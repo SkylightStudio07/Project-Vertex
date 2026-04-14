@@ -32,7 +32,11 @@ public class DamageEffect : CardEffect
 {
     public int amount;
     public int hitCount = 1;
-    public override void Execute(CardContext context) { /* 차후 구현 */ }
+    public override void Execute(CardContext context) {
+    
+
+    
+    }
 }
 
 [CreateAssetMenu(menuName = "Cards/Effects/Block")]
@@ -47,6 +51,19 @@ public class DrawEffect : CardEffect
 {
     public int count;
     public override void Execute(CardContext context) { /* 차후 구현 */ }
+}
+
+[CreateAssetMenu(menuName = "Cards/Effects/Apply Status")]
+public class ApplyStatusEffect : CardEffect
+{
+    public StatusType statusType;
+    public int amount;
+    public TargetType target;  // Self, Enemy, AllEnemies
+
+    public override void Execute(CardContext ctx)
+    {
+        
+    }
 }
 
 
@@ -64,3 +81,4 @@ public class DrawEffect : CardEffect
 // 타게팅. 자기 자신/단일 적/전체 적/랜덤 적.
 // 이걸... 여기서 처리하는 게 맞나 모르겠네. 그런데 여기 말고 달리 처리할 곳도 없음.
 public enum TargetType { Self, SingleEnemy, AllEnemies, RandomEnemy }
+public enum StatusType { Weak, Vulnerable, Poison, Strength, Dexterity }
