@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 117956437}
+  - component: {fileID: 117956438}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -150,6 +151,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &117956438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117956436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c76a08813e90ca439a71ddadce2505b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  currentEnemies: []
+  playerDeck: []
+  DrawableDeck: []
+  DiscardedDeck: []
+  chapter: 0
+  floor: 0
+  strikeCard: {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  blockCard: {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  currentTurn: 0
 --- !u!1 &533714797
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 533714797}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.34, y: -0.3, z: 0}
+  m_LocalPosition: {x: -5.4, y: -0.3, z: 0}
   m_LocalScale: {x: 0.22598933, y: 0.22598933, z: 0.22598933}
   m_ConstrainProportionsScale: 0
   m_Children: []

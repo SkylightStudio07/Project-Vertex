@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "\uBC29\uC5B4"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: 
+  cardName: "\uBC29\uC5B4"
   cardImage: {fileID: 0}
-  energyCost: 0
+  energyCost: 1
   ammoCost: 0
-  cardDescription: 
-  cardEffect: {fileID: 0}
+  cardDescription: "\uBC29\uC5B4\uB3C4\uAC00 5 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  cardEffect: {fileID: 11400000, guid: c514cb43917599043ac99c1562112f51, type: 2}
   isExhaust: 0
   isEthereal: 0
   isInnate: 0
   isRetain: 0
-  upgradedName: 
-  upgradedCost: 0
+  upgradedName: "\uBC29\uC5B4+"
+  upgradedCost: 1
   isUpgraded: 0
   upgradedEffects: []
   useAnimation: {fileID: 0}
