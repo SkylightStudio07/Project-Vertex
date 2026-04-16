@@ -69,20 +69,19 @@ public class GameManager : MonoBehaviour
             playerDeck.Add(Instantiate(strikeCard)); 
             playerDeck.Add(Instantiate(blockCard));
         }
-
+        InitializeBattle();
     }
 
     void InitializeBattle()
     {
-        DrawableDeck = new List<CardData>(playerDeck); // 드로우 가능한 카드 더미 초기화
-
-        
         // 메모리에 악영향이겠지만, 매 전투마다 플레이어 덱을 깊은 복사할 수밖에 없다. 고민은 좀 해 봤는데 다른 방법이랑 별달리 퍼포먼스 차이가 있을 것 같진 않으니까.
     
         foreach(var card in playerDeck)
         {
             DrawableDeck.Add(Instantiate(card)); // 플레이어 덱의 카드들을 드로우 가능한 카드 더미에 인스턴스화하여 추가
         }
+
+        ShuffleDeck(DrawableDeck); // 드로우 가능한 카드 더미 섞기
     }
 
     void DeckDraw() // 카드 드로우.
@@ -93,15 +92,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // 덱  섞기. Fisher-Yates 알고리즘 사용.
+    // 처음 시작, 그리고 뽑을 카드 없을 때 버린 카드 더미를 드로우 가능한 카드 더미로 옮긴 후 섞을 때 사용.
     void ShuffleDeck(List<CardData> deck)
     {
-        
+        for (int i = 0; i < deck.Count; i++)
+        {
+            int randomIndex = Random.Range(i, deck.Count);
+            CardData temp = deck[i];
+            deck[i] = deck[randomIndex];
+            deck[randomIndex] = temp;
+        }
     }
 
     enum Turn
     {
         PlayerTurn,
         EnemyTurn
+    }
+
+    void UseCard(CardData card_to_use) // 이러면 이벤트로 호출하나?
+    {
+        // 카드 드로우 로직
+        if(currentTurn == Turn.PlayerTurn)
+        {
+        }
+        else
+        {
+            return;
+        }
     }
 
 }
