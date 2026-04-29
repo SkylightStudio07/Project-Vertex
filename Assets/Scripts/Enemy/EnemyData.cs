@@ -4,11 +4,11 @@ using UnityEngine;
 [System.Serializable]
 public struct EnemyActivityPattern
 {
-    public ActivityType activityType; // Çàµ¿ Á¾·ù 
+    public ActivityType activityType; // í–‰ë™ ì¢…ë¥˜ 
 
     [Header("Action Details")]
-    public float actionAmount; // °ø°İ ¼öÄ¡ ¶Ç´Â ¹æ¾î ¼öÄ¡
-    public int actionCount;    // °ø°İ È½¼ö
+    public float actionAmount; // ê³µê²© ìˆ˜ì¹˜ ë˜ëŠ” ë°©ì–´ ìˆ˜ì¹˜
+    public int actionCount;    // ê³µê²© íšŸìˆ˜
 }
 
 public enum ActivityType
@@ -21,7 +21,7 @@ public enum ActivityType
 [CreateAssetMenu(fileName = "NewEnemy", menuName = "Game Asset/Enemy")]
 public class EnemyData : ScriptableObject
 {
-    // ÇÁ·ÎÆÛÆ¼ »ı°¢.
+    // í”„ë¡œí¼í‹° ìƒê°.
     public string enemyName;
     public int health;
     public Sprite enemyImage;
