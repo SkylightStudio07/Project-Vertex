@@ -53,13 +53,16 @@ public class CardData : ScriptableObject
      */
 
     [Header("기본 정보")]
-    [SerializeField] private string cardName; // 카드 네임
-    [SerializeField] private Sprite cardImage; // 카드 이미지
-    [SerializeField] private int energyCost; // 에너지 코스트
-    [SerializeField] private int ammoCost; // 탄약 코스트
+    [SerializeField] private string cardName;
+    [SerializeField] private Sprite cardImage;
+    [SerializeField] private int energyCost;
+    [SerializeField] private int ammoCost;
+    [SerializeField] private CardType cardType;
+    [SerializeField] private CardRarity cardRarity;
+    [SerializeField] private CardOwner cardOwner;
 
     [Header("카드 설명 및 효과")]
-    [SerializeField] private string cardDescription; // 카드 설명 - 하단 설명문
+    [SerializeField] private string cardDescription;
     [SerializeField] private CardEffect cardEffect; // 카드 효과 - 별도의 ScriptableObject로 처리
 
     [Header("키워드")]
@@ -69,24 +72,37 @@ public class CardData : ScriptableObject
     [SerializeField] private bool isRetain;     // 턴 넘겨도 유지
 
     [Header("강화")]
-    // public CardData upgradedVersion; // 강화 어떻게 하지... 제일 편한건 SO 분리시키는 건데 30장 만들거 60장 만들기 싫음...
-    [SerializeField] private string upgradedName;        // "강타" → "강타+" 이런 식. 이름이야 자기 마음이다.
-    [SerializeField] private int upgradedCost; // 강화 여부에 따라 코스트 변동 처리할 때 필요.
-    [SerializeField] public bool isUpgraded; // 업그레이드 여부. 카드 인스턴스에서 들고있는게 맞는 것 같은데 음...
+    [SerializeField] private string upgradedName;
+    [SerializeField] private int upgradedCost;
+    [SerializeField] public bool isUpgraded;
     [SerializeField] private List<CardEffect> upgradedEffects;
 
-
     [Header("연출")]
-    public AnimationClip useAnimation; // 써야 해? 그록이라도 쓸까.
+    public AnimationClip useAnimation;
     public AudioClip useSFX;
 
-    public enum CardType { Attack, Skill, Power } // 카드 타입 - 공격, 스킬, 버프.
-                                                  // 단순 구분용이지 실제 효과는 CardEffect에서 처리한다!!!!
-    public enum CardRarity { Common, Rare, Unique } // 일반, 희귀, 고유
-    public enum CardOwner // 카드 소유자 - 무색, 합류 캐릭터 구분용
+    // --- Public Accessors ---
+    public string CardName        => isUpgraded ? upgradedName : cardName;
+    public Sprite CardImage       => cardImage;
+    public int    EnergyCost      => isUpgraded ? upgradedCost : energyCost;
+    public int    AmmoCost        => ammoCost;
+    public string CardDescription => cardDescription;
+    public CardEffect CardEffect  => cardEffect;
+    public List<CardEffect> UpgradedEffects => upgradedEffects;
+    public CardType   Type        => cardType;
+    public CardRarity Rarity      => cardRarity;
+    public CardOwner  Owner       => cardOwner;
+    public bool IsExhaust         => isExhaust;
+    public bool IsEthereal        => isEthereal;
+    public bool IsInnate          => isInnate;
+    public bool IsRetain          => isRetain;
+
+    public enum CardType  { Attack, Skill, Power }
+    public enum CardRarity { Common, Rare, Unique }
+    public enum CardOwner
     {
-        Player, Jogasaki, CanadaMarine, GermanDeserter, // 플레이어, 죠가사키, 탈영병
-        NamibiaPartisan, BrassKnight, ChinaSpecOps, // 파르티잔, 황동 기사, 중국군
-        Non_Color // 무색
+        Player, Jogasaki, CanadaMarine, GermanDeserter,
+        NamibiaPartisan, BrassKnight, ChinaSpecOps,
+        Non_Color
     }
 }

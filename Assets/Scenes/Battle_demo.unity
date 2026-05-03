@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 117956437}
   - component: {fileID: 117956438}
+  - component: {fileID: 117956439}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -163,15 +164,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c76a08813e90ca439a71ddadce2505b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  currentEnemies: []
+  currentEnemies:
+  - {fileID: 11400000, guid: 90f3c922d5c03a54b82118ca1d27d05d, type: 2}
   playerDeck: []
-  DrawableDeck: []
-  DiscardedDeck: []
+  maxPlayerHP: 80
   chapter: 0
   floor: 0
   strikeCard: {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
   blockCard: {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  currentTurn: 0
+--- !u!114 &117956439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117956436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fee6ab72c55ff844b88038e133dc165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleManager
+  Energy: 3
+  MaxEnergy: 3
+  Ammo: 3
+  PlayerBlock: 0
+  drawPile: []
+  hand: []
+  discardPile: []
+  exhaustPile: []
 --- !u!1 &533714797
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +211,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &533714798
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -236,6 +257,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 0c10cd7a2da47914891a3cc540a6380c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -245,7 +267,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &533714799
 Transform:

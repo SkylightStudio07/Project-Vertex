@@ -3,16 +3,15 @@
 // 작성자    : SkylightStudio07 - 박영서
 // 작성일    : 2026-04-12
 // 설명      : 카드 실행 시 필요한 맥락 정보를 담는 데이터 클래스.
-//             CombatManager에서 생성(나중에 만들거...) CardEffect에 전달.
+//             BattleManager에서 생성 후 CardEffect.Execute()에 전달.
 // ============================================================
 
 using System.Collections.Generic;
 
 public class CardContext
 {
-    // 사용자
-    // 타겟
-    // 광역기 쓸때 전체 적 받아올 때 적 전체 리스트
-    // 덱
-    // 프로퍼티는 이쯤 이렇게 하면 되지 않을까 싶은데.
+    public BattleManager Battle;        // 전투 상태 접근 (에너지, 탄약, 드로우 등)
+    public CardData Card;               // 실행 중인 카드
+    public EnemyInstance Target;        // 단일 대상용
+    public List<EnemyInstance> AllEnemies; // 광역기용
 }

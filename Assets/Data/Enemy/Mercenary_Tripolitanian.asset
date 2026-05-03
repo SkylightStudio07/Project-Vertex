@@ -14,4 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uD2B8\uB9AC\uD3F4\uB9AC\uD0C0\uB2C8\uC544 \uC6A9\uBCD1"
   health: 0
-  enemyImage: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  enemyImage: {fileID: 21300000, guid: 0c10cd7a2da47914891a3cc540a6380c, type: 3}
+  activityPatterns:
+  - activityType: 0
+    actionAmount: 3
+    actionCount: 0
+  - activityType: 1
+    actionAmount: 3
+    actionCount: 0
+  - activityType: 2
+    actionAmount: 0
+    actionCount: 0
