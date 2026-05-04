@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private int MaxEnergy   = 3;
     [SerializeField] private int Ammo        = 3;
     [SerializeField] private int PlayerBlock = 0;
+    [SerializeField] private int DrawCount = 5;
 
     [Header("플레이어 카드 더미")]
     [SerializeField] private List<CardData> drawPile    = new();
@@ -81,7 +82,7 @@ public class BattleManager : MonoBehaviour
     }
 
     // 플레이어 턴에 뽑을 카드 더미에서 손패로 카드 가져오기(드로우)
-    private void TakeOutCardtoHand()
+    public void TakeOutCardtoHand()
     {
         if(hand.Count >= 10)
         {
@@ -91,7 +92,8 @@ public class BattleManager : MonoBehaviour
         }
         // 드로우할 카드가 손패에 들어감
         // 뽑을 카드 더미(drawpile)에서 랜덤으로 카드 6개 뽑아서 손패로
-        for(int i = 0; i < 6; i++)
+
+        for(int i = 0; i < DrawCount; i++)
         {
             if (drawPile.Count == 0)
             {
@@ -112,5 +114,31 @@ public class BattleManager : MonoBehaviour
             drawPile.RemoveAt(index);
         }
     }
+
+    // 
+
+    public void PlayerTurnStart()
+    {
+        Energy = MaxEnergy;
+        TakeOutCardtoHand();
+    }
+
+    public void PlayerTurnEnd()
+    {
+        
+    }
+
+    public void EnemyTurnStart()
+    {
+        foreach (var enemy in enemies)
+        {
+            var pattern = enemy.GetCurrentPattern();
+            // 패턴에 따른 행동 실행 (예: 공격, 버프 등)
+            // 예시: player.TakeDamage(pattern.damage);
+            enemy.AdvancePattern();
+        }
+    }
+
+    
 }
 

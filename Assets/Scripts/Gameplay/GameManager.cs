@@ -74,11 +74,9 @@ public class GameManager : MonoBehaviour
     public void InitializeBattle()
     {
         BattleManager.Instance.StartBattle(currentEnemies, playerDeck);
+        BattleManager.Instance.TakeOutCardtoHand();
     }
 
-    // ─────────────────────────────────────────────────────────
-    // HP 시스템
-    // ─────────────────────────────────────────────────────────
 
     public void TakeDamage(int amount)
     {
