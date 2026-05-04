@@ -54,7 +54,8 @@ public class CardData : ScriptableObject
 
     [Header("기본 정보")]
     [SerializeField] private string cardName;
-    [SerializeField] private Sprite cardImage;
+    [SerializeField] public Sprite cardImage;
+    [SerializeField] public Sprite CardBackground;
     [SerializeField] private int energyCost;
     [SerializeField] private int ammoCost;
     [SerializeField] private CardType cardType;
@@ -62,8 +63,8 @@ public class CardData : ScriptableObject
     [SerializeField] private CardOwner cardOwner;
 
     [Header("카드 설명 및 효과")]
-    [SerializeField] private string cardDescription;
-    [SerializeField] private CardEffect cardEffect; // 카드 효과 - 별도의 ScriptableObject로 처리
+    [SerializeField] public string cardDescription;
+    [SerializeField] public CardEffect cardEffect; // 카드 효과 - 별도의 ScriptableObject로 처리
 
     [Header("키워드")]
     [SerializeField] private bool isExhaust;    // 소멸

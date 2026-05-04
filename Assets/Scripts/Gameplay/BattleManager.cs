@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,6 @@ public class BattleManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
-
 
     [Header("플레이어 전투  스테이터스")]
     [SerializeField] private int Energy      = 3;
@@ -27,6 +27,9 @@ public class BattleManager : MonoBehaviour
 
     // UI용으로 읽기 전용 손패 리스트 빼놓은 거.
     public IReadOnlyList<CardData> Hand => hand;
+
+    // 손패가 바뀔 때마다 HandView가 구독해서 화면 갱신
+    public event Action OnHandChanged;
 
     // EnemyInstance는 plain C# 클래스라 Inspector엔 안 뜸 — 런타임 전용
     private readonly List<EnemyInstance> enemies = new();
@@ -76,7 +79,7 @@ public class BattleManager : MonoBehaviour
     {
         for (int i = 0; i < deck.Count; i++)
         {
-            int j = Random.Range(i, deck.Count);
+            int j = UnityEngine.Random.Range(i, deck.Count);
             (deck[i], deck[j]) = (deck[j], deck[i]);
         }
     }
@@ -108,11 +111,12 @@ public class BattleManager : MonoBehaviour
                 Shuffle(drawPile);
             }
             // 뽑을 카드 더미에서 랜덤으로 카드 하나 뽑아서 손패로
-            int index = Random.Range(0, drawPile.Count);
+            int index = UnityEngine.Random.Range(0, drawPile.Count);
             CardData drawnCard = drawPile[index];
             hand.Add(drawnCard);
             drawPile.RemoveAt(index);
         }
+        OnHandChanged?.Invoke();
     }
 
     // 
@@ -128,13 +132,42 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    public void AddCardToDrawPile(CardData card)
+    {
+        drawPile.Add(Instantiate(card));
+        Shuffle(drawPile);
+    }
+
+    public void AddCardToDiscardPile(CardData card)
+    {
+        discardPile.Add(Instantiate(card));
+    }
+
+    public void AddCardToHand(CardData card)
+    {
+        if (hand.Count < 10)
+        {
+            hand.Add(Instantiate(card));
+            OnHandChanged?.Invoke();
+        }
+    }
+
     public void EnemyTurnStart()
     {
         foreach (var enemy in enemies)
         {
-            var pattern = enemy.GetCurrentPattern();
-            // 패턴에 따른 행동 실행 (예: 공격, 버프 등)
-            // 예시: player.TakeDamage(pattern.damage);
+            var action = enemy.GetCurrentAction();
+            if (action != null)
+            {
+                var ctx = new CardContext
+                {
+                    Battle      = this,
+                    ActingEnemy = enemy,
+                    AllEnemies  = enemies
+                };
+                foreach (var effect in action.effects)
+                    effect.Execute(ctx);
+            }
             enemy.AdvancePattern();
         }
     }

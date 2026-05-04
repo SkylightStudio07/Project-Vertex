@@ -13,18 +13,22 @@ MonoBehaviour:
   m_Name: "\uC0AC\uACA9"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "\uC0AC\uACA9"
-  cardImage: {fileID: 0}
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
   energyCost: 1
   ammoCost: 1
+  cardType: 0
+  cardRarity: 0
+  cardOwner: 0
   cardDescription: "\uC0AC\uACA9\uD574, 6 \uB300\uBBF8\uC9C0\uB97C \uC801\uC5D0\uAC8C
     \uAC00\uD569\uB2C8\uB2E4."
-  cardEffect: {fileID: 11400000, guid: c375bc4ca23cddc4ebd1206d45bb55bd, type: 2}
+  cardEffect: {fileID: 11400000, guid: 1f4e7d621a9ce6545b696467f26890c3, type: 2}
   isExhaust: 0
   isEthereal: 0
   isInnate: 0
   isRetain: 0
   upgradedName: "\uC0AC\uACA9"
-  upgradedCost: 0
+  upgradedCost: 1
   isUpgraded: 0
   upgradedEffects: []
   useAnimation: {fileID: 0}

@@ -15,6 +15,9 @@ public class EnemyInstance
     public int  Block   { get; private set; }
     public bool IsDead  => HP <= 0;
 
+    // 적 스프라이트
+    public Sprite EnemySprite { get; private set; }
+
     public EnemyStatusSet Status { get; private set; } = new();
 
     private int _patternIndex;
@@ -26,12 +29,13 @@ public class EnemyInstance
     {
         Data = data;
         HP   = data.health;
+        EnemySprite = data.enemyImage;
     }
 
-    public EnemyActivityPattern GetCurrentPattern()
+    public EnemyAction GetCurrentAction()
     {
         if (Data.activityPatterns == null || Data.activityPatterns.Count == 0)
-            return default;
+            return null;
 
         return Data.activityPatterns[_patternIndex % Data.activityPatterns.Count];
     }

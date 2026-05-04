@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c854a75a493ec1e4e8963bb23c501a44, type: 3}
+  m_Name: Mercenary Attack
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
+  intentType: 0
+  effects:
+  - {fileID: 11400000, guid: 204a71bcc9c60884ebe52fd5318ca2cc, type: 2}
