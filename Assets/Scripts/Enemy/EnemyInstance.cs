@@ -1,7 +1,8 @@
 // ============================================================
-// 파일명    : EnemyInstance.cs
-// 설명      : EnemyData SO의 런타임 래퍼.
-//             전투 중 HP, 블록, 버프/디버프 상태를 보유한다.
+// filename   : EnemyInstance.cs
+// description   : EnemyData SO의 런타임 래퍼.
+//             전투 중 HP, 블록, 버프/디버프 상태를 보유.
+//             퍼포먼스 문제 때문에 일부러 MonoBehaviour 상속 안 했으니까 수정 ㄴㄴ.
 // ============================================================
 
 using System;
@@ -12,6 +13,7 @@ public class EnemyInstance
     public EnemyData Data { get; private set; }
 
     public int  HP      { get; private set; }
+    public int  MaxHP   => Data.health;
     public int  Block   { get; private set; }
     public bool IsDead  => HP <= 0;
 

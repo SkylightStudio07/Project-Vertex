@@ -36,16 +36,18 @@ public class BattleManager : MonoBehaviour
     // 이건 필요할지 모르겠는데, 일단 해 둠.
     public IReadOnlyList<EnemyInstance> Enemies => enemies;
 
-    // ─────────────────────────────────────────────────────────
+    // 적 리스트가 바뀔 때 EnemyZoneView가 구독해서 화면 갱신
+    public event Action OnEnemiesChanged;
+
     // 전투 초기화
     // 매 전투 진입 시 GameManager가 호출.
-    // ─────────────────────────────────────────────────────────
 
     public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck)
     {
         SetupEnemies(enemyDataList);
         SetupBattleDeck(masterDeck);
         ResetPlayerBattleState();
+        OnEnemiesChanged?.Invoke();
     }
 
     private void SetupEnemies(List<EnemyData> enemyDataList)
