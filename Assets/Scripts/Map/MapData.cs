@@ -16,6 +16,7 @@ public class MapData
         // MapNode 리스트의 리스트를 만드는 것. totalfloors만큼.
 
         // MapGenerator가 나중에 각 층에 노드를 채워 넣는다.
+        //
         floors = new List<List<MapNode>>(totalFloors);
         for (int i = 0; i < totalFloors; i++)
             floors.Add(new List<MapNode>());
