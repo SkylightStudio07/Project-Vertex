@@ -2,6 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 전투 유형 일단 임시?
+public enum BattleType
+{
+    Normal,
+    Elite,
+    Boss,
+}
+
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
@@ -36,6 +44,10 @@ public class BattleManager : MonoBehaviour
     // 이건 필요할지 모르겠는데, 일단 해 둠.
     public IReadOnlyList<EnemyInstance> Enemies => enemies;
 
+    // 전투 승리시 보상 띄우기 위한 이벤트. BattleRewardManager가 구독
+    public event Action<BattleType> OnBattleVictory;
+    private BattleType currentBattleType;
+
     // 적 리스트가 바뀔 때 EnemyZoneView가 구독해서 화면 갱신
     public event Action OnEnemiesChanged;
 
@@ -54,7 +66,11 @@ public class BattleManager : MonoBehaviour
     {
         enemies.Clear();
         foreach (var data in enemyDataList)
-            enemies.Add(new EnemyInstance(data));
+        {
+            EnemyInstance enemy = new EnemyInstance(data);
+            enemy.OnDied += CheckVictory;
+            enemies.Add(enemy);
+        }
     }
 
     // 카드 더미 초기화
@@ -174,6 +190,23 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    
+    private void CheckVictory()
+    {
+        foreach (var enemy in enemies)
+        {
+            if (!enemy.IsDead) return;
+        }
+
+        Victory();
+    }
+
+    private void Victory()
+    {
+        OnBattleVictory?.Invoke(currentBattleType);
+        foreach (var enemy in enemies)
+        {
+            enemy.OnDied -= CheckVictory;
+        }
+    }
 }
 
