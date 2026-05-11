@@ -24,7 +24,7 @@ public class FloorGuarantee // 층별 고정 노드.
 public class MapConfig : ScriptableObject
 {
     [Header("층 설정")]
-    public int totalFloors = 15;            // 보스 층 포함 총 층 수
+    public int totalFloors = 16;            // 보스 층 포함 총 층 수
 
     [Header("층당 노드 수")]
     [Range(2, 5)] public int minNodesPerFloor = 3;
@@ -48,6 +48,8 @@ public class MapConfig : ScriptableObject
     // 성소, 보물상자, 보스 전 휴식 노드는 고정임.
     public List<FloorGuarantee> guaranteedNodes = new()
     {
+        new FloorGuarantee { floorIndex = 0, nodeType = NodeType.Blessing }, // 1층 (0-based), 시작은 축복 노드로 고정
+        new FloorGuarantee { floorIndex = 1, nodeType = NodeType.Combat },  // 2층 (0-based)
         new FloorGuarantee { floorIndex = 2, nodeType = NodeType.Sanctuary },  // 3층 (0-based)
         new FloorGuarantee { floorIndex = 9, nodeType = NodeType.Treasure_Box },  // 10층 (0-based)
         new FloorGuarantee { floorIndex = 14, nodeType = NodeType.Rest },  // 15층 (0-based), 보스전 직전 휴식 보장

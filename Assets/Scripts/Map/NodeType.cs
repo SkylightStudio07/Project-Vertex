@@ -7,5 +7,7 @@ public enum NodeType
     Elite, // 엘리트
     Boss, // 막 보스
     Treasure_Box, // 상자
-    Sanctuary // 성소
+    Sanctuary, // 성소
+
+    Blessing // 이건 이벤트 노드로 처리해도 될 것 같지만..
 }
