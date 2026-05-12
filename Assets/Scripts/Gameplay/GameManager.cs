@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
             playerDeck.Add(Instantiate(blockCard));
         }
 
+        MapManager.Instance.InitializeMap();
+
         InitializeBattle();
     }
 

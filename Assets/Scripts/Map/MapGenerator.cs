@@ -14,143 +14,190 @@ public static class MapGenerator
 
     public static MapData Generate(MapConfig config, int seed)
     {
-        // 시드로 랜덤 초기화
         UnityEngine.Random.InitState(seed);
-        // 맵 데이터 컨테이너 생성
         MapData mapData = new MapData(seed, config.totalFloors);
 
-        /*
-        config.guaranteedNodes를 먼저 처리해서 보장 노드들을 배치.
-        
-        guaranteedNodes 현재 형식 :
-        [{ floorIndex: 2, nodeType: Sanctuary }, { floorIndex: 9, nodeType: Treasure_Box }, ...]
-        
-        나중에 조회할 거 생각하면 이건 Dictionary<int, NodeType> 형태로 바꿔도 될 듯. 층 인덱스 -> 보장 노드 타입 매핑 식으로.
-
-        */
-
+        // guaranteedNodes 리스트  { 층 인덱스 / 고정 타입 목록 } 딕셔너리화
         var guaranteeMap = new Dictionary<int, List<NodeType>>();
+
+
+        // 혹여 중복 보장 노드가 있을 수 있으니 층별로 리스트에 추가하는 방식으로 처리.
+        // 사실 이 경우는 그냥 기획서상 오류에 가까워서 예외처리 개념으로 접근한다.
 
         foreach (var guarantee in config.guaranteedNodes)
         {
-
-            // 만약 층에 보장 노드가 여러 개 인 경우를 상정했음.
-            // 당연히 기획서에 그런 내용은 없음! 현재로서는 예외처리에 가까운 내용이지만 
-            if (!guaranteeMap.ContainsKey(guarantee.floorIndex)) // 같은 층에 키가 이미 존재하지 않는 경우. 그러니까 통상적인 경우
-                guaranteeMap[guarantee.floorIndex] = new List<NodeType>(); // 층에 대한 빈 리스트 생성
-
-            guaranteeMap[guarantee.floorIndex].Add(guarantee.nodeType); 
-            // 이게 문제의 보장 노드 여러개인 경우. 이 경우는 사실 누군가 MapConfig를 잘못 만졌다고 봐야 함.
+            if (!guaranteeMap.ContainsKey(guarantee.floorIndex))
+                guaranteeMap[guarantee.floorIndex] = new List<NodeType>();
+            guaranteeMap[guarantee.floorIndex].Add(guarantee.nodeType);
         }
-        /* 층별 노드 수 결정 
-        
-        0, 15층은 고정 노드 1개만 있으니까 따로 처리.
-        
-        */
 
-        // floor = 0일때는 첫 시작 노드.
+        // ── Step 1: 각 층에 노드 배치 ──────────────────────────────────────
 
+        // 0층: Blessing 1개, 가운데 열 고정
         mapData.floors[0].Add(new MapNode
         {
-            nodeType = NodeType.Blessing,
+            nodeType   = NodeType.Blessing,
             floorIndex = 0,
-            nodeIndex = 0
+            nodeIndex  = 0,
+            column     = config.maxNodesPerFloor / 2
         });
 
-
-        // floor = config.totalFloors - 1일때는 보스 노드 고정.
-
-        mapData.floors[config.totalFloors - 1].Add(new MapNode
+        // 마지막 층: Boss 1개, 가운데 열 고정
+        int lastFloor = config.totalFloors - 1;
+        mapData.floors[lastFloor].Add(new MapNode
         {
-            nodeType = NodeType.Boss,
-            floorIndex = config.totalFloors - 1,
-            nodeIndex = 0
+            nodeType   = NodeType.Boss,
+            floorIndex = lastFloor,
+            nodeIndex  = 0,
+            column     = config.maxNodesPerFloor / 2
         });
 
-
-        // 시작 노드(축복), 끝 노드(보스) 제외
-        for (int floor = 1; floor < config.totalFloors - 1; floor++)
+        // 1층 ~ (totalFloors-2)층 채우는 로직
+        for (int f = 1; f < config.totalFloors - 1; f++)
         {
-            int nodesToGenerate = UnityEngine.Random.Range(config.minNodesPerFloor, config.maxNodesPerFloor + 1);
 
-            // 보장 노드가 있는 층은 보장 노드만 존재. 보장 노드 수가 nodesToGenerate보다 많을 경우는 예외적으로 보장 노드 수만큼만 생성.
-            if (guaranteeMap.ContainsKey(floor))
+            // 차피 타입은 지정되어 있으니(List<NodeType>) var로 하고 보장 노드가 있는 층인지 여부만 bool로 처리한다.
+
+            bool hasGuarantee = guaranteeMap.TryGetValue(f, out var guarantees);
+
+            List<NodeType> types; // 이 층에 배치할 노드 타입 목록. 보장 노드가 있으면 그 타입들, 없으면 가중치 추첨으로 채움
+            int nodeCount; // 이 층에 배치할 노드 수. 보장 노드가 있으면 그 수만큼, 없으면 랜덤 결정
+
+            if (hasGuarantee)
             {
-                foreach (var guaranteedNodeType in guaranteeMap[floor])
-                {
-                    mapData.floors[floor].Add(new MapNode
-                    {
-                        nodeType = guaranteedNodeType,
-                        floorIndex = floor,
-                        nodeIndex = mapData.floors[floor].Count // 현재 층에 이미 추가된 노드 수를 인덱스로 사용
-                    });
-                }
+                // 보장 노드가 있는 층: 보장 노드만 배치
+                types     = new List<NodeType>(guarantees);
+                nodeCount = guarantees.Count;
             }
-            else // 보장 노드 없는 층은 일반적으로 노드 생성
+            else
             {
-                for (int i = 0; i < nodesToGenerate; i++)
-                {
-                    NodeType randomNodeType = GetRandomNodeType(config.nodeTypeWeights);
-                    mapData.floors[floor].Add(new MapNode
-                    {
-                        nodeType = randomNodeType,
-                        floorIndex = floor,
-                        nodeIndex = i
-                    });
-                }
+                // 일반 층: 노드 수 랜덤 결정 후 가중치 추첨으로 타입 채우기
+                nodeCount = UnityEngine.Random.Range(config.minNodesPerFloor, config.maxNodesPerFloor + 1);
+                types     = new List<NodeType>();
+                for (int i = 0; i < nodeCount; i++)
+                    types.Add(GetRandomNodeType(config.nodeTypeWeights));
             }
 
-            /* 
+            // 열 위치 랜덤 배정: 0 ~ maxNodesPerFloor-1 슬롯 중 nodeCount개 선택 후 정렬
+            var columns = PickColumns(config.maxNodesPerFloor, nodeCount);
 
-            여기서부터는 노드 간선 연결 관련 정리.
-
-            1. 선이 교차하면 안 됨 (UX상 혼란)
-            2. 다음 층 노드 중 연결 안 된 노드가 없어야 함 (고립 방지)
-            3. 각 노드는 다음 층으로 최소 1개 연결
-            4. 각 노드는 다음 층으로 최대 2개 연결 (너무 복잡해지는 거 방지)
-            5. 노드 간선은 층별로 랜덤하게 배치 (매번 다른 맵이 나오도록)
-
-            */
-
-            
-
+            // 노드 생성 및 층에 추가
+            for (int n = 0; n < nodeCount; n++)
+            {
+                mapData.floors[f].Add(new MapNode
+                {
+                    nodeType   = types[n],
+                    floorIndex = f,
+                    nodeIndex  = n,
+                    column     = columns[n]
+                });
+            }
         }
-            
-        
-        
 
-
+        // ── Step 2: 층 간 연결 ─────────────────────────────────────────────
+        for (int f = 0; f < config.totalFloors - 1; f++)
+            ConnectFloors(mapData.floors[f], mapData.floors[f + 1]);
 
         return mapData;
     }
 
-    private static NodeType GetRandomNodeType(List<NodeTypeWeight> nodeTypeWeights)
+    // ── 내부 헬퍼 ─────────────────────────────────────────────────────────
+
+    // 슬롯 0 ~ maxNodes-1 중 count개를 랜덤 선택, 정렬해서 반환 (왼→오 순서 보장)
+    private static List<int> PickColumns(int maxNodes, int count)
     {
-        // 가중치 기반 노드 타입 선택 로직
-        // ntw : nodeTypeWeights 리스트의 각 요소. 
-        // NodeType과 weight를 가지고 있음.
+        var slots = new List<int>();
+        for (int i = 0; i < maxNodes; i++) slots.Add(i);
+        Shuffle(slots);
+        var picked = slots.GetRange(0, count);
+        picked.Sort();
+        return picked;
+    }
 
-        float totalWeight = 0f;
-        foreach (var ntw in nodeTypeWeights)
-            totalWeight += ntw.weight;
+    // 현재 층 → 다음 층 연결.
+    // |현재 column - 다음 column| <= 1 인 노드끼리만 연결 -> 교차 못하게...
+    private static void ConnectFloors(List<MapNode> current, List<MapNode> next)
+    {
+        var reachedNext = new HashSet<int>(); // 연결된 다음 층 노드 인덱스 추적
 
-        // 0부터 totalWeight 사이의 랜덤 값 생성
-
-        float randomValue = UnityEngine.Random.Range(0, totalWeight);
-        
-        // cumulativeWeight는 nodeTypeWeights 리스트를 순회하면서 각 노드 타입의 weight를 누적해서 더해가는 변수.
-        
-        float cumulativeWeight = 0f;
-
-        // randomValue가 누적 가중치 범위 내에 들어오는 첫 번째 노드 타입을 반환
-        foreach (var ntw in nodeTypeWeights)
+        foreach (var curr in current)
         {
-            cumulativeWeight += ntw.weight;
-            if (randomValue <= cumulativeWeight)
-                return ntw.nodeType;
+            // 이 노드와 열이 인접한 다음 층 노드 목록
+            var candidates = new List<MapNode>();
+            foreach (var nextNode in next)
+            {
+                if (Mathf.Abs(curr.column - nextNode.column) <= 1)
+                    candidates.Add(nextNode);
+            }
+
+            // 인접 노드가 아예 없으면 가장 가까운 노드로 대체
+            if (candidates.Count == 0)
+                candidates.Add(FindClosest(curr, next));
+
+            // 필수 연결 1개
+            var picked = candidates[UnityEngine.Random.Range(0, candidates.Count)];
+            curr.nextNodeIndices.Add(picked.nodeIndex);
+            reachedNext.Add(picked.nodeIndex);
+
+            // 50% 확률로 후보 중 다른 노드 1개 추가 연결 (경로 다양성)
+            if (candidates.Count > 1 && UnityEngine.Random.value < 0.5f)
+            {
+                MapNode extra;
+                do { extra = candidates[UnityEngine.Random.Range(0, candidates.Count)]; }
+                while (extra.nodeIndex == picked.nodeIndex);
+
+                curr.nextNodeIndices.Add(extra.nodeIndex);
+                reachedNext.Add(extra.nodeIndex);
+            }
         }
 
-        // 혹시나 해서 기본값 반환 (여기까지 오면 사고임)
-        return NodeType.Combat;
+        // 고립된 다음 층 노드 강제 연결
+        foreach (var nextNode in next)
+        {
+            if (reachedNext.Contains(nextNode.nodeIndex)) continue;
+            var closest = FindClosest(nextNode, current);
+            if (!closest.nextNodeIndices.Contains(nextNode.nodeIndex))
+                closest.nextNodeIndices.Add(nextNode.nodeIndex);
+        }
+    }
+
+    // column 기준으로 가장 가까운 노드 반환
+    private static MapNode FindClosest(MapNode from, List<MapNode> candidates)
+    {
+        MapNode closest = candidates[0];
+        int minDist = Mathf.Abs(from.column - closest.column);
+        foreach (var c in candidates)
+        {
+            int dist = Mathf.Abs(from.column - c.column);
+            if (dist < minDist) { minDist = dist; closest = c; }
+        }
+        return closest;
+    }
+
+    // 가중치 기반 노드 타입 추첨
+    private static NodeType GetRandomNodeType(List<NodeTypeWeight> weights)
+    {
+        float total = 0f;
+        foreach (var w in weights) total += w.weight;
+
+        float roll = UnityEngine.Random.Range(0f, total);
+        float cumulative = 0f;
+        foreach (var w in weights)
+        {
+            cumulative += w.weight;
+            if (roll <= cumulative) return w.nodeType;
+        }
+
+        return NodeType.Combat; // 부동소수점 오차 보정
+    }
+
+    // Fisher-Yates 셔플
+    private static void Shuffle<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = UnityEngine.Random.Range(0, i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
     }
 }
