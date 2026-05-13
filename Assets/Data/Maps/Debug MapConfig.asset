@@ -10,18 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33ec64faa9f617b49944964cb4664395, type: 3}
-  m_Name: Debug Map Config
+  m_Name: Debug MapConfig
   m_EditorClassIdentifier: Assembly-CSharp::MapConfig
-  totalFloors: 15
+  totalFloors: 16
   minNodesPerFloor: 3
   maxNodesPerFloor: 5
   nodeTypeWeights:
   - nodeType: 0
-    weight: 0
+    weight: 1
+  - nodeType: 4
+    weight: 0.3
+  - nodeType: 7
+    weight: 0.1
+  - nodeType: 6
+    weight: 0.1
+  - nodeType: 1
+    weight: 0.4
+  - nodeType: 2
+    weight: 0.1
+  - nodeType: 3
+    weight: 0.1
   guaranteedNodes:
+  - floorIndex: 0
+    nodeType: 8
+  - floorIndex: 1
+    nodeType: 0
   - floorIndex: 2
     nodeType: 7
   - floorIndex: 9
     nodeType: 6
   - floorIndex: 14
     nodeType: 3
+  - floorIndex: 15
+    nodeType: 5
