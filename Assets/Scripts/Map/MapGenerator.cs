@@ -163,7 +163,7 @@ public static class MapGenerator
         //=========== Phase 4: 노드 연결 =============== //
 
         // 층 간 노드 연결. ConnectFloors 함수 참고.
-        // 제약: (1) |curr.column - next.column| ≤ 1,
+        // 제약: (1) |curr.column - next.column| ≤ 1, 그러니까 플마 1.
         // (2) 왼쪽 curr가 사용한 next.column 이상으로만 (교차 방지. 그러니까, 왼쪽 노드가 오른쪽 노드보다 더 왼쪽 노드랑 연결되는 상황 방지.)
         // 예외처리: 만약 제약 만족하는 후보가 없으면 제약
 
@@ -328,6 +328,7 @@ public static class MapGenerator
 
             // 클로드가 이런 구조도 제안했다. 50% 확률!
             // 그러니까 후보가 2개 이상이고, 랜덤값이 0.5보다 작으면 추가 연결을 하나 더 만들어버리는 것.
+            // 이런 식으로 확률론은 처음 보네. ㅇㅎ
             if (candidates.Count > 1 && UnityEngine.Random.value < 0.5f)
             {
                 var extras = new List<MapNode>();

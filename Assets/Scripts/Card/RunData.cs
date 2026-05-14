@@ -15,6 +15,11 @@ public class RunData : MonoBehaviour
     public int currentFloor;         // 현재 층 인덱스
     public int currentNodeIndex;     // 현재 층에서의 노드 인덱스
 
+    // Inspector에서 현재 노드 타입 확인용. 
+    // MapManager가 이동할 때마다 갱신한다.
+    // 프로퍼티라 field 문법 사용
+    [field: SerializeField] public NodeType CurrentNodeType { get; set; }
+
     // 현재 위치의 MapNode를 바로 꺼내는 편의 프로퍼티
     public MapNode CurrentNode => mapData?.GetNode(currentFloor, currentNodeIndex);
 
