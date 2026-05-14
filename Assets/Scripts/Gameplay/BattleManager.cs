@@ -200,8 +200,17 @@ public class BattleManager : MonoBehaviour
         Victory();
     }
 
+    // 테스트용 - 빌드 전 제거
+    public void TestVictory(BattleType battleType)
+    {
+        currentBattleType = battleType;
+        Victory();
+    }
+
     private void Victory()
     {
+        RewardProbabilityData rewardData = GameManager.Instance.GetRewardProbability(currentBattleType);
+        Reward reward = new Reward(GameManager.Instance.cardPools, rewardData, currentBattleType);
         OnBattleVictory?.Invoke(currentBattleType);
         foreach (var enemy in enemies)
         {
@@ -209,4 +218,3 @@ public class BattleManager : MonoBehaviour
         }
     }
 }
-

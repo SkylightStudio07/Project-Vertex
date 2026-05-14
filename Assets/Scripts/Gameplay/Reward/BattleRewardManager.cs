@@ -13,7 +13,7 @@ public class BattleRewardManager : MonoBehaviour
     [SerializeField] private List<CardData> uniquePool;
 
     [Header("카드 보상 확률")]
-    [SerializeField] private List<RewardProbabilityData> rewardTable;
+    [SerializeField] private List<RewardProbabilityData> cardRewardTable;
 
     // 골드 보상
     private int goldRewardAmount;
@@ -40,6 +40,7 @@ public class BattleRewardManager : MonoBehaviour
         for(int i = 0; i< cardRewardAmount; i++)
         {
             CardRarity rarity = GetRarity(probabilityData);
+            Debug.Log("선택된 카드 희귀도: " + rarity);
             CardData cardData = PickCard(rarity);
             cardRewards.Add(cardData);
             Debug.Log($"카드 보상: {cardData.CardName}");
@@ -47,7 +48,7 @@ public class BattleRewardManager : MonoBehaviour
     }
     private RewardProbabilityData GetRewardProbability(int chapter, BattleType battleType)
     {
-        return rewardTable.Find(t => t.Chapter == chapter && t.BattleType == battleType);
+        return cardRewardTable.Find(t => t.Chapter == chapter && t.BattleType == battleType);
     }
     private CardRarity GetRarity(RewardProbabilityData probailityData)
     {
@@ -85,5 +86,79 @@ public class BattleRewardManager : MonoBehaviour
     private void OnDestroy()
     {
         BattleManager.Instance.OnBattleVictory -= GenerateReward;
+    }
+
+    // 테스트용 - 빌드 전 제거
+    private void Update()
+    {
+        if (UnityEngine.InputSystem.Keyboard.current[UnityEngine.InputSystem.Key.T].wasPressedThisFrame)
+            BattleManager.Instance.TestVictory(BattleType.Normal);
+    }
+}
+
+public class Reward
+{
+    private int goldRewardAmount;
+    private int numofCardReward = 3;
+    private readonly List<CardData> cardRewards = new List<CardData>();
+
+    public int GoldRewardAmount => goldRewardAmount;
+    public int NumofCardReward => numofCardReward;
+
+    public Reward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, BattleType battleType)
+    {
+        GenerateReward(cardRewardsPool, rewardData, battleType);
+    }
+
+    private void GenerateReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, BattleType battleType)
+    {
+        GenerateCardReward(cardRewardsPool, rewardData);
+        GenerateGoldReward(battleType);
+    }
+
+    private void GenerateCardReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
+    {
+        cardRewards.Clear();
+        for (int i = 0; i<numofCardReward; i++)
+        {
+            CardRarity rarity = GetRarity(rewardData);
+            CardData cardData = PickCard(cardRewardsPool[rarity]);
+            cardRewards.Add(cardData);
+        }
+    }
+    private void GenerateGoldReward(BattleType battleType)
+    {
+        int goldReward = 0;
+        switch (battleType)
+        {
+            case BattleType.Normal:
+                goldReward = Random.Range(10, 20);
+                break;
+            case BattleType.Elite:
+                goldReward = Random.Range(25, 35);
+                break;
+            case BattleType.Boss:
+                goldReward = Random.Range(50, 80);
+                break;
+        }
+        goldRewardAmount = goldReward;
+    }
+
+    private CardRarity GetRarity(RewardProbabilityData rewardData)
+    {
+        int total = rewardData.CommonProbability + rewardData.RareProbability + rewardData.UniqueProbability;
+        int roll = Random.Range(0, total);
+
+        if (roll < rewardData.CommonProbability)
+            return CardRarity.Common;
+        else if (roll < rewardData.CommonProbability + rewardData.RareProbability)
+            return CardRarity.Rare;
+        else
+            return CardRarity.Unique;
+    }
+    private CardData PickCard(List<CardData> cardPool)
+    {
+        int index = Random.Range(0, cardPool.Count);
+        return cardPool[index];
     }
 }
