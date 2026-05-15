@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // 전투 유형 일단 임시?
 public enum BattleType
@@ -44,8 +45,8 @@ public class BattleManager : MonoBehaviour
     // 이건 필요할지 모르겠는데, 일단 해 둠.
     public IReadOnlyList<EnemyInstance> Enemies => enemies;
 
-    // 전투 승리시 보상 띄우기 위한 이벤트. BattleRewardManager가 구독
-    public event Action<BattleType> OnBattleVictory;
+    // 전투 승리시 보상 띄우기 위한 이벤트.
+    public event Action<Reward> OnBattleVictory;
     private BattleType currentBattleType;
 
     // 적 리스트가 바뀔 때 EnemyZoneView가 구독해서 화면 갱신
@@ -206,12 +207,20 @@ public class BattleManager : MonoBehaviour
         currentBattleType = battleType;
         Victory();
     }
+    private void Update()
+    {
+        if (Keyboard.current[Key.V].wasPressedThisFrame)
+        {
+            TestVictory(BattleType.Normal);
+        }
+    }
 
     private void Victory()
     {
         RewardProbabilityData rewardData = GameManager.Instance.GetRewardProbability(currentBattleType);
         Reward reward = new Reward(GameManager.Instance.cardPools, rewardData, currentBattleType);
-        OnBattleVictory?.Invoke(currentBattleType);
+
+        OnBattleVictory?.Invoke(reward);
         foreach (var enemy in enemies)
         {
             enemy.OnDied -= CheckVictory;
