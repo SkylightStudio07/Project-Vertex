@@ -47,7 +47,6 @@ public class EnemyInstance
         if (Data.activityPatterns != null && Data.activityPatterns.Count > 0)
             _patternIndex = (_patternIndex + 1) % Data.activityPatterns.Count;
     }
-
 }
 
 // 적 상태이상 컨테이너 (추후 필요 항목 추가)

@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC7AC\uC7A5\uC804"
+  m_Name: Rare2
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uC7AC\uC7A5\uC804"
+  cardName: Rare2
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
   energyCost: 1
   ammoCost: 0
   cardType: 1
-  cardRarity: 0
+  cardRarity: 1
   cardOwner: 0
-  cardDescription: Ammo +1
-  cardEffect: {fileID: 0}
+  cardDescription: "\uC77C\uBC18\uC801\uC774\uC9C4 \uC54A\uC2B5\uB2C8\uB2E4."
+  cardEffect: {fileID: 11400000, guid: 5dcc3b72c92b9a144b1edb188793f9e2, type: 2}
   isExhaust: 0
   isEthereal: 0
   isInnate: 0
   isRetain: 0
-  upgradedName: "\uC7AC\uC7A5\uC804+"
-  upgradedCost: 0
+  upgradedName: "\uBC29\uC5B4+"
+  upgradedCost: 1
   isUpgraded: 0
   upgradedEffects: []
   useAnimation: {fileID: 0}
