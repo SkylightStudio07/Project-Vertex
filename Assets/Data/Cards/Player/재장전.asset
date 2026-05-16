@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "\uC7AC\uC7A5\uC804"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: 
-  cardImage: {fileID: 0}
-  CardBackground: {fileID: 0}
-  energyCost: 0
+  cardName: "\uC7AC\uC7A5\uC804"
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
+  energyCost: 1
   ammoCost: 0
   cardType: 1
   cardRarity: 0
   cardOwner: 0
-  cardDescription: 
+  cardDescription: Ammo +1
   cardEffect: {fileID: 0}
   isExhaust: 0
   isEthereal: 0
   isInnate: 0
   isRetain: 0
-  upgradedName: 
+  upgradedName: "\uC7AC\uC7A5\uC804+"
   upgradedCost: 0
   isUpgraded: 0
   upgradedEffects: []
