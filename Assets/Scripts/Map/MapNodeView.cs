@@ -13,11 +13,10 @@ public enum MapNodeState
     Visited     // 이미 방문한 노드 - 회색
 }
 
-// 맵 노드 하나의 시각적 표현을 담당하는 컴포넌트
-// 스프라이트 매핑도 여기서 직접 관리 (프리팹 Inspector에서 한 번만 세팅)
+// 노드 하나하나 시각적 처리 클래스. MapUIController가 프리팹을 Instantiate한 뒤 Setup()으로 초기화하고, 맵 이동 시마다 SetState()로 상태 갱신.
 public class MapNodeView : MonoBehaviour
 {
-    // NodeType별 스프라이트 매핑 - Inspector에서 NodeType.cs의 9개 타입 전부 연결할 것
+    // NodeType별 스프라이트 매핑 - 어차피 9개니까 선형으로 무식하게 해도 문제없음.
     [Serializable]
     public struct NodeSprite
     {
@@ -49,7 +48,6 @@ public class MapNodeView : MonoBehaviour
         iconImage.sprite = GetSprite(data.nodeType); // 타입에 맞는 스프라이트를 내부에서 조회
 
         // 중복 등록 방지 후 클릭 리스너 등록
-        // onClick?.Invoke(Data) : onClick이 null이 아닐 때만 호출 (null 안전 호출)
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => onClick?.Invoke(Data));
     }
