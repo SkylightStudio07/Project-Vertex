@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
         cardPools[CardData.CardRarity.Rare] = rarePool;
         cardPools[CardData.CardRarity.Unique] = uniquePool;
 
+        MapManager.Instance.InitializeMap();
+
         InitializeBattle();
     }
 
