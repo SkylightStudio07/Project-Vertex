@@ -8,7 +8,7 @@ public static class MapGenerator
     // 시드 없이 호출하면 랜덤 시드로 생성
     public static MapData Generate(MapConfig config)
     {
-        int seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+        int seed = new System.Random().Next(int.MinValue, int.MaxValue);
         return Generate(config, seed);
     }
 
@@ -21,7 +21,8 @@ public static class MapGenerator
 
         //========================================== //
 
-        UnityEngine.Random.InitState(seed);
+        // 전역 UnityEngine.Random 대신 맵 전용 System.Random 인스턴스 사용 (재현성/독립성 보장)
+        var rng = new System.Random(seed);
         MapData mapData = new MapData(seed, config.totalFloors);
 
         //=========== Phase 1: 보장 노드 =============== //
@@ -107,10 +108,10 @@ public static class MapGenerator
             // 노드 수를 랜덤으로 뽑고, 타입도 가중치 기반으로 랜덤 추첨한다.
             // 타입 추첨 알고리즘은 GetRandomNodeType 함수 참고.
             {
-                nodeCount = UnityEngine.Random.Range(config.minNodesPerFloor, config.maxNodesPerFloor + 1);
+                nodeCount = rng.Next(config.minNodesPerFloor, config.maxNodesPerFloor + 1);
                 types     = new List<NodeType>();
                 for (int i = 0; i < nodeCount; i++)
-                    types.Add(GetRandomNodeType(config.nodeTypeWeights));
+                    types.Add(GetRandomNodeType(config.nodeTypeWeights, rng));
             }
 
             //=========== Phase 3: 이전 층 컬럼 수집 =============== //
@@ -135,7 +136,7 @@ public static class MapGenerator
             // 이 층의 column 후보군 뽑기.
             // 하단의 PickColumns 함수 참고. 이전 층 column ±1 범위에서 nodeCount개를 랜덤 선택해서 반환한다.
 
-            var columns = PickColumns(columnCount, nodeCount, prevCols);
+            var columns = PickColumns(columnCount, nodeCount, prevCols, rng);
 
             // 허용 슬롯이 nodeCount보다 적으면 자동 축소. 
             // 일차적으로는 pickColumns 함수 내에서 먼저 수행하는데, 클로드가 여기서도 한 번 더 수행하라고 권해서 여기도 이렇게 함.
@@ -170,7 +171,7 @@ public static class MapGenerator
         //========================================== //
 
         for (int f = 0; f < config.totalFloors - 1; f++)
-            ConnectFloors(mapData.floors[f], mapData.floors[f + 1]);
+            ConnectFloors(mapData.floors[f], mapData.floors[f + 1], rng);
 
         return mapData;
     }
@@ -186,7 +187,7 @@ public static class MapGenerator
     //========================================== //
 
 
-    private static List<int> PickColumns(int columnCount, int count, HashSet<int> prevCols)
+    private static List<int> PickColumns(int columnCount, int count, HashSet<int> prevCols, System.Random rng)
     {
 
         // 반환 자체는 List<int> 형태로, 이번 층에 배치할 column 인덱스 리스트이다.
@@ -241,8 +242,8 @@ public static class MapGenerator
         if (slots.Count < count) 
             count = slots.Count;
 
-        // 셔플. 
-        Shuffle(slots);
+        // 셔플.
+        Shuffle(slots, rng);
 
         // 셔플된 리스트에서 앞의 count개만 가져옴.
         // 앞에서 셔플을 했으니 단순히 자르기만 해도 랜덤화해서 자르는 거랑 같은 효과... 라고 한다. 이 생각은 못했네.
@@ -257,7 +258,7 @@ public static class MapGenerator
 
     // 현재 층 → 다음 층 연결.
     // 두 제약: (1) |curr.column - next.column| ≤ 1, (2) 왼쪽 curr가 사용한 next.column 이상으로만 (교차 방지)
-    private static void ConnectFloors(List<MapNode> current, List<MapNode> next)
+    private static void ConnectFloors(List<MapNode> current, List<MapNode> next, System.Random rng)
     {
 
         // current : 현재 층 노드 리스트
@@ -307,7 +308,7 @@ public static class MapGenerator
 
             // 후보군 중 하나 랜덤으로 선택.
             // 여기서 picked가 다음 노드.
-            var picked = candidates[UnityEngine.Random.Range(0, candidates.Count)];
+            var picked = candidates[rng.Next(0, candidates.Count)];
 
             // 현재 노드 curr의 nextNodeIndices에 picked 노드의 인덱스 추가. 그리고 reachedNext에도 추가.
             // 조건문은 예외처리용.(중복 연결 방지)... 하나쯤이면 충분하지 않나 클로드야?
@@ -329,7 +330,7 @@ public static class MapGenerator
             // 클로드가 이런 구조도 제안했다. 50% 확률!
             // 그러니까 후보가 2개 이상이고, 랜덤값이 0.5보다 작으면 추가 연결을 하나 더 만들어버리는 것.
             // 이런 식으로 확률론은 처음 보네. ㅇㅎ
-            if (candidates.Count > 1 && UnityEngine.Random.value < 0.5f)
+            if (candidates.Count > 1 && rng.NextDouble() < 0.5)
             {
                 var extras = new List<MapNode>();
                 foreach (var c in candidates)
@@ -346,7 +347,7 @@ public static class MapGenerator
                 // 간선은 최고 2개까지로만 상정해놔서, 추가 후보가 하나 이상 있으면 그 중에서 랜덤으로 하나만 고른다.
                 if (extras.Count > 0)
                 {
-                    var extra = extras[UnityEngine.Random.Range(0, extras.Count)];
+                    var extra = extras[rng.Next(0, extras.Count)];
                     if (!curr.nextNodeIndices.Contains(extra.nodeIndex))
                         curr.nextNodeIndices.Add(extra.nodeIndex);
                     reachedNext.Add(extra.nodeIndex);
@@ -372,6 +373,10 @@ public static class MapGenerator
     // column 기준으로 가장 가까운 노드 반환
     private static MapNode FindClosest(MapNode from, List<MapNode> candidates)
     {
+
+        // 가장 가까운 노드 찾는 기준은 column 간의 절대값 차이.
+        if(candidates.Count == 0 || candidates == null) 
+            return null; // 예외처리용. 후보가 없으면 null 반환.
         MapNode closest = candidates[0];
         int minDist = Mathf.Abs(from.column - closest.column);
         foreach (var c in candidates)
@@ -383,12 +388,12 @@ public static class MapGenerator
     }
 
     // 가중치 기반 노드 타입 추첨
-    private static NodeType GetRandomNodeType(List<NodeTypeWeight> weights)
+    private static NodeType GetRandomNodeType(List<NodeTypeWeight> weights, System.Random rng)
     {
         float total = 0f;
         foreach (var w in weights) total += w.weight;
 
-        float roll = UnityEngine.Random.Range(0f, total);
+        float roll = (float)(rng.NextDouble() * total);
         float cumulative = 0f;
         foreach (var w in weights)
         {
@@ -399,11 +404,11 @@ public static class MapGenerator
         return NodeType.Combat; // 부동소수점 오차 보정
     }
 
-    private static void Shuffle<T>(List<T> list)
+    private static void Shuffle<T>(List<T> list, System.Random rng)
     {
         for (int i = list.Count - 1; i > 0; i--)
         {
-            int j = UnityEngine.Random.Range(0, i + 1);
+            int j = rng.Next(0, i + 1);
             (list[i], list[j]) = (list[j], list[i]);
         }
     }
