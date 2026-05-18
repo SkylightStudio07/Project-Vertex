@@ -43,6 +43,13 @@ public class MapConfig : ScriptableObject
         new NodeTypeWeight { nodeType = NodeType.Rest, weight = 0.1f },
     };
 
+    // minNodesPerFloor가 maxNodesPerFloor보다 값 안넘게 보정.
+    private void OnValidate()
+    {
+        if (minNodesPerFloor > maxNodesPerFloor)
+            minNodesPerFloor = maxNodesPerFloor;
+    }
+
     [Header("층별 고정 노드 설정(보스, 성소, 보물상자)")]
     // 지정한 층에 해당 타입의 노드를 반드시 1개 배치.
     // 성소, 보물상자, 보스 전 휴식 노드는 고정임.

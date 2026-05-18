@@ -18,6 +18,7 @@ public class MapUIController : MonoBehaviour
 
     private readonly List<MapNodeView>       nodeViews = new();
     private readonly List<MapConnectionLine> lineViews = new();
+    private MapData builtMapData;
 
     private void Start()
     {
@@ -27,7 +28,8 @@ public class MapUIController : MonoBehaviour
     public void OpenMap()
     {
         mapPanel.SetActive(true);
-        BuildMap();
+        if (builtMapData != RunData.Instance.mapData) BuildMap();
+        else RefreshNodeStates();
     }
 
     public void CloseMap()
@@ -56,6 +58,7 @@ public class MapUIController : MonoBehaviour
         lineViews.Clear();
 
         MapData mapData = RunData.Instance.mapData;
+        builtMapData = mapData;
         if (mapData == null)
         {
             Debug.LogWarning("[MapUIController] mapData가 null입니다. MapManager.InitializeMap()이 호출됐는지 확인하세요.");
