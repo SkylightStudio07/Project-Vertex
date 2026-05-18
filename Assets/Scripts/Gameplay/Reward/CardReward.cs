@@ -25,8 +25,7 @@ public class CardReward : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
         cardData = GetComponent<CardView>().Data;
-        GameManager.Instance.playerDeck.Add(cardData); 
-        Debug.Log($"Card '{cardData.CardName}' added to player's deck.");
+        GameManager.Instance.playerDeck.Add(Instantiate(cardData)); 
         Onclick?.Invoke();
     }
 
