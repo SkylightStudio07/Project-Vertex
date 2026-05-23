@@ -162,17 +162,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3256287257281969648}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3319252093806831319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 235}
-  m_SizeDelta: {x: 280, y: 390}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 267.2}
+  m_SizeDelta: {x: 870, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2542348346791265470
 CanvasRenderer:
@@ -324,11 +324,11 @@ RectTransform:
   - {fileID: 7445328931656097836}
   m_Father: {fileID: 3319252093806831319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 230}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 35}
   m_SizeDelta: {x: 1024, y: 1480}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &813689531219638275
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -788,9 +788,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3319252093806831319}
   - component: {fileID: 324129827944308415}
+  - component: {fileID: 4625638338993974579}
+  - component: {fileID: 3859630821584481256}
   - component: {fileID: 4966828274408846273}
   - component: {fileID: 7115500420871821585}
-  - component: {fileID: 4625638338993974579}
   m_Layer: 5
   m_Name: Card Prefab
   m_TagString: Untagged
@@ -808,17 +809,17 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 5695895218573263549}
   - {fileID: 7448811610022134523}
+  - {fileID: 5695895218573263549}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 260, y: 390}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 260, y: 100}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &324129827944308415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +838,41 @@ MonoBehaviour:
   descriptionText: {fileID: 5120340962378960820}
   artworkImage: {fileID: 941421291680739837}
   backgroundImage: {fileID: 6468053577110910938}
+--- !u!114 &4625638338993974579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940060157747184222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd98f3710ce35774688ce50cd7cb0c47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardHandler
+  dropYThreshold: 500
+  targetCancelYThreshold: 400
+--- !u!114 &3859630821584481256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940060157747184222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf172b0dbcf4335a0ff5fbd7e361596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardInteractionView
+  visual: {fileID: 5695895218573263549}
+  hoverScale: {x: 0.45, y: 0.45, z: 1}
+  dragSortingOrder: 100
+  returnDuration: 0.25
+  targetingCardYOffset: 120
+  targetingMoveDuration: 0.2
+  showDebugTargetArrow: 1
+  debugTargetArrowSortingOrder: 101
+  debugTargetArrowColor: {r: 0.85, g: 0.15, b: 0.15, a: 0.95}
 --- !u!223 &4966828274408846273
 Canvas:
   m_ObjectHideFlags: 0
@@ -877,18 +913,3 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4625638338993974579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940060157747184222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd98f3710ce35774688ce50cd7cb0c47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardHandler
-  visual: {fileID: 5695895218573263549}
-  hoverScale: {x: 0.45, y: 0.45, z: 1}
-  hoverSortingOrder: 10

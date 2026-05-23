@@ -21,7 +21,8 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   cardDescription: Ammo +1
-  cardEffect: {fileID: 0}
+  cardEffects: []
+  useMode: 0
   isExhaust: 0
   isEthereal: 0
   isInnate: 0

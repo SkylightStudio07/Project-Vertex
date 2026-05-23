@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Cards/Effects/Add Card To Pile")]
@@ -9,13 +10,22 @@ public class AddCardToPileEffect : CardEffect
 
     public override void Execute(CardContext context)
     {
+        if (targetPile == PileType.Hand)
+        {
+            var cardsToAdd = new List<CardData>(count);
+            for (int i = 0; i < count; i++)
+                cardsToAdd.Add(cardToAdd);
+
+            context.Battle.AddCardsToHand(cardsToAdd);
+            return;
+        }
+
         for (int i = 0; i < count; i++)
         {
             switch (targetPile)
             {
                 case PileType.DrawPile:    context.Battle.AddCardToDrawPile(cardToAdd);    break;
                 case PileType.DiscardPile: context.Battle.AddCardToDiscardPile(cardToAdd); break;
-                case PileType.Hand:        context.Battle.AddCardToHand(cardToAdd);        break;
             }
         }
     }

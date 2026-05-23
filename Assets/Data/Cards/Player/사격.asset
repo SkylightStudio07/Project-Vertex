@@ -22,7 +22,9 @@ MonoBehaviour:
   cardOwner: 0
   cardDescription: "\uC0AC\uACA9\uD574, 6 \uB300\uBBF8\uC9C0\uB97C \uC801\uC5D0\uAC8C
     \uAC00\uD569\uB2C8\uB2E4."
-  cardEffect: {fileID: 11400000, guid: 1f4e7d621a9ce6545b696467f26890c3, type: 2}
+  cardEffects:
+  - {fileID: 11400000, guid: 1f4e7d621a9ce6545b696467f26890c3, type: 2}
+  useMode: 1
   isExhaust: 0
   isEthereal: 0
   isInnate: 0
