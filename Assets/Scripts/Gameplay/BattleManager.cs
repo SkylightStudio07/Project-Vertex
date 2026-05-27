@@ -42,6 +42,8 @@ public class BattleManager : MonoBehaviour
     // 손패가 바뀔 때마다 HandView가 구독해서 화면 갱신
     public event Action OnHandChanged;
 
+    private System.Random rndSeed = new();
+
     // EnemyInstance는 plain C# 클래스라 Inspector엔 안 뜸 — 런타임 전용
     private readonly List<EnemyInstance> enemies = new();
     // 이건 필요할지 모르겠는데, 일단 해 둠.
@@ -57,8 +59,9 @@ public class BattleManager : MonoBehaviour
     // 전투 초기화
     // 매 전투 진입 시 GameManager가 호출.
 
-    public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck)
+    public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck, int seed)
     {
+        rndSeed = new System.Random(seed);
         SetupEnemies(enemyDataList);
         SetupBattleDeck(masterDeck);
         ResetPlayerBattleState();
@@ -96,11 +99,11 @@ public class BattleManager : MonoBehaviour
         Ammo         = 3; // 기본 무기(권총) 탄창
     }
 
-    private static void Shuffle(List<CardData> deck)
+    private void Shuffle(List<CardData> deck)
     {
         for (int i = 0; i < deck.Count; i++)
         {
-            int j = UnityEngine.Random.Range(i, deck.Count);
+            int j = rndSeed.Next(i, deck.Count);
             (deck[i], deck[j]) = (deck[j], deck[i]);
         }
     }
@@ -131,7 +134,7 @@ public class BattleManager : MonoBehaviour
                 Shuffle(drawPile);
             }
             // 뽑을 카드 더미에서 랜덤으로 카드 하나 뽑아서 손패로
-            int index = UnityEngine.Random.Range(0, drawPile.Count);
+            int index = rndSeed.Next(0, drawPile.Count);
             CardData drawnCard = drawPile[index];
             hand.Add(drawnCard);
             drawPile.RemoveAt(index);
