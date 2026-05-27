@@ -8,6 +8,8 @@
 // ------------------------------------------------------------
 // 2026-04-12 | 박영서 | 최초 작성.
 // 카드 효과를 별도의 ScriptableObject로 분리하는 방향으로 설계 변경. 헤더 컨벤션은 나중에 쓸지말지 결정...
+// 2026-05-23 | 최성제 | 카드 기본 효과가 리스트가 아니였던 것 수정. 모든 카드가 강화 안하면 몽둥이질과 무적이 될 뻔함ㅋㅋㅋ
+// 카드의 사용 방법도 추가함. 타켓 방식인지, 아니면 타깃이 필요 없는지...
 // ============================================================
 
 
@@ -64,7 +66,8 @@ public class CardData : ScriptableObject
 
     [Header("카드 설명 및 효과")]
     [SerializeField] public string cardDescription;
-    [SerializeField] public CardEffect cardEffect; // 카드 효과 - 별도의 ScriptableObject로 처리
+    [SerializeField] public List<CardEffect> cardEffects = new(); // 카드 효과 - 별도의 ScriptableObject로 처리
+    [SerializeField] private CardUseMode useMode = CardUseMode.DropToPlayArea;
 
     [Header("키워드")]
     [SerializeField] private bool isExhaust;    // 소멸
@@ -76,7 +79,7 @@ public class CardData : ScriptableObject
     [SerializeField] private string upgradedName;
     [SerializeField] private int upgradedCost;
     [SerializeField] public bool isUpgraded;
-    [SerializeField] private List<CardEffect> upgradedEffects;
+    [SerializeField] private List<CardEffect> upgradedEffects = new();
 
     [Header("연출")]
     public AnimationClip useAnimation;
@@ -88,8 +91,21 @@ public class CardData : ScriptableObject
     public int    EnergyCost      => isUpgraded ? upgradedCost : energyCost;
     public int    AmmoCost        => ammoCost;
     public string CardDescription => cardDescription;
-    public CardEffect CardEffect  => cardEffect;
+    public List<CardEffect> CardEffect  => cardEffects;
     public List<CardEffect> UpgradedEffects => upgradedEffects;
+    public IReadOnlyList<CardEffect> ActiveEffects
+    {
+        get
+        {
+            if (isUpgraded && upgradedEffects != null && upgradedEffects != null)
+                return upgradedEffects;
+
+            return cardEffects != null
+                ? cardEffects
+                : System.Array.Empty<CardEffect>();
+        }
+    }
+    public CardUseMode UseMode    => useMode;
     public CardType   Type        => cardType;
     public CardRarity Rarity      => cardRarity;
     public CardOwner  Owner       => cardOwner;
@@ -100,6 +116,7 @@ public class CardData : ScriptableObject
 
     public enum CardType  { Attack, Skill, Power }
     public enum CardRarity { Common, Rare, Unique }
+    public enum CardUseMode { DropToPlayArea, SelectEnemy }
     public enum CardOwner
     {
         Player, Jogasaki, CanadaMarine, GermanDeserter,

@@ -4,12 +4,13 @@
 //             씬에 하나만 존재하는 손패 컨테이너 오브젝트에 부착.
 // ============================================================
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HandView : MonoBehaviour
 {
     [SerializeField] private CardView cardPrefab;    // 카드 프리팹 (CardView 부착된 것)
-    [SerializeField] private Transform cardContainer; // 카드들이 나열될 부모 Transform
+    [SerializeField] private RectTransform cardContainer; // 카드들이 나열될 부모 Transform
 
     private void Start()
     {
@@ -30,10 +31,18 @@ public class HandView : MonoBehaviour
             Destroy(child.gameObject);
 
         // 손패의 각 CardData마다 CardView 생성. 늘 그렇듯 이런 식이 퍼포먼스에 썩 좋을지는 모르겠는데, 달리 대안이 없음.
-        foreach (var cardData in BattleManager.Instance.Hand)
+        IReadOnlyList<CardData> hand = BattleManager.Instance.Hand;
+        for (int i = 0; i < hand.Count; i++)
         {
             var view = Instantiate(cardPrefab, cardContainer);
-            view.SetCard(cardData);
+            view.SetCard(hand[i]);
+
+            CardInteractionView interactionView = view.GetComponent<CardInteractionView>();
+            if (interactionView != null)
+            {
+                interactionView.SetRestingSortingOrder(i);
+                interactionView.SetTargetingAnchor(cardContainer);
+            }
         }
     }
 }

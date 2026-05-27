@@ -33,6 +33,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private List<CardData> hand        = new();
     [SerializeField] private List<CardData> discardPile = new();
     [SerializeField] private List<CardData> exhaustPile = new();
+    private int handChangeBatchDepth;
+    private bool hasPendingHandChange;
 
     // UI용으로 읽기 전용 손패 리스트 빼놓은 거.
     public IReadOnlyList<CardData> Hand => hand;
@@ -112,10 +114,9 @@ public class BattleManager : MonoBehaviour
             Debug.Log("손패가 가득 참.");
             return;
         }
-        // 드로우할 카드가 손패에 들어감
-        // 뽑을 카드 더미(drawpile)에서 랜덤으로 카드 6개 뽑아서 손패로
 
-        for(int i = 0; i < DrawCount; i++)
+        bool drewAnyCard = false;
+        for(int i = 0; i < DrawCount && hand.Count < 10; i++)
         {
             if (drawPile.Count == 0)
             {
@@ -123,7 +124,7 @@ public class BattleManager : MonoBehaviour
                 if (discardPile.Count == 0)
                 {
                     Debug.Log("뽑을 카드 더미와 버릴 카드 더미가 모두 액션빔.");
-                    return;
+                    break;
                 }
                 drawPile.AddRange(discardPile);
                 discardPile.Clear();
@@ -134,16 +135,27 @@ public class BattleManager : MonoBehaviour
             CardData drawnCard = drawPile[index];
             hand.Add(drawnCard);
             drawPile.RemoveAt(index);
+            drewAnyCard = true;
         }
-        OnHandChanged?.Invoke();
+
+        if (drewAnyCard)
+            NotifyHandChanged();
     }
 
     // 
 
     public void PlayerTurnStart()
     {
-        Energy = MaxEnergy;
-        TakeOutCardtoHand();
+        BeginHandChangeBatch();
+        try
+        {
+            Energy = MaxEnergy;
+            TakeOutCardtoHand();
+        }
+        finally
+        {
+            EndHandChangeBatch();
+        }
     }
 
     public void PlayerTurnEnd()
@@ -164,11 +176,119 @@ public class BattleManager : MonoBehaviour
 
     public void AddCardToHand(CardData card)
     {
-        if (hand.Count < 10)
+        AddCardsToHand(new[] { card });
+    }
+
+    public void AddCardsToHand(IEnumerable<CardData> cards)
+    {
+        if (cards == null) return;
+
+        bool addedAnyCard = false;
+        foreach (CardData card in cards)
         {
+            if (hand.Count >= 10) break;
+            if (card == null) continue;
+
             hand.Add(Instantiate(card));
-            OnHandChanged?.Invoke();
+            addedAnyCard = true;
         }
+
+        if (addedAnyCard)
+            NotifyHandChanged();
+
+        //핸드가 꽉 차는 등 카드가 추가될 수 없ㄴ으면 추가 로직이 있어야함
+    }
+
+    public bool IsCardPlayable(CardData card)
+    {
+        return EvaluateCardPlayability(card);
+    }
+
+    private bool EvaluateCardPlayability(CardData card)
+    {
+        if (card == null || !hand.Contains(card)) return false;
+        if (Energy < card.EnergyCost || Ammo < card.AmmoCost) return false;
+
+        if (card.UseMode == CardData.CardUseMode.SelectEnemy)
+        {
+            foreach (EnemyInstance enemy in enemies)
+            {
+                if (!enemy.IsDead) return true;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private void NotifyHandChanged()
+    {
+        if (handChangeBatchDepth > 0)
+        {
+            hasPendingHandChange = true;
+            return;
+        }
+
+        OnHandChanged?.Invoke();
+    }
+
+    private void BeginHandChangeBatch()
+    {
+        handChangeBatchDepth++;
+    }
+
+    private void EndHandChangeBatch()
+    {
+        handChangeBatchDepth--;
+        if (handChangeBatchDepth > 0) return;
+
+        bool handChanged = hasPendingHandChange;
+        hasPendingHandChange = false;
+
+        if (handChanged)
+            OnHandChanged?.Invoke();
+    }
+
+    //카드 플레이 시 카드 효과 실행. 카드가 손패에 없거나, 에너지/탄약 부족, 적 선택 필요 카드에 적 선택 안 했거나 유효하지 않은 적 선택한 경우 플레이 실패.
+    public bool TryPlayCard(CardData card, EnemyInstance target)
+    {
+        if (!EvaluateCardPlayability(card)) return false;
+        if (card.UseMode == CardData.CardUseMode.SelectEnemy &&
+            (target == null || target.IsDead || !enemies.Contains(target)))
+            return false;
+
+        BeginHandChangeBatch(); //배치 시작 - 카드 플레이 과정에서 손패 여러 번 바뀔 수 있으니, 배치로 묶어서 한 번만 갱신하도록
+        try
+        {
+            Energy -= card.EnergyCost;
+            Ammo -= card.AmmoCost;
+
+            hand.Remove(card);
+            if (card.IsExhaust) exhaustPile.Add(card);
+            else discardPile.Add(card);
+            NotifyHandChanged();
+
+            var ctx = new CardContext
+            {
+                Battle     = this,
+                Card       = card,
+                Target     = target,
+                AllEnemies = enemies
+            };
+
+            foreach (CardEffect effect in card.ActiveEffects)
+            {
+                if (effect != null)
+                    effect.Execute(ctx);
+            }
+        }
+        finally
+        {
+            EndHandChangeBatch(); //배치 끝
+        }
+
+        return true;
     }
 
     public void EnemyTurnStart()
