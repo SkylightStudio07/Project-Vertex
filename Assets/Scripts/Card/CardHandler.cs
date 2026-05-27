@@ -204,8 +204,6 @@ public class CardHandler : MonoBehaviour,
 
     private void FinishReturn()
     {
-        SetState(interactionView.IsPointerCurrentlyOverCard(isPointerOverCard)
-            ? CardState.Hover
-            : CardState.Idle);
+        SetState(isPointerOverCard ? CardState.Hover : CardState.Idle);
     }
 }

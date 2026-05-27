@@ -11,7 +11,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Canvas))]
@@ -151,22 +150,6 @@ public class CardInteractionView : MonoBehaviour
         Vector3 visualCenterWorld = visual.TransformPoint(visual.rect.center);
         Vector2 visualCenterLocal = parent.InverseTransformPoint(visualCenterWorld);
         visual.anchoredPosition += localPoint - visualCenterLocal;
-    }
-
-    public bool IsPointerCurrentlyOverCard(bool fallback)
-    {
-        if (visual == null || Pointer.current == null)
-            return fallback;
-
-        Canvas rootCanvas = cardCanvas.rootCanvas;
-        Camera camera = rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay
-            ? null
-            : rootCanvas.worldCamera;
-
-        return RectTransformUtility.RectangleContainsScreenPoint(
-            visual,
-            Pointer.current.position.ReadValue(),
-            camera);
     }
 
     private void OnDestroy()

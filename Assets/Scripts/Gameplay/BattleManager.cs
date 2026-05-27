@@ -33,17 +33,14 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private List<CardData> hand        = new();
     [SerializeField] private List<CardData> discardPile = new();
     [SerializeField] private List<CardData> exhaustPile = new();
-    private readonly Dictionary<CardData, bool> cardPlayability = new();
     private int handChangeBatchDepth;
     private bool hasPendingHandChange;
-    private bool hasPendingPlayabilityRefresh;
 
     // UI용으로 읽기 전용 손패 리스트 빼놓은 거.
     public IReadOnlyList<CardData> Hand => hand;
 
     // 손패가 바뀔 때마다 HandView가 구독해서 화면 갱신
     public event Action OnHandChanged;
-    public event Action OnCardPlayabilityChanged;
 
     // EnemyInstance는 plain C# 클래스라 Inspector엔 안 뜸 — 런타임 전용
     private readonly List<EnemyInstance> enemies = new();
@@ -75,7 +72,6 @@ public class BattleManager : MonoBehaviour
         {
             EnemyInstance enemy = new EnemyInstance(data);
             enemy.OnDied += CheckVictory;
-            enemy.OnDied += RequestCardPlayabilityRefresh;
             enemies.Add(enemy);
         }
     }
@@ -87,7 +83,6 @@ public class BattleManager : MonoBehaviour
         hand.Clear();
         discardPile.Clear();
         exhaustPile.Clear();
-        cardPlayability.Clear();
 
         foreach (var card in masterDeck)
             drawPile.Add(Instantiate(card));
@@ -155,7 +150,6 @@ public class BattleManager : MonoBehaviour
         try
         {
             Energy = MaxEnergy;
-            RequestCardPlayabilityRefresh();
             TakeOutCardtoHand();
         }
         finally
@@ -207,9 +201,7 @@ public class BattleManager : MonoBehaviour
 
     public bool IsCardPlayable(CardData card)
     {
-        return card != null &&
-               cardPlayability.TryGetValue(card, out bool isPlayable) &&
-               isPlayable;
+        return EvaluateCardPlayability(card);
     }
 
     private bool EvaluateCardPlayability(CardData card)
@@ -230,37 +222,15 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
-    private void RebuildCardPlayabilityCache()
-    {
-        cardPlayability.Clear();
-        foreach (CardData card in hand)
-            cardPlayability[card] = EvaluateCardPlayability(card);
-    }
-
     private void NotifyHandChanged()
     {
         if (handChangeBatchDepth > 0)
         {
             hasPendingHandChange = true;
-            hasPendingPlayabilityRefresh = true;
             return;
         }
 
-        RebuildCardPlayabilityCache();
         OnHandChanged?.Invoke();
-        OnCardPlayabilityChanged?.Invoke();
-    }
-
-    private void RequestCardPlayabilityRefresh()
-    {
-        if (handChangeBatchDepth > 0)
-        {
-            hasPendingPlayabilityRefresh = true;
-            return;
-        }
-
-        RebuildCardPlayabilityCache();
-        OnCardPlayabilityChanged?.Invoke();
     }
 
     private void BeginHandChangeBatch()
@@ -274,18 +244,10 @@ public class BattleManager : MonoBehaviour
         if (handChangeBatchDepth > 0) return;
 
         bool handChanged = hasPendingHandChange;
-        bool refreshPlayability = hasPendingPlayabilityRefresh;
         hasPendingHandChange = false;
-        hasPendingPlayabilityRefresh = false;
-
-        if (refreshPlayability)
-            RebuildCardPlayabilityCache();
 
         if (handChanged)
             OnHandChanged?.Invoke();
-
-        if (refreshPlayability)
-            OnCardPlayabilityChanged?.Invoke();
     }
 
     //카드 플레이 시 카드 효과 실행. 카드가 손패에 없거나, 에너지/탄약 부족, 적 선택 필요 카드에 적 선택 안 했거나 유효하지 않은 적 선택한 경우 플레이 실패.
@@ -296,7 +258,7 @@ public class BattleManager : MonoBehaviour
             (target == null || target.IsDead || !enemies.Contains(target)))
             return false;
 
-        BeginHandChangeBatch();
+        BeginHandChangeBatch(); //배치 시작 - 카드 플레이 과정에서 손패 여러 번 바뀔 수 있으니, 배치로 묶어서 한 번만 갱신하도록
         try
         {
             Energy -= card.EnergyCost;
@@ -323,7 +285,7 @@ public class BattleManager : MonoBehaviour
         }
         finally
         {
-            EndHandChangeBatch();
+            EndHandChangeBatch(); //배치 끝
         }
 
         return true;
@@ -382,7 +344,6 @@ public class BattleManager : MonoBehaviour
         foreach (var enemy in enemies)
         {
             enemy.OnDied -= CheckVictory;
-            enemy.OnDied -= RequestCardPlayabilityRefresh;
         }
     }
 }
