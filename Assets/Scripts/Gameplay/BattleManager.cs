@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// 전투 유형 일단 임시?
-public enum BattleType
-{
-    Normal,
-    Elite,
-    Boss,
-}
+public enum BattleType { Normal, Elite, Boss }
 
 public class BattleManager : MonoBehaviour
 {
@@ -21,138 +15,92 @@ public class BattleManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    [Header("플레이어 전투  스테이터스")]
-    [SerializeField] private int Energy      = 3;
-    [SerializeField] private int MaxEnergy   = 3;
-    [SerializeField] private int Ammo        = 3;
-    [SerializeField] private int PlayerBlock = 0;
-    [SerializeField] private int DrawCount = 5;
+    // Inspector 기본값 — StartBattle 시 BattleState 초기화에 사용
+    [Header("전투 기본 설정")]
+    [SerializeField] private int defaultMaxEnergy = 3;
+    [SerializeField] private int defaultAmmo      = 3;
+    [SerializeField] private int defaultDrawCount = 5;
 
-    [Header("플레이어 카드 더미")]
-    [SerializeField] private List<CardData> drawPile    = new();
-    [SerializeField] private List<CardData> hand        = new();
-    [SerializeField] private List<CardData> discardPile = new();
-    [SerializeField] private List<CardData> exhaustPile = new();
-    private int handChangeBatchDepth;
-    private bool hasPendingHandChange;
+    // 런타임 전투 상태 — 모든 읽기/쓰기는 여기를 통함
+    private BattleState _state;
+    public BattleState State => _state;
 
-    // UI용으로 읽기 전용 손패 리스트 빼놓은 거.
-    public IReadOnlyList<CardData> Hand => hand;
+    // 하위 호환 래퍼 (UI/외부 코드용)
+    public int Energy      => _state?.Energy      ?? 0;
+    public int MaxEnergy   => _state?.MaxEnergy   ?? defaultMaxEnergy;
+    public int Ammo        => _state?.Ammo        ?? 0;
+    public int PlayerBlock => _state?.Player?.Block ?? 0;
 
-    // 손패가 바뀔 때마다 HandView가 구독해서 화면 갱신
-    public event Action OnHandChanged;
+    // 손패 변경 배치 처리
+    private int  _handChangeBatchDepth;
+    private bool _hasPendingHandChange;
 
-    private System.Random rndSeed = new();
+    public IReadOnlyList<CardData>      Hand    => _state?.Hand    ?? new List<CardData>();
+    public IReadOnlyList<EnemyInstance> Enemies => _state?.Enemies ?? new List<EnemyInstance>();
 
-    // EnemyInstance는 plain C# 클래스라 Inspector엔 안 뜸 — 런타임 전용
-    private readonly List<EnemyInstance> enemies = new();
-    // 이건 필요할지 모르겠는데, 일단 해 둠.
-    public IReadOnlyList<EnemyInstance> Enemies => enemies;
-
-    // 전투 승리시 보상 띄우기 위한 이벤트.
+    public event Action         OnHandChanged;
+    public event Action         OnEnemiesChanged;
     public event Action<Reward> OnBattleVictory;
-    private BattleType currentBattleType;
 
-    // 적 리스트가 바뀔 때 EnemyZoneView가 구독해서 화면 갱신
-    public event Action OnEnemiesChanged;
+    private BattleType   _currentBattleType;
+    private System.Random _rnd = new();
 
-    // 전투 초기화
-    // 매 전투 진입 시 GameManager가 호출.
+    // ─────────────────────────────────────────────
+    // 초기화
+    // ─────────────────────────────────────────────
 
     public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck, int seed)
     {
-        rndSeed = new System.Random(seed);
+        _rnd = new System.Random(seed);
+
+        _state = new BattleState
+        {
+            Player    = new PlayerCombatant(),
+            Energy    = defaultMaxEnergy,
+            MaxEnergy = defaultMaxEnergy,
+            Ammo      = defaultAmmo,
+            DrawCount = defaultDrawCount,
+            Phase     = BattlePhase.PlayerTurn,
+        };
+
         SetupEnemies(enemyDataList);
         SetupBattleDeck(masterDeck);
-        ResetPlayerBattleState();
         OnEnemiesChanged?.Invoke();
     }
 
     private void SetupEnemies(List<EnemyData> enemyDataList)
     {
-        enemies.Clear();
+        _state.Enemies.Clear();
         foreach (var data in enemyDataList)
         {
-            EnemyInstance enemy = new EnemyInstance(data);
+            var enemy = new EnemyInstance(data);
             enemy.OnDied += CheckVictory;
-            enemies.Add(enemy);
+            _state.Enemies.Add(enemy);
         }
     }
 
-    // 카드 더미 초기화
     private void SetupBattleDeck(List<CardData> masterDeck)
     {
-        drawPile.Clear();
-        hand.Clear();
-        discardPile.Clear();
-        exhaustPile.Clear();
+        _state.Hand.Clear();
+        _state.DrawPile.Clear();
+        _state.DiscardPile.Clear();
+        _state.ExhaustPile.Clear();
 
         foreach (var card in masterDeck)
-            drawPile.Add(Instantiate(card));
-        Shuffle(drawPile);
+            _state.DrawPile.Add(Instantiate(card));
+        Shuffle(_state.DrawPile);
     }
 
-    private void ResetPlayerBattleState()
-    {
-        Energy       = MaxEnergy;
-        PlayerBlock  = 0;
-        Ammo         = 3; // 기본 무기(권총) 탄창
-    }
-
-    private void Shuffle(List<CardData> deck)
-    {
-        for (int i = 0; i < deck.Count; i++)
-        {
-            int j = rndSeed.Next(i, deck.Count);
-            (deck[i], deck[j]) = (deck[j], deck[i]);
-        }
-    }
-
-    // 플레이어 턴에 뽑을 카드 더미에서 손패로 카드 가져오기(드로우)
-    public void TakeOutCardtoHand()
-    {
-        if(hand.Count >= 10)
-        {
-            // 손패 최대치 10장. 10장 넘었으면 여분 뽑을 카드 더미로
-            Debug.Log("손패가 가득 참.");
-            return;
-        }
-
-        bool drewAnyCard = false;
-        for(int i = 0; i < DrawCount && hand.Count < 10; i++)
-        {
-            if (drawPile.Count == 0)
-            {
-                // 뽑을 카드 더미가 비었으면 버릴 카드 더미를 섞어서 뽑을 카드 더미로
-                if (discardPile.Count == 0)
-                {
-                    Debug.Log("뽑을 카드 더미와 버릴 카드 더미가 모두 액션빔.");
-                    break;
-                }
-                drawPile.AddRange(discardPile);
-                discardPile.Clear();
-                Shuffle(drawPile);
-            }
-            // 뽑을 카드 더미에서 랜덤으로 카드 하나 뽑아서 손패로
-            int index = rndSeed.Next(0, drawPile.Count);
-            CardData drawnCard = drawPile[index];
-            hand.Add(drawnCard);
-            drawPile.RemoveAt(index);
-            drewAnyCard = true;
-        }
-
-        if (drewAnyCard)
-            NotifyHandChanged();
-    }
-
-    // 
+    // ─────────────────────────────────────────────
+    // 턴 흐름
+    // ─────────────────────────────────────────────
 
     public void PlayerTurnStart()
     {
         BeginHandChangeBatch();
         try
         {
-            Energy = MaxEnergy;
+            _state.Energy = _state.MaxEnergy;
             TakeOutCardtoHand();
         }
         finally
@@ -163,190 +111,251 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTurnEnd()
     {
-        
-    }
-
-    public void AddCardToDrawPile(CardData card)
-    {
-        drawPile.Add(Instantiate(card));
-        Shuffle(drawPile);
-    }
-
-    public void AddCardToDiscardPile(CardData card)
-    {
-        discardPile.Add(Instantiate(card));
-    }
-
-    public void AddCardToHand(CardData card)
-    {
-        AddCardsToHand(new[] { card });
-    }
-
-    public void AddCardsToHand(IEnumerable<CardData> cards)
-    {
-        if (cards == null) return;
-
-        bool addedAnyCard = false;
-        foreach (CardData card in cards)
-        {
-            if (hand.Count >= 10) break;
-            if (card == null) continue;
-
-            hand.Add(Instantiate(card));
-            addedAnyCard = true;
-        }
-
-        if (addedAnyCard)
-            NotifyHandChanged();
-
-        //핸드가 꽉 차는 등 카드가 추가될 수 없ㄴ으면 추가 로직이 있어야함
-    }
-
-    public bool IsCardPlayable(CardData card)
-    {
-        return EvaluateCardPlayability(card);
-    }
-
-    private bool EvaluateCardPlayability(CardData card)
-    {
-        if (card == null || !hand.Contains(card)) return false;
-        if (Energy < card.EnergyCost || Ammo < card.AmmoCost) return false;
-
-        if (card.UseMode == CardData.CardUseMode.SelectEnemy)
-        {
-            foreach (EnemyInstance enemy in enemies)
-            {
-                if (!enemy.IsDead) return true;
-            }
-
-            return false;
-        }
-
-        return true;
-    }
-
-    private void NotifyHandChanged()
-    {
-        if (handChangeBatchDepth > 0)
-        {
-            hasPendingHandChange = true;
-            return;
-        }
-
-        OnHandChanged?.Invoke();
-    }
-
-    private void BeginHandChangeBatch()
-    {
-        handChangeBatchDepth++;
-    }
-
-    private void EndHandChangeBatch()
-    {
-        handChangeBatchDepth--;
-        if (handChangeBatchDepth > 0) return;
-
-        bool handChanged = hasPendingHandChange;
-        hasPendingHandChange = false;
-
-        if (handChanged)
-            OnHandChanged?.Invoke();
-    }
-
-    //카드 플레이 시 카드 효과 실행. 카드가 손패에 없거나, 에너지/탄약 부족, 적 선택 필요 카드에 적 선택 안 했거나 유효하지 않은 적 선택한 경우 플레이 실패.
-    public bool TryPlayCard(CardData card, EnemyInstance target)
-    {
-        if (!EvaluateCardPlayability(card)) return false;
-        if (card.UseMode == CardData.CardUseMode.SelectEnemy &&
-            (target == null || target.IsDead || !enemies.Contains(target)))
-            return false;
-
-        BeginHandChangeBatch(); //배치 시작 - 카드 플레이 과정에서 손패 여러 번 바뀔 수 있으니, 배치로 묶어서 한 번만 갱신하도록
-        try
-        {
-            Energy -= card.EnergyCost;
-            Ammo -= card.AmmoCost;
-
-            hand.Remove(card);
-            if (card.IsExhaust) exhaustPile.Add(card);
-            else discardPile.Add(card);
-            NotifyHandChanged();
-
-            var ctx = new CardContext
-            {
-                Battle     = this,
-                Card       = card,
-                Target     = target,
-                AllEnemies = enemies
-            };
-
-            foreach (CardEffect effect in card.ActiveEffects)
-            {
-                if (effect != null)
-                    effect.Execute(ctx);
-            }
-        }
-        finally
-        {
-            EndHandChangeBatch(); //배치 끝
-        }
-
-        return true;
+        _state.Player.TickPassives(_state);
     }
 
     public void EnemyTurnStart()
     {
-        foreach (var enemy in enemies)
+        _state.Phase = BattlePhase.EnemyTurn;
+
+        foreach (var enemy in _state.Enemies)
         {
+            if (enemy.IsDead) continue;
+
+            // 패시브 OnTurnStart + TickDown
+            enemy.TickPassives(_state);
+
             var action = enemy.GetCurrentAction();
             if (action != null)
             {
-                var ctx = new CardContext
-                {
-                    Battle      = this,
-                    ActingEnemy = enemy,
-                    AllEnemies  = enemies
-                };
+                var ctx = BuildEnemyContext(enemy);
                 foreach (var effect in action.effects)
-                    effect.Execute(ctx);
+                    effect?.Execute(ctx);
             }
             enemy.AdvancePattern();
         }
+
+        _state.Phase = BattlePhase.PlayerTurn;
     }
+
+    // ─────────────────────────────────────────────
+    // 카드 플레이
+    // ─────────────────────────────────────────────
+
+    public bool IsCardPlayable(CardData card) => EvaluateCardPlayability(card);
+
+    private bool EvaluateCardPlayability(CardData card)
+    {
+        if (card == null || !_state.Hand.Contains(card)) return false;
+        if (_state.Energy < card.EnergyCost || _state.Ammo < card.AmmoCost) return false;
+
+        if (card.UseMode == CardData.CardUseMode.SelectEnemy)
+        {
+            foreach (var e in _state.Enemies)
+                if (!e.IsDead) return true;
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool TryPlayCard(CardData card, EnemyInstance target)
+    {
+        if (!EvaluateCardPlayability(card)) return false;
+        if (card.UseMode == CardData.CardUseMode.SelectEnemy &&
+            (target == null || target.IsDead || !_state.Enemies.Contains(target)))
+            return false;
+
+        BeginHandChangeBatch();
+        try
+        {
+            _state.Energy -= card.EnergyCost;
+            _state.Ammo   -= card.AmmoCost;
+
+            _state.Hand.Remove(card);
+            if (card.IsExhaust) _state.ExhaustPile.Add(card);
+            else _state.DiscardPile.Add(card);
+            NotifyHandChanged();
+
+            var ctx = new CardContext
+            {
+                State      = _state,
+                Battle     = this,
+                Card       = card,
+                Target     = target,
+                AllEnemies = _state.Enemies,
+            };
+
+            foreach (var effect in card.ActiveEffects)
+                effect?.Execute(ctx);
+        }
+        finally
+        {
+            EndHandChangeBatch();
+        }
+
+        return true;
+    }
+
+    // ─────────────────────────────────────────────
+    // 카드 더미 조작 (Effect에서 호출 가능)
+    // ─────────────────────────────────────────────
+
+    public void TakeOutCardtoHand()
+    {
+        if (_state.Hand.Count >= 10)
+        {
+            Debug.Log("손패가 가득 참.");
+            return;
+        }
+
+        bool drew = false;
+        for (int i = 0; i < _state.DrawCount && _state.Hand.Count < 10; i++)
+        {
+            if (_state.DrawPile.Count == 0)
+            {
+                if (_state.DiscardPile.Count == 0)
+                {
+                    Debug.Log("뽑을 카드 더미와 버릴 카드 더미가 모두 비어있음.");
+                    break;
+                }
+                _state.DrawPile.AddRange(_state.DiscardPile);
+                _state.DiscardPile.Clear();
+                Shuffle(_state.DrawPile);
+            }
+
+            int idx = _rnd.Next(0, _state.DrawPile.Count);
+            _state.Hand.Add(_state.DrawPile[idx]);
+            _state.DrawPile.RemoveAt(idx);
+            drew = true;
+        }
+
+        if (drew) NotifyHandChanged();
+    }
+
+    // DrawEffect에서 특정 매수만큼 드로우
+    public void DrawCards(int count)
+    {
+        if (_state == null || count <= 0) return;
+
+        bool drew = false;
+        for (int i = 0; i < count && _state.Hand.Count < 10; i++)
+        {
+            if (_state.DrawPile.Count == 0)
+            {
+                if (_state.DiscardPile.Count == 0) break;
+                _state.DrawPile.AddRange(_state.DiscardPile);
+                _state.DiscardPile.Clear();
+                Shuffle(_state.DrawPile);
+            }
+
+            int idx = _rnd.Next(0, _state.DrawPile.Count);
+            _state.Hand.Add(_state.DrawPile[idx]);
+            _state.DrawPile.RemoveAt(idx);
+            drew = true;
+        }
+
+        if (drew) NotifyHandChanged();
+    }
+
+    public void AddCardToDrawPile(CardData card)
+    {
+        _state.DrawPile.Add(Instantiate(card));
+        Shuffle(_state.DrawPile);
+    }
+
+    public void AddCardToDiscardPile(CardData card)
+    {
+        _state.DiscardPile.Add(Instantiate(card));
+    }
+
+    public void AddCardToHand(CardData card) => AddCardsToHand(new[] { card });
+
+    public void AddCardsToHand(IEnumerable<CardData> cards)
+    {
+        if (cards == null) return;
+        bool added = false;
+        foreach (var card in cards)
+        {
+            if (_state.Hand.Count >= 10) break;
+            if (card == null) continue;
+            _state.Hand.Add(Instantiate(card));
+            added = true;
+        }
+        if (added) NotifyHandChanged();
+    }
+
+    // ─────────────────────────────────────────────
+    // 승리 판정
+    // ─────────────────────────────────────────────
 
     private void CheckVictory()
     {
-        foreach (var enemy in enemies)
-        {
-            if (!enemy.IsDead) return;
-        }
-
+        foreach (var e in _state.Enemies)
+            if (!e.IsDead) return;
         Victory();
-    }
-
-    // 테스트용 - 빌드 전 제거
-    public void TestVictory(BattleType battleType)
-    {
-        currentBattleType = battleType;
-        Victory();
-    }
-    private void Update()
-    {
-        if (Keyboard.current[Key.V].wasPressedThisFrame)
-        {
-            TestVictory(BattleType.Normal);
-        }
     }
 
     private void Victory()
     {
-        RewardProbabilityData rewardData = GameManager.Instance.GetRewardProbability(currentBattleType);
-        Reward reward = new Reward(GameManager.Instance.cardPools, rewardData, currentBattleType);
-
+        var rewardData = GameManager.Instance.GetRewardProbability(_currentBattleType);
+        var reward     = new Reward(GameManager.Instance.cardPools, rewardData, _currentBattleType);
         OnBattleVictory?.Invoke(reward);
-        foreach (var enemy in enemies)
+        foreach (var e in _state.Enemies)
+            e.OnDied -= CheckVictory;
+    }
+
+    // ─────────────────────────────────────────────
+    // 내부 유틸
+    // ─────────────────────────────────────────────
+
+    private CardContext BuildEnemyContext(EnemyInstance enemy) => new()
+    {
+        State       = _state,
+        Battle      = this,
+        ActingEnemy = enemy,
+        AllEnemies  = _state.Enemies,
+    };
+
+    private void NotifyHandChanged()
+    {
+        if (_handChangeBatchDepth > 0) { _hasPendingHandChange = true; return; }
+        OnHandChanged?.Invoke();
+    }
+
+    private void BeginHandChangeBatch() => _handChangeBatchDepth++;
+
+    private void EndHandChangeBatch()
+    {
+        _handChangeBatchDepth--;
+        if (_handChangeBatchDepth > 0) return;
+        bool changed = _hasPendingHandChange;
+        _hasPendingHandChange = false;
+        if (changed) OnHandChanged?.Invoke();
+    }
+
+    private void Shuffle(List<CardData> deck)
+    {
+        for (int i = 0; i < deck.Count; i++)
         {
-            enemy.OnDied -= CheckVictory;
+            int j = _rnd.Next(i, deck.Count);
+            (deck[i], deck[j]) = (deck[j], deck[i]);
         }
+    }
+
+    // ─────────────────────────────────────────────
+    // 테스트용 (빌드 전 제거)
+    // ─────────────────────────────────────────────
+
+    public void TestVictory(BattleType battleType)
+    {
+        _currentBattleType = battleType;
+        Victory();
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current[Key.V].wasPressedThisFrame)
+            TestVictory(BattleType.Normal);
     }
 }
