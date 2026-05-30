@@ -20,8 +20,9 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 0
   cardOwner: 0
-  cardDescription: Ammo +1
-  cardEffects: []
+  cardDescription: Ammo +3
+  cardEffects:
+  - {fileID: 0}
   useMode: 0
   isExhaust: 0
   isEthereal: 0

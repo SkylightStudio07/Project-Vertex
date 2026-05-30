@@ -27,6 +27,9 @@ public class CardHandler : MonoBehaviour,
 
     private static bool isAnyDragging;
 
+    private static bool IsInteractable =>
+        GameManager.Instance != null && GameManager.Instance.Phase == GamePhase.Battle;
+
     private CardView cardView;
     private CardInteractionView interactionView;
     private CardState state = CardState.Idle;
@@ -42,7 +45,7 @@ public class CardHandler : MonoBehaviour,
     public void OnPointerEnter(PointerEventData eventData)
     {
         isPointerOverCard = true;
-        if (state != CardState.Idle || isAnyDragging) return;
+        if (state != CardState.Idle || isAnyDragging || !IsInteractable) return;
 
         SetState(CardState.Hover);
     }
@@ -57,6 +60,7 @@ public class CardHandler : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!IsInteractable) return;
         if (state != CardState.Hover && state != CardState.Idle) return;
         if (BattleManager.Instance == null ||
             cardView.Data == null ||

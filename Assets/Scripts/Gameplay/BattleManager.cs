@@ -41,6 +41,7 @@ public class BattleManager : MonoBehaviour
     public event Action         OnHandChanged;
     public event Action         OnEnemiesChanged;
     public event Action<Reward> OnBattleVictory;
+    public event Action         OnBattleDefeat;
 
     private BattleType   _currentBattleType;
     private System.Random _rnd = new();
@@ -65,6 +66,7 @@ public class BattleManager : MonoBehaviour
 
         SetupEnemies(enemyDataList);
         SetupBattleDeck(masterDeck);
+        _state.Player.OnDied += Defeat;
         OnEnemiesChanged?.Invoke();
     }
 
@@ -111,7 +113,26 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTurnEnd()
     {
+        if (_state.Phase != BattlePhase.PlayerTurn) return;
+
+        // 손패 → 버린 카드 더미
+        BeginHandChangeBatch();
+        try
+        {
+            foreach (var card in _state.Hand)
+                _state.DiscardPile.Add(card);
+            _state.Hand.Clear();
+            NotifyHandChanged();
+        }
+        finally
+        {
+            EndHandChangeBatch();
+        }
+
+        _state.Player.ResetBlock();
         _state.Player.TickPassives(_state);
+
+        EnemyTurnStart();
     }
 
     public void EnemyTurnStart()
@@ -122,7 +143,6 @@ public class BattleManager : MonoBehaviour
         {
             if (enemy.IsDead) continue;
 
-            // 패시브 OnTurnStart + TickDown
             enemy.TickPassives(_state);
 
             var action = enemy.GetCurrentAction();
@@ -133,9 +153,21 @@ public class BattleManager : MonoBehaviour
                     effect?.Execute(ctx);
             }
             enemy.AdvancePattern();
+
+            if (_state.Player.IsDead) return;
         }
 
+        if (IsAllEnemiesDead()) return;
+
         _state.Phase = BattlePhase.PlayerTurn;
+        PlayerTurnStart();
+    }
+
+    private bool IsAllEnemiesDead()
+    {
+        foreach (var e in _state.Enemies)
+            if (!e.IsDead) return false;
+        return true;
     }
 
     // ─────────────────────────────────────────────
@@ -303,6 +335,11 @@ public class BattleManager : MonoBehaviour
         OnBattleVictory?.Invoke(reward);
         foreach (var e in _state.Enemies)
             e.OnDied -= CheckVictory;
+    }
+
+    private void Defeat()
+    {
+        OnBattleDefeat?.Invoke();
     }
 
     // ─────────────────────────────────────────────

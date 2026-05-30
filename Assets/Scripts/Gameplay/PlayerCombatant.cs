@@ -16,7 +16,8 @@ public class PlayerCombatant : ICombatant
     public bool IsDead => HP <= 0;
     public List<IPassiveLogic> Passives => _passives;
 
-    public event Action<int> OnDamaged; // 실제 받은 피해량
+    public event Action<int> OnDamaged;
+    public event Action      OnDied;
 
     public void TakeDamage(DamageInfo info)
     {
@@ -33,6 +34,7 @@ public class PlayerCombatant : ICombatant
             GameManager.Instance.TakeDamage(amount);
 
         OnDamaged?.Invoke(amount);
+        if (IsDead) OnDied?.Invoke();
     }
 
     public void AddBlock(int amount) => _block = Math.Max(0, _block + amount);

@@ -28,6 +28,7 @@ public class MapUIController : MonoBehaviour
     public void OpenMap()
     {
         mapPanel.SetActive(true);
+        GameManager.Instance.SetPhase(GamePhase.Map);
         if (builtMapData != RunData.Instance.mapData) BuildMap();
         else RefreshNodeStates();
     }
@@ -35,6 +36,7 @@ public class MapUIController : MonoBehaviour
     public void CloseMap()
     {
         mapPanel.SetActive(false);
+        GameManager.Instance.SetPhase(GamePhase.Battle);
     }
 
     // Map 버튼 OnClick()에 바인딩
