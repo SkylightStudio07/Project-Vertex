@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aae76a5df93687488f7413a6d64505f, type: 3}
+  m_Name: Cp_01
+  m_EditorClassIdentifier: Assembly-CSharp::CoopCharData
+  charID: Cp_01
+  charName: Cp_01
+  charDescription: "\uCE90\uB9AD\uD130 \uC124\uBA85"
+  charImage: {fileID: 0}
+  charIcon: {fileID: 0}
+  idleAnim: {fileID: 0}
+  attackAnim: {fileID: 0}
+  hitAnim: {fileID: 0}
+  deathAnim: {fileID: 0}
+  charSoundEffect: {fileID: 0}
+  joinRewardCard: {fileID: 0}
+  battleRewardCardPool: []
+  maxCoopLevel: 5
+  rankEventDatas:
+  - targetRank: 0
+    requiredPoint: 0
+    dialogueID: Cp_01_01
+    choices:
+    - choiceText: 11
+      coopPoint: 2
+  - targetRank: 1
+    requiredPoint: 2
+    dialogueID: Cp_01_01
+    choices:
+    - choiceText: 15
+      coopPoint: 126
