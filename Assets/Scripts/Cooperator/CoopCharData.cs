@@ -5,7 +5,7 @@ using UnityEngine;
 public class CoopCharData : CharData
 {
     [Header("호감도 레벨 당 해금 카드")]
-    public Dictionary<int, CardData> unlockCardCoopLevel = new();
+    public List<CardData> unlockCardCoopLevel = new();
 
     [Header("합류 시 획득 카드")]
     public CardData joinRewardCard;
@@ -23,7 +23,7 @@ public class CoopCharData : CharData
 [System.Serializable]
 public class RankEventData
 {
-    public int targetRank;
+    public int targetLevel;
 
     public int requiredPoint;
 

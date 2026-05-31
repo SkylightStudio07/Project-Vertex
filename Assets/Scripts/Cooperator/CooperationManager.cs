@@ -11,7 +11,7 @@ public struct CoopCharState
     public int currentCoopLevel;
     public int currentCoopPoint;
     public bool isLevelUp;
-    public Dictionary<int, RankEventData> rankEventDatas;
+    public Dictionary<int, RankEventData> rankEventDatasDict;
 }
 
 public class CooperationManager : MonoBehaviour
@@ -42,7 +42,7 @@ public class CooperationManager : MonoBehaviour
             Dictionary<int, RankEventData> rankEventDatasDict = new Dictionary<int, RankEventData>();
             foreach (var rankEventData in coopCharData.rankEventDatas)
             {
-                rankEventDatasDict[rankEventData.targetRank] = rankEventData;
+                rankEventDatasDict[rankEventData.targetLevel] = rankEventData;
             }
 
             coopCharDict[coopCharData.charID] = new CoopCharState
@@ -52,7 +52,7 @@ public class CooperationManager : MonoBehaviour
                 currentCoopLevel = 0,
                 currentCoopPoint = 0,
                 isLevelUp = false,
-                rankEventDatas = rankEventDatasDict
+                rankEventDatasDict = rankEventDatasDict
             };
 
             // Debug
@@ -63,7 +63,7 @@ public class CooperationManager : MonoBehaviour
                 currentCoopLevel = 0,
                 currentCoopPoint = 0,
                 isLevelUp = false,
-                rankEventDatas = rankEventDatasDict
+                rankEventDatasDict = rankEventDatasDict
             };
             // Debug
 
@@ -105,12 +105,13 @@ public class CooperationManager : MonoBehaviour
     // 호감도 포인트 추가 메소드
     public void AddCoopPoint(string charID, int point)
     {
+        if (debugCoopChar.currentCoopLevel == 0) return;
         //Debug
         debugCoopChar.currentCoopPoint += point;
         // 호감도 레벨업 체크
-        if (debugCoopChar.currentCoopLevel+1 < debugCoopChar.charData.maxCoopLevel)
+        if (debugCoopChar.currentCoopLevel + 1 < debugCoopChar.charData.maxCoopLevel)
         {
-            if (debugCoopChar.currentCoopPoint >= debugCoopChar.charData.rankEventDatas[debugCoopChar.currentCoopLevel + 1].requiredPoint)
+            if (debugCoopChar.currentCoopPoint >= debugCoopChar.rankEventDatasDict[debugCoopChar.currentCoopLevel].requiredPoint)
             {
                 debugCoopChar.isLevelUp = true;
             }
@@ -120,11 +121,13 @@ public class CooperationManager : MonoBehaviour
 
         if (coopCharDict.TryGetValue(charID, out var charState))
         {
+            if (charState.currentCoopLevel == 0) return;
+
             charState.currentCoopPoint += point;
             // 호감도 레벨업 체크
-            if (charState.currentCoopLevel+1 < charState.charData.maxCoopLevel)
+            if (charState.currentCoopLevel + 1 < charState.charData.maxCoopLevel)
             {
-                if (charState.currentCoopPoint >= charState.charData.rankEventDatas[charState.currentCoopLevel + 1].requiredPoint)
+                if (charState.currentCoopPoint >= charState.rankEventDatasDict[charState.currentCoopLevel].requiredPoint)
                 {
                     charState.isLevelUp = true;
                 }
@@ -136,33 +139,42 @@ public class CooperationManager : MonoBehaviour
 
     public void SettlePoint(string charID)
     {
+        //Debug
+        if (debugCoopChar.currentCoopLevel == 0) return;
         // 호감도 레벨업 체크
-        if (debugCoopChar.currentCoopLevel + 1 < debugCoopChar.charData.maxCoopLevel)
+        if (debugCoopChar.currentCoopLevel + 1 <= debugCoopChar.charData.maxCoopLevel)
         {
-            if (debugCoopChar.currentCoopPoint >= debugCoopChar.charData.rankEventDatas[debugCoopChar.currentCoopLevel + 1].requiredPoint)
+            debugCoopChar.currentCoopPoint -= debugCoopChar.rankEventDatasDict[debugCoopChar.currentCoopLevel].requiredPoint;
+            if (debugCoopChar.currentCoopPoint >= debugCoopChar.rankEventDatasDict[debugCoopChar.currentCoopLevel].requiredPoint)
             {
-                debugCoopChar.currentCoopPoint -= debugCoopChar.charData.rankEventDatas[debugCoopChar.currentCoopLevel + 1].requiredPoint;
+                debugCoopChar.isLevelUp = true;
             }
+            else
+            {
+                debugCoopChar.isLevelUp = false;
+            }
+            debugCoopChar.currentCoopLevel++;
         }
-
-        debugCoopChar.currentCoopLevel++;
-        debugCoopChar.isLevelUp = false;
-
         return;
+        //Debug
 
         if (coopCharDict.TryGetValue(charID, out var charState))
         {
+            if (charState.currentCoopLevel == 0) return;
             // 호감도 레벨업 체크
-            if (charState.currentCoopLevel + 1 < charState.charData.maxCoopLevel)
+            if (charState.currentCoopLevel + 1 <= charState.charData.maxCoopLevel)
             {
-                if (charState.currentCoopPoint >= charState.charData.rankEventDatas[charState.currentCoopLevel + 1].requiredPoint)
+                charState.currentCoopPoint -= charState.rankEventDatasDict[charState.currentCoopLevel].requiredPoint;
+                if (charState.currentCoopPoint >= charState.rankEventDatasDict[charState.currentCoopLevel].requiredPoint)
                 {
-                    charState.currentCoopPoint -= charState.charData.rankEventDatas[charState.currentCoopLevel + 1].requiredPoint;
+                    charState.isLevelUp = true;
                 }
+                else
+                {
+                    charState.isLevelUp = false;
+                }
+                charState.currentCoopLevel++;
             }
-
-            charState.currentCoopLevel++;
-            charState.isLevelUp = false;
 
             coopCharDict[charID] = charState;
         }
@@ -179,6 +191,11 @@ public class CooperationManager : MonoBehaviour
     public void SettlePoint_Debug()
     {
         SettlePoint("Cp_01");
+    }
+
+    public void UnlockCoopertor()
+    {
+        debugCoopChar.currentCoopLevel = 1;
     }
 }
 

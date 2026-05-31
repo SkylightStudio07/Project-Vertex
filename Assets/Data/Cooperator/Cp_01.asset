@@ -22,17 +22,18 @@ MonoBehaviour:
   hitAnim: {fileID: 0}
   deathAnim: {fileID: 0}
   charSoundEffect: {fileID: 0}
+  unlockCardCoopLevel: []
   joinRewardCard: {fileID: 0}
   battleRewardCardPool: []
   maxCoopLevel: 5
   rankEventDatas:
-  - targetRank: 0
-    requiredPoint: 0
+  - targetLevel: 1
+    requiredPoint: 2
     dialogueID: Cp_01_01
     choices:
     - choiceText: 11
       coopPoint: 2
-  - targetRank: 1
+  - targetLevel: 2
     requiredPoint: 2
     dialogueID: Cp_01_01
     choices:
