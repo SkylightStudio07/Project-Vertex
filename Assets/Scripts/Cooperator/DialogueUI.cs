@@ -8,9 +8,9 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI charNameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
 
-    public void SetDialogue(Image charImage, string charNameText, string dialogueText)
+    public void SetDialogue(Sprite charImage, string charNameText, string dialogueText)
     {
-        this.charImage = charImage;
+        this.charImage.sprite = charImage;
         this.charNameText.text = charNameText;
         this.dialogueText.text = dialogueText;
     }
