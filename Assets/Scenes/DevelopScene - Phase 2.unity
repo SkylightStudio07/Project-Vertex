@@ -202,6 +202,7 @@ MonoBehaviour:
   floor: 0
   strikeCard: {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
   blockCard: {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  reloadCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
 --- !u!114 &117956439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,15 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fee6ab72c55ff844b88038e133dc165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
-  Energy: 3
-  MaxEnergy: 3
-  Ammo: 3
-  PlayerBlock: 0
-  DrawCount: 5
-  drawPile: []
-  hand: []
-  discardPile: []
-  exhaustPile: []
+  defaultMaxEnergy: 3
+  defaultAmmo: 3
+  defaultDrawCount: 5
 --- !u!114 &117956440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +248,8 @@ MonoBehaviour:
   nodePrefab: {fileID: 5061233425930402740, guid: 8da60c6cc60850245837432e2f837154, type: 3}
   linePrefab: {fileID: 235328721144647464, guid: 47adc8dedf2a9874587cf8a60f17e051, type: 3}
   scrollRect: {fileID: 826431240}
+  eventView: {fileID: 0}
+  eventPool: []
   floorSpacing: 120
   columnSpacing: 120
   verticalPadding: 80
@@ -1905,7 +1902,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1564995714}
         m_TargetAssemblyTypeName: RewardsView, Assembly-CSharp
-        m_MethodName: Close
+        m_MethodName: OnProceedClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2299,6 +2296,7 @@ MonoBehaviour:
   rewardButtonPrefab: {fileID: -6894734140303628496, guid: 7c5429d526d8f5745aa65d61c3cd2814, type: 3}
   rewardButtonContainer: {fileID: 1864350614}
   cardRewardView: {fileID: 279747962}
+  mapUIController: {fileID: 117956441}
 --- !u!1 &1585591797
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,7 +2734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBCF4\uC0C1 \uC2A4\uD0B4"
+  m_text: "\uC9C4\uD589"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 344148b6ccbacf84a83c7ecef3902e92, type: 2}
   m_sharedMaterial: {fileID: 217728622651580723, guid: 344148b6ccbacf84a83c7ecef3902e92, type: 2}
@@ -2904,13 +2902,15 @@ GameObject:
   - component: {fileID: 1975396849}
   - component: {fileID: 1975396851}
   - component: {fileID: 1975396850}
+  - component: {fileID: 1975396852}
+  - component: {fileID: 1975396853}
   m_Layer: 5
   m_Name: MapView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1975396849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2969,6 +2969,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975396848}
   m_CullTransparentMesh: 1
+--- !u!223 &1975396852
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975396848}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 50
+  m_TargetDisplay: 0
+--- !u!114 &1975396853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975396848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

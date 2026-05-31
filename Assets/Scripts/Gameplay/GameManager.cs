@@ -114,7 +114,14 @@ public class GameManager : MonoBehaviour
             NodeType.Boss  => BattleType.Boss,
             _              => BattleType.Normal,
         };
-        BattleManager.Instance.StartBattle(currentEnemies, playerDeck, RunData.Instance.mapData.seed, battleType);
+
+        // 노드에 조우가 할당돼 있으면 그걸 쓰고, 없으면 Inspector 기본값(currentEnemies) 사용
+        var node = RunData.Instance.CurrentNode;
+        var enemies = (node?.encounter != null && node.encounter.Count > 0)
+            ? node.encounter
+            : currentEnemies;
+
+        BattleManager.Instance.StartBattle(enemies, playerDeck, RunData.Instance.mapData.seed, battleType);
         BattleManager.Instance.PlayerTurnStart();
     }
 
