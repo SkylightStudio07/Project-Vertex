@@ -108,7 +108,13 @@ public class GameManager : MonoBehaviour
     // 전투 전용 덱 복사/셔플은 BattleManager가 담당한다.
     public void InitializeBattle()
     {
-        BattleManager.Instance.StartBattle(currentEnemies, playerDeck, RunData.Instance.mapData.seed);
+        BattleType battleType = RunData.Instance.CurrentNodeType switch
+        {
+            NodeType.Elite => BattleType.Elite,
+            NodeType.Boss  => BattleType.Boss,
+            _              => BattleType.Normal,
+        };
+        BattleManager.Instance.StartBattle(currentEnemies, playerDeck, RunData.Instance.mapData.seed, battleType);
         BattleManager.Instance.PlayerTurnStart();
     }
 

@@ -28,7 +28,9 @@ public class CardHandler : MonoBehaviour,
     private static bool isAnyDragging;
 
     private static bool IsInteractable =>
-        GameManager.Instance != null && GameManager.Instance.Phase == GamePhase.Battle;
+        BattleManager.Instance != null &&
+        BattleManager.Instance.State?.Phase == BattlePhase.PlayerTurn &&
+        (MapUIController.Instance == null || !MapUIController.Instance.IsMapOpen);
 
     private CardView cardView;
     private CardInteractionView interactionView;

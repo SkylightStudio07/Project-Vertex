@@ -50,8 +50,9 @@ public class BattleManager : MonoBehaviour
     // 초기화
     // ─────────────────────────────────────────────
 
-    public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck, int seed)
+    public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck, int seed, BattleType battleType = BattleType.Normal)
     {
+        _currentBattleType = battleType;
         _rnd = new System.Random(seed);
 
         _state = new BattleState
@@ -330,6 +331,21 @@ public class BattleManager : MonoBehaviour
 
     private void Victory()
     {
+        // 승리 후 손패를 그대로 두면 맵으로 돌아갔을 때 손패가 가로채져서 맵 스크롤과 노드 클릭이 동작하지 않는 문제가 있었다.
+        // 손패를 버리는 배치 처리로 해결. 승리 시 손패는 어차피 초기화되므로, 승리 후에 OnHandChanged가 한 번만 호출되도록...
+        BeginHandChangeBatch();
+        try
+        {
+            foreach (var card in _state.Hand)
+                _state.DiscardPile.Add(card);
+            _state.Hand.Clear();
+            NotifyHandChanged();
+        }
+        finally
+        {
+            EndHandChangeBatch();
+        }
+
         var rewardData = GameManager.Instance.GetRewardProbability(_currentBattleType);
         var reward     = new Reward(GameManager.Instance.cardPools, rewardData, _currentBattleType);
         OnBattleVictory?.Invoke(reward);
