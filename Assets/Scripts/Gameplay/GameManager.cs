@@ -26,13 +26,15 @@ public class GameManager : MonoBehaviour
     [Header("덱 관련")]
     public List<CardData> playerDeck; // 플레이어가 얻은 전체 카드덱 (런 내내 지속)
 
-    [Header("카드 풀")]
+    [Header("보상 풀")]
     // 플레이어가 보상으로 획득 가능한 카드들.
     // 지금은 SerializeField로 개별 리스트 만들어서 채우는 방식인데, 나중에 카드 데이터 관리 시스템 구축하면 그쪽에서 관리하도록 바꿔야 함.
     public Dictionary<CardData.CardRarity, List<CardData>> cardPools = new Dictionary<CardData.CardRarity, List<CardData>>();
     [SerializeField] private List<CardData> commonPool;
     [SerializeField] private List<CardData> rarePool;
     [SerializeField] private List<CardData> uniquePool;
+    // 아이템 보상 풀
+    [SerializeField] private List<ItemData> itemPool;
     // 챕터, 전투 유형 별 카드 보상 확률 데이터
     [SerializeField] private List<RewardProbabilityData> rewardProbabilityTable;
 
@@ -88,6 +90,9 @@ public class GameManager : MonoBehaviour
         cardPools[CardData.CardRarity.Common] = commonPool;
         cardPools[CardData.CardRarity.Rare] = rarePool;
         cardPools[CardData.CardRarity.Unique] = uniquePool;
+
+        // 아이템 풀 초기화
+        Reward.SetItemRewardsPool(itemPool);
 
         MapManager.Instance.InitializeMap();
 

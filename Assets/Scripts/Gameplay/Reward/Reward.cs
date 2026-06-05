@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static CardData;
+using static ItemData;
 
 public enum RewardType { Gold, Item, Card }
 
@@ -16,6 +17,7 @@ public struct RewardItem
     public string ItemDescription => Type switch
     {
         RewardType.Gold => $"{Data} Gold",
+        RewardType.Item => ((ItemData)Data).ItemName,
         RewardType.Card => $"Cards",
         _ => "Unknown Reward"
     };
@@ -31,22 +33,28 @@ public struct RewardItem
 // 전투 전체 보상 데이터 관리
 public class Reward
 {
+    // 아이템 보상 전체 풀 - 런 중에는 바뀔 일이 없으므로 GameManager에서 런 시작에 초기화하고 static으로 관리
+    private static List<ItemData> itemRewardsPool = new List<ItemData>();
+    public static void SetItemRewardsPool(List<ItemData> pool) => itemRewardsPool = pool;
+
     private int gold;
-    private int numofCardReward;
+    private ItemData itemReward = null;
+    private int numCardReward;
     private readonly List<CardData> cardRewards = new List<CardData>();
 
-    public int NumofCardReward => numofCardReward;
+    public int NumofCardReward => numCardReward;
 
-    public Reward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, BattleType battleType, int numOfCardReward = 3)
+    public Reward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, int numCardReward = 3)
     {
-        this.numofCardReward = numOfCardReward;
-        GenerateReward(cardRewardsPool, rewardData, battleType);
+        this.numCardReward = numCardReward;
+        GenerateReward(cardRewardsPool, rewardData);
     }
 
-    private void GenerateReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, BattleType battleType)
+    private void GenerateReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
     {
         GenerateCardReward(cardRewardsPool, rewardData);
-        GenerateGoldReward(battleType);
+        GenerateGoldReward(rewardData.BattleType);
+        GenerateItemReward(rewardData);
     }
 
     // 카드 보상 생성 메서드
@@ -54,7 +62,7 @@ public class Reward
     private void GenerateCardReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
     {
         cardRewards.Clear();
-        for (int i = 0; i<numofCardReward; i++)
+        for (int i = 0; i<numCardReward; i++)
         {
             CardRarity rarity = GetRarity(rewardData);
             CardData cardData = PickCard(cardRewardsPool[rarity]);
@@ -79,14 +87,22 @@ public class Reward
         gold = goldReward;
     }
 
+    // 아이템 보상 생성 메서드
+    // 아이템 보상 등장 여부 결정 -> 희귀도 결정 -> 전체 풀에서 희귀도 일치/ItemGetType 플래그 포함 두 조건 모두 만족하는 아이템 필터링 & 풀 구성 
+    // -> 아이템 보상 리스트에서 랜덤으로 하나 선택
+    private void GenerateItemReward(RewardProbabilityData rewardData)
+    {
+        // TODO: 아이템 보상 생성 로직 - 
+    }
+
     private CardRarity GetRarity(RewardProbabilityData rewardData)
     {
-        int total = rewardData.CommonProbability + rewardData.RareProbability + rewardData.UniqueProbability;
+        int total = rewardData.CommonCardProb + rewardData.RareCardProb + rewardData.UniqueCardProb;
         int roll = Random.Range(0, total);
 
-        if (roll < rewardData.CommonProbability)
+        if (roll < rewardData.CommonCardProb)
             return CardRarity.Common;
-        else if (roll < rewardData.CommonProbability + rewardData.RareProbability)
+        else if (roll < rewardData.CommonCardProb + rewardData.RareCardProb)
             return CardRarity.Rare;
         else
             return CardRarity.Unique;
@@ -122,6 +138,8 @@ public class Reward
             items.Add(new RewardItem(RewardType.Gold, gold));
         if(cardRewards.Count > 0)
             items.Add(new RewardItem(RewardType.Card, cardRewards));
+        if(itemReward != null)
+            items.Add(new RewardItem(RewardType.Item, itemReward));
 
         return items;
     }

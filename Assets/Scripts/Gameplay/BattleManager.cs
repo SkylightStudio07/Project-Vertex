@@ -341,7 +341,7 @@ public class BattleManager : MonoBehaviour
     private void Victory()
     {
         RewardProbabilityData rewardData = GameManager.Instance.GetRewardProbability(currentBattleType);
-        Reward reward = new Reward(GameManager.Instance.cardPools, rewardData, currentBattleType);
+        Reward reward = new Reward(GameManager.Instance.cardPools, rewardData);
 
         OnBattleVictory?.Invoke(reward);
         foreach (var enemy in enemies)
