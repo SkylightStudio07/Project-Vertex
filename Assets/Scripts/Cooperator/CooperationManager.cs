@@ -83,6 +83,15 @@ public class CooperationManager : MonoBehaviour
         else return null;
     }
 
+    public Sprite GetCoopSprite(string CharID)
+    {
+        if (coopCharDict.TryGetValue(CharID, out var charState))
+        {
+            return charState.charData.charImage;
+        }
+        return null;
+    }
+
     // 호감도 포인트 추가 메소드
     public void AddCoopPoint(string charID, int point)
     {
