@@ -211,8 +211,111 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2093951693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2093951695}
+  - component: {fileID: 2093951694}
+  m_Layer: 0
+  m_Name: LobbyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2093951694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093951693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771df28bb9a64e3c9743d3687bb32011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
+  runSceneName: SampleScene
+  progressionManager: {fileID: 0}
+  featureUnlocks:
+  - action: 0
+    displayName: Start Run
+    requiredExperience: 0
+    implemented: 1
+    description: 
+  - action: 1
+    displayName: Starting Deck
+    requiredExperience: 0
+    implemented: 1
+    description: 
+  - action: 2
+    displayName: Settings
+    requiredExperience: 0
+    implemented: 1
+    description: 
+  - action: 3
+    displayName: Starting Weapon
+    requiredExperience: 0
+    implemented: 0
+    description: 
+  - action: 4
+    displayName: Card Unlocks
+    requiredExperience: 0
+    implemented: 0
+    description: 
+  - action: 5
+    displayName: Enemy Codex
+    requiredExperience: 0
+    implemented: 1
+    description: 
+  - action: 6
+    displayName: Event Records
+    requiredExperience: 0
+    implemented: 1
+    description: 
+  - action: 7
+    displayName: Training Ground
+    requiredExperience: 100
+    implemented: 0
+    description: 
+  - action: 8
+    displayName: Requests
+    requiredExperience: 0
+    implemented: 1
+    description: 
+  - action: 9
+    displayName: Meta Progression
+    requiredExperience: 0
+    implemented: 1
+    description: 
+  - action: 10
+    displayName: Cooperator Event
+    requiredExperience: 0
+    implemented: 0
+    description: 
+--- !u!4 &2093951695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093951693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.11791, y: 2.29351, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1126698158}
+  - {fileID: 2093951695}
