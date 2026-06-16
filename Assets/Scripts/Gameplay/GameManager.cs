@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 
@@ -102,6 +103,33 @@ public class GameManager : MonoBehaviour
         BattleManager.Instance.TakeOutCardtoHand();
     }
 
+
+    // 플레이어 덱에 획득 카드를 추가하는 메소드
+    public void AddCardToPlayerDeck(CardData card)
+    {
+        if (card == null) return;
+
+        playerDeck.Add(Instantiate(card));
+        Debug.Log("플레이어 덱에 카드 추가완료.");
+    }
+
+    // 카드 등급에 맞는 전투 보상 카드 풀에 카드를 추가하는 메소드
+    public void AddCardToRewardPool(CardData card)
+    {
+        if (card == null) return;
+
+        if (!cardPools.TryGetValue(card.Rarity, out var pool))
+        {
+            pool = new List<CardData>();
+            cardPools[card.Rarity] = pool;
+        }
+
+        if (!pool.Contains(card))
+        {
+            pool.Add(card);
+            Debug.Log("카드 풀에 카드 추가 완료.");
+        }
+    }
 
     public void TakeDamage(int amount)
     {

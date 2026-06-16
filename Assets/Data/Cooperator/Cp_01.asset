@@ -15,16 +15,22 @@ MonoBehaviour:
   charID: Cp_01
   charName: Cp_01
   charDescription: "\uCE90\uB9AD\uD130 \uC124\uBA85"
-  charImage: {fileID: 0}
+  charImage: {fileID: -1795282074631900718, guid: 0d8c306917f3f1740b93d57e02fdc14f, type: 3}
   charIcon: {fileID: 0}
   idleAnim: {fileID: 0}
   attackAnim: {fileID: 0}
   hitAnim: {fileID: 0}
   deathAnim: {fileID: 0}
   charSoundEffect: {fileID: 0}
-  unlockCardCoopLevel: []
-  joinRewardCard: {fileID: 0}
-  battleRewardCardPool: []
+  unlockCardCoopLevel:
+  - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
+  - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
+  - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
+  joinRewardCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
+  battleRewardCardPool:
+  - {fileID: 11400000, guid: 29651ea8435a386489b1ec118f568521, type: 2}
+  - {fileID: 11400000, guid: 6e99534b633f55e49888225af7d4d7f9, type: 2}
+  - {fileID: 11400000, guid: 1aa6850b62fe8f94db2c7130e4957573, type: 2}
   maxCoopLevel: 5
   rankEventDatas:
   - targetLevel: 1

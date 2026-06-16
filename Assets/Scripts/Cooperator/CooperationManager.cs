@@ -17,7 +17,7 @@ public class CooperationManager : MonoBehaviour
     public static CooperationManager Instance { get; private set; }
 
     [SerializeField] private List<CoopCharData> coopCharList = new List<CoopCharData>();
-    [SerializeField] private Dictionary<string, CoopCharState> coopCharDict = new Dictionary<string, CoopCharState>();
+    private Dictionary<string, CoopCharState> coopCharDict = new Dictionary<string, CoopCharState>();
     
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class CooperationManager : MonoBehaviour
         }
     }
 
-    // Ư�� ĳ������ ȣ���� ���� �ҷ�����
+    // 특정 캐릭터의 호감도 레벨 불러오기
     public int GetCoopLevel(string charID)
     {
         if (coopCharDict.TryGetValue(charID, out var charState))
@@ -62,7 +62,7 @@ public class CooperationManager : MonoBehaviour
         return 0;
     }
 
-    // ȣ���� �̺�Ʈ �߻� ���θ� üũ
+    // 호감도 이벤트 발생 여부를 체크
     public bool IsCoopLevelUP(string charID)
     {
         if (coopCharDict.TryGetValue(charID, out var charState))
@@ -77,10 +77,22 @@ public class CooperationManager : MonoBehaviour
     {
         if (coopCharDict.TryGetValue(charID, out var charState))
         {
-            // ���̾�α� ��ũ��Ʈ �ѱ��
+            // 다이얼로그 스크립트 넘기기
             return null;
         }
         else return null;
+    }
+
+    // charID로 협력자 원본 데이터를 가져오는 메소드
+    public CoopCharData GetCoopCharData(string charID)
+    {
+        if (coopCharDict.TryGetValue(charID, out var charState))
+        {
+            return charState.charData;
+        }
+
+        Debug.LogWarning($"{charID}에 해당하는 협력자 데이터 없음");
+        return null;
     }
 
     public Sprite GetCoopSprite(string CharID)
@@ -92,7 +104,7 @@ public class CooperationManager : MonoBehaviour
         return null;
     }
 
-    // ȣ���� ����Ʈ �߰� �޼ҵ�
+    // 호감도 포인트 추가 메소드
     public void AddCoopPoint(string charID, int point)
     {
         if (coopCharDict.TryGetValue(charID, out var charState))
@@ -100,7 +112,7 @@ public class CooperationManager : MonoBehaviour
             if (charState.currentCoopLevel == 0) return;
 
             charState.currentCoopPoint += point;
-            // ȣ���� ������ üũ
+            // 호감도 레벨업 체크
             if (charState.currentCoopLevel + 1 < charState.charData.maxCoopLevel)
             {
                 if (charState.currentCoopPoint >= charState.rankEventDatasDict[charState.currentCoopLevel].requiredPoint)
@@ -109,16 +121,17 @@ public class CooperationManager : MonoBehaviour
                 }
             }
             
-            coopCharDict[charID] = charState; // ������Ʈ�� ���� ����
+            coopCharDict[charID] = charState; // 업데이트된 상태 저장
         }
     }
 
+    // 호감도 이벤트 완료 후 호감도 상태 결산 메소드 
     public void SettlePoint(string charID)
     {
         if (coopCharDict.TryGetValue(charID, out var charState))
         {
             if (charState.currentCoopLevel == 0) return;
-            // ȣ���� ������ üũ
+            // 호감도 레벨업 체크
             if (charState.currentCoopLevel + 1 <= charState.charData.maxCoopLevel)
             {
                 charState.currentCoopPoint -= charState.rankEventDatasDict[charState.currentCoopLevel].requiredPoint;
@@ -137,5 +150,35 @@ public class CooperationManager : MonoBehaviour
         }
 
     }
-}
 
+    // 성소에서 캐릭터를 선택할 때, 카드 풀을 GameManager에 추가하는 메소드
+    public void SelectChar(string charID)
+    {
+        if (string.IsNullOrEmpty(charID))
+        {
+            Debug.LogWarning("선택된 협력자 ID 없음");
+            return;
+        }
+
+        CoopCharData coopCharData = GetCoopCharData(charID);
+        int currentCoopLevel = Mathf.Min(GetCoopLevel(charID), coopCharData.unlockCardCoopLevel.Count);
+        if (coopCharData == null) return;
+
+        if (coopCharData.joinRewardCard != null)
+        {
+            GameManager.Instance.AddCardToPlayerDeck(coopCharData.joinRewardCard);
+        }
+
+        foreach (CardData card in coopCharData.battleRewardCardPool)
+        {
+            GameManager.Instance.AddCardToRewardPool(card);
+        }
+
+        for (int coopLevel = 0; coopLevel < currentCoopLevel; coopLevel++)
+        {
+            GameManager.Instance.AddCardToRewardPool(coopCharData.unlockCardCoopLevel[coopLevel]);
+        }
+
+        Debug.Log($"{charID} 성소 보상 적용 완료");
+    }
+}

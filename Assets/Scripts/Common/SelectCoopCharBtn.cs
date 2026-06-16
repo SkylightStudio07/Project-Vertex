@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -38,15 +38,9 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
         selectCoopCharUI.Selected(rectTransform);
     }
 
-    // 버튼 OnClick 이벤트에 사용할 메소드
+    // 버튼 OnClick 이벤트에 사용할 메소드 ( 현재 선택한 캐릭터의 카드 추가 ) 
     public void OnClickBtn()
     {
-        SelectChar();
-    }
-
-    // 현재 선택된 캐릭터 
-    private void SelectChar()
-    {
-
+        CooperationManager.Instance.SelectChar(charID);
     }
 }
