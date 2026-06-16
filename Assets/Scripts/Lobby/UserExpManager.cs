@@ -13,13 +13,12 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
     {
         base.Init();
 
-        LoadExperience();
+        SetDefaultExperience();
     }
 
-    public void LoadExperience()
+    public void SetDefaultExperience()
     {
-        UserExpData userExpData = SaveDataManager.Instance.GetSaveData<UserExpData>();
-        Experience = userExpData != null ? userExpData.Experience : Mathf.Max(0, defaultExperience);
+        Experience = Mathf.Max(0, defaultExperience);
         OnExperienceChanged?.Invoke(Experience);
     }
 
@@ -43,13 +42,21 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
             return;
 
         Experience = clampedExperience;
-        UserExpData userExpData = SaveDataManager.Instance.GetSaveData<UserExpData>();
-        if (userExpData != null)
-        {
-            userExpData.Experience = Experience;
-            SaveDataManager.Instance.SaveData();
-        }
-
         OnExperienceChanged?.Invoke(Experience);
+    }
+
+    // Debug buttons for testing user experience changes in the Inspector.
+    [ContextMenu("Debug/Add 10 Experience")]
+    private void DebugAdd10Experience()
+    {
+        AddExperience(10);
+        Logger.Log(this, $"Experience changed to {Experience}.");
+    }
+
+    [ContextMenu("Debug/Reset Experience")]
+    private void DebugResetExperience()
+    {
+        SetDefaultExperience();
+        Logger.Log(this, $"Experience reset to {Experience}.");
     }
 }

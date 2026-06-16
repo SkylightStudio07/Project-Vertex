@@ -66,4 +66,26 @@ public abstract class Facility : MonoBehaviour
     protected virtual void OnInteractionEnded()
     {
     }
+
+    // Debug buttons for testing facility interaction in the Inspector.
+    [ContextMenu("Debug/Interact")]
+    private void DebugInteract()
+    {
+        bool result = TryInteract();
+        Logger.Log(this, $"Debug interact result: {result}");
+    }
+
+    [ContextMenu("Debug/End Interaction")]
+    private void DebugEndInteraction()
+    {
+        EndInteraction();
+        Logger.Log(this, "Debug interaction ended.");
+    }
+
+    [ContextMenu("Debug/Toggle Active")]
+    private void DebugToggleActive()
+    {
+        SetFacilityActive(!IsActive);
+        Logger.Log(this, $"Debug active changed to {IsActive}.");
+    }
 }

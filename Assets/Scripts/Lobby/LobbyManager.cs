@@ -19,12 +19,13 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
     {
         m_IsDestroyOnLoad = true;
         base.Init();
-        lobbyData = SaveDataManager.Instance.GetSaveData<LobbyData>();
+        lobbyData = new LobbyData();
     }
 
     private void Start()
     {
         CollectSceneFacilities();
+        lobbyData.SetDefaultData(facilities);
         ApplyLobbyData();
     }
 
@@ -112,5 +113,41 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
 
         LobbyDataProgressData progressData = lobbyData.GetOrCreateFacilityProgressData(facility.FacilityId);
         facility.SetFacilityActive(progressData.isActive);
+    }
+
+    // Debug buttons for testing lobby facility behavior in the Inspector.
+    [ContextMenu("Debug/Rebuild Lobby Data")]
+    private void DebugRebuildLobbyData()
+    {
+        CollectSceneFacilities();
+        lobbyData ??= new LobbyData();
+        lobbyData.SetDefaultData(facilities);
+        ApplyLobbyData();
+        Logger.Log(this, "Lobby data rebuilt from current scene facilities.");
+    }
+
+    [ContextMenu("Debug/Log Facility States")]
+    private void DebugLogFacilityStates()
+    {
+        foreach (Facility facility in facilities)
+        {
+            if (facility == null)
+                continue;
+
+            Logger.Log(this, $"{facility.FacilityId} / Active: {facility.IsActive} / Interacting: {facility.IsInteracting}");
+        }
+    }
+
+    [ContextMenu("Debug/Toggle First Facility Active")]
+    private void DebugToggleFirstFacilityActive()
+    {
+        if (facilities.Count == 0 || facilities[0] == null)
+        {
+            Logger.LogWarning(this, "No facility exists to toggle.");
+            return;
+        }
+
+        SetFacilityActive(facilities[0], !facilities[0].IsActive);
+        Logger.Log(this, $"{facilities[0].FacilityId} active changed to {facilities[0].IsActive}.");
     }
 }

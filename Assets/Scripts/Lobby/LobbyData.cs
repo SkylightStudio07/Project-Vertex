@@ -2,19 +2,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyData : ISaveData
+public class LobbyData
 {
-    private const string LobbyDataKey = "Lobby.Data";
-
     private LobbyDataWrapper wrapper = new LobbyDataWrapper();
 
     public IReadOnlyList<LobbyDataProgressData> FacilityProgressDataList => wrapper.facilityProgressDataList;
 
-    public void SetDefaultData()
+    public void SetDefaultData(IEnumerable<Facility> facilities)
     {
         wrapper = new LobbyDataWrapper();
 
-        foreach (Facility facility in UnityEngine.Object.FindObjectsByType<Facility>(FindObjectsSortMode.None))
+        if (facilities == null)
+            return;
+
+        foreach (Facility facility in facilities)
         {
             if (facility == null)
                 continue;
@@ -24,43 +25,6 @@ public class LobbyData : ISaveData
                 isActive = facility.IsActive
             };
             wrapper.facilityProgressDataList.Add(progressData);
-        }
-    }
-
-    public bool LoadData()
-    {
-        try
-        {
-            string json = PlayerPrefs.GetString(LobbyDataKey, string.Empty);
-            if (string.IsNullOrWhiteSpace(json))
-            {
-                SetDefaultData();
-                return true;
-            }
-
-            wrapper = JsonUtility.FromJson<LobbyDataWrapper>(json) ?? new LobbyDataWrapper();
-            wrapper.facilityProgressDataList ??= new List<LobbyDataProgressData>();
-            return true;
-        }
-        catch (Exception exception)
-        {
-            Logger.LogError(typeof(LobbyData), $"Failed to load lobby data: {exception}");
-            SetDefaultData();
-            return false;
-        }
-    }
-
-    public bool SaveData()
-    {
-        try
-        {
-            PlayerPrefs.SetString(LobbyDataKey, JsonUtility.ToJson(wrapper));
-            return true;
-        }
-        catch (Exception exception)
-        {
-            Logger.LogError(typeof(LobbyData), $"Failed to save lobby data: {exception}");
-            return false;
         }
     }
 
