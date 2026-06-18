@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct CoopCharState
+public class CoopCharState
 {
     public string charID;
     public CoopCharData charData;
@@ -120,9 +120,8 @@ public class CooperationManager : MonoBehaviour
                     charState.isLevelUp = true;
                 }
             }
-            
-            coopCharDict[charID] = charState; // 업데이트된 상태 저장
         }
+        Debug.Log($"{charID} 호감도 포인트 추가 완료. 현재 레벨: {coopCharDict[charID].currentCoopLevel}, 현재 포인트: {coopCharDict[charID].currentCoopPoint}");
     }
 
     // 호감도 이벤트 완료 후 호감도 상태 결산 메소드 
@@ -145,9 +144,8 @@ public class CooperationManager : MonoBehaviour
                 }
                 charState.currentCoopLevel++;
             }
-
-            coopCharDict[charID] = charState;
         }
+        Debug.Log($"{charID} 호감도 레벨업 완료. 현재 레벨: {coopCharDict[charID].currentCoopLevel}, 현재 포인트: {coopCharDict[charID].currentCoopPoint}");
 
     }
 
@@ -180,5 +178,26 @@ public class CooperationManager : MonoBehaviour
         }
 
         Debug.Log($"{charID} 성소 보상 적용 완료");
+    }
+
+    // 호감도 증가 테스트 메소드
+    public void Debug1()
+    {
+        AddCoopPoint("Cp_01", 10);
+    }
+
+    // 호감도 증가 테스트 메소드 2
+    public void Debug2()
+    {
+        SettlePoint("Cp_01");
+    }
+
+    // 캐릭터 호감도 증가 테스트 메소드 3
+    public void Debug3()
+    {
+        if (coopCharDict.TryGetValue("Cp_01", out var charState))
+        {
+            charState.currentCoopLevel = 1;
+        }
     }
 }
