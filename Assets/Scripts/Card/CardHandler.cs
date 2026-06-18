@@ -27,10 +27,13 @@ public class CardHandler : MonoBehaviour,
 
     private static bool isAnyDragging;
 
+    // 카드 호버/드래그 가능 조건: 전투 중 + 플레이어 턴 + 맵/이벤트 화면이 안 열려있을 때.
+    // 다른 풀스크린 UI(보상, 상점 등)가 추가되면 같은 패턴으로 조건을 늘릴 것.
     private static bool IsInteractable =>
         BattleManager.Instance != null &&
         BattleManager.Instance.State?.Phase == BattlePhase.PlayerTurn &&
-        (MapUIController.Instance == null || !MapUIController.Instance.IsMapOpen);
+        (MapUIController.Instance == null || !MapUIController.Instance.IsMapOpen) &&
+        (EventView.Instance == null || !EventView.Instance.IsEventOpen);
 
     private CardView cardView;
     private CardInteractionView interactionView;

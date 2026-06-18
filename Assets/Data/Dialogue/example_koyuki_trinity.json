@@ -1,0 +1,42 @@
+{
+  "characters": [
+    { "id": "koyuki", "name": "코유키", "slot": 0 },
+    { "id": "trinity", "name": "트리니티", "slot": 1 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "koyuki", "emotion": "confident", "text": "어라? 그런데 누구시죠? 트리니티" },
+        { "type": "line", "speaker": "trinity", "emotion": "idle", "text": "...국가판무관부 소속이었다, 라고 해두죠." },
+        { "type": "line", "speaker": "koyuki", "emotion": "embarrassed", "text": "어, 그게 무슨... 잠깐, 탈영병이라는 거예요?" },
+        { "type": "line", "speaker": "trinity", "emotion": "annoyed", "text": "표현이 거칠군요. 하지만 틀린 말은 아니네요." },
+        {
+          "type": "choice",
+          "options": [
+            { "text": "[걱정] 괜찮은 거예요? 쫓기고 있는 거 아니에요?", "next": "worry" },
+            { "text": "[무덤덤] 그래서요. 별로 상관없는데.", "next": "indifferent" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "worry",
+      "lines": [
+        { "type": "line", "speaker": "koyuki", "emotion": "sad", "text": "쫓기고 있는 거면... 위험한 거 아니에요?" },
+        { "type": "line", "speaker": "trinity", "emotion": "blush", "text": "...그렇게 걱정스러운 표정 짓지 마세요. 익숙하지 않으니까." },
+        { "type": "line", "speaker": "trinity", "emotion": "laugh", "text": "그래도, 고맙네요." },
+        { "type": "end" }
+      ]
+    },
+    {
+      "id": "indifferent",
+      "lines": [
+        { "type": "line", "speaker": "trinity", "emotion": "despise", "text": "...그렇군요. 솔직한 반응이라 오히려 편하네요." },
+        { "type": "line", "speaker": "koyuki", "emotion": "laugh", "text": "어차피 버텍스 안에선 다 사정 있는 사람들뿐이잖아요." },
+        { "type": "end" }
+      ]
+    }
+  ]
+}

@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardData blockCard;
     [SerializeField] private CardData reloadCard;
 
+    [Header("디버그")]
+    [SerializeField] private CardData strikeCard_Debug;
+    [SerializeField] private CardData blockCard_Debug;
+
 
 
 
@@ -94,6 +98,11 @@ public class GameManager : MonoBehaviour
             playerDeck.Add(Instantiate(blockCard));
         }
         playerDeck.Add(Instantiate(reloadCard));
+
+        // 디버그용 시작 덱
+        // 실제 릴리즈 시에는 이 부분 제거할 것
+        playerDeck.Add(Instantiate(strikeCard_Debug));
+        playerDeck.Add(Instantiate(blockCard_Debug));
         
         // 카드 풀 초기화
         cardPools[CardData.CardRarity.Common] = commonPool;

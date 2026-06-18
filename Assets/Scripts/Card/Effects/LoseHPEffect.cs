@@ -7,6 +7,7 @@ public class LoseHPEffect : CardEffect
 
     public override void Execute(CardContext context)
     {
+        if (GameManager.Instance == null) return;
         GameManager.Instance.TakeDamage(amount);
     }
 }

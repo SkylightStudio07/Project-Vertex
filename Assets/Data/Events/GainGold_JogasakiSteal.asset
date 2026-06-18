@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c61e595b875def948a5ed08c5927f167, type: 3}
-  m_Name: EventData
-  m_EditorClassIdentifier: Assembly-CSharp::EventData
-  eventJson: {fileID: 0}
-  choiceEffects: []
+  m_Script: {fileID: 11500000, guid: 603316f156861a14ebde04f820f1b53f, type: 3}
+  m_Name: GainGold_JogasakiSteal
+  m_EditorClassIdentifier:
+  amount: 60

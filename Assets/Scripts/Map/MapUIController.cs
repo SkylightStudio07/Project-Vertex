@@ -189,6 +189,12 @@ public class MapUIController : MonoBehaviour
 
     private void OpenEvent(MapNode node)
     {
+        if (eventView == null)
+        {
+            Debug.LogWarning("[Map] eventView 참조가 없음. Inspector 연결 확인 필요.");
+            return;
+        }
+
         if (eventPool == null || eventPool.Count == 0)
         {
             Debug.LogWarning("[Map] eventPool이 비어있음.");
