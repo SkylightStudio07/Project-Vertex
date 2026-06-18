@@ -7,6 +7,7 @@ public class SelectCoopCharUI : MonoBehaviour
 {
     [SerializeField] private RectTransform selectedUI;
     [SerializeField] private List<SelectCoopCharBtn> selectCoopCharBtns;
+    [SerializeField] private FadeController fadeController;
 
     // 협력자 선택 이벤트 활성화 시 UI를 초기화하는 메소드
 
@@ -17,6 +18,7 @@ public class SelectCoopCharUI : MonoBehaviour
 
     public void Init()
     {
+        fadeController.FadeIn();
         //List<string> selectableCharIDList = HolyPlaceManager.Instance.GetSeletableChar(GameManager.Instance.Floor);
         List<string> selectableCharIDList = HolyPlaceManager.Instance.GetSeletableChar(1);
         if (selectableCharIDList == null || selectableCharIDList.Count == 0)
@@ -35,5 +37,11 @@ public class SelectCoopCharUI : MonoBehaviour
     public void Selected(Transform transform)
     {
         selectedUI.position = transform.position;
+
+    }
+
+    public void CloseUI()
+    {
+        fadeController.FadeOut();
     }
 }

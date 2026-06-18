@@ -42,5 +42,6 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
     public void OnClickBtn()
     {
         CooperationManager.Instance.SelectChar(charID);
+        selectCoopCharUI.CloseUI();
     }
 }
