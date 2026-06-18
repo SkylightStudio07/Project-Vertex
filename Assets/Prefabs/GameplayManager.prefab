@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6525762481672852196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6499981781060928166}
+  - component: {fileID: 665690029544217599}
+  - component: {fileID: 8312875015868583927}
+  - component: {fileID: 7944735580650700734}
+  - component: {fileID: 9136998352492492046}
+  m_Layer: 0
+  m_Name: GameplayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6499981781060928166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525762481672852196}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.68222, y: 0.77622, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &665690029544217599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525762481672852196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c76a08813e90ca439a71ddadce2505b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  currentEnemies:
+  - {fileID: 11400000, guid: 448b92ffcbce1ba49b466c600e6263ef, type: 2}
+  playerDeck:
+  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  commonPool:
+  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  - {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
+  rarePool:
+  - {fileID: 11400000, guid: 29651ea8435a386489b1ec118f568521, type: 2}
+  - {fileID: 11400000, guid: 6e99534b633f55e49888225af7d4d7f9, type: 2}
+  - {fileID: 11400000, guid: 1aa6850b62fe8f94db2c7130e4957573, type: 2}
+  uniquePool:
+  - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
+  - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
+  - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
+  rewardProbabilityTable:
+  - {fileID: 11400000, guid: 1f70f7d092f9d474ca02a07cdca27edc, type: 2}
+  - {fileID: 11400000, guid: 2b8494ab46065984680216adcad5e735, type: 2}
+  - {fileID: 11400000, guid: 7d881b7b5aedaa14d8889284021a7b16, type: 2}
+  maxPlayerHP: 80
+  playerGold: 0
+  chapter: 0
+  floor: 0
+  strikeCard: {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  blockCard: {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+--- !u!114 &8312875015868583927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525762481672852196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fee6ab72c55ff844b88038e133dc165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleManager
+  Energy: 3
+  MaxEnergy: 3
+  Ammo: 3
+  PlayerBlock: 0
+  DrawCount: 5
+  drawPile: []
+  hand: []
+  discardPile: []
+  exhaustPile: []
+--- !u!114 &7944735580650700734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525762481672852196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91713b3572c2f14692ba245dd38ad87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapManager
+  mapConfig: {fileID: 11400000, guid: 2cfbf1c158d002a48a4802e609a710ba, type: 2}
+--- !u!114 &9136998352492492046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525762481672852196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761bec45ce1796242a06794d584b6710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapUIController
+  mapPanel: {fileID: 0}
+  mapContent: {fileID: 0}
+  nodePrefab: {fileID: 5061233425930402740, guid: 8da60c6cc60850245837432e2f837154, type: 3}
+  linePrefab: {fileID: 235328721144647464, guid: 47adc8dedf2a9874587cf8a60f17e051, type: 3}
+  scrollRect: {fileID: 0}
+  floorSpacing: 120
+  columnSpacing: 120
+  verticalPadding: 80
