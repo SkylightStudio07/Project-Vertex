@@ -36,9 +36,12 @@ public class EventView : MonoBehaviour
 
     private void Awake()
     {
+        // 주의: 이 오브젝트는 씬에서 비활성 상태로 시작해야 함.
+        // 비활성 오브젝트는 Awake가 호출되지 않다가 최초로 SetActive(true)될 때 호출되는데,
+        // 여기서 SetActive(false)를 부르면 그 최초 활성화(Open()의 SetActive(true))를
+        // 같은 프레임에서 즉시 취소해버려 첫 호출만 패널이 안 뜨는 버그가 생긴다.
         Instance = this;
         continueButton.onClick.AddListener(OnContinueClicked);
-        gameObject.SetActive(false);
     }
 
     public void Open(EventData data)

@@ -31,8 +31,10 @@ public class DialogueView : MonoBehaviour
 
     private void Awake()
     {
+        // 주의: 이 오브젝트는 씬에서 비활성 상태로 시작해야 함.
+        // 여기서 SetActive(false)를 부르면 Play()가 호출하는 최초 SetActive(true)를
+        // 같은 프레임에서 취소해버려 첫 호출만 패널이 안 뜨는 버그가 생긴다 (EventView와 동일 이슈).
         advanceButton.onClick.AddListener(OnAdvanceClicked);
-        gameObject.SetActive(false);
     }
 
     public void Play(TextAsset json, Action onComplete)
