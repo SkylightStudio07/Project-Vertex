@@ -50,6 +50,11 @@ public class MapConfig : ScriptableObject
             minNodesPerFloor = maxNodesPerFloor;
     }
 
+    [Header("조우 풀 (맵 생성 시 노드에 할당)")]
+    public List<EnemyData> normalEncounterPool;
+    public List<EnemyData> eliteEncounterPool;
+    public List<EnemyData> bossEncounterPool;
+
     [Header("층별 고정 노드 설정(보스, 성소, 보물상자)")]
     // 지정한 층에 해당 타입의 노드를 반드시 1개 배치.
     // 성소, 보물상자, 보스 전 휴식 노드는 고정임.

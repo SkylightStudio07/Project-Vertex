@@ -4,10 +4,15 @@ using UnityEngine;
 
 
 
+public enum GamePhase { Battle, Map, Reward, Shop, Event }
+
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance { get; private set; }
+
+    public GamePhase Phase { get; private set; } = GamePhase.Battle;
+
+    public void SetPhase(GamePhase phase) => Phase = phase;
 
     void Awake()
     {
@@ -57,6 +62,11 @@ public class GameManager : MonoBehaviour
     [Header("기본 덱")]
     [SerializeField] private CardData strikeCard;
     [SerializeField] private CardData blockCard;
+    [SerializeField] private CardData reloadCard;
+
+    [Header("디버그")]
+    [SerializeField] private CardData strikeCard_Debug;
+    [SerializeField] private CardData blockCard_Debug;
 
 
 
@@ -72,6 +82,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // 백날 게임매니저 시작 덱에 카드 넣어봤자 테스트 안 된다!
+    // 플레이어 시작 덱은 여기서 Instantiate해서 따로 처리한다는 것.
+
     void InitializeRun()
     {
         chapter = 1;
@@ -84,6 +97,12 @@ public class GameManager : MonoBehaviour
             playerDeck.Add(Instantiate(strikeCard));
             playerDeck.Add(Instantiate(blockCard));
         }
+        playerDeck.Add(Instantiate(reloadCard));
+
+        // 디버그용 시작 덱
+        // 실제 릴리즈 시에는 이 부분 제거할 것
+        playerDeck.Add(Instantiate(strikeCard_Debug));
+        playerDeck.Add(Instantiate(blockCard_Debug));
         
         // 카드 풀 초기화
         cardPools[CardData.CardRarity.Common] = commonPool;
@@ -99,8 +118,21 @@ public class GameManager : MonoBehaviour
     // 전투 전용 덱 복사/셔플은 BattleManager가 담당한다.
     public void InitializeBattle()
     {
-        BattleManager.Instance.StartBattle(currentEnemies, playerDeck, RunData.Instance.mapData.seed);
-        BattleManager.Instance.TakeOutCardtoHand();
+        BattleType battleType = RunData.Instance.CurrentNodeType switch
+        {
+            NodeType.Elite => BattleType.Elite,
+            NodeType.Boss  => BattleType.Boss,
+            _              => BattleType.Normal,
+        };
+
+        // 노드에 조우가 할당돼 있으면 그걸 쓰고, 없으면 Inspector 기본값(currentEnemies) 사용
+        var node = RunData.Instance.CurrentNode;
+        var enemies = (node?.encounter != null && node.encounter.Count > 0)
+            ? node.encounter
+            : currentEnemies;
+
+        BattleManager.Instance.StartBattle(enemies, playerDeck, RunData.Instance.mapData.seed, battleType);
+        BattleManager.Instance.PlayerTurnStart();
     }
 
 

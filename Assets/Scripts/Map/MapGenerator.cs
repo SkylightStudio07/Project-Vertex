@@ -151,13 +151,15 @@ public static class MapGenerator
             // 여기서부터 실제 노드 생성 및 배치.
             for (int n = 0; n < nodeCount; n++)
             {
-                mapData.floors[f].Add(new MapNode
+                var node = new MapNode
                 {
                     nodeType   = types[n],
                     floorIndex = f,
                     nodeIndex  = n,
                     column     = columns[n]
-                });
+                };
+                AssignEncounter(node, config, rng);
+                mapData.floors[f].Add(node);
             }
         }
 
@@ -402,6 +404,20 @@ public static class MapGenerator
         }
 
         return NodeType.Combat; // 부동소수점 오차 보정
+    }
+
+    private static void AssignEncounter(MapNode node, MapConfig config, System.Random rng)
+    {
+        List<EnemyData> pool = node.nodeType switch
+        {
+            NodeType.Combat => config.normalEncounterPool,
+            NodeType.Elite  => config.eliteEncounterPool,
+            NodeType.Boss   => config.bossEncounterPool,
+            _               => null
+        };
+
+        if (pool == null || pool.Count == 0) return;
+        node.encounter.Add(pool[rng.Next(0, pool.Count)]);
     }
 
     private static void Shuffle<T>(List<T> list, System.Random rng)
