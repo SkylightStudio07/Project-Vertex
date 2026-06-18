@@ -35,7 +35,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
     // 마우스가 캐릭터 창 위에 위치했을 때 선택되었다는 표시가 나타나도록 함
     public void OnPointerEnter(PointerEventData eventData)
     {
-        selectCoopCharUI.Selected(rectTransform);
+        //selectCoopCharUI.Selected(rectTransform);
     }
 
     // 버튼 OnClick 이벤트에 사용할 메소드 ( 현재 선택한 캐릭터의 카드 추가 ) 
