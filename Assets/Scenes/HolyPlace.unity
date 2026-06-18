@@ -2220,12 +2220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7f9fefceeac044d90b7bc0b9c05fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HolyPlaceManager
-  holyPlaceDatas:
-  - floor: 1
-    charIDs:
-    - Cp_01
-    - Cp_02
-    - Cp_03
+  holyPlaceData: {fileID: 11400000, guid: 69d0b0c369f4b8e458e7ff58e86f4934, type: 2}
 --- !u!4 &1968843827
 Transform:
   m_ObjectHideFlags: 0

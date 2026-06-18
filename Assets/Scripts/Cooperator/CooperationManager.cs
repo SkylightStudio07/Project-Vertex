@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 런타임 중 현재 캐릭터 호감도 상태 저장
 [System.Serializable]
 public class CoopCharState
 {
@@ -12,15 +13,18 @@ public class CoopCharState
     public Dictionary<int, RankEventData> rankEventDatasDict;
 }
 
+// 협력자 호감도 관리 스크립트
 public class CooperationManager : MonoBehaviour
 {
     public static CooperationManager Instance { get; private set; }
 
     [SerializeField] private List<CoopCharData> coopCharList = new List<CoopCharData>();
     private Dictionary<string, CoopCharState> coopCharDict = new Dictionary<string, CoopCharState>();
+
     
     private void Awake()
     {
+        #region 싱글톤
         if (Instance == null)
         {
             Instance = this;
@@ -30,7 +34,7 @@ public class CooperationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        #endregion
 
         foreach (var coopCharData in coopCharList)
         {
