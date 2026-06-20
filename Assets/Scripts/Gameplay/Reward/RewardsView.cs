@@ -8,7 +8,7 @@ public class RewardsView: MonoBehaviour
 {
     [SerializeField] private RewardItemButton rewardButtonPrefab;
     [SerializeField] private Transform rewardButtonContainer;
-    private Reward reward;
+    private BattleReward reward;
 
     // 현재 활성화된 보상 버튼들
     private List<RewardItemButton> buttons;
@@ -20,7 +20,7 @@ public class RewardsView: MonoBehaviour
         BattleManager.Instance.OnBattleVictory += Open;
     }
 
-    private void Open(Reward reward)
+    private void Open(BattleReward reward)
     {
         this.reward = reward;
         buttons = new List<RewardItemButton>();

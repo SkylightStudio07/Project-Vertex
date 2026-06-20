@@ -29,22 +29,22 @@ public struct RewardItem
 }
 
 
-// 보상 플레인 클래스
+// 전투 보상 플레인 클래스
 // 전투 전체 보상 데이터 관리
-public class Reward
+public class BattleReward
 {
     // 아이템 보상 전체 풀 - 런 중에는 바뀔 일이 없으므로 GameManager에서 런 시작에 초기화하고 static으로 관리
     private static List<ItemData> itemRewardsPool = new List<ItemData>();
     public static void SetItemRewardsPool(List<ItemData> pool) => itemRewardsPool = pool;
 
-    private int gold;
+    private int goldReward;
     private ItemData itemReward = null;
     private int numCardReward;
     private readonly List<CardData> cardRewards = new List<CardData>();
 
     public int NumofCardReward => numCardReward;
 
-    public Reward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, int numCardReward = 3)
+    public BattleReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, int numCardReward = 3)
     {
         this.numCardReward = numCardReward;
         GenerateReward(cardRewardsPool, rewardData);
@@ -64,7 +64,7 @@ public class Reward
         cardRewards.Clear();
         for (int i = 0; i<numCardReward; i++)
         {
-            CardRarity rarity = GetRarity(rewardData);
+            CardRarity rarity = GetCardRarity(rewardData);
             CardData cardData = PickCard(cardRewardsPool[rarity]);
             cardRewards.Add(cardData);
         }
@@ -84,7 +84,7 @@ public class Reward
                 goldReward = Random.Range(50, 80);
                 break;
         }
-        gold = goldReward;
+        this.goldReward = goldReward;
     }
 
     // 아이템 보상 생성 메서드
@@ -92,10 +92,32 @@ public class Reward
     // -> 아이템 보상 리스트에서 랜덤으로 하나 선택
     private void GenerateItemReward(RewardProbabilityData rewardData)
     {
-        // TODO: 아이템 보상 생성 로직 - 
+        if(!IsItemRewardGiven(rewardData))
+        {
+            itemReward = null;
+            return;
+        }
+        ItemRarity rarity = GetItemRarity(rewardData);
+        ItemGetType getType = GetItemGetType(rewardData.BattleType);
+        
+        List<ItemData> filteredPool = itemRewardsPool.FindAll(item => item.Rarity == rarity && (item.ItemTypes & getType) != 0);
+
+        if(filteredPool.Count == 0)
+        {
+            itemReward = null;
+            return;
+        }
+
+        itemReward = filteredPool[Random.Range(0, filteredPool.Count)];
     }
 
-    private CardRarity GetRarity(RewardProbabilityData rewardData)
+    private bool IsItemRewardGiven(RewardProbabilityData rewardData)
+    {
+        int roll = Random.Range(0, 100);
+        return roll < rewardData.ItemProbability;
+    }
+
+    private CardRarity GetCardRarity(RewardProbabilityData rewardData)
     {
         int total = rewardData.CommonCardProb + rewardData.RareCardProb + rewardData.UniqueCardProb;
         int roll = Random.Range(0, total);
@@ -107,6 +129,19 @@ public class Reward
         else
             return CardRarity.Unique;
     }
+    private ItemRarity GetItemRarity(RewardProbabilityData rewardData)
+    {
+        int total = rewardData.CommonItemProb + rewardData.UncommonItemProb + rewardData.RareItemProb;
+        int roll = Random.Range(0, total);
+
+        if (roll < rewardData.CommonItemProb)
+            return ItemRarity.Common;
+        else if (roll < rewardData.CommonItemProb + rewardData.UncommonItemProb)
+            return ItemRarity.Uncommon;
+        else
+            return ItemRarity.Rare;
+    }
+
     // 카드 풀에서 카드 선택하는 메서드 - 중복되면 중복되지 않는 카드 나올 때까지 다시 뽑는 방식
     private CardData PickCard(List<CardData> cardPool)
     {
@@ -118,13 +153,26 @@ public class Reward
         return cardPool[index];
     }
 
+    // BattleType - ItemGetType 매핑 메서드
+    private ItemGetType GetItemGetType(BattleType battleType)
+    {
+        return battleType switch
+        {
+            BattleType.Normal => ItemGetType.BattleReward,
+            BattleType.Elite => ItemGetType.EliteReward,
+            BattleType.Boss => ItemGetType.BossReward,
+            _ => ItemGetType.BattleReward
+        };
+    }
+
     // 단일 보상 데이터 반환 메서드
     public T GetReward<T>(RewardType type)
     {
         return type switch
         {
-            RewardType.Gold => (T)(object)gold,
+            RewardType.Gold => (T)(object)goldReward,
             RewardType.Card => (T)(object)cardRewards,
+            RewardType.Item => (T)(object)itemReward,
             _ => default
         };
     }
@@ -134,8 +182,8 @@ public class Reward
     {
         var items = new List<RewardItem>();
 
-        if(gold > 0)
-            items.Add(new RewardItem(RewardType.Gold, gold));
+        if(goldReward > 0)
+            items.Add(new RewardItem(RewardType.Gold, goldReward));
         if(cardRewards.Count > 0)
             items.Add(new RewardItem(RewardType.Card, cardRewards));
         if(itemReward != null)

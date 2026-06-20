@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         cardPools[CardData.CardRarity.Unique] = uniquePool;
 
         // 아이템 풀 초기화
-        Reward.SetItemRewardsPool(itemPool);
+        BattleReward.SetItemRewardsPool(itemPool);
 
         MapManager.Instance.InitializeMap();
 

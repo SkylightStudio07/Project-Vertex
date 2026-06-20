@@ -32,6 +32,10 @@ public class RewardItemButton : MonoBehaviour
             case RewardType.Card:
                 DisplayCardReward();
                 break;
+            case RewardType.Item:
+                // TODO: 아이템 보상 처리 - 인벤토리에 아이템 추가
+                CompleteReward();
+                break;
             default:
                 Debug.LogWarning("Unknown reward type clicked.");
                 break;

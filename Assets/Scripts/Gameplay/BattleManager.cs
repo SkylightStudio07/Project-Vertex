@@ -50,7 +50,7 @@ public class BattleManager : MonoBehaviour
     public IReadOnlyList<EnemyInstance> Enemies => enemies;
 
     // 전투 승리시 보상 띄우기 위한 이벤트.
-    public event Action<Reward> OnBattleVictory;
+    public event Action<BattleReward> OnBattleVictory;
     private BattleType currentBattleType;
 
     // 적 리스트가 바뀔 때 EnemyZoneView가 구독해서 화면 갱신
@@ -341,7 +341,7 @@ public class BattleManager : MonoBehaviour
     private void Victory()
     {
         RewardProbabilityData rewardData = GameManager.Instance.GetRewardProbability(currentBattleType);
-        Reward reward = new Reward(GameManager.Instance.cardPools, rewardData);
+        BattleReward reward = new BattleReward(GameManager.Instance.cardPools, rewardData);
 
         OnBattleVictory?.Invoke(reward);
         foreach (var enemy in enemies)
