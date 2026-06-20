@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class ItemInventoryManager : MonoBehaviour
         }
         _items.Add(item);
         OnInventoryChanged?.Invoke();
+        Debug.Log($"Added item: {item.ItemName}");
+        Debug.Log($"Current capacity: {_items.Count}/{maxСapacityHint}");
         return true;
     }
     public void RemoveItem(ItemData item)

@@ -111,12 +111,14 @@ public class BattleReward
         itemReward = filteredPool[Random.Range(0, filteredPool.Count)];
     }
 
+    // 아이템 등장 여부 결정
     private bool IsItemRewardGiven(RewardProbabilityData rewardData)
     {
         int roll = Random.Range(0, 100);
         return roll < rewardData.ItemProbability;
     }
 
+    // 레어도 결정 메서드들 - 카드/아이템 각각 확률 데이터에서 확률에 따라 레어도 결정
     private CardRarity GetCardRarity(RewardProbabilityData rewardData)
     {
         int total = rewardData.CommonCardProb + rewardData.RareCardProb + rewardData.UniqueCardProb;
