@@ -33,8 +33,7 @@ public class RewardItemButton : MonoBehaviour
                 DisplayCardReward();
                 break;
             case RewardType.Item:
-                // TODO: 아이템 보상 처리 - 인벤토리에 아이템 추가
-                CompleteReward();
+                GetItemReward();
                 break;
             default:
                 Debug.LogWarning("Unknown reward type clicked.");
@@ -49,6 +48,15 @@ public class RewardItemButton : MonoBehaviour
 
         var cards = (List<CardData>)rewardItem.Data;
         OnCardReward?.Invoke(cards, this);
+    }
+
+    private void GetItemReward()
+    {
+        ItemData itemData = rewardItem.Data as ItemData;
+        if (ItemInventoryManager.Instance.AddItem(itemData))
+        {
+            CompleteReward();
+        }
     }
     
     public void CompleteReward()
