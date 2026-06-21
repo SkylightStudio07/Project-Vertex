@@ -8,21 +8,21 @@ public class LobbyData
 
     public IReadOnlyList<LobbyDataProgressData> FacilityProgressDataList => wrapper.facilityProgressDataList;
 
-    public void SetDefaultData(IEnumerable<Facility> facilities)
+    public void SetDefaultData(IEnumerable<FacilityController> facilities)
     {
         wrapper = new LobbyDataWrapper();
 
         if (facilities == null)
             return;
 
-        foreach (Facility facility in facilities)
+        foreach (FacilityController facility in facilities)
         {
             if (facility == null)
                 continue;
 
             LobbyDataProgressData progressData = new LobbyDataProgressData(facility.FacilityId)
             {
-                isActive = facility.IsActive
+                isActive = facility.DefaultActive
             };
             wrapper.facilityProgressDataList.Add(progressData);
         }
@@ -38,11 +38,19 @@ public class LobbyData
 
     public LobbyDataProgressData GetOrCreateFacilityProgressData(string facilityId)
     {
+        return GetOrCreateFacilityProgressData(facilityId, true);
+    }
+
+    public LobbyDataProgressData GetOrCreateFacilityProgressData(string facilityId, bool defaultActive)
+    {
         LobbyDataProgressData progressData = GetFacilityProgressData(facilityId);
         if (progressData != null)
             return progressData;
 
-        progressData = new LobbyDataProgressData(facilityId);
+        progressData = new LobbyDataProgressData(facilityId)
+        {
+            isActive = defaultActive
+        };
         wrapper.facilityProgressDataList.Add(progressData);
         return progressData;
     }

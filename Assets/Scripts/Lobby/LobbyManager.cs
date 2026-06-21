@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class LobbyManager : SingletonBehaviour<LobbyManager>
 {
-    [SerializeField] private List<Facility> facilities = new List<Facility>();
+    [SerializeField] private List<FacilityController> facilities = new List<FacilityController>();
 
     private LobbyData lobbyData;
 
-    public Facility CurrentInteractingFacility { get; private set; }
-    public IReadOnlyList<Facility> Facilities => facilities;
+    public FacilityController CurrentInteractingFacility { get; private set; }
+    public IReadOnlyList<FacilityController> Facilities => facilities;
     public LobbyData LobbyData => lobbyData;
 
-    public event Action<Facility> OnFacilityInteractionStarted;
-    public event Action<Facility> OnFacilityInteractionEnded;
+    public event Action<FacilityController> OnFacilityInteractionStarted;
+    public event Action<FacilityController> OnFacilityInteractionEnded;
 
     protected override void Init()
     {
@@ -29,7 +29,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         ApplyLobbyData();
     }
 
-    public void RegisterFacility(Facility facility)
+    public void RegisterFacility(FacilityController facility)
     {
         if (facility == null || facilities.Contains(facility))
             return;
@@ -38,7 +38,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         ApplyLobbyData(facility);
     }
 
-    public void UnregisterFacility(Facility facility)
+    public void UnregisterFacility(FacilityController facility)
     {
         if (facility == null)
             return;
@@ -49,14 +49,14 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
             CurrentInteractingFacility = null;
     }
 
-    public bool CanInteract(Facility facility)
+    public bool CanInteract(FacilityController facility)
     {
         return facility != null &&
                facility.IsActive &&
                (CurrentInteractingFacility == null || CurrentInteractingFacility == facility);
     }
 
-    public bool TryBeginInteraction(Facility facility)
+    public bool TryBeginInteraction(FacilityController facility)
     {
         if (CurrentInteractingFacility == facility)
             return true;
@@ -70,7 +70,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         return true;
     }
 
-    public void EndInteraction(Facility facility)
+    public void EndInteraction(FacilityController facility)
     {
         if (facility == null || CurrentInteractingFacility != facility)
             return;
@@ -79,7 +79,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         OnFacilityInteractionEnded?.Invoke(facility);
     }
 
-    public void SetFacilityActive(Facility facility, bool active)
+    public void SetFacilityActive(FacilityController facility, bool active)
     {
         if (facility == null)
             return;
@@ -93,7 +93,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
 
     private void CollectSceneFacilities()
     {
-        foreach (Facility facility in FindObjectsByType<Facility>(FindObjectsSortMode.None))
+        foreach (FacilityController facility in FindObjectsByType<FacilityController>(FindObjectsSortMode.None))
             RegisterFacility(facility);
     }
 
@@ -102,16 +102,16 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         if (lobbyData == null)
             return;
 
-        foreach (Facility facility in facilities)
+        foreach (FacilityController facility in facilities)
             ApplyLobbyData(facility);
     }
 
-    private void ApplyLobbyData(Facility facility)
+    private void ApplyLobbyData(FacilityController facility)
     {
         if (facility == null || lobbyData == null)
             return;
 
-        LobbyDataProgressData progressData = lobbyData.GetOrCreateFacilityProgressData(facility.FacilityId);
+        LobbyDataProgressData progressData = lobbyData.GetOrCreateFacilityProgressData(facility.FacilityId, facility.DefaultActive);
         facility.SetFacilityActive(progressData.isActive);
     }
 
@@ -129,7 +129,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
     [ContextMenu("Debug/Log Facility States")]
     private void DebugLogFacilityStates()
     {
-        foreach (Facility facility in facilities)
+        foreach (FacilityController facility in facilities)
         {
             if (facility == null)
                 continue;

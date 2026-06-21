@@ -4,8 +4,10 @@ using UnityEngine;
 public class UserExpManager : SingletonBehaviour<UserExpManager>
 {
     [SerializeField] private int defaultExperience;
+    [SerializeField, Min(0)] private int maxExperience = 100;
 
     public int Experience { get; private set; }
+    public int MaxExperience => Mathf.Max(0, maxExperience);
 
     public event Action<int> OnExperienceChanged;
 
@@ -18,7 +20,7 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
 
     public void SetDefaultExperience()
     {
-        Experience = Mathf.Max(0, defaultExperience);
+        Experience = Mathf.Clamp(defaultExperience, 0, MaxExperience);
         OnExperienceChanged?.Invoke(Experience);
     }
 
@@ -27,7 +29,8 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
         if (amount <= 0)
             return;
 
-        SetExperience(Experience + amount);
+        long increasedExperience = (long)Experience + amount;
+        SetExperience((int)Math.Min(increasedExperience, MaxExperience));
     }
 
     public bool HasExperience(int requiredExperience)
@@ -37,7 +40,7 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
 
     private void SetExperience(int experience)
     {
-        int clampedExperience = Mathf.Max(0, experience);
+        int clampedExperience = Mathf.Clamp(experience, 0, MaxExperience);
         if (Experience == clampedExperience)
             return;
 
@@ -45,7 +48,7 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
         OnExperienceChanged?.Invoke(Experience);
     }
 
-    // Debug buttons for testing user experience changes in the Inspector.
+    // 디버깅용 버튼 함수들.
     [ContextMenu("Debug/Add 10 Experience")]
     private void DebugAdd10Experience()
     {
