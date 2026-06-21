@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "mcp__claude_ai_Notion__notion-fetch"
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-update-page",
+      "Bash(grep -i \"newtonsoft\" Packages/manifest.json)",
+      "Bash(ls Assets/Data/)",
+      "PowerShell([guid]::NewGuid\\(\\).ToString\\(\"N\"\\))"
     ]
   }
 }

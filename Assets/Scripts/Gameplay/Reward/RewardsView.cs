@@ -1,19 +1,16 @@
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-// 전체 보상 버튼 UI 띄우는 스크립트.
 // 전투 승리 시 BattleManager에서 보상 데이터 받아와서 버튼 띄우는 뷰.
-public class RewardsView: MonoBehaviour
+public class RewardsView : MonoBehaviour
 {
     [SerializeField] private RewardItemButton rewardButtonPrefab;
     [SerializeField] private Transform rewardButtonContainer;
-    private Reward reward;
-
-    // 현재 활성화된 보상 버튼들
-    private List<RewardItemButton> buttons;
-
     [SerializeField] private CardRewardView cardRewardView;
+    [SerializeField] private MapUIController mapUIController;
+
+    private Reward reward;
+    private List<RewardItemButton> buttons;
 
     private void Start()
     {
@@ -26,33 +23,27 @@ public class RewardsView: MonoBehaviour
         buttons = new List<RewardItemButton>();
         Refresh();
         foreach (Transform child in transform)
-        {
             child.gameObject.SetActive(true);
-        }
     }
-    public void Close()
+
+    // 진행 버튼 onClick에 연결
+    public void OnProceedClicked()
     {
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
+        mapUIController.OpenMap();
     }
 
     private void DestroyButton(RewardItemButton destroyedButton)
     {
         if (buttons == null) return;
 
-        if(buttons.Contains(destroyedButton))
+        if (buttons.Contains(destroyedButton))
         {
             destroyedButton.OnDestroyed -= DestroyButton;
             buttons.Remove(destroyedButton);
             Destroy(destroyedButton.gameObject);
         }
-
-        if (buttons is null || buttons.Count == 0)
-        {
-            Close();
-        }
+        // 보상 다 소진해도 자동 닫힘 없음 — 진행 버튼으로 처리
     }
 
     private void Refresh()

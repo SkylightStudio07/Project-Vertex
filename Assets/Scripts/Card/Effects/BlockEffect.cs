@@ -5,5 +5,8 @@ public class BlockEffect : CardEffect
 {
     public int amount;
 
-    public override void Execute(CardContext context) { /* 차후 구현 */ }
+    public override void Execute(CardContext context)
+    {
+        context.State?.Player?.AddBlock(amount);
+    }
 }

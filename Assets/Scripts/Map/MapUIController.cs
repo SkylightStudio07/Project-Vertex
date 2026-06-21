@@ -4,12 +4,20 @@ using UnityEngine;
 // 맵 패널 열기/닫기, 노드 및 연결선 생성, 상태 갱신을 담당
 public class MapUIController : MonoBehaviour
 {
+    public static MapUIController Instance { get; private set; }
+
+    private void Awake() => Instance = this;
+
     [Header("참조")]
     [SerializeField] private GameObject mapPanel;
     [SerializeField] private RectTransform mapContent;
     [SerializeField] private MapNodeView nodePrefab;
     [SerializeField] private MapConnectionLine linePrefab;
     [SerializeField] private UnityEngine.UI.ScrollRect scrollRect;
+
+    [Header("이벤트")]
+    [SerializeField] private EventView eventView;
+    [SerializeField] private List<EventData> eventPool;
 
     [Header("배치 설정")]
     [SerializeField] private float floorSpacing    = 120f;
@@ -24,6 +32,8 @@ public class MapUIController : MonoBehaviour
     {
         mapPanel.SetActive(false);
     }
+
+    public bool IsMapOpen => mapPanel != null && mapPanel.activeSelf;
 
     public void OpenMap()
     {
@@ -160,5 +170,40 @@ public class MapUIController : MonoBehaviour
         MapManager.Instance.MoveToNode(node);
         RefreshNodeStates();
         CloseMap();
+
+        switch (node.nodeType)
+        {
+            case NodeType.Combat:
+            case NodeType.Elite:
+            case NodeType.Boss:
+                GameManager.Instance.InitializeBattle();
+                break;
+            case NodeType.Event:
+                OpenEvent(node);
+                break;
+            default:
+                Debug.Log($"[Map] 노드 타입 {node.nodeType} — 미구현");
+                break;
+        }
+    }
+
+    private void OpenEvent(MapNode node)
+    {
+        if (eventView == null)
+        {
+            Debug.LogWarning("[Map] eventView 참조가 없음. Inspector 연결 확인 필요.");
+            return;
+        }
+
+        if (eventPool == null || eventPool.Count == 0)
+        {
+            Debug.LogWarning("[Map] eventPool이 비어있음.");
+            return;
+        }
+
+        // 노드 위치 기반 시드로 같은 노드는 항상 같은 이벤트 선택
+        var rnd = new System.Random(RunData.Instance.mapData.seed + node.floorIndex * 100 + node.nodeIndex);
+        var data = eventPool[rnd.Next(0, eventPool.Count)];
+        eventView.Open(data);
     }
 }
