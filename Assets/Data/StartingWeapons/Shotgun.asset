@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834314770ff24ee78540cfc290c1743d, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: Assembly-CSharp::StartingWeaponData
+  weaponId: Shotgun
+  weaponName: "\uC0B0\uD0C4\uCD1D"
+  attackCard: {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
+  attackCardCount: 6
+  defenseCard: {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
+  defenseCardCount: 4
+  reloadCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
+  reloadCardCount: 2
