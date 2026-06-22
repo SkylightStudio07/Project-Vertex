@@ -9,7 +9,7 @@ public class RewardsView : MonoBehaviour
     [SerializeField] private CardRewardView cardRewardView;
     [SerializeField] private MapUIController mapUIController;
 
-    private Reward reward;
+    private BattleReward reward;
     private List<RewardItemButton> buttons;
 
     private void Start()
@@ -17,7 +17,7 @@ public class RewardsView : MonoBehaviour
         BattleManager.Instance.OnBattleVictory += Open;
     }
 
-    private void Open(Reward reward)
+    private void Open(BattleReward reward)
     {
         this.reward = reward;
         buttons = new List<RewardItemButton>();

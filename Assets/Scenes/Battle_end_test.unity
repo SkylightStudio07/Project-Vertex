@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 117956437}
   - component: {fileID: 117956438}
   - component: {fileID: 117956439}
+  - component: {fileID: 117956440}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -190,6 +191,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
   - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
   - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
+  itemPool:
+  - {fileID: 11400000, guid: 02a21998af712674da8558d399e09de0, type: 2}
+  - {fileID: 11400000, guid: 88a6498d93aebe140b42d4ed1416a165, type: 2}
+  - {fileID: 11400000, guid: 4ae6c7a579b7cbd41a0d2faf1cdba8bb, type: 2}
   rewardProbabilityTable:
   - {fileID: 11400000, guid: 1f70f7d092f9d474ca02a07cdca27edc, type: 2}
   - {fileID: 11400000, guid: 2b8494ab46065984680216adcad5e735, type: 2}
@@ -221,6 +226,19 @@ MonoBehaviour:
   hand: []
   discardPile: []
   exhaustPile: []
+--- !u!114 &117956440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117956436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e810204f29d443948b5d189f68f89e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemInventoryManager
+  "max\u0421apacityHint": 3
 --- !u!1 &126016699
 GameObject:
   m_ObjectHideFlags: 0
