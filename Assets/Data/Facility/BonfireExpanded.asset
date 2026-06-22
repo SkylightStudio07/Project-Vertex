@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4f054c2d02f411bb02185270ae2410d, type: 3}
-  m_Name: Bonfire
+  m_Name: BonfireExpanded
   m_EditorClassIdentifier: Assembly-CSharp::Facility
   facilityId: Bonfire
-  displayName: "\uBAA8\uB2E5\uBD88"
-  description: "\uD569\uB958 \uCE90\uB9AD\uD130\uC640 \uB9CC\uB0A0 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  displayName: "\uD655\uC7A5\uB41C \uBAA8\uB2E5\uBD88"
+  description: "\uD569\uB958 \uCE90\uB9AD\uD130\uC640 \uB300\uD654\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
+    \uC870\uAE08 \uB354 \uB9CE\uC740 \uC774\uBCA4\uD2B8\uAC00 \uBC1C\uC0DD\uD569\uB2C8\uB2E4."
   defaultActive: 1
   requiredRunCount: 0
-  isUpgradedFacility: 0
-  upgradeFacility: {fileID: 11400000, guid: 7674c256ab304ae1bd46ebbaee19560d, type: 2}
-  upgradeRequiredExp: 200
+  isUpgradedFacility: 1
+  upgradeFacility: {fileID: 0}
+  upgradeRequiredExp: 0

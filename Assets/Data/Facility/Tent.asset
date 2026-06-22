@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Facility
   facilityId: Tent
   displayName: "\uD150\uD2B8"
+  description: "\uAE30\uCD08\uC801\uC778 \uD150\uD2B8\uC785\uB2C8\uB2E4. "
   defaultActive: 1
-  requiredExp: 0
-  description: "\uB4E0\uB4E0"
+  requiredRunCount: 0
+  isUpgradedFacility: 0
+  upgradeFacility: {fileID: 11400000, guid: 285761032c5046daa9083b2e700dca54, type: 2}
+  upgradeRequiredExp: 300

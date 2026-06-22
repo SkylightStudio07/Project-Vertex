@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4f054c2d02f411bb02185270ae2410d, type: 3}
-  m_Name: Bonfire
+  m_Name: QuestBoard
   m_EditorClassIdentifier: Assembly-CSharp::Facility
-  facilityId: Bonfire
-  displayName: "\uBAA8\uB2E5\uBD88"
-  description: "\uD569\uB958 \uCE90\uB9AD\uD130\uC640 \uB9CC\uB0A0 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  defaultActive: 1
-  requiredRunCount: 0
+  facilityId: QuestBoard
+  displayName: "\uC758\uB8B0 \uAC8C\uC2DC\uD310"
+  description: "\uACBD\uD5D8\uCE58\uB97C \uD68D\uB4DD\uD560 \uC218 \uC788\uB294 \uAC00\uBCBC\uC6B4
+    \uC758\uB8B0\uB97C \uC81C\uACF5\uD569\uB2C8\uB2E4. "
+  defaultActive: 0
+  requiredRunCount: 3
   isUpgradedFacility: 0
-  upgradeFacility: {fileID: 11400000, guid: 7674c256ab304ae1bd46ebbaee19560d, type: 2}
-  upgradeRequiredExp: 200
+  upgradeFacility: {fileID: 11400000, guid: 99f4c64d22f14eb58c9afec6e93a7a46, type: 2}
+  upgradeRequiredExp: 250
