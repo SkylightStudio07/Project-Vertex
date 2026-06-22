@@ -4,74 +4,108 @@ using UnityEngine;
 
 public class LobbyManager : SingletonBehaviour<LobbyManager>
 {
-    [SerializeField] private List<FacilityController> facilities = new List<FacilityController>();
+    [SerializeField] private List<FacilityController> facilities = new();
+    [SerializeField, Min(0)] private int completedRunCount; // 런 완료 횟수. 시설 오픈에 사용
 
-    private LobbyData lobbyData;
+    private readonly Dictionary<FacilityType, FacilityController> facilityByType = new();
 
     public FacilityController CurrentInteractingFacility { get; private set; }
     public IReadOnlyList<FacilityController> Facilities => facilities;
-    public LobbyData LobbyData => lobbyData;
+    public int CompletedRunCount => completedRunCount;
 
     public event Action<FacilityController> OnFacilityInteractionStarted;
     public event Action<FacilityController> OnFacilityInteractionEnded;
 
     protected override void Init()
     {
-        m_IsDestroyOnLoad = true;
+        m_IsDestroyOnLoad = true; // Lobby 씬을 벗어나면 제거
         base.Init();
-        lobbyData = new LobbyData();
     }
 
     private void Start()
     {
-        CollectSceneFacilities();
-        lobbyData.SetDefaultData(facilities);
-        ApplyLobbyData();
+        CollectSceneFacilities(); // 우선 지금은 FindObject로 작동. 추후 저장 기능이 나오면 저장된 데이터를 불러오는 방식으로 설정
+        RefreshFacilityUnlocks();
     }
 
-    public void RegisterFacility(FacilityController facility)
-    {
-        if (facility == null || facilities.Contains(facility))
-            return;
-
-        facilities.Add(facility);
-        ApplyLobbyData(facility);
-    }
-
-    public void UnregisterFacility(FacilityController facility)
+    // 시설 등록 및 제거
+    private void RegisterFacility(FacilityController facility)
     {
         if (facility == null)
             return;
 
-        facilities.Remove(facility);
+        FacilityType facilityType = facility.FacilityType;
+        if (facilityType == FacilityType.None)
+        {
+            Logger.LogWarning(this, $"Facility type is not assigned: {facility.name}");
+            return;
+        }
 
-        if (CurrentInteractingFacility == facility)
-            CurrentInteractingFacility = null;
+        if (facilityByType.TryGetValue(facilityType, out FacilityController registeredFacility))
+        {
+            if (registeredFacility != facility)
+                Logger.LogWarning(this, $"Only one {facilityType} facility can exist in the scene.");
+            return;
+        }
+
+        facilityByType.Add(facilityType, facility);
+        facilities.Add(facility);
     }
 
-    public bool CanInteract(FacilityController facility)
+    public FacilityController GetFacility(FacilityType facilityType)
     {
+        if (facilityType == FacilityType.None)
+            return null;
+
+        facilityByType.TryGetValue(facilityType, out FacilityController facility);
+        return facility;
+    }
+
+    public bool IsFacilityRegistered(FacilityType facilityType)
+    {
+        return GetFacility(facilityType) != null;
+    }
+
+    //활성화 여부 반환. 사실상 시설 해금 여부를 반환하는 함메서드
+    public bool IsFacilityActive(FacilityType facilityType)
+    {
+        FacilityController facility = GetFacility(facilityType);
+        return facility != null && facility.IsActive;
+    }
+
+    public bool IsFacilityUpgraded(FacilityType facilityType)
+    {
+        FacilityController facility = GetFacility(facilityType);
+        return facility != null && facility.IsUpgraded;
+    }
+
+    // 시설 상호작용 가능 여부 반환
+    public bool CanInteract(FacilityType facilityType)
+    {
+        FacilityController facility = GetFacility(facilityType);
         return facility != null &&
-               facility.IsActive &&
                (CurrentInteractingFacility == null || CurrentInteractingFacility == facility);
     }
 
-    public bool TryBeginInteraction(FacilityController facility)
+    // 시설 상호작용 시도. 메인 화면에서 각 시설 버튼을 누르면 이 함수가 호출됨
+    public bool TryBeginInteraction(FacilityType facilityType)
     {
-        if (CurrentInteractingFacility == facility)
+        FacilityController facility = GetFacility(facilityType);
+        if (CurrentInteractingFacility == facility && facility != null)
             return true;
 
-        if (!CanInteract(facility))
+        if (!CanInteract(facilityType))
             return false;
 
-        RegisterFacility(facility);
         CurrentInteractingFacility = facility;
         OnFacilityInteractionStarted?.Invoke(facility);
         return true;
     }
 
-    public void EndInteraction(FacilityController facility)
+    // 시설 상호작용을 끝내는 함수. 각 시설 UI에서 돌아가기를 누르면 이 함수가 실행됨
+    public void EndInteraction(FacilityType facilityType)
     {
+        FacilityController facility = GetFacility(facilityType);
         if (facility == null || CurrentInteractingFacility != facility)
             return;
 
@@ -79,51 +113,64 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         OnFacilityInteractionEnded?.Invoke(facility);
     }
 
-    public void SetFacilityActive(FacilityController facility, bool active)
+    // 시설 잠금 해제 시도
+    public bool TryUnlockFacility(FacilityType facilityType)
     {
+        FacilityController facility = GetFacility(facilityType);
         if (facility == null)
-            return;
+            return false;
 
-        facility.SetFacilityActive(active);
+        if (facility.IsActive)
+            return true;
 
-        LobbyDataProgressData progressData = lobbyData?.GetOrCreateFacilityProgressData(facility.FacilityId);
-        if (progressData != null)
-            progressData.isActive = active;
+        if (!facility.IsUnlockConditionMet(completedRunCount))
+            return false;
+
+        SetFacilityActive(facility, true);
+        return true;
+    }
+
+    public void AddCompletedRun()
+    {
+        completedRunCount = Mathf.Max(0, completedRunCount + 1);
+        RefreshFacilityUnlocks();
+    }
+
+    public void RefreshFacilityUnlocks()
+    {
+        foreach (FacilityController facility in facilities)
+        {
+            if (facility != null && facility.IsUnlockConditionMet(completedRunCount))
+                SetFacilityActive(facility, true);
+        }
     }
 
     private void CollectSceneFacilities()
     {
-        foreach (FacilityController facility in FindObjectsByType<FacilityController>(FindObjectsSortMode.None))
+        facilities.Clear();
+        facilityByType.Clear();
+
+        foreach (FacilityController facility in FindObjectsByType<FacilityController>(
+                     FindObjectsInactive.Include,
+                     FindObjectsSortMode.None))
+        {
             RegisterFacility(facility);
+        }
     }
 
-    private void ApplyLobbyData()
+    // 시설 활성화 상태 변경 함수
+    private void SetFacilityActive(FacilityController facility, bool active)
     {
-        if (lobbyData == null)
-            return;
-
-        foreach (FacilityController facility in facilities)
-            ApplyLobbyData(facility);
+        facility?.SetFacilityActive(active);
     }
 
-    private void ApplyLobbyData(FacilityController facility)
-    {
-        if (facility == null || lobbyData == null)
-            return;
-
-        LobbyDataProgressData progressData = lobbyData.GetOrCreateFacilityProgressData(facility.FacilityId, facility.DefaultActive);
-        facility.SetFacilityActive(progressData.isActive);
-    }
-
-    // Debug buttons for testing lobby facility behavior in the Inspector.
-    [ContextMenu("Debug/Rebuild Lobby Data")]
-    private void DebugRebuildLobbyData()
+    // 디버그용 함수들
+    [ContextMenu("Debug/Refresh Facilities")]
+    private void DebugRefreshFacilities()
     {
         CollectSceneFacilities();
-        lobbyData ??= new LobbyData();
-        lobbyData.SetDefaultData(facilities);
-        ApplyLobbyData();
-        Logger.Log(this, "Lobby data rebuilt from current scene facilities.");
+        RefreshFacilityUnlocks();
+        Logger.Log(this, $"Refreshed {facilities.Count} facilities.");
     }
 
     [ContextMenu("Debug/Log Facility States")]
@@ -134,20 +181,9 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
             if (facility == null)
                 continue;
 
-            Logger.Log(this, $"{facility.FacilityId} / Active: {facility.IsActive} / Interacting: {facility.IsInteracting}");
+            Logger.Log(this,
+                $"{facility.FacilityType} / Active: {facility.IsActive} / " +
+                $"Upgraded: {facility.IsUpgraded} / Interacting: {facility.IsInteracting}");
         }
-    }
-
-    [ContextMenu("Debug/Toggle First Facility Active")]
-    private void DebugToggleFirstFacilityActive()
-    {
-        if (facilities.Count == 0 || facilities[0] == null)
-        {
-            Logger.LogWarning(this, "No facility exists to toggle.");
-            return;
-        }
-
-        SetFacilityActive(facilities[0], !facilities[0].IsActive);
-        Logger.Log(this, $"{facilities[0].FacilityId} active changed to {facilities[0].IsActive}.");
     }
 }

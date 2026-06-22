@@ -1,11 +1,23 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum FacilityType
+{
+    None = 0,
+    Tent = 1,
+    Bonfire = 2,
+    Armory = 3,
+    InformationBroker = 4,
+    TrainingGround = 5,
+    QuestBoard = 6
+}
+
 /// <summary>로비 시설의 해금 조건과 업그레이드 정보를 정의하는 데이터.</summary>
 [CreateAssetMenu(fileName = "Facility", menuName = "Lobby/Facility")]
 public class Facility : ScriptableObject
 {
     [Header("기본 정보")]
+    [SerializeField] private FacilityType facilityType;
     [SerializeField] private string facilityId;
     [SerializeField] private string displayName;
     [SerializeField] private string description;
@@ -20,6 +32,7 @@ public class Facility : ScriptableObject
     [FormerlySerializedAs("requiredExp")]
     [SerializeField, Min(0)] private int upgradeRequiredExp;
 
+    public FacilityType FacilityType => facilityType;
     public string FacilityId => facilityId;
     public string DisplayName => displayName;
     public string Description => description;
