@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -41,11 +40,14 @@ public class BattleReward
     private ItemData itemReward = null;
     private int numCardReward;
     private readonly List<CardData> cardRewards = new List<CardData>();
+    // 노드 고정 시드로 자체 생성하는 보상 전용 RNG
+    private readonly System.Random random;
 
     public int NumofCardReward => numCardReward;
 
-    public BattleReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, int numCardReward = 3)
+    public BattleReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, int seed, int numCardReward = 3)
     {
+        this.random = new System.Random(seed);
         this.numCardReward = numCardReward;
         GenerateReward(cardRewardsPool, rewardData);
     }
@@ -66,7 +68,8 @@ public class BattleReward
         {
             CardRarity rarity = GetCardRarity(rewardData);
             CardData cardData = PickCard(cardRewardsPool[rarity]);
-            cardRewards.Add(cardData);
+            if (cardData != null)
+                cardRewards.Add(cardData);
         }
     }
     private void GenerateGoldReward(BattleType battleType)
@@ -75,13 +78,13 @@ public class BattleReward
         switch (battleType)
         {
             case BattleType.Normal:
-                goldReward = Random.Range(10, 20);
+                goldReward = random.Next(10, 20);
                 break;
             case BattleType.Elite:
-                goldReward = Random.Range(25, 35);
+                goldReward = random.Next(25, 35);
                 break;
             case BattleType.Boss:
-                goldReward = Random.Range(50, 80);
+                goldReward = random.Next(50, 80);
                 break;
         }
         this.goldReward = goldReward;
@@ -108,13 +111,13 @@ public class BattleReward
             return;
         }
 
-        itemReward = filteredPool[Random.Range(0, filteredPool.Count)];
+        itemReward = filteredPool[random.Next(0, filteredPool.Count)];
     }
 
     // 아이템 등장 여부 결정
     private bool IsItemRewardGiven(RewardProbabilityData rewardData)
     {
-        int roll = Random.Range(0, 100);
+        int roll = random.Next(0, 100);
         return roll < rewardData.ItemProbability;
     }
 
@@ -122,7 +125,7 @@ public class BattleReward
     private CardRarity GetCardRarity(RewardProbabilityData rewardData)
     {
         int total = rewardData.CommonCardProb + rewardData.RareCardProb + rewardData.UniqueCardProb;
-        int roll = Random.Range(0, total);
+        int roll = random.Next(0, total);
 
         if (roll < rewardData.CommonCardProb)
             return CardRarity.Common;
@@ -134,7 +137,7 @@ public class BattleReward
     private ItemRarity GetItemRarity(RewardProbabilityData rewardData)
     {
         int total = rewardData.CommonItemProb + rewardData.UncommonItemProb + rewardData.RareItemProb;
-        int roll = Random.Range(0, total);
+        int roll = random.Next(0, total);
 
         if (roll < rewardData.CommonItemProb)
             return ItemRarity.Common;
@@ -144,15 +147,20 @@ public class BattleReward
             return ItemRarity.Rare;
     }
 
-    // 카드 풀에서 카드 선택하는 메서드 - 중복되면 중복되지 않는 카드 나올 때까지 다시 뽑는 방식
+    // 카드 풀에서 카드 선택하는 메서드
+    // 이미 뽑힌 카드를 제외한 후보에서 선택 -> 한 보상 화면에 같은 카드 중복 방지
+    // 후보가 없을 경우(레어도 풀 < 보상 수, 사실상 발생 안 함)에만 중복 허용 폴백 -> 무한 재귀/StackOverflow 방지
     private CardData PickCard(List<CardData> cardPool)
     {
-        int index = Random.Range(0, cardPool.Count);
-        if(cardRewards.Contains(cardPool[index]))
-        {
-            return PickCard(cardPool);
-        }
-        return cardPool[index];
+        if (cardPool == null || cardPool.Count == 0)
+            return null;
+
+        List<CardData> availableCards = cardPool.FindAll(card => !cardRewards.Contains(card));
+        if (availableCards.Count == 0)
+            availableCards = cardPool;
+
+        int index = random.Next(0, availableCards.Count);
+        return availableCards[index];
     }
 
     // BattleType - ItemGetType 매핑 메서드

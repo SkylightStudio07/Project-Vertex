@@ -347,7 +347,12 @@ public class BattleManager : MonoBehaviour
         }
 
         var rewardData = GameManager.Instance.GetRewardProbability(_currentBattleType);
-        var reward     = new BattleReward(GameManager.Instance.cardPools, rewardData);
+        // 보상 생성 랜덤값. 노드 위치 기반 고정 시드로 생성 (이벤트 노드와 동일 방식)
+        // → 같은 노드면 항상 같은 보상
+        int rewardSeed = RunData.Instance.mapData.seed
+                         + RunData.Instance.currentFloor * 100
+                         + RunData.Instance.currentNodeIndex;
+        var reward     = new BattleReward(GameManager.Instance.cardPools, rewardData, rewardSeed);
         OnBattleVictory?.Invoke(reward);
         foreach (var e in _state.Enemies)
             e.OnDied -= CheckVictory;

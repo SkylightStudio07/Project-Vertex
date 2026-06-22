@@ -114,6 +114,10 @@ public class GameManager : MonoBehaviour
         // 아이템 풀 초기화
         BattleReward.SetItemRewardsPool(itemPool);
 
+        // 새 런 시작 시 이전 판 아이템이 남지 않도록 인벤토리 초기화
+        if (ItemInventoryManager.Instance != null)
+            ItemInventoryManager.Instance.Clear();
+
         MapManager.Instance.InitializeMap();
 
         InitializeBattle();
