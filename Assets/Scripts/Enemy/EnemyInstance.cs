@@ -26,9 +26,10 @@ public class EnemyInstance : ICombatant
 
     public Sprite EnemySprite { get; private set; }
 
-    public event Action<int> OnDamaged;      // 실제 HP 감소량
-    public event Action<int> OnBlockChanged; // 현재 블록 수치
+    public event Action<int> OnDamaged;       // 실제 HP 감소량
+    public event Action<int> OnBlockChanged;  // 현재 블록 수치
     public event Action      OnDied;
+    public event Action      OnIntentChanged; // GetCurrentAction()이 가리키는 행동이 바뀜 (TakeTurn 후)
 
     public EnemyInstance(EnemyData data)
     {
@@ -118,5 +119,56 @@ public class EnemyInstance : ICombatant
     {
         if (Data.activityPatterns != null && Data.activityPatterns.Count > 0)
             _patternIndex = (_patternIndex + 1) % Data.activityPatterns.Count;
+    }
+
+    // Intent UI에서 공격 수치를 미리 보여주기 위한 헬퍼.
+    // GetCurrentAction()의 effects 중 DamageEffect들을 합산한다 (강화/약화 등 패시브 보정은 반영하지 않음 — TODO).
+    // DamageEffect가 없는 행동(방어/버프 등)이면 null 반환.
+    public int? GetIntentDamageAmount()
+    {
+        var action = GetCurrentAction();
+        if (action == null || action.effects == null) return null;
+
+        int total = 0;
+        bool found = false;
+        foreach (var effect in action.effects)
+        {
+            if (effect is DamageEffect dmg)
+            {
+                total += dmg.amount * dmg.hitCount;
+                found = true;
+            }
+        }
+        return found ? total : null;
+    }
+
+    // 적 턴 행동 전체를 캡슐화: 패시브 틱 → 생존 확인 → 패턴 실행 → 패턴 진행.
+    // 패시브(독·화상 등)로 턴 시작 중 사망하면 이번 턴 행동은 실행하지 않는다.
+    // battle은 CardContext.Battle을 채우기 위해서만 필요 (DrawEffect 등 일부 효과가 참조).
+    // 반환값: 이번 턴에 실제로 행동을 실행했는지 여부.
+    public bool TakeTurn(BattleState state, BattleManager battle)
+    {
+        if (IsDead) return false;
+
+        TickPassives(state);
+        if (IsDead) return false; // 패시브로 죽었으면 행동하지 않음
+
+        var action = GetCurrentAction();
+        if (action != null)
+        {
+            var ctx = new CardContext
+            {
+                State       = state,
+                Battle      = battle,
+                ActingEnemy = this,
+                AllEnemies  = state.Enemies,
+            };
+            foreach (var effect in action.effects)
+                if (effect != null) effect.Execute(ctx);
+        }
+
+        AdvancePattern();
+        OnIntentChanged?.Invoke(); // 다음 턴에 보여줄 인텐트가 바뀌었으니 뷰 갱신 알림
+        return true;
     }
 }

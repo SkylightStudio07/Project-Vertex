@@ -100,6 +100,10 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTurnStart()
     {
+        // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
+        // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
+        _state.Player.ResetBlock();
+
         BeginHandChangeBatch();
         try
         {
@@ -130,7 +134,6 @@ public class BattleManager : MonoBehaviour
             EndHandChangeBatch();
         }
 
-        _state.Player.ResetBlock();
         _state.Player.TickPassives(_state);
 
         EnemyTurnStart();
@@ -142,18 +145,7 @@ public class BattleManager : MonoBehaviour
 
         foreach (var enemy in _state.Enemies)
         {
-            if (enemy.IsDead) continue;
-
-            enemy.TickPassives(_state);
-
-            var action = enemy.GetCurrentAction();
-            if (action != null)
-            {
-                var ctx = BuildEnemyContext(enemy);
-                foreach (var effect in action.effects)
-                    effect?.Execute(ctx);
-            }
-            enemy.AdvancePattern();
+            enemy.TakeTurn(_state, this);
 
             if (_state.Player.IsDead) return;
         }
@@ -366,14 +358,6 @@ public class BattleManager : MonoBehaviour
     // ─────────────────────────────────────────────
     // 내부 유틸
     // ─────────────────────────────────────────────
-
-    private CardContext BuildEnemyContext(EnemyInstance enemy) => new()
-    {
-        State       = _state,
-        Battle      = this,
-        ActingEnemy = enemy,
-        AllEnemies  = _state.Enemies,
-    };
 
     private void NotifyHandChanged()
     {
