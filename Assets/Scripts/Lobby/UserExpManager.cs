@@ -38,6 +38,15 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
         return Experience >= Mathf.Max(0, requiredExperience);
     }
 
+    public bool TrySpendExperience(int amount)
+    {
+        if (amount < 0 || !HasExperience(amount))
+            return false;
+
+        SetExperience(Experience - amount);
+        return true;
+    }
+
     private void SetExperience(int experience)
     {
         int clampedExperience = Mathf.Clamp(experience, 0, MaxExperience);
@@ -62,4 +71,12 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
         SetDefaultExperience();
         Logger.Log(this, $"Experience reset to {Experience}.");
     }
+
+    [ContextMenu("Debug/Set Max Experience")]
+    private void DebugSetMaxExperience()
+    {
+        SetExperience(MaxExperience);
+        Logger.Log(this, $"Experience set to max: {Experience}.");
+    }
+
 }
