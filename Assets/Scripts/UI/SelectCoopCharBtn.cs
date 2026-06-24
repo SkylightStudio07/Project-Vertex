@@ -23,6 +23,13 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
     public void SetBtn(string charID)
     {
         this.charID = charID;
+
+        if (CooperationManager.Instance == null)
+        {
+            Debug.LogWarning("[SelectCoopCharBtn] CooperationManager.Instance가 없음. 씬(또는 부트 씬)에 CooperationManager가 있는지 확인 필요.");
+            return;
+        }
+
         if (CooperationManager.Instance.GetCoopSprite(charID) == null)
         {
             Debug.Log($"{charID}에 해당하는 캐릭터 이미지 없음");
@@ -41,6 +48,12 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
     // 버튼 OnClick 이벤트에 사용할 메소드 ( 현재 선택한 캐릭터의 카드 추가 ) 
     public void OnClickBtn()
     {
+        if (CooperationManager.Instance == null)
+        {
+            Debug.LogWarning("[SelectCoopCharBtn] CooperationManager.Instance가 없음. 씬(또는 부트 씬)에 CooperationManager가 있는지 확인 필요.");
+            return;
+        }
+
         CooperationManager.Instance.SelectChar(charID);
         selectCoopCharUI.CloseUI();
     }

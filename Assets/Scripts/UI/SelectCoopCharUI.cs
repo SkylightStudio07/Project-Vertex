@@ -19,8 +19,14 @@ public class SelectCoopCharUI : MonoBehaviour
     public void Init()
     {
         fadeController.FadeIn();
-        //List<string> selectableCharIDList = HolyPlaceManager.Instance.GetSeletableChar(GameManager.Instance.Floor);
-        List<string> selectableCharIDList = HolyPlaceManager.Instance.GetSeletableChar(1);
+
+        if (HolyPlaceManager.Instance == null)
+        {
+            Debug.LogWarning("[SelectCoopCharUI] HolyPlaceManager.Instance가 없음. 씬(또는 부트 씬)에 HolyPlaceManager가 있는지 확인 필요.");
+            return;
+        }
+
+        List<string> selectableCharIDList = HolyPlaceManager.Instance.GetSeletableChar(RunData.Instance.currentFloor);
         if (selectableCharIDList == null || selectableCharIDList.Count == 0)
         {
             Debug.Log("현재 층에 선택 가능한 협력자 캐릭터 없음");
@@ -42,6 +48,10 @@ public class SelectCoopCharUI : MonoBehaviour
 
     public void CloseUI()
     {
-        fadeController.FadeOut();
+        // FadeOut()을 부르면서 동시에 SetActive(false)하면 페이드 애니메이션이 재생될 틈도 없이
+        // 오브젝트가 꺼져버린다. 페이드 비주얼을 살리려면 타임라인 종료 Signal에 맞춰 닫는 작업이
+        // 추후 필요함 (지금은 정확성 우선 — 닫혔는데 맵 클릭이 막히는 버그를 피하는 쪽을 택함).
+        gameObject.SetActive(false);
+        if (MapUIController.Instance != null) MapUIController.Instance.OpenMap();
     }
 }
