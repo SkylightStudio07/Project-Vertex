@@ -38,6 +38,12 @@ public class EnemyView : MonoBehaviour
     {
         Unbind();
 
+        if (instance == null)
+        {
+            Debug.LogWarning("[EnemyView] Bind에 null EnemyInstance가 전달됨.");
+            return;
+        }
+
         Instance = instance;
 
         enemyImage.sprite  = instance.EnemySprite;
@@ -67,6 +73,8 @@ public class EnemyView : MonoBehaviour
 
     private void RefreshHP()
     {
+        if (Instance == null) return;
+
         float ratio = Instance.MaxHP > 0 ? (float)Instance.HP / Instance.MaxHP : 0f;
         if (hpFill != null) hpFill.fillAmount = ratio;
         if (hpText != null) hpText.text = $"{Instance.HP} / {Instance.MaxHP}";
@@ -74,6 +82,8 @@ public class EnemyView : MonoBehaviour
 
     private void RefreshIntent()
     {
+        if (Instance == null) return;
+
         EnemyAction action = Instance.GetCurrentAction();
 
         if (intentIcon != null)
@@ -93,6 +103,7 @@ public class EnemyView : MonoBehaviour
 
     private Sprite GetIntentSprite(IntentType type)
     {
+        if (intentSprites == null) return null;
         foreach (var entry in intentSprites)
             if (entry.intentType == type) return entry.sprite;
         return null;

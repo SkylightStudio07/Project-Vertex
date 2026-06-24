@@ -74,8 +74,15 @@ public class BattleManager : MonoBehaviour
     private void SetupEnemies(List<EnemyData> enemyDataList)
     {
         _state.Enemies.Clear();
+        if (enemyDataList == null) return;
+
         foreach (var data in enemyDataList)
         {
+            if (data == null)
+            {
+                Debug.LogWarning("[BattleManager] enemyDataList에 null 항목이 있어 건너뜀. Inspector 확인 필요.");
+                continue;
+            }
             var enemy = new EnemyInstance(data);
             enemy.OnDied += CheckVictory;
             _state.Enemies.Add(enemy);
@@ -145,6 +152,8 @@ public class BattleManager : MonoBehaviour
 
         foreach (var enemy in _state.Enemies)
         {
+            if (enemy == null) continue;
+
             enemy.TakeTurn(_state, this);
 
             if (_state.Player.IsDead) return;

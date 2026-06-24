@@ -154,7 +154,7 @@ public class EnemyInstance : ICombatant
         if (IsDead) return false; // 패시브로 죽었으면 행동하지 않음
 
         var action = GetCurrentAction();
-        if (action != null)
+        if (action != null && action.effects != null)
         {
             var ctx = new CardContext
             {
