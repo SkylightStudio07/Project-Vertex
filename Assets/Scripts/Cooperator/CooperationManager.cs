@@ -77,14 +77,15 @@ public class CooperationManager : MonoBehaviour
         return false;
     }
 
-    public string[] GetCoopDialogue(string charID, int coopLevel)
+    // 호감도 랭크업 시 재생할 대사 JSON 반환. 해당 레벨에 등록된 이벤트가 없으면 null.
+    public TextAsset GetCoopDialogue(string charID, int coopLevel)
     {
-        if (coopCharDict.TryGetValue(charID, out var charState))
+        if (coopCharDict.TryGetValue(charID, out var charState) &&
+            charState.rankEventDatasDict.TryGetValue(coopLevel, out var rankEvent))
         {
-            // 다이얼로그 스크립트 넘기기
-            return null;
+            return rankEvent.dialogueJson;
         }
-        else return null;
+        return null;
     }
 
     // charID로 협력자 원본 데이터를 가져오는 메소드

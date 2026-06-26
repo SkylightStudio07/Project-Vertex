@@ -4,37 +4,31 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCoopChar", menuName = "Game Asset/Coop Character")]
 public class CoopCharData : CharData
 {
-    [Header("È£°¨µµ ·¹º§ ´ç ÇØ±İ Ä«µå")]
+    [Header("í˜¸ê°ë„ ë ˆë²¨ ë‹¹ í•´ê¸ˆ ì¹´ë“œ")]
     public List<CardData> unlockCardCoopLevel = new();
 
-    [Header("ÇÕ·ù ½Ã È¹µæ Ä«µå")]
+    [Header("í•©ë¥˜ ì‹œ íšë“ ì¹´ë“œ")]
     public CardData joinRewardCard;
 
-    [Header("ÀüÅõ º¸»ó Ä«µå Ç®")]
+    [Header("í•©ë¥˜ ì‹œ ì¬ìƒí•  ì§§ì€ ëŒ€ì‚¬ (ì„ íƒ)")]
+    public TextAsset joinDialogueJson;
+
+    [Header("ì „íˆ¬ ë³´ìƒ ì¹´ë“œ í’€")]
     public List<CardData> battleRewardCardPool = new();
 
-    [Header("È£°¨µµ ÃÖ´ë ·¹º§")]
+    [Header("í˜¸ê°ë„ ìµœëŒ€ ë ˆë²¨")]
     public int maxCoopLevel;
 
-    [Header("È£°¨µµ ·¹º§ º° ÀÌº¥Æ® µ¥ÀÌÅÍ")]
+    [Header("í˜¸ê°ë„ ë­í¬ ë³„ ì´ë²¤íŠ¸ ë°ì´í„°")]
     public List<RankEventData> rankEventDatas;
 }
 
+// í˜¸ê°ë„ ë­í¬ì—… ì‹œ ì¬ìƒí•  ì´ë²¤íŠ¸ ë°ì´í„°.
+// dialogueJson í¬ë§·: Assets/Data/Dialogue/ì§€ì¹¨.md (ì„ íƒì§€ê°€ í•„ìš”í•˜ë©´ JSON ì•ˆì—ì„œ ì§ì ‘ ì‘ì„±)
 [System.Serializable]
 public class RankEventData
 {
     public int targetLevel;
-
     public int requiredPoint;
-
-    public string dialogueID;
-
-    public List<DialogueChoiceData> choices;
-}
-
-[System.Serializable]
-public class DialogueChoiceData
-{
-    public string choiceText;
-    public int coopPoint;
+    public TextAsset dialogueJson;
 }

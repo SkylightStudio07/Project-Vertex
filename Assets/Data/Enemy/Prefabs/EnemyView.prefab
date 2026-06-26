@@ -309,7 +309,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -14.200035, y: 70.8}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 180, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5895652225431053790
 CanvasRenderer:
@@ -339,9 +339,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -55702203006513449, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -484,15 +484,15 @@ MonoBehaviour:
   intentValueText: {fileID: 5975634853204776868}
   intentSprites:
   - intentType: 0
-    sprite: {fileID: -6058820318900436461, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
+    sprite: {fileID: -1018138221582106572, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
   - intentType: 1
-    sprite: {fileID: 7331502205543587572, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
+    sprite: {fileID: -8615907805357774769, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
   - intentType: 2
-    sprite: {fileID: -6058820318900436461, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
+    sprite: {fileID: -3117382119761062844, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
   - intentType: 3
-    sprite: {fileID: -6058820318900436461, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
+    sprite: {fileID: 936468029, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
   - intentType: 4
-    sprite: {fileID: -6058820318900436461, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
+    sprite: {fileID: 3135245866846812400, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
 --- !u!1 &8632164857285306369
 GameObject:
   m_ObjectHideFlags: 0
