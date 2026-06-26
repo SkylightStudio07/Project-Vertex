@@ -18,15 +18,21 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadRelationshipEvent(string charID)
     {
+        // 아래 조기 return들은 전부 isDialogueEnd를 발화해야 한다.
+        // 호출부(CharacterEventManager 등)가 호출 직후 "진행 중" 플래그를 무조건 true로 세팅하고
+        // isDialogueEnd가 와야만 그걸 false로 되돌리는 구조라, 여기서 발화를 빼먹으면
+        // 대화가 시작도 안 했는데 그 플래그가 영원히 true로 남아 이후 입력이 전부 잠긴다.
         if (cooperationManager == null)
         {
             Debug.LogWarning("[DialogueManager] CooperationManager.Instance가 없음.");
+            isDialogueEnd?.Invoke();
             return;
         }
 
         if (!cooperationManager.IsCoopLevelUP(charID))
         {
             Debug.Log("현재 이벤트 발생 조건이 부족합니다.");
+            isDialogueEnd?.Invoke();
             return;
         }
 

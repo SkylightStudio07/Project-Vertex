@@ -186,11 +186,22 @@ public class DialogueView : MonoBehaviour
     {
         HideChoices();
 
+        if (option == null) return;
+
         if (option.effects != null)
         {
             var ctx = new CardContext();
             foreach (var effect in option.effects)
                 if (effect != null) effect.Execute(ctx);
+        }
+
+        // Dictionary.TryGetValue는 key가 null이면 ArgumentNullException을 던진다 (못 찾는 것과 다름).
+        // JSON 작성 시 "next"를 빠뜨리면 option.next가 null로 들어와 GoToNode에서 바로 크래시 나므로 가드 필요.
+        if (string.IsNullOrEmpty(option.next))
+        {
+            Debug.LogWarning("[Dialogue] 선택지의 'next' 노드 ID가 비어 있음.");
+            Finish();
+            return;
         }
 
         GoToNode(option.next);
@@ -208,7 +219,9 @@ public class DialogueView : MonoBehaviour
     // GameObject가 비활성(대화 안 하는 중)일 때는 Update 자체가 호출되지 않으므로 따로 체크 안 해도 됨.
     private void Update()
     {
-        if (!advanceButton.gameObject.activeSelf) return;
+        // interactable도 같이 체크 — 향후 타이프라이터 효과 등으로 버튼을 잠가도
+        // 키보드 입력이 그걸 우회해서 넘어가버리는 비일관성을 막기 위함.
+        if (!advanceButton.gameObject.activeSelf || !advanceButton.interactable) return;
         if (Keyboard.current == null) return;
 
         if (Keyboard.current[Key.Space].wasPressedThisFrame || Keyboard.current[Key.Enter].wasPressedThisFrame)
