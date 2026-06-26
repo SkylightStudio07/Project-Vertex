@@ -8,6 +8,9 @@ public class SelectCoopCharUI : MonoBehaviour
     [SerializeField] private RectTransform selectedUI;
     [SerializeField] private List<SelectCoopCharBtn> selectCoopCharBtns;
     [SerializeField] private FadeController fadeController;
+    [SerializeField] private DialogueView dialogueView;
+
+    public DialogueView DialogueView => dialogueView;
 
     // 협력자 선택 이벤트 활성화 시 UI를 초기화하는 메소드
 

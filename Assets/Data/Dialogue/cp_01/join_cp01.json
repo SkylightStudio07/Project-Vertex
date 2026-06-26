@@ -1,0 +1,15 @@
+{
+  "characters": [
+    { "id": "Cp_01", "name": "Cp_01", "slot": 0 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "Cp_01", "emotion": "confident", "text": "좋아, 어디 한 번 해 보자고." },
+        { "type": "end" }
+      ]
+    }
+  ]
+}

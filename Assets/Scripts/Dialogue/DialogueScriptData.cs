@@ -2,6 +2,8 @@
 // 그래서 노드는 id를 가진 배열로, line/choice/end는 하나의 클래스에 담아 type으로 구분한다.
 // 포맷 전체 설명: Assets/Data/Dialogue/지침.md
 
+using System.Collections.Generic;
+
 [System.Serializable]
 public class DialogueCharacterData
 {
@@ -15,6 +17,9 @@ public class DialogueChoiceOption
 {
     public string text;
     public string next; // 점프할 노드 id
+
+    // 선택 시 실행할 부수효과 (호감도 포인트 지급 등). Card/Event 효과와 같은 CardEffect 라이브러리 재사용.
+    public List<CardEffect> effects;
 }
 
 [System.Serializable]

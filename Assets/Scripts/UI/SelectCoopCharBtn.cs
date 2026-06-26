@@ -45,7 +45,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
         //selectCoopCharUI.Selected(rectTransform);
     }
 
-    // 버튼 OnClick 이벤트에 사용할 메소드 ( 현재 선택한 캐릭터의 카드 추가 ) 
+    // 버튼 OnClick 이벤트에 사용할 메소드 ( 현재 선택한 캐릭터의 카드 추가 )
     public void OnClickBtn()
     {
         if (CooperationManager.Instance == null)
@@ -54,6 +54,21 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
             return;
         }
 
+        // 합류 시 짧은 대사가 있으면 먼저 재생, 끝나면 보상 적용 + UI 닫기.
+        DialogueView dialogueView = selectCoopCharUI != null ? selectCoopCharUI.DialogueView : null;
+        CoopCharData coopCharData = CooperationManager.Instance.GetCoopCharData(charID);
+        if (coopCharData != null && coopCharData.joinDialogueJson != null && dialogueView != null)
+        {
+            dialogueView.Play(coopCharData.joinDialogueJson, FinishSelection);
+        }
+        else
+        {
+            FinishSelection();
+        }
+    }
+
+    private void FinishSelection()
+    {
         CooperationManager.Instance.SelectChar(charID);
         selectCoopCharUI.CloseUI();
     }

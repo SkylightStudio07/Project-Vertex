@@ -27,6 +27,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
   - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
   joinRewardCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
+  joinDialogueJson: {fileID: 4900000, guid: f40cfa2b9a87d7b43a02d1241cc149fb, type: 3}
   battleRewardCardPool:
   - {fileID: 11400000, guid: 29651ea8435a386489b1ec118f568521, type: 2}
   - {fileID: 11400000, guid: 6e99534b633f55e49888225af7d4d7f9, type: 2}
@@ -35,13 +36,7 @@ MonoBehaviour:
   rankEventDatas:
   - targetLevel: 1
     requiredPoint: 2
-    dialogueID: Cp_01_01
-    choices:
-    - choiceText: 11
-      coopPoint: 2
+    dialogueJson: {fileID: 0}
   - targetLevel: 2
     requiredPoint: 2
-    dialogueID: Cp_01_01
-    choices:
-    - choiceText: 15
-      coopPoint: 126
+    dialogueJson: {fileID: 0}
