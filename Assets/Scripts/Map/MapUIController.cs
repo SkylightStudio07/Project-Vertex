@@ -19,6 +19,9 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private EventView eventView;
     [SerializeField] private List<EventData> eventPool;
 
+    [Header("휴식")]
+    [SerializeField] private RestView restView;
+
     [Header("배치 설정")]
     [SerializeField] private float floorSpacing    = 120f;
     [SerializeField] private float columnSpacing   = 120f;
@@ -181,6 +184,9 @@ public class MapUIController : MonoBehaviour
             case NodeType.Event:
                 OpenEvent(node);
                 break;
+            case NodeType.Rest:
+                OpenRest(node);
+                break;
             default:
                 Debug.Log($"[Map] 노드 타입 {node.nodeType} — 미구현");
                 break;
@@ -205,5 +211,16 @@ public class MapUIController : MonoBehaviour
         var rnd = new System.Random(RunData.Instance.mapData.seed + node.floorIndex * 100 + node.nodeIndex);
         var data = eventPool[rnd.Next(0, eventPool.Count)];
         eventView.Open(data);
+    }
+
+    private void OpenRest(MapNode node)
+    {
+        if(restView == null)
+        {
+            Debug.LogWarning("[Map] restView 참조가 없음. Inspector 연결 확인 필요.");
+            return;
+        }
+
+        restView.Open();
     }
 }
