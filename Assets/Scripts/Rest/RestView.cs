@@ -25,6 +25,18 @@ public class RestView : MonoBehaviour
     // 합류한 캐릭터들의 초상화 슬롯을 생성하여 표시
     private void DisplayCoopPortraits()
     {
+        if (portraitSlotPrefab == null || portraitSlotParent == null)
+        {
+            Debug.LogWarning("[RestView] portraitSlotPrefab 또는 portraitSlotParent가 Inspector에서 지정되지 않았습니다.");
+            return;
+        }
+
+        if (CooperationManager.Instance == null)
+        {
+            Debug.LogWarning("[RestView] CooperationManager.Instance가 null입니다.");
+            return;
+        }
+
         // 기존 슬롯 제거
         foreach (var slot in portraitSlots)
         {
@@ -57,6 +69,11 @@ public class RestView : MonoBehaviour
 
     private void Finish()
     {
+        if (mapUIController == null)
+        {
+            Debug.LogWarning("[RestView] mapUIController 참조가 Inspector에서 연결되지 않았습니다.");
+            return;
+        }
         gameObject.SetActive(false);
         mapUIController.OpenMap();
     }

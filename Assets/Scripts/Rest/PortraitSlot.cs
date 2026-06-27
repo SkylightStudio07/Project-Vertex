@@ -8,7 +8,7 @@ public class PortraitSlot : MonoBehaviour,
     IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Image portraitImage;
-    [SerializeField] private TextMeshProUGUI name;
+    [SerializeField] private TextMeshProUGUI nameText;
     //[SerializeField] private TextMeshProUGUI level;
 
     // 호버 연출 색상
@@ -25,7 +25,7 @@ public class PortraitSlot : MonoBehaviour,
         onClickCallback = onClick;
         portraitImage.sprite = state.charData.charImage;
         portraitImage.color = normalColor;
-        name.text = state.charData.charName;
+        nameText.text = state.charData.charName;
         //level.text = state.currentCoopLevel.ToString();
     }
 
