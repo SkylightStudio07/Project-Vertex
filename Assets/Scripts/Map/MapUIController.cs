@@ -21,6 +21,8 @@ public class MapUIController : MonoBehaviour
 
     [Header("휴식")]
     [SerializeField] private RestView restView;
+    [Header("성소")]
+    [SerializeField] private SelectCoopCharUI selectCoopCharUI;
 
     [Header("배치 설정")]
     [SerializeField] private float floorSpacing    = 120f;
@@ -187,6 +189,9 @@ public class MapUIController : MonoBehaviour
             case NodeType.Rest:
                 OpenRest(node);
                 break;
+            case NodeType.Sanctuary:
+                OpenSanctuary();
+                break;
             default:
                 Debug.Log($"[Map] 노드 타입 {node.nodeType} — 미구현");
                 break;
@@ -222,5 +227,17 @@ public class MapUIController : MonoBehaviour
         }
 
         restView.Open();
+    }
+
+    private void OpenSanctuary()
+    {
+        if (selectCoopCharUI == null)
+        {
+            Debug.LogWarning("[Map] selectCoopCharUI 참조가 없음. Inspector 연결 확인 필요.");
+            return;
+        }
+
+        selectCoopCharUI.gameObject.SetActive(true);
+        selectCoopCharUI.Init();
     }
 }
