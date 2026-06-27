@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PortraitSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class PortraitSlot : MonoBehaviour, 
+    IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Image portraitImage;
     [SerializeField] private TextMeshProUGUI name;
@@ -13,6 +14,7 @@ public class PortraitSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     // 호버 연출 색상
     [SerializeField] private Color normalColor = new Color(0.6f, 0.6f, 0.6f, 1f); // 평소 약간 어둡게
     [SerializeField] private Color hoverColor = Color.white;                      // 호버 시 밝게
+    [SerializeField] private Color pressedColor = new Color(0.4f, 0.4f, 0.4f, 1f); // 클릭 시 어둡게
 
     private CoopCharState charState;
     private Action<CoopCharState> onClickCallback;
@@ -44,7 +46,21 @@ public class PortraitSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             portraitImage.color = normalColor;
         }
     }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (portraitImage != null)
+        {
+            portraitImage.color = pressedColor;
+        }
+    }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (portraitImage != null)
+        {
+            portraitImage.color = hoverColor;
+        }
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
         onClickCallback?.Invoke(charState);

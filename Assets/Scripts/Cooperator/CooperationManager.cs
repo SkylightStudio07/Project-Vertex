@@ -234,4 +234,19 @@ public class CooperationManager : MonoBehaviour
             charState.currentCoopLevel = 1;
         }
     }
+
+    // 테스트용: 카드 보상 없이 합류 상태(isJoinedInRun)만 켜기
+    public void DebugJoin(string charID)
+    {
+        if (coopCharDict.TryGetValue(charID, out var charState))
+        {
+            charState.isJoinedInRun = true;
+            Debug.Log($"[Test] {charID} 합류 처리");
+        }
+        else Debug.LogWarning($"[Test] {charID} 없음 — coopCharList에 등록된 charID인지 확인");
+    }
+
+    // 인스펙터 우클릭으로 실행하는 테스트 합류 (Cp_01)
+    [ContextMenu("Test/Join Cp_01")]
+    private void TestJoinCp01() => DebugJoin("Cp_01");
 }
