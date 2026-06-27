@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 런타임 중 현재 캐릭터 호감도 상태 저장
+// 6-27 | 박근혁 : 런 중에 합류했는지 여부 나타내는 isJoinedInRun 추가
 [System.Serializable]
 public class CoopCharState
 {
@@ -10,6 +11,7 @@ public class CoopCharState
     public int currentCoopLevel;
     public int currentCoopPoint;
     public bool isLevelUp;
+    public bool isJoinedInRun;      // 런 중에 합류했는지 여부(런이 시작될 때마다 false로 초기화 되어야 함!!)
     public Dictionary<int, RankEventData> rankEventDatasDict;
 }
 
@@ -51,8 +53,18 @@ public class CooperationManager : MonoBehaviour
                 currentCoopLevel = 0,
                 currentCoopPoint = 0,
                 isLevelUp = false,
+                isJoinedInRun = false,
                 rankEventDatasDict = rankEventDatasDict
             };
+        }
+    }
+
+    // 런 시작 시, 모든 캐릭터의 isJoinedInRun 상태를 false로 초기화
+    public void ResetOnRunStart()
+    {
+        foreach (var charState in coopCharDict.Values)
+        {
+            charState.isJoinedInRun = false;
         }
     }
 
@@ -182,6 +194,24 @@ public class CooperationManager : MonoBehaviour
         }
 
         Debug.Log($"{charID} 성소 보상 적용 완료");
+
+        CoopCharState charState = coopCharDict[charID];
+        charState.isJoinedInRun = true;
+    }
+
+    // 현재 런에 합류한 캐릭터들의 상태를 반환하는 메소드
+    public List<CoopCharState> GetJoinedInRunCharStates()
+    {
+        List<CoopCharState> joinedCharStates = new List<CoopCharState>();
+        foreach (var charState in coopCharDict.Values)
+        {
+            if (charState.isJoinedInRun)
+            {
+                joinedCharStates.Add(charState);
+            }
+        }
+        joinedCharStates.Sort((x, y) => x.charID.CompareTo(y.charID));
+        return joinedCharStates;
     }
 
     // 호감도 증가 테스트 메소드
