@@ -169,7 +169,7 @@ public class CooperationManager : MonoBehaviour
 
         if (coopCharData.joinRewardCard != null)
         {
-            GameManager.Instance.AddCardToPlayerDeck(coopCharData.joinRewardCard);
+            DeckManager.Instance.AddCardToPlayerDeck(coopCharData.joinRewardCard);
         }
 
         foreach (CardData card in coopCharData.battleRewardCardPool)
