@@ -32,6 +32,9 @@ public class RewardItemButton : MonoBehaviour
             case RewardType.Card:
                 DisplayCardReward();
                 break;
+            case RewardType.Item:
+                GetItemReward();
+                break;
             default:
                 Debug.LogWarning("Unknown reward type clicked.");
                 break;
@@ -45,6 +48,15 @@ public class RewardItemButton : MonoBehaviour
 
         var cards = (List<CardData>)rewardItem.Data;
         OnCardReward?.Invoke(cards, this);
+    }
+
+    private void GetItemReward()
+    {
+        ItemData itemData = rewardItem.Data as ItemData;
+        if (ItemInventoryManager.Instance.AddItem(itemData))
+        {
+            CompleteReward();
+        }
     }
     
     public void CompleteReward()

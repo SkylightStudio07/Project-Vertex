@@ -1,0 +1,69 @@
+using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class PortraitSlot : MonoBehaviour, 
+    IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+{
+    [SerializeField] private Image portraitImage;
+    [SerializeField] private TextMeshProUGUI nameText;
+    //[SerializeField] private TextMeshProUGUI level;
+
+    // 호버 연출 색상
+    [SerializeField] private Color normalColor = new Color(0.6f, 0.6f, 0.6f, 1f); // 평소 약간 어둡게
+    [SerializeField] private Color hoverColor = Color.white;                      // 호버 시 밝게
+    [SerializeField] private Color pressedColor = new Color(0.4f, 0.4f, 0.4f, 1f); // 클릭 시 어둡게
+
+    private CoopCharState charState;
+    private Action<CoopCharState> onClickCallback;
+
+    public void SetData(CoopCharState state, Action<CoopCharState> onClick = null)
+    {
+        charState = state;
+        onClickCallback = onClick;
+        portraitImage.sprite = state.charData.charImage;
+        portraitImage.color = normalColor;
+        nameText.text = state.charData.charName;
+        //level.text = state.currentCoopLevel.ToString();
+    }
+
+
+    // 추후 대화 이벤트 등을 위한 상호작용 함수들
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(portraitImage != null)
+        {
+            portraitImage.color = hoverColor;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (portraitImage != null)
+        {
+            portraitImage.color = normalColor;
+        }
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (portraitImage != null)
+        {
+            portraitImage.color = pressedColor;
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (portraitImage != null)
+        {
+            portraitImage.color = hoverColor;
+        }
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        onClickCallback?.Invoke(charState);
+        Debug.Log($"Clicked on {charState.charData.charName}");
+    }
+}

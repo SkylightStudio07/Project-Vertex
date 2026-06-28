@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 런타임 중 현재 캐릭터 호감도 상태 저장
+// 6-27 | 박근혁 : 런 중에 합류했는지 여부 나타내는 isJoinedInRun 추가
 [System.Serializable]
 public class CoopCharState
 {
@@ -10,6 +11,7 @@ public class CoopCharState
     public int currentCoopLevel;
     public int currentCoopPoint;
     public bool isLevelUp;
+    public bool isJoinedInRun;      // 런 중에 합류했는지 여부(런이 시작될 때마다 false로 초기화 되어야 함!!)
     public Dictionary<int, RankEventData> rankEventDatasDict;
 }
 
@@ -51,8 +53,18 @@ public class CooperationManager : MonoBehaviour
                 currentCoopLevel = 0,
                 currentCoopPoint = 0,
                 isLevelUp = false,
+                isJoinedInRun = false,
                 rankEventDatasDict = rankEventDatasDict
             };
+        }
+    }
+
+    // 런 시작 시, 모든 캐릭터의 isJoinedInRun 상태를 false로 초기화
+    public void ResetOnRunStart()
+    {
+        foreach (var charState in coopCharDict.Values)
+        {
+            charState.isJoinedInRun = false;
         }
     }
 
@@ -77,14 +89,15 @@ public class CooperationManager : MonoBehaviour
         return false;
     }
 
-    public string[] GetCoopDialogue(string charID, int coopLevel)
+    // 호감도 랭크업 시 재생할 대사 JSON 반환. 해당 레벨에 등록된 이벤트가 없으면 null.
+    public TextAsset GetCoopDialogue(string charID, int coopLevel)
     {
-        if (coopCharDict.TryGetValue(charID, out var charState))
+        if (coopCharDict.TryGetValue(charID, out var charState) &&
+            charState.rankEventDatasDict.TryGetValue(coopLevel, out var rankEvent))
         {
-            // 다이얼로그 스크립트 넘기기
-            return null;
+            return rankEvent.dialogueJson;
         }
-        else return null;
+        return null;
     }
 
     // charID로 협력자 원본 데이터를 가져오는 메소드
@@ -182,6 +195,24 @@ public class CooperationManager : MonoBehaviour
         }
 
         Debug.Log($"{charID} 성소 보상 적용 완료");
+
+        CoopCharState charState = coopCharDict[charID];
+        charState.isJoinedInRun = true;
+    }
+
+    // 현재 런에 합류한 캐릭터들의 상태를 반환하는 메소드
+    public List<CoopCharState> GetJoinedInRunCharStates()
+    {
+        List<CoopCharState> joinedCharStates = new List<CoopCharState>();
+        foreach (var charState in coopCharDict.Values)
+        {
+            if (charState.isJoinedInRun)
+            {
+                joinedCharStates.Add(charState);
+            }
+        }
+        joinedCharStates.Sort((x, y) => x.charID.CompareTo(y.charID));
+        return joinedCharStates;
     }
 
     // 호감도 증가 테스트 메소드
@@ -204,4 +235,19 @@ public class CooperationManager : MonoBehaviour
             charState.currentCoopLevel = 1;
         }
     }
+
+    // 테스트용: 카드 보상 없이 합류 상태(isJoinedInRun)만 켜기
+    public void DebugJoin(string charID)
+    {
+        if (coopCharDict.TryGetValue(charID, out var charState))
+        {
+            charState.isJoinedInRun = true;
+            Debug.Log($"[Test] {charID} 합류 처리");
+        }
+        else Debug.LogWarning($"[Test] {charID} 없음 — coopCharList에 등록된 charID인지 확인");
+    }
+
+    // 인스펙터 우클릭으로 실행하는 테스트 합류 (Cp_01)
+    [ContextMenu("Test/Join Cp_01")]
+    private void TestJoinCp01() => DebugJoin("Cp_01");
 }

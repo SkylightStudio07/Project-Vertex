@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2534956941257406870}
   - component: {fileID: 5061233425930402740}
+  - component: {fileID: -3717186337410621422}
   m_Layer: 5
   m_Name: Map Node Prefab
   m_TagString: Untagged
@@ -111,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 490}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 198, y: 198}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &5061233425930402740
 MonoBehaviour:
@@ -127,17 +128,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapNodeView
   nodeSprites:
   - nodeType: 0
-    sprite: {fileID: -8226447978964141100, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
+    sprite: {fileID: 6410164051656956338, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
   - nodeType: 1
-    sprite: {fileID: 5782758918058847316, guid: fb002c6d94e3b78438035148d74d0222, type: 3}
+    sprite: {fileID: -6058820318900436461, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
   - nodeType: 2
-    sprite: {fileID: 7727401719933266816, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
+    sprite: {fileID: -8243337043712992259, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
   - nodeType: 3
-    sprite: {fileID: -8757908933327734425, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
+    sprite: {fileID: 7331502205543587572, guid: f0d183c446f86764a8a5df01ae22704a, type: 3}
   - nodeType: 4
     sprite: {fileID: 2321433904195076412, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
   - nodeType: 5
-    sprite: {fileID: -7303773540737559214, guid: 831c2cfed3ee9ea4a8343a571818e15b, type: 3}
+    sprite: {fileID: 2321433904195076412, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
   - nodeType: 6
     sprite: {fileID: -2497275117540228030, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
   - nodeType: 7
@@ -147,6 +148,14 @@ MonoBehaviour:
   iconImage: {fileID: 6719284070550357927}
   button: {fileID: 7884801782846990722}
   currentMarker: {fileID: 1036725900798749602}
+--- !u!222 &-3717186337410621422
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2419669571929957132}
+  m_CullTransparentMesh: 1
 --- !u!1 &8197790852642599615
 GameObject:
   m_ObjectHideFlags: 0

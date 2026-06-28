@@ -9,7 +9,7 @@ public class RewardsView : MonoBehaviour
     [SerializeField] private CardRewardView cardRewardView;
     [SerializeField] private MapUIController mapUIController;
 
-    private Reward reward;
+    private BattleReward reward;
     private List<RewardItemButton> buttons;
 
     private void Start()
@@ -17,8 +17,12 @@ public class RewardsView : MonoBehaviour
         BattleManager.Instance.OnBattleVictory += Open;
     }
 
-    private void Open(Reward reward)
+    private void Open(BattleReward reward)
     {
+        // OnProceedClicked()가 루트 자체를 꺼두기 때문에, 다음 승리에서도 보이려면
+        // 자식들뿐 아니라 루트도 다시 켜야 한다. (안 켜면 두 번째 승리부터 화면에 안 뜨는 버그)
+        gameObject.SetActive(true);
+
         this.reward = reward;
         buttons = new List<RewardItemButton>();
         Refresh();

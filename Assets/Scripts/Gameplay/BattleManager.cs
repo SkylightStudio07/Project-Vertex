@@ -40,7 +40,7 @@ public class BattleManager : MonoBehaviour
 
     public event Action         OnHandChanged;
     public event Action         OnEnemiesChanged;
-    public event Action<Reward> OnBattleVictory;
+    public event Action<BattleReward> OnBattleVictory;
     public event Action         OnBattleDefeat;
 
     private BattleType   _currentBattleType;
@@ -74,8 +74,15 @@ public class BattleManager : MonoBehaviour
     private void SetupEnemies(List<EnemyData> enemyDataList)
     {
         _state.Enemies.Clear();
+        if (enemyDataList == null) return;
+
         foreach (var data in enemyDataList)
         {
+            if (data == null)
+            {
+                Debug.LogWarning("[BattleManager] enemyDataList에 null 항목이 있어 건너뜀. Inspector 확인 필요.");
+                continue;
+            }
             var enemy = new EnemyInstance(data);
             enemy.OnDied += CheckVictory;
             _state.Enemies.Add(enemy);
@@ -100,6 +107,10 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTurnStart()
     {
+        // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
+        // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
+        _state.Player.ResetBlock();
+
         BeginHandChangeBatch();
         try
         {
@@ -130,7 +141,6 @@ public class BattleManager : MonoBehaviour
             EndHandChangeBatch();
         }
 
-        _state.Player.ResetBlock();
         _state.Player.TickPassives(_state);
 
         EnemyTurnStart();
@@ -142,18 +152,9 @@ public class BattleManager : MonoBehaviour
 
         foreach (var enemy in _state.Enemies)
         {
-            if (enemy.IsDead) continue;
+            if (enemy == null) continue;
 
-            enemy.TickPassives(_state);
-
-            var action = enemy.GetCurrentAction();
-            if (action != null)
-            {
-                var ctx = BuildEnemyContext(enemy);
-                foreach (var effect in action.effects)
-                    effect?.Execute(ctx);
-            }
-            enemy.AdvancePattern();
+            enemy.TakeTurn(_state, this);
 
             if (_state.Player.IsDead) return;
         }
@@ -347,7 +348,12 @@ public class BattleManager : MonoBehaviour
         }
 
         var rewardData = GameManager.Instance.GetRewardProbability(_currentBattleType);
-        var reward     = new Reward(GameManager.Instance.cardPools, rewardData, _currentBattleType);
+        // 보상 생성 랜덤값. 노드 위치 기반 고정 시드로 생성 (이벤트 노드와 동일 방식)
+        // → 같은 노드면 항상 같은 보상
+        int rewardSeed = RunData.Instance.mapData.seed
+                         + RunData.Instance.currentFloor * 100
+                         + RunData.Instance.currentNodeIndex;
+        var reward     = new BattleReward(GameManager.Instance.cardPools, rewardData, rewardSeed);
         OnBattleVictory?.Invoke(reward);
         foreach (var e in _state.Enemies)
             e.OnDied -= CheckVictory;
@@ -361,14 +367,6 @@ public class BattleManager : MonoBehaviour
     // ─────────────────────────────────────────────
     // 내부 유틸
     // ─────────────────────────────────────────────
-
-    private CardContext BuildEnemyContext(EnemyInstance enemy) => new()
-    {
-        State       = _state,
-        Battle      = this,
-        ActingEnemy = enemy,
-        AllEnemies  = _state.Enemies,
-    };
 
     private void NotifyHandChanged()
     {

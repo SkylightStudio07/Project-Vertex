@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 // 분기 가능한 다중 캐릭터 다이얼로그 재생기.
@@ -175,16 +176,35 @@ public class DialogueView : MonoBehaviour
         {
             var btn = Instantiate(choiceButtonPrefab, choiceContainer);
             btn.GetComponentInChildren<TextMeshProUGUI>().text = option.text;
-            string next = option.next;
-            btn.onClick.AddListener(() => OnChoiceSelected(next));
+            var capturedOption = option;
+            btn.onClick.AddListener(() => OnChoiceSelected(capturedOption));
             _choiceButtons.Add(btn);
         }
     }
 
-    private void OnChoiceSelected(string nextNodeId)
+    private void OnChoiceSelected(DialogueChoiceOption option)
     {
         HideChoices();
-        GoToNode(nextNodeId);
+
+        if (option == null) return;
+
+        if (option.effects != null)
+        {
+            var ctx = new CardContext();
+            foreach (var effect in option.effects)
+                if (effect != null) effect.Execute(ctx);
+        }
+
+        // Dictionary.TryGetValue는 key가 null이면 ArgumentNullException을 던진다 (못 찾는 것과 다름).
+        // JSON 작성 시 "next"를 빠뜨리면 option.next가 null로 들어와 GoToNode에서 바로 크래시 나므로 가드 필요.
+        if (string.IsNullOrEmpty(option.next))
+        {
+            Debug.LogWarning("[Dialogue] 선택지의 'next' 노드 ID가 비어 있음.");
+            Finish();
+            return;
+        }
+
+        GoToNode(option.next);
     }
 
     private void HideChoices()
@@ -192,6 +212,20 @@ public class DialogueView : MonoBehaviour
         foreach (var b in _choiceButtons)
             Destroy(b.gameObject);
         _choiceButtons.Clear();
+    }
+
+    // 선택지가 표시 중일 때는 advanceButton이 비활성화돼 있으므로, 그 상태를 그대로
+    // "지금 스페이스/엔터로 넘겨도 되는 시점인지" 가드로 재사용한다 (별도 플래그 불필요).
+    // GameObject가 비활성(대화 안 하는 중)일 때는 Update 자체가 호출되지 않으므로 따로 체크 안 해도 됨.
+    private void Update()
+    {
+        // interactable도 같이 체크 — 향후 타이프라이터 효과 등으로 버튼을 잠가도
+        // 키보드 입력이 그걸 우회해서 넘어가버리는 비일관성을 막기 위함.
+        if (!advanceButton.gameObject.activeSelf || !advanceButton.interactable) return;
+        if (Keyboard.current == null) return;
+
+        if (Keyboard.current[Key.Space].wasPressedThisFrame || Keyboard.current[Key.Enter].wasPressedThisFrame)
+            OnAdvanceClicked();
     }
 
     private void OnAdvanceClicked()
