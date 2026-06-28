@@ -127,27 +127,11 @@ public class BonfireInteractionHandler : FacilityInteractionHandler
         }
     }
 
-    [SerializeField] private LobbyScreenRouter screenRouter;
-    [SerializeField] private GameObject interactionView;
     [SerializeField] private List<CharacterPlacement> characterPlacements = new();
 
     protected override void OnOpenInteraction()
     {
         RefreshCharacterPlacements();
-
-        if (screenRouter != null)
-            screenRouter.ShowFacilityView(interactionView);
-        else
-            interactionView?.SetActive(true);
-
-        if (interactionView == null)
-            Logger.Log(this, "Bonfire facility interacted.");
-    }
-
-    protected override void OnCloseInteraction()
-    {
-        interactionView?.SetActive(false);
-        screenRouter?.ShowMainView();
     }
 
     public void RefreshCharacterPlacements()

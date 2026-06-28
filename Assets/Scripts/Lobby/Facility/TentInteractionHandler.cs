@@ -1,48 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class TentInteractionHandler : FacilityInteractionHandler
 {
-    [SerializeField] private LobbyScreenRouter screenRouter;
-    [SerializeField] private GameObject interactionView;
     [SerializeField] private Button runStartButton;
-    [SerializeField] private Button deckCheckButton;
-    [SerializeField] private GameObject deckPreviewView;
-    [SerializeField] private TMP_Text weaponNameText;
-    [SerializeField] private TMP_Text deckPreviewText;
-    [SerializeField] private StartingWeaponData selectedStartingWeapon;
+    [SerializeField] private Transform cardSummaryParent;
+    [SerializeField] private StartingDeckSummaryItem cardSummaryPrefab;
+    [SerializeField] private List<CardData> startingDeckCards = new();
     [SerializeField] private string runSceneName = "SampleScene";
     [SerializeField] private UnityEvent onRunStarted;
 
+    private readonly List<StartingDeckSummaryItem> spawnedSummaryItems = new();
+
+    public IReadOnlyList<CardData> StartingDeckCards => startingDeckCards;
+
     private void Awake()
     {
-        runStartButton?.onClick.AddListener(StartRun);
-        deckCheckButton?.onClick.AddListener(ToggleDeckPreview);
+        BindButtonListeners();
+        RefreshStartingDeckView();
     }
 
     private void OnDestroy()
     {
         runStartButton?.onClick.RemoveListener(StartRun);
-        deckCheckButton?.onClick.RemoveListener(ToggleDeckPreview);
     }
 
     protected override void OnOpenInteraction()
     {
-        RefreshDeckPreview();
-
-        if (screenRouter != null)
-            screenRouter.ShowFacilityView(interactionView);
-        else
-            interactionView?.SetActive(true);
-    }
-
-    protected override void OnCloseInteraction()
-    {
-        interactionView?.SetActive(false);
-        screenRouter?.ShowMainView();
+        RefreshStartingDeckView();
     }
 
     public void StartRun()
@@ -61,50 +49,121 @@ public class TentInteractionHandler : FacilityInteractionHandler
         SceneManager.LoadScene(runSceneName);
     }
 
-    public void ToggleDeckPreview()
+    public void SetStartingDeckCards(List<CardData> cards)
     {
-        if (deckPreviewView == null)
+        startingDeckCards = cards;
+        RefreshStartingDeckView();
+    }
+
+    [ContextMenu("Debug/Refresh Starting Deck View")]
+    private void DebugRefreshStartingDeckView()
+    {
+        RefreshStartingDeckView();
+    }
+
+    private void BindButtonListeners()
+    {
+        runStartButton?.onClick.RemoveListener(StartRun);
+        runStartButton?.onClick.AddListener(StartRun);
+    }
+
+    private void RefreshStartingDeckView()
+    {
+        if (cardSummaryParent == null || cardSummaryPrefab == null)
             return;
 
-        deckPreviewView.SetActive(!deckPreviewView.activeSelf);
-        RefreshDeckPreview();
-    }
+        CollectExistingSummaryItems();
 
-    public void SetStartingWeapon(StartingWeaponData startingWeapon)
-    {
-        selectedStartingWeapon = startingWeapon;
-        RefreshDeckPreview();
-    }
+        List<CardStack> cardStacks = BuildCardStacks(startingDeckCards);
+        EnsureSummaryItemCount(cardStacks.Count);
 
-    private void RefreshDeckPreview()
-    {
-        if (selectedStartingWeapon == null)
+        for (int i = 0; i < spawnedSummaryItems.Count; i++)
         {
-            if (weaponNameText != null)
-                weaponNameText.text = "선택된 시작 무기 없음";
-            if (deckPreviewText != null)
-                deckPreviewText.text = string.Empty;
+            StartingDeckSummaryItem item = spawnedSummaryItems[i];
+            if (item == null)
+                continue;
+
+            bool shouldShow = i < cardStacks.Count;
+            item.gameObject.SetActive(shouldShow);
+
+            if (!shouldShow)
+                continue;
+
+            CardStack stack = cardStacks[i];
+            item.Bind(stack.Card, stack.Count, "카드");
+        }
+    }
+
+    private void EnsureSummaryItemCount(int count)
+    {
+        while (spawnedSummaryItems.Count < count)
+        {
+            StartingDeckSummaryItem item = Instantiate(cardSummaryPrefab, cardSummaryParent);
+            SetLayerRecursively(item.gameObject, cardSummaryParent.gameObject.layer);
+            item.gameObject.SetActive(true);
+            spawnedSummaryItems.Add(item);
+        }
+    }
+
+    private void CollectExistingSummaryItems()
+    {
+        if (spawnedSummaryItems.Count > 0)
             return;
-        }
 
-        if (weaponNameText != null)
-            weaponNameText.text = selectedStartingWeapon.WeaponName;
-
-        if (deckPreviewText != null)
+        foreach (StartingDeckSummaryItem item in cardSummaryParent.GetComponentsInChildren<StartingDeckSummaryItem>(true))
         {
-            string attackName = GetCardName(selectedStartingWeapon.AttackCard, "타격");
-            string defenseName = GetCardName(selectedStartingWeapon.DefenseCard, "수비");
-            string reloadName = GetCardName(selectedStartingWeapon.ReloadCard, "재장전");
-            deckPreviewText.text =
-                $"{attackName} × {selectedStartingWeapon.AttackCardCount}\n" +
-                $"{defenseName} × {selectedStartingWeapon.DefenseCardCount}\n" +
-                $"{reloadName} × {selectedStartingWeapon.ReloadCardCount}\n" +
-                $"총 {selectedStartingWeapon.TotalCardCount}장";
+            if (item != null && item.transform.parent == cardSummaryParent)
+                spawnedSummaryItems.Add(item);
         }
     }
 
-    private static string GetCardName(CardData card, string fallbackName)
+    private static void SetLayerRecursively(GameObject target, int layer)
     {
-        return card != null ? card.CardName : fallbackName;
+        if (target == null)
+            return;
+
+        target.layer = layer;
+        foreach (Transform child in target.transform)
+            SetLayerRecursively(child.gameObject, layer);
+    }
+
+    private static List<CardStack> BuildCardStacks(IReadOnlyList<CardData> cards)
+    {
+        List<CardStack> cardStacks = new();
+        Dictionary<CardData, int> indexByCard = new();
+
+        if (cards == null)
+            return cardStacks;
+
+        foreach (CardData card in cards)
+        {
+            if (card == null)
+                continue;
+
+            if (indexByCard.TryGetValue(card, out int index))
+            {
+                CardStack stack = cardStacks[index];
+                stack.Count++;
+                cardStacks[index] = stack;
+                continue;
+            }
+
+            indexByCard.Add(card, cardStacks.Count);
+            cardStacks.Add(new CardStack(card, 1));
+        }
+
+        return cardStacks;
+    }
+
+    private struct CardStack
+    {
+        public CardStack(CardData card, int count)
+        {
+            Card = card;
+            Count = count;
+        }
+
+        public CardData Card { get; }
+        public int Count { get; set; }
     }
 }

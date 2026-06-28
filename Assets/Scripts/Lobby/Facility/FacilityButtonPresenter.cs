@@ -1,26 +1,26 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>메인 화면 시설 버튼의 클릭과 상태 배지를 관리한다.</summary>
+/// <summary>메인 화면 시설 버튼의 클릭과 상태 표시를 관리한다.</summary>
 public class FacilityButtonPresenter : MonoBehaviour
 {
     [SerializeField] private FacilityType facilityType;
-    [SerializeField] private Button facilityButton;
-    [SerializeField] private GameObject lockedIndicator;
-    [SerializeField] private GameObject upgradedIndicator;
+    [SerializeField] private Button interactionButton;
+    [SerializeField] private TMP_Text upgradeStateText;
 
     private LobbyManager lobbyManager;
     private FacilityManager facilityManager;
 
     private void Awake()
     {
-        if (facilityButton == null)
-            facilityButton = GetComponent<Button>();
+        if (interactionButton == null)
+            interactionButton = GetComponent<Button>();
     }
 
     private void OnEnable()
     {
-        facilityButton?.onClick.AddListener(HandleButtonClicked);
+        interactionButton?.onClick.AddListener(HandleButtonClicked);
         BindManagers();
         Refresh();
     }
@@ -33,7 +33,7 @@ public class FacilityButtonPresenter : MonoBehaviour
 
     private void OnDisable()
     {
-        facilityButton?.onClick.RemoveListener(HandleButtonClicked);
+        interactionButton?.onClick.RemoveListener(HandleButtonClicked);
         UnbindFacilityManager();
     }
 
@@ -42,8 +42,14 @@ public class FacilityButtonPresenter : MonoBehaviour
         if (lobbyManager == null)
             BindManagers();
 
-        lockedIndicator?.SetActive(lobbyManager == null || !lobbyManager.IsFacilityActive(facilityType));
-        upgradedIndicator?.SetActive(lobbyManager != null && lobbyManager.IsFacilityUpgraded(facilityType));
+        bool isActive = lobbyManager != null && lobbyManager.IsFacilityActive(facilityType);
+        bool isUpgraded = lobbyManager != null && lobbyManager.IsFacilityUpgraded(facilityType);
+
+        if (interactionButton != null)
+            interactionButton.interactable = isActive;
+
+        if (upgradeStateText != null)
+            upgradeStateText.text = isUpgraded ? "Lv.2" : "Lv.1";
     }
 
     private void HandleButtonClicked()

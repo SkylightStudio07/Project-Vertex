@@ -4,7 +4,7 @@ using UnityEngine;
 /// Switches between the lobby main menu and a facility view.
 /// Facility handlers own interaction state; this class only owns presentation.
 /// </summary>
-public class LobbyScreenRouter : MonoBehaviour
+public class LobbyScreenConverter : MonoBehaviour
 {
     [SerializeField] private GameObject mainView;
 
@@ -15,7 +15,7 @@ public class LobbyScreenRouter : MonoBehaviour
         ShowMainView();
     }
 
-    public void ShowFacilityView(GameObject facilityView)
+    public virtual void ShowFacilityView(GameObject facilityView)
     {
         if (facilityView == null)
             return;
@@ -28,7 +28,7 @@ public class LobbyScreenRouter : MonoBehaviour
         currentView.SetActive(true);
     }
 
-    public void ShowMainView()
+    public virtual void ShowMainView()
     {
         if (currentView != null)
             currentView.SetActive(false);

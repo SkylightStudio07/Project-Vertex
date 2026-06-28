@@ -1,4 +1,4 @@
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,22 +7,30 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     [Header("공통 시설 UI")]
     [SerializeField] private FacilityType facilityType;
     [SerializeField] private Button upgradeButton;
-    [SerializeField] private TMP_Text facilityStateText;
-    [SerializeField] private GameObject lockedContent;
-    [SerializeField] private GameObject unlockedContent;
+    [SerializeField] private Button closeButton;
+    [SerializeField] private GameObject facilityRoot;
+
+    [Header("시설 상태별 표시 대상")]
+    [SerializeField] private List<GameObject> activeWhenLocked = new();
+    [SerializeField] private List<GameObject> activeWhenUnlocked = new();
+
+    private LobbyScreenConverter screenConverter;
 
     public FacilityType FacilityType => facilityType;
     public Facility CurrentFacility { get; private set; }
     public FacilityManager FacilityManager { get; private set; }
+    protected GameObject FacilityRoot => facilityRoot != null ? facilityRoot : gameObject;
 
     protected virtual void OnEnable()
     {
         upgradeButton?.onClick.AddListener(HandleUpgradeButtonClicked);
+        closeButton?.onClick.AddListener(CloseInteraction);
     }
 
     protected virtual void OnDisable()
     {
         upgradeButton?.onClick.RemoveListener(HandleUpgradeButtonClicked);
+        closeButton?.onClick.RemoveListener(CloseInteraction);
     }
 
     public void Bind(FacilityManager facilityManager)
@@ -46,6 +54,7 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     {
         CurrentFacility = facility;
         RefreshFacilityUI();
+        ShowFacilityView();
         OnOpenInteraction();
     }
 
@@ -63,6 +72,7 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
 
     public void CloseInteractionFromManager()
     {
+        HideFacilityView();
         OnCloseInteraction();
     }
 
@@ -73,27 +83,19 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
             : CurrentFacility;
 
         bool isUnlocked = FacilityManager != null && FacilityManager.IsFacilityActive(FacilityType);
-        lockedContent?.SetActive(!isUnlocked);
-        unlockedContent?.SetActive(isUnlocked);
+        SetObjectsActive(activeWhenLocked, !isUnlocked);
+        SetObjectsActive(activeWhenUnlocked, isUnlocked);
 
         if (upgradeButton != null)
             upgradeButton.gameObject.SetActive(!isUnlocked || (CurrentFacility != null && CurrentFacility.CanUpgrade));
-
-        if (facilityStateText == null || CurrentFacility == null)
-            return;
-
-        if (!isUnlocked)
-        {
-            facilityStateText.text = string.Empty;
-            return;
-        }
-
-        facilityStateText.text = CurrentFacility.CanUpgrade
-            ? $"업그레이드 필요 EXP: {CurrentFacility.UpgradeRequiredExp}"
-            : "최대 단계입니다.";
     }
 
     private void HandleUpgradeButtonClicked()
+    {
+        RequestUpgradeOrUnlock();
+    }
+
+    public void RequestUpgradeOrUnlock()
     {
         if (FacilityManager == null)
             return;
@@ -104,39 +106,20 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
 
         if (!FacilityManager.IsFacilityActive(FacilityType))
         {
-            int completedRuns = lobbyManager.CompletedRunCount;
-
-            if (lobbyManager.TryUnlockFacility(FacilityType))
+            if (!lobbyManager.TryUnlockFacility(FacilityType))
             {
-                RefreshFacilityUI();
-                SetStateMessage("시설이 해금되었습니다.");
-                return;
+                Facility facility = FacilityManager.GetFacility(FacilityType);
+                int requiredRunCount = facility != null ? facility.RequiredRunCount : 0;
+                Logger.Log(this, $"{FacilityType} unlock requires {requiredRunCount} completed runs. Current: {lobbyManager.CompletedRunCount}");
             }
 
-            Facility facility = FacilityManager.GetFacility(FacilityType);
-            int requiredRunCount = facility != null ? facility.RequiredRunCount : 0;
-            SetStateMessage($"런 {requiredRunCount}회 완료 후 해금됩니다. (현재 {completedRuns}회)");
+            RefreshFacilityUI();
             return;
         }
 
         FacilityUpgradeResult result = lobbyManager.TryUpgradeFacility(FacilityType);
-        switch (result)
-        {
-            case FacilityUpgradeResult.Locked:
-                SetStateMessage("아직 해금되지 않은 시설입니다.");
-                break;
-            case FacilityUpgradeResult.NotUpgradeable:
-                SetStateMessage("더 이상 업그레이드할 수 없습니다.");
-                break;
-            case FacilityUpgradeResult.ExperienceManagerMissing:
-                SetStateMessage("EXP 정보를 찾을 수 없습니다.");
-                break;
-            case FacilityUpgradeResult.NotEnoughExperience:
-                Facility facility = FacilityManager.GetFacility(FacilityType);
-                int requiredExperience = facility != null ? facility.UpgradeRequiredExp : 0;
-                SetStateMessage($"EXP가 부족합니다. 필요 EXP: {requiredExperience}");
-                break;
-        }
+        if (result != FacilityUpgradeResult.Success)
+            Logger.Log(this, $"{FacilityType} upgrade failed: {result}");
     }
 
     private void HandleFacilityChanged(FacilityType changedFacilityType)
@@ -151,13 +134,45 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
             RefreshFacilityUI();
     }
 
-    private void SetStateMessage(string message)
+    private void ShowFacilityView()
     {
-        if (facilityStateText != null)
-            facilityStateText.text = message;
+        LobbyScreenConverter converter = GetScreenConverter();
+        if (converter != null)
+            converter.ShowFacilityView(FacilityRoot);
+        else
+            FacilityRoot.SetActive(true);
     }
 
-    protected abstract void OnOpenInteraction();
+    private void HideFacilityView()
+    {
+        LobbyScreenConverter converter = GetScreenConverter();
+        if (converter != null)
+            converter.ShowMainView();
+        else
+            FacilityRoot.SetActive(false);
+    }
+
+    private LobbyScreenConverter GetScreenConverter()
+    {
+        if (screenConverter != null)
+            return screenConverter;
+
+        screenConverter = GetComponentInParent<LobbyScreenConverter>();
+        if (screenConverter == null)
+            screenConverter = FindFirstObjectByType<LobbyScreenConverter>();
+
+        return screenConverter;
+    }
+
+    private static void SetObjectsActive(List<GameObject> targets, bool active)
+    {
+        foreach (GameObject target in targets)
+            target?.SetActive(active);
+    }
+
+    protected virtual void OnOpenInteraction()
+    {
+    }
 
     protected virtual void OnCloseInteraction()
     {

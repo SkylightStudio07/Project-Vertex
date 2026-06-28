@@ -131,7 +131,7 @@ public class FacilityManager : MonoBehaviour
 
         foreach (Facility facility in facilities)
         {
-            if (facility == null || facility.FacilityType == FacilityType.None || facility.IsUpgradedFacility)
+            if (facility == null || facility.FacilityType == FacilityType.None)
                 continue;
 
             if (facilityByType.ContainsKey(facility.FacilityType))
