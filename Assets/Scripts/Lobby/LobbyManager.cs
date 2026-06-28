@@ -35,7 +35,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         RefreshFacilityUnlocks(); // 우선 지금은 FindObject로 작동. 추후 저장 기능이 나오면 저장된 데이터를 불러오는 방식으로 설정
     }
 
-    // 시설 등록 및 제거
+    // 시설 등록
     public Facility GetFacility(FacilityType facilityType)
     {
         return facilityManager != null ? facilityManager.GetFacility(facilityType) : null;

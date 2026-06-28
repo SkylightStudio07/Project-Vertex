@@ -13,8 +13,6 @@ public class TentInteractionHandler : FacilityInteractionHandler
     [SerializeField] private string runSceneName = "SampleScene";
     [SerializeField] private UnityEvent onRunStarted;
 
-    private readonly List<StartingDeckSummaryItem> spawnedSummaryItems = new();
-
     public IReadOnlyList<CardData> StartingDeckCards => startingDeckCards;
 
     private void Awake()
@@ -72,59 +70,23 @@ public class TentInteractionHandler : FacilityInteractionHandler
         if (cardSummaryParent == null || cardSummaryPrefab == null)
             return;
 
-        CollectExistingSummaryItems();
+        ClearCardSummaryItems();
 
         List<CardStack> cardStacks = BuildCardStacks(startingDeckCards);
-        EnsureSummaryItemCount(cardStacks.Count);
 
-        for (int i = 0; i < spawnedSummaryItems.Count; i++)
+        foreach (CardStack stack in cardStacks)
         {
-            StartingDeckSummaryItem item = spawnedSummaryItems[i];
-            if (item == null)
-                continue;
-
-            bool shouldShow = i < cardStacks.Count;
-            item.gameObject.SetActive(shouldShow);
-
-            if (!shouldShow)
-                continue;
-
-            CardStack stack = cardStacks[i];
+            StartingDeckSummaryItem item = Instantiate(cardSummaryPrefab, cardSummaryParent);
             item.Bind(stack.Card, stack.Count, "카드");
         }
     }
 
-    private void EnsureSummaryItemCount(int count)
+    private void ClearCardSummaryItems()
     {
-        while (spawnedSummaryItems.Count < count)
+        for (int i = cardSummaryParent.childCount - 1; i >= 0; i--)
         {
-            StartingDeckSummaryItem item = Instantiate(cardSummaryPrefab, cardSummaryParent);
-            SetLayerRecursively(item.gameObject, cardSummaryParent.gameObject.layer);
-            item.gameObject.SetActive(true);
-            spawnedSummaryItems.Add(item);
+            Destroy(cardSummaryParent.GetChild(i).gameObject);
         }
-    }
-
-    private void CollectExistingSummaryItems()
-    {
-        if (spawnedSummaryItems.Count > 0)
-            return;
-
-        foreach (StartingDeckSummaryItem item in cardSummaryParent.GetComponentsInChildren<StartingDeckSummaryItem>(true))
-        {
-            if (item != null && item.transform.parent == cardSummaryParent)
-                spawnedSummaryItems.Add(item);
-        }
-    }
-
-    private static void SetLayerRecursively(GameObject target, int layer)
-    {
-        if (target == null)
-            return;
-
-        target.layer = layer;
-        foreach (Transform child in target.transform)
-            SetLayerRecursively(child.gameObject, layer);
     }
 
     private static List<CardStack> BuildCardStacks(IReadOnlyList<CardData> cards)
