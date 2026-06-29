@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -45,6 +46,17 @@ public class BattleManager : MonoBehaviour
 
     private BattleType   _currentBattleType;
     private System.Random _rnd = new();
+
+    [Header("적 턴 연출")]
+    [SerializeField] private EnemyTurnBannerView turnBanner;
+    // 전진(lunge out)이 끝나는 시점 = 공격이 닿는 타이밍이라 여기서 데미지를 적용한다.
+    // EnemyView.lungeOutDuration과 값을 맞춰야 모션과 타격감이 어긋나지 않는다.
+    [SerializeField] private float lungeOutWaitDuration  = 0.2f;
+    [SerializeField] private float lungeBackWaitDuration = 0.2f; // 후퇴 모션 + 피격 리액션 대기
+
+    [Header("플레이어 턴 연출")]
+    [SerializeField] private EnemyTurnBannerView playerTurnBanner; // 전투 첫 진입 시에는 PlayerTurnStart(false)로 건너뜀
+    [SerializeField] private float postActionDelay       = 0.3f; // 추가 후처리 대기
 
     // ─────────────────────────────────────────────
     // 초기화
@@ -105,8 +117,20 @@ public class BattleManager : MonoBehaviour
     // 턴 흐름
     // ─────────────────────────────────────────────
 
-    public void PlayerTurnStart()
+    // 적 턴에서 넘어올 때(기본값)는 배너를 보여주고, 전투 최초 진입 시에는 PlayerTurnStart(false)로
+    // 호출해 배너를 건너뛴다 (GameManager.InitializeBattle / DebugBattleStarter에서 사용).
+    public void PlayerTurnStart() => PlayerTurnStart(true);
+
+    public void PlayerTurnStart(bool showBanner)
     {
+        StartCoroutine(PlayerTurnStartSequence(showBanner));
+    }
+
+    private IEnumerator PlayerTurnStartSequence(bool showBanner)
+    {
+        if (showBanner && playerTurnBanner != null)
+            yield return playerTurnBanner.ShowAndWait();
+
         // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
         // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
         _state.Player.ResetBlock();
@@ -148,18 +172,37 @@ public class BattleManager : MonoBehaviour
 
     public void EnemyTurnStart()
     {
+        StartCoroutine(EnemyTurnSequence());
+    }
+
+    // 배너 표시 → 적마다 (전진 대기 → 데미지 적용(전진 피크 시점) → 후퇴+후처리 대기) → 다음 플레이어 턴.
+    // 데미지를 전진이 끝나는 시점에 적용해서, 적이 아직 앞에 있는 동안 타격감이 나도록 한다
+    // (후퇴까지 다 끝난 뒤 적용하면 적이 이미 물러난 다음에 맞는 것처럼 보여 타이밍이 늦게 느껴짐).
+    private IEnumerator EnemyTurnSequence()
+    {
         _state.Phase = BattlePhase.EnemyTurn;
+
+        if (turnBanner != null)
+            yield return turnBanner.ShowAndWait();
 
         foreach (var enemy in _state.Enemies)
         {
-            if (enemy == null) continue;
+            if (enemy == null || enemy.IsDead) continue;
 
-            enemy.TakeTurn(_state, this);
+            enemy.TickPassives(_state);
+            if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음
 
-            if (_state.Player.IsDead) return;
+            enemy.NotifyActionStarted();
+            yield return new WaitForSeconds(lungeOutWaitDuration);
+
+            enemy.ExecuteCurrentAction(_state, this); // 전진 피크 시점에 데미지 적용
+
+            yield return new WaitForSeconds(lungeBackWaitDuration + postActionDelay);
+
+            if (_state.Player.IsDead) yield break; // OnDied → Defeat()는 이미 구독되어 있음
         }
 
-        if (IsAllEnemiesDead()) return;
+        if (IsAllEnemiesDead()) yield break;
 
         _state.Phase = BattlePhase.PlayerTurn;
         PlayerTurnStart();
