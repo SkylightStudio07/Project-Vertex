@@ -231,9 +231,43 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
+    // 지금 아이템을 사용할 수 있는 상태인지 (전투 중 + 플레이어 턴). UI 버튼 활성 판정용.
+    public bool CanUseItemNow => _state != null && _state.Phase == BattlePhase.PlayerTurn;
+
+    // 아이템 사용. 카드 사용(TryPlayCard)과 동일 구조, 차이는 비용 없음 / 인벤토리에서 소비 / ctx.Item 세팅.
     public bool TryUseItem(ItemData item, EnemyInstance target)
     {
-        return false;
+        if (_state == null || item == null) return false;
+        if (_state.Phase != BattlePhase.PlayerTurn) return false;   // 적 턴 중 사용 금지
+
+        // SelectTarget 아이템은 유효한 적 타겟 필요 (타겟팅 UI 미구현)
+        if (item.UseMode == ItemData.ItemUseMode.SelectTarget &&
+            (target == null || target.IsDead || !_state.Enemies.Contains(target)))
+            return false;
+
+        BeginHandChangeBatch();   // 아이템 효과가 손패를 건드릴 수 있어 카드와 동일하게 배치로 묶음
+        try
+        {
+            var ctx = new CardContext
+            {
+                State      = _state,
+                Battle     = this,
+                Card       = null,     // 카드 아님
+                Item       = item,     // 아이템
+                Target     = target,
+                AllEnemies = _state.Enemies,
+            };
+
+            foreach (var effect in item.ItemEffects)
+                effect?.Execute(ctx);
+        }
+        finally
+        {
+            EndHandChangeBatch();
+        }
+
+        ItemInventoryManager.Instance.RemoveItem(item);   // 소비 → OnInventoryChanged로 바 자동 갱신
+        return true;
     }
 
     // ─────────────────────────────────────────────
