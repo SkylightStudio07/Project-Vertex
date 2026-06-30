@@ -26,7 +26,7 @@ public class ItemInventoryManager : MonoBehaviour
             Debug.LogWarning("인벤토리 용량 초과. 아이템을 추가할 수 없습니다.");
             return false;
         }
-        _items.Add(item);
+        _items.Add(Instantiate(item));
         OnInventoryChanged?.Invoke();
         Debug.Log($"Added item: {item.ItemName}");
         Debug.Log($"Current capacity: {_items.Count}/{maxCapacityHint}");

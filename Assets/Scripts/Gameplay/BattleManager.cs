@@ -231,6 +231,11 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
+    public bool TryUseItem(ItemData item, EnemyInstance target)
+    {
+        return false;
+    }
+
     // ─────────────────────────────────────────────
     // 카드 더미 조작 (Effect에서 호출 가능)
     // ─────────────────────────────────────────────
