@@ -29,9 +29,6 @@ public class GameManager : MonoBehaviour
 
     public List<EnemyData> currentEnemies; // 현재 전투에 참여하는 적들의 데이터 리스트
 
-    [Header("덱 관련")]
-    public List<CardData> playerDeck; // 플레이어가 얻은 전체 카드덱 (런 내내 지속)
-
     [Header("보상 풀")]
     // 플레이어가 보상으로 획득 가능한 카드들.
     // 지금은 SerializeField로 개별 리스트 만들어서 채우는 방식인데, 나중에 카드 데이터 관리 시스템 구축하면 그쪽에서 관리하도록 바꿔야 함.
@@ -61,17 +58,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int chapter = 1;
     [SerializeField] private int floor   = 1;
 
-    [Header("기본 덱")]
-    [SerializeField] private CardData strikeCard;
-    [SerializeField] private CardData blockCard;
-    [SerializeField] private CardData reloadCard;
-
-    [Header("디버그")]
-    [SerializeField] private CardData strikeCard_Debug;
-    [SerializeField] private CardData blockCard_Debug;
-
-
-
 
     void Start()
     {
@@ -92,20 +78,8 @@ public class GameManager : MonoBehaviour
         chapter = 1;
         PlayerHP = maxPlayerHP;
 
-        // SO 원본이 오염되지 않도록 Instantiate로 복사
-        playerDeck = new List<CardData>();
-        for (int i = 0; i < 5; i++)
-        {
-            playerDeck.Add(Instantiate(strikeCard));
-            playerDeck.Add(Instantiate(blockCard));
-        }
-        playerDeck.Add(Instantiate(reloadCard));
+        DeckManager.Instance.InitializeStartingDeck();
 
-        // 디버그용 시작 덱
-        // 실제 릴리즈 시에는 이 부분 제거할 것
-        playerDeck.Add(Instantiate(strikeCard_Debug));
-        playerDeck.Add(Instantiate(blockCard_Debug));
-        
         // 카드 풀 초기화
         cardPools[CardData.CardRarity.Common] = commonPool;
         cardPools[CardData.CardRarity.Rare] = rarePool;
@@ -140,18 +114,8 @@ public class GameManager : MonoBehaviour
             ? node.encounter
             : currentEnemies;
 
-        BattleManager.Instance.StartBattle(enemies, playerDeck, RunData.Instance.mapData.seed, battleType);
+        BattleManager.Instance.StartBattle(enemies, DeckManager.Instance.PlayerDeck, RunData.Instance.mapData.seed, battleType);
         BattleManager.Instance.PlayerTurnStart();
-    }
-
-
-    // 플레이어 덱에 획득 카드를 추가하는 메소드
-    public void AddCardToPlayerDeck(CardData card)
-    {
-        if (card == null) return;
-
-        playerDeck.Add(Instantiate(card));
-        Debug.Log("플레이어 덱에 카드 추가완료.");
     }
 
     // 카드 등급에 맞는 전투 보상 카드 풀에 카드를 추가하는 메소드
