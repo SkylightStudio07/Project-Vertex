@@ -21,6 +21,8 @@ public class FacilityManager : MonoBehaviour
     private readonly Dictionary<FacilityType, FacilityInteractionHandler> handlerByType = new();
 
     private FacilityInteractionHandler currentInteractionHandler;
+    private UserExpManager userExpManager;
+    private int completedRunCount;
 
     public FacilityType CurrentInteractionType => currentInteractionHandler != null
         ? currentInteractionHandler.FacilityType
@@ -29,18 +31,24 @@ public class FacilityManager : MonoBehaviour
 
     public event Action<FacilityType> OnFacilityChanged;
     public event Action<FacilityType, bool> OnActiveChanged;
+    public event Action<FacilityState> OnFacilityStateChanged;
+    public event Action<FacilityType> OnFacilityInteractionStarted;
+    public event Action<FacilityType> OnFacilityInteractionEnded;
 
     private void Awake()
     {
+        userExpManager = GetComponent<UserExpManager>();
         BuildFacilityCache(); //설비들 Enum <-> Facility SO 끼리 Build
         BuildHandlerCache(); //설비들 Enum <-> Handler 끼리 Build
     }
 
     public void Initialize(int completedRunCount)
     {
+        this.completedRunCount = Mathf.Max(0, completedRunCount);
+        userExpManager = userExpManager != null ? userExpManager : GetComponent<UserExpManager>();
         BuildFacilityCache();
         BuildHandlerCache();
-        RefreshFacilityUnlocks(completedRunCount);
+        RefreshFacilityUnlocks(this.completedRunCount);
     }
 
     public Facility GetFacility(FacilityType facilityType)
@@ -55,35 +63,129 @@ public class FacilityManager : MonoBehaviour
         return null;
     }
 
+    public FacilityState GetFacilityState(FacilityType facilityType)
+    {
+        Facility facility = GetFacility(facilityType);
+        bool isActive = facilityType != FacilityType.None &&
+                        activeByType.TryGetValue(facilityType, out bool active) &&
+                        active;
+        return new FacilityState(facilityType, facility, isActive);
+    }
+
     public bool IsFacilityActive(FacilityType facilityType)
     {
         return activeByType.TryGetValue(facilityType, out bool active) && active;
     }
 
-    public bool TryUnlockFacility(FacilityType facilityType, int completedRunCount)
+    public bool IsFacilityUpgraded(FacilityType facilityType)
+    {
+        Facility facility = GetFacility(facilityType);
+        return facility != null && facility.IsUpgradedFacility;
+    }
+
+    public bool CanInteract(FacilityType facilityType)
+    {
+        return facilityType != FacilityType.None &&
+               GetFacility(facilityType) != null &&
+               (CurrentInteractionType == FacilityType.None || CurrentInteractionType == facilityType);
+    }
+
+    public bool TryBeginInteraction(FacilityType facilityType)
+    {
+        if (CurrentInteractionType == facilityType && facilityType != FacilityType.None)
+            return true;
+
+        if (!CanInteract(facilityType))
+            return false;
+
+        if (!OpenInteraction(facilityType))
+            return false;
+
+        OnFacilityInteractionStarted?.Invoke(facilityType);
+        return true;
+    }
+
+    public void EndInteraction(FacilityType facilityType)
+    {
+        if (facilityType == FacilityType.None || CurrentInteractionType != facilityType)
+            return;
+
+        CloseCurrentInteraction();
+        OnFacilityInteractionEnded?.Invoke(facilityType);
+    }
+
+    public void RequestFacilityProgression(FacilityType facilityType)
+    {
+        FacilityState facilityState = GetFacilityState(facilityType);
+        if (!facilityState.IsRegistered)
+            return;
+
+        if (!facilityState.IsActive)
+        {
+            UnlockFacility(facilityType);
+            return;
+        }
+
+        UpgradeFacility(facilityType);
+    }
+
+    public bool UnlockFacility(FacilityType facilityType)
     {
         if (IsFacilityActive(facilityType))
             return true;
 
         Facility facility = GetFacility(facilityType);
-        if (facility == null || !facility.IsUnlockConditionMet(completedRunCount))
+        if (facility == null)
             return false;
+
+        if (!facility.IsUnlockConditionMet(completedRunCount))
+        {
+            Logger.Log(this, $"{facilityType} unlock requires {facility.RequiredRunCount} completed runs. Current: {completedRunCount}");
+            return false;
+        }
 
         SetFacilityActive(facilityType, true);
         return true;
     }
 
+    public FacilityUpgradeResult UpgradeFacility(FacilityType facilityType)
+    {
+        if (userExpManager == null)
+            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.ExperienceManagerMissing);
+
+        if (!IsFacilityActive(facilityType))
+            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.Locked);
+
+        Facility facility = GetFacility(facilityType);
+        if (facility == null || !facility.CanUpgrade)
+            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotUpgradeable);
+
+        if (!userExpManager.HasExperience(facility.UpgradeRequiredExp))
+            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotEnoughExperience);
+
+        if (!userExpManager.TrySpendExperience(facility.UpgradeRequiredExp))
+            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotEnoughExperience);
+
+        if (!ApplyUpgrade(facilityType))
+            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotUpgradeable);
+
+        EndInteraction(facilityType);
+        return FacilityUpgradeResult.Success;
+    }
+
     public void RefreshFacilityUnlocks(int completedRunCount)
     {
+        this.completedRunCount = Mathf.Max(0, completedRunCount);
+
         foreach (FacilityType facilityType in facilityByType.Keys)
         {
             Facility facility = GetFacility(facilityType);
-            if (facility != null && facility.IsUnlockConditionMet(completedRunCount))
+            if (facility != null && facility.IsUnlockConditionMet(this.completedRunCount))
                 SetFacilityActive(facilityType, true);
         }
     }
 
-    public bool ApplyUpgrade(FacilityType facilityType)
+    private bool ApplyUpgrade(FacilityType facilityType)
     {
         Facility facility = GetFacility(facilityType);
         if (facility == null || !facility.CanUpgrade)
@@ -91,10 +193,17 @@ public class FacilityManager : MonoBehaviour
 
         facilityByType[facilityType] = facility.UpgradeFacility;
         OnFacilityChanged?.Invoke(facilityType);
+        NotifyFacilityStateChanged(facilityType);
         return true;
     }
 
-    public bool OpenInteraction(FacilityType facilityType)
+    private FacilityUpgradeResult LogUpgradeFailed(FacilityType facilityType, FacilityUpgradeResult result)
+    {
+        Logger.Log(this, $"{facilityType} upgrade failed: {result}");
+        return result;
+    }
+
+    private bool OpenInteraction(FacilityType facilityType)
     {
         if (!handlerByType.TryGetValue(facilityType, out FacilityInteractionHandler handler) || handler == null)
             return false;
@@ -105,18 +214,18 @@ public class FacilityManager : MonoBehaviour
         CloseCurrentInteraction();
 
         currentInteractionHandler = handler;
-        handler.OpenInteraction(GetFacility(facilityType));
+        handler.OpenInteraction(GetFacilityState(facilityType));
         return true;
     }
 
-    public void CloseCurrentInteraction()
+    private void CloseCurrentInteraction()
     {
         if (currentInteractionHandler == null)
             return;
 
         FacilityInteractionHandler handler = currentInteractionHandler;
         currentInteractionHandler = null;
-        handler.CloseInteractionFromManager();
+        handler.CloseView();
     }
 
     public bool IsCurrentInteraction(FacilityType facilityType)
@@ -179,9 +288,15 @@ public class FacilityManager : MonoBehaviour
 
         activeByType[facilityType] = active;
         OnActiveChanged?.Invoke(facilityType, active);
+        NotifyFacilityStateChanged(facilityType);
 
         if (!active && IsCurrentInteraction(facilityType))
             CloseCurrentInteraction();
+    }
+
+    private void NotifyFacilityStateChanged(FacilityType facilityType)
+    {
+        OnFacilityStateChanged?.Invoke(GetFacilityState(facilityType));
     }
 
     [ContextMenu("Debug/Refresh Handlers")]
@@ -196,10 +311,34 @@ public class FacilityManager : MonoBehaviour
         Logger.Log(this, $"Refreshed {interactionHandlers.Count} facility interaction handlers.");
     }
 
+    [ContextMenu("Debug/Refresh Facilities")]
+    private void DebugRefreshFacilities()
+    {
+        Initialize(completedRunCount);
+        Logger.Log(this, "Refreshed facilities.");
+    }
+
+    [ContextMenu("Debug/Log Facility States")]
+    private void DebugLogFacilityStates()
+    {
+        foreach (Facility facility in facilities)
+        {
+            if (facility == null)
+                continue;
+
+            Facility currentFacility = GetFacility(facility.FacilityType);
+            Logger.Log(this,
+                $"{facility.FacilityType} / Active: {IsFacilityActive(facility.FacilityType)} / " +
+                $"Upgraded: {currentFacility != null && currentFacility.IsUpgradedFacility} / " +
+                $"Interacting: {IsCurrentInteraction(facility.FacilityType)}");
+        }
+    }
+
     [ContextMenu("Debug/Add RunCount")]
     private void DebugAddRunCount()
     {
-        RefreshFacilityUnlocks(1);
+        completedRunCount = Mathf.Max(0, completedRunCount + 1);
+        RefreshFacilityUnlocks(completedRunCount);
         Logger.Log(this, "Added 1 completed run count and refreshed facility unlocks.");
     }
 }

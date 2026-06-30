@@ -129,7 +129,7 @@ public class BonfireInteractionHandler : FacilityInteractionHandler
 
     [SerializeField] private List<CharacterPlacement> characterPlacements = new();
 
-    protected override void OnOpenInteraction()
+    protected override void OnOpenInteraction(FacilityState facilityState)
     {
         RefreshCharacterPlacements();
     }

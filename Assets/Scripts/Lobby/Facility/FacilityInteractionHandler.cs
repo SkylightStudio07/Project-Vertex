@@ -1,3 +1,5 @@
+//각 시설 InteractionHandler의 공통 기능을 제공하는 추상 클래스
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +19,6 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     private LobbyScreenConverter screenConverter;
 
     public FacilityType FacilityType => facilityType;
-    public Facility CurrentFacility { get; private set; }
     public FacilityManager FacilityManager { get; private set; }
     protected GameObject FacilityRoot => facilityRoot != null ? facilityRoot : gameObject;
 
@@ -33,44 +34,35 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
         closeButton?.onClick.RemoveListener(CloseInteraction);
     }
 
+    //시설 매니저에 이벤트 구독
     public void Bind(FacilityManager facilityManager)
     {
         if (FacilityManager != null)
         {
-            FacilityManager.OnFacilityChanged -= HandleFacilityChanged;
-            FacilityManager.OnActiveChanged -= HandleActiveChanged;
+            FacilityManager.OnFacilityStateChanged -= HandleFacilityStateChanged;
         }
 
         FacilityManager = facilityManager;
 
         if (FacilityManager != null)
         {
-            FacilityManager.OnFacilityChanged += HandleFacilityChanged;
-            FacilityManager.OnActiveChanged += HandleActiveChanged;
+            FacilityManager.OnFacilityStateChanged += HandleFacilityStateChanged;
         }
     }
 
-    public void OpenInteraction(Facility facility)
+    public void OpenInteraction(FacilityState facilityState)
     {
-        CurrentFacility = facility;
-        RefreshFacilityUI();
+        RefreshFacilityUI(facilityState);
         ShowFacilityView();
-        OnOpenInteraction();
+        OnOpenInteraction(facilityState);
     }
 
     public void CloseInteraction()
     {
-        LobbyManager lobbyManager = LobbyManager.Instance;
-        if (lobbyManager != null)
-        {
-            lobbyManager.EndInteraction(FacilityType);
-            return;
-        }
-
-        FacilityManager?.CloseCurrentInteraction();
+        GetFacilityManager()?.EndInteraction(FacilityType);
     }
 
-    public void CloseInteractionFromManager()
+    public void CloseView()
     {
         HideFacilityView();
         OnCloseInteraction();
@@ -78,60 +70,42 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
 
     public void RefreshFacilityUI()
     {
-        CurrentFacility = FacilityManager != null
-            ? FacilityManager.GetFacility(FacilityType)
-            : CurrentFacility;
+        FacilityManager facilityManager = GetFacilityManager();
+        if (facilityManager == null)
+            return;
 
-        bool isUnlocked = FacilityManager != null && FacilityManager.IsFacilityActive(FacilityType);
-        SetObjectsActive(activeWhenLocked, !isUnlocked);
-        SetObjectsActive(activeWhenUnlocked, isUnlocked);
+        RefreshFacilityUI(facilityManager.GetFacilityState(FacilityType));
+    }
+
+    public void RefreshFacilityUI(FacilityState facilityState)
+    {
+        if (facilityState.FacilityType != FacilityType)
+            return;
+
+        SetObjectsActive(activeWhenLocked, !facilityState.IsActive);
+        SetObjectsActive(activeWhenUnlocked, facilityState.IsActive);
 
         if (upgradeButton != null)
-            upgradeButton.gameObject.SetActive(!isUnlocked || (CurrentFacility != null && CurrentFacility.CanUpgrade));
+            upgradeButton.gameObject.SetActive(!facilityState.IsActive || facilityState.CanUpgrade);
     }
 
     private void HandleUpgradeButtonClicked()
     {
-        RequestUpgradeOrUnlock();
+        RequestFacilityProgression();
     }
 
-    public void RequestUpgradeOrUnlock()
+    public void RequestFacilityProgression()
     {
-        if (FacilityManager == null)
+        FacilityManager facilityManager = GetFacilityManager();
+        if (facilityManager == null)
             return;
 
-        LobbyManager lobbyManager = LobbyManager.Instance;
-        if (lobbyManager == null)
-            return;
-
-        if (!FacilityManager.IsFacilityActive(FacilityType))
-        {
-            if (!lobbyManager.TryUnlockFacility(FacilityType))
-            {
-                Facility facility = FacilityManager.GetFacility(FacilityType);
-                int requiredRunCount = facility != null ? facility.RequiredRunCount : 0;
-                Logger.Log(this, $"{FacilityType} unlock requires {requiredRunCount} completed runs. Current: {lobbyManager.CompletedRunCount}");
-            }
-
-            RefreshFacilityUI();
-            return;
-        }
-
-        FacilityUpgradeResult result = lobbyManager.TryUpgradeFacility(FacilityType);
-        if (result != FacilityUpgradeResult.Success)
-            Logger.Log(this, $"{FacilityType} upgrade failed: {result}");
+        facilityManager.RequestFacilityProgression(FacilityType);
     }
 
-    private void HandleFacilityChanged(FacilityType changedFacilityType)
+    private void HandleFacilityStateChanged(FacilityState facilityState)
     {
-        if (changedFacilityType == FacilityType)
-            RefreshFacilityUI();
-    }
-
-    private void HandleActiveChanged(FacilityType changedFacilityType, bool active)
-    {
-        if (changedFacilityType == FacilityType)
-            RefreshFacilityUI();
+        RefreshFacilityUI(facilityState);
     }
 
     private void ShowFacilityView()
@@ -164,13 +138,21 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
         return screenConverter;
     }
 
+    private FacilityManager GetFacilityManager()
+    {
+        if (FacilityManager != null)
+            return FacilityManager;
+
+        return LobbyManager.Instance != null ? LobbyManager.Instance.FacilityManager : null;
+    }
+
     private static void SetObjectsActive(List<GameObject> targets, bool active)
     {
         foreach (GameObject target in targets)
             target?.SetActive(active);
     }
 
-    protected virtual void OnOpenInteraction()
+    protected virtual void OnOpenInteraction(FacilityState facilityState)
     {
     }
 

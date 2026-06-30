@@ -42,14 +42,20 @@ public class FacilityButtonPresenter : MonoBehaviour
         if (lobbyManager == null)
             BindManagers();
 
-        bool isActive = lobbyManager != null && lobbyManager.IsFacilityActive(facilityType);
-        bool isUpgraded = lobbyManager != null && lobbyManager.IsFacilityUpgraded(facilityType);
+        FacilityState facilityState = facilityManager != null
+            ? facilityManager.GetFacilityState(facilityType)
+            : new FacilityState(facilityType, null, false);
 
+        Apply(facilityState);
+    }
+
+    private void Apply(FacilityState facilityState)
+    {
         if (interactionButton != null)
-            interactionButton.interactable = isActive;
+            interactionButton.interactable = facilityState.IsRegistered;
 
         if (upgradeStateText != null)
-            upgradeStateText.text = isUpgraded ? "Lv.2" : "Lv.1";
+            upgradeStateText.text = facilityState.IsUpgraded ? "Lv.2" : "Lv.1";
     }
 
     private void HandleButtonClicked()
@@ -57,7 +63,7 @@ public class FacilityButtonPresenter : MonoBehaviour
         if (lobbyManager == null)
             BindManagers();
 
-        lobbyManager?.TryBeginInteraction(facilityType);
+        facilityManager?.TryBeginInteraction(facilityType);
     }
 
     private void BindManagers()
@@ -72,8 +78,7 @@ public class FacilityButtonPresenter : MonoBehaviour
 
         if (facilityManager != null)
         {
-            facilityManager.OnFacilityChanged += HandleFacilityChanged;
-            facilityManager.OnActiveChanged += HandleActiveChanged;
+            facilityManager.OnFacilityStateChanged += HandleFacilityStateChanged;
         }
     }
 
@@ -82,20 +87,13 @@ public class FacilityButtonPresenter : MonoBehaviour
         if (facilityManager == null)
             return;
 
-        facilityManager.OnFacilityChanged -= HandleFacilityChanged;
-        facilityManager.OnActiveChanged -= HandleActiveChanged;
+        facilityManager.OnFacilityStateChanged -= HandleFacilityStateChanged;
         facilityManager = null;
     }
 
-    private void HandleFacilityChanged(FacilityType changedFacilityType)
+    private void HandleFacilityStateChanged(FacilityState facilityState)
     {
-        if (changedFacilityType == facilityType)
-            Refresh();
-    }
-
-    private void HandleActiveChanged(FacilityType changedFacilityType, bool active)
-    {
-        if (changedFacilityType == facilityType)
-            Refresh();
+        if (facilityState.FacilityType == facilityType)
+            Apply(facilityState);
     }
 }

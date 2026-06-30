@@ -26,7 +26,7 @@ public class TentInteractionHandler : FacilityInteractionHandler
         runStartButton?.onClick.RemoveListener(StartRun);
     }
 
-    protected override void OnOpenInteraction()
+    protected override void OnOpenInteraction(FacilityState facilityState)
     {
         RefreshStartingDeckView();
     }
