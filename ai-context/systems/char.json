@@ -1,0 +1,383 @@
+﻿{
+  "Id": "topic:char",
+  "Name": "Char",
+  "Anchor": "systems/char.md",
+  "Stats": {
+    "NodeCount": 3,
+    "InternalEdges": 2,
+    "ExternalEdges": 34,
+    "EntryMethodCount": 0,
+    "Keywords": [
+      "char",
+      "coop",
+      "cooperator"
+    ]
+  },
+  "RoleEstimate": "Char appears to be an externally connected area around char, coop, cooperator. It contains 3 types, including 1 Unity-facing types.",
+  "StartHere": [],
+  "CoreTypes": [
+    {
+      "Id": "CoopCharState",
+      "Name": "CoopCharState",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+      "Line": 7,
+      "IsUnityType": false,
+      "Incoming": 22,
+      "Outgoing": 2,
+      "Internal": 1,
+      "External": 23
+    },
+    {
+      "Id": "CoopCharData",
+      "Name": "CoopCharData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+      "Line": 5,
+      "IsUnityType": false,
+      "Incoming": 6,
+      "Outgoing": 5,
+      "Internal": 2,
+      "External": 9
+    },
+    {
+      "Id": "CharData",
+      "Name": "CharData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\CharData.cs",
+      "Line": 3,
+      "IsUnityType": true,
+      "Incoming": 2,
+      "Outgoing": 1,
+      "Internal": 1,
+      "External": 2
+    }
+  ],
+  "LikelyFlows": [],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "CoopCharState",
+        "SourceName": "CoopCharState",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 10,
+          "Text": "CoopCharData"
+        }
+      },
+      {
+        "Kind": "inherits",
+        "Direction": "internal",
+        "Source": "CoopCharData",
+        "SourceName": "CoopCharData",
+        "Target": "CharData",
+        "TargetName": "CharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+          "Line": 5,
+          "Text": "CharData"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 11,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 74,
+          "Text": "coopCharDict.TryGetValue(charID, out var charState)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 24,
+          "Text": "Dictionary\u003Cstring, CoopCharState\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "CoopCharData",
+        "SourceName": "CoopCharData",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+          "Line": 8,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "PortraitSlot",
+        "SourceName": "PortraitSlot",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Rest\\PortraitSlot.cs",
+          "Line": 22,
+          "Text": "CoopCharState"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "PortraitSlot",
+        "SourceName": "PortraitSlot",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Rest\\PortraitSlot.cs",
+          "Line": 19,
+          "Text": "CoopCharState"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 199,
+          "Text": "CoopCharState"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 23,
+          "Text": "List\u003CCoopCharData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "CharData",
+        "SourceName": "CharData",
+        "Target": "IPassiveLogic",
+        "TargetName": "IPassiveLogic",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\CharData.cs",
+          "Line": 24,
+          "Text": "IPassiveLogic"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "CoopCharData",
+        "SourceName": "CoopCharData",
+        "Target": "RankEventData",
+        "TargetName": "RankEventData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+          "Line": 23,
+          "Text": "List\u003CRankEventData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "CoopCharState",
+        "SourceName": "CoopCharState",
+        "Target": "RankEventData",
+        "TargetName": "RankEventData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 15,
+          "Text": "Dictionary\u003Cint, RankEventData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 23,
+          "Text": "List\u003CCoopCharData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 24,
+          "Text": "Dictionary\u003Cstring, CoopCharState\u003E"
+        }
+      },
+      {
+        "Kind": "inherits",
+        "Direction": "incoming",
+        "Source": "PlayerCharData",
+        "SourceName": "PlayerCharData",
+        "Target": "CharData",
+        "TargetName": "CharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Player\\PlayerCharData.cs",
+          "Line": 5,
+          "Text": "CharData"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 104,
+          "Text": "CoopCharData"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 204,
+          "Text": "List\u003CCoopCharState\u003E"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "incoming",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 178,
+          "Text": "CoopCharData"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "incoming",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 59,
+          "Text": "CoopCharData"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": []
+  },
+  "Evidence": [
+    {
+      "Title": "incoming calls_member",
+      "Detail": "CooperationManager -\u003E CoopCharState / 11 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 74,
+        "Text": "coopCharDict.TryGetValue(charID, out var charState)"
+      }
+    },
+    {
+      "Title": "incoming creates",
+      "Detail": "CooperationManager -\u003E CoopCharState / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 24,
+        "Text": "Dictionary\u003Cstring, CoopCharState\u003E"
+      }
+    },
+    {
+      "Title": "outgoing has_field_type",
+      "Detail": "CoopCharData -\u003E CardData / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+        "Line": 8,
+        "Text": "List\u003CCardData\u003E"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "CoopCharState -\u003E CoopCharData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 10,
+        "Text": "CoopCharData"
+      }
+    },
+    {
+      "Title": "Internal inherits",
+      "Detail": "CoopCharData -\u003E CharData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+        "Line": 5,
+        "Text": "CharData"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Char context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

@@ -1,0 +1,195 @@
+﻿{
+  "Id": "topic:cooperator",
+  "Name": "Cooperator",
+  "Anchor": "systems/cooperator.md",
+  "Stats": {
+    "NodeCount": 1,
+    "InternalEdges": 0,
+    "ExternalEdges": 8,
+    "EntryMethodCount": 2,
+    "Keywords": [
+      "cooperator",
+      "dialogue"
+    ]
+  },
+  "RoleEstimate": "Cooperator appears to be an externally connected area around cooperator, dialogue. It contains 1 types, including 1 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "DialogueManager.Start@14",
+      "TypeId": "DialogueManager",
+      "Signature": "Start()",
+      "Label": "DialogueManager.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+      "Line": 14
+    },
+    {
+      "Id": "DialogueManager.LoadRelationshipEvent@19",
+      "TypeId": "DialogueManager",
+      "Signature": "LoadRelationshipEvent(string)",
+      "Label": "DialogueManager.LoadRelationshipEvent(string)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+      "Line": 19
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "DialogueManager",
+      "Name": "DialogueManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+      "Line": 7,
+      "IsUnityType": true,
+      "Incoming": 2,
+      "Outgoing": 6,
+      "Internal": 0,
+      "External": 8
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "DialogueManager.LoadRelationshipEvent(string)",
+      "Steps": [
+        "DialogueManager.LoadRelationshipEvent(string) / terminal"
+      ]
+    },
+    {
+      "Entry": "DialogueManager.Start()",
+      "Steps": [
+        "DialogueManager.Start() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [],
+    "External": [
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "CooperationManager",
+        "TargetName": "CooperationManager",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 32,
+          "Text": "cooperationManager.IsCoopLevelUP(charID)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "CharacterEventManager",
+        "SourceName": "CharacterEventManager",
+        "Target": "DialogueManager",
+        "TargetName": "DialogueManager",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+          "Line": 32,
+          "Text": "dialogueManager.LoadRelationshipEvent(\u0022Cp_01\u0022)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 49,
+          "Text": "dialogueView.Play(dialogueJson, () =\u003E isDialogueEnd?.Invoke())"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "CharacterEventManager",
+        "SourceName": "CharacterEventManager",
+        "Target": "DialogueManager",
+        "TargetName": "DialogueManager",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+          "Line": 11,
+          "Text": "DialogueManager"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "CooperationManager",
+        "TargetName": "CooperationManager",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 10,
+          "Text": "CooperationManager"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 9,
+          "Text": "DialogueView"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": []
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "DialogueManager.LoadRelationshipEvent(string) -\u003E "
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "DialogueManager.Start() -\u003E "
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "DialogueManager -\u003E CooperationManager / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+        "Line": 32,
+        "Text": "cooperationManager.IsCoopLevelUP(charID)"
+      }
+    },
+    {
+      "Title": "incoming calls_member",
+      "Detail": "CharacterEventManager -\u003E DialogueManager / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+        "Line": 32,
+        "Text": "dialogueManager.LoadRelationshipEvent(\u0022Cp_01\u0022)"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "DialogueManager -\u003E DialogueView / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+        "Line": 49,
+        "Text": "dialogueView.Play(dialogueJson, () =\u003E isDialogueEnd?.Invoke())"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Cooperator context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

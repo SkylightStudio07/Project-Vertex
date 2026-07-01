@@ -1,0 +1,2032 @@
+﻿{
+  "Id": "battle",
+  "Name": "Battle System",
+  "Anchor": "systems/battle-system.md",
+  "Stats": {
+    "NodeCount": 22,
+    "InternalEdges": 52,
+    "ExternalEdges": 105,
+    "EntryMethodCount": 8,
+    "Keywords": [
+      "enemy",
+      "gameplay",
+      "status",
+      "battle",
+      "effects",
+      "passive",
+      "damage",
+      "intent",
+      "phase",
+      "action",
+      "banner",
+      "burn"
+    ]
+  },
+  "RoleEstimate": "Battle System appears to be an externally connected area around enemy, gameplay, status, battle, effects. It contains 22 types, including 7 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "DebugBattleStarter.Start@10",
+      "TypeId": "DebugBattleStarter",
+      "Signature": "Start()",
+      "Label": "DebugBattleStarter.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Develop\\DebugBattleStarter.cs",
+      "Line": 10
+    },
+    {
+      "Id": "BattleManager.Awake@13",
+      "TypeId": "BattleManager",
+      "Signature": "Awake()",
+      "Label": "BattleManager.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+      "Line": 13
+    },
+    {
+      "Id": "EnemyZoneView.Start@14",
+      "TypeId": "EnemyZoneView",
+      "Signature": "Start()",
+      "Label": "EnemyZoneView.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyZoneView.cs",
+      "Line": 14
+    },
+    {
+      "Id": "EnemyView.OnDestroy@114",
+      "TypeId": "EnemyView",
+      "Signature": "OnDestroy()",
+      "Label": "EnemyView.OnDestroy()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+      "Line": 114
+    },
+    {
+      "Id": "BattleManager.Update@450",
+      "TypeId": "BattleManager",
+      "Signature": "Update()",
+      "Label": "BattleManager.Update()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+      "Line": 450
+    },
+    {
+      "Id": "BattleManager.StartBattle@65",
+      "TypeId": "BattleManager",
+      "Signature": "StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType)",
+      "Label": "BattleManager.StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+      "Line": 65
+    },
+    {
+      "Id": "BattleManager.SetupBattleDeck@104",
+      "TypeId": "BattleManager",
+      "Signature": "SetupBattleDeck(List\u003CCardData\u003E)",
+      "Label": "BattleManager.SetupBattleDeck(List\u003CCardData\u003E)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+      "Line": 104
+    },
+    {
+      "Id": "EnemyView.SpawnHitEffect@148",
+      "TypeId": "EnemyView",
+      "Signature": "SpawnHitEffect()",
+      "Label": "EnemyView.SpawnHitEffect()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+      "Line": 148
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "EnemyInstance",
+      "Name": "EnemyInstance",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+      "Line": 12,
+      "IsUnityType": false,
+      "Incoming": 18,
+      "Outgoing": 21,
+      "Internal": 18,
+      "External": 21
+    },
+    {
+      "Id": "BattleManager",
+      "Name": "BattleManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+      "Line": 9,
+      "IsUnityType": true,
+      "Incoming": 3,
+      "Outgoing": 32,
+      "Internal": 18,
+      "External": 17
+    },
+    {
+      "Id": "BattleState",
+      "Name": "BattleState",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+      "Line": 7,
+      "IsUnityType": false,
+      "Incoming": 24,
+      "Outgoing": 7,
+      "Internal": 14,
+      "External": 17
+    },
+    {
+      "Id": "DamageInfo",
+      "Name": "DamageInfo",
+      "Kind": "struct",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\DamageInfo.cs",
+      "Line": 1,
+      "IsUnityType": false,
+      "Incoming": 21,
+      "Outgoing": 2,
+      "Internal": 8,
+      "External": 15
+    },
+    {
+      "Id": "EnemyData",
+      "Name": "EnemyData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyData.cs",
+      "Line": 5,
+      "IsUnityType": true,
+      "Incoming": 11,
+      "Outgoing": 1,
+      "Internal": 6,
+      "External": 6
+    },
+    {
+      "Id": "EnemyView",
+      "Name": "EnemyView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+      "Line": 14,
+      "IsUnityType": true,
+      "Incoming": 3,
+      "Outgoing": 8,
+      "Internal": 8,
+      "External": 3
+    },
+    {
+      "Id": "BattleType",
+      "Name": "BattleType",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+      "Line": 7,
+      "IsUnityType": false,
+      "Incoming": 8,
+      "Outgoing": 0,
+      "Internal": 3,
+      "External": 5
+    },
+    {
+      "Id": "DamageCalculator",
+      "Name": "DamageCalculator",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\DamageCalculator.cs",
+      "Line": 3,
+      "IsUnityType": false,
+      "Incoming": 3,
+      "Outgoing": 4,
+      "Internal": 2,
+      "External": 5
+    },
+    {
+      "Id": "EnemyAction",
+      "Name": "EnemyAction",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyAction.cs",
+      "Line": 14,
+      "IsUnityType": true,
+      "Incoming": 3,
+      "Outgoing": 2,
+      "Internal": 4,
+      "External": 1
+    },
+    {
+      "Id": "StrengthStatus",
+      "Name": "StrengthStatus",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\StrengthStatus.cs",
+      "Line": 2,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 4,
+      "Internal": 3,
+      "External": 2
+    },
+    {
+      "Id": "VulnerableStatus",
+      "Name": "VulnerableStatus",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\VulnerableStatus.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 4,
+      "Internal": 3,
+      "External": 2
+    },
+    {
+      "Id": "WeakStatus",
+      "Name": "WeakStatus",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\WeakStatus.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 4,
+      "Internal": 3,
+      "External": 2
+    },
+    {
+      "Id": "EnemyTurnBannerView",
+      "Name": "EnemyTurnBannerView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\EnemyTurnBannerView.cs",
+      "Line": 10,
+      "IsUnityType": true,
+      "Incoming": 4,
+      "Outgoing": 0,
+      "Internal": 4,
+      "External": 0
+    },
+    {
+      "Id": "PoisonStatus",
+      "Name": "PoisonStatus",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\PoisonStatus.cs",
+      "Line": 2,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 3,
+      "Internal": 1,
+      "External": 3
+    },
+    {
+      "Id": "BurnStatus",
+      "Name": "BurnStatus",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\BurnStatus.cs",
+      "Line": 2,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 3,
+      "Internal": 1,
+      "External": 2
+    },
+    {
+      "Id": "IntentType",
+      "Name": "IntentType",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyAction.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 3,
+      "Outgoing": 0,
+      "Internal": 3,
+      "External": 0
+    },
+    {
+      "Id": "DebugBattleStarter",
+      "Name": "DebugBattleStarter",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Develop\\DebugBattleStarter.cs",
+      "Line": 4,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 2,
+      "Internal": 1,
+      "External": 1
+    },
+    {
+      "Id": "EnemyView\u002BIntentSprite",
+      "Name": "EnemyView\u002BIntentSprite",
+      "Kind": "struct",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+      "Line": 18,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 1,
+      "Internal": 2,
+      "External": 0
+    },
+    {
+      "Id": "GamePhase",
+      "Name": "GamePhase",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+      "Line": 7,
+      "IsUnityType": false,
+      "Incoming": 2,
+      "Outgoing": 0,
+      "Internal": 0,
+      "External": 2
+    },
+    {
+      "Id": "BattlePhase",
+      "Name": "BattlePhase",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+      "Line": 3,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 0,
+      "Internal": 1,
+      "External": 0
+    },
+    {
+      "Id": "EnemyZoneView",
+      "Name": "EnemyZoneView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyZoneView.cs",
+      "Line": 9,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 1,
+      "Internal": 1,
+      "External": 0
+    },
+    {
+      "Id": "StatusType",
+      "Name": "StatusType",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardEffect.cs",
+      "Line": 23,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 0,
+      "Internal": 0,
+      "External": 1
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "BattleManager.StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType)",
+      "Steps": [
+        "BattleManager.StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType)",
+        "BattleManager.SetupEnemies(List\u003CEnemyData\u003E) / terminal"
+      ]
+    },
+    {
+      "Entry": "EnemyZoneView.Start()",
+      "Steps": [
+        "EnemyZoneView.Start()",
+        "EnemyZoneView.Refresh() / terminal"
+      ]
+    },
+    {
+      "Entry": "EnemyView.OnDestroy()",
+      "Steps": [
+        "EnemyView.OnDestroy()",
+        "EnemyView.Unbind() / terminal"
+      ]
+    },
+    {
+      "Entry": "BattleManager.Update()",
+      "Steps": [
+        "BattleManager.Update()",
+        "BattleManager.TestVictory(BattleType)",
+        "BattleManager.Victory()",
+        "BattleManager.NotifyHandChanged() / terminal"
+      ]
+    },
+    {
+      "Entry": "BattleManager.SetupBattleDeck(List\u003CCardData\u003E)",
+      "Steps": [
+        "BattleManager.SetupBattleDeck(List\u003CCardData\u003E)",
+        "BattleManager.Shuffle(List\u003CCardData\u003E) / terminal"
+      ]
+    },
+    {
+      "Entry": "EnemyView.SpawnHitEffect()",
+      "Steps": [
+        "EnemyView.SpawnHitEffect() / terminal"
+      ]
+    },
+    {
+      "Entry": "DebugBattleStarter.Start()",
+      "Steps": [
+        "DebugBattleStarter.Start() / terminal"
+      ]
+    },
+    {
+      "Entry": "BattleManager.Awake()",
+      "Steps": [
+        "BattleManager.Awake() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 96,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "BattleType",
+        "TargetName": "BattleType",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 65,
+          "Text": "BattleType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 65,
+          "Text": "List\u003CEnemyData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "BattleManager",
+        "TargetName": "BattleManager",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 153,
+          "Text": "BattleManager"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "EnemyTurnBannerView",
+        "TargetName": "EnemyTurnBannerView",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 132,
+          "Text": "playerTurnBanner.ShowAndWait()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "EnemyView",
+        "SourceName": "EnemyView",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 169,
+          "Text": "Instance.GetCurrentAction()"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 40,
+          "Text": "List\u003CEnemyInstance\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "EnemyTurnBannerView",
+        "TargetName": "EnemyTurnBannerView",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 51,
+          "Text": "EnemyTurnBannerView"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 239,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BurnStatus",
+        "SourceName": "BurnStatus",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\BurnStatus.cs",
+          "Line": 6,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "DamageCalculator",
+        "SourceName": "DamageCalculator",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\DamageCalculator.cs",
+          "Line": 5,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "DamageCalculator",
+        "SourceName": "DamageCalculator",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\DamageCalculator.cs",
+          "Line": 5,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 43,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 35,
+          "Text": "EnemyData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "EnemyView",
+        "SourceName": "EnemyView",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 90,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "EnemyView",
+        "SourceName": "EnemyView",
+        "Target": "IntentType",
+        "TargetName": "IntentType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 186,
+          "Text": "IntentType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "PoisonStatus",
+        "SourceName": "PoisonStatus",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\PoisonStatus.cs",
+          "Line": 6,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "StrengthStatus",
+        "SourceName": "StrengthStatus",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\StrengthStatus.cs",
+          "Line": 8,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "StrengthStatus",
+        "SourceName": "StrengthStatus",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\StrengthStatus.cs",
+          "Line": 8,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "VulnerableStatus",
+        "SourceName": "VulnerableStatus",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\VulnerableStatus.cs",
+          "Line": 8,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "VulnerableStatus",
+        "SourceName": "VulnerableStatus",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\VulnerableStatus.cs",
+          "Line": 8,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "WeakStatus",
+        "SourceName": "WeakStatus",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\WeakStatus.cs",
+          "Line": 8,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "WeakStatus",
+        "SourceName": "WeakStatus",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\WeakStatus.cs",
+          "Line": 8,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 70,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 26,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "BattleType",
+        "TargetName": "BattleType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 47,
+          "Text": "BattleType"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "BattleState",
+        "SourceName": "BattleState",
+        "Target": "BattlePhase",
+        "TargetName": "BattlePhase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+          "Line": 17,
+          "Text": "BattlePhase"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "BattleState",
+        "SourceName": "BattleState",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+          "Line": 10,
+          "Text": "List\u003CEnemyInstance\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "DebugBattleStarter",
+        "SourceName": "DebugBattleStarter",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Develop\\DebugBattleStarter.cs",
+          "Line": 7,
+          "Text": "List\u003CEnemyData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EnemyAction",
+        "SourceName": "EnemyAction",
+        "Target": "IntentType",
+        "TargetName": "IntentType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyAction.cs",
+          "Line": 17,
+          "Text": "IntentType"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EnemyData",
+        "SourceName": "EnemyData",
+        "Target": "EnemyAction",
+        "TargetName": "EnemyAction",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyData.cs",
+          "Line": 12,
+          "Text": "List\u003CEnemyAction\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EnemyView",
+        "SourceName": "EnemyView",
+        "Target": "EnemyView\u002BIntentSprite",
+        "TargetName": "EnemyView\u002BIntentSprite",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 35,
+          "Text": "List\u003CIntentSprite\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EnemyView\u002BIntentSprite",
+        "SourceName": "EnemyView\u002BIntentSprite",
+        "Target": "IntentType",
+        "TargetName": "IntentType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 20,
+          "Text": "IntentType"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EnemyZoneView",
+        "SourceName": "EnemyZoneView",
+        "Target": "EnemyView",
+        "TargetName": "EnemyView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyZoneView.cs",
+          "Line": 11,
+          "Text": "EnemyView"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 27,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "internal",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 40,
+          "Text": "IReadOnlyList\u003CEnemyInstance\u003E"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 10,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 65,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "IPassiveLogic",
+        "SourceName": "IPassiveLogic",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 5,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\IPassiveLogic.cs",
+          "Line": 3,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 5,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 25,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "BattleState",
+        "SourceName": "BattleState",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+          "Line": 19,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "DamageCalculator",
+        "TargetName": "DamageCalculator",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 23,
+          "Text": "DamageCalculator.Resolve(new DamageInfo(amount, attacker), single, context.State)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 23,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "CardContext",
+        "SourceName": "CardContext",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardContext.cs",
+          "Line": 22,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "MapConfig",
+        "SourceName": "MapConfig",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+          "Line": 54,
+          "Text": "List\u003CEnemyData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "BattleType",
+        "TargetName": "BattleType",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 75,
+          "Text": "BattleType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "CardHandler",
+        "SourceName": "CardHandler",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 120,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "IPassiveLogic",
+        "SourceName": "IPassiveLogic",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\IPassiveLogic.cs",
+          "Line": 8,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 28,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "IPassiveLogic",
+        "TargetName": "IPassiveLogic",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 92,
+          "Text": "_passives.Add(passive)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 89,
+          "Text": "existing.TryMerge(passive)"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "incoming",
+        "Source": "IPassiveLogic",
+        "SourceName": "IPassiveLogic",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\IPassiveLogic.cs",
+          "Line": 8,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "incoming",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 28,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "type_check",
+        "Direction": "outgoing",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 89,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 33,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "BurnStatus",
+        "SourceName": "BurnStatus",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\BurnStatus.cs",
+          "Line": 6,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "DamageCalculator",
+        "SourceName": "DamageCalculator",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\DamageCalculator.cs",
+          "Line": 5,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "DamageInfo",
+        "SourceName": "DamageInfo",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\DamageInfo.cs",
+          "Line": 7,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 85,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "BattleType",
+        "TargetName": "BattleType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 151,
+          "Text": "BattleType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "GamePhase",
+        "TargetName": "GamePhase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 15,
+          "Text": "GamePhase"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "ICombatant",
+        "SourceName": "ICombatant",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\ICombatant.cs",
+          "Line": 11,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 60,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 23,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "PoisonStatus",
+        "SourceName": "PoisonStatus",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\Effects\\PoisonStatus.cs",
+          "Line": 6,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 36,
+          "Text": "enemy.AddPassive(passive)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "DamageCalculator",
+        "SourceName": "DamageCalculator",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Common\\DamageCalculator.cs",
+          "Line": 19,
+          "Text": "target.TakeDamage(info)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 38,
+          "Text": "alive.Add(e)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "EnemyView",
+        "SourceName": "EnemyView",
+        "Target": "HitEffectSpawner",
+        "TargetName": "HitEffectSpawner",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 153,
+          "Text": "HitEffectSpawner.Spawn(hitEffectPrefab, anchor)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "PoisonStatus",
+        "TargetName": "PoisonStatus",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 44,
+          "Text": "PoisonStatus"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "StrengthStatus",
+        "TargetName": "StrengthStatus",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 43,
+          "Text": "StrengthStatus"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "VulnerableStatus",
+        "TargetName": "VulnerableStatus",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 41,
+          "Text": "VulnerableStatus"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "WeakStatus",
+        "TargetName": "WeakStatus",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 42,
+          "Text": "WeakStatus"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "EnemyZoneView",
+        "Source": "Start()",
+        "TargetType": "EnemyZoneView",
+        "Target": "Refresh()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyZoneView.cs",
+          "Line": 17,
+          "Text": "Refresh()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType)",
+        "TargetType": "BattleManager",
+        "Target": "SetupBattleDeck(List\u003CCardData\u003E)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 81,
+          "Text": "SetupBattleDeck(masterDeck)"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType)",
+        "TargetType": "BattleManager",
+        "Target": "SetupEnemies(List\u003CEnemyData\u003E)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 80,
+          "Text": "SetupEnemies(enemyDataList)"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "Bind(EnemyInstance)",
+        "TargetType": "EnemyView",
+        "Target": "RefreshHP()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 110,
+          "Text": "RefreshHP()"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "Bind(EnemyInstance)",
+        "TargetType": "EnemyView",
+        "Target": "RefreshIntent()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 111,
+          "Text": "RefreshIntent()"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "Bind(EnemyInstance)",
+        "TargetType": "EnemyView",
+        "Target": "Unbind()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 92,
+          "Text": "Unbind()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "SetupBattleDeck(List\u003CCardData\u003E)",
+        "TargetType": "BattleManager",
+        "Target": "Shuffle(List\u003CCardData\u003E)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 113,
+          "Text": "Shuffle(_state.DrawPile)"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "OnDestroy()",
+        "TargetType": "EnemyView",
+        "Target": "Unbind()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 114,
+          "Text": "Unbind()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnStart(bool)",
+        "TargetType": "BattleManager",
+        "Target": "PlayerTurnStartSequence(bool)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 126,
+          "Text": "PlayerTurnStartSequence(showBanner)"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "HandleDamaged(int)",
+        "TargetType": "EnemyView",
+        "Target": "RefreshHP()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 128,
+          "Text": "RefreshHP()"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "HandleDamaged(int)",
+        "TargetType": "EnemyView",
+        "Target": "SpawnHitEffect()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 129,
+          "Text": "SpawnHitEffect()"
+        }
+      },
+      {
+        "SourceType": "EnemyInstance",
+        "Source": "GetIntentDamageAmount()",
+        "TargetType": "EnemyInstance",
+        "Target": "GetCurrentAction()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 130,
+          "Text": "GetCurrentAction()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnStartSequence(bool)",
+        "TargetType": "BattleManager",
+        "Target": "BeginHandChangeBatch()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 138,
+          "Text": "BeginHandChangeBatch()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnStartSequence(bool)",
+        "TargetType": "BattleManager",
+        "Target": "EndHandChangeBatch()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 146,
+          "Text": "EndHandChangeBatch()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnStartSequence(bool)",
+        "TargetType": "BattleManager",
+        "Target": "TakeOutCardtoHand()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 142,
+          "Text": "TakeOutCardtoHand()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnStartSequence(bool)",
+        "TargetType": "EnemyTurnBannerView",
+        "Target": "ShowAndWait()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 132,
+          "Text": "playerTurnBanner.ShowAndWait()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnEnd()",
+        "TargetType": "BattleManager",
+        "Target": "BeginHandChangeBatch()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 155,
+          "Text": "BeginHandChangeBatch()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnEnd()",
+        "TargetType": "BattleManager",
+        "Target": "EndHandChangeBatch()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 165,
+          "Text": "EndHandChangeBatch()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnEnd()",
+        "TargetType": "BattleManager",
+        "Target": "EnemyTurnStart()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 170,
+          "Text": "EnemyTurnStart()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "PlayerTurnEnd()",
+        "TargetType": "BattleManager",
+        "Target": "NotifyHandChanged()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 161,
+          "Text": "NotifyHandChanged()"
+        }
+      },
+      {
+        "SourceType": "EnemyInstance",
+        "Source": "ExecuteCurrentAction(BattleState, BattleManager)",
+        "TargetType": "EnemyInstance",
+        "Target": "AdvancePattern()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 169,
+          "Text": "AdvancePattern()"
+        }
+      },
+      {
+        "SourceType": "EnemyInstance",
+        "Source": "ExecuteCurrentAction(BattleState, BattleManager)",
+        "TargetType": "EnemyInstance",
+        "Target": "GetCurrentAction()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 155,
+          "Text": "GetCurrentAction()"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "RefreshIntent()",
+        "TargetType": "EnemyInstance",
+        "Target": "GetCurrentAction()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 169,
+          "Text": "Instance.GetCurrentAction()"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "RefreshIntent()",
+        "TargetType": "EnemyInstance",
+        "Target": "GetIntentDamageAmount()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 180,
+          "Text": "Instance.GetIntentDamageAmount()"
+        }
+      },
+      {
+        "SourceType": "EnemyView",
+        "Source": "RefreshIntent()",
+        "TargetType": "EnemyView",
+        "Target": "GetIntentSprite(IntentType)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 173,
+          "Text": "GetIntentSprite(action.intentType)"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "EnemyTurnStart()",
+        "TargetType": "BattleManager",
+        "Target": "EnemyTurnSequence()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 175,
+          "Text": "EnemyTurnSequence()"
+        }
+      },
+      {
+        "SourceType": "EnemyInstance",
+        "Source": "TakeTurn(BattleState, BattleManager)",
+        "TargetType": "EnemyInstance",
+        "Target": "ExecuteCurrentAction(BattleState, BattleManager)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 185,
+          "Text": "ExecuteCurrentAction(state, battle)"
+        }
+      },
+      {
+        "SourceType": "EnemyInstance",
+        "Source": "TakeTurn(BattleState, BattleManager)",
+        "TargetType": "EnemyInstance",
+        "Target": "NotifyActionStarted()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 184,
+          "Text": "NotifyActionStarted()"
+        }
+      },
+      {
+        "SourceType": "EnemyInstance",
+        "Source": "TakeTurn(BattleState, BattleManager)",
+        "TargetType": "EnemyInstance",
+        "Target": "TickPassives(BattleState)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 181,
+          "Text": "TickPassives(state)"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "EnemyTurnSequence()",
+        "TargetType": "BattleManager",
+        "Target": "IsAllEnemiesDead()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 205,
+          "Text": "IsAllEnemiesDead()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "EnemyTurnSequence()",
+        "TargetType": "BattleManager",
+        "Target": "PlayerTurnStart()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 208,
+          "Text": "PlayerTurnStart()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "EnemyTurnSequence()",
+        "TargetType": "EnemyTurnBannerView",
+        "Target": "ShowAndWait()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 186,
+          "Text": "turnBanner.ShowAndWait()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "IsCardPlayable(CardData)",
+        "TargetType": "BattleManager",
+        "Target": "EvaluateCardPlayability(CardData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 222,
+          "Text": "EvaluateCardPlayability(card)"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "TryPlayCard(CardData, EnemyInstance)",
+        "TargetType": "BattleManager",
+        "Target": "BeginHandChangeBatch()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 246,
+          "Text": "BeginHandChangeBatch()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "TryPlayCard(CardData, EnemyInstance)",
+        "TargetType": "BattleManager",
+        "Target": "EndHandChangeBatch()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 271,
+          "Text": "EndHandChangeBatch()"
+        }
+      },
+      {
+        "SourceType": "BattleManager",
+        "Source": "TryPlayCard(CardData, EnemyInstance)",
+        "TargetType": "BattleManager",
+        "Target": "EvaluateCardPlayability(CardData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 241,
+          "Text": "EvaluateCardPlayability(card)"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "BattleManager.StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType) -\u003E BattleManager.SetupEnemies(List\u003CEnemyData\u003E) / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "EnemyZoneView.Start() -\u003E EnemyZoneView.Refresh() / terminal"
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "EnemyZoneView.Start() -\u003E EnemyZoneView.Refresh()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyZoneView.cs",
+        "Line": 17,
+        "Text": "Refresh()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "BattleManager.StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType) -\u003E BattleManager.SetupBattleDeck(List\u003CCardData\u003E)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 81,
+        "Text": "SetupBattleDeck(masterDeck)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "BattleManager.StartBattle(List\u003CEnemyData\u003E, List\u003CCardData\u003E, int, BattleType) -\u003E BattleManager.SetupEnemies(List\u003CEnemyData\u003E)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 80,
+        "Text": "SetupEnemies(enemyDataList)"
+      }
+    },
+    {
+      "Title": "outgoing accepts_parameter",
+      "Detail": "BattleManager -\u003E CardData / 10 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 65,
+        "Text": "List\u003CCardData\u003E"
+      }
+    },
+    {
+      "Title": "incoming accepts_parameter",
+      "Detail": "IPassiveLogic -\u003E BattleState / 5 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\IPassiveLogic.cs",
+        "Line": 3,
+        "Text": "BattleState"
+      }
+    },
+    {
+      "Title": "incoming accepts_parameter",
+      "Detail": "StatusEffectBase -\u003E BattleState / 5 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+        "Line": 25,
+        "Text": "BattleState"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "EnemyInstance -\u003E BattleState / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+        "Line": 96,
+        "Text": "BattleState"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "BattleManager -\u003E BattleType / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 65,
+        "Text": "BattleType"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "BattleManager -\u003E EnemyData / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 65,
+        "Text": "List\u003CEnemyData\u003E"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "EnemyInstance -\u003E BattleManager / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+        "Line": 153,
+        "Text": "BattleManager"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "BattleManager -\u003E EnemyTurnBannerView / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 132,
+        "Text": "playerTurnBanner.ShowAndWait()"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "EnemyView -\u003E EnemyInstance / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+        "Line": 169,
+        "Text": "Instance.GetCurrentAction()"
+      }
+    },
+    {
+      "Title": "Internal creates",
+      "Detail": "BattleManager -\u003E EnemyInstance / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 40,
+        "Text": "List\u003CEnemyInstance\u003E"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "BattleManager -\u003E EnemyTurnBannerView / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 51,
+        "Text": "EnemyTurnBannerView"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Battle System context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

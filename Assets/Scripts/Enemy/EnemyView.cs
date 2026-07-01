@@ -30,6 +30,7 @@ public class EnemyView : MonoBehaviour
 
     [Header("인텐트")]
     [SerializeField] private Image intentIcon;
+    [SerializeField] private GameObject intentField; // 단순 blob 용도
     [SerializeField] private TextMeshProUGUI intentValueText; // 공격 수치 등. DamageEffect 없는 행동이면 숨김
     [SerializeField] private List<IntentSprite> intentSprites;
 
@@ -47,6 +48,8 @@ public class EnemyView : MonoBehaviour
 
     private RectTransform _intentIconRect;
     private Vector2 _intentIconBasePos;
+    private RectTransform _intentValueRect;
+    private Vector2 _intentValueBasePos;
 
     private RectTransform _rect;
 
@@ -57,7 +60,14 @@ public class EnemyView : MonoBehaviour
         if (intentIcon != null)
         {
             _intentIconRect = intentIcon.rectTransform;
+            // 부유 애니메이션의 기준점. 매 프레임 여기에 오프셋을 더해서 위아래로 움직인다.
             _intentIconBasePos = _intentIconRect.anchoredPosition;
+        }
+
+        if (intentValueText != null)
+        {
+            _intentValueRect = intentValueText.rectTransform;
+            _intentValueBasePos = _intentValueRect.anchoredPosition;
         }
 
         _rect = transform as RectTransform;
@@ -67,8 +77,14 @@ public class EnemyView : MonoBehaviour
     {
         if (_intentIconRect == null || !intentIcon.enabled) return;
 
+        // Sin(시간 * 속도) → -1~+1을 반복하는 값. 여기에 진폭을 곱하면 -amplitude~+amplitude(px) 범위의 오프셋이 된다.
+        // 예) bobAmplitude=6, bobSpeed=2 → 초당 약 0.3회 진동, 최대 ±6px 위아래로 움직임.
         float offsetY = Mathf.Sin(Time.time * bobSpeed) * bobAmplitude;
+
+        // 기준 위치에 오프셋을 더한다. 기준점을 고정해야 오프셋이 누적되지 않는다.
         _intentIconRect.anchoredPosition = _intentIconBasePos + new Vector2(0f, offsetY);
+        if (_intentValueRect != null)
+            _intentValueRect.anchoredPosition = _intentValueBasePos + new Vector2(0f, offsetY);
     }
 
     public void Bind(EnemyInstance instance)

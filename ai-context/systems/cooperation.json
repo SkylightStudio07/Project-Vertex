@@ -1,0 +1,390 @@
+﻿{
+  "Id": "topic:cooperation",
+  "Name": "Cooperation",
+  "Anchor": "systems/cooperation.md",
+  "Stats": {
+    "NodeCount": 1,
+    "InternalEdges": 0,
+    "ExternalEdges": 30,
+    "EntryMethodCount": 1,
+    "Keywords": [
+      "cooperation",
+      "cooperator"
+    ]
+  },
+  "RoleEstimate": "Cooperation appears to be an externally connected area around cooperation, cooperator. It contains 1 types, including 1 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "CooperationManager.Awake@27",
+      "TypeId": "CooperationManager",
+      "Signature": "Awake()",
+      "Label": "CooperationManager.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+      "Line": 27
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "CooperationManager",
+      "Name": "CooperationManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+      "Line": 19,
+      "IsUnityType": true,
+      "Incoming": 5,
+      "Outgoing": 25,
+      "Internal": 0,
+      "External": 30
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "CooperationManager.Awake()",
+      "Steps": [
+        "CooperationManager.Awake() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [],
+    "External": [
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 11,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 74,
+          "Text": "coopCharDict.TryGetValue(charID, out var charState)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "CooperationManager",
+        "TargetName": "CooperationManager",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 32,
+          "Text": "cooperationManager.IsCoopLevelUP(charID)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 24,
+          "Text": "Dictionary\u003Cstring, CoopCharState\u003E"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 199,
+          "Text": "CoopCharState"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 23,
+          "Text": "List\u003CCoopCharData\u003E"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "RankEventData",
+        "TargetName": "RankEventData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 43,
+          "Text": "Dictionary\u003Cint, RankEventData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "CharacterEventManager",
+        "SourceName": "CharacterEventManager",
+        "Target": "CooperationManager",
+        "TargetName": "CooperationManager",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+          "Line": 12,
+          "Text": "CooperationManager"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 23,
+          "Text": "List\u003CCoopCharData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 24,
+          "Text": "Dictionary\u003Cstring, CoopCharState\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "CooperationManager",
+        "TargetName": "CooperationManager",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 10,
+          "Text": "CooperationManager"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 104,
+          "Text": "CoopCharData"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharState",
+        "TargetName": "CoopCharState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 204,
+          "Text": "List\u003CCoopCharState\u003E"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 187,
+          "Text": "CardData"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 178,
+          "Text": "CoopCharData"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "CooperationManager",
+        "SourceName": "CooperationManager",
+        "Target": "RankEventData",
+        "TargetName": "RankEventData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 43,
+          "Text": "Dictionary\u003Cint, RankEventData\u003E"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "CooperationManager",
+        "Source": "SelectChar(string)",
+        "TargetType": "CooperationManager",
+        "Target": "GetCoopCharData(string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 178,
+          "Text": "GetCoopCharData(charID)"
+        }
+      },
+      {
+        "SourceType": "CooperationManager",
+        "Source": "SelectChar(string)",
+        "TargetType": "CooperationManager",
+        "Target": "GetCoopLevel(string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 179,
+          "Text": "GetCoopLevel(charID)"
+        }
+      },
+      {
+        "SourceType": "CooperationManager",
+        "Source": "Debug1()",
+        "TargetType": "CooperationManager",
+        "Target": "AddCoopPoint(string, int)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 221,
+          "Text": "AddCoopPoint(\u0022Cp_01\u0022, 10)"
+        }
+      },
+      {
+        "SourceType": "CooperationManager",
+        "Source": "Debug2()",
+        "TargetType": "CooperationManager",
+        "Target": "SettlePoint(string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 227,
+          "Text": "SettlePoint(\u0022Cp_01\u0022)"
+        }
+      },
+      {
+        "SourceType": "CooperationManager",
+        "Source": "TestJoinCp01()",
+        "TargetType": "CooperationManager",
+        "Target": "DebugJoin(string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+          "Line": 252,
+          "Text": "DebugJoin(\u0022Cp_01\u0022)"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "CooperationManager.Awake() -\u003E "
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "CooperationManager.SelectChar(string) -\u003E CooperationManager.GetCoopCharData(string)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 178,
+        "Text": "GetCoopCharData(charID)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "CooperationManager.SelectChar(string) -\u003E CooperationManager.GetCoopLevel(string)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 179,
+        "Text": "GetCoopLevel(charID)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "CooperationManager.Debug1() -\u003E CooperationManager.AddCoopPoint(string, int)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 221,
+        "Text": "AddCoopPoint(\u0022Cp_01\u0022, 10)"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "CooperationManager -\u003E CoopCharState / 11 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 74,
+        "Text": "coopCharDict.TryGetValue(charID, out var charState)"
+      }
+    },
+    {
+      "Title": "incoming calls_member",
+      "Detail": "DialogueManager -\u003E CooperationManager / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+        "Line": 32,
+        "Text": "cooperationManager.IsCoopLevelUP(charID)"
+      }
+    },
+    {
+      "Title": "outgoing creates",
+      "Detail": "CooperationManager -\u003E CoopCharState / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CooperationManager.cs",
+        "Line": 24,
+        "Text": "Dictionary\u003Cstring, CoopCharState\u003E"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Cooperation context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

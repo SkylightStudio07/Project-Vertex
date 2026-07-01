@@ -243,6 +243,8 @@ public class BattleManager : MonoBehaviour
             (target == null || target.IsDead || !_state.Enemies.Contains(target)))
             return false;
 
+        // 비용 차감·패 제거는 즉시 처리해 UI가 바로 반영되도록 한다.
+        // 이펙트 실행만 코루틴으로 분리해, 연타처럼 히트 사이 딜레이가 필요한 경우를 지원한다.
         BeginHandChangeBatch();
         try
         {
@@ -253,25 +255,32 @@ public class BattleManager : MonoBehaviour
             if (card.IsExhaust) _state.ExhaustPile.Add(card);
             else _state.DiscardPile.Add(card);
             NotifyHandChanged();
-
-            var ctx = new CardContext
-            {
-                State      = _state,
-                Battle     = this,
-                Card       = card,
-                Target     = target,
-                AllEnemies = _state.Enemies,
-            };
-
-            foreach (var effect in card.ActiveEffects)
-                effect?.Execute(ctx);
         }
         finally
         {
             EndHandChangeBatch();
         }
 
+        var ctx = new CardContext
+        {
+            State      = _state,
+            Battle     = this,
+            Card       = card,
+            Target     = target,
+            AllEnemies = _state.Enemies,
+        };
+        StartCoroutine(ExecuteEffectsSequence(card.ActiveEffects, ctx));
+
         return true;
+    }
+
+    private IEnumerator ExecuteEffectsSequence(System.Collections.Generic.IReadOnlyList<CardEffect> effects, CardContext ctx)
+    {
+        foreach (var effect in effects)
+        {
+            if (effect != null)
+                yield return StartCoroutine(effect.ExecuteCoroutine(ctx));
+        }
     }
 
     // ─────────────────────────────────────────────
