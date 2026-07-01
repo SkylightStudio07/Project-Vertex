@@ -46,6 +46,9 @@ public class BattleManager : MonoBehaviour
 
     private BattleType   _currentBattleType;
     private System.Random _rnd = new();
+    // 카드 이펙트(DamageEffect 등)가 RandomEnemy 타겟을 결정할 때 이 인스턴스를 사용해야
+    // 전투 시드 기반의 결정론적 동작이 보장된다. UnityEngine.Random.Range는 시드와 무관하다.
+    public System.Random Rnd => _rnd;
 
     [Header("적 턴 연출")]
     [SerializeField] private EnemyTurnBannerView turnBanner;
@@ -185,7 +188,12 @@ public class BattleManager : MonoBehaviour
         if (turnBanner != null)
             yield return turnBanner.ShowAndWait();
 
-        foreach (var enemy in _state.Enemies)
+        // _state.Enemies를 직접 foreach하면 yield return 대기 중 OnDied 등이 리스트를 수정했을 때
+        // InvalidOperationException(Collection was modified)이 발생할 수 있다.
+        // 지금은 OnDied → CheckVictory()만 연결돼 있어 당장 터지진 않지만,
+        // 나중에 OnDied에 리스트 제거 로직이 붙는 순간 조용히 터지는 문제라 복사본으로 순회한다.
+        var enemiesCopy = new List<EnemyInstance>(_state.Enemies);
+        foreach (var enemy in enemiesCopy)
         {
             if (enemy == null || enemy.IsDead) continue;
 

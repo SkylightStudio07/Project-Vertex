@@ -125,12 +125,15 @@ public class PlayerHUDView : MonoBehaviour
 
     private void HandleBlocked(int absorbed) => SpawnBlockEffect();
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (_subscribedPlayer != null)
         {
             _subscribedPlayer.OnDamaged -= HandlePlayerDamaged;
             _subscribedPlayer.OnBlocked -= HandleBlocked;
+            // null로 초기화해야 재활성화 시 UpdateDamageSubscription()이
+            // 변경을 감지하고 재구독한다. null 없이 해제만 하면 재구독이 안 된다.
+            _subscribedPlayer = null;
         }
     }
 

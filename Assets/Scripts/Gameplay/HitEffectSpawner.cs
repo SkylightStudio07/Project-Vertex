@@ -22,6 +22,11 @@ public static class HitEffectSpawner
             rotation = Quaternion.LookRotation(cam.transform.position - position);
         }
 
-        Object.Instantiate(prefab, position, rotation, anchor);
+        // 부모 없이 월드 공간에 스폰한다.
+        // anchor를 부모로 지정하면 Canvas 계층의 Scale을 상속받아 파티클이 왜곡되거나
+        // 보이지 않을 정도로 작아지는 문제가 있다.
+        // 단발성 이펙트는 앵커를 따라다닐 필요가 없고, 파티클 시스템의 Stop Action을
+        // Destroy로 설정해두면 재생 후 자동 정리된다.
+        Object.Instantiate(prefab, position, rotation);
     }
 }
