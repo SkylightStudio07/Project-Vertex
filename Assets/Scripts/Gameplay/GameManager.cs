@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
             : currentEnemies;
 
         BattleManager.Instance.StartBattle(enemies, DeckManager.Instance.PlayerDeck, RunData.Instance.mapData.seed, battleType);
-        BattleManager.Instance.PlayerTurnStart();
+        BattleManager.Instance.PlayerTurnStart(false); // 전투 첫 진입이라 턴 배너는 건너뜀
     }
 
     // 카드 등급에 맞는 전투 보상 카드 풀에 카드를 추가하는 메소드

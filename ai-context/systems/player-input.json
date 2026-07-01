@@ -1,0 +1,478 @@
+﻿{
+  "Id": "player",
+  "Name": "Player / Input",
+  "Anchor": "systems/player-input.md",
+  "Stats": {
+    "NodeCount": 3,
+    "InternalEdges": 2,
+    "ExternalEdges": 19,
+    "EntryMethodCount": 4,
+    "Keywords": [
+      "player",
+      "gameplay",
+      "char",
+      "combatant",
+      "hud"
+    ]
+  },
+  "RoleEstimate": "Player / Input appears to be an externally connected area around player, gameplay, char, combatant, hud. It contains 3 types, including 1 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "PlayerHUDView.Update@50",
+      "TypeId": "PlayerHUDView",
+      "Signature": "Update()",
+      "Label": "PlayerHUDView.Update()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+      "Line": 50
+    },
+    {
+      "Id": "PlayerHUDView.OnDestroy@120",
+      "TypeId": "PlayerHUDView",
+      "Signature": "OnDestroy()",
+      "Label": "PlayerHUDView.OnDestroy()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+      "Line": 120
+    },
+    {
+      "Id": "PlayerHUDView.SpawnHitEffect@125",
+      "TypeId": "PlayerHUDView",
+      "Signature": "SpawnHitEffect()",
+      "Label": "PlayerHUDView.SpawnHitEffect()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+      "Line": 125
+    },
+    {
+      "Id": "PlayerHUDView.SpawnBlockEffect@131",
+      "TypeId": "PlayerHUDView",
+      "Signature": "SpawnBlockEffect()",
+      "Label": "PlayerHUDView.SpawnBlockEffect()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+      "Line": 131
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "PlayerCombatant",
+      "Name": "PlayerCombatant",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+      "Line": 8,
+      "IsUnityType": false,
+      "Incoming": 4,
+      "Outgoing": 12,
+      "Internal": 2,
+      "External": 14
+    },
+    {
+      "Id": "PlayerHUDView",
+      "Name": "PlayerHUDView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+      "Line": 19,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 4,
+      "Internal": 2,
+      "External": 2
+    },
+    {
+      "Id": "PlayerCharData",
+      "Name": "PlayerCharData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Player\\PlayerCharData.cs",
+      "Line": 5,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 3,
+      "Internal": 0,
+      "External": 3
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "PlayerHUDView.Update()",
+      "Steps": [
+        "PlayerHUDView.Update()",
+        "PlayerHUDView.UpdateBlockedSubscription() / terminal"
+      ]
+    },
+    {
+      "Entry": "PlayerHUDView.SpawnHitEffect()",
+      "Steps": [
+        "PlayerHUDView.SpawnHitEffect() / terminal"
+      ]
+    },
+    {
+      "Entry": "PlayerHUDView.SpawnBlockEffect()",
+      "Steps": [
+        "PlayerHUDView.SpawnBlockEffect() / terminal"
+      ]
+    },
+    {
+      "Entry": "PlayerHUDView.OnDestroy()",
+      "Steps": [
+        "PlayerHUDView.OnDestroy() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "PlayerHUDView",
+        "SourceName": "PlayerHUDView",
+        "Target": "PlayerCombatant",
+        "TargetName": "PlayerCombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+          "Line": 48,
+          "Text": "PlayerCombatant"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "internal",
+        "Source": "PlayerHUDView",
+        "SourceName": "PlayerHUDView",
+        "Target": "PlayerCombatant",
+        "TargetName": "PlayerCombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+          "Line": 110,
+          "Text": "PlayerCombatant"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "IPassiveLogic",
+        "TargetName": "IPassiveLogic",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 57,
+          "Text": "_passives.Add(passive)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 54,
+          "Text": "existing.TryMerge(passive)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "PlayerHUDView",
+        "SourceName": "PlayerHUDView",
+        "Target": "HitEffectSpawner",
+        "TargetName": "HitEffectSpawner",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+          "Line": 128,
+          "Text": "HitEffectSpawner.Spawn(hitEffectPrefab, anchor)"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "PlayerCharData",
+        "SourceName": "PlayerCharData",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Player\\PlayerCharData.cs",
+          "Line": 14,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "type_check",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 54,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 60,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 23,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 50,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "PlayerCombatant",
+        "TargetName": "PlayerCombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 72,
+          "Text": "PlayerCombatant"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "BattleState",
+        "SourceName": "BattleState",
+        "Target": "PlayerCombatant",
+        "TargetName": "PlayerCombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+          "Line": 9,
+          "Text": "PlayerCombatant"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "IPassiveLogic",
+        "TargetName": "IPassiveLogic",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 11,
+          "Text": "List\u003CIPassiveLogic\u003E"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "IPassiveLogic",
+        "TargetName": "IPassiveLogic",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 17,
+          "Text": "List\u003CIPassiveLogic\u003E"
+        }
+      },
+      {
+        "Kind": "implements",
+        "Direction": "outgoing",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 8,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "inherits",
+        "Direction": "outgoing",
+        "Source": "PlayerCharData",
+        "SourceName": "PlayerCharData",
+        "Target": "CharData",
+        "TargetName": "CharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Player\\PlayerCharData.cs",
+          "Line": 5,
+          "Text": "CharData"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "PlayerHUDView",
+        "Source": "Update()",
+        "TargetType": "PlayerHUDView",
+        "Target": "SpawnHitEffect()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+          "Line": 61,
+          "Text": "SpawnHitEffect()"
+        }
+      },
+      {
+        "SourceType": "PlayerHUDView",
+        "Source": "Update()",
+        "TargetType": "PlayerHUDView",
+        "Target": "UpdateBlockedSubscription()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+          "Line": 52,
+          "Text": "UpdateBlockedSubscription()"
+        }
+      },
+      {
+        "SourceType": "PlayerHUDView",
+        "Source": "HandleBlocked(int)",
+        "TargetType": "PlayerHUDView",
+        "Target": "SpawnBlockEffect()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+          "Line": 118,
+          "Text": "SpawnBlockEffect()"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "PlayerHUDView.Update() -\u003E PlayerHUDView.UpdateBlockedSubscription() / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "PlayerHUDView.SpawnHitEffect() -\u003E "
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "PlayerHUDView.Update() -\u003E PlayerHUDView.SpawnHitEffect()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+        "Line": 61,
+        "Text": "SpawnHitEffect()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "PlayerHUDView.Update() -\u003E PlayerHUDView.UpdateBlockedSubscription()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+        "Line": 52,
+        "Text": "UpdateBlockedSubscription()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "PlayerHUDView.HandleBlocked(int) -\u003E PlayerHUDView.SpawnBlockEffect()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+        "Line": 118,
+        "Text": "SpawnBlockEffect()"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "PlayerCombatant -\u003E IPassiveLogic / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+        "Line": 57,
+        "Text": "_passives.Add(passive)"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "PlayerCombatant -\u003E StatusEffectBase / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+        "Line": 54,
+        "Text": "existing.TryMerge(passive)"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "PlayerHUDView -\u003E HitEffectSpawner / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+        "Line": 128,
+        "Text": "HitEffectSpawner.Spawn(hitEffectPrefab, anchor)"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "PlayerHUDView -\u003E PlayerCombatant / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+        "Line": 48,
+        "Text": "PlayerCombatant"
+      }
+    },
+    {
+      "Title": "Internal uses_local_type",
+      "Detail": "PlayerHUDView -\u003E PlayerCombatant / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+        "Line": 110,
+        "Text": "PlayerCombatant"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Player / Input context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

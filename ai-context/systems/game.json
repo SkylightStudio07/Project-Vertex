@@ -1,0 +1,440 @@
+﻿{
+  "Id": "topic:game",
+  "Name": "Game",
+  "Anchor": "systems/game.md",
+  "Stats": {
+    "NodeCount": 1,
+    "InternalEdges": 0,
+    "ExternalEdges": 24,
+    "EntryMethodCount": 5,
+    "Keywords": [
+      "game",
+      "gameplay"
+    ]
+  },
+  "RoleEstimate": "Game appears to be an externally connected area around game, gameplay. It contains 1 types, including 1 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "GameManager.Awake@17",
+      "TypeId": "GameManager",
+      "Signature": "Awake()",
+      "Label": "GameManager.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+      "Line": 17
+    },
+    {
+      "Id": "GameManager.Start@62",
+      "TypeId": "GameManager",
+      "Signature": "Start()",
+      "Label": "GameManager.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+      "Line": 62
+    },
+    {
+      "Id": "GameManager.Update@68",
+      "TypeId": "GameManager",
+      "Signature": "Update()",
+      "Label": "GameManager.Update()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+      "Line": 68
+    },
+    {
+      "Id": "GameManager.InitializeRun@76",
+      "TypeId": "GameManager",
+      "Signature": "InitializeRun()",
+      "Label": "GameManager.InitializeRun()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+      "Line": 76
+    },
+    {
+      "Id": "GameManager.InitializeBattle@102",
+      "TypeId": "GameManager",
+      "Signature": "InitializeBattle()",
+      "Label": "GameManager.InitializeBattle()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+      "Line": 102
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "GameManager",
+      "Name": "GameManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+      "Line": 9,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 24,
+      "Internal": 0,
+      "External": 24
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "GameManager.InitializeRun()",
+      "Steps": [
+        "GameManager.InitializeRun()",
+        "GameManager.InitializeBattle() / terminal"
+      ]
+    },
+    {
+      "Entry": "GameManager.Start()",
+      "Steps": [
+        "GameManager.Start()",
+        "GameManager.InitializeRun()",
+        "GameManager.InitializeBattle() / terminal"
+      ]
+    },
+    {
+      "Entry": "GameManager.Awake()",
+      "Steps": [
+        "GameManager.Awake() / terminal"
+      ]
+    },
+    {
+      "Entry": "GameManager.Update()",
+      "Steps": [
+        "GameManager.Update() / terminal"
+      ]
+    },
+    {
+      "Entry": "GameManager.InitializeBattle()",
+      "Steps": [
+        "GameManager.InitializeBattle() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [],
+    "External": [
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 132,
+          "Text": "pool.Contains(card)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData\u002BCardRarity",
+        "TargetName": "CardData\u002BCardRarity",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData\u002BCardRarity",
+        "TargetName": "CardData\u002BCardRarity",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "BattleType",
+        "TargetName": "BattleType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 151,
+          "Text": "BattleType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 122,
+          "Text": "CardData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "GamePhase",
+        "TargetName": "GamePhase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 15,
+          "Text": "GamePhase"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "BattleReward",
+        "TargetName": "BattleReward",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 89,
+          "Text": "BattleReward.SetItemRewardsPool(itemPool)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData\u002BCardRarity",
+        "TargetName": "CardData\u002BCardRarity",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 126,
+          "Text": "cardPools.TryGetValue(card.Rarity, out var pool)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "RewardProbabilityData",
+        "TargetName": "RewardProbabilityData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 153,
+          "Text": "rewardProbabilityTable.Find(t =\u003E t.Chapter == chapter \u0026\u0026 t.BattleType == battleType)"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 30,
+          "Text": "List\u003CEnemyData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 40,
+          "Text": "List\u003CItemData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "RewardProbabilityData",
+        "TargetName": "RewardProbabilityData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 42,
+          "Text": "List\u003CRewardProbabilityData\u003E"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "GamePhase",
+        "TargetName": "GamePhase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 13,
+          "Text": "GamePhase"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "RewardProbabilityData",
+        "TargetName": "RewardProbabilityData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 151,
+          "Text": "RewardProbabilityData"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "BattleType",
+        "TargetName": "BattleType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 104,
+          "Text": "BattleType"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "GameManager",
+        "Source": "Start()",
+        "TargetType": "GameManager",
+        "Target": "InitializeRun()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 65,
+          "Text": "InitializeRun()"
+        }
+      },
+      {
+        "SourceType": "GameManager",
+        "Source": "InitializeRun()",
+        "TargetType": "GameManager",
+        "Target": "InitializeBattle()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 97,
+          "Text": "InitializeBattle()"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "GameManager.InitializeRun() -\u003E GameManager.InitializeBattle() / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "GameManager.Start() -\u003E GameManager.InitializeRun() -\u003E GameManager.InitializeBattle() / terminal"
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "GameManager.Start() -\u003E GameManager.InitializeRun()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+        "Line": 65,
+        "Text": "InitializeRun()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "GameManager.InitializeRun() -\u003E GameManager.InitializeBattle()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+        "Line": 97,
+        "Text": "InitializeBattle()"
+      }
+    },
+    {
+      "Title": "outgoing has_field_type",
+      "Detail": "GameManager -\u003E CardData / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+        "Line": 35,
+        "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "GameManager -\u003E CardData / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+        "Line": 132,
+        "Text": "pool.Contains(card)"
+      }
+    },
+    {
+      "Title": "outgoing creates",
+      "Detail": "GameManager -\u003E CardData / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+        "Line": 35,
+        "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Game context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

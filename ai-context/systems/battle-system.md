@@ -1,0 +1,336 @@
+﻿# Battle System
+
+Battle System appears to be an externally connected area around enemy, gameplay, status, battle, effects. It contains 22 types, including 7 Unity-facing types.
+
+## Stats
+
+- Types: 22
+- Internal relationships: 52
+- External relationships: 105
+- Entry candidates: 8
+- Keywords: `enemy`, `gameplay`, `status`, `battle`, `effects`, `passive`, `damage`, `intent`, `phase`, `action`, `banner`, `burn`
+
+## Start Here
+
+- `DebugBattleStarter.Start()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Develop\DebugBattleStarter.cs:10
+- `BattleManager.Awake()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:13
+- `EnemyZoneView.Start()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyZoneView.cs:14
+- `EnemyView.OnDestroy()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:114
+- `BattleManager.Update()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:450
+- `BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType)` - flow_candidate / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65
+- `BattleManager.SetupBattleDeck(List<CardData>)` - flow_candidate / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:104
+- `EnemyView.SpawnHitEffect()` - flow_candidate / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:148
+
+## Core Types
+
+- `EnemyInstance` - class / 21 out / 18 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:12
+- `BattleManager` - class / Unity / 32 out / 3 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:9
+- `BattleState` - class / 7 out / 24 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleState.cs:7
+- `DamageInfo` - struct / 2 out / 21 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\DamageInfo.cs:1
+- `EnemyData` - class / Unity / 1 out / 11 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyData.cs:5
+- `EnemyView` - class / Unity / 8 out / 3 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:14
+- `BattleType` - enum / 0 out / 8 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:7
+- `DamageCalculator` - class / 4 out / 3 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\DamageCalculator.cs:3
+- `EnemyAction` - class / Unity / 2 out / 3 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyAction.cs:14
+- `StrengthStatus` - class / 4 out / 1 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\StrengthStatus.cs:2
+- `VulnerableStatus` - class / 4 out / 1 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\VulnerableStatus.cs:4
+- `WeakStatus` - class / 4 out / 1 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\WeakStatus.cs:4
+- `EnemyTurnBannerView` - class / Unity / 0 out / 4 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\EnemyTurnBannerView.cs:10
+- `PoisonStatus` - class / 3 out / 1 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\PoisonStatus.cs:2
+- `BurnStatus` - class / 3 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\BurnStatus.cs:2
+- `IntentType` - enum / 0 out / 3 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyAction.cs:4
+- `DebugBattleStarter` - class / Unity / 2 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Develop\DebugBattleStarter.cs:4
+- `EnemyView+IntentSprite` - struct / 1 out / 1 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:18
+- `GamePhase` - enum / 0 out / 2 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:7
+- `BattlePhase` - enum / 0 out / 1 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleState.cs:3
+- `EnemyZoneView` - class / Unity / 1 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyZoneView.cs:9
+- `StatusType` - enum / 0 out / 1 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardEffect.cs:23
+
+## Likely Method Flows
+
+- `BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType)`
+  - `BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType)`
+  - `BattleManager.SetupEnemies(List<EnemyData>) / terminal`
+- `EnemyZoneView.Start()`
+  - `EnemyZoneView.Start()`
+  - `EnemyZoneView.Refresh() / terminal`
+- `EnemyView.OnDestroy()`
+  - `EnemyView.OnDestroy()`
+  - `EnemyView.Unbind() / terminal`
+- `BattleManager.Update()`
+  - `BattleManager.Update()`
+  - `BattleManager.TestVictory(BattleType)`
+  - `BattleManager.Victory()`
+  - `BattleManager.NotifyHandChanged() / terminal`
+- `BattleManager.SetupBattleDeck(List<CardData>)`
+  - `BattleManager.SetupBattleDeck(List<CardData>)`
+  - `BattleManager.Shuffle(List<CardData>) / terminal`
+- `EnemyView.SpawnHitEffect()`
+  - `EnemyView.SpawnHitEffect() / terminal`
+- `DebugBattleStarter.Start()`
+  - `DebugBattleStarter.Start() / terminal`
+- `BattleManager.Awake()`
+  - `BattleManager.Awake() / terminal`
+
+## Internal Type Relationships
+
+- `EnemyInstance` -> `BattleState` - internal / accepts_parameter / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:96 / BattleState`
+- `BattleManager` -> `BattleType` - internal / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / BattleType`
+- `BattleManager` -> `EnemyData` - internal / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / List<EnemyData>`
+- `EnemyInstance` -> `BattleManager` - internal / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:153 / BattleManager`
+- `BattleManager` -> `EnemyTurnBannerView` - internal / calls_member / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:132 / playerTurnBanner.ShowAndWait()`
+- `EnemyView` -> `EnemyInstance` - internal / calls_member / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:169 / Instance.GetCurrentAction()`
+- `BattleManager` -> `EnemyInstance` - internal / creates / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:40 / List<EnemyInstance>`
+- `BattleManager` -> `EnemyTurnBannerView` - internal / has_field_type / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:51 / EnemyTurnBannerView`
+- `BattleManager` -> `EnemyInstance` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:239 / EnemyInstance`
+- `BurnStatus` -> `BattleState` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\BurnStatus.cs:6 / BattleState`
+- `DamageCalculator` -> `BattleState` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\DamageCalculator.cs:5 / BattleState`
+- `DamageCalculator` -> `DamageInfo` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\DamageCalculator.cs:5 / DamageInfo`
+- `EnemyInstance` -> `DamageInfo` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:43 / DamageInfo`
+- `EnemyInstance` -> `EnemyData` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:35 / EnemyData`
+- `EnemyView` -> `EnemyInstance` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:90 / EnemyInstance`
+- `EnemyView` -> `IntentType` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:186 / IntentType`
+- `PoisonStatus` -> `BattleState` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\PoisonStatus.cs:6 / BattleState`
+- `StrengthStatus` -> `BattleState` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\StrengthStatus.cs:8 / BattleState`
+- `StrengthStatus` -> `DamageInfo` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\StrengthStatus.cs:8 / DamageInfo`
+- `VulnerableStatus` -> `BattleState` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\VulnerableStatus.cs:8 / BattleState`
+- `VulnerableStatus` -> `DamageInfo` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\VulnerableStatus.cs:8 / DamageInfo`
+- `WeakStatus` -> `BattleState` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\WeakStatus.cs:8 / BattleState`
+- `WeakStatus` -> `DamageInfo` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\WeakStatus.cs:8 / DamageInfo`
+- `BattleManager` -> `BattleState` - internal / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:70 / BattleState`
+- `BattleManager` -> `BattleState` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:26 / BattleState`
+- `BattleManager` -> `BattleType` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:47 / BattleType`
+- `BattleState` -> `BattlePhase` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleState.cs:17 / BattlePhase`
+- `BattleState` -> `EnemyInstance` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleState.cs:10 / List<EnemyInstance>`
+- `DebugBattleStarter` -> `EnemyData` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Develop\DebugBattleStarter.cs:7 / List<EnemyData>`
+- `EnemyAction` -> `IntentType` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyAction.cs:17 / IntentType`
+- `EnemyData` -> `EnemyAction` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyData.cs:12 / List<EnemyAction>`
+- `EnemyView` -> `EnemyView+IntentSprite` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:35 / List<IntentSprite>`
+- `EnemyView+IntentSprite` -> `IntentType` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:20 / IntentType`
+- `EnemyZoneView` -> `EnemyView` - internal / has_field_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyZoneView.cs:11 / EnemyView`
+- `BattleManager` -> `BattleState` - internal / has_property_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:27 / BattleState`
+- `BattleManager` -> `EnemyInstance` - internal / has_property_type / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:40 / IReadOnlyList<EnemyInstance>`
+
+## External Touchpoints
+
+- `BattleManager` -> `CardData` - outgoing / accepts_parameter / 10 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / List<CardData>`
+- `IPassiveLogic` -> `BattleState` - incoming / accepts_parameter / 5 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\IPassiveLogic.cs:3 / BattleState`
+- `StatusEffectBase` -> `BattleState` - incoming / accepts_parameter / 5 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\StatusEffectBase.cs:25 / BattleState`
+- `BattleState` -> `CardData` - outgoing / has_field_type / 4 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleState.cs:19 / List<CardData>`
+- `DamageEffect` -> `DamageCalculator` - incoming / calls_member / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\DamageEffect.cs:23 / DamageCalculator.Resolve(new DamageInfo(amount, attacker), single, context.State)`
+- `DamageEffect` -> `DamageInfo` - incoming / creates / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\DamageEffect.cs:23 / DamageInfo`
+- `CardContext` -> `EnemyInstance` - incoming / has_field_type / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardContext.cs:22 / EnemyInstance`
+- `MapConfig` -> `EnemyData` - incoming / has_field_type / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Map\MapConfig.cs:54 / List<EnemyData>`
+- `BattleReward` -> `BattleType` - incoming / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:75 / BattleType`
+- `CardHandler` -> `EnemyInstance` - incoming / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:120 / EnemyInstance`
+- `IPassiveLogic` -> `DamageInfo` - incoming / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\IPassiveLogic.cs:8 / DamageInfo`
+- `StatusEffectBase` -> `DamageInfo` - incoming / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\StatusEffectBase.cs:28 / DamageInfo`
+- `EnemyInstance` -> `IPassiveLogic` - outgoing / calls_member / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:92 / _passives.Add(passive)`
+- `EnemyInstance` -> `StatusEffectBase` - outgoing / calls_member / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:89 / existing.TryMerge(passive)`
+- `IPassiveLogic` -> `DamageInfo` - incoming / returns / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\IPassiveLogic.cs:8 / DamageInfo`
+- `StatusEffectBase` -> `DamageInfo` - incoming / returns / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\StatusEffectBase.cs:28 / DamageInfo`
+- `EnemyInstance` -> `StatusEffectBase` - outgoing / type_check / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:89 / StatusEffectBase`
+- `ApplyStatusEffect` -> `EnemyInstance` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\ApplyStatusEffect.cs:33 / EnemyInstance`
+- `BurnStatus` -> `ICombatant` - outgoing / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\BurnStatus.cs:6 / ICombatant`
+- `DamageCalculator` -> `ICombatant` - outgoing / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\DamageCalculator.cs:5 / ICombatant`
+- `DamageInfo` -> `ICombatant` - outgoing / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\DamageInfo.cs:7 / ICombatant`
+- `EnemyInstance` -> `StatusEffectBase` - outgoing / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:85 / StatusEffectBase`
+- `GameManager` -> `BattleType` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:151 / BattleType`
+- `GameManager` -> `GamePhase` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:15 / GamePhase`
+- `ICombatant` -> `DamageInfo` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\ICombatant.cs:11 / DamageInfo`
+- `PlayerCombatant` -> `BattleState` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\PlayerCombatant.cs:60 / BattleState`
+- `PlayerCombatant` -> `DamageInfo` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\PlayerCombatant.cs:23 / DamageInfo`
+- `PoisonStatus` -> `ICombatant` - outgoing / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\Effects\PoisonStatus.cs:6 / ICombatant`
+- `ApplyStatusEffect` -> `EnemyInstance` - incoming / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\ApplyStatusEffect.cs:36 / enemy.AddPassive(passive)`
+- `DamageCalculator` -> `ICombatant` - outgoing / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Common\DamageCalculator.cs:19 / target.TakeDamage(info)`
+- `DamageEffect` -> `EnemyInstance` - incoming / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\DamageEffect.cs:38 / alive.Add(e)`
+- `EnemyView` -> `HitEffectSpawner` - outgoing / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:153 / HitEffectSpawner.Spawn(hitEffectPrefab, anchor)`
+- `ApplyStatusEffect` -> `PoisonStatus` - incoming / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\ApplyStatusEffect.cs:44 / PoisonStatus`
+- `ApplyStatusEffect` -> `StrengthStatus` - incoming / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\ApplyStatusEffect.cs:43 / StrengthStatus`
+- `ApplyStatusEffect` -> `VulnerableStatus` - incoming / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\ApplyStatusEffect.cs:41 / VulnerableStatus`
+- `ApplyStatusEffect` -> `WeakStatus` - incoming / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\ApplyStatusEffect.cs:42 / WeakStatus`
+
+## Internal Method Calls
+
+- `EnemyZoneView.Start()` -> `EnemyZoneView.Refresh()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyZoneView.cs:17 / Refresh()`
+- `BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType)` -> `BattleManager.SetupBattleDeck(List<CardData>)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:81 / SetupBattleDeck(masterDeck)`
+- `BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType)` -> `BattleManager.SetupEnemies(List<EnemyData>)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:80 / SetupEnemies(enemyDataList)`
+- `EnemyView.Bind(EnemyInstance)` -> `EnemyView.RefreshHP()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:110 / RefreshHP()`
+- `EnemyView.Bind(EnemyInstance)` -> `EnemyView.RefreshIntent()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:111 / RefreshIntent()`
+- `EnemyView.Bind(EnemyInstance)` -> `EnemyView.Unbind()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:92 / Unbind()`
+- `BattleManager.SetupBattleDeck(List<CardData>)` -> `BattleManager.Shuffle(List<CardData>)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:113 / Shuffle(_state.DrawPile)`
+- `EnemyView.OnDestroy()` -> `EnemyView.Unbind()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:114 / Unbind()`
+- `BattleManager.PlayerTurnStart(bool)` -> `BattleManager.PlayerTurnStartSequence(bool)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:126 / PlayerTurnStartSequence(showBanner)`
+- `EnemyView.HandleDamaged(int)` -> `EnemyView.RefreshHP()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:128 / RefreshHP()`
+- `EnemyView.HandleDamaged(int)` -> `EnemyView.SpawnHitEffect()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:129 / SpawnHitEffect()`
+- `EnemyInstance.GetIntentDamageAmount()` -> `EnemyInstance.GetCurrentAction()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:130 / GetCurrentAction()`
+- `BattleManager.PlayerTurnStartSequence(bool)` -> `BattleManager.BeginHandChangeBatch()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:138 / BeginHandChangeBatch()`
+- `BattleManager.PlayerTurnStartSequence(bool)` -> `BattleManager.EndHandChangeBatch()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:146 / EndHandChangeBatch()`
+- `BattleManager.PlayerTurnStartSequence(bool)` -> `BattleManager.TakeOutCardtoHand()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:142 / TakeOutCardtoHand()`
+- `BattleManager.PlayerTurnStartSequence(bool)` -> `EnemyTurnBannerView.ShowAndWait()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:132 / playerTurnBanner.ShowAndWait()`
+- `BattleManager.PlayerTurnEnd()` -> `BattleManager.BeginHandChangeBatch()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:155 / BeginHandChangeBatch()`
+- `BattleManager.PlayerTurnEnd()` -> `BattleManager.EndHandChangeBatch()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:165 / EndHandChangeBatch()`
+- `BattleManager.PlayerTurnEnd()` -> `BattleManager.EnemyTurnStart()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:170 / EnemyTurnStart()`
+- `BattleManager.PlayerTurnEnd()` -> `BattleManager.NotifyHandChanged()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:161 / NotifyHandChanged()`
+- `EnemyInstance.ExecuteCurrentAction(BattleState, BattleManager)` -> `EnemyInstance.AdvancePattern()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:169 / AdvancePattern()`
+- `EnemyInstance.ExecuteCurrentAction(BattleState, BattleManager)` -> `EnemyInstance.GetCurrentAction()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:155 / GetCurrentAction()`
+- `EnemyView.RefreshIntent()` -> `EnemyInstance.GetCurrentAction()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:169 / Instance.GetCurrentAction()`
+- `EnemyView.RefreshIntent()` -> `EnemyInstance.GetIntentDamageAmount()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:180 / Instance.GetIntentDamageAmount()`
+- `EnemyView.RefreshIntent()` -> `EnemyView.GetIntentSprite(IntentType)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:173 / GetIntentSprite(action.intentType)`
+- `BattleManager.EnemyTurnStart()` -> `BattleManager.EnemyTurnSequence()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:175 / EnemyTurnSequence()`
+- `EnemyInstance.TakeTurn(BattleState, BattleManager)` -> `EnemyInstance.ExecuteCurrentAction(BattleState, BattleManager)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:185 / ExecuteCurrentAction(state, battle)`
+- `EnemyInstance.TakeTurn(BattleState, BattleManager)` -> `EnemyInstance.NotifyActionStarted()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:184 / NotifyActionStarted()`
+- `EnemyInstance.TakeTurn(BattleState, BattleManager)` -> `EnemyInstance.TickPassives(BattleState)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:181 / TickPassives(state)`
+- `BattleManager.EnemyTurnSequence()` -> `BattleManager.IsAllEnemiesDead()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:205 / IsAllEnemiesDead()`
+- `BattleManager.EnemyTurnSequence()` -> `BattleManager.PlayerTurnStart()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:208 / PlayerTurnStart()`
+- `BattleManager.EnemyTurnSequence()` -> `EnemyTurnBannerView.ShowAndWait()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:186 / turnBanner.ShowAndWait()`
+- `BattleManager.IsCardPlayable(CardData)` -> `BattleManager.EvaluateCardPlayability(CardData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:222 / EvaluateCardPlayability(card)`
+- `BattleManager.TryPlayCard(CardData, EnemyInstance)` -> `BattleManager.BeginHandChangeBatch()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:246 / BeginHandChangeBatch()`
+- `BattleManager.TryPlayCard(CardData, EnemyInstance)` -> `BattleManager.EndHandChangeBatch()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:271 / EndHandChangeBatch()`
+- `BattleManager.TryPlayCard(CardData, EnemyInstance)` -> `BattleManager.EvaluateCardPlayability(CardData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:241 / EvaluateCardPlayability(card)`
+
+## Evidence
+
+- Likely flow - BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType) -> BattleManager.SetupEnemies(List<EnemyData>) / terminal
+- Likely flow - EnemyZoneView.Start() -> EnemyZoneView.Refresh() / terminal
+- Internal call - EnemyZoneView.Start() -> EnemyZoneView.Refresh()
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyZoneView.cs:17 / Refresh()`
+- Internal call - BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType) -> BattleManager.SetupBattleDeck(List<CardData>)
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:81 / SetupBattleDeck(masterDeck)`
+- Internal call - BattleManager.StartBattle(List<EnemyData>, List<CardData>, int, BattleType) -> BattleManager.SetupEnemies(List<EnemyData>)
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:80 / SetupEnemies(enemyDataList)`
+- outgoing accepts_parameter - BattleManager -> CardData / 10 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / List<CardData>`
+- incoming accepts_parameter - IPassiveLogic -> BattleState / 5 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\IPassiveLogic.cs:3 / BattleState`
+- incoming accepts_parameter - StatusEffectBase -> BattleState / 5 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\StatusEffectBase.cs:25 / BattleState`
+- Internal accepts_parameter - EnemyInstance -> BattleState / 3 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:96 / BattleState`
+- Internal accepts_parameter - BattleManager -> BattleType / 2 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / BattleType`
+- Internal accepts_parameter - BattleManager -> EnemyData / 2 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / List<EnemyData>`
+- Internal accepts_parameter - EnemyInstance -> BattleManager / 2 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyInstance.cs:153 / BattleManager`
+- Internal calls_member - BattleManager -> EnemyTurnBannerView / 2 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:132 / playerTurnBanner.ShowAndWait()`
+- Internal calls_member - EnemyView -> EnemyInstance / 2 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Enemy\EnemyView.cs:169 / Instance.GetCurrentAction()`
+- Internal creates - BattleManager -> EnemyInstance / 2 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:40 / List<EnemyInstance>`
+- Internal has_field_type - BattleManager -> EnemyTurnBannerView / 2 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:51 / EnemyTurnBannerView`
+
+## Suggested AI Task
+
+Use the Battle System context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible.
+
