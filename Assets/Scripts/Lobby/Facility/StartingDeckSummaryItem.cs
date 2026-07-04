@@ -10,9 +10,11 @@ public class StartingDeckSummaryItem : MonoBehaviour
     [SerializeField] private TMP_Text countText;
     [SerializeField] private TMP_Text costText;
 
-    public void Bind(CardData card, int count, string fallbackName)
+    private string fallbackString = "N/A";
+
+    public void Bind(CardData card, int count)
     {
-        string cardName = card != null ? card.CardName : fallbackName;
+        string cardName = card != null ? card.CardName : fallbackString;
 
         if (cardNameText != null)
             cardNameText.text = cardName;

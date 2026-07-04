@@ -47,9 +47,11 @@ public class TentInteractionHandler : FacilityInteractionHandler
         SceneManager.LoadScene(runSceneName);
     }
 
-    public void SetStartingDeckCards(List<CardData> cards)
+    public void SetStartingDeckCards()
     {
-        startingDeckCards = cards;
+        startingDeckCards.Clear();
+        DeckManager.Instance.InitializeStartingDeck();
+        startingDeckCards = DeckManager.Instance.PlayerDeck;
         RefreshStartingDeckView();
     }
 
@@ -72,12 +74,12 @@ public class TentInteractionHandler : FacilityInteractionHandler
 
         ClearCardSummaryItems();
 
-        List<CardStack> cardStacks = BuildCardStacks(startingDeckCards);
+        Dictionary<CardData, int> cardStacks = BuildCardStacks(startingDeckCards);
 
-        foreach (CardStack stack in cardStacks)
+        foreach (var stack in cardStacks)
         {
             StartingDeckSummaryItem item = Instantiate(cardSummaryPrefab, cardSummaryParent);
-            item.Bind(stack.Card, stack.Count, "카드");
+            item.Bind(stack.Key, stack.Value);
         }
     }
 
@@ -89,10 +91,9 @@ public class TentInteractionHandler : FacilityInteractionHandler
         }
     }
 
-    private static List<CardStack> BuildCardStacks(IReadOnlyList<CardData> cards)
+    private static Dictionary<CardData, int> BuildCardStacks(IReadOnlyList<CardData> cards)
     {
-        List<CardStack> cardStacks = new();
-        Dictionary<CardData, int> indexByCard = new();
+        Dictionary<CardData, int> cardStacks = new();
 
         if (cards == null)
             return cardStacks;
@@ -102,30 +103,17 @@ public class TentInteractionHandler : FacilityInteractionHandler
             if (card == null)
                 continue;
 
-            if (indexByCard.TryGetValue(card, out int index))
+            if (cardStacks.TryGetValue(card, out int index))
             {
-                CardStack stack = cardStacks[index];
-                stack.Count++;
-                cardStacks[index] = stack;
+                cardStacks[card] = index + 1;
                 continue;
             }
-
-            indexByCard.Add(card, cardStacks.Count);
-            cardStacks.Add(new CardStack(card, 1));
+            else
+            {
+                cardStacks.Add(card, 1);
+            }
         }
 
         return cardStacks;
-    }
-
-    private struct CardStack
-    {
-        public CardStack(CardData card, int count)
-        {
-            Card = card;
-            Count = count;
-        }
-
-        public CardData Card { get; }
-        public int Count { get; set; }
     }
 }
