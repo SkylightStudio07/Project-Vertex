@@ -1,0 +1,2058 @@
+﻿{
+  "Id": "card",
+  "Name": "Card System",
+  "Anchor": "systems/card-system.md",
+  "Stats": {
+    "NodeCount": 27,
+    "InternalEdges": 134,
+    "ExternalEdges": 109,
+    "EntryMethodCount": 8,
+    "Keywords": [
+      "card",
+      "reward",
+      "gameplay",
+      "effect",
+      "pile",
+      "rarity",
+      "target",
+      "add",
+      "arrow",
+      "battle",
+      "button",
+      "context"
+    ]
+  },
+  "RoleEstimate": "Card System appears to be an internally dense area around card, reward, gameplay, effect, pile. It contains 27 types, including 13 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "DeckManager.Awake@11",
+      "TypeId": "DeckManager",
+      "Signature": "Awake()",
+      "Label": "DeckManager.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\DeckManager.cs",
+      "Line": 11
+    },
+    {
+      "Id": "HandView.Start@15",
+      "TypeId": "HandView",
+      "Signature": "Start()",
+      "Label": "HandView.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\HandView.cs",
+      "Line": 15
+    },
+    {
+      "Id": "RewardsView.Start@15",
+      "TypeId": "RewardsView",
+      "Signature": "Start()",
+      "Label": "RewardsView.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+      "Line": 15
+    },
+    {
+      "Id": "CardReward.OnEnable@21",
+      "TypeId": "CardReward",
+      "Signature": "OnEnable()",
+      "Label": "CardReward.OnEnable()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardReward.cs",
+      "Line": 21
+    },
+    {
+      "Id": "CardInteractionView.OnDestroy@155",
+      "TypeId": "CardInteractionView",
+      "Signature": "OnDestroy()",
+      "Label": "CardInteractionView.OnDestroy()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+      "Line": 155
+    },
+    {
+      "Id": "BattleReward.GenerateReward@55",
+      "TypeId": "BattleReward",
+      "Signature": "GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+      "Label": "BattleReward.GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+      "Line": 55
+    },
+    {
+      "Id": "BattleReward.GenerateCardReward@64",
+      "TypeId": "BattleReward",
+      "Signature": "GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+      "Label": "BattleReward.GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+      "Line": 64
+    },
+    {
+      "Id": "BattleReward.GenerateItemReward@96",
+      "TypeId": "BattleReward",
+      "Signature": "GenerateItemReward(RewardProbabilityData)",
+      "Label": "BattleReward.GenerateItemReward(RewardProbabilityData)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+      "Line": 96
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "CardData",
+      "Name": "CardData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardData.cs",
+      "Line": 20,
+      "IsUnityType": true,
+      "Incoming": 71,
+      "Outgoing": 13,
+      "Internal": 52,
+      "External": 32
+    },
+    {
+      "Id": "BattleReward",
+      "Name": "BattleReward",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+      "Line": 33,
+      "IsUnityType": false,
+      "Incoming": 6,
+      "Outgoing": 46,
+      "Internal": 39,
+      "External": 13
+    },
+    {
+      "Id": "CardContext",
+      "Name": "CardContext",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardContext.cs",
+      "Line": 16,
+      "IsUnityType": false,
+      "Incoming": 19,
+      "Outgoing": 9,
+      "Internal": 3,
+      "External": 25
+    },
+    {
+      "Id": "CardHandler",
+      "Name": "CardHandler",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+      "Line": 18,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 25,
+      "Internal": 21,
+      "External": 4
+    },
+    {
+      "Id": "CardInteractionView",
+      "Name": "CardInteractionView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+      "Line": 17,
+      "IsUnityType": true,
+      "Incoming": 18,
+      "Outgoing": 5,
+      "Internal": 23,
+      "External": 0
+    },
+    {
+      "Id": "CardEffect",
+      "Name": "CardEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardEffect.cs",
+      "Line": 16,
+      "IsUnityType": true,
+      "Incoming": 20,
+      "Outgoing": 1,
+      "Internal": 7,
+      "External": 14
+    },
+    {
+      "Id": "RewardItemButton",
+      "Name": "RewardItemButton",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardItemButton.cs",
+      "Line": 8,
+      "IsUnityType": true,
+      "Incoming": 10,
+      "Outgoing": 6,
+      "Internal": 14,
+      "External": 2
+    },
+    {
+      "Id": "RewardsView",
+      "Name": "RewardsView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+      "Line": 5,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 15,
+      "Internal": 13,
+      "External": 2
+    },
+    {
+      "Id": "DeckManager",
+      "Name": "DeckManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\DeckManager.cs",
+      "Line": 7,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 14,
+      "Internal": 14,
+      "External": 0
+    },
+    {
+      "Id": "RewardItem",
+      "Name": "RewardItem",
+      "Kind": "struct",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+      "Line": 12,
+      "IsUnityType": false,
+      "Incoming": 11,
+      "Outgoing": 3,
+      "Internal": 13,
+      "External": 1
+    },
+    {
+      "Id": "CardData\u002BCardRarity",
+      "Name": "CardData\u002BCardRarity",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardData.cs",
+      "Line": 118,
+      "IsUnityType": false,
+      "Incoming": 12,
+      "Outgoing": 0,
+      "Internal": 7,
+      "External": 5
+    },
+    {
+      "Id": "RewardProbabilityData",
+      "Name": "RewardProbabilityData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardProbabilityData.cs",
+      "Line": 7,
+      "IsUnityType": true,
+      "Incoming": 10,
+      "Outgoing": 1,
+      "Internal": 7,
+      "External": 4
+    },
+    {
+      "Id": "CardRewardView",
+      "Name": "CardRewardView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardRewardView.cs",
+      "Line": 6,
+      "IsUnityType": true,
+      "Incoming": 2,
+      "Outgoing": 7,
+      "Internal": 9,
+      "External": 0
+    },
+    {
+      "Id": "CardView",
+      "Name": "CardView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardView.cs",
+      "Line": 11,
+      "IsUnityType": true,
+      "Incoming": 6,
+      "Outgoing": 2,
+      "Internal": 8,
+      "External": 0
+    },
+    {
+      "Id": "AddCardToPileEffect",
+      "Name": "AddCardToPileEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddCardToPileEffect.cs",
+      "Line": 5,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 6,
+      "Internal": 6,
+      "External": 0
+    },
+    {
+      "Id": "HandView",
+      "Name": "HandView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\HandView.cs",
+      "Line": 10,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 6,
+      "Internal": 6,
+      "External": 0
+    },
+    {
+      "Id": "CardReward",
+      "Name": "CardReward",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardReward.cs",
+      "Line": 12,
+      "IsUnityType": true,
+      "Incoming": 2,
+      "Outgoing": 3,
+      "Internal": 5,
+      "External": 0
+    },
+    {
+      "Id": "DebugCardTargetArrow",
+      "Name": "DebugCardTargetArrow",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+      "Line": 331,
+      "IsUnityType": false,
+      "Incoming": 5,
+      "Outgoing": 0,
+      "Internal": 5,
+      "External": 0
+    },
+    {
+      "Id": "CardHandler\u002BCardState",
+      "Name": "CardHandler\u002BCardState",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+      "Line": 22,
+      "IsUnityType": false,
+      "Incoming": 4,
+      "Outgoing": 0,
+      "Internal": 4,
+      "External": 0
+    },
+    {
+      "Id": "ItemData\u002BItemRarity",
+      "Name": "ItemData\u002BItemRarity",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemData.cs",
+      "Line": 39,
+      "IsUnityType": false,
+      "Incoming": 4,
+      "Outgoing": 0,
+      "Internal": 2,
+      "External": 2
+    },
+    {
+      "Id": "RewardType",
+      "Name": "RewardType",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+      "Line": 8,
+      "IsUnityType": false,
+      "Incoming": 3,
+      "Outgoing": 0,
+      "Internal": 3,
+      "External": 0
+    },
+    {
+      "Id": "RunData",
+      "Name": "RunData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\RunData.cs",
+      "Line": 5,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 3,
+      "Internal": 0,
+      "External": 3
+    },
+    {
+      "Id": "CardData\u002BCardOwner",
+      "Name": "CardData\u002BCardOwner",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardData.cs",
+      "Line": 120,
+      "IsUnityType": false,
+      "Incoming": 2,
+      "Outgoing": 0,
+      "Internal": 2,
+      "External": 0
+    },
+    {
+      "Id": "CardData\u002BCardType",
+      "Name": "CardData\u002BCardType",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardData.cs",
+      "Line": 117,
+      "IsUnityType": false,
+      "Incoming": 2,
+      "Outgoing": 0,
+      "Internal": 2,
+      "External": 0
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "BattleReward.GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+      "Steps": [
+        "BattleReward.GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "BattleReward.GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "BattleReward.GetCardRarity(RewardProbabilityData) / terminal"
+      ]
+    },
+    {
+      "Entry": "BattleReward.GenerateItemReward(RewardProbabilityData)",
+      "Steps": [
+        "BattleReward.GenerateItemReward(RewardProbabilityData)",
+        "BattleReward.IsItemRewardGiven(RewardProbabilityData) / terminal"
+      ]
+    },
+    {
+      "Entry": "BattleReward.GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+      "Steps": [
+        "BattleReward.GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "BattleReward.GetCardRarity(RewardProbabilityData) / terminal"
+      ]
+    },
+    {
+      "Entry": "HandView.Start()",
+      "Steps": [
+        "HandView.Start()",
+        "HandView.Refresh()",
+        "CardInteractionView.SetRestingSortingOrder(int) / terminal"
+      ]
+    },
+    {
+      "Entry": "CardInteractionView.OnDestroy()",
+      "Steps": [
+        "CardInteractionView.OnDestroy()",
+        "CardInteractionView.StopMovement() / terminal"
+      ]
+    },
+    {
+      "Entry": "DeckManager.Awake()",
+      "Steps": [
+        "DeckManager.Awake() / terminal"
+      ]
+    },
+    {
+      "Entry": "RewardsView.Start()",
+      "Steps": [
+        "RewardsView.Start() / terminal"
+      ]
+    },
+    {
+      "Entry": "CardReward.OnEnable()",
+      "Steps": [
+        "CardReward.OnEnable() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "CardHandler",
+        "SourceName": "CardHandler",
+        "Target": "CardInteractionView",
+        "TargetName": "CardInteractionView",
+        "Weight": 11,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 76,
+          "Text": "interactionView.MoveVisualCenterToPointer(eventData)"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "RewardProbabilityData",
+        "TargetName": "RewardProbabilityData",
+        "Weight": 7,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 48,
+          "Text": "RewardProbabilityData"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "DeckManager",
+        "SourceName": "DeckManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 6,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\DeckManager.cs",
+          "Line": 42,
+          "Text": "PlayerDeck.Add(Instantiate(strikeCard))"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "DeckManager",
+        "SourceName": "DeckManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 5,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\DeckManager.cs",
+          "Line": 25,
+          "Text": "CardData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 48,
+          "Text": "Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 66,
+          "Text": "cardRewards.Clear()"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "RewardItem",
+        "TargetName": "RewardItem",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 193,
+          "Text": "List\u003CRewardItem\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "CardData\u002BCardRarity",
+        "TargetName": "CardData\u002BCardRarity",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 48,
+          "Text": "Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "CardHandler",
+        "SourceName": "CardHandler",
+        "Target": "CardHandler\u002BCardState",
+        "TargetName": "CardHandler\u002BCardState",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 160,
+          "Text": "CardState"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "RewardItem",
+        "TargetName": "RewardItem",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 196,
+          "Text": "items.Add(new RewardItem(RewardType.Gold, goldReward))"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "CardInteractionView",
+        "SourceName": "CardInteractionView",
+        "Target": "DebugCardTargetArrow",
+        "TargetName": "DebugCardTargetArrow",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 299,
+          "Text": "debugTargetArrow.Hide()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "RewardItemButton",
+        "TargetName": "RewardItemButton",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 44,
+          "Text": "buttons.Contains(destroyedButton)"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "internal",
+        "Source": "CardData",
+        "SourceName": "CardData",
+        "Target": "CardEffect",
+        "TargetName": "CardEffect",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardData.cs",
+          "Line": 94,
+          "Text": "List\u003CCardEffect\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "CardRewardView",
+        "SourceName": "CardRewardView",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardRewardView.cs",
+          "Line": 13,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "HandView",
+        "SourceName": "HandView",
+        "Target": "CardInteractionView",
+        "TargetName": "CardInteractionView",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\HandView.cs",
+          "Line": 43,
+          "Text": "interactionView.SetRestingSortingOrder(i)"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "CardData",
+        "SourceName": "CardData",
+        "Target": "CardEffect",
+        "TargetName": "CardEffect",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardData.cs",
+          "Line": 69,
+          "Text": "List\u003CCardEffect\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "RewardItemButton",
+        "TargetName": "RewardItemButton",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 7,
+          "Text": "RewardItemButton"
+        }
+      },
+      {
+        "Kind": "unity_try_get_component",
+        "Direction": "internal",
+        "Source": "CardRewardView",
+        "SourceName": "CardRewardView",
+        "Target": "CardReward",
+        "TargetName": "CardReward",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardRewardView.cs",
+          "Line": 28,
+          "Text": "CardReward"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 70,
+          "Text": "CardData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "AddCardToPileEffect",
+        "SourceName": "AddCardToPileEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddCardToPileEffect.cs",
+          "Line": 11,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "RewardType",
+        "TargetName": "RewardType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 179,
+          "Text": "RewardType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "CardEffect",
+        "SourceName": "CardEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardEffect.cs",
+          "Line": 18,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "CardRewardView",
+        "SourceName": "CardRewardView",
+        "Target": "RewardItemButton",
+        "TargetName": "RewardItemButton",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardRewardView.cs",
+          "Line": 13,
+          "Text": "RewardItemButton"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "CardView",
+        "SourceName": "CardView",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardView.cs",
+          "Line": 25,
+          "Text": "CardData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "DeckManager",
+        "SourceName": "DeckManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\DeckManager.cs",
+          "Line": 53,
+          "Text": "CardData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "RewardItem",
+        "SourceName": "RewardItem",
+        "Target": "RewardType",
+        "TargetName": "RewardType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 23,
+          "Text": "RewardType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "RewardItemButton",
+        "SourceName": "RewardItemButton",
+        "Target": "RewardItem",
+        "TargetName": "RewardItem",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardItemButton.cs",
+          "Line": 18,
+          "Text": "RewardItem"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "BattleReward",
+        "TargetName": "BattleReward",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 20,
+          "Text": "BattleReward"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "RewardItemButton",
+        "TargetName": "RewardItemButton",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 40,
+          "Text": "RewardItemButton"
+        }
+      },
+      {
+        "Kind": "attribute_type_argument",
+        "Direction": "internal",
+        "Source": "CardHandler",
+        "SourceName": "CardHandler",
+        "Target": "CardInteractionView",
+        "TargetName": "CardInteractionView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 17,
+          "Text": "RequireComponent(typeof(CardInteractionView))"
+        }
+      },
+      {
+        "Kind": "attribute_type_argument",
+        "Direction": "internal",
+        "Source": "CardHandler",
+        "SourceName": "CardHandler",
+        "Target": "CardView",
+        "TargetName": "CardView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 16,
+          "Text": "RequireComponent(typeof(Canvas), typeof(GraphicRaycaster), typeof(CardView))"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "AddCardToPileEffect",
+        "SourceName": "AddCardToPileEffect",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddCardToPileEffect.cs",
+          "Line": 17,
+          "Text": "cardsToAdd.Add(cardToAdd)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "BattleReward",
+        "TargetName": "BattleReward",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 66,
+          "Text": "reward.GetRewardList()"
+        }
+      },
+      {
+        "Kind": "casts_to",
+        "Direction": "internal",
+        "Source": "RewardItemButton",
+        "SourceName": "RewardItemButton",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardItemButton.cs",
+          "Line": 49,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "AddCardToPileEffect",
+        "SourceName": "AddCardToPileEffect",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddCardToPileEffect.cs",
+          "Line": 15,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 42,
+          "Text": "List\u003CCardData\u003E"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 10,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 65,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "BattleState",
+        "SourceName": "BattleState",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+          "Line": 19,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "CardContext",
+        "SourceName": "CardContext",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardContext.cs",
+          "Line": 22,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "CoopCharData",
+        "SourceName": "CoopCharData",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+          "Line": 8,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "BattleType",
+        "TargetName": "BattleType",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 75,
+          "Text": "BattleType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "CardHandler",
+        "SourceName": "CardHandler",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 120,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 11,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 132,
+          "Text": "pool.Contains(card)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData\u002BCardRarity",
+        "TargetName": "CardData\u002BCardRarity",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 36,
+          "Text": "List\u003CItemData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData\u002BCardRarity",
+        "TargetName": "CardData\u002BCardRarity",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 35,
+          "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "PlayerCharData",
+        "SourceName": "PlayerCharData",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Player\\PlayerCharData.cs",
+          "Line": 14,
+          "Text": "List\u003CCardData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "AddAmmoEffect",
+        "SourceName": "AddAmmoEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddAmmoEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "AddCoopPointEffect",
+        "SourceName": "AddCoopPointEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddCoopPointEffect.cs",
+          "Line": 10,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 10,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 37,
+          "Text": "List\u003CItemData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "BlockEffect",
+        "SourceName": "BlockEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\BlockEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "DrawEffect",
+        "SourceName": "DrawEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DrawEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "GainGoldEffect",
+        "SourceName": "GainGoldEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\GainGoldEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 122,
+          "Text": "CardData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "HealEffect",
+        "SourceName": "HealEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\HealEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "IPassiveLogic",
+        "SourceName": "IPassiveLogic",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\IPassiveLogic.cs",
+          "Line": 5,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "LoseHPEffect",
+        "SourceName": "LoseHPEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\LoseHPEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 27,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "BattleReward",
+        "SourceName": "BattleReward",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 106,
+          "Text": "itemRewardsPool.FindAll(item =\u003E item.Rarity == rarity \u0026\u0026 (item.ItemTypes \u0026 getType) != 0)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "BattleReward",
+        "TargetName": "BattleReward",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 89,
+          "Text": "BattleReward.SetItemRewardsPool(itemPool)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "CardData\u002BCardRarity",
+        "TargetName": "CardData\u002BCardRarity",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 126,
+          "Text": "cardPools.TryGetValue(card.Rarity, out var pool)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "GameManager",
+        "SourceName": "GameManager",
+        "Target": "RewardProbabilityData",
+        "TargetName": "RewardProbabilityData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+          "Line": 153,
+          "Text": "rewardProbabilityTable.Find(t =\u003E t.Chapter == chapter \u0026\u0026 t.BattleType == battleType)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 37,
+          "Text": "mapUIController.OpenMap()"
+        }
+      },
+      {
+        "Kind": "casts_to",
+        "Direction": "outgoing",
+        "Source": "CardContext",
+        "SourceName": "CardContext",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardContext.cs",
+          "Line": 27,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "casts_to",
+        "Direction": "outgoing",
+        "Source": "RewardItem",
+        "SourceName": "RewardItem",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 19,
+          "Text": "ItemData"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "BattleReward",
+        "TargetName": "BattleReward",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 399,
+          "Text": "BattleReward"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 257,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "BattleManager",
+        "SourceName": "BattleManager",
+        "Target": "CardData",
+        "TargetName": "CardData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+          "Line": 39,
+          "Text": "List\u003CCardData\u003E"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "DebugCardTargetArrow",
+        "Source": "OnPopulateMesh(VertexHelper)",
+        "TargetType": "DebugCardTargetArrow",
+        "Target": "AddVertex(VertexHelper, Vector2)",
+        "Weight": 7,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 366,
+          "Text": "AddVertex(vertexHelper, startPoint \u002B perpendicular * shaftWidth * 0.5f)"
+        }
+      },
+      {
+        "SourceType": "CardInteractionView",
+        "Source": "TargetingMoveCoroutine()",
+        "TargetType": "CardInteractionView",
+        "Target": "TryGetTargetingWorldPosition(Vector3)",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 164,
+          "Text": "TryGetTargetingWorldPosition(out _)"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnDrag(PointerEventData)",
+        "TargetType": "CardHandler",
+        "Target": "SetState(CardState)",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 87,
+          "Text": "SetState(CardState.Dragging)"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnDrag(PointerEventData)",
+        "TargetType": "CardInteractionView",
+        "Target": "MoveVisualCenterToPointer(PointerEventData)",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 88,
+          "Text": "interactionView.MoveVisualCenterToPointer(eventData)"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnEndDrag(PointerEventData)",
+        "TargetType": "CardHandler",
+        "Target": "SetState(CardState)",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 111,
+          "Text": "SetState(CardState.Returning)"
+        }
+      },
+      {
+        "SourceType": "CardInteractionView",
+        "Source": "TargetingMoveCoroutine()",
+        "TargetType": "CardInteractionView",
+        "Target": "UpdateDebugTargetArrow(Vector2)",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 184,
+          "Text": "UpdateDebugTargetArrow(targetingPointerPosition)"
+        }
+      },
+      {
+        "SourceType": "CardRewardView",
+        "Source": "Open(List\u003CCardData\u003E, RewardItemButton)",
+        "TargetType": "CardRewardView",
+        "Target": "Refresh(List\u003CCardData\u003E)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardRewardView.cs",
+          "Line": 17,
+          "Text": "Refresh(cardRewardList)"
+        }
+      },
+      {
+        "SourceType": "HandView",
+        "Source": "Start()",
+        "TargetType": "HandView",
+        "Target": "Refresh()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\HandView.cs",
+          "Line": 18,
+          "Text": "Refresh()"
+        }
+      },
+      {
+        "SourceType": "RewardsView",
+        "Source": "Open(BattleReward)",
+        "TargetType": "RewardsView",
+        "Target": "Refresh()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 28,
+          "Text": "Refresh()"
+        }
+      },
+      {
+        "SourceType": "RewardItemButton",
+        "Source": "OnClick()",
+        "TargetType": "RewardItemButton",
+        "Target": "CompleteReward()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardItemButton.cs",
+          "Line": 30,
+          "Text": "CompleteReward()"
+        }
+      },
+      {
+        "SourceType": "RewardItemButton",
+        "Source": "OnClick()",
+        "TargetType": "RewardItemButton",
+        "Target": "DisplayCardReward()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardItemButton.cs",
+          "Line": 33,
+          "Text": "DisplayCardReward()"
+        }
+      },
+      {
+        "SourceType": "RewardItemButton",
+        "Source": "OnClick()",
+        "TargetType": "RewardItemButton",
+        "Target": "GetItemReward()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardItemButton.cs",
+          "Line": 36,
+          "Text": "GetItemReward()"
+        }
+      },
+      {
+        "SourceType": "HandView",
+        "Source": "Refresh()",
+        "TargetType": "CardInteractionView",
+        "Target": "SetRestingSortingOrder(int)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\HandView.cs",
+          "Line": 43,
+          "Text": "interactionView.SetRestingSortingOrder(i)"
+        }
+      },
+      {
+        "SourceType": "HandView",
+        "Source": "Refresh()",
+        "TargetType": "CardInteractionView",
+        "Target": "SetTargetingAnchor(RectTransform)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\HandView.cs",
+          "Line": 44,
+          "Text": "interactionView.SetTargetingAnchor(cardContainer)"
+        }
+      },
+      {
+        "SourceType": "CardReward",
+        "Source": "OnPointerEnter(PointerEventData)",
+        "TargetType": "CardReward",
+        "Target": "AnimateScale(Vector3, float)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardReward.cs",
+          "Line": 36,
+          "Text": "AnimateScale(zoomScale, animationDuration)"
+        }
+      },
+      {
+        "SourceType": "CardReward",
+        "Source": "OnPointerExit(PointerEventData)",
+        "TargetType": "CardReward",
+        "Target": "AnimateScale(Vector3, float)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\CardReward.cs",
+          "Line": 42,
+          "Text": "AnimateScale(originalScale, animationDuration)"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "BattleReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData, int, int)",
+        "TargetType": "BattleReward",
+        "Target": "GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 52,
+          "Text": "GenerateReward(cardRewardsPool, rewardData)"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnPointerEnter(PointerEventData)",
+        "TargetType": "CardHandler",
+        "Target": "SetState(CardState)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 55,
+          "Text": "SetState(CardState.Hover)"
+        }
+      },
+      {
+        "SourceType": "RewardItemButton",
+        "Source": "GetItemReward()",
+        "TargetType": "RewardItemButton",
+        "Target": "CompleteReward()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardItemButton.cs",
+          "Line": 58,
+          "Text": "CompleteReward()"
+        }
+      },
+      {
+        "SourceType": "RewardsView",
+        "Source": "Refresh()",
+        "TargetType": "BattleReward",
+        "Target": "GetRewardList()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 66,
+          "Text": "reward.GetRewardList()"
+        }
+      },
+      {
+        "SourceType": "RewardsView",
+        "Source": "Refresh()",
+        "TargetType": "RewardsView",
+        "Target": "DestroyButton(RewardItemButton)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 60,
+          "Text": "Destroy(child.gameObject)"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "TargetType": "BattleReward",
+        "Target": "GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 57,
+          "Text": "GenerateCardReward(cardRewardsPool, rewardData)"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "TargetType": "BattleReward",
+        "Target": "GenerateGoldReward(BattleType)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 58,
+          "Text": "GenerateGoldReward(rewardData.BattleType)"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "TargetType": "BattleReward",
+        "Target": "GenerateItemReward(RewardProbabilityData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 59,
+          "Text": "GenerateItemReward(rewardData)"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnPointerExit(PointerEventData)",
+        "TargetType": "CardHandler",
+        "Target": "SetState(CardState)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 63,
+          "Text": "SetState(CardState.Idle)"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "TargetType": "BattleReward",
+        "Target": "GetCardRarity(RewardProbabilityData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 69,
+          "Text": "GetCardRarity(rewardData)"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData)",
+        "TargetType": "BattleReward",
+        "Target": "PickCard(List\u003CCardData\u003E)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 70,
+          "Text": "PickCard(cardRewardsPool[rarity])"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnBeginDrag(PointerEventData)",
+        "TargetType": "CardHandler",
+        "Target": "SetState(CardState)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 75,
+          "Text": "SetState(CardState.Dragging)"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnBeginDrag(PointerEventData)",
+        "TargetType": "CardInteractionView",
+        "Target": "MoveVisualCenterToPointer(PointerEventData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 76,
+          "Text": "interactionView.MoveVisualCenterToPointer(eventData)"
+        }
+      },
+      {
+        "SourceType": "CardHandler",
+        "Source": "OnDrag(PointerEventData)",
+        "TargetType": "CardInteractionView",
+        "Target": "UpdateTargetingPointer(Vector2)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+          "Line": 84,
+          "Text": "interactionView.UpdateTargetingPointer(eventData.position)"
+        }
+      },
+      {
+        "SourceType": "CardInteractionView",
+        "Source": "EnterIdle()",
+        "TargetType": "CardInteractionView",
+        "Target": "HideDebugTargetArrow()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 83,
+          "Text": "HideDebugTargetArrow()"
+        }
+      },
+      {
+        "SourceType": "CardInteractionView",
+        "Source": "EnterIdle()",
+        "TargetType": "CardInteractionView",
+        "Target": "StopMovement()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 82,
+          "Text": "StopMovement()"
+        }
+      },
+      {
+        "SourceType": "CardInteractionView",
+        "Source": "EnterHover()",
+        "TargetType": "CardInteractionView",
+        "Target": "BringCardToFront()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 96,
+          "Text": "BringCardToFront()"
+        }
+      },
+      {
+        "SourceType": "CardInteractionView",
+        "Source": "EnterHover()",
+        "TargetType": "CardInteractionView",
+        "Target": "StopMovement()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+          "Line": 94,
+          "Text": "StopMovement()"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "GenerateItemReward(RewardProbabilityData)",
+        "TargetType": "BattleReward",
+        "Target": "GetItemGetType(BattleType)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 104,
+          "Text": "GetItemGetType(rewardData.BattleType)"
+        }
+      },
+      {
+        "SourceType": "BattleReward",
+        "Source": "GenerateItemReward(RewardProbabilityData)",
+        "TargetType": "BattleReward",
+        "Target": "GetItemRarity(RewardProbabilityData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+          "Line": 103,
+          "Text": "GetItemRarity(rewardData)"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "BattleReward.GenerateReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData) -\u003E BattleReward.GenerateCardReward(Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E, RewardProbabilityData) -\u003E BattleReward.GetCardRarity(RewardProbabilityData) / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "BattleReward.GenerateItemReward(RewardProbabilityData) -\u003E BattleReward.IsItemRewardGiven(RewardProbabilityData) / terminal"
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "DebugCardTargetArrow.OnPopulateMesh(VertexHelper) -\u003E DebugCardTargetArrow.AddVertex(VertexHelper, Vector2)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+        "Line": 366,
+        "Text": "AddVertex(vertexHelper, startPoint \u002B perpendicular * shaftWidth * 0.5f)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "CardInteractionView.TargetingMoveCoroutine() -\u003E CardInteractionView.TryGetTargetingWorldPosition(Vector3)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardInteractionView.cs",
+        "Line": 164,
+        "Text": "TryGetTargetingWorldPosition(out _)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "CardHandler.OnDrag(PointerEventData) -\u003E CardHandler.SetState(CardState)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+        "Line": 87,
+        "Text": "SetState(CardState.Dragging)"
+      }
+    },
+    {
+      "Title": "incoming accepts_parameter",
+      "Detail": "BattleManager -\u003E CardData / 10 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleManager.cs",
+        "Line": 65,
+        "Text": "List\u003CCardData\u003E"
+      }
+    },
+    {
+      "Title": "incoming has_field_type",
+      "Detail": "BattleState -\u003E CardData / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\BattleState.cs",
+        "Line": 19,
+        "Text": "List\u003CCardData\u003E"
+      }
+    },
+    {
+      "Title": "incoming has_field_type",
+      "Detail": "GameManager -\u003E CardData / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\GameManager.cs",
+        "Line": 35,
+        "Text": "Dictionary\u003CCardData.CardRarity, List\u003CCardData\u003E\u003E"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "CardHandler -\u003E CardInteractionView / 11 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\CardHandler.cs",
+        "Line": 76,
+        "Text": "interactionView.MoveVisualCenterToPointer(eventData)"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "BattleReward -\u003E RewardProbabilityData / 7 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+        "Line": 48,
+        "Text": "RewardProbabilityData"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "DeckManager -\u003E CardData / 6 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\DeckManager.cs",
+        "Line": 42,
+        "Text": "PlayerDeck.Add(Instantiate(strikeCard))"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "DeckManager -\u003E CardData / 5 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\DeckManager.cs",
+        "Line": 25,
+        "Text": "CardData"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "BattleReward -\u003E CardData / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+        "Line": 48,
+        "Text": "Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "BattleReward -\u003E CardData / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+        "Line": 66,
+        "Text": "cardRewards.Clear()"
+      }
+    },
+    {
+      "Title": "Internal creates",
+      "Detail": "BattleReward -\u003E RewardItem / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+        "Line": 193,
+        "Text": "List\u003CRewardItem\u003E"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "BattleReward -\u003E CardData\u002BCardRarity / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\BattleReward.cs",
+        "Line": 48,
+        "Text": "Dictionary\u003CCardRarity, List\u003CCardData\u003E\u003E"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Card System context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

@@ -1,0 +1,534 @@
+﻿{
+  "Id": "ui",
+  "Name": "UI Layer",
+  "Anchor": "systems/ui-layer.md",
+  "Stats": {
+    "NodeCount": 4,
+    "InternalEdges": 9,
+    "ExternalEdges": 7,
+    "EntryMethodCount": 4,
+    "Keywords": [
+      "ui",
+      "char",
+      "coop",
+      "select",
+      "btn",
+      "cooperator",
+      "dialogue",
+      "fade"
+    ]
+  },
+  "RoleEstimate": "UI Layer appears to be an internally dense area around ui, char, coop, select, btn. It contains 4 types, including 4 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "SelectCoopCharBtn.Start@15",
+      "TypeId": "SelectCoopCharBtn",
+      "Signature": "Start()",
+      "Label": "SelectCoopCharBtn.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+      "Line": 15
+    },
+    {
+      "Id": "SelectCoopCharUI.Awake@17",
+      "TypeId": "SelectCoopCharUI",
+      "Signature": "Awake()",
+      "Label": "SelectCoopCharUI.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+      "Line": 17
+    },
+    {
+      "Id": "SelectCoopCharUI.Init@22",
+      "TypeId": "SelectCoopCharUI",
+      "Signature": "Init()",
+      "Label": "SelectCoopCharUI.Init()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+      "Line": 22
+    },
+    {
+      "Id": "FadeController.StartFade@35",
+      "TypeId": "FadeController",
+      "Signature": "StartFade()",
+      "Label": "FadeController.StartFade()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\FadeController.cs",
+      "Line": 35
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "SelectCoopCharUI",
+      "Name": "SelectCoopCharUI",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+      "Line": 6,
+      "IsUnityType": true,
+      "Incoming": 6,
+      "Outgoing": 7,
+      "Internal": 9,
+      "External": 4
+    },
+    {
+      "Id": "SelectCoopCharBtn",
+      "Name": "SelectCoopCharBtn",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+      "Line": 5,
+      "IsUnityType": true,
+      "Incoming": 3,
+      "Outgoing": 7,
+      "Internal": 7,
+      "External": 3
+    },
+    {
+      "Id": "FadeController",
+      "Name": "FadeController",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\FadeController.cs",
+      "Line": 5,
+      "IsUnityType": true,
+      "Incoming": 2,
+      "Outgoing": 0,
+      "Internal": 2,
+      "External": 0
+    },
+    {
+      "Id": "DialogueUI",
+      "Name": "DialogueUI",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueUI.cs",
+      "Line": 5,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 0,
+      "Internal": 0,
+      "External": 0
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "SelectCoopCharUI.Init()",
+      "Steps": [
+        "SelectCoopCharUI.Init()",
+        "FadeController.FadeIn() / terminal"
+      ]
+    },
+    {
+      "Entry": "SelectCoopCharBtn.Start()",
+      "Steps": [
+        "SelectCoopCharBtn.Start() / terminal"
+      ]
+    },
+    {
+      "Entry": "SelectCoopCharUI.Awake()",
+      "Steps": [
+        "SelectCoopCharUI.Awake() / terminal"
+      ]
+    },
+    {
+      "Entry": "FadeController.StartFade()",
+      "Steps": [
+        "FadeController.StartFade() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "unity_get_component",
+        "Direction": "internal",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "SelectCoopCharUI",
+        "TargetName": "SelectCoopCharUI",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 17,
+          "Text": "SelectCoopCharUI"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "SelectCoopCharUI",
+        "TargetName": "SelectCoopCharUI",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 73,
+          "Text": "selectCoopCharUI.CloseUI()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "FadeController",
+        "TargetName": "FadeController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 24,
+          "Text": "fadeController.FadeIn()"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "SelectCoopCharBtn",
+        "TargetName": "SelectCoopCharBtn",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 19,
+          "Text": "List\u003CSelectCoopCharBtn\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "SelectCoopCharUI",
+        "TargetName": "SelectCoopCharUI",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 9,
+          "Text": "SelectCoopCharUI"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "FadeController",
+        "TargetName": "FadeController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 10,
+          "Text": "FadeController"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "SelectCoopCharBtn",
+        "TargetName": "SelectCoopCharBtn",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 9,
+          "Text": "List\u003CSelectCoopCharBtn\u003E"
+        }
+      },
+      {
+        "Kind": "unity_get_component",
+        "Direction": "internal",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "SelectCoopCharBtn",
+        "TargetName": "SelectCoopCharBtn",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 19,
+          "Text": "SelectCoopCharBtn"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "SelectCoopCharUI",
+        "TargetName": "SelectCoopCharUI",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 241,
+          "Text": "selectCoopCharUI.Init()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 62,
+          "Text": "dialogueView.Play(coopCharData.joinDialogueJson, FinishSelection)"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "SelectCoopCharUI",
+        "TargetName": "SelectCoopCharUI",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 25,
+          "Text": "SelectCoopCharUI"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 11,
+          "Text": "DialogueView"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "outgoing",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 13,
+          "Text": "DialogueView"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "CoopCharData",
+        "TargetName": "CoopCharData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 59,
+          "Text": "CoopCharData"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 58,
+          "Text": "DialogueView"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "SelectCoopCharUI",
+        "Source": "Init()",
+        "TargetType": "FadeController",
+        "Target": "FadeIn()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 24,
+          "Text": "fadeController.FadeIn()"
+        }
+      },
+      {
+        "SourceType": "SelectCoopCharBtn",
+        "Source": "OnClickBtn()",
+        "TargetType": "SelectCoopCharBtn",
+        "Target": "FinishSelection()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 66,
+          "Text": "FinishSelection()"
+        }
+      },
+      {
+        "SourceType": "SelectCoopCharBtn",
+        "Source": "FinishSelection()",
+        "TargetType": "SelectCoopCharUI",
+        "Target": "CloseUI()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 73,
+          "Text": "selectCoopCharUI.CloseUI()"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "SelectCoopCharUI.Init() -\u003E FadeController.FadeIn() / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "SelectCoopCharBtn.Start() -\u003E "
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "SelectCoopCharUI.Init() -\u003E FadeController.FadeIn()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+        "Line": 24,
+        "Text": "fadeController.FadeIn()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "SelectCoopCharBtn.OnClickBtn() -\u003E SelectCoopCharBtn.FinishSelection()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+        "Line": 66,
+        "Text": "FinishSelection()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "SelectCoopCharBtn.FinishSelection() -\u003E SelectCoopCharUI.CloseUI()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+        "Line": 73,
+        "Text": "selectCoopCharUI.CloseUI()"
+      }
+    },
+    {
+      "Title": "incoming calls_member",
+      "Detail": "MapUIController -\u003E SelectCoopCharUI / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+        "Line": 241,
+        "Text": "selectCoopCharUI.Init()"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "SelectCoopCharBtn -\u003E DialogueView / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+        "Line": 62,
+        "Text": "dialogueView.Play(coopCharData.joinDialogueJson, FinishSelection)"
+      }
+    },
+    {
+      "Title": "incoming has_field_type",
+      "Detail": "MapUIController -\u003E SelectCoopCharUI / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+        "Line": 25,
+        "Text": "SelectCoopCharUI"
+      }
+    },
+    {
+      "Title": "Internal unity_get_component",
+      "Detail": "SelectCoopCharBtn -\u003E SelectCoopCharUI / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+        "Line": 17,
+        "Text": "SelectCoopCharUI"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "SelectCoopCharBtn -\u003E SelectCoopCharUI / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+        "Line": 73,
+        "Text": "selectCoopCharUI.CloseUI()"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "SelectCoopCharUI -\u003E FadeController / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+        "Line": 24,
+        "Text": "fadeController.FadeIn()"
+      }
+    },
+    {
+      "Title": "Internal creates",
+      "Detail": "SelectCoopCharUI -\u003E SelectCoopCharBtn / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+        "Line": 19,
+        "Text": "List\u003CSelectCoopCharBtn\u003E"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "SelectCoopCharBtn -\u003E SelectCoopCharUI / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+        "Line": 9,
+        "Text": "SelectCoopCharUI"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "SelectCoopCharUI -\u003E FadeController / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+        "Line": 10,
+        "Text": "FadeController"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "SelectCoopCharUI -\u003E SelectCoopCharBtn / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+        "Line": 9,
+        "Text": "List\u003CSelectCoopCharBtn\u003E"
+      }
+    },
+    {
+      "Title": "Internal unity_get_component",
+      "Detail": "SelectCoopCharUI -\u003E SelectCoopCharBtn / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+        "Line": 19,
+        "Text": "SelectCoopCharBtn"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the UI Layer context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

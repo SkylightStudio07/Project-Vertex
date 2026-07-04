@@ -1,0 +1,723 @@
+﻿{
+  "Id": "topic:dialogue",
+  "Name": "Dialogue",
+  "Anchor": "systems/dialogue.md",
+  "Stats": {
+    "NodeCount": 4,
+    "InternalEdges": 4,
+    "ExternalEdges": 19,
+    "EntryMethodCount": 3,
+    "Keywords": [
+      "dialogue",
+      "character",
+      "line"
+    ]
+  },
+  "RoleEstimate": "Dialogue appears to be an externally connected area around dialogue, character, line. It contains 4 types, including 1 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "DialogueView.Awake@33",
+      "TypeId": "DialogueView",
+      "Signature": "Awake()",
+      "Label": "DialogueView.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+      "Line": 33
+    },
+    {
+      "Id": "DialogueView.Update@220",
+      "TypeId": "DialogueView",
+      "Signature": "Update()",
+      "Label": "DialogueView.Update()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+      "Line": 220
+    },
+    {
+      "Id": "DialogueView.SetupCharacterSlots@71",
+      "TypeId": "DialogueView",
+      "Signature": "SetupCharacterSlots()",
+      "Label": "DialogueView.SetupCharacterSlots()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+      "Line": 71
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "DialogueView",
+      "Name": "DialogueView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+      "Line": 12,
+      "IsUnityType": true,
+      "Incoming": 8,
+      "Outgoing": 10,
+      "Internal": 3,
+      "External": 15
+    },
+    {
+      "Id": "DialogueLineData",
+      "Name": "DialogueLineData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+      "Line": 26,
+      "IsUnityType": false,
+      "Incoming": 3,
+      "Outgoing": 1,
+      "Internal": 2,
+      "External": 2
+    },
+    {
+      "Id": "DialogueScriptData",
+      "Name": "DialogueScriptData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+      "Line": 47,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 2,
+      "Internal": 2,
+      "External": 1
+    },
+    {
+      "Id": "DialogueCharacterData",
+      "Name": "DialogueCharacterData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+      "Line": 8,
+      "IsUnityType": false,
+      "Incoming": 2,
+      "Outgoing": 0,
+      "Internal": 1,
+      "External": 1
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "DialogueView.Update()",
+      "Steps": [
+        "DialogueView.Update()",
+        "DialogueView.OnAdvanceClicked()",
+        "DialogueView.ShowCurrentLine()",
+        "DialogueView.Finish() / terminal"
+      ]
+    },
+    {
+      "Entry": "DialogueView.Awake()",
+      "Steps": [
+        "DialogueView.Awake() / terminal"
+      ]
+    },
+    {
+      "Entry": "DialogueView.SetupCharacterSlots()",
+      "Steps": [
+        "DialogueView.SetupCharacterSlots() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueLineData",
+        "TargetName": "DialogueLineData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 136,
+          "Text": "DialogueLineData"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "DialogueScriptData",
+        "SourceName": "DialogueScriptData",
+        "Target": "DialogueCharacterData",
+        "TargetName": "DialogueCharacterData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+          "Line": 49,
+          "Text": "DialogueCharacterData[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueScriptData",
+        "TargetName": "DialogueScriptData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 26,
+          "Text": "DialogueScriptData"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 27,
+          "Text": "Dictionary\u003Cstring, DialogueNodeData\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "CharacterSlotView",
+        "SourceName": "CharacterSlotView",
+        "Target": "DialogueCharacterData",
+        "TargetName": "DialogueCharacterData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\CharacterSlotView.cs",
+          "Line": 17,
+          "Text": "DialogueCharacterData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueChoiceOption",
+        "TargetName": "DialogueChoiceOption",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 185,
+          "Text": "DialogueChoiceOption"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 49,
+          "Text": "dialogueView.Play(dialogueJson, () =\u003E isDialogueEnd?.Invoke())"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 97,
+          "Text": "_nodeMap.TryGetValue(nodeId, out _currentNode)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 82,
+          "Text": "dialogueView.Play(_data.dialogueJson, ShowDescriptionAndChoices)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 62,
+          "Text": "dialogueView.Play(coopCharData.joinDialogueJson, FinishSelection)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 193,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 61,
+          "Text": "Dictionary\u003Cstring, DialogueNodeData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "DialogueLineData",
+        "SourceName": "DialogueLineData",
+        "Target": "DialogueChoiceOption",
+        "TargetName": "DialogueChoiceOption",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+          "Line": 36,
+          "Text": "DialogueChoiceOption[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "DialogueManager",
+        "SourceName": "DialogueManager",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\DialogueManager.cs",
+          "Line": 9,
+          "Text": "DialogueView"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "DialogueNodeData",
+        "SourceName": "DialogueNodeData",
+        "Target": "DialogueLineData",
+        "TargetName": "DialogueLineData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+          "Line": 43,
+          "Text": "DialogueLineData[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "DialogueScriptData",
+        "SourceName": "DialogueScriptData",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+          "Line": 51,
+          "Text": "DialogueNodeData[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "CharacterSlotView",
+        "TargetName": "CharacterSlotView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 15,
+          "Text": "CharacterSlotView[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 31,
+          "Text": "DialogueView"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 11,
+          "Text": "DialogueView"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "incoming",
+        "Source": "SelectCoopCharUI",
+        "SourceName": "SelectCoopCharUI",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharUI.cs",
+          "Line": 13,
+          "Text": "DialogueView"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "incoming",
+        "Source": "SelectCoopCharBtn",
+        "SourceName": "SelectCoopCharBtn",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\UI\\SelectCoopCharBtn.cs",
+          "Line": 58,
+          "Text": "DialogueView"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowCurrentLine()",
+        "TargetType": "DialogueView",
+        "Target": "Finish()",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 113,
+          "Text": "Finish()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "Play(TextAsset, Action)",
+        "TargetType": "DialogueView",
+        "Target": "GoToNode(string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 68,
+          "Text": "GoToNode(_script.startNode)"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "Play(TextAsset, Action)",
+        "TargetType": "DialogueView",
+        "Target": "SetupCharacterSlots()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 65,
+          "Text": "SetupCharacterSlots()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "GoToNode(string)",
+        "TargetType": "DialogueView",
+        "Target": "Finish()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 100,
+          "Text": "Finish()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "GoToNode(string)",
+        "TargetType": "DialogueView",
+        "Target": "ShowCurrentLine()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 104,
+          "Text": "ShowCurrentLine()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowCurrentLine()",
+        "TargetType": "DialogueView",
+        "Target": "HideChoices()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 109,
+          "Text": "HideChoices()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowCurrentLine()",
+        "TargetType": "DialogueView",
+        "Target": "ShowChoices(DialogueLineData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 124,
+          "Text": "ShowChoices(line)"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowCurrentLine()",
+        "TargetType": "DialogueView",
+        "Target": "ShowLine(DialogueLineData)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 121,
+          "Text": "ShowLine(line)"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowLine(DialogueLineData)",
+        "TargetType": "DialogueView",
+        "Target": "GetCharacterName(string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 139,
+          "Text": "GetCharacterName(line.speaker)"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowLine(DialogueLineData)",
+        "TargetType": "DialogueView",
+        "Target": "UpdateSpeakerHighlight(string, string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 141,
+          "Text": "UpdateSpeakerHighlight(line.speaker, line.emotion)"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowChoices(DialogueLineData)",
+        "TargetType": "DialogueView",
+        "Target": "Finish()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 171,
+          "Text": "Finish()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "ShowChoices(DialogueLineData)",
+        "TargetType": "DialogueView",
+        "Target": "OnChoiceSelected(DialogueChoiceOption)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 180,
+          "Text": "OnChoiceSelected(capturedOption)"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "OnChoiceSelected(DialogueChoiceOption)",
+        "TargetType": "DialogueView",
+        "Target": "Finish()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 203,
+          "Text": "Finish()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "OnChoiceSelected(DialogueChoiceOption)",
+        "TargetType": "DialogueView",
+        "Target": "GoToNode(string)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 207,
+          "Text": "GoToNode(option.next)"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "OnChoiceSelected(DialogueChoiceOption)",
+        "TargetType": "DialogueView",
+        "Target": "HideChoices()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 187,
+          "Text": "HideChoices()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "Update()",
+        "TargetType": "DialogueView",
+        "Target": "OnAdvanceClicked()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 228,
+          "Text": "OnAdvanceClicked()"
+        }
+      },
+      {
+        "SourceType": "DialogueView",
+        "Source": "OnAdvanceClicked()",
+        "TargetType": "DialogueView",
+        "Target": "ShowCurrentLine()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 234,
+          "Text": "ShowCurrentLine()"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "DialogueView.Update() -\u003E DialogueView.OnAdvanceClicked() -\u003E DialogueView.ShowCurrentLine() -\u003E DialogueView.Finish() / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "DialogueView.Awake() -\u003E "
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "DialogueView.ShowCurrentLine() -\u003E DialogueView.Finish()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 113,
+        "Text": "Finish()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "DialogueView.Play(TextAsset, Action) -\u003E DialogueView.GoToNode(string)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 68,
+        "Text": "GoToNode(_script.startNode)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "DialogueView.Play(TextAsset, Action) -\u003E DialogueView.SetupCharacterSlots()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 65,
+        "Text": "SetupCharacterSlots()"
+      }
+    },
+    {
+      "Title": "outgoing has_field_type",
+      "Detail": "DialogueView -\u003E DialogueNodeData / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 27,
+        "Text": "Dictionary\u003Cstring, DialogueNodeData\u003E"
+      }
+    },
+    {
+      "Title": "incoming accepts_parameter",
+      "Detail": "CharacterSlotView -\u003E DialogueCharacterData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\CharacterSlotView.cs",
+        "Line": 17,
+        "Text": "DialogueCharacterData"
+      }
+    },
+    {
+      "Title": "outgoing accepts_parameter",
+      "Detail": "DialogueView -\u003E DialogueChoiceOption / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 185,
+        "Text": "DialogueChoiceOption"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "DialogueView -\u003E DialogueLineData / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 136,
+        "Text": "DialogueLineData"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "DialogueScriptData -\u003E DialogueCharacterData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+        "Line": 49,
+        "Text": "DialogueCharacterData[]"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "DialogueView -\u003E DialogueScriptData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 26,
+        "Text": "DialogueScriptData"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Dialogue context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

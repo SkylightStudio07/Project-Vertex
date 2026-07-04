@@ -13,8 +13,10 @@ public class CoopCharData : CharData
     [Header("합류 시 재생할 짧은 대사 (선택)")]
     public TextAsset joinDialogueJson;
 
-    [Header("전투 보상 카드 풀")]
-    public List<CardData> battleRewardCardPool = new();
+    [Header("전투 보상 카드 풀 (등급별)")]
+    public List<CardData> rewardPoolCommon = new();
+    public List<CardData> rewardPoolRare   = new();
+    public List<CardData> rewardPoolUnique = new();
 
     [Header("호감도 최대 레벨")]
     public int maxCoopLevel;
