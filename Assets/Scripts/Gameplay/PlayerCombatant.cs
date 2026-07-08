@@ -42,17 +42,27 @@ public class PlayerCombatant : ICombatant
         if (IsDead) OnDied?.Invoke();
     }
 
-    public void AddBlock(int amount) => _block = Math.Max(0, _block + amount);
+    public void AddBlock(int amount)
+    {
+        foreach (var p in _passives)
+            if (p is DexterityStatus dex) amount += dex.Stacks;
+        _block = Math.Max(0, _block + amount);
+    }
 
     public void ResetBlock() => _block = 0;
 
-    // 패시브 추가 — 같은 타입이면 스택 합산
-    public void AddPassive(StatusEffectBase passive)
+    // 패시브 추가.
+    // StatusEffectBase면 같은 타입과 스택 합산 시도.
+    // PowerPassiveBase(영구 파워)면 merge 없이 직접 추가.
+    public void AddPassive(IPassiveLogic passive)
     {
-        foreach (var p in _passives)
+        if (passive is StatusEffectBase newStatus)
         {
-            if (p is StatusEffectBase existing && existing.TryMerge(passive))
-                return;
+            foreach (var p in _passives)
+            {
+                if (p is StatusEffectBase existing && existing.TryMerge(newStatus))
+                    return;
+            }
         }
         _passives.Add(passive);
     }

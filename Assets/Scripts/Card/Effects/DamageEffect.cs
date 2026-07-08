@@ -16,6 +16,7 @@ public class DamageEffect : CardEffect
         if (context.State == null) return;
 
         ICombatant attacker = context.Attacker;
+        bool isAmmoAttack = context.Card != null && context.Card.AmmoCost > 0;
 
         switch (targetType)
         {
@@ -23,7 +24,7 @@ public class DamageEffect : CardEffect
                 ICombatant single = ResolveSingleTarget(context);
                 if (single == null || single.IsDead) return;
                 for (int i = 0; i < hitCount; i++)
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker), single, context.State);
+                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), single, context.State);
                 break;
 
             case TargetType.AllEnemies:
@@ -31,7 +32,7 @@ public class DamageEffect : CardEffect
                 {
                     if (enemy.IsDead) continue;
                     for (int i = 0; i < hitCount; i++)
-                        DamageCalculator.Resolve(new DamageInfo(amount, attacker), enemy, context.State);
+                        DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), enemy, context.State);
                 }
                 break;
 
@@ -42,12 +43,10 @@ public class DamageEffect : CardEffect
                 if (alive.Count == 0) return;
                 for (int i = 0; i < hitCount; i++)
                 {
-                    // UnityEngine.Random은 시드와 무관해 결정론적 재현이 안 된다.
-                    // BattleManager.Rnd(시드 기반 System.Random)를 사용한다.
                     int idx = context.Battle != null
                         ? context.Battle.Rnd.Next(0, alive.Count)
                         : UnityEngine.Random.Range(0, alive.Count);
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker), alive[idx], context.State);
+                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), alive[idx], context.State);
                 }
                 break;
         }
@@ -65,9 +64,8 @@ public class DamageEffect : CardEffect
 
         if (ctx.State == null) yield break;
         ICombatant attacker = ctx.Attacker;
+        bool isAmmoAttack = ctx.Card != null && ctx.Card.AmmoCost > 0;
 
-        // 루프마다 new WaitForSeconds를 생성하면 GC Alloc이 hitCount만큼 발생한다.
-        // 한 번만 생성해서 재사용한다.
         var delay = new WaitForSeconds(hitInterval);
 
         switch (targetType)
@@ -77,16 +75,13 @@ public class DamageEffect : CardEffect
                 if (single == null || single.IsDead) yield break;
                 for (int i = 0; i < hitCount; i++)
                 {
-                    // yield return 사이에 적이 사망할 수 있으므로 매 히트마다 체크
                     if (single.IsDead) yield break;
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker), single, ctx.State);
+                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), single, ctx.State);
                     if (i < hitCount - 1) yield return delay;
                 }
                 break;
 
             case TargetType.AllEnemies:
-                // ctx.AllEnemies를 직접 foreach하면 yield return 대기 중 리스트가 수정(적 사망 제거)될 때
-                // InvalidOperationException이 발생할 수 있어서 복사본을 사용한다.
                 var targets = new List<EnemyInstance>(ctx.AllEnemies);
                 foreach (var enemy in targets)
                 {
@@ -94,7 +89,7 @@ public class DamageEffect : CardEffect
                     for (int i = 0; i < hitCount; i++)
                     {
                         if (enemy.IsDead) break;
-                        DamageCalculator.Resolve(new DamageInfo(amount, attacker), enemy, ctx.State);
+                        DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), enemy, ctx.State);
                         if (i < hitCount - 1) yield return delay;
                     }
                 }
@@ -107,16 +102,12 @@ public class DamageEffect : CardEffect
                 if (alive.Count == 0) yield break;
                 for (int i = 0; i < hitCount; i++)
                 {
-                    // 이전 히트로 적이 사망했을 수 있으므로 매 히트 전에 dead 제거.
-                    // alive를 초기에만 구성하면 이미 죽은 적을 계속 타겟팅하는 버그가 생긴다.
                     alive.RemoveAll(e => e.IsDead);
                     if (alive.Count == 0) yield break;
-                    // UnityEngine.Random은 시드와 무관해 결정론적 재현이 안 된다.
-                    // BattleManager.Rnd(시드 기반 System.Random)를 사용한다.
                     int idx = ctx.Battle != null
                         ? ctx.Battle.Rnd.Next(0, alive.Count)
                         : UnityEngine.Random.Range(0, alive.Count);
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker), alive[idx], ctx.State);
+                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), alive[idx], ctx.State);
                     if (i < hitCount - 1) yield return delay;
                 }
                 break;
