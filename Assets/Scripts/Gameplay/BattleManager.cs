@@ -32,6 +32,11 @@ public class BattleManager : MonoBehaviour
     public int Ammo        => _state?.Ammo        ?? 0;
     public int PlayerBlock => _state?.Player?.Block ?? 0;
 
+#if UNITY_EDITOR
+    [Header("디버그")]
+    [SerializeField] private List<string> _passiveDebugView = new();
+#endif
+
     // 손패 변경 배치 처리
     private int  _handChangeBatchDepth;
     private bool _hasPendingHandChange;
@@ -260,8 +265,10 @@ public class BattleManager : MonoBehaviour
             _state.Ammo   -= card.AmmoCost;
 
             _state.Hand.Remove(card);
-            if (card.IsExhaust) _state.ExhaustPile.Add(card);
-            else _state.DiscardPile.Add(card);
+            if (card.IsExhaust || card.Type == CardData.CardType.Power)
+                _state.ExhaustPile.Add(card);
+            else
+                _state.DiscardPile.Add(card);
             NotifyHandChanged();
         }
         finally
@@ -468,5 +475,10 @@ public class BattleManager : MonoBehaviour
     {
         if (Keyboard.current[Key.V].wasPressedThisFrame)
             TestVictory(BattleType.Normal);
+
+#if UNITY_EDITOR
+        if (_state?.Player != null)
+            _passiveDebugView = _state.Player.DebugPassiveInfo;
+#endif
     }
 }

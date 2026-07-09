@@ -14,6 +14,7 @@
 
 
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewCard", menuName = "Game Asset/Card")]
@@ -78,6 +79,7 @@ public class CardData : ScriptableObject
     [Header("강화")]
     [SerializeField] private string upgradedName;
     [SerializeField] private int upgradedCost;
+    [SerializeField] private bool upgradedIsExhaust;
     [SerializeField] public bool isUpgraded;
     [SerializeField] private List<CardEffect> upgradedEffects = new();
 
@@ -90,7 +92,7 @@ public class CardData : ScriptableObject
     public Sprite CardImage       => cardImage;
     public int    EnergyCost      => isUpgraded ? upgradedCost : energyCost;
     public int    AmmoCost        => ammoCost;
-    public string CardDescription => cardDescription;
+    public string CardDescription => GetFullDescription();
     public List<CardEffect> CardEffect  => cardEffects;
     public List<CardEffect> UpgradedEffects => upgradedEffects;
     public IReadOnlyList<CardEffect> ActiveEffects
@@ -109,10 +111,24 @@ public class CardData : ScriptableObject
     public CardType   Type        => cardType;
     public CardRarity Rarity      => cardRarity;
     public CardOwner  Owner       => cardOwner;
-    public bool IsExhaust         => isExhaust;
+    public bool IsExhaust         => isUpgraded ? upgradedIsExhaust : isExhaust;
     public bool IsEthereal        => isEthereal;
     public bool IsInnate          => isInnate;
     public bool IsRetain          => isRetain;
+
+    // {0.fieldName} 토큰을 ActiveEffects[0]의 해당 필드값으로 치환한다.
+    public string GetFullDescription()
+    {
+        if (string.IsNullOrEmpty(cardDescription)) return string.Empty;
+        return Regex.Replace(cardDescription, @"\{(\d+)\.(\w+)\}", match =>
+        {
+            if (!int.TryParse(match.Groups[1].Value, out int idx)) return match.Value;
+            var effects = ActiveEffects;
+            if (idx >= effects.Count) return match.Value;
+            var field = effects[idx].GetType().GetField(match.Groups[2].Value);
+            return field?.GetValue(effects[idx])?.ToString() ?? match.Value;
+        });
+    }
 
     public enum CardType  { Attack, Skill, Power }
     public enum CardRarity { Common, Rare, Unique }

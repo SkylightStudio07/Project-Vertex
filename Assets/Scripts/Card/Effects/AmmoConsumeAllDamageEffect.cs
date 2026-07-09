@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// 엠티 매거진용. 현재 탄약을 전량 소모하고 damagePerAmmo * 소모량만큼 피해를 준다.
-// 탄약이 없으면 효과 없음.
 [CreateAssetMenu(menuName = "Cards/Effects/AmmoConsumeAllDamage")]
 public class AmmoConsumeAllDamageEffect : CardEffect
 {

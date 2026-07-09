@@ -7,6 +7,9 @@ public class BlockEffect : CardEffect
 
     public override void Execute(CardContext context)
     {
-        context.State?.Player?.AddBlock(amount);
+        if (context.ActingEnemy != null)
+            context.ActingEnemy.AddBlock(amount);
+        else
+            context.State?.Player?.AddBlock(amount);
     }
 }

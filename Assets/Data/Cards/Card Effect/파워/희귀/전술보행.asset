@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca9929a3977cff4d82869d5a28d6177, type: 3}
-  m_Name: Pure Damage
-  m_EditorClassIdentifier: Assembly-CSharp::DamageEffect
-  amount: 1
-  hitCount: 6
+  m_Script: {fileID: 11500000, guid: c797c1f2b1de16549a854ba602e1593d, type: 3}
+  m_Name: "\uC804\uC220\uBCF4\uD589"
+  m_EditorClassIdentifier: Assembly-CSharp::TacticalWalkPowerEffect
+  dexterityBonus: 2
+  firstAttackBonus: 6

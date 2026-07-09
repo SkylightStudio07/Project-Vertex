@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // 전투 내 플레이어를 ICombatant로 표현하는 래퍼.
@@ -81,4 +82,12 @@ public class PlayerCombatant : ICombatant
             }
         }
     }
+
+#if UNITY_EDITOR
+    public List<string> DebugPassiveInfo => _passives
+        .Select(p => p is StatusEffectBase s
+            ? $"{p.GetType().Name} (x{s.Stacks})"
+            : p.GetType().Name)
+        .ToList();
+#endif
 }

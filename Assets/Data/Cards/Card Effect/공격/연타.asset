@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca9929a3977cff4d82869d5a28d6177, type: 3}
   m_Name: "\uC5F0\uD0C0"
   m_EditorClassIdentifier: Assembly-CSharp::DamageEffect
-  amount: 0
-  hitCount: 1
+  amount: 4
+  hitCount: 2
   targetType: 1
+  hitInterval: 0.08

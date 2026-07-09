@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// R&C 컴퍼니 스피드로더용. 플레이 시 AmmoPerTurnPassive를 플레이어에 등록한다.
 [CreateAssetMenu(menuName = "Cards/Effects/AmmoPerTurnPower")]
 public class AmmoPerTurnPowerEffect : CardEffect
 {
