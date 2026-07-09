@@ -11,4 +11,5 @@ public interface ICombatant
     void TakeDamage(DamageInfo info);
     void AddBlock(int amount);
     void ResetBlock();
+    void RemoveExpiredPassives();
 }

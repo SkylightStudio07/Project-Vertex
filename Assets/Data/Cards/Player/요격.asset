@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: "\uC694\uACA9"
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "\uC694\uACA9"
+  cardImage: {fileID: 0}
+  CardBackground: {fileID: 0}
+  energyCost: 2
+  ammoCost: 100000
+  cardType: 1
+  cardRarity: 1
+  cardOwner: 0
+  cardDescription: "\uBAA8\uB4E0 \uD0C4\uD658\uC744 \uC18C\uBE44\uD558\uACE0 1\uD134\uB3D9\uC548
+    \uBAA8\uB4E0 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uBC1B\uC9C0 \uC54A\uB294\uB2E4."
+  cardEffects:
+  - {fileID: 11400000, guid: b8ca18280383c3b4abf324f84f59ba08, type: 2}
+  useMode: 0
+  isExhaust: 1
+  isEthereal: 0
+  isInnate: 0
+  isRetain: 0
+  upgradedName: "\uC694\uACA9_V2"
+  upgradedCost: 2
+  isUpgraded: 0
+  upgradedEffects: []
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}

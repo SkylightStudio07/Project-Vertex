@@ -26,6 +26,7 @@ public class ApplyStatusEffect : CardEffect
             case TargetType.Self:
                 var selfPassive = CreatePassive();
                 if (selfPassive != null) context.State.Player?.AddPassive(selfPassive);
+                Debug.Log("패시브 추가");
                 break;
         }
     }
@@ -42,6 +43,7 @@ public class ApplyStatusEffect : CardEffect
         StatusType.Weak       => new WeakStatus(amount),
         StatusType.Strength   => new StrengthStatus(amount),
         StatusType.Poison     => new PoisonStatus(amount),
+        StatusType.DamageNullified => new DamageNullifiedStatus(amount),
         _                     => null,
     };
 }
