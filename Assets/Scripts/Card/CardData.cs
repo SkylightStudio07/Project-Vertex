@@ -11,8 +11,9 @@
 // 2026-05-23 | 최성제 | 카드 기본 효과가 리스트가 아니였던 것 수정. 모든 카드가 강화 안하면 몽둥이질과 무적이 될 뻔함ㅋㅋㅋ
 // 카드의 사용 방법도 추가함. 타켓 방식인지, 아니면 타깃이 필요 없는지...
 // 2026-07-11 | 박영서 | 카드 이펙트를 SO 참조 → [SerializeReference] 인라인으로 전환.
-// 수치 조합마다 이펙트 에셋이 늘어나는 문제 해소. 이름·코스트·키워드는 CardUpgradeState로 통합,
-// 구 루트 필드는 에셋 수동 이전 참조용으로 임시 유지 (이전 완료 후 삭제할 것).
+// 수치 조합마다 이펙트 에셋이 늘어나는 문제 해소. 이름·코스트·키워드는 CardUpgradeState로 통합.
+// 구 루트 필드(이름·코스트·키워드·이펙트 참조)는 전부 삭제 — 카드 데이터 원본은 노션 DB 기준,
+// 에셋은 새 구조로 재작성한다.
 // ============================================================
 
 
@@ -78,20 +79,6 @@ public class CardData : ScriptableObject
     [SerializeField] public bool isUpgraded;
     [SerializeField] private CardUpgradeState normalState;
     [SerializeField] private CardUpgradeState upgradedState;
-
-    [Header("(구) 필드 — 상태 구조로 수동 이전 후 삭제 예정")]
-    // 기존 에셋의 데이터가 아직 여기 들어있다. normalState/upgradedState로 옮겨 적는 동안만 유지.
-    // (구 cardEffects/upgradedEffects는 SO 참조라 인라인 구조로 자동 이전이 불가능해 필드 자체를 제거함.
-    //  기존 이펙트 수치는 Assets/Data/Cards/Card Effect/ 아래 구 SO 에셋 파일에서 확인할 것.)
-    [SerializeField] private string cardName;
-    [SerializeField] private int energyCost;
-    [SerializeField] private int ammoCost;
-    [SerializeField] private bool isExhaust;
-    [SerializeField] private bool isEthereal;
-    [SerializeField] private bool isInnate;
-    [SerializeField] private bool isRetain;
-    [SerializeField] private string upgradedName;
-    [SerializeField] private int upgradedCost;
 
     [Header("연출")]
     public AnimationClip useAnimation;
