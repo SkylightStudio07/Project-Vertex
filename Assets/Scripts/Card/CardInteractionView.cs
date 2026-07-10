@@ -39,7 +39,7 @@ public class CardInteractionView : MonoBehaviour
 
     private Canvas cardCanvas;
     private RectTransform targetingAnchor;
-    private DebugCardTargetArrow debugTargetArrow;
+    private TargetArrow debugTargetArrow;
     private Canvas debugTargetArrowCanvas;
     private RectTransform debugArrowCanvasRect;
     private Vector3 originalScale;
@@ -293,7 +293,7 @@ public class CardInteractionView : MonoBehaviour
         debugTargetArrowCanvas.sortingLayerID = cardCanvas.sortingLayerID;
         BringDebugArrowToFront();
 
-        debugTargetArrow = arrowObject.AddComponent<DebugCardTargetArrow>();
+        debugTargetArrow = arrowObject.AddComponent<TargetArrow>();
         debugTargetArrow.raycastTarget = false;
         debugTargetArrow.color = debugTargetArrowColor;
         debugTargetArrow.Hide();
@@ -325,60 +325,5 @@ public class CardInteractionView : MonoBehaviour
     {
         if (debugTargetArrow != null)
             debugTargetArrow.Hide();
-    }
-}
-
-public class DebugCardTargetArrow : MaskableGraphic
-{
-    [SerializeField] private float shaftWidth = 10f;
-    [SerializeField] private float headLength = 28f;
-    [SerializeField] private float headWidth = 30f;
-
-    private Vector2 startPoint;
-    private Vector2 endPoint;
-
-    public void SetPoints(Vector2 start, Vector2 end)
-    {
-        startPoint = start;
-        endPoint = end;
-        enabled = true;
-        SetVerticesDirty();
-    }
-
-    public void Hide()
-    {
-        enabled = false;
-    }
-
-    protected override void OnPopulateMesh(VertexHelper vertexHelper)
-    {
-        vertexHelper.Clear();
-
-        Vector2 delta = endPoint - startPoint;
-        if (delta.sqrMagnitude < 1f) return;
-
-        Vector2 direction = delta.normalized;
-        Vector2 perpendicular = new Vector2(-direction.y, direction.x);
-        float effectiveHeadLength = Mathf.Min(headLength, delta.magnitude * 0.5f);
-        Vector2 headBase = endPoint - direction * effectiveHeadLength;
-
-        int shaftStart = vertexHelper.currentVertCount;
-        AddVertex(vertexHelper, startPoint + perpendicular * shaftWidth * 0.5f);
-        AddVertex(vertexHelper, startPoint - perpendicular * shaftWidth * 0.5f);
-        AddVertex(vertexHelper, headBase - perpendicular * shaftWidth * 0.5f);
-        AddVertex(vertexHelper, headBase + perpendicular * shaftWidth * 0.5f);
-        vertexHelper.AddTriangle(shaftStart, shaftStart + 1, shaftStart + 2);
-        vertexHelper.AddTriangle(shaftStart, shaftStart + 2, shaftStart + 3);
-
-        int headStart = vertexHelper.currentVertCount;
-        AddVertex(vertexHelper, headBase + perpendicular * headWidth * 0.5f);
-        AddVertex(vertexHelper, headBase - perpendicular * headWidth * 0.5f);
-        AddVertex(vertexHelper, endPoint);
-        vertexHelper.AddTriangle(headStart, headStart + 1, headStart + 2);
-    }
-
-    private void AddVertex(VertexHelper vertexHelper, Vector2 position)
-    {
-        vertexHelper.AddVert(position, color, Vector2.zero);
     }
 }
