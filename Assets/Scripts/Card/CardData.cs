@@ -79,7 +79,7 @@ public class CardData : ScriptableObject
     [Header("강화")]
     [SerializeField] private string upgradedName;
     [SerializeField] private int upgradedCost;
-    [SerializeField] private bool upgradedIsExhaust;
+    [SerializeField] private bool upgradedIsExhaust; // 강화 후 소멸 여부. 체크 안 하면 강화 시 소멸 해제 (꼼짝마! 등)
     [SerializeField] public bool isUpgraded;
     [SerializeField] private List<CardEffect> upgradedEffects = new();
 
@@ -116,7 +116,10 @@ public class CardData : ScriptableObject
     public bool IsInnate          => isInnate;
     public bool IsRetain          => isRetain;
 
-    // {0.fieldName} 토큰을 ActiveEffects[0]의 해당 필드값으로 치환한다.
+    // cardDescription의 {인덱스.필드명} 토큰을 ActiveEffects[인덱스]의 public 필드값으로 치환한다.
+    // 예) "적에게 {0.amount}의 피해를 {0.hitCount}회 줍니다." → "적에게 5의 피해를 3회 줍니다."
+    // ActiveEffects가 강화 여부에 따라 다른 리스트를 반환하므로 강화 수치는 자동 반영됨.
+    // 템플릿은 기본/강화 공용 하나만 작성하면 된다. 잘못된 토큰(인덱스 초과, 없는 필드)은 원문 그대로 노출.
     public string GetFullDescription()
     {
         if (string.IsNullOrEmpty(cardDescription)) return string.Empty;

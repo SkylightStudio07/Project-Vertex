@@ -43,6 +43,8 @@ public class PlayerCombatant : ICombatant
         if (IsDead) OnDied?.Invoke();
     }
 
+    // 민첩(DexterityStatus)은 데미지 파이프라인이 아니라 방어도 획득 시점에 보정되므로 여기서 직접 반영한다.
+    // 음수 민첩으로 획득량이 음수가 되어도 기존 방어도까지 깎이지는 않도록 Max(0)로 하한 처리.
     public void AddBlock(int amount)
     {
         foreach (var p in _passives)
