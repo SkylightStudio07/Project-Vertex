@@ -8,7 +8,6 @@
 //              이동, 정렬, 화살표 등 화면 표현은 CardInteractionView에 위임한다.
 // ============================================================
 
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -129,33 +128,13 @@ public class CardHandler : MonoBehaviour,
 
             case CardData.CardUseMode.SelectEnemy:
                 return state == CardState.Targeting &&
-                       TryGetEnemyTarget(eventData, out target);
+                       EnemyTargeting.TryGetUnderPointer(eventData, out target);
 
             default:
                 return false;
         }
     }
 
-    private static bool TryGetEnemyTarget(PointerEventData eventData, out EnemyInstance target)
-    {
-        target = null;
-        if (EventSystem.current == null) return false;
-
-        var hits = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, hits);
-
-        foreach (RaycastResult hit in hits)
-        {
-            EnemyView enemyView = hit.gameObject.GetComponentInParent<EnemyView>();
-            if (enemyView == null || enemyView.Instance == null || enemyView.Instance.IsDead)
-                continue;
-
-            target = enemyView.Instance;
-            return true;
-        }
-
-        return false;
-    }
 
     private void SetState(CardState next)
     {

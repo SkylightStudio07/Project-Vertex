@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // 아이템 바의 슬롯 1칸. 아이콘만 표시하고, 호버/클릭은 소유 View로 위임.
-// 툴팁은 공용(ItemInventoryView 소유)을 사용 — 슬롯마다 갖지 않는다.
+// 툴팁은 공용(ItemInventoryView 소유)
 public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private ItemData item;

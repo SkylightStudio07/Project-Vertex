@@ -10,7 +10,11 @@ public class ItemActionPopup : MonoBehaviour
     [SerializeField] private Button discardButton;
     [SerializeField] private Button backdropButton;     // 전체화면 투명 버튼 — 바깥 클릭 시 닫기
 
+    [Header("타겟팅")]
+    [SerializeField] private ItemTargetingController targetingController;  // SelectTarget 아이템 타겟팅 UI
+
     private ItemData item;
+    private Vector3 anchorWorldPos;   // 슬롯 위치 — SelectTarget 화살표 시작점으로 사용
 
     private void Awake()
     {
@@ -22,6 +26,7 @@ public class ItemActionPopup : MonoBehaviour
     public void Open(ItemData itemData, Vector3 anchorWorldPos)
     {
         item = itemData;
+        this.anchorWorldPos = anchorWorldPos;
         if (rect != null) rect.position = anchorWorldPos;
 
         // 전투 중 + 플레이어 턴일 때만 사용 가능 (적 턴/비전투면 회색)
@@ -35,10 +40,20 @@ public class ItemActionPopup : MonoBehaviour
 
     public void OnUseClicked()
     {
-        // 전투 중 사용. Immediate 아이템은 target 없이 사용. (SelectTarget 타겟팅 UI는 추후)
         // 사용 성공 시 ItemInventoryManager가 소비 처리 → OnInventoryChanged로 바 자동 갱신
         if (item != null && BattleManager.Instance != null)
+        {
+            if (item.UseMode == ItemData.ItemUseMode.SelectTarget && targetingController != null)
+            {
+                // 적 지정 아이템: 즉시 사용하지 않고 타겟팅 모드로 위임 (적 클릭 시 컨트롤러가 TryUseItem 호출)
+                targetingController.BeginTargeting(item, anchorWorldPos);
+                Close();
+                return;
+            }
+
+            // Immediate 아이템: target 없이 즉시 사용
             BattleManager.Instance.TryUseItem(item, null);
+        }
         Close();
     }
 

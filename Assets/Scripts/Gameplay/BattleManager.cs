@@ -25,6 +25,11 @@ public class BattleManager : MonoBehaviour
     private BattleState _state;
     public BattleState State => _state;
 
+    private bool _isInBattle;
+    public bool IsInBattle => _isInBattle;
+    // StartBattle 끝: _isInBattle = true;
+    // Victory()/Defeat() 시작: _isInBattle = false;
+
     // 하위 호환 래퍼 (UI/외부 코드용)
     public int Energy      => _state?.Energy      ?? 0;
     public int MaxEnergy   => _state?.MaxEnergy   ?? defaultMaxEnergy;
@@ -69,6 +74,8 @@ public class BattleManager : MonoBehaviour
         SetupBattleDeck(masterDeck);
         _state.Player.OnDied += Defeat;
         OnEnemiesChanged?.Invoke();
+
+        _isInBattle = true;
     }
 
     private void SetupEnemies(List<EnemyData> enemyDataList)
@@ -232,13 +239,13 @@ public class BattleManager : MonoBehaviour
     }
 
     // 지금 아이템을 사용할 수 있는 상태인지 (전투 중 + 플레이어 턴). UI 버튼 활성 판정용.
-    public bool CanUseItemNow => _state != null && _state.Phase == BattlePhase.PlayerTurn;
+    public bool CanUseItemNow => _isInBattle && _state != null && _state.Phase == BattlePhase.PlayerTurn;
 
     // 아이템 사용. 카드 사용(TryPlayCard)과 동일 구조, 차이는 비용 없음 / 인벤토리에서 소비 / ctx.Item 세팅.
     public bool TryUseItem(ItemData item, EnemyInstance target)
     {
         if (_state == null || item == null) return false;
-        if (_state.Phase != BattlePhase.PlayerTurn) return false;   // 적 턴 중 사용 금지
+        if (!CanUseItemNow) return false;   // 적 턴 중 사용 금지
 
         // SelectTarget 아이템은 유효한 적 타겟 필요 (타겟팅 UI 미구현)
         if (item.UseMode == ItemData.ItemUseMode.SelectTarget &&
@@ -374,6 +381,7 @@ public class BattleManager : MonoBehaviour
         // 승리 후 손패를 그대로 두면 맵으로 돌아갔을 때 손패가 가로채져서 맵 스크롤과 노드 클릭이 동작하지 않는 문제가 있었다.
         // 손패를 버리는 배치 처리로 해결. 승리 시 손패는 어차피 초기화되므로, 승리 후에 OnHandChanged가 한 번만 호출되도록...
         BeginHandChangeBatch();
+        _isInBattle = false;
         try
         {
             foreach (var card in _state.Hand)
@@ -400,6 +408,7 @@ public class BattleManager : MonoBehaviour
 
     private void Defeat()
     {
+        _isInBattle = false;
         OnBattleDefeat?.Invoke();
     }
 
