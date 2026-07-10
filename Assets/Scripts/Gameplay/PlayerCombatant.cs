@@ -17,6 +17,7 @@ public class PlayerCombatant : ICombatant
     public List<IPassiveLogic> Passives => _passives;
 
     public event Action<int> OnDamaged;
+    public event Action<int> OnBlocked; // 블록으로 흡수한 데미지량. ResetBlock()으로 0이 되는 것과는 구분된 신호.
     public event Action      OnDied;
 
     public void TakeDamage(DamageInfo info)
@@ -26,8 +27,12 @@ public class PlayerCombatant : ICombatant
         if (!info.IsPiercing)
         {
             int absorbed = Math.Min(_block, amount);
-            _block -= absorbed;
-            amount -= absorbed;
+            if (absorbed > 0)
+            {
+                _block -= absorbed;
+                amount -= absorbed;
+                OnBlocked?.Invoke(absorbed);
+            }
         }
 
         if (amount > 0)

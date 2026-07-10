@@ -30,12 +30,11 @@ public class GameManager : MonoBehaviour
     public List<EnemyData> currentEnemies; // 현재 전투에 참여하는 적들의 데이터 리스트
 
     [Header("보상 풀")]
-    // 플레이어가 보상으로 획득 가능한 카드들.
-    // 지금은 SerializeField로 개별 리스트 만들어서 채우는 방식인데, 나중에 카드 데이터 관리 시스템 구축하면 그쪽에서 관리하도록 바꿔야 함.
+    // 런 시작 시 기본 보상 풀 SO. 캐릭터 합류 시 CoopCharData 풀이 여기에 합산된다.
+    [SerializeField] private PlayerRewardPoolSO playerRewardPool;
+    // 런타임 전체 보상 풀 — 기본 풀 복사본으로 시작해 런 중 동적으로 카드가 추가된다.
+    // SO 원본 리스트를 직접 참조하면 런 간 데이터가 누적되므로 InitializeRun에서 복사본을 만든다.
     public Dictionary<CardData.CardRarity, List<CardData>> cardPools = new Dictionary<CardData.CardRarity, List<CardData>>();
-    [SerializeField] private List<CardData> commonPool;
-    [SerializeField] private List<CardData> rarePool;
-    [SerializeField] private List<CardData> uniquePool;
     // 아이템 보상 풀
     [SerializeField] private List<ItemData> itemPool;
     // 챕터, 전투 유형 별 카드 보상 확률 데이터
@@ -61,7 +60,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Instance = this;
         InitializeRun();
     }
 
@@ -78,12 +76,10 @@ public class GameManager : MonoBehaviour
         chapter = 1;
         PlayerHP = maxPlayerHP;
 
-        DeckManager.Instance.InitializeStartingDeck();
-
-        // 카드 풀 초기화
-        cardPools[CardData.CardRarity.Common] = commonPool;
-        cardPools[CardData.CardRarity.Rare] = rarePool;
-        cardPools[CardData.CardRarity.Unique] = uniquePool;
+        // 카드 풀 초기화 — SO 원본이 아닌 복사본으로 시작해야 런 간 데이터 누적을 막는다.
+        cardPools[CardData.CardRarity.Common] = playerRewardPool != null ? new List<CardData>(playerRewardPool.commonCards) : new List<CardData>();
+        cardPools[CardData.CardRarity.Rare]   = playerRewardPool != null ? new List<CardData>(playerRewardPool.rareCards)   : new List<CardData>();
+        cardPools[CardData.CardRarity.Unique] = playerRewardPool != null ? new List<CardData>(playerRewardPool.uniqueCards) : new List<CardData>();
 
         // 아이템 풀 초기화
         BattleReward.SetItemRewardsPool(itemPool);
@@ -115,25 +111,34 @@ public class GameManager : MonoBehaviour
             : currentEnemies;
 
         BattleManager.Instance.StartBattle(enemies, DeckManager.Instance.PlayerDeck, RunData.Instance.mapData.seed, battleType);
-        BattleManager.Instance.PlayerTurnStart();
+        BattleManager.Instance.PlayerTurnStart(false); // 전투 첫 진입이라 턴 배너는 건너뜀
     }
 
-    // 카드 등급에 맞는 전투 보상 카드 풀에 카드를 추가하는 메소드
+    // 단일 카드를 카드 자체의 Rarity에 맞는 풀에 추가. unlockCardCoopLevel 등 단건 추가용.
     public void AddCardToRewardPool(CardData card)
     {
         if (card == null) return;
-
         if (!cardPools.TryGetValue(card.Rarity, out var pool))
         {
             pool = new List<CardData>();
             cardPools[card.Rarity] = pool;
         }
-
         if (!pool.Contains(card))
-        {
             pool.Add(card);
-            Debug.Log("카드 풀에 카드 추가 완료.");
+    }
+
+    // 등급별 리스트 일괄 추가. CoopCharData의 rewardPoolCommon/Rare/Unique 합산용.
+    public void AddCardsToRewardPool(List<CardData> cards, CardData.CardRarity rarity)
+    {
+        if (cards == null || cards.Count == 0) return;
+        if (!cardPools.TryGetValue(rarity, out var pool))
+        {
+            pool = new List<CardData>();
+            cardPools[rarity] = pool;
         }
+        foreach (var card in cards)
+            if (card != null && !pool.Contains(card))
+                pool.Add(card);
     }
 
     public void TakeDamage(int amount)

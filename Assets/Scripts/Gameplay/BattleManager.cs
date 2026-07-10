@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -50,6 +51,20 @@ public class BattleManager : MonoBehaviour
 
     private BattleType   _currentBattleType;
     private System.Random _rnd = new();
+    // 카드 이펙트(DamageEffect 등)가 RandomEnemy 타겟을 결정할 때 이 인스턴스를 사용해야
+    // 전투 시드 기반의 결정론적 동작이 보장된다. UnityEngine.Random.Range는 시드와 무관하다.
+    public System.Random Rnd => _rnd;
+
+    [Header("적 턴 연출")]
+    [SerializeField] private EnemyTurnBannerView turnBanner;
+    // 전진(lunge out)이 끝나는 시점 = 공격이 닿는 타이밍이라 여기서 데미지를 적용한다.
+    // EnemyView.lungeOutDuration과 값을 맞춰야 모션과 타격감이 어긋나지 않는다.
+    [SerializeField] private float lungeOutWaitDuration  = 0.2f;
+    [SerializeField] private float lungeBackWaitDuration = 0.2f; // 후퇴 모션 + 피격 리액션 대기
+
+    [Header("플레이어 턴 연출")]
+    [SerializeField] private EnemyTurnBannerView playerTurnBanner; // 전투 첫 진입 시에는 PlayerTurnStart(false)로 건너뜀
+    [SerializeField] private float postActionDelay       = 0.3f; // 추가 후처리 대기
 
     // ─────────────────────────────────────────────
     // 초기화
@@ -112,8 +127,20 @@ public class BattleManager : MonoBehaviour
     // 턴 흐름
     // ─────────────────────────────────────────────
 
-    public void PlayerTurnStart()
+    // 적 턴에서 넘어올 때(기본값)는 배너를 보여주고, 전투 최초 진입 시에는 PlayerTurnStart(false)로
+    // 호출해 배너를 건너뛴다 (GameManager.InitializeBattle / DebugBattleStarter에서 사용).
+    public void PlayerTurnStart() => PlayerTurnStart(true);
+
+    public void PlayerTurnStart(bool showBanner)
     {
+        StartCoroutine(PlayerTurnStartSequence(showBanner));
+    }
+
+    private IEnumerator PlayerTurnStartSequence(bool showBanner)
+    {
+        if (showBanner && playerTurnBanner != null)
+            yield return playerTurnBanner.ShowAndWait();
+
         // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
         // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
         _state.Player.ResetBlock();
@@ -155,18 +182,42 @@ public class BattleManager : MonoBehaviour
 
     public void EnemyTurnStart()
     {
+        StartCoroutine(EnemyTurnSequence());
+    }
+
+    // 배너 표시 → 적마다 (전진 대기 → 데미지 적용(전진 피크 시점) → 후퇴+후처리 대기) → 다음 플레이어 턴.
+    // 데미지를 전진이 끝나는 시점에 적용해서, 적이 아직 앞에 있는 동안 타격감이 나도록 한다
+    // (후퇴까지 다 끝난 뒤 적용하면 적이 이미 물러난 다음에 맞는 것처럼 보여 타이밍이 늦게 느껴짐).
+    private IEnumerator EnemyTurnSequence()
+    {
         _state.Phase = BattlePhase.EnemyTurn;
 
-        foreach (var enemy in _state.Enemies)
+        if (turnBanner != null)
+            yield return turnBanner.ShowAndWait();
+
+        // _state.Enemies를 직접 foreach하면 yield return 대기 중 OnDied 등이 리스트를 수정했을 때
+        // InvalidOperationException(Collection was modified)이 발생할 수 있다.
+        // 지금은 OnDied → CheckVictory()만 연결돼 있어 당장 터지진 않지만,
+        // 나중에 OnDied에 리스트 제거 로직이 붙는 순간 조용히 터지는 문제라 복사본으로 순회한다.
+        var enemiesCopy = new List<EnemyInstance>(_state.Enemies);
+        foreach (var enemy in enemiesCopy)
         {
-            if (enemy == null) continue;
+            if (enemy == null || enemy.IsDead) continue;
 
-            enemy.TakeTurn(_state, this);
+            enemy.TickPassives(_state);
+            if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음
 
-            if (_state.Player.IsDead) return;
+            enemy.NotifyActionStarted();
+            yield return new WaitForSeconds(lungeOutWaitDuration);
+
+            enemy.ExecuteCurrentAction(_state, this); // 전진 피크 시점에 데미지 적용
+
+            yield return new WaitForSeconds(lungeBackWaitDuration + postActionDelay);
+
+            if (_state.Player.IsDead) yield break; // OnDied → Defeat()는 이미 구독되어 있음
         }
 
-        if (IsAllEnemiesDead()) return;
+        if (IsAllEnemiesDead()) yield break;
 
         _state.Phase = BattlePhase.PlayerTurn;
         PlayerTurnStart();
@@ -207,6 +258,8 @@ public class BattleManager : MonoBehaviour
             (target == null || target.IsDead || !_state.Enemies.Contains(target)))
             return false;
 
+        // 비용 차감·패 제거는 즉시 처리해 UI가 바로 반영되도록 한다.
+        // 이펙트 실행만 코루틴으로 분리해, 연타처럼 히트 사이 딜레이가 필요한 경우를 지원한다.
         BeginHandChangeBatch();
         try
         {
@@ -217,23 +270,21 @@ public class BattleManager : MonoBehaviour
             if (card.IsExhaust) _state.ExhaustPile.Add(card);
             else _state.DiscardPile.Add(card);
             NotifyHandChanged();
-
-            var ctx = new CardContext
-            {
-                State      = _state,
-                Battle     = this,
-                Card       = card,
-                Target     = target,
-                AllEnemies = _state.Enemies,
-            };
-
-            foreach (var effect in card.ActiveEffects)
-                effect?.Execute(ctx);
         }
         finally
         {
             EndHandChangeBatch();
         }
+
+        var ctx = new CardContext
+        {
+            State      = _state,
+            Battle     = this,
+            Card       = card,
+            Target     = target,
+            AllEnemies = _state.Enemies,
+        };
+        StartCoroutine(ExecuteEffectsSequence(card.ActiveEffects, ctx));
 
         return true;
     }
@@ -275,6 +326,15 @@ public class BattleManager : MonoBehaviour
 
         ItemInventoryManager.Instance.RemoveItem(item);   // 소비 → OnInventoryChanged로 바 자동 갱신
         return true;
+    }
+    
+    private IEnumerator ExecuteEffectsSequence(System.Collections.Generic.IReadOnlyList<CardEffect> effects, CardContext ctx)
+    {
+        foreach (var effect in effects)
+        {
+            if (effect != null)
+                yield return StartCoroutine(effect.ExecuteCoroutine(ctx));
+        }
     }
 
     // ─────────────────────────────────────────────

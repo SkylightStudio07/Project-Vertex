@@ -10,6 +10,6 @@ public class DebugBattleStarter : MonoBehaviour
     void Start()
     {
         BattleManager.Instance.StartBattle(enemies, deck, debugSeed);
-        BattleManager.Instance.PlayerTurnStart();
+        BattleManager.Instance.PlayerTurnStart(false); // 전투 첫 진입이라 턴 배너는 건너뜀
     }
 }

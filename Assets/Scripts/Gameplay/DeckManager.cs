@@ -18,7 +18,13 @@ public class DeckManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        // 로비 구현 전 임시 처리. 로비 완성 후에는 로비에서 덱을 구성한 뒤 런을 시작하는 흐름으로 이전할 것.
+        // Awake에 두는 이유: Start()보다 먼저 실행되므로, GameManager.Start() → InitializeBattle()이
+        // PlayerDeck을 참조하기 전에 덱이 준비되는 것을 보장한다.
+        InitializeStartingDeck();
     }
 
     [Header("기본 덱")]
@@ -32,7 +38,7 @@ public class DeckManager : MonoBehaviour
 
     public List<CardData> PlayerDeck { get; private set; } = new();
 
-    // 새 런 시작 시 GameManager.InitializeRun()에서 호출.
+    // 기본 시작 덱을 구성한다. 로비 구현 후에는 로비에서 직접 호출하거나 커스텀 덱으로 대체한다.
     public void InitializeStartingDeck()
     {
         // SO 원본이 오염되지 않도록 Instantiate로 복사

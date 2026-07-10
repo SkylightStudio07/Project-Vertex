@@ -184,10 +184,10 @@ public class CooperationManager : MonoBehaviour
             DeckManager.Instance.AddCardToPlayerDeck(coopCharData.joinRewardCard);
         }
 
-        foreach (CardData card in coopCharData.battleRewardCardPool)
-        {
-            GameManager.Instance.AddCardToRewardPool(card);
-        }
+        // 등급별 리스트를 직접 합산 — battleRewardCardPool(flat) 대신 rarity 분리된 리스트 사용
+        GameManager.Instance.AddCardsToRewardPool(coopCharData.rewardPoolCommon, CardData.CardRarity.Common);
+        GameManager.Instance.AddCardsToRewardPool(coopCharData.rewardPoolRare,   CardData.CardRarity.Rare);
+        GameManager.Instance.AddCardsToRewardPool(coopCharData.rewardPoolUnique, CardData.CardRarity.Unique);
 
         for (int coopLevel = 0; coopLevel < currentCoopLevel; coopLevel++)
         {

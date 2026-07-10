@@ -1,0 +1,338 @@
+﻿# Card System
+
+Card System appears to be an internally dense area around card, reward, gameplay, effect, pile. It contains 27 types, including 13 Unity-facing types.
+
+## Stats
+
+- Types: 27
+- Internal relationships: 134
+- External relationships: 109
+- Entry candidates: 8
+- Keywords: `card`, `reward`, `gameplay`, `effect`, `pile`, `rarity`, `target`, `add`, `arrow`, `battle`, `button`, `context`
+
+## Start Here
+
+- `DeckManager.Awake()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\DeckManager.cs:11
+- `HandView.Start()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\HandView.cs:15
+- `RewardsView.Start()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:15
+- `CardReward.OnEnable()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardReward.cs:21
+- `CardInteractionView.OnDestroy()` - unity_lifecycle / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:155
+- `BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` - flow_candidate / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:55
+- `BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` - flow_candidate / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:64
+- `BattleReward.GenerateItemReward(RewardProbabilityData)` - flow_candidate / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:96
+
+## Core Types
+
+- `CardData` - class / Unity / 13 out / 71 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardData.cs:20
+- `BattleReward` - class / 46 out / 6 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:33
+- `CardContext` - class / 9 out / 19 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardContext.cs:16
+- `CardHandler` - class / Unity / 25 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:18
+- `CardInteractionView` - class / Unity / 5 out / 18 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:17
+- `CardEffect` - class / Unity / 1 out / 20 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardEffect.cs:16
+- `RewardItemButton` - class / Unity / 6 out / 10 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardItemButton.cs:8
+- `RewardsView` - class / Unity / 15 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:5
+- `DeckManager` - class / Unity / 14 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\DeckManager.cs:7
+- `RewardItem` - struct / 3 out / 11 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:12
+- `CardData+CardRarity` - enum / 0 out / 12 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardData.cs:118
+- `RewardProbabilityData` - class / Unity / 1 out / 10 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardProbabilityData.cs:7
+- `CardRewardView` - class / Unity / 7 out / 2 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardRewardView.cs:6
+- `CardView` - class / Unity / 2 out / 6 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardView.cs:11
+- `AddCardToPileEffect` - class / 6 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\AddCardToPileEffect.cs:5
+- `HandView` - class / Unity / 6 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\HandView.cs:10
+- `CardReward` - class / Unity / 3 out / 2 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardReward.cs:12
+- `DebugCardTargetArrow` - class / 0 out / 5 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:331
+- `CardHandler+CardState` - enum / 0 out / 4 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:22
+- `ItemData+ItemRarity` - enum / 0 out / 4 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Item\ItemData.cs:39
+- `RewardType` - enum / 0 out / 3 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:8
+- `RunData` - class / Unity / 3 out / 0 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\RunData.cs:5
+- `CardData+CardOwner` - enum / 0 out / 2 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardData.cs:120
+- `CardData+CardType` - enum / 0 out / 2 in / H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardData.cs:117
+
+## Likely Method Flows
+
+- `BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)`
+  - `BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)`
+  - `BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)`
+  - `BattleReward.GetCardRarity(RewardProbabilityData) / terminal`
+- `BattleReward.GenerateItemReward(RewardProbabilityData)`
+  - `BattleReward.GenerateItemReward(RewardProbabilityData)`
+  - `BattleReward.IsItemRewardGiven(RewardProbabilityData) / terminal`
+- `BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)`
+  - `BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)`
+  - `BattleReward.GetCardRarity(RewardProbabilityData) / terminal`
+- `HandView.Start()`
+  - `HandView.Start()`
+  - `HandView.Refresh()`
+  - `CardInteractionView.SetRestingSortingOrder(int) / terminal`
+- `CardInteractionView.OnDestroy()`
+  - `CardInteractionView.OnDestroy()`
+  - `CardInteractionView.StopMovement() / terminal`
+- `DeckManager.Awake()`
+  - `DeckManager.Awake() / terminal`
+- `RewardsView.Start()`
+  - `RewardsView.Start() / terminal`
+- `CardReward.OnEnable()`
+  - `CardReward.OnEnable() / terminal`
+
+## Internal Type Relationships
+
+- `CardHandler` -> `CardInteractionView` - internal / calls_member / 11 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:76 / interactionView.MoveVisualCenterToPointer(eventData)`
+- `BattleReward` -> `RewardProbabilityData` - internal / accepts_parameter / 7 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:48 / RewardProbabilityData`
+- `DeckManager` -> `CardData` - internal / calls_member / 6 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\DeckManager.cs:42 / PlayerDeck.Add(Instantiate(strikeCard))`
+- `DeckManager` -> `CardData` - internal / has_field_type / 5 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\DeckManager.cs:25 / CardData`
+- `BattleReward` -> `CardData` - internal / accepts_parameter / 4 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:48 / Dictionary<CardRarity, List<CardData>>`
+- `BattleReward` -> `CardData` - internal / calls_member / 4 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:66 / cardRewards.Clear()`
+- `BattleReward` -> `RewardItem` - internal / creates / 4 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:193 / List<RewardItem>`
+- `BattleReward` -> `CardData+CardRarity` - internal / accepts_parameter / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:48 / Dictionary<CardRarity, List<CardData>>`
+- `CardHandler` -> `CardHandler+CardState` - internal / accepts_parameter / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:160 / CardState`
+- `BattleReward` -> `RewardItem` - internal / calls_member / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:196 / items.Add(new RewardItem(RewardType.Gold, goldReward))`
+- `CardInteractionView` -> `DebugCardTargetArrow` - internal / calls_member / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:299 / debugTargetArrow.Hide()`
+- `RewardsView` -> `RewardItemButton` - internal / calls_member / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:44 / buttons.Contains(destroyedButton)`
+- `CardData` -> `CardEffect` - internal / has_property_type / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardData.cs:94 / List<CardEffect>`
+- `CardRewardView` -> `CardData` - internal / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardRewardView.cs:13 / List<CardData>`
+- `HandView` -> `CardInteractionView` - internal / calls_member / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\HandView.cs:43 / interactionView.SetRestingSortingOrder(i)`
+- `CardData` -> `CardEffect` - internal / has_field_type / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardData.cs:69 / List<CardEffect>`
+- `RewardsView` -> `RewardItemButton` - internal / has_field_type / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:7 / RewardItemButton`
+- `CardRewardView` -> `CardReward` - internal / unity_try_get_component / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardRewardView.cs:28 / CardReward`
+- `BattleReward` -> `CardData` - internal / uses_local_type / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:70 / CardData`
+- `AddCardToPileEffect` -> `CardContext` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\AddCardToPileEffect.cs:11 / CardContext`
+- `BattleReward` -> `RewardType` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:179 / RewardType`
+- `CardEffect` -> `CardContext` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardEffect.cs:18 / CardContext`
+- `CardRewardView` -> `RewardItemButton` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardRewardView.cs:13 / RewardItemButton`
+- `CardView` -> `CardData` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardView.cs:25 / CardData`
+- `DeckManager` -> `CardData` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\DeckManager.cs:53 / CardData`
+- `RewardItem` -> `RewardType` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:23 / RewardType`
+- `RewardItemButton` -> `RewardItem` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardItemButton.cs:18 / RewardItem`
+- `RewardsView` -> `BattleReward` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:20 / BattleReward`
+- `RewardsView` -> `RewardItemButton` - internal / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:40 / RewardItemButton`
+- `CardHandler` -> `CardInteractionView` - internal / attribute_type_argument / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:17 / RequireComponent(typeof(CardInteractionView))`
+- `CardHandler` -> `CardView` - internal / attribute_type_argument / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:16 / RequireComponent(typeof(Canvas), typeof(GraphicRaycaster), typeof(CardView))`
+- `AddCardToPileEffect` -> `CardData` - internal / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\AddCardToPileEffect.cs:17 / cardsToAdd.Add(cardToAdd)`
+- `RewardsView` -> `BattleReward` - internal / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:66 / reward.GetRewardList()`
+- `RewardItemButton` -> `CardData` - internal / casts_to / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardItemButton.cs:49 / List<CardData>`
+- `AddCardToPileEffect` -> `CardData` - internal / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\AddCardToPileEffect.cs:15 / List<CardData>`
+- `BattleReward` -> `CardData` - internal / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:42 / List<CardData>`
+
+## External Touchpoints
+
+- `BattleManager` -> `CardData` - incoming / accepts_parameter / 10 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / List<CardData>`
+- `BattleState` -> `CardData` - incoming / has_field_type / 4 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleState.cs:19 / List<CardData>`
+- `GameManager` -> `CardData` - incoming / has_field_type / 4 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:35 / Dictionary<CardData.CardRarity, List<CardData>>`
+- `CardContext` -> `EnemyInstance` - outgoing / has_field_type / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardContext.cs:22 / EnemyInstance`
+- `CoopCharData` -> `CardData` - incoming / has_field_type / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Cooperator\CoopCharData.cs:8 / List<CardData>`
+- `BattleReward` -> `BattleType` - outgoing / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:75 / BattleType`
+- `CardHandler` -> `EnemyInstance` - outgoing / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:120 / EnemyInstance`
+- `DamageEffect` -> `CardContext` - incoming / accepts_parameter / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\DamageEffect.cs:11 / CardContext`
+- `GameManager` -> `CardData` - incoming / calls_member / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:132 / pool.Contains(card)`
+- `GameManager` -> `CardData` - incoming / creates / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:35 / Dictionary<CardData.CardRarity, List<CardData>>`
+- `GameManager` -> `CardData+CardRarity` - incoming / creates / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:35 / Dictionary<CardData.CardRarity, List<CardData>>`
+- `BattleReward` -> `ItemData` - outgoing / has_field_type / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:36 / List<ItemData>`
+- `GameManager` -> `CardData+CardRarity` - incoming / has_field_type / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:35 / Dictionary<CardData.CardRarity, List<CardData>>`
+- `PlayerCharData` -> `CardData` - incoming / has_field_type / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Player\PlayerCharData.cs:14 / List<CardData>`
+- `AddAmmoEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\AddAmmoEffect.cs:8 / CardContext`
+- `AddCoopPointEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\AddCoopPointEffect.cs:10 / CardContext`
+- `ApplyStatusEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\ApplyStatusEffect.cs:10 / CardContext`
+- `BattleReward` -> `ItemData` - outgoing / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:37 / List<ItemData>`
+- `BlockEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\BlockEffect.cs:8 / CardContext`
+- `DrawEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\DrawEffect.cs:8 / CardContext`
+- `GainGoldEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\GainGoldEffect.cs:8 / CardContext`
+- `GameManager` -> `CardData` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:122 / CardData`
+- `HealEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\HealEffect.cs:8 / CardContext`
+- `IPassiveLogic` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\IPassiveLogic.cs:5 / CardContext`
+- `LoseHPEffect` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\Effects\LoseHPEffect.cs:8 / CardContext`
+- `StatusEffectBase` -> `CardContext` - incoming / accepts_parameter / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Passive\StatusEffectBase.cs:27 / CardContext`
+- `BattleReward` -> `ItemData` - outgoing / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:106 / itemRewardsPool.FindAll(item => item.Rarity == rarity && (item.ItemTypes & getType) != 0)`
+- `GameManager` -> `BattleReward` - incoming / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:89 / BattleReward.SetItemRewardsPool(itemPool)`
+- `GameManager` -> `CardData+CardRarity` - incoming / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:126 / cardPools.TryGetValue(card.Rarity, out var pool)`
+- `GameManager` -> `RewardProbabilityData` - incoming / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:153 / rewardProbabilityTable.Find(t => t.Chapter == chapter && t.BattleType == battleType)`
+- `RewardsView` -> `MapUIController` - outgoing / calls_member / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:37 / mapUIController.OpenMap()`
+- `CardContext` -> `ICombatant` - outgoing / casts_to / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardContext.cs:27 / ICombatant`
+- `RewardItem` -> `ItemData` - outgoing / casts_to / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:19 / ItemData`
+- `BattleManager` -> `BattleReward` - incoming / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:399 / BattleReward`
+- `BattleManager` -> `CardContext` - incoming / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:257 / CardContext`
+- `BattleManager` -> `CardData` - incoming / creates / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:39 / List<CardData>`
+
+## Internal Method Calls
+
+- `DebugCardTargetArrow.OnPopulateMesh(VertexHelper)` -> `DebugCardTargetArrow.AddVertex(VertexHelper, Vector2)` / 7 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:366 / AddVertex(vertexHelper, startPoint + perpendicular * shaftWidth * 0.5f)`
+- `CardInteractionView.TargetingMoveCoroutine()` -> `CardInteractionView.TryGetTargetingWorldPosition(Vector3)` / 3 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:164 / TryGetTargetingWorldPosition(out _)`
+- `CardHandler.OnDrag(PointerEventData)` -> `CardHandler.SetState(CardState)` / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:87 / SetState(CardState.Dragging)`
+- `CardHandler.OnDrag(PointerEventData)` -> `CardInteractionView.MoveVisualCenterToPointer(PointerEventData)` / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:88 / interactionView.MoveVisualCenterToPointer(eventData)`
+- `CardHandler.OnEndDrag(PointerEventData)` -> `CardHandler.SetState(CardState)` / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:111 / SetState(CardState.Returning)`
+- `CardInteractionView.TargetingMoveCoroutine()` -> `CardInteractionView.UpdateDebugTargetArrow(Vector2)` / 2 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:184 / UpdateDebugTargetArrow(targetingPointerPosition)`
+- `CardRewardView.Open(List<CardData>, RewardItemButton)` -> `CardRewardView.Refresh(List<CardData>)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardRewardView.cs:17 / Refresh(cardRewardList)`
+- `HandView.Start()` -> `HandView.Refresh()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\HandView.cs:18 / Refresh()`
+- `RewardsView.Open(BattleReward)` -> `RewardsView.Refresh()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:28 / Refresh()`
+- `RewardItemButton.OnClick()` -> `RewardItemButton.CompleteReward()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardItemButton.cs:30 / CompleteReward()`
+- `RewardItemButton.OnClick()` -> `RewardItemButton.DisplayCardReward()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardItemButton.cs:33 / DisplayCardReward()`
+- `RewardItemButton.OnClick()` -> `RewardItemButton.GetItemReward()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardItemButton.cs:36 / GetItemReward()`
+- `HandView.Refresh()` -> `CardInteractionView.SetRestingSortingOrder(int)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\HandView.cs:43 / interactionView.SetRestingSortingOrder(i)`
+- `HandView.Refresh()` -> `CardInteractionView.SetTargetingAnchor(RectTransform)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\HandView.cs:44 / interactionView.SetTargetingAnchor(cardContainer)`
+- `CardReward.OnPointerEnter(PointerEventData)` -> `CardReward.AnimateScale(Vector3, float)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardReward.cs:36 / AnimateScale(zoomScale, animationDuration)`
+- `CardReward.OnPointerExit(PointerEventData)` -> `CardReward.AnimateScale(Vector3, float)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\CardReward.cs:42 / AnimateScale(originalScale, animationDuration)`
+- `BattleReward.BattleReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData, int, int)` -> `BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:52 / GenerateReward(cardRewardsPool, rewardData)`
+- `CardHandler.OnPointerEnter(PointerEventData)` -> `CardHandler.SetState(CardState)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:55 / SetState(CardState.Hover)`
+- `RewardItemButton.GetItemReward()` -> `RewardItemButton.CompleteReward()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardItemButton.cs:58 / CompleteReward()`
+- `RewardsView.Refresh()` -> `BattleReward.GetRewardList()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:66 / reward.GetRewardList()`
+- `RewardsView.Refresh()` -> `RewardsView.DestroyButton(RewardItemButton)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\RewardsView.cs:60 / Destroy(child.gameObject)`
+- `BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` -> `BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:57 / GenerateCardReward(cardRewardsPool, rewardData)`
+- `BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` -> `BattleReward.GenerateGoldReward(BattleType)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:58 / GenerateGoldReward(rewardData.BattleType)`
+- `BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` -> `BattleReward.GenerateItemReward(RewardProbabilityData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:59 / GenerateItemReward(rewardData)`
+- `CardHandler.OnPointerExit(PointerEventData)` -> `CardHandler.SetState(CardState)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:63 / SetState(CardState.Idle)`
+- `BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` -> `BattleReward.GetCardRarity(RewardProbabilityData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:69 / GetCardRarity(rewardData)`
+- `BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData)` -> `BattleReward.PickCard(List<CardData>)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:70 / PickCard(cardRewardsPool[rarity])`
+- `CardHandler.OnBeginDrag(PointerEventData)` -> `CardHandler.SetState(CardState)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:75 / SetState(CardState.Dragging)`
+- `CardHandler.OnBeginDrag(PointerEventData)` -> `CardInteractionView.MoveVisualCenterToPointer(PointerEventData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:76 / interactionView.MoveVisualCenterToPointer(eventData)`
+- `CardHandler.OnDrag(PointerEventData)` -> `CardInteractionView.UpdateTargetingPointer(Vector2)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:84 / interactionView.UpdateTargetingPointer(eventData.position)`
+- `CardInteractionView.EnterIdle()` -> `CardInteractionView.HideDebugTargetArrow()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:83 / HideDebugTargetArrow()`
+- `CardInteractionView.EnterIdle()` -> `CardInteractionView.StopMovement()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:82 / StopMovement()`
+- `CardInteractionView.EnterHover()` -> `CardInteractionView.BringCardToFront()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:96 / BringCardToFront()`
+- `CardInteractionView.EnterHover()` -> `CardInteractionView.StopMovement()` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:94 / StopMovement()`
+- `BattleReward.GenerateItemReward(RewardProbabilityData)` -> `BattleReward.GetItemGetType(BattleType)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:104 / GetItemGetType(rewardData.BattleType)`
+- `BattleReward.GenerateItemReward(RewardProbabilityData)` -> `BattleReward.GetItemRarity(RewardProbabilityData)` / 1 refs
+  - Evidence: `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:103 / GetItemRarity(rewardData)`
+
+## Evidence
+
+- Likely flow - BattleReward.GenerateReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData) -> BattleReward.GenerateCardReward(Dictionary<CardRarity, List<CardData>>, RewardProbabilityData) -> BattleReward.GetCardRarity(RewardProbabilityData) / terminal
+- Likely flow - BattleReward.GenerateItemReward(RewardProbabilityData) -> BattleReward.IsItemRewardGiven(RewardProbabilityData) / terminal
+- Internal call - DebugCardTargetArrow.OnPopulateMesh(VertexHelper) -> DebugCardTargetArrow.AddVertex(VertexHelper, Vector2)
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:366 / AddVertex(vertexHelper, startPoint + perpendicular * shaftWidth * 0.5f)`
+- Internal call - CardInteractionView.TargetingMoveCoroutine() -> CardInteractionView.TryGetTargetingWorldPosition(Vector3)
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardInteractionView.cs:164 / TryGetTargetingWorldPosition(out _)`
+- Internal call - CardHandler.OnDrag(PointerEventData) -> CardHandler.SetState(CardState)
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:87 / SetState(CardState.Dragging)`
+- incoming accepts_parameter - BattleManager -> CardData / 10 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleManager.cs:65 / List<CardData>`
+- incoming has_field_type - BattleState -> CardData / 4 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\BattleState.cs:19 / List<CardData>`
+- incoming has_field_type - GameManager -> CardData / 4 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\GameManager.cs:35 / Dictionary<CardData.CardRarity, List<CardData>>`
+- Internal calls_member - CardHandler -> CardInteractionView / 11 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Card\CardHandler.cs:76 / interactionView.MoveVisualCenterToPointer(eventData)`
+- Internal accepts_parameter - BattleReward -> RewardProbabilityData / 7 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:48 / RewardProbabilityData`
+- Internal calls_member - DeckManager -> CardData / 6 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\DeckManager.cs:42 / PlayerDeck.Add(Instantiate(strikeCard))`
+- Internal has_field_type - DeckManager -> CardData / 5 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\DeckManager.cs:25 / CardData`
+- Internal accepts_parameter - BattleReward -> CardData / 4 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:48 / Dictionary<CardRarity, List<CardData>>`
+- Internal calls_member - BattleReward -> CardData / 4 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:66 / cardRewards.Clear()`
+- Internal creates - BattleReward -> RewardItem / 4 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:193 / List<RewardItem>`
+- Internal accepts_parameter - BattleReward -> CardData+CardRarity / 3 refs
+  - `H:\Unity\ProjectV\ProjectV\Assets\Scripts\Gameplay\Reward\BattleReward.cs:48 / Dictionary<CardRarity, List<CardData>>`
+
+## Suggested AI Task
+
+Use the Card System context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible.
+

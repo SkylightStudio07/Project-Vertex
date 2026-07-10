@@ -1,0 +1,141 @@
+﻿{
+  "Id": "topic:holy",
+  "Name": "Holy",
+  "Anchor": "systems/holy.md",
+  "Stats": {
+    "NodeCount": 3,
+    "InternalEdges": 2,
+    "ExternalEdges": 0,
+    "EntryMethodCount": 1,
+    "Keywords": [
+      "holy",
+      "place",
+      "gameplay",
+      "char",
+      "in",
+      "selectable"
+    ]
+  },
+  "RoleEstimate": "Holy appears to be an internally dense area around holy, place, gameplay, char, in. It contains 3 types, including 2 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "HolyPlaceManager.Awake@16",
+      "TypeId": "HolyPlaceManager",
+      "Signature": "Awake()",
+      "Label": "HolyPlaceManager.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceManager.cs",
+      "Line": 16
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "HolyPlaceData",
+      "Name": "HolyPlaceData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceData.cs",
+      "Line": 6,
+      "IsUnityType": true,
+      "Incoming": 1,
+      "Outgoing": 1,
+      "Internal": 2,
+      "External": 0
+    },
+    {
+      "Id": "HolyPlaceManager",
+      "Name": "HolyPlaceManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceManager.cs",
+      "Line": 7,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 1,
+      "Internal": 1,
+      "External": 0
+    },
+    {
+      "Id": "SelectableCharDataInHolyPlace",
+      "Name": "SelectableCharDataInHolyPlace",
+      "Kind": "struct",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceData.cs",
+      "Line": 13,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 0,
+      "Internal": 1,
+      "External": 0
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "HolyPlaceManager.Awake()",
+      "Steps": [
+        "HolyPlaceManager.Awake() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "HolyPlaceData",
+        "SourceName": "HolyPlaceData",
+        "Target": "SelectableCharDataInHolyPlace",
+        "TargetName": "SelectableCharDataInHolyPlace",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceData.cs",
+          "Line": 8,
+          "Text": "List\u003CSelectableCharDataInHolyPlace\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "HolyPlaceManager",
+        "SourceName": "HolyPlaceManager",
+        "Target": "HolyPlaceData",
+        "TargetName": "HolyPlaceData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceManager.cs",
+          "Line": 14,
+          "Text": "HolyPlaceData"
+        }
+      }
+    ],
+    "External": []
+  },
+  "MethodCalls": {
+    "Internal": []
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "HolyPlaceManager.Awake() -\u003E "
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "HolyPlaceData -\u003E SelectableCharDataInHolyPlace / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceData.cs",
+        "Line": 8,
+        "Text": "List\u003CSelectableCharDataInHolyPlace\u003E"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "HolyPlaceManager -\u003E HolyPlaceData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HolyPlace\\HolyPlaceManager.cs",
+        "Line": 14,
+        "Text": "HolyPlaceData"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Holy context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}
