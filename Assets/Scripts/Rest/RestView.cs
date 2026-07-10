@@ -13,7 +13,9 @@ public class RestView : MonoBehaviour
     private List<PortraitSlot> portraitSlots = new List<PortraitSlot>();
 
     [Header("행동")]
-    [SerializeField] private HealEffect restHealEffect;        // 휴식 회복용 효과 SO
+    // 휴식 회복량. CardEffect가 순수 클래스로 전환되며 SO 에셋 참조가 불가능해져 int로 단순화 —
+    // 구 HealEffect.Execute도 GameManager.HealPlayer 호출이 전부였다. (구 RestHealEffect.asset 값: 20)
+    [SerializeField] private int restHealAmount = 20;
 
 
     public void Open()
@@ -55,10 +57,8 @@ public class RestView : MonoBehaviour
 
     public void OnRestClicked()
     {
-        if (restHealEffect != null)
-        {
-            restHealEffect.Execute(new CardContext());
-        }
+        if (GameManager.Instance != null)
+            GameManager.Instance.HealPlayer(restHealAmount);
         Finish();
     }
     public void OnUpgradeClicked()
