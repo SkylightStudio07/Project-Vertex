@@ -1,0 +1,1592 @@
+﻿{
+  "Id": "map",
+  "Name": "Map Generation",
+  "Anchor": "systems/map-generation.md",
+  "Stats": {
+    "NodeCount": 14,
+    "InternalEdges": 101,
+    "ExternalEdges": 27,
+    "EntryMethodCount": 8,
+    "Keywords": [
+      "map",
+      "node",
+      "dialogue",
+      "config",
+      "connection",
+      "floor",
+      "generator",
+      "guarantee",
+      "line",
+      "sprite",
+      "ui",
+      "weight"
+    ]
+  },
+  "RoleEstimate": "Map Generation appears to be an internally dense area around map, node, dialogue, config, connection. It contains 14 types, including 5 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "MapUIController.Awake@9",
+      "TypeId": "MapUIController",
+      "Signature": "Awake()",
+      "Label": "MapUIController.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+      "Line": 9
+    },
+    {
+      "Id": "MapManager.Awake@13",
+      "TypeId": "MapManager",
+      "Signature": "Awake()",
+      "Label": "MapManager.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+      "Line": 13
+    },
+    {
+      "Id": "MapUIController.Start@36",
+      "TypeId": "MapUIController",
+      "Signature": "Start()",
+      "Label": "MapUIController.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+      "Line": 36
+    },
+    {
+      "Id": "MapGenerator.Generate@15",
+      "TypeId": "MapGenerator",
+      "Signature": "Generate(MapConfig, int)",
+      "Label": "MapGenerator.Generate(MapConfig, int)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+      "Line": 15
+    },
+    {
+      "Id": "MapManager.InitializeMap@26",
+      "TypeId": "MapManager",
+      "Signature": "InitializeMap()",
+      "Label": "MapManager.InitializeMap()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+      "Line": 26
+    },
+    {
+      "Id": "MapNodeView.Setup@45",
+      "TypeId": "MapNodeView",
+      "Signature": "Setup(MapNode, Action\u003CMapNode\u003E)",
+      "Label": "MapNodeView.Setup(MapNode, Action\u003CMapNode\u003E)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+      "Line": 45
+    },
+    {
+      "Id": "MapUIController.BuildMap@62",
+      "TypeId": "MapUIController",
+      "Signature": "BuildMap()",
+      "Label": "MapUIController.BuildMap()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+      "Line": 62
+    },
+    {
+      "Id": "MapUIController.BuildLines@119",
+      "TypeId": "MapUIController",
+      "Signature": "BuildLines(MapData, float)",
+      "Label": "MapUIController.BuildLines(MapData, float)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+      "Line": 119
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "MapNode",
+      "Name": "MapNode",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNode.cs",
+      "Line": 9,
+      "IsUnityType": false,
+      "Incoming": 40,
+      "Outgoing": 2,
+      "Internal": 40,
+      "External": 2
+    },
+    {
+      "Id": "MapUIController",
+      "Name": "MapUIController",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+      "Line": 5,
+      "IsUnityType": true,
+      "Incoming": 6,
+      "Outgoing": 33,
+      "Internal": 26,
+      "External": 13
+    },
+    {
+      "Id": "MapGenerator",
+      "Name": "MapGenerator",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+      "Line": 6,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 36,
+      "Internal": 36,
+      "External": 1
+    },
+    {
+      "Id": "MapConfig",
+      "Name": "MapConfig",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+      "Line": 24,
+      "IsUnityType": true,
+      "Incoming": 4,
+      "Outgoing": 18,
+      "Internal": 19,
+      "External": 3
+    },
+    {
+      "Id": "NodeType",
+      "Name": "NodeType",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\NodeType.cs",
+      "Line": 1,
+      "IsUnityType": false,
+      "Incoming": 16,
+      "Outgoing": 0,
+      "Internal": 15,
+      "External": 1
+    },
+    {
+      "Id": "MapData",
+      "Name": "MapData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapData.cs",
+      "Line": 6,
+      "IsUnityType": false,
+      "Incoming": 10,
+      "Outgoing": 5,
+      "Internal": 14,
+      "External": 1
+    },
+    {
+      "Id": "MapNodeView",
+      "Name": "MapNodeView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+      "Line": 17,
+      "IsUnityType": true,
+      "Incoming": 8,
+      "Outgoing": 6,
+      "Internal": 14,
+      "External": 0
+    },
+    {
+      "Id": "MapManager",
+      "Name": "MapManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+      "Line": 6,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 10,
+      "Internal": 10,
+      "External": 0
+    },
+    {
+      "Id": "NodeTypeWeight",
+      "Name": "NodeTypeWeight",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+      "Line": 5,
+      "IsUnityType": false,
+      "Incoming": 9,
+      "Outgoing": 1,
+      "Internal": 10,
+      "External": 0
+    },
+    {
+      "Id": "FloorGuarantee",
+      "Name": "FloorGuarantee",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+      "Line": 13,
+      "IsUnityType": false,
+      "Incoming": 7,
+      "Outgoing": 1,
+      "Internal": 8,
+      "External": 0
+    },
+    {
+      "Id": "DialogueNodeData",
+      "Name": "DialogueNodeData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+      "Line": 40,
+      "IsUnityType": false,
+      "Incoming": 5,
+      "Outgoing": 1,
+      "Internal": 0,
+      "External": 6
+    },
+    {
+      "Id": "MapConnectionLine",
+      "Name": "MapConnectionLine",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConnectionLine.cs",
+      "Line": 6,
+      "IsUnityType": true,
+      "Incoming": 6,
+      "Outgoing": 0,
+      "Internal": 6,
+      "External": 0
+    },
+    {
+      "Id": "MapNodeState",
+      "Name": "MapNodeState",
+      "Kind": "enum",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+      "Line": 8,
+      "IsUnityType": false,
+      "Incoming": 2,
+      "Outgoing": 0,
+      "Internal": 2,
+      "External": 0
+    },
+    {
+      "Id": "MapNodeView\u002BNodeSprite",
+      "Name": "MapNodeView\u002BNodeSprite",
+      "Kind": "struct",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+      "Line": 21,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 1,
+      "Internal": 2,
+      "External": 0
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "MapGenerator.Generate(MapConfig, int)",
+      "Steps": [
+        "MapGenerator.Generate(MapConfig, int)",
+        "MapGenerator.PickColumns(int, int, HashSet\u003Cint\u003E, System.Random)",
+        "MapGenerator.Shuffle(List\u003CT\u003E, System.Random) / terminal"
+      ]
+    },
+    {
+      "Entry": "MapUIController.BuildMap()",
+      "Steps": [
+        "MapUIController.BuildMap()",
+        "MapNodeView.Setup(MapNode, Action\u003CMapNode\u003E)",
+        "MapNodeView.GetSprite(NodeType) / terminal"
+      ]
+    },
+    {
+      "Entry": "MapUIController.BuildLines(MapData, float)",
+      "Steps": [
+        "MapUIController.BuildLines(MapData, float)",
+        "MapConnectionLine.Setup(Vector2, Vector2) / terminal"
+      ]
+    },
+    {
+      "Entry": "MapManager.InitializeMap()",
+      "Steps": [
+        "MapManager.InitializeMap()",
+        "MapGenerator.Generate(MapConfig) / terminal"
+      ]
+    },
+    {
+      "Entry": "MapNodeView.Setup(MapNode, Action\u003CMapNode\u003E)",
+      "Steps": [
+        "MapNodeView.Setup(MapNode, Action\u003CMapNode\u003E)",
+        "MapNodeView.GetSprite(NodeType) / terminal"
+      ]
+    },
+    {
+      "Entry": "MapUIController.Awake()",
+      "Steps": [
+        "MapUIController.Awake() / terminal"
+      ]
+    },
+    {
+      "Entry": "MapManager.Awake()",
+      "Steps": [
+        "MapManager.Awake() / terminal"
+      ]
+    },
+    {
+      "Entry": "MapUIController.Start()",
+      "Steps": [
+        "MapUIController.Start() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "MapConfig",
+        "SourceName": "MapConfig",
+        "Target": "NodeTypeWeight",
+        "TargetName": "NodeTypeWeight",
+        "Weight": 7,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+          "Line": 37,
+          "Text": "NodeTypeWeight"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "MapConfig",
+        "SourceName": "MapConfig",
+        "Target": "FloorGuarantee",
+        "TargetName": "FloorGuarantee",
+        "Weight": 6,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+          "Line": 63,
+          "Text": "FloorGuarantee"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 6,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 69,
+          "Text": "MapNode"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 5,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 263,
+          "Text": "List\u003CMapNode\u003E"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapNodeView",
+        "TargetName": "MapNodeView",
+        "Weight": 5,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 72,
+          "Text": "nodeViews.Clear()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 276,
+          "Text": "sortedCurr.Sort((a, b) =\u003E a.column.CompareTo(b.column))"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "NodeType",
+        "TargetName": "NodeType",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 47,
+          "Text": "guaranteeMap.ContainsKey(guarantee.floorIndex)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "NodeType",
+        "TargetName": "NodeType",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 39,
+          "Text": "Dictionary\u003Cint, List\u003CNodeType\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "MapConfig",
+        "TargetName": "MapConfig",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 9,
+          "Text": "MapConfig"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 173,
+          "Text": "MapNode"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapConnectionLine",
+        "TargetName": "MapConnectionLine",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 73,
+          "Text": "lineViews.Clear()"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "MapManager",
+        "SourceName": "MapManager",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+          "Line": 51,
+          "Text": "List\u003CMapNode\u003E"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 138,
+          "Text": "MapNode"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapNodeView",
+        "SourceName": "MapNodeView",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+          "Line": 45,
+          "Text": "MapNode"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "MapData",
+        "SourceName": "MapData",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapData.cs",
+          "Line": 20,
+          "Text": "List\u003CList\u003CMapNode\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapConnectionLine",
+        "TargetName": "MapConnectionLine",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 15,
+          "Text": "MapConnectionLine"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapNodeView",
+        "TargetName": "MapNodeView",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 14,
+          "Text": "MapNodeView"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "MapData",
+        "TargetName": "MapData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 9,
+          "Text": "MapData"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "NodeTypeWeight",
+        "TargetName": "NodeTypeWeight",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 393,
+          "Text": "List\u003CNodeTypeWeight\u003E"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapManager",
+        "SourceName": "MapManager",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+          "Line": 37,
+          "Text": "MapNode"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapNodeView",
+        "SourceName": "MapNodeView",
+        "Target": "MapNodeState",
+        "TargetName": "MapNodeState",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+          "Line": 56,
+          "Text": "MapNodeState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapNodeView",
+        "SourceName": "MapNodeView",
+        "Target": "NodeType",
+        "TargetName": "NodeType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+          "Line": 77,
+          "Text": "NodeType"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapData",
+        "TargetName": "MapData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 119,
+          "Text": "MapData"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapData",
+        "SourceName": "MapData",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapData.cs",
+          "Line": 22,
+          "Text": "floors.Add(new List\u003CMapNode\u003E())"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapManager",
+        "SourceName": "MapManager",
+        "Target": "MapGenerator",
+        "TargetName": "MapGenerator",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+          "Line": 28,
+          "Text": "MapGenerator.Generate(mapConfig)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapManager",
+        "SourceName": "MapManager",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+          "Line": 60,
+          "Text": "result.Add(RunData.Instance.mapData.GetNode(nextFloor, nodeIndex))"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapData",
+        "TargetName": "MapData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 138,
+          "Text": "mapData.GetNode(nextFloor, nextIndex)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "internal",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 164,
+          "Text": "accessible.Contains(view.Data)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "internal",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "MapData",
+        "TargetName": "MapData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 26,
+          "Text": "MapData"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "FloorGuarantee",
+        "SourceName": "FloorGuarantee",
+        "Target": "NodeType",
+        "TargetName": "NodeType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+          "Line": 17,
+          "Text": "NodeType"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapConfig",
+        "SourceName": "MapConfig",
+        "Target": "FloorGuarantee",
+        "TargetName": "FloorGuarantee",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+          "Line": 61,
+          "Text": "List\u003CFloorGuarantee\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapConfig",
+        "SourceName": "MapConfig",
+        "Target": "NodeTypeWeight",
+        "TargetName": "NodeTypeWeight",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+          "Line": 35,
+          "Text": "List\u003CNodeTypeWeight\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapData",
+        "SourceName": "MapData",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapData.cs",
+          "Line": 9,
+          "Text": "List\u003CList\u003CMapNode\u003E\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapManager",
+        "SourceName": "MapManager",
+        "Target": "MapConfig",
+        "TargetName": "MapConfig",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+          "Line": 11,
+          "Text": "MapConfig"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapNode",
+        "SourceName": "MapNode",
+        "Target": "NodeType",
+        "TargetName": "NodeType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNode.cs",
+          "Line": 13,
+          "Text": "NodeType"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "MapNodeView",
+        "SourceName": "MapNodeView",
+        "Target": "MapNodeView\u002BNodeSprite",
+        "TargetName": "MapNodeView\u002BNodeSprite",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+          "Line": 27,
+          "Text": "List\u003CNodeSprite\u003E"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "MapConfig",
+        "SourceName": "MapConfig",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+          "Line": 54,
+          "Text": "List\u003CEnemyData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 27,
+          "Text": "Dictionary\u003Cstring, DialogueNodeData\u003E"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 97,
+          "Text": "_nodeMap.TryGetValue(nodeId, out _currentNode)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 156,
+          "Text": "mapUIController.OpenMap()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "EventView",
+        "TargetName": "EventView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 218,
+          "Text": "eventView.Open(data)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "RestView",
+        "TargetName": "RestView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 229,
+          "Text": "restView.Open()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "SelectCoopCharUI",
+        "TargetName": "SelectCoopCharUI",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 241,
+          "Text": "selectCoopCharUI.Init()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "RestView",
+        "SourceName": "RestView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Rest\\RestView.cs",
+          "Line": 78,
+          "Text": "mapUIController.OpenMap()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 37,
+          "Text": "mapUIController.OpenMap()"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "incoming",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 61,
+          "Text": "Dictionary\u003Cstring, DialogueNodeData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "DialogueNodeData",
+        "SourceName": "DialogueNodeData",
+        "Target": "DialogueLineData",
+        "TargetName": "DialogueLineData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+          "Line": 43,
+          "Text": "DialogueLineData[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "DialogueScriptData",
+        "SourceName": "DialogueScriptData",
+        "Target": "DialogueNodeData",
+        "TargetName": "DialogueNodeData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+          "Line": 51,
+          "Text": "DialogueNodeData[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 30,
+          "Text": "MapUIController"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "MapNode",
+        "SourceName": "MapNode",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNode.cs",
+          "Line": 23,
+          "Text": "List\u003CEnemyData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "EventData",
+        "TargetName": "EventData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 20,
+          "Text": "List\u003CEventData\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "EventView",
+        "TargetName": "EventView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 19,
+          "Text": "EventView"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "RestView",
+        "TargetName": "RestView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 23,
+          "Text": "RestView"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "SelectCoopCharUI",
+        "TargetName": "SelectCoopCharUI",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 25,
+          "Text": "SelectCoopCharUI"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "RestView",
+        "SourceName": "RestView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Rest\\RestView.cs",
+          "Line": 8,
+          "Text": "MapUIController"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "RewardsView",
+        "SourceName": "RewardsView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\Reward\\RewardsView.cs",
+          "Line": 10,
+          "Text": "MapUIController"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "incoming",
+        "Source": "RunData",
+        "SourceName": "RunData",
+        "Target": "MapData",
+        "TargetName": "MapData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\RunData.cs",
+          "Line": 14,
+          "Text": "MapData"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "incoming",
+        "Source": "RunData",
+        "SourceName": "RunData",
+        "Target": "MapNode",
+        "TargetName": "MapNode",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\RunData.cs",
+          "Line": 24,
+          "Text": "MapNode"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "incoming",
+        "Source": "RunData",
+        "SourceName": "RunData",
+        "Target": "NodeType",
+        "TargetName": "NodeType",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\RunData.cs",
+          "Line": 21,
+          "Text": "NodeType"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "MapGenerator",
+        "SourceName": "MapGenerator",
+        "Target": "EnemyData",
+        "TargetName": "EnemyData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 411,
+          "Text": "List\u003CEnemyData\u003E"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "MapGenerator",
+        "Source": "ConnectFloors(List\u003CMapNode\u003E, List\u003CMapNode\u003E, System.Random)",
+        "TargetType": "MapGenerator",
+        "Target": "FindClosest(MapNode, List\u003CMapNode\u003E)",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 309,
+          "Text": "FindClosest(curr, next)"
+        }
+      },
+      {
+        "SourceType": "MapGenerator",
+        "Source": "Generate(MapConfig, int)",
+        "TargetType": "MapGenerator",
+        "Target": "AssignEncounter(MapNode, MapConfig, System.Random)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 161,
+          "Text": "AssignEncounter(node, config, rng)"
+        }
+      },
+      {
+        "SourceType": "MapGenerator",
+        "Source": "Generate(MapConfig, int)",
+        "TargetType": "MapGenerator",
+        "Target": "ConnectFloors(List\u003CMapNode\u003E, List\u003CMapNode\u003E, System.Random)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 176,
+          "Text": "ConnectFloors(mapData.floors[f], mapData.floors[f \u002B 1], rng)"
+        }
+      },
+      {
+        "SourceType": "MapGenerator",
+        "Source": "Generate(MapConfig, int)",
+        "TargetType": "MapGenerator",
+        "Target": "GetRandomNodeType(List\u003CNodeTypeWeight\u003E, System.Random)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 114,
+          "Text": "GetRandomNodeType(config.nodeTypeWeights, rng)"
+        }
+      },
+      {
+        "SourceType": "MapGenerator",
+        "Source": "Generate(MapConfig, int)",
+        "TargetType": "MapGenerator",
+        "Target": "PickColumns(int, int, HashSet\u003Cint\u003E, System.Random)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 139,
+          "Text": "PickColumns(columnCount, nodeCount, prevCols, rng)"
+        }
+      },
+      {
+        "SourceType": "MapManager",
+        "Source": "InitializeMap()",
+        "TargetType": "MapGenerator",
+        "Target": "Generate(MapConfig)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapManager.cs",
+          "Line": 28,
+          "Text": "MapGenerator.Generate(mapConfig)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "OpenMap()",
+        "TargetType": "MapUIController",
+        "Target": "BuildMap()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 46,
+          "Text": "BuildMap()"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "OpenMap()",
+        "TargetType": "MapUIController",
+        "Target": "RefreshNodeStates()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 47,
+          "Text": "RefreshNodeStates()"
+        }
+      },
+      {
+        "SourceType": "MapNodeView",
+        "Source": "Setup(MapNode, Action\u003CMapNode\u003E)",
+        "TargetType": "MapNodeView",
+        "Target": "GetSprite(NodeType)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapNodeView.cs",
+          "Line": 48,
+          "Text": "GetSprite(data.nodeType)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "ToggleMap()",
+        "TargetType": "MapUIController",
+        "Target": "CloseMap()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 58,
+          "Text": "CloseMap()"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "ToggleMap()",
+        "TargetType": "MapUIController",
+        "Target": "OpenMap()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 59,
+          "Text": "OpenMap()"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "BuildMap()",
+        "TargetType": "MapNodeView",
+        "Target": "Setup(MapNode, Action\u003CMapNode\u003E)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 106,
+          "Text": "view.Setup(node, OnNodeClicked)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "BuildMap()",
+        "TargetType": "MapUIController",
+        "Target": "BuildLines(MapData, float)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 94,
+          "Text": "BuildLines(mapData, xOffset)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "BuildMap()",
+        "TargetType": "MapUIController",
+        "Target": "RefreshNodeStates()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 111,
+          "Text": "RefreshNodeStates()"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "BuildLines(MapData, float)",
+        "TargetType": "MapConnectionLine",
+        "Target": "Setup(Vector2, Vector2)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 144,
+          "Text": "line.Setup(from, to)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "BuildLines(MapData, float)",
+        "TargetType": "MapData",
+        "Target": "GetNode(int, int)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 138,
+          "Text": "mapData.GetNode(nextFloor, nextIndex)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "OnNodeClicked(MapNode)",
+        "TargetType": "MapUIController",
+        "Target": "CloseMap()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 177,
+          "Text": "CloseMap()"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "OnNodeClicked(MapNode)",
+        "TargetType": "MapUIController",
+        "Target": "OpenEvent(MapNode)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 187,
+          "Text": "OpenEvent(node)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "OnNodeClicked(MapNode)",
+        "TargetType": "MapUIController",
+        "Target": "OpenRest(MapNode)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 190,
+          "Text": "OpenRest(node)"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "OnNodeClicked(MapNode)",
+        "TargetType": "MapUIController",
+        "Target": "OpenSanctuary()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 193,
+          "Text": "OpenSanctuary()"
+        }
+      },
+      {
+        "SourceType": "MapUIController",
+        "Source": "OnNodeClicked(MapNode)",
+        "TargetType": "MapUIController",
+        "Target": "RefreshNodeStates()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 176,
+          "Text": "RefreshNodeStates()"
+        }
+      },
+      {
+        "SourceType": "MapGenerator",
+        "Source": "PickColumns(int, int, HashSet\u003Cint\u003E, System.Random)",
+        "TargetType": "MapGenerator",
+        "Target": "Shuffle(List\u003CT\u003E, System.Random)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+          "Line": 248,
+          "Text": "Shuffle(slots, rng)"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "MapGenerator.Generate(MapConfig, int) -\u003E MapGenerator.PickColumns(int, int, HashSet\u003Cint\u003E, System.Random) -\u003E MapGenerator.Shuffle(List\u003CT\u003E, System.Random) / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "MapUIController.BuildMap() -\u003E MapNodeView.Setup(MapNode, Action\u003CMapNode\u003E) -\u003E MapNodeView.GetSprite(NodeType) / terminal"
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "MapGenerator.ConnectFloors(List\u003CMapNode\u003E, List\u003CMapNode\u003E, System.Random) -\u003E MapGenerator.FindClosest(MapNode, List\u003CMapNode\u003E)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 309,
+        "Text": "FindClosest(curr, next)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "MapGenerator.Generate(MapConfig, int) -\u003E MapGenerator.AssignEncounter(MapNode, MapConfig, System.Random)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 161,
+        "Text": "AssignEncounter(node, config, rng)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "MapGenerator.Generate(MapConfig, int) -\u003E MapGenerator.ConnectFloors(List\u003CMapNode\u003E, List\u003CMapNode\u003E, System.Random)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 176,
+        "Text": "ConnectFloors(mapData.floors[f], mapData.floors[f \u002B 1], rng)"
+      }
+    },
+    {
+      "Title": "outgoing has_field_type",
+      "Detail": "MapConfig -\u003E EnemyData / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+        "Line": 54,
+        "Text": "List\u003CEnemyData\u003E"
+      }
+    },
+    {
+      "Title": "incoming has_field_type",
+      "Detail": "DialogueView -\u003E DialogueNodeData / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 27,
+        "Text": "Dictionary\u003Cstring, DialogueNodeData\u003E"
+      }
+    },
+    {
+      "Title": "incoming calls_member",
+      "Detail": "DialogueView -\u003E DialogueNodeData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+        "Line": 97,
+        "Text": "_nodeMap.TryGetValue(nodeId, out _currentNode)"
+      }
+    },
+    {
+      "Title": "Internal creates",
+      "Detail": "MapConfig -\u003E NodeTypeWeight / 7 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+        "Line": 37,
+        "Text": "NodeTypeWeight"
+      }
+    },
+    {
+      "Title": "Internal creates",
+      "Detail": "MapConfig -\u003E FloorGuarantee / 6 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapConfig.cs",
+        "Line": 63,
+        "Text": "FloorGuarantee"
+      }
+    },
+    {
+      "Title": "Internal creates",
+      "Detail": "MapGenerator -\u003E MapNode / 6 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 69,
+        "Text": "MapNode"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "MapGenerator -\u003E MapNode / 5 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 263,
+        "Text": "List\u003CMapNode\u003E"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "MapUIController -\u003E MapNodeView / 5 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+        "Line": 72,
+        "Text": "nodeViews.Clear()"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "MapGenerator -\u003E MapNode / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 276,
+        "Text": "sortedCurr.Sort((a, b) =\u003E a.column.CompareTo(b.column))"
+      }
+    },
+    {
+      "Title": "Internal calls_member",
+      "Detail": "MapGenerator -\u003E NodeType / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 47,
+        "Text": "guaranteeMap.ContainsKey(guarantee.floorIndex)"
+      }
+    },
+    {
+      "Title": "Internal creates",
+      "Detail": "MapGenerator -\u003E NodeType / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapGenerator.cs",
+        "Line": 39,
+        "Text": "Dictionary\u003Cint, List\u003CNodeType\u003E\u003E"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Map Generation context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

@@ -1,0 +1,1210 @@
+﻿{
+  "Id": "action",
+  "Name": "Action Event Pipeline",
+  "Anchor": "systems/action-event-pipeline.md",
+  "Stats": {
+    "NodeCount": 19,
+    "InternalEdges": 6,
+    "ExternalEdges": 94,
+    "EntryMethodCount": 7,
+    "Keywords": [
+      "effect",
+      "event",
+      "card",
+      "effects",
+      "choice",
+      "add",
+      "cooperator",
+      "dialogue",
+      "json",
+      "status",
+      "ammo",
+      "apply"
+    ]
+  },
+  "RoleEstimate": "Action Event Pipeline appears to be an externally connected area around effect, event, card, effects, choice. It contains 19 types, including 3 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "CharacterEventManager.Start@14",
+      "TypeId": "CharacterEventManager",
+      "Signature": "Start()",
+      "Label": "CharacterEventManager.Start()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+      "Line": 14
+    },
+    {
+      "Id": "CharacterEventManager.OnDisable@20",
+      "TypeId": "CharacterEventManager",
+      "Signature": "OnDisable()",
+      "Label": "CharacterEventManager.OnDisable()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+      "Line": 20
+    },
+    {
+      "Id": "CharacterEventManager.Update@25",
+      "TypeId": "CharacterEventManager",
+      "Signature": "Update()",
+      "Label": "CharacterEventManager.Update()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+      "Line": 25
+    },
+    {
+      "Id": "EventView.Awake@37",
+      "TypeId": "EventView",
+      "Signature": "Awake()",
+      "Label": "EventView.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+      "Line": 37
+    },
+    {
+      "Id": "HitEffectSpawner.Spawn@10",
+      "TypeId": "HitEffectSpawner",
+      "Signature": "Spawn(GameObject, Transform, float)",
+      "Label": "HitEffectSpawner.Spawn(GameObject, Transform, float)",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HitEffectSpawner.cs",
+      "Line": 10
+    },
+    {
+      "Id": "ApplyStatusEffect.CreatePassive@39",
+      "TypeId": "ApplyStatusEffect",
+      "Signature": "CreatePassive()",
+      "Label": "ApplyStatusEffect.CreatePassive()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+      "Line": 39
+    },
+    {
+      "Id": "EventView.BuildChoices@105",
+      "TypeId": "EventView",
+      "Signature": "BuildChoices()",
+      "Label": "EventView.BuildChoices()",
+      "EntryKind": "flow_candidate",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+      "Line": 105
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "StatusEffectBase",
+      "Name": "StatusEffectBase",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+      "Line": 3,
+      "IsUnityType": false,
+      "Incoming": 16,
+      "Outgoing": 15,
+      "Internal": 1,
+      "External": 30
+    },
+    {
+      "Id": "DamageEffect",
+      "Name": "DamageEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+      "Line": 5,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 15,
+      "Internal": 0,
+      "External": 16
+    },
+    {
+      "Id": "ApplyStatusEffect",
+      "Name": "ApplyStatusEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 11,
+      "Internal": 1,
+      "External": 10
+    },
+    {
+      "Id": "EventView",
+      "Name": "EventView",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+      "Line": 9,
+      "IsUnityType": true,
+      "Incoming": 2,
+      "Outgoing": 8,
+      "Internal": 3,
+      "External": 7
+    },
+    {
+      "Id": "EventData",
+      "Name": "EventData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventData.cs",
+      "Line": 8,
+      "IsUnityType": true,
+      "Incoming": 3,
+      "Outgoing": 1,
+      "Internal": 3,
+      "External": 1
+    },
+    {
+      "Id": "HealEffect",
+      "Name": "HealEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\HealEffect.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 2,
+      "Outgoing": 2,
+      "Internal": 0,
+      "External": 4
+    },
+    {
+      "Id": "RankEventData",
+      "Name": "RankEventData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CoopCharData.cs",
+      "Line": 29,
+      "IsUnityType": false,
+      "Incoming": 4,
+      "Outgoing": 0,
+      "Internal": 0,
+      "External": 4
+    },
+    {
+      "Id": "CharacterEventManager",
+      "Name": "CharacterEventManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+      "Line": 6,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 3,
+      "Internal": 0,
+      "External": 3
+    },
+    {
+      "Id": "DialogueChoiceOption",
+      "Name": "DialogueChoiceOption",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueScriptData.cs",
+      "Line": 16,
+      "IsUnityType": false,
+      "Incoming": 2,
+      "Outgoing": 1,
+      "Internal": 0,
+      "External": 3
+    },
+    {
+      "Id": "HitEffectSpawner",
+      "Name": "HitEffectSpawner",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\HitEffectSpawner.cs",
+      "Line": 8,
+      "IsUnityType": false,
+      "Incoming": 3,
+      "Outgoing": 0,
+      "Internal": 0,
+      "External": 3
+    },
+    {
+      "Id": "AddAmmoEffect",
+      "Name": "AddAmmoEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddAmmoEffect.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 2,
+      "Internal": 0,
+      "External": 2
+    },
+    {
+      "Id": "AddCoopPointEffect",
+      "Name": "AddCoopPointEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddCoopPointEffect.cs",
+      "Line": 5,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 2,
+      "Internal": 0,
+      "External": 2
+    },
+    {
+      "Id": "BlockEffect",
+      "Name": "BlockEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\BlockEffect.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 2,
+      "Internal": 0,
+      "External": 2
+    },
+    {
+      "Id": "DrawEffect",
+      "Name": "DrawEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DrawEffect.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 2,
+      "Internal": 0,
+      "External": 2
+    },
+    {
+      "Id": "EventChoiceEffect",
+      "Name": "EventChoiceEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventData.cs",
+      "Line": 24,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 1,
+      "Internal": 1,
+      "External": 1
+    },
+    {
+      "Id": "EventJsonData",
+      "Name": "EventJsonData",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventJsonData.cs",
+      "Line": 7,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 1,
+      "Internal": 2,
+      "External": 0
+    },
+    {
+      "Id": "GainGoldEffect",
+      "Name": "GainGoldEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\GainGoldEffect.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 2,
+      "Internal": 0,
+      "External": 2
+    },
+    {
+      "Id": "LoseHPEffect",
+      "Name": "LoseHPEffect",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\LoseHPEffect.cs",
+      "Line": 4,
+      "IsUnityType": false,
+      "Incoming": 0,
+      "Outgoing": 2,
+      "Internal": 0,
+      "External": 2
+    },
+    {
+      "Id": "EventChoiceJson",
+      "Name": "EventChoiceJson",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventJsonData.cs",
+      "Line": 15,
+      "IsUnityType": false,
+      "Incoming": 1,
+      "Outgoing": 0,
+      "Internal": 1,
+      "External": 0
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "EventView.BuildChoices()",
+      "Steps": [
+        "EventView.BuildChoices()",
+        "EventView.HideChoices() / terminal"
+      ]
+    },
+    {
+      "Entry": "CharacterEventManager.Update()",
+      "Steps": [
+        "CharacterEventManager.Update() / terminal"
+      ]
+    },
+    {
+      "Entry": "CharacterEventManager.Start()",
+      "Steps": [
+        "CharacterEventManager.Start() / terminal"
+      ]
+    },
+    {
+      "Entry": "CharacterEventManager.OnDisable()",
+      "Steps": [
+        "CharacterEventManager.OnDisable() / terminal"
+      ]
+    },
+    {
+      "Entry": "EventView.Awake()",
+      "Steps": [
+        "EventView.Awake() / terminal"
+      ]
+    },
+    {
+      "Entry": "HitEffectSpawner.Spawn(GameObject, Transform, float)",
+      "Steps": [
+        "HitEffectSpawner.Spawn(GameObject, Transform, float) / terminal"
+      ]
+    },
+    {
+      "Entry": "ApplyStatusEffect.CreatePassive()",
+      "Steps": [
+        "ApplyStatusEffect.CreatePassive() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "internal",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "EventData",
+        "TargetName": "EventData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 47,
+          "Text": "EventData"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EventData",
+        "SourceName": "EventData",
+        "Target": "EventChoiceEffect",
+        "TargetName": "EventChoiceEffect",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventData.cs",
+          "Line": 13,
+          "Text": "List\u003CEventChoiceEffect\u003E"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EventJsonData",
+        "SourceName": "EventJsonData",
+        "Target": "EventChoiceJson",
+        "TargetName": "EventChoiceJson",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventJsonData.cs",
+          "Line": 11,
+          "Text": "EventChoiceJson[]"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "EventData",
+        "TargetName": "EventData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 33,
+          "Text": "EventData"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "internal",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "EventJsonData",
+        "TargetName": "EventJsonData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 34,
+          "Text": "EventJsonData"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "internal",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 39,
+          "Text": "StatusEffectBase"
+        }
+      }
+    ],
+    "External": [
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "BattleState",
+        "TargetName": "BattleState",
+        "Weight": 5,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 25,
+          "Text": "BattleState"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 4,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 25,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "DamageCalculator",
+        "TargetName": "DamageCalculator",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 23,
+          "Text": "DamageCalculator.Resolve(new DamageInfo(amount, attacker), single, context.State)"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 23,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 11,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 28,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 89,
+          "Text": "existing.TryMerge(passive)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 54,
+          "Text": "existing.TryMerge(passive)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "PlayerHUDView",
+        "SourceName": "PlayerHUDView",
+        "Target": "HitEffectSpawner",
+        "TargetName": "HitEffectSpawner",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerHUDView.cs",
+          "Line": 128,
+          "Text": "HitEffectSpawner.Spawn(hitEffectPrefab, anchor)"
+        }
+      },
+      {
+        "Kind": "returns",
+        "Direction": "outgoing",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "DamageInfo",
+        "TargetName": "DamageInfo",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 28,
+          "Text": "DamageInfo"
+        }
+      },
+      {
+        "Kind": "type_check",
+        "Direction": "incoming",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 89,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "type_check",
+        "Direction": "incoming",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 54,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "uses_local_type",
+        "Direction": "outgoing",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "ICombatant",
+        "TargetName": "ICombatant",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 15,
+          "Text": "ICombatant"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "AddAmmoEffect",
+        "SourceName": "AddAmmoEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddAmmoEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "AddCoopPointEffect",
+        "SourceName": "AddCoopPointEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\AddCoopPointEffect.cs",
+          "Line": 10,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 10,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 33,
+          "Text": "EnemyInstance"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "BlockEffect",
+        "SourceName": "BlockEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\BlockEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "DialogueView",
+        "SourceName": "DialogueView",
+        "Target": "DialogueChoiceOption",
+        "TargetName": "DialogueChoiceOption",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Dialogue\\DialogueView.cs",
+          "Line": 185,
+          "Text": "DialogueChoiceOption"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "DrawEffect",
+        "SourceName": "DrawEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DrawEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "EnemyInstance",
+        "SourceName": "EnemyInstance",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyInstance.cs",
+          "Line": 85,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "GainGoldEffect",
+        "SourceName": "GainGoldEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\GainGoldEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "HealEffect",
+        "SourceName": "HealEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\HealEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "LoseHPEffect",
+        "SourceName": "LoseHPEffect",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\LoseHPEffect.cs",
+          "Line": 8,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "incoming",
+        "Source": "PlayerCombatant",
+        "SourceName": "PlayerCombatant",
+        "Target": "StatusEffectBase",
+        "TargetName": "StatusEffectBase",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Gameplay\\PlayerCombatant.cs",
+          "Line": 50,
+          "Text": "StatusEffectBase"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "StatusEffectBase",
+        "SourceName": "StatusEffectBase",
+        "Target": "CardContext",
+        "TargetName": "CardContext",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+          "Line": 27,
+          "Text": "CardContext"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 36,
+          "Text": "enemy.AddPassive(passive)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "CharacterEventManager",
+        "SourceName": "CharacterEventManager",
+        "Target": "DialogueManager",
+        "TargetName": "DialogueManager",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Cooperator\\CharacterEventManager.cs",
+          "Line": 32,
+          "Text": "dialogueManager.LoadRelationshipEvent(\u0022Cp_01\u0022)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "DamageEffect",
+        "SourceName": "DamageEffect",
+        "Target": "EnemyInstance",
+        "TargetName": "EnemyInstance",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 38,
+          "Text": "alive.Add(e)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "EnemyView",
+        "SourceName": "EnemyView",
+        "Target": "HitEffectSpawner",
+        "TargetName": "HitEffectSpawner",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Enemy\\EnemyView.cs",
+          "Line": 153,
+          "Text": "HitEffectSpawner.Spawn(hitEffectPrefab, anchor)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "DialogueView",
+        "TargetName": "DialogueView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 82,
+          "Text": "dialogueView.Play(_data.dialogueJson, ShowDescriptionAndChoices)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "EventView",
+        "SourceName": "EventView",
+        "Target": "MapUIController",
+        "TargetName": "MapUIController",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 156,
+          "Text": "mapUIController.OpenMap()"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "MapUIController",
+        "SourceName": "MapUIController",
+        "Target": "EventView",
+        "TargetName": "EventView",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Map\\MapUIController.cs",
+          "Line": 218,
+          "Text": "eventView.Open(data)"
+        }
+      },
+      {
+        "Kind": "calls_member",
+        "Direction": "incoming",
+        "Source": "RestView",
+        "SourceName": "RestView",
+        "Target": "HealEffect",
+        "TargetName": "HealEffect",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Rest\\RestView.cs",
+          "Line": 60,
+          "Text": "restHealEffect.Execute(new CardContext())"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "PoisonStatus",
+        "TargetName": "PoisonStatus",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 44,
+          "Text": "PoisonStatus"
+        }
+      },
+      {
+        "Kind": "creates",
+        "Direction": "outgoing",
+        "Source": "ApplyStatusEffect",
+        "SourceName": "ApplyStatusEffect",
+        "Target": "StrengthStatus",
+        "TargetName": "StrengthStatus",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 43,
+          "Text": "StrengthStatus"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": [
+      {
+        "SourceType": "ApplyStatusEffect",
+        "Source": "Execute(CardContext)",
+        "TargetType": "ApplyStatusEffect",
+        "Target": "ApplyTo(EnemyInstance)",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 18,
+          "Text": "ApplyTo(context.Target)"
+        }
+      },
+      {
+        "SourceType": "EventView",
+        "Source": "Open(EventData)",
+        "TargetType": "EventView",
+        "Target": "ShowDescriptionAndChoices()",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 78,
+          "Text": "ShowDescriptionAndChoices()"
+        }
+      },
+      {
+        "SourceType": "ApplyStatusEffect",
+        "Source": "Execute(CardContext)",
+        "TargetType": "ApplyStatusEffect",
+        "Target": "CreatePassive()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 27,
+          "Text": "CreatePassive()"
+        }
+      },
+      {
+        "SourceType": "DamageEffect",
+        "Source": "Execute(CardContext)",
+        "TargetType": "DamageEffect",
+        "Target": "ResolveSingleTarget(CardContext)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+          "Line": 20,
+          "Text": "ResolveSingleTarget(context)"
+        }
+      },
+      {
+        "SourceType": "ApplyStatusEffect",
+        "Source": "ApplyTo(EnemyInstance)",
+        "TargetType": "ApplyStatusEffect",
+        "Target": "CreatePassive()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+          "Line": 35,
+          "Text": "CreatePassive()"
+        }
+      },
+      {
+        "SourceType": "EventView",
+        "Source": "Open(EventData)",
+        "TargetType": "EventView",
+        "Target": "HideChoices()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 69,
+          "Text": "HideChoices()"
+        }
+      },
+      {
+        "SourceType": "EventView",
+        "Source": "ShowDescriptionAndChoices()",
+        "TargetType": "EventView",
+        "Target": "BuildChoices()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 95,
+          "Text": "BuildChoices()"
+        }
+      },
+      {
+        "SourceType": "EventView",
+        "Source": "BuildChoices()",
+        "TargetType": "EventView",
+        "Target": "HideChoices()",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 107,
+          "Text": "HideChoices()"
+        }
+      },
+      {
+        "SourceType": "EventView",
+        "Source": "BuildChoices()",
+        "TargetType": "EventView",
+        "Target": "OnChoiceSelected(int)",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+          "Line": 114,
+          "Text": "OnChoiceSelected(index)"
+        }
+      }
+    ]
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "EventView.BuildChoices() -\u003E EventView.HideChoices() / terminal"
+    },
+    {
+      "Title": "Likely flow",
+      "Detail": "CharacterEventManager.Update() -\u003E "
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "ApplyStatusEffect.Execute(CardContext) -\u003E ApplyStatusEffect.ApplyTo(EnemyInstance)",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+        "Line": 18,
+        "Text": "ApplyTo(context.Target)"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "EventView.Open(EventData) -\u003E EventView.ShowDescriptionAndChoices()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+        "Line": 78,
+        "Text": "ShowDescriptionAndChoices()"
+      }
+    },
+    {
+      "Title": "Internal call",
+      "Detail": "ApplyStatusEffect.Execute(CardContext) -\u003E ApplyStatusEffect.CreatePassive()",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+        "Line": 27,
+        "Text": "CreatePassive()"
+      }
+    },
+    {
+      "Title": "outgoing accepts_parameter",
+      "Detail": "StatusEffectBase -\u003E BattleState / 5 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+        "Line": 25,
+        "Text": "BattleState"
+      }
+    },
+    {
+      "Title": "outgoing accepts_parameter",
+      "Detail": "StatusEffectBase -\u003E ICombatant / 4 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Passive\\StatusEffectBase.cs",
+        "Line": 25,
+        "Text": "ICombatant"
+      }
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "DamageEffect -\u003E DamageCalculator / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\DamageEffect.cs",
+        "Line": 23,
+        "Text": "DamageCalculator.Resolve(new DamageInfo(amount, attacker), single, context.State)"
+      }
+    },
+    {
+      "Title": "Internal accepts_parameter",
+      "Detail": "EventView -\u003E EventData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+        "Line": 47,
+        "Text": "EventData"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "EventData -\u003E EventChoiceEffect / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventData.cs",
+        "Line": 13,
+        "Text": "List\u003CEventChoiceEffect\u003E"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "EventJsonData -\u003E EventChoiceJson / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventJsonData.cs",
+        "Line": 11,
+        "Text": "EventChoiceJson[]"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "EventView -\u003E EventData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+        "Line": 33,
+        "Text": "EventData"
+      }
+    },
+    {
+      "Title": "Internal has_field_type",
+      "Detail": "EventView -\u003E EventJsonData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Event\\EventView.cs",
+        "Line": 34,
+        "Text": "EventJsonData"
+      }
+    },
+    {
+      "Title": "Internal returns",
+      "Detail": "ApplyStatusEffect -\u003E StatusEffectBase / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Card\\Effects\\ApplyStatusEffect.cs",
+        "Line": 39,
+        "Text": "StatusEffectBase"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Action Event Pipeline context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

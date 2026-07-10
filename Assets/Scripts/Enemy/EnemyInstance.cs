@@ -30,6 +30,7 @@ public class EnemyInstance : ICombatant
     public event Action<int> OnBlockChanged;  // 현재 블록 수치
     public event Action      OnDied;
     public event Action      OnIntentChanged; // GetCurrentAction()이 가리키는 행동이 바뀜 (TakeTurn 후)
+    public event Action      OnActionStarted; // 행동 실행 직전 발화 — EnemyView가 공격 모션 재생에 사용
 
     public EnemyInstance(EnemyData data)
     {
@@ -142,17 +143,15 @@ public class EnemyInstance : ICombatant
         return found ? total : null;
     }
 
-    // 적 턴 행동 전체를 캡슐화: 패시브 틱 → 생존 확인 → 패턴 실행 → 패턴 진행.
-    // 패시브(독·화상 등)로 턴 시작 중 사망하면 이번 턴 행동은 실행하지 않는다.
+    // 행동 실행 직전 알림. EnemyView가 공격 모션(전진→후퇴 등)을 트리거하는 데 사용.
+    // BattleManager(다른 클래스)에서 이벤트를 직접 invoke할 수 없어서 래퍼로 노출.
+    public void NotifyActionStarted() => OnActionStarted?.Invoke();
+
+    // 현재 패턴의 효과를 실행하고 다음 패턴으로 진행한다.
+    // TickPassives/생존 확인은 호출부(BattleManager의 코루틴 등) 책임.
     // battle은 CardContext.Battle을 채우기 위해서만 필요 (DrawEffect 등 일부 효과가 참조).
-    // 반환값: 이번 턴에 실제로 행동을 실행했는지 여부.
-    public bool TakeTurn(BattleState state, BattleManager battle)
+    public void ExecuteCurrentAction(BattleState state, BattleManager battle)
     {
-        if (IsDead) return false;
-
-        TickPassives(state);
-        if (IsDead) return false; // 패시브로 죽었으면 행동하지 않음
-
         var action = GetCurrentAction();
         if (action != null && action.effects != null)
         {
@@ -169,6 +168,21 @@ public class EnemyInstance : ICombatant
 
         AdvancePattern();
         OnIntentChanged?.Invoke(); // 다음 턴에 보여줄 인텐트가 바뀌었으니 뷰 갱신 알림
+    }
+
+    // 패시브 틱 → 생존 확인 → 행동 실행을 한 번에 처리하는 동기 버전.
+    // BattleManager는 이제 코루틴으로 단계별 호출하지만, 연출 없이 즉시 처리해야 하는
+    // 테스트/디버그 코드를 위해 남겨둔다.
+    // 반환값: 이번 턴에 실제로 행동을 실행했는지 여부.
+    public bool TakeTurn(BattleState state, BattleManager battle)
+    {
+        if (IsDead) return false;
+
+        TickPassives(state);
+        if (IsDead) return false; // 패시브로 죽었으면 행동하지 않음
+
+        NotifyActionStarted();
+        ExecuteCurrentAction(state, battle);
         return true;
     }
 }

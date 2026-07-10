@@ -1,0 +1,147 @@
+﻿{
+  "Id": "topic:inventory",
+  "Name": "Inventory",
+  "Anchor": "systems/inventory.md",
+  "Stats": {
+    "NodeCount": 1,
+    "InternalEdges": 0,
+    "ExternalEdges": 7,
+    "EntryMethodCount": 1,
+    "Keywords": [
+      "inventory"
+    ]
+  },
+  "RoleEstimate": "Inventory appears to be an externally connected area around inventory. It contains 1 types, including 1 Unity-facing types.",
+  "StartHere": [
+    {
+      "Id": "ItemInventoryManager.Awake@10",
+      "TypeId": "ItemInventoryManager",
+      "Signature": "Awake()",
+      "Label": "ItemInventoryManager.Awake()",
+      "EntryKind": "unity_lifecycle",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+      "Line": 10
+    }
+  ],
+  "CoreTypes": [
+    {
+      "Id": "ItemInventoryManager",
+      "Name": "ItemInventoryManager",
+      "Kind": "class",
+      "Namespace": "",
+      "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+      "Line": 7,
+      "IsUnityType": true,
+      "Incoming": 0,
+      "Outgoing": 7,
+      "Internal": 0,
+      "External": 7
+    }
+  ],
+  "LikelyFlows": [
+    {
+      "Entry": "ItemInventoryManager.Awake()",
+      "Steps": [
+        "ItemInventoryManager.Awake() / terminal"
+      ]
+    }
+  ],
+  "Relationships": {
+    "Internal": [],
+    "External": [
+      {
+        "Kind": "calls_member",
+        "Direction": "outgoing",
+        "Source": "ItemInventoryManager",
+        "SourceName": "ItemInventoryManager",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 3,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+          "Line": 29,
+          "Text": "_items.Add(item)"
+        }
+      },
+      {
+        "Kind": "accepts_parameter",
+        "Direction": "outgoing",
+        "Source": "ItemInventoryManager",
+        "SourceName": "ItemInventoryManager",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 2,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+          "Line": 22,
+          "Text": "ItemData"
+        }
+      },
+      {
+        "Kind": "has_field_type",
+        "Direction": "outgoing",
+        "Source": "ItemInventoryManager",
+        "SourceName": "ItemInventoryManager",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+          "Line": 16,
+          "Text": "List\u003CItemData\u003E"
+        }
+      },
+      {
+        "Kind": "has_property_type",
+        "Direction": "outgoing",
+        "Source": "ItemInventoryManager",
+        "SourceName": "ItemInventoryManager",
+        "Target": "ItemData",
+        "TargetName": "ItemData",
+        "Weight": 1,
+        "Example": {
+          "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+          "Line": 19,
+          "Text": "IReadOnlyList\u003CItemData\u003E"
+        }
+      }
+    ]
+  },
+  "MethodCalls": {
+    "Internal": []
+  },
+  "Evidence": [
+    {
+      "Title": "Likely flow",
+      "Detail": "ItemInventoryManager.Awake() -\u003E "
+    },
+    {
+      "Title": "outgoing calls_member",
+      "Detail": "ItemInventoryManager -\u003E ItemData / 3 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+        "Line": 29,
+        "Text": "_items.Add(item)"
+      }
+    },
+    {
+      "Title": "outgoing accepts_parameter",
+      "Detail": "ItemInventoryManager -\u003E ItemData / 2 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+        "Line": 22,
+        "Text": "ItemData"
+      }
+    },
+    {
+      "Title": "outgoing has_field_type",
+      "Detail": "ItemInventoryManager -\u003E ItemData / 1 refs",
+      "Example": {
+        "File": "H:\\Unity\\ProjectV\\ProjectV\\Assets\\Scripts\\Item\\ItemInventoryManager.cs",
+        "Line": 16,
+        "Text": "List\u003CItemData\u003E"
+      }
+    }
+  ],
+  "SuggestedAiTask": "Use the Inventory context to explain the reading order, likely runtime flow, and risky assumptions. Cite method names, relationship edges, and file references when possible."
+}

@@ -11,11 +11,20 @@
 // 2026-04-12 | SkylightStudio07 | 최초 작성
 // ============================================================
 
+using System.Collections;
 using UnityEngine;
 
 public abstract class CardEffect : ScriptableObject
 {
     public abstract void Execute(CardContext context);
+
+    // 기본 구현은 Execute()를 동기 호출하고 끝낸다.
+    // 연타처럼 히트 사이에 딜레이가 필요한 이펙트만 오버라이드한다.
+    public virtual IEnumerator ExecuteCoroutine(CardContext context)
+    {
+        Execute(context);
+        yield break;
+    }
 }
 
 // 타게팅. 자기 자신/단일 적/전체 적/랜덤 적.

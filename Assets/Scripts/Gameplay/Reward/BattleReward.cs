@@ -64,7 +64,7 @@ public class BattleReward
     private void GenerateCardReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
     {
         cardRewards.Clear();
-        for (int i = 0; i<numCardReward; i++)
+        for (int i = 0; i < numCardReward; i++)
         {
             CardRarity rarity = GetCardRarity(rewardData);
             CardData cardData = PickCard(cardRewardsPool[rarity]);
@@ -155,7 +155,7 @@ public class BattleReward
         if (cardPool == null || cardPool.Count == 0)
             return null;
 
-        List<CardData> availableCards = cardPool.FindAll(card => !cardRewards.Contains(card));
+        List<CardData> availableCards = cardPool.FindAll(card => card != null && !cardRewards.Contains(card));
         if (availableCards.Count == 0)
             availableCards = cardPool;
 
