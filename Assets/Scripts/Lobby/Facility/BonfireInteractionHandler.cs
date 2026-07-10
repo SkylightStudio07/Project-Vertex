@@ -13,30 +13,47 @@ public class BonfireInteractionHandler : FacilityInteractionHandler
         [SerializeField] private bool mirror;
 
         private Image characterVisual;
+        private Button characterButton;
         private GameObject relationshipEventIndicator;
+        private Action<CoopCharData> onClicked;
 
         public CoopCharData Character => character;
 
-        public void Apply(CooperationManager cooperationManager)
+        public void Apply(CooperationManager cooperationManager, Action<CoopCharData> clickHandler)
         {
             if (placementPoint == null)
                 return;
 
+            onClicked = clickHandler;
             EnsureCharacterVisual();
+            EnsureCharacterButton();
             EnsureRelationshipEventIndicator();
 
             Sprite characterSprite = character != null ? character.charImage : null;
+            bool hasMetCharacter = character != null &&
+                                   cooperationManager != null &&
+                                   cooperationManager.GetCoopLevel(character.charID) > 0;
+
             characterVisual.sprite = characterSprite;
-            characterVisual.gameObject.SetActive(characterSprite != null);
+            characterVisual.gameObject.SetActive(characterSprite != null && hasMetCharacter);
 
             Vector3 scale = characterVisual.rectTransform.localScale;
             scale.x = Mathf.Abs(scale.x) * (mirror ? -1f : 1f);
             characterVisual.rectTransform.localScale = scale;
 
-            bool hasRelationshipEvent = character != null &&
-                                        cooperationManager != null &&
+            bool hasRelationshipEvent = hasMetCharacter &&
                                         cooperationManager.IsCoopLevelUP(character.charID);
+
             relationshipEventIndicator.SetActive(hasRelationshipEvent);
+            characterButton.interactable = characterSprite != null && hasMetCharacter && hasRelationshipEvent;
+        }
+
+        public void Release()
+        {
+            if (characterButton != null)
+                characterButton.onClick.RemoveListener(HandleClicked);
+
+            onClicked = null;
         }
 
         private void EnsureCharacterVisual()
@@ -61,7 +78,28 @@ public class BonfireInteractionHandler : FacilityInteractionHandler
             visualRect.offsetMin = Vector2.zero;
             visualRect.offsetMax = Vector2.zero;
             characterVisual.preserveAspect = true;
-            characterVisual.raycastTarget = false;
+        }
+
+        private void EnsureCharacterButton()
+        {
+            if (characterButton == null)
+                characterButton = characterVisual.GetComponent<Button>();
+
+            if (characterButton == null)
+                characterButton = characterVisual.gameObject.AddComponent<Button>();
+
+            characterVisual.raycastTarget = true;
+            characterButton.transition = Selectable.Transition.None;
+            characterButton.onClick.RemoveListener(HandleClicked);
+            characterButton.onClick.AddListener(HandleClicked);
+        }
+
+        private void HandleClicked()
+        {
+            if (character == null)
+                return;
+
+            onClicked?.Invoke(character);
         }
 
         private void EnsureRelationshipEventIndicator()
@@ -128,6 +166,20 @@ public class BonfireInteractionHandler : FacilityInteractionHandler
     }
 
     [SerializeField] private List<CharacterPlacement> characterPlacements = new();
+    [SerializeField] private DialogueView dialogueView;
+    [SerializeField] private TextAsset defaultRelationshipDialogue;
+
+    private bool isPlayingRelationshipEvent;
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        foreach (CharacterPlacement placement in characterPlacements)
+            placement?.Release();
+
+        isPlayingRelationshipEvent = false;
+    }
 
     protected override void OnOpenInteraction(FacilityState facilityState)
     {
@@ -138,6 +190,78 @@ public class BonfireInteractionHandler : FacilityInteractionHandler
     {
         CooperationManager cooperationManager = CooperationManager.Instance;
         foreach (CharacterPlacement placement in characterPlacements)
-            placement?.Apply(cooperationManager);
+            placement?.Apply(cooperationManager, HandleCharacterClicked);
+    }
+
+    private void HandleCharacterClicked(CoopCharData character)
+    {
+        if (isPlayingRelationshipEvent || character == null)
+            return;
+
+        CooperationManager cooperationManager = CooperationManager.Instance;
+        if (cooperationManager == null)
+        {
+            Debug.LogWarning("[Bonfire] CooperationManager.Instance가 없습니다.");
+            return;
+        }
+
+        if (!cooperationManager.IsCoopLevelUP(character.charID))
+            return;
+
+        DialogueView view = GetDialogueView();
+        if (view == null)
+        {
+            Debug.LogWarning("[Bonfire] DialogueView가 없습니다.");
+            return;
+        }
+
+        TextAsset dialogueJson = GetRelationshipDialogue(cooperationManager, character);
+        if (dialogueJson == null)
+            return;
+
+        isPlayingRelationshipEvent = true;
+        view.Play(dialogueJson, () => HandleRelationshipDialogueEnded(character.charID));
+    }
+
+    private void HandleRelationshipDialogueEnded(string charID)
+    {
+        CooperationManager cooperationManager = CooperationManager.Instance;
+        if (cooperationManager != null)
+            cooperationManager.SettlePoint(charID);
+
+        isPlayingRelationshipEvent = false;
+        RefreshCharacterPlacements();
+    }
+
+    private TextAsset GetRelationshipDialogue(CooperationManager cooperationManager, CoopCharData character)
+    {
+        int currentCoopLevel = cooperationManager.GetCoopLevel(character.charID);
+        int eventCoopLevel = currentCoopLevel + 1;
+        TextAsset dialogueJson = cooperationManager.GetCoopDialogue(character.charID, eventCoopLevel);
+
+        if (dialogueJson != null)
+            return dialogueJson;
+
+        dialogueJson = cooperationManager.GetCoopDialogue(character.charID, currentCoopLevel);
+        if (dialogueJson != null)
+            return dialogueJson;
+
+        if (defaultRelationshipDialogue != null)
+            return defaultRelationshipDialogue;
+
+        Debug.LogWarning($"[Bonfire] {character.charID} 레벨 {eventCoopLevel}에 등록된 대사가 없고 defaultRelationshipDialogue도 비어 있습니다.");
+        return null;
+    }
+
+    private DialogueView GetDialogueView()
+    {
+        if (dialogueView != null)
+            return dialogueView;
+
+        dialogueView = GetComponentInParent<DialogueView>();
+        if (dialogueView == null)
+            dialogueView = FindFirstObjectByType<DialogueView>();
+
+        return dialogueView;
     }
 }
