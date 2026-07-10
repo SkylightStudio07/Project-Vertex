@@ -19,6 +19,11 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         item = itemData;
         owner = ownerView;
+        if(item == null)
+        {
+            if (iconImage != null) iconImage.sprite = null;
+            return;
+        }
         if (iconImage == null) iconImage = GetComponent<Image>();   // 비활성 프리팹 대비
         if (iconImage != null) iconImage.sprite = item.ItemIcon;
     }

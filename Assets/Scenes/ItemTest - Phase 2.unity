@@ -307,21 +307,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   currentEnemies:
   - {fileID: 11400000, guid: 448b92ffcbce1ba49b466c600e6263ef, type: 2}
-  commonPool:
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
-  rarePool:
-  - {fileID: 11400000, guid: 29651ea8435a386489b1ec118f568521, type: 2}
-  - {fileID: 11400000, guid: 6e99534b633f55e49888225af7d4d7f9, type: 2}
-  - {fileID: 11400000, guid: 1aa6850b62fe8f94db2c7130e4957573, type: 2}
-  uniquePool:
-  - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
-  - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
-  - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
+  playerRewardPool: {fileID: 0}
   itemPool:
-  - {fileID: 11400000, guid: 02a21998af712674da8558d399e09de0, type: 2}
-  - {fileID: 11400000, guid: 02a21998af712674da8558d399e09de0, type: 2}
+  - {fileID: 11400000, guid: 4ae6c7a579b7cbd41a0d2faf1cdba8bb, type: 2}
+  - {fileID: 11400000, guid: 4ae6c7a579b7cbd41a0d2faf1cdba8bb, type: 2}
+  - {fileID: 11400000, guid: 4ae6c7a579b7cbd41a0d2faf1cdba8bb, type: 2}
   rewardProbabilityTable:
   - {fileID: 11400000, guid: 1f70f7d092f9d474ca02a07cdca27edc, type: 2}
   - {fileID: 11400000, guid: 2b8494ab46065984680216adcad5e735, type: 2}
@@ -345,6 +335,11 @@ MonoBehaviour:
   defaultMaxEnergy: 3
   defaultAmmo: 3
   defaultDrawCount: 5
+  turnBanner: {fileID: 0}
+  lungeOutWaitDuration: 0.2
+  lungeBackWaitDuration: 0.2
+  playerTurnBanner: {fileID: 0}
+  postActionDelay: 0.3
 --- !u!114 &117956440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3150,6 +3145,7 @@ MonoBehaviour:
   useButton: {fileID: 1697982875}
   discardButton: {fileID: 1381236324}
   backdropButton: {fileID: 1952520951}
+  targetingController: {fileID: 1779886124}
 --- !u!1 &1355360163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4702,6 +4698,7 @@ GameObject:
   - component: {fileID: 1779886121}
   - component: {fileID: 1779886123}
   - component: {fileID: 1779886122}
+  - component: {fileID: 1779886124}
   m_Layer: 5
   m_Name: TopBar
   m_TagString: Untagged
@@ -4772,6 +4769,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1779886124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779886120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ea29c01d5626947ba9b282e28c1781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemTargetingController
+  arrowColor: {r: 0.85, g: 0.15, b: 0.15, a: 0.95}
+  arrowSortingOrder: 200
 --- !u!1 &1781572854
 GameObject:
   m_ObjectHideFlags: 0

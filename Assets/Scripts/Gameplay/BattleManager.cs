@@ -324,7 +324,10 @@ public class BattleManager : MonoBehaviour
             EndHandChangeBatch();
         }
 
-        ItemInventoryManager.Instance.RemoveItem(item);   // 소비 → OnInventoryChanged로 바 자동 갱신
+        if (ItemInventoryManager.Instance != null)
+        {
+            ItemInventoryManager.Instance.RemoveItem(item);   // 소비 → OnInventoryChanged로 바 자동 갱신
+        }
         return true;
     }
     
