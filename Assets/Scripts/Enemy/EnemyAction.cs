@@ -17,5 +17,7 @@ public class EnemyAction : ScriptableObject
     public IntentType intentType;
 
     [Header("실행 효과")]
-    public List<CardEffect> effects = new();
+    // 카드와 동일한 CardEffect를 인라인으로 조합. EnemyAction SO 자체는 유지되므로
+    // 여러 적이 같은 행동 에셋을 공유하는 것은 여전히 가능하다.
+    [SerializeReference, SubclassPicker] public List<CardEffect> effects = new();
 }

@@ -22,7 +22,7 @@ public class ItemData : ScriptableObject
 
     [Header("아이템 설명 및 효과")]
     [SerializeField] public string itemDescription;
-    [SerializeField] public List<CardEffect> itemEffects = new();
+    [SerializeReference, SubclassPicker] public List<CardEffect> itemEffects = new();
     [SerializeField] private ItemUseMode useMode;
 
     // --- Public Accessors ---

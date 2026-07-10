@@ -68,8 +68,6 @@ public class PlayerCombatant : ICombatant
             }
         }
         _passives.Add(passive);
-        Debug.Log(_passives.Count);
-        
     }
 
     public void TickPassives(BattleState state)

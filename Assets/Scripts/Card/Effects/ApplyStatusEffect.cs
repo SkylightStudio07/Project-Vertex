@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Cards/Effects/Apply Status")]
+[System.Serializable]
 public class ApplyStatusEffect : CardEffect
 {
     public StatusType statusType;
@@ -26,7 +24,6 @@ public class ApplyStatusEffect : CardEffect
             case TargetType.Self:
                 var selfPassive = CreatePassive();
                 if (selfPassive != null) context.State.Player?.AddPassive(selfPassive);
-                Debug.Log("패시브 추가");
                 break;
         }
     }

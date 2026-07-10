@@ -10,6 +10,9 @@
 // 카드 효과를 별도의 ScriptableObject로 분리하는 방향으로 설계 변경. 헤더 컨벤션은 나중에 쓸지말지 결정...
 // 2026-05-23 | 최성제 | 카드 기본 효과가 리스트가 아니였던 것 수정. 모든 카드가 강화 안하면 몽둥이질과 무적이 될 뻔함ㅋㅋㅋ
 // 카드의 사용 방법도 추가함. 타켓 방식인지, 아니면 타깃이 필요 없는지...
+// 2026-07-11 | 박영서 | 카드 이펙트를 SO 참조 → [SerializeReference] 인라인으로 전환.
+// 수치 조합마다 이펙트 에셋이 늘어나는 문제 해소. 이름·코스트·키워드는 CardUpgradeState로 통합,
+// 구 루트 필드는 에셋 수동 이전 참조용으로 임시 유지 (이전 완료 후 삭제할 것).
 // ============================================================
 
 
@@ -56,33 +59,39 @@ public class CardData : ScriptableObject
      */
 
     [Header("기본 정보")]
-    [SerializeField] private string cardName;
     [SerializeField] public Sprite cardImage;
     [SerializeField] public Sprite CardBackground;
-    [SerializeField] private int energyCost;
-    [SerializeField] private int ammoCost;
     [SerializeField] private CardType cardType;
     [SerializeField] private CardRarity cardRarity;
     [SerializeField] private CardOwner cardOwner;
 
     [Header("카드 설명 및 효과")]
+    // {인덱스.필드명} 토큰 지원 — GetFullDescription() 참고. 기본/강화 공용 템플릿 하나만 작성.
     [SerializeField] public string cardDescription;
-    [SerializeField] public List<CardEffect> cardEffects = new(); // 카드 효과 - 별도의 ScriptableObject로 처리
     [SerializeField] private CardUseMode useMode = CardUseMode.DropToPlayArea;
 
-    [Header("키워드")]
-    [SerializeField] private bool isExhaust;    // 소멸
-    [SerializeField] private bool isEthereal;   // 휘발 (손패에 있을때 안 쓰면 소멸)
-    [SerializeField] private bool isInnate;     // 선천성. 항상 초기 패에 포함
-    [SerializeField] private bool isRetain;     // 턴 넘겨도 유지
-
-    [Header("강화")]
-    [SerializeField] private string upgradedName;
-    [SerializeField] private int upgradedCost;
+    [Header("기본/강화 상태")]
+    // 이름·코스트·키워드·이펙트는 상태별로 CardUpgradeState에 담는다. 이펙트는 SO 참조가 아니라
+    // 인라인 직렬화 — 상태 폴드아웃 안에서 타입 선택 후 수치를 직접 입력한다.
+    // isUpgraded는 런타임 강화 스위치. 덱에는 Instantiate 복사본이 들어가므로 장별 강화가 가능하지만,
+    // 원본 에셋에 체크한 채 커밋하면 해당 카드는 획득 시점부터 강화 상태가 되니 주의.
     [SerializeField] public bool isUpgraded;
-    [SerializeField] private List<CardEffect> upgradedEffects = new();
     [SerializeField] private CardUpgradeState normalState;
     [SerializeField] private CardUpgradeState upgradedState;
+
+    [Header("(구) 필드 — 상태 구조로 수동 이전 후 삭제 예정")]
+    // 기존 에셋의 데이터가 아직 여기 들어있다. normalState/upgradedState로 옮겨 적는 동안만 유지.
+    // (구 cardEffects/upgradedEffects는 SO 참조라 인라인 구조로 자동 이전이 불가능해 필드 자체를 제거함.
+    //  기존 이펙트 수치는 Assets/Data/Cards/Card Effect/ 아래 구 SO 에셋 파일에서 확인할 것.)
+    [SerializeField] private string cardName;
+    [SerializeField] private int energyCost;
+    [SerializeField] private int ammoCost;
+    [SerializeField] private bool isExhaust;
+    [SerializeField] private bool isEthereal;
+    [SerializeField] private bool isInnate;
+    [SerializeField] private bool isRetain;
+    [SerializeField] private string upgradedName;
+    [SerializeField] private int upgradedCost;
 
     [Header("연출")]
     public AnimationClip useAnimation;

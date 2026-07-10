@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Cards/Effects/LoseHP")]
+[System.Serializable]
 public class LoseHPEffect : CardEffect
 {
     public int amount;

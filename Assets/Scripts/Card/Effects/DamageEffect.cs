@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Cards/Effects/Damage")]
+[System.Serializable]
 public class DamageEffect : CardEffect
 {
     public int amount;

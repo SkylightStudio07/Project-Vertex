@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Cards/Effects/Draw")]
+[System.Serializable]
 public class DrawEffect : CardEffect
 {
     public int count;

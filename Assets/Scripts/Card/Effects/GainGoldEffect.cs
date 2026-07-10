@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Cards/Effects/GainGold")]
+[System.Serializable]
 public class GainGoldEffect : CardEffect
 {
     public int amount;

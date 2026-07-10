@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Cards/Effects/Block")]
+[System.Serializable]
 public class BlockEffect : CardEffect
 {
     public int amount;
