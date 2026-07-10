@@ -79,31 +79,33 @@ public class CardData : ScriptableObject
     [Header("강화")]
     [SerializeField] private string upgradedName;
     [SerializeField] private int upgradedCost;
-    [SerializeField] private bool upgradedIsExhaust; // 강화 후 소멸 여부. 체크 안 하면 강화 시 소멸 해제 (꼼짝마! 등)
     [SerializeField] public bool isUpgraded;
     [SerializeField] private List<CardEffect> upgradedEffects = new();
+    [SerializeField] private CardUpgradeState normalState;
+    [SerializeField] private CardUpgradeState upgradedState;
 
     [Header("연출")]
     public AnimationClip useAnimation;
     public AudioClip useSFX;
 
     // --- Public Accessors ---
-    public string CardName        => isUpgraded ? upgradedName : cardName;
+    private CardUpgradeState ActiveState => isUpgraded ? upgradedState : normalState;
+    public string CardName        => ActiveState.cardName;
     public Sprite CardImage       => cardImage;
-    public int    EnergyCost      => isUpgraded ? upgradedCost : energyCost;
-    public int    AmmoCost        => ammoCost;
-    public string CardDescription => GetFullDescription();
-    public List<CardEffect> CardEffect  => cardEffects;
-    public List<CardEffect> UpgradedEffects => upgradedEffects;
+    public int    EnergyCost      => ActiveState.energyCost;
+    public int    AmmoCost        => ActiveState.ammoCost;
+    public string CardDescription => GetFullDescription(); // 토큰 치환 결과. 원문 템플릿은 cardDescription
+    public List<CardEffect> CardEffect  => normalState.effects;
+    public List<CardEffect> UpgradedEffects => upgradedState.effects;
     public IReadOnlyList<CardEffect> ActiveEffects
     {
         get
         {
-            if (isUpgraded && upgradedEffects != null && upgradedEffects != null)
-                return upgradedEffects;
+            if (ActiveState.effects != null)
+                return ActiveState.effects;
 
-            return cardEffects != null
-                ? cardEffects
+            return normalState.effects != null
+                ? normalState.effects
                 : System.Array.Empty<CardEffect>();
         }
     }
@@ -111,10 +113,10 @@ public class CardData : ScriptableObject
     public CardType   Type        => cardType;
     public CardRarity Rarity      => cardRarity;
     public CardOwner  Owner       => cardOwner;
-    public bool IsExhaust         => isUpgraded ? upgradedIsExhaust : isExhaust;
-    public bool IsEthereal        => isEthereal;
-    public bool IsInnate          => isInnate;
-    public bool IsRetain          => isRetain;
+    public bool IsExhaust         => ActiveState.isExhaust;
+    public bool IsEthereal        => ActiveState.isEthereal;
+    public bool IsInnate          => ActiveState.isInnate;
+    public bool IsRetain          => ActiveState.isRetain;
 
     // cardDescription의 {인덱스.필드명} 토큰을 ActiveEffects[인덱스]의 public 필드값으로 치환한다.
     // 예) "적에게 {0.amount}의 피해를 {0.hitCount}회 줍니다." → "적에게 5의 피해를 3회 줍니다."

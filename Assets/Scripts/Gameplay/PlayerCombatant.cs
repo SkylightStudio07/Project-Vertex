@@ -68,6 +68,8 @@ public class PlayerCombatant : ICombatant
             }
         }
         _passives.Add(passive);
+        Debug.Log(_passives.Count);
+        
     }
 
     public void TickPassives(BattleState state)
@@ -80,8 +82,18 @@ public class PlayerCombatant : ICombatant
             if (_passives[i] is StatusEffectBase s)
             {
                 s.TickDown();
-                if (s.IsExpired) _passives.RemoveAt(i);
             }
+        }
+
+        RemoveExpiredPassives();
+    }
+
+    public void RemoveExpiredPassives()
+    {
+        for (int i = _passives.Count - 1; i >= 0; i--)
+        {
+            if (_passives[i] is StatusEffectBase s && s.IsExpired)
+                _passives.RemoveAt(i);
         }
     }
 
