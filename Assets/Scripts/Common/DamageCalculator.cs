@@ -9,11 +9,13 @@ public static class DamageCalculator
         {
             foreach (var p in info.Source.Passives)
                 info = p.ModifyOutgoingDamage(info, state);
+            info.Source.RemoveExpiredPassives();
         }
 
         // 2. 방어자 패시브 (Vulnerable 등)
         foreach (var p in target.Passives)
             info = p.ModifyIncomingDamage(info, state);
+        target.RemoveExpiredPassives();
 
         // 3. 블록 흡수 + HP 감소 (TakeDamage 내부에서 처리)
         target.TakeDamage(info);

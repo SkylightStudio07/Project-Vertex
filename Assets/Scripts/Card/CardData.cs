@@ -80,28 +80,31 @@ public class CardData : ScriptableObject
     [SerializeField] private int upgradedCost;
     [SerializeField] public bool isUpgraded;
     [SerializeField] private List<CardEffect> upgradedEffects = new();
+    [SerializeField] private CardUpgradeState normalState;
+    [SerializeField] private CardUpgradeState upgradedState;
 
     [Header("연출")]
     public AnimationClip useAnimation;
     public AudioClip useSFX;
 
     // --- Public Accessors ---
-    public string CardName        => isUpgraded ? upgradedName : cardName;
+    private CardUpgradeState ActiveState => isUpgraded ? upgradedState : normalState;
+    public string CardName        => ActiveState.cardName;
     public Sprite CardImage       => cardImage;
-    public int    EnergyCost      => isUpgraded ? upgradedCost : energyCost;
-    public int    AmmoCost        => ammoCost;
+    public int    EnergyCost      => ActiveState.energyCost;
+    public int    AmmoCost        => ActiveState.ammoCost;
     public string CardDescription => cardDescription;
-    public List<CardEffect> CardEffect  => cardEffects;
-    public List<CardEffect> UpgradedEffects => upgradedEffects;
+    public List<CardEffect> CardEffect  => normalState.effects;
+    public List<CardEffect> UpgradedEffects => upgradedState.effects;
     public IReadOnlyList<CardEffect> ActiveEffects
     {
         get
         {
-            if (isUpgraded && upgradedEffects != null && upgradedEffects != null)
-                return upgradedEffects;
+            if (ActiveState.effects != null)
+                return ActiveState.effects;
 
-            return cardEffects != null
-                ? cardEffects
+            return normalState.effects != null
+                ? normalState.effects
                 : System.Array.Empty<CardEffect>();
         }
     }
@@ -109,10 +112,10 @@ public class CardData : ScriptableObject
     public CardType   Type        => cardType;
     public CardRarity Rarity      => cardRarity;
     public CardOwner  Owner       => cardOwner;
-    public bool IsExhaust         => isExhaust;
-    public bool IsEthereal        => isEthereal;
-    public bool IsInnate          => isInnate;
-    public bool IsRetain          => isRetain;
+    public bool IsExhaust         => ActiveState.isExhaust;
+    public bool IsEthereal        => ActiveState.isEthereal;
+    public bool IsInnate          => ActiveState.isInnate;
+    public bool IsRetain          => ActiveState.isRetain;
 
     public enum CardType  { Attack, Skill, Power }
     public enum CardRarity { Common, Rare, Unique }
