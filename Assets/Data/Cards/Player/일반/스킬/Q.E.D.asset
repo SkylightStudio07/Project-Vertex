@@ -12,27 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: Q.E.D
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Q.E.D
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
-  energyCost: 2
-  ammoCost: 0
   cardType: 1
   cardRarity: 0
   cardOwner: 0
-  cardDescription: "{0.turns}\uB3D9\uC548, {0.blockPerTurn}\uC758 \uBC29\uC5B4\uB3C4\uB97C
+  cardDescription: "{0.turns}\uD134\uB3D9\uC548, {0.blockPerTurn}\uC758 \uBC29\uC5B4\uB3C4\uB97C
     \uC5BB\uC2B5\uB2C8\uB2E4."
-  cardEffects:
-  - {fileID: 11400000, guid: bf4decbea56079241a974f13359ef854, type: 2}
   useMode: 0
-  isExhaust: 0
-  isEthereal: 0
-  isInnate: 0
-  isRetain: 0
-  upgradedName: "\uBC29\uC5B4+"
-  upgradedCost: 1
-  upgradedIsExhaust: 0
   isUpgraded: 0
-  upgradedEffects: []
+  normalState:
+    cardName: Q.E.D
+    energyCost: 2
+    ammoCost: 0
+    effects:
+    - rid: 4680130923130519636
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: I.F.F
+    energyCost: 2
+    ammoCost: 0
+    effects:
+    - rid: 4680130923130519637
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
   useAnimation: {fileID: 0}
   useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4680130923130519636
+      type: {class: TimedBlockEffect, ns: , asm: Assembly-CSharp}
+      data:
+        turns: 3
+        blockPerTurn: 6
+    - rid: 4680130923130519637
+      type: {class: TimedBlockEffect, ns: , asm: Assembly-CSharp}
+      data:
+        turns: 4
+        blockPerTurn: 8

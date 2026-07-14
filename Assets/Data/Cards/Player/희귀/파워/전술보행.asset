@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "\uC804\uC220\uBCF4\uD589"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uC804\uC220\uBCF4\uD589"
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
-  energyCost: 2
-  ammoCost: 0
   cardType: 2
   cardRarity: 1
   cardOwner: 0
@@ -24,17 +21,40 @@ MonoBehaviour:
     \uB9E4 \uD134 \uCC98\uC74C \uACF5\uACA9 \uCE74\uB4DC\uB97C \uC0AC\uC6A9\uD558\uBA74
     {0.firstAttackBonus}\uB9CC\uD07C\uC758 \uCD94\uAC00 \uB370\uBBF8\uC9C0\uB97C
     \uC5BB\uC2B5\uB2C8\uB2E4."
-  cardEffects:
-  - {fileID: 11400000, guid: 7a789c09d23577c48b9b3124a57deffb, type: 2}
   useMode: 0
-  isExhaust: 0
-  isEthereal: 0
-  isInnate: 0
-  isRetain: 0
-  upgradedName: "\uBC29\uC5B4+"
-  upgradedCost: 1
-  upgradedIsExhaust: 0
   isUpgraded: 0
-  upgradedEffects: []
+  normalState:
+    cardName: 
+    energyCost: 0
+    ammoCost: 0
+    effects:
+    - rid: 4680130923130519645
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: 
+    energyCost: 0
+    ammoCost: 0
+    effects:
+    - rid: 4680130923130519646
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
   useAnimation: {fileID: 0}
   useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4680130923130519645
+      type: {class: TacticalWalkPowerEffect, ns: , asm: Assembly-CSharp}
+      data:
+        dexterityBonus: 1
+        firstAttackBonus: 3
+    - rid: 4680130923130519646
+      type: {class: TacticalWalkPowerEffect, ns: , asm: Assembly-CSharp}
+      data:
+        dexterityBonus: 2
+        firstAttackBonus: 5

@@ -12,27 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "\uC8C4\uC640 \uBC8C"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uC8C4\uC640 \uBC8C"
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
-  energyCost: 3
-  ammoCost: 0
   cardType: 2
   cardRarity: 2
   cardOwner: 0
   cardDescription: "\uBAA8\uB4E0 \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uB294 \uCE74\uB4DC\uAC00
     {0.bonusDamage}\uB9CC\uD07C\uC758 \uCD94\uAC00 \uB370\uBBF8\uC9C0\uB97C \uC5BB\uC2B5\uB2C8\uB2E4. "
-  cardEffects:
-  - {fileID: 11400000, guid: fb1739daa1137234dbf75c4b332583c2, type: 2}
   useMode: 0
-  isExhaust: 0
-  isEthereal: 0
-  isInnate: 0
-  isRetain: 0
-  upgradedName: "\uBC29\uC5B4+"
-  upgradedCost: 1
-  upgradedIsExhaust: 0
   isUpgraded: 0
-  upgradedEffects: []
+  normalState:
+    cardName: "\uC8C4\uC640 \uBC8C"
+    energyCost: 3
+    ammoCost: 0
+    effects:
+    - rid: 4680130923130519642
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: "\uC2EC\uD310"
+    energyCost: 2
+    ammoCost: 0
+    effects:
+    - rid: 4680130923130519641
+    isExhaust: 1
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
   useAnimation: {fileID: 0}
   useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4680130923130519641
+      type: {class: AmmoAttackBonusPowerEffect, ns: , asm: Assembly-CSharp}
+      data:
+        bonusDamage: 6
+    - rid: 4680130923130519642
+      type: {class: AmmoAttackBonusPowerEffect, ns: , asm: Assembly-CSharp}
+      data:
+        bonusDamage: 6
