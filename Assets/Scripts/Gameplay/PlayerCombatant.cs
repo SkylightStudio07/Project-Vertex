@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // 전투 내 플레이어를 ICombatant로 표현하는 래퍼.
@@ -42,21 +43,38 @@ public class PlayerCombatant : ICombatant
         if (IsDead) OnDied?.Invoke();
     }
 
-    public void AddBlock(int amount) => _block = Math.Max(0, _block + amount);
+    // 민첩(DexterityStatus)은 데미지 파이프라인이 아니라 방어도 획득 시점에 보정되므로 여기서 직접 반영한다.
+    // 최종 방어도가 음수가 되지 않도록 Max(0)로 하한 처리.
+    public void AddBlock(int amount)
+    {
+        _block = Math.Max(0, _block + PreviewBlockGain(amount));
+    }
+
+    // 민첩 보정이 반영된 "이번에 얻게 될" 방어도 획득량. AddBlock과 같은 계산의 읽기 전용 버전 —
+    // 카드 설명문의 보정 수치 표시(BlockEffect.GetDisplayValue)에서 사용한다.
+    public int PreviewBlockGain(int amount)
+    {
+        foreach (var p in _passives)
+            if (p is DexterityStatus dex) amount += dex.Stacks;
+        return amount;
+    }
 
     public void ResetBlock() => _block = 0;
 
-    // 패시브 추가 — 같은 타입이면 스택 합산
-    public void AddPassive(StatusEffectBase passive)
+    // 패시브 추가.
+    // StatusEffectBase면 같은 타입과 스택 합산 시도.
+    // PowerPassiveBase(영구 파워)면 merge 없이 직접 추가.
+    public void AddPassive(IPassiveLogic passive)
     {
-        foreach (var p in _passives)
+        if (passive is StatusEffectBase newStatus)
         {
-            if (p is StatusEffectBase existing && existing.TryMerge(passive))
-                return;
+            foreach (var p in _passives)
+            {
+                if (p is StatusEffectBase existing && existing.TryMerge(newStatus))
+                    return;
+            }
         }
         _passives.Add(passive);
-        Debug.Log(_passives.Count);
-        
     }
 
     public void TickPassives(BattleState state)
@@ -83,4 +101,12 @@ public class PlayerCombatant : ICombatant
                 _passives.RemoveAt(i);
         }
     }
+
+#if UNITY_EDITOR
+    public List<string> DebugPassiveInfo => _passives
+        .Select(p => p is StatusEffectBase s
+            ? $"{p.GetType().Name} (x{s.Stacks})"
+            : p.GetType().Name)
+        .ToList();
+#endif
 }

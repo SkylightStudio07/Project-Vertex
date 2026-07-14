@@ -39,6 +39,8 @@ public class CardHandler : MonoBehaviour,
     private CardState state = CardState.Idle;
     private bool isPointerOverCard;
     private Vector2 targetingPointerPosition;
+    // 타겟팅 중 포인터 아래의 적 — 설명문에 대상 측 보정(취약·버퍼)을 반영하기 위해 추적.
+    private EnemyInstance hoveredTarget;
 
     private void Awake()
     {
@@ -81,6 +83,16 @@ public class CardHandler : MonoBehaviour,
         {
             targetingPointerPosition = eventData.position;
             interactionView.UpdateTargetingPointer(eventData.position);
+
+            // 포인터 아래 적이 바뀌었을 때만 설명문 갱신 — 대상 측 보정(취약·버퍼) 미리보기.
+            // 적 위가 아니면 hovered가 null이 되어 공격자 측 보정만 반영된 표시로 돌아간다.
+            EnemyTargeting.TryGetUnderPointer(eventData, out EnemyInstance hovered);
+            if (hovered != hoveredTarget)
+            {
+                hoveredTarget = hovered;
+                cardView.RefreshDescription(hovered);
+            }
+
             if (eventData.position.y <= targetCancelYThreshold)
             {
                 SetState(CardState.Dragging);
@@ -186,6 +198,12 @@ public class CardHandler : MonoBehaviour,
             case CardState.Targeting:
                 isAnyDragging = false;
                 interactionView.ExitTargeting();
+                // 타겟팅 종료 — 대상 측 보정이 반영됐던 설명문을 원래 표시로 되돌린다.
+                if (hoveredTarget != null)
+                {
+                    hoveredTarget = null;
+                    cardView.RefreshDescription();
+                }
                 break;
         }
     }

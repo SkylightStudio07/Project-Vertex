@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-[CreateAssetMenu(menuName = "Cards/Effects/Add Card To Pile")]
+[System.Serializable]
 public class AddCardToPileEffect : CardEffect
 {
     public CardData cardToAdd;

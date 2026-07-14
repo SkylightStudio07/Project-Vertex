@@ -3,7 +3,11 @@ using System;
 public abstract class StatusEffectBase : IPassiveLogic
 {
     public int Stacks { get; protected set; }
-    public bool IsExpired => Stacks <= 0;
+
+    // 만료 판정 — 기본은 "0 이하면 만료" (시한부 상태는 TickDown이 0에서 멈추므로 사실상 == 0).
+    // 민첩·힘처럼 음수 스택이 유효한(감소 상태) 영구 패시브는 == 0으로 override할 것 —
+    // 안 하면 음수가 되는 순간 TickPassives 정리 루프에서 즉시 제거된다.
+    public virtual bool IsExpired => Stacks <= 0;
 
     protected StatusEffectBase(int stacks)
     {
@@ -28,4 +32,11 @@ public abstract class StatusEffectBase : IPassiveLogic
     public virtual DamageInfo ModifyOutgoingDamage(DamageInfo info, BattleState state) => info;
     public virtual DamageInfo ModifyIncomingDamage(DamageInfo info, BattleState state) => info;
     public virtual void OnAfterDamageTaken(int actualDamage, BattleState state, ICombatant owner) { }
+
+    // 표시용 미리보기 — 기본은 Modify 위임.
+    // Modify에서 내부 상태를 소모하는 패시브는 반드시 소모 없는 버전으로 override할 것.
+    public virtual DamageInfo PreviewOutgoingDamage(DamageInfo info, BattleState state)
+        => ModifyOutgoingDamage(info, state);
+    public virtual DamageInfo PreviewIncomingDamage(DamageInfo info, BattleState state)
+        => ModifyIncomingDamage(info, state);
 }
