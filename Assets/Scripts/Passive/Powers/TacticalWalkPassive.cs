@@ -18,4 +18,12 @@ public class TacticalWalkPassive : PowerPassiveBase
         info.Amount += _bonusDamage;
         return info;
     }
+
+    // 미리보기: 플래그를 소모하지 않고 "지금 공격하면 보너스가 붙는가"만 반영.
+    // 기본 위임을 그대로 쓰면 설명문을 그리는 것만으로 첫 공격 보너스가 소모되는 버그가 된다.
+    public override DamageInfo PreviewOutgoingDamage(DamageInfo info, BattleState state)
+    {
+        if (!_firstAttackUsed) info.Amount += _bonusDamage;
+        return info;
+    }
 }

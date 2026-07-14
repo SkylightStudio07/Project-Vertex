@@ -68,7 +68,8 @@ public class CardData : ScriptableObject
 
     [Header("카드 설명 및 효과")]
     // {인덱스.필드명} 토큰 지원 — GetFullDescription() 참고. 기본/강화 공용 템플릿 하나만 작성.
-    [SerializeField] public string cardDescription;
+    // EffectTokenHint가 인스펙터에 사용 가능 토큰 목록과 치환 미리보기를 띄워준다.
+    [SerializeField, EffectTokenHint("normalState.effects")] public string cardDescription;
     [SerializeField] private CardUseMode useMode = CardUseMode.DropToPlayArea;
 
     [Header("기본/강화 상태")]
@@ -118,7 +119,11 @@ public class CardData : ScriptableObject
     // 예) "적에게 {0.amount}의 피해를 {0.hitCount}회 줍니다." → "적에게 5의 피해를 3회 줍니다."
     // ActiveEffects가 강화 여부에 따라 다른 리스트를 반환하므로 강화 수치는 자동 반영됨.
     // 템플릿은 기본/강화 공용 하나만 작성하면 된다. 잘못된 토큰(인덱스 초과, 없는 필드)은 원문 그대로 노출.
-    public string GetFullDescription()
+    //
+    // state를 넘기면(전투 중 손패 표시) int 수치를 이펙트의 GetDisplayValue로 한 번 더 통과시켜
+    // 힘·민첩 등 패시브 보정이 반영된 값으로 표시한다. state가 null이면(보상·덱 화면) 원시값 그대로.
+    // target까지 넘기면(타겟팅 드래그 중) 취약·버퍼 등 대상 측 보정도 반영된다.
+    public string GetFullDescription(BattleState state = null, EnemyInstance target = null)
     {
         if (string.IsNullOrEmpty(cardDescription)) return string.Empty;
         return Regex.Replace(cardDescription, @"\{(\d+)\.(\w+)\}", match =>
@@ -126,8 +131,16 @@ public class CardData : ScriptableObject
             if (!int.TryParse(match.Groups[1].Value, out int idx)) return match.Value;
             var effects = ActiveEffects;
             if (idx >= effects.Count) return match.Value;
-            var field = effects[idx].GetType().GetField(match.Groups[2].Value);
-            return field?.GetValue(effects[idx])?.ToString() ?? match.Value;
+
+            var effect = effects[idx];
+            var field = effect.GetType().GetField(match.Groups[2].Value);
+            object value = field?.GetValue(effect);
+            if (value == null) return match.Value;
+
+            if (state != null && value is int intValue)
+                return effect.GetDisplayValue(field.Name, intValue, state, this, target).ToString();
+
+            return value.ToString();
         });
     }
 

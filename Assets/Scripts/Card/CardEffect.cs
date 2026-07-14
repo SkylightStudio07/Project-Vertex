@@ -30,6 +30,14 @@ public abstract class CardEffect
         Execute(context);
         yield break;
     }
+
+    // 설명문 토큰({i.필드명})이 전투 중 표시될 때 원시값 대신 보여줄 "보정 후 수치".
+    // 기본은 무보정(원시값 그대로). 패시브 영향을 받는 수치를 가진 이펙트만 override —
+    // DamageEffect(힘·약화·전술보행 등), BlockEffect(민첩) 참고.
+    // state가 null이면(보상·덱 화면 등 비전투 맥락) 호출측(CardData)에서 아예 부르지 않는다.
+    // target은 타겟팅 드래그 중에만 채워진다 — 취약·버퍼 등 대상 측 보정 반영용.
+    public virtual int GetDisplayValue(string fieldName, int rawValue, BattleState state, CardData card, EnemyInstance target = null)
+        => rawValue;
 }
 
 // 타게팅. 자기 자신/단일 적/전체 적/랜덤 적.

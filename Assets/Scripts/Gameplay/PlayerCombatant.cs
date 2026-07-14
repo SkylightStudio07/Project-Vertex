@@ -44,12 +44,19 @@ public class PlayerCombatant : ICombatant
     }
 
     // 민첩(DexterityStatus)은 데미지 파이프라인이 아니라 방어도 획득 시점에 보정되므로 여기서 직접 반영한다.
-    // 음수 민첩으로 획득량이 음수가 되어도 기존 방어도까지 깎이지는 않도록 Max(0)로 하한 처리.
+    // 최종 방어도가 음수가 되지 않도록 Max(0)로 하한 처리.
     public void AddBlock(int amount)
+    {
+        _block = Math.Max(0, _block + PreviewBlockGain(amount));
+    }
+
+    // 민첩 보정이 반영된 "이번에 얻게 될" 방어도 획득량. AddBlock과 같은 계산의 읽기 전용 버전 —
+    // 카드 설명문의 보정 수치 표시(BlockEffect.GetDisplayValue)에서 사용한다.
+    public int PreviewBlockGain(int amount)
     {
         foreach (var p in _passives)
             if (p is DexterityStatus dex) amount += dex.Stacks;
-        _block = Math.Max(0, _block + amount);
+        return amount;
     }
 
     public void ResetBlock() => _block = 0;

@@ -114,6 +114,24 @@ public class DamageEffect : CardEffect
         }
     }
 
+    // 표시용 보정 데미지 — 실제 파이프라인(DamageCalculator)과 같은 순서로 Preview 훅을 돌린다.
+    // 공격자 측(힘·약화·전술보행)은 항상, 대상 측(취약·버퍼)은 타겟팅 중(target != null)에만 반영.
+    public override int GetDisplayValue(string fieldName, int rawValue, BattleState state, CardData card, EnemyInstance target = null)
+    {
+        if (fieldName != nameof(amount) || state?.Player == null) return rawValue;
+
+        bool isAmmoAttack = card != null && card.AmmoCost > 0;
+        var info = new DamageInfo(rawValue, state.Player, false, isAmmoAttack);
+        foreach (var p in state.Player.Passives)
+            info = p.PreviewOutgoingDamage(info, state);
+
+        if (target != null)
+            foreach (var p in target.Passives)
+                info = p.PreviewIncomingDamage(info, state);
+
+        return info.Amount;
+    }
+
     // 플레이어 카드 → ctx.Target(적), 적 행동 → 플레이어
     private static ICombatant ResolveSingleTarget(CardContext ctx)
     {
