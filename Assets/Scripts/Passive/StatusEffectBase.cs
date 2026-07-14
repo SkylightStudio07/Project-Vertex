@@ -3,7 +3,11 @@ using System;
 public abstract class StatusEffectBase : IPassiveLogic
 {
     public int Stacks { get; protected set; }
-    public bool IsExpired => Stacks <= 0;
+
+    // 만료 판정 — 기본은 "0 이하면 만료" (시한부 상태는 TickDown이 0에서 멈추므로 사실상 == 0).
+    // 민첩·힘처럼 음수 스택이 유효한(감소 상태) 영구 패시브는 == 0으로 override할 것 —
+    // 안 하면 음수가 되는 순간 TickPassives 정리 루프에서 즉시 제거된다.
+    public virtual bool IsExpired => Stacks <= 0;
 
     protected StatusEffectBase(int stacks)
     {
