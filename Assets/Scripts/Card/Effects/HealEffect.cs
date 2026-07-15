@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Cards/Effects/Heal")]
+[System.Serializable]
 public class HealEffect : CardEffect
 {
     public int amount;

@@ -14,5 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
   intentType: 0
   effects:
-  - {fileID: 11400000, guid: 1f4e7d621a9ce6545b696467f26890c3, type: 2}
-  - {fileID: 11400000, guid: 5dcc3b72c92b9a144b1edb188793f9e2, type: 2}
+  - rid: 4680130923130519647
+  references:
+    version: 2
+    RefIds:
+    - rid: 4680130923130519647
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 6
+        hitCount: 1
+        targetType: 1
+        hitInterval: 0.08

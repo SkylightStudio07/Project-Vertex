@@ -26,11 +26,21 @@ public class BattleManager : MonoBehaviour
     private BattleState _state;
     public BattleState State => _state;
 
+    private bool _isInBattle;
+    public bool IsInBattle => _isInBattle;
+    // StartBattle 끝: _isInBattle = true;
+    // Victory()/Defeat() 시작: _isInBattle = false;
+
     // 하위 호환 래퍼 (UI/외부 코드용)
     public int Energy      => _state?.Energy      ?? 0;
     public int MaxEnergy   => _state?.MaxEnergy   ?? defaultMaxEnergy;
     public int Ammo        => _state?.Ammo        ?? 0;
     public int PlayerBlock => _state?.Player?.Block ?? 0;
+
+#if UNITY_EDITOR
+    [Header("디버그")]
+    [SerializeField] private List<string> _passiveDebugView = new();
+#endif
 
     // 손패 변경 배치 처리
     private int  _handChangeBatchDepth;
@@ -84,6 +94,8 @@ public class BattleManager : MonoBehaviour
         SetupBattleDeck(masterDeck);
         _state.Player.OnDied += Defeat;
         OnEnemiesChanged?.Invoke();
+
+        _isInBattle = true;
     }
 
     private void SetupEnemies(List<EnemyData> enemyDataList)
@@ -260,8 +272,12 @@ public class BattleManager : MonoBehaviour
             _state.Ammo   -= card.AmmoCost;
 
             _state.Hand.Remove(card);
-            if (card.IsExhaust) _state.ExhaustPile.Add(card);
-            else _state.DiscardPile.Add(card);
+            // 파워 카드는 isExhaust 설정과 무관하게 항상 소멸 — 패시브가 영구 등록되므로
+            // 덱 순환으로 다시 뽑혀 중복 사용되는 것을 시스템 차원에서 차단한다.
+            if (card.IsExhaust || card.Type == CardData.CardType.Power)
+                _state.ExhaustPile.Add(card);
+            else
+                _state.DiscardPile.Add(card);
             NotifyHandChanged();
         }
         finally
@@ -282,6 +298,48 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
+    // 지금 아이템을 사용할 수 있는 상태인지 (전투 중 + 플레이어 턴). UI 버튼 활성 판정용.
+    public bool CanUseItemNow => _isInBattle && _state != null && _state.Phase == BattlePhase.PlayerTurn;
+
+    // 아이템 사용. 카드 사용(TryPlayCard)과 동일 구조, 차이는 비용 없음 / 인벤토리에서 소비 / ctx.Item 세팅.
+    public bool TryUseItem(ItemData item, EnemyInstance target)
+    {
+        if (_state == null || item == null) return false;
+        if (!CanUseItemNow) return false;   // 적 턴 중 사용 금지
+
+        // SelectTarget 아이템은 유효한 적 타겟 필요 (타겟팅 UI 미구현)
+        if (item.UseMode == ItemData.ItemUseMode.SelectTarget &&
+            (target == null || target.IsDead || !_state.Enemies.Contains(target)))
+            return false;
+
+        BeginHandChangeBatch();   // 아이템 효과가 손패를 건드릴 수 있어 카드와 동일하게 배치로 묶음
+        try
+        {
+            var ctx = new CardContext
+            {
+                State      = _state,
+                Battle     = this,
+                Card       = null,     // 카드 아님
+                Item       = item,     // 아이템
+                Target     = target,
+                AllEnemies = _state.Enemies,
+            };
+
+            foreach (var effect in item.ItemEffects)
+                effect?.Execute(ctx);
+        }
+        finally
+        {
+            EndHandChangeBatch();
+        }
+
+        if (ItemInventoryManager.Instance != null)
+        {
+            ItemInventoryManager.Instance.RemoveItem(item);   // 소비 → OnInventoryChanged로 바 자동 갱신
+        }
+        return true;
+    }
+    
     private IEnumerator ExecuteEffectsSequence(System.Collections.Generic.IReadOnlyList<CardEffect> effects, CardContext ctx)
     {
         foreach (var effect in effects)
@@ -395,6 +453,7 @@ public class BattleManager : MonoBehaviour
         // 승리 후 손패를 그대로 두면 맵으로 돌아갔을 때 손패가 가로채져서 맵 스크롤과 노드 클릭이 동작하지 않는 문제가 있었다.
         // 손패를 버리는 배치 처리로 해결. 승리 시 손패는 어차피 초기화되므로, 승리 후에 OnHandChanged가 한 번만 호출되도록...
         BeginHandChangeBatch();
+        _isInBattle = false;
         try
         {
             foreach (var card in _state.Hand)
@@ -421,6 +480,7 @@ public class BattleManager : MonoBehaviour
 
     private void Defeat()
     {
+        _isInBattle = false;
         OnBattleDefeat?.Invoke();
     }
 
@@ -468,5 +528,10 @@ public class BattleManager : MonoBehaviour
     {
         if (Keyboard.current[Key.V].wasPressedThisFrame)
             TestVictory(BattleType.Normal);
+
+#if UNITY_EDITOR
+        if (_state?.Player != null)
+            _passiveDebugView = _state.Player.DebugPassiveInfo;
+#endif
     }
 }

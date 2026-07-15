@@ -1,6 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Cards/Effects/Apply Status")]
+[System.Serializable]
 public class ApplyStatusEffect : CardEffect
 {
     public StatusType statusType;
@@ -42,6 +40,7 @@ public class ApplyStatusEffect : CardEffect
         StatusType.Weak       => new WeakStatus(amount),
         StatusType.Strength   => new StrengthStatus(amount),
         StatusType.Poison     => new PoisonStatus(amount),
+        StatusType.DamageNullified => new DamageNullifiedStatus(amount),
         _                     => null,
     };
 }

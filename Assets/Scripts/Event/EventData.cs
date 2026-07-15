@@ -23,5 +23,5 @@ public class EventData : ScriptableObject
 [System.Serializable]
 public class EventChoiceEffect
 {
-    public List<CardEffect> effects;
+    [SerializeReference, SubclassPicker] public List<CardEffect> effects;
 }

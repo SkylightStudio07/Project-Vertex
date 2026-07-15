@@ -19,6 +19,10 @@ public class DialogueChoiceOption
     public string next; // 점프할 노드 id
 
     // 선택 시 실행할 부수효과 (호감도 포인트 지급 등). Card/Event 효과와 같은 CardEffect 라이브러리 재사용.
+    // 주의: 이 클래스는 JsonUtility로 JSON에서 역직렬화되는데, JsonUtility는 폴리모피즘을
+    // 지원하지 않아 CardEffect(추상)가 순수 클래스로 전환된 현재 이 필드는 JSON에서 채워지지 않는다.
+    // (SO 시절에도 JSON에서 에셋 참조가 불가능해 사실상 동작하지 않던 필드.)
+    // 다이얼로그 선택지 효과가 실제로 필요해지면 효과 ID 문자열 → 팩토리 매핑 방식으로 재설계할 것.
     public List<CardEffect> effects;
 }
 

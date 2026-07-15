@@ -1,7 +1,5 @@
-using UnityEngine;
-
 // 다이얼로그 선택지 등에서 협력자 호감도 포인트를 지급하는 효과.
-[CreateAssetMenu(menuName = "Cards/Effects/AddCoopPoint")]
+[System.Serializable]
 public class AddCoopPointEffect : CardEffect
 {
     public string charID;
