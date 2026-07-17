@@ -9,6 +9,8 @@ public class ApplyStatusEffect : CardEffect
     {
         if (context.State == null) return;
 
+        bool isActingEnemy = context.ActingEnemy != null;
+
         switch (target)
         {
             case TargetType.SingleEnemy:
@@ -23,7 +25,9 @@ public class ApplyStatusEffect : CardEffect
 
             case TargetType.Self:
                 var selfPassive = CreatePassive();
-                if (selfPassive != null) context.State.Player?.AddPassive(selfPassive);
+                if(selfPassive == null) return;
+                if (isActingEnemy) context.ActingEnemy?.AddPassive(selfPassive);
+                else context.State.Player?.AddPassive(selfPassive);
                 break;
         }
     }

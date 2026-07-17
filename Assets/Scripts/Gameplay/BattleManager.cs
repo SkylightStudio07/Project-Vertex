@@ -110,7 +110,7 @@ public class BattleManager : MonoBehaviour
                 Debug.LogWarning("[BattleManager] enemyDataList에 null 항목이 있어 건너뜀. Inspector 확인 필요.");
                 continue;
             }
-            var enemy = new EnemyInstance(data);
+            var enemy = new EnemyInstance(data, _rnd);
             enemy.OnDied += CheckVictory;
             _state.Enemies.Add(enemy);
         }
