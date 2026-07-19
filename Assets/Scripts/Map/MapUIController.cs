@@ -212,8 +212,8 @@ public class MapUIController : MonoBehaviour
             return;
         }
 
-        // 노드 위치 기반 시드로 같은 노드는 항상 같은 이벤트 선택
-        var rnd = new System.Random(RunData.Instance.mapData.seed + node.floorIndex * 100 + node.nodeIndex);
+        // 노드 위치 기반 재시드로 같은 노드는 항상 같은 이벤트 선택.
+        var rnd = RunRng.For(RngStream.Event, node.floorIndex, node.nodeIndex);
         var data = eventPool[rnd.Next(0, eventPool.Count)];
         eventView.Open(data);
     }

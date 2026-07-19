@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 using static CardData;
 using static ItemData;
 
@@ -40,20 +38,28 @@ public class BattleReward
     private ItemData itemReward = null;
     private int numCardReward;
     private readonly List<CardData> cardRewards = new List<CardData>();
-    // 노드 고정 시드로 자체 생성하는 보상 전용 RNG
+    // 보상 전용 RNG — RunRng.For(RngStream.Reward, ...)로 노드 고정 재시드된 것을 주입받는다
     private readonly System.Random random;
 
     public int NumofCardReward => numCardReward;
 
-    public BattleReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, int seed, int numCardReward = 3)
+    public BattleReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, System.Random rng, int numCardReward = 3)
     {
-        this.random = new System.Random(seed);
+        this.random = rng;
         this.numCardReward = numCardReward;
         GenerateReward(cardRewardsPool, rewardData);
     }
 
     private void GenerateReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
     {
+        // 테이블 누락(GetRewardProbability 폴백까지 실패) 시에도 골드는 지급 — 보상 화면이 완전히 비는 것 방지
+        if (rewardData == null)
+        {
+            Debug.LogError("[BattleReward] RewardProbabilityData가 null — 골드만 지급. 보상 테이블 등록 확인 필요.");
+            GenerateGoldReward(BattleType.Normal);
+            return;
+        }
+
         GenerateCardReward(cardRewardsPool, rewardData);
         GenerateGoldReward(rewardData.BattleType);
         GenerateItemReward(rewardData);
@@ -67,9 +73,20 @@ public class BattleReward
         for (int i = 0; i < numCardReward; i++)
         {
             CardRarity rarity = GetCardRarity(rewardData);
-            CardData cardData = PickCard(cardRewardsPool[rarity]);
+
+            // 굴린 레어도의 풀이 비어 있으면 한 단계 낮은 레어도로 폴백.
+            // 예전에 "3장 생성인데 2장만 표시"류 무증상 결함이 있었어서, 조용히 장수가 줄지 않게 한다.
+            CardData cardData = null;
+            for (int r = (int)rarity; r >= (int)CardRarity.Common && cardData == null; r--)
+            {
+                if (cardRewardsPool.TryGetValue((CardRarity)r, out var pool))
+                    cardData = PickCard(pool);
+            }
+
             if (cardData != null)
                 cardRewards.Add(cardData);
+            else
+                Debug.LogWarning("[BattleReward] 모든 레어도 풀이 비어 있어 카드 보상을 생성하지 못함. PlayerRewardPool 확인 필요.");
         }
     }
     private void GenerateGoldReward(BattleType battleType)
@@ -125,6 +142,15 @@ public class BattleReward
     private CardRarity GetCardRarity(RewardProbabilityData rewardData)
     {
         int total = rewardData.CommonCardProb + rewardData.RareCardProb + rewardData.UniqueCardProb;
+
+        // 가중치 합 0 = 테이블 미입력. 이전엔 Next(0,0)=0이 분기를 전부 미끄러져
+        // 조용히 Unique로 떨어졌다 (엘리트 테이블 미입력 때 실제 발생) — 명시적으로 잡는다.
+        if (total <= 0)
+        {
+            Debug.LogWarning($"[BattleReward] '{rewardData.name}' 카드 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
+            return CardRarity.Common;
+        }
+
         int roll = random.Next(0, total);
 
         if (roll < rewardData.CommonCardProb)
@@ -137,6 +163,14 @@ public class BattleReward
     private ItemRarity GetItemRarity(RewardProbabilityData rewardData)
     {
         int total = rewardData.CommonItemProb + rewardData.UncommonItemProb + rewardData.RareItemProb;
+
+        // 카드 쪽 GetCardRarity와 같은 이유의 가드 — 미입력 시 조용히 Rare로 떨어지던 것 방지
+        if (total <= 0)
+        {
+            Debug.LogWarning($"[BattleReward] '{rewardData.name}' 아이템 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
+            return ItemRarity.Common;
+        }
+
         int roll = random.Next(0, total);
 
         if (roll < rewardData.CommonItemProb)
