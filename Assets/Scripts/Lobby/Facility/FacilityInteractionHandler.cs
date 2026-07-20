@@ -16,7 +16,7 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     [SerializeField] private List<GameObject> activeWhenLocked = new();
     [SerializeField] private List<GameObject> activeWhenUnlocked = new();
 
-    private LobbyScreenConverter screenConverter;
+    private LobbyUIManager lobbyUIManager;
 
     public FacilityType FacilityType => facilityType;
     public FacilityManager FacilityManager { get; private set; }
@@ -53,7 +53,7 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     public void OpenInteraction(FacilityState facilityState)
     {
         RefreshFacilityUI(facilityState);
-        ShowFacilityView();
+        ShowFacilityView(facilityState);
         OnOpenInteraction(facilityState);
     }
 
@@ -108,34 +108,34 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
         RefreshFacilityUI(facilityState);
     }
 
-    private void ShowFacilityView()
+    private void ShowFacilityView(FacilityState facilityState)
     {
-        LobbyScreenConverter converter = GetScreenConverter();
-        if (converter != null)
-            converter.ShowFacilityView(FacilityRoot);
+        LobbyUIManager uiManager = GetLobbyUIManager();
+        if (uiManager != null)
+            uiManager.ShowFacilityView(FacilityRoot, facilityState);
         else
             FacilityRoot.SetActive(true);
     }
 
     private void HideFacilityView()
     {
-        LobbyScreenConverter converter = GetScreenConverter();
-        if (converter != null)
-            converter.ShowMainView();
+        LobbyUIManager uiManager = GetLobbyUIManager();
+        if (uiManager != null)
+            uiManager.ShowMainView();
         else
             FacilityRoot.SetActive(false);
     }
 
-    private LobbyScreenConverter GetScreenConverter()
+    private LobbyUIManager GetLobbyUIManager()
     {
-        if (screenConverter != null)
-            return screenConverter;
+        if (lobbyUIManager != null)
+            return lobbyUIManager;
 
-        screenConverter = GetComponentInParent<LobbyScreenConverter>();
-        if (screenConverter == null)
-            screenConverter = FindFirstObjectByType<LobbyScreenConverter>();
+        lobbyUIManager = GetComponentInParent<LobbyUIManager>();
+        if (lobbyUIManager == null)
+            lobbyUIManager = FindFirstObjectByType<LobbyUIManager>();
 
-        return screenConverter;
+        return lobbyUIManager;
     }
 
     private FacilityManager GetFacilityManager()
