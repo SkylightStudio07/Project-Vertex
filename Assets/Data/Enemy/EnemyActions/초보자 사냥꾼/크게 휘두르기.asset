@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: "\uD06C\uAC8C \uD718\uB450\uB974\uAE30"
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
   intentType: 0
-  effects: []
+  effects:
+  - rid: 6105002488825380936
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6105002488825380936
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 8
+        hitCount: 1
+        targetType: 1
+        hitInterval: 0.08

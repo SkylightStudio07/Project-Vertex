@@ -33,7 +33,7 @@ public class ApplyStatusEffect : CardEffect
 
             case TargetType.Self:
                 var selfPassive = CreatePassive();
-                if(selfPassive == null) return;
+                if (selfPassive == null) break;
                 if (isActingEnemy) context.ActingEnemy?.AddPassive(selfPassive);
                 else context.State.Player?.AddPassive(selfPassive);
                 break;

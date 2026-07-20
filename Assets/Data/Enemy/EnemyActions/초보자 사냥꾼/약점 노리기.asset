@@ -22,7 +22,7 @@ MonoBehaviour:
     - rid: 6105002488825380934
       type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
       data:
-        cardToAdd: {fileID: 0}
+        cardToAdd: {fileID: 11400000, guid: 95580df3117a6b8459d9b43977e80e44, type: 2}
         targetPile: 1
         count: 1
     - rid: 6105002488825380935

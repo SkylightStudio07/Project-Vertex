@@ -177,6 +177,8 @@ public class EnemyInstance : ICombatant
     {
         if (patterns == null || patterns.Count == 0)
             return null;
+        if (patterns.Count == 1)
+            return patterns[0];
 
         // 직전 확정 행동과 다른 것을 우선 뽑아 같은 행동 연속을 완화한다. 전투 시드(_rng)로 결정론 보장.
         EnemyAction next;

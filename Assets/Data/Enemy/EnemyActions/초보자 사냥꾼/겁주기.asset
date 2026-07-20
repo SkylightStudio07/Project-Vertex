@@ -12,8 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c854a75a493ec1e4e8963bb23c501a44, type: 3}
   m_Name: "\uAC81\uC8FC\uAE30"
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
-  intentType: 0
-  effects: []
+  intentType: 3
+  effects:
+  - rid: 6105002488825380937
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6105002488825380937
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusType: 0
+        amount: 2
+        target: 1
