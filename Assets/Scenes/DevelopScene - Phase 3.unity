@@ -469,6 +469,7 @@ MonoBehaviour:
   defaultMaxEnergy: 3
   defaultAmmo: 3
   defaultDrawCount: 5
+  _passiveDebugView: []
   turnBanner: {fileID: 1901336938}
   lungeOutWaitDuration: 0.2
   lungeBackWaitDuration: 0.2
@@ -4998,7 +4999,7 @@ MonoBehaviour:
   mapUIController: {fileID: 117956441}
   portraitSlotParent: {fileID: 1295376326}
   portraitSlotPrefab: {fileID: 4368745059828746129, guid: 7a1c32b6b65ba8c4bbd5d8c02771393a, type: 3}
-  restHealEffect: {fileID: 11400000, guid: c97ee80917bcdd248b776072bbfed1d3, type: 2}
+  restHealAmount: 20
 --- !u!114 &1367776489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5132,9 +5133,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1486399160}
-  - component: {fileID: 1486399162}
   - component: {fileID: 1486399161}
   - component: {fileID: 1486399163}
+  - component: {fileID: 1486399164}
   m_Layer: 5
   m_Name: HandArea
   m_TagString: Untagged
@@ -5175,32 +5176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HandView
   cardPrefab: {fileID: 324129827944308415, guid: e3cfe6cad59611b419b1bcc0547c3c54, type: 3}
   cardContainer: {fileID: 1486399160}
---- !u!114 &1486399162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486399159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: -50
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  fanLayout: {fileID: 1486399164}
 --- !u!223 &1486399163
 Canvas:
   m_ObjectHideFlags: 0
@@ -5224,6 +5200,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 5
   m_TargetDisplay: 0
+--- !u!114 &1486399164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486399159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f5389ece35da3449bc84fd61ce632a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandFanLayout
+  maxCardSpacing: 140
+  maxWidth: 900
+  totalFanAngle: 32
+  arcSag: 60
 --- !u!1 &1494846968
 GameObject:
   m_ObjectHideFlags: 0
