@@ -9,11 +9,21 @@ public class ApplyStatusEffect : CardEffect
     {
         if (context.State == null) return;
 
+        bool isActingEnemy = context.ActingEnemy != null;
+
         switch (target)
         {
             case TargetType.SingleEnemy:
-                if (context.Target != null && !context.Target.IsDead)
+                if(isActingEnemy)
+                {
+                    // 적 입장에서 플레이어에게
+                    var etpPassive = CreatePassive();
+                    if(etpPassive != null) context.State.Player?.AddPassive(etpPassive);
+                }
+                else if (context.Target != null && !context.Target.IsDead)
+                {
                     ApplyTo(context.Target);
+                }
                 break;
 
             case TargetType.AllEnemies:
@@ -23,7 +33,9 @@ public class ApplyStatusEffect : CardEffect
 
             case TargetType.Self:
                 var selfPassive = CreatePassive();
-                if (selfPassive != null) context.State.Player?.AddPassive(selfPassive);
+                if (selfPassive == null) break;
+                if (isActingEnemy) context.ActingEnemy?.AddPassive(selfPassive);
+                else context.State.Player?.AddPassive(selfPassive);
                 break;
         }
     }
