@@ -16,10 +16,13 @@ public class EnemyInstance : ICombatant
     private int _hp;
     private int _block;
     private readonly List<IPassiveLogic> _passives = new();
+
+    // 패턴 진행 인덱스. openingActions가 있으면 우선 그걸 먼저 진행하고, 끝나면 activityPatterns로 넘어감
     private int _openingIndex;
     private int _patternIndex;
+    // 랜덤 패턴일 때 직전 행동과 다른 것을 뽑기 위한 난수
     private System.Random _rng;
-
+    // 적의 현재 인텐트
     private EnemyAction _action;
 
     public int  HP     => _hp;
@@ -42,6 +45,8 @@ public class EnemyInstance : ICombatant
         _hp         = data.health;
         EnemySprite = data.enemyImage;
         _rng = rng ?? new System.Random();
+        // 첫 인텐트 결정
+        DetermineCurrentAction();
     }
 
     // 블록 흡수 → HP 감소. 패시브 배율은 DamageCalculator가 호출 전에 이미 적용함.

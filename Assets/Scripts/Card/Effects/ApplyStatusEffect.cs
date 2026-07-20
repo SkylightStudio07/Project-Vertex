@@ -14,8 +14,16 @@ public class ApplyStatusEffect : CardEffect
         switch (target)
         {
             case TargetType.SingleEnemy:
-                if (context.Target != null && !context.Target.IsDead)
+                if(isActingEnemy)
+                {
+                    // 적 입장에서 플레이어에게
+                    var etpPassive = CreatePassive();
+                    if(etpPassive != null) context.State.Player?.AddPassive(etpPassive);
+                }
+                else if (context.Target != null && !context.Target.IsDead)
+                {
                     ApplyTo(context.Target);
+                }
                 break;
 
             case TargetType.AllEnemies:
