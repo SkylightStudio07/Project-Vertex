@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
-  m_Name: "\uD560\uD034\uB294 \uC0DD\uBB3C"
+  m_Name: "\uCD08\uBCF4\uC790 \uC0AC\uB0E5\uAFBC"
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: "\uD560\uD034\uB294 \uC0DD\uBB3C"
-  health: 70
-  enemyImage: {fileID: -8757908933327734425, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
+  enemyName: "\uCD08\uBCF4\uC790 \uC0AC\uB0E5\uAFBC"
+  health: 55
+  enemyImage: {fileID: -8226447978964141100, guid: c571fd17042dddc4ba601202182be0cd, type: 3}
   activityPatternType: 0
   openingActions: []
   activityPatterns:
-  - {fileID: 11400000, guid: 058dcaf2750a3ea429dd8cc28f26e075, type: 2}
-  - {fileID: 11400000, guid: be4081ffb6ce118479056ce1c1b517f7, type: 2}
-  - {fileID: 11400000, guid: aa50adf5c6cd1cd468b64e59c3425223, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
