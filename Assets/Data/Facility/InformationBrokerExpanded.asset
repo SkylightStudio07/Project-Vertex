@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f054c2d02f411bb02185270ae2410d, type: 3}
+  m_Name: InformationBrokerExpanded
+  m_EditorClassIdentifier: Assembly-CSharp::Facility
+  facilityId: InformationBroker
+  facilityType: 4
+  displayName: "\uD655\uC7A5\uB41C \uC815\uBCF4\uC0C1"
+  description: "\uC801 \uB3C4\uAC10, \uC774\uBCA4\uD2B8 \uAE30\uB85D\uC744 \uD655\uC778\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uCD94\uAC00\uC801\uC73C\uB85C \uC2DC\uC791
+    \uC2DC \uB9F5 \uC548\uAC1C 1\uCE78\uC744 \uCD94\uAC00\uB85C \uACF5\uAC1C\uD569\uB2C8\uB2E4."
+  defaultActive: 1
+  requiredRunCount: 3
+  isUpgradedFacility: 1
+  upgradeFacility: {fileID: 0}
+  upgradeRequiredExp: 0
