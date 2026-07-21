@@ -17,6 +17,7 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     [SerializeField] private List<GameObject> activeWhenUnlocked = new();
 
     private LobbyUIManager lobbyUIManager;
+    private FacilityManager subscribedFacilityManager;
 
     public FacilityType FacilityType => facilityType;
     public FacilityManager FacilityManager { get; private set; }
@@ -26,28 +27,24 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     {
         upgradeButton?.onClick.AddListener(HandleUpgradeButtonClicked);
         closeButton?.onClick.AddListener(CloseInteraction);
+        SubscribeFacilityStateChanged(GetFacilityManager());
     }
 
     protected virtual void OnDisable()
     {
         upgradeButton?.onClick.RemoveListener(HandleUpgradeButtonClicked);
         closeButton?.onClick.RemoveListener(CloseInteraction);
+        UnsubscribeFacilityStateChanged();
     }
 
     //시설 매니저에 이벤트 구독
     public void Bind(FacilityManager facilityManager)
     {
-        if (FacilityManager != null)
-        {
-            FacilityManager.OnFacilityStateChanged -= HandleFacilityStateChanged;
-        }
-
+        UnsubscribeFacilityStateChanged();
         FacilityManager = facilityManager;
 
-        if (FacilityManager != null)
-        {
-            FacilityManager.OnFacilityStateChanged += HandleFacilityStateChanged;
-        }
+        if (isActiveAndEnabled)
+            SubscribeFacilityStateChanged(FacilityManager);
     }
 
     public void OpenInteraction(FacilityState facilityState)
@@ -106,6 +103,25 @@ public abstract class FacilityInteractionHandler : MonoBehaviour
     private void HandleFacilityStateChanged(FacilityState facilityState)
     {
         RefreshFacilityUI(facilityState);
+    }
+
+    private void SubscribeFacilityStateChanged(FacilityManager facilityManager)
+    {
+        if (facilityManager == null || subscribedFacilityManager == facilityManager)
+            return;
+
+        UnsubscribeFacilityStateChanged();
+        subscribedFacilityManager = facilityManager;
+        subscribedFacilityManager.OnFacilityStateChanged += HandleFacilityStateChanged;
+    }
+
+    private void UnsubscribeFacilityStateChanged()
+    {
+        if (subscribedFacilityManager == null)
+            return;
+
+        subscribedFacilityManager.OnFacilityStateChanged -= HandleFacilityStateChanged;
+        subscribedFacilityManager = null;
     }
 
     private void ShowFacilityView(FacilityState facilityState)

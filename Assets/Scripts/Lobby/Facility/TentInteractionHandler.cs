@@ -17,12 +17,18 @@ public class TentInteractionHandler : FacilityInteractionHandler
 
     private void Awake()
     {
-        BindButtonListeners();
         RefreshStartingDeckView();
     }
 
-    private void OnDestroy()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        runStartButton?.onClick.AddListener(StartRun);
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
         runStartButton?.onClick.RemoveListener(StartRun);
     }
 
@@ -61,12 +67,6 @@ public class TentInteractionHandler : FacilityInteractionHandler
         RefreshStartingDeckView();
     }
 
-    private void BindButtonListeners()
-    {
-        runStartButton?.onClick.RemoveListener(StartRun);
-        runStartButton?.onClick.AddListener(StartRun);
-    }
-
     private void RefreshStartingDeckView()
     {
         if (cardSummaryParent == null || cardSummaryPrefab == null)
@@ -87,7 +87,9 @@ public class TentInteractionHandler : FacilityInteractionHandler
     {
         for (int i = cardSummaryParent.childCount - 1; i >= 0; i--)
         {
-            Destroy(cardSummaryParent.GetChild(i).gameObject);
+            GameObject child = cardSummaryParent.GetChild(i).gameObject;
+            child.SetActive(false);
+            Destroy(child);
         }
     }
 

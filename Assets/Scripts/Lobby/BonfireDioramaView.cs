@@ -58,6 +58,15 @@ public class BonfireDioramaView : MonoBehaviour
         SetDioramaActive(false);
     }
 
+    private void OnDestroy()
+    {
+        if (vortexLoopMaterial != null)
+        {
+            Destroy(vortexLoopMaterial);
+            vortexLoopMaterial = null;
+        }
+    }
+
     private void Update()
     {
         AnimateVortex();

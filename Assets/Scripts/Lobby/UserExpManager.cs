@@ -13,6 +13,7 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
 
     protected override void Init()
     {
+        m_IsDestroyOnLoad = true;
         base.Init();
 
         SetDefaultExperience();

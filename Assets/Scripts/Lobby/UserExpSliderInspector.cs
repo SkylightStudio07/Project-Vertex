@@ -9,7 +9,7 @@ public class UserExpSliderInspector : MonoBehaviour
 
     private UserExpManager userExpManager;
 
-    private void Start()
+    private void OnEnable()
     {
         userExpManager = UserExpManager.Instance;
         if (userExpManager == null)
@@ -20,8 +20,6 @@ public class UserExpSliderInspector : MonoBehaviour
         userExpManager.OnExperienceChanged += Refresh;
         Refresh(userExpManager.Experience);
     }
-
-
     private void OnDisable()
     {
         if (userExpManager == null)
