@@ -21,7 +21,7 @@ public class PartyView : MonoBehaviour
     [SerializeField] private Image playerImage;
 
     [Header("합류 캐릭터 — 스프라이트를 생성해 넣을 프리팹과 위치 마커(빈 오브젝트, 최대 3명)")]
-    [SerializeField] private Image companionPrefab;
+    [SerializeField] private GameObject companionPrefab; // 루트 밑에 "CharacterSprite"(Image) 자식 필요 — 발밑 그림자(Shadow)도 같이 딸려옴
     [SerializeField] private Transform[] companionSlots = new Transform[3];
 
     private void Start()
@@ -107,12 +107,12 @@ public class PartyView : MonoBehaviour
             if (slot == null || i >= joined.Count || joined[i].charData == null)
                 continue; // 미합류 슬롯은 빈 위치로 남김
 
-            var image = Instantiate(companionPrefab, slot);
+            GameObject instance = Instantiate(companionPrefab, slot);
 
             // 슬롯(빈 오브젝트) 기준 정중앙에 앉히도록 강제 정렬.
             // 프리팹에 남아있는 앵커/피벗이 무엇이든 상관없이 "슬롯 위치 = 카드 중심"을 보장한다
             // (CardInteractionView.SetRestingPose에서 겪은 것과 같은 종류의 문제 예방).
-            RectTransform rt = image.rectTransform;
+            RectTransform rt = instance.GetComponent<RectTransform>();
             if (rt != null)
             {
                 rt.anchorMin = new Vector2(0.5f, 0.5f);
@@ -122,7 +122,14 @@ public class PartyView : MonoBehaviour
             }
             else
             {
-                image.transform.localPosition = Vector3.zero;
+                instance.transform.localPosition = Vector3.zero;
+            }
+
+            Transform spriteChild = instance.transform.Find("CharacterSprite");
+            if (spriteChild == null || !spriteChild.TryGetComponent(out Image image))
+            {
+                Debug.LogWarning("[PartyView] companionPrefab 밑에서 'CharacterSprite'(Image)를 못 찾음. 프리팹 구조 확인 필요.");
+                continue;
             }
 
             image.sprite  = joined[i].charData.standingSprite;
