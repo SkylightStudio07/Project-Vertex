@@ -133,6 +133,8 @@ public class CardData : ScriptableObject
             if (idx >= effects.Count) return match.Value;
 
             var effect = effects[idx];
+            if (effect == null) return match.Value; // 슬롯은 늘렸지만 아직 타입을 안 고른 빈 이펙트
+
             var field = effect.GetType().GetField(match.Groups[2].Value);
             object value = field?.GetValue(effect);
             if (value == null) return match.Value;
