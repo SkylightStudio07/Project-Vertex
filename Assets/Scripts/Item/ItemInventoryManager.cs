@@ -26,12 +26,14 @@ public class ItemInventoryManager : MonoBehaviour
             Debug.LogWarning("추가하려는 아이템 데이터가 null입니다.");
             return false;
         }
-        _items.Add(Instantiate(item));
+
+        // 추가하기 전에 용량 검사. maxCapacityHint까지는 허용 → 이미 그 값에 도달했으면 거절.
         if (_items.Count >= maxCapacityHint)
         {
             Debug.LogWarning("인벤토리 용량 초과. 아이템을 추가할 수 없습니다.");
             return false;
         }
+
         _items.Add(Instantiate(item));
         OnInventoryChanged?.Invoke();
         Debug.Log($"Added item: {item.ItemName}");

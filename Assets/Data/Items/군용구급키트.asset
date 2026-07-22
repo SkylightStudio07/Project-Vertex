@@ -19,5 +19,12 @@ MonoBehaviour:
   itemGetTypes: 11
   itemDescription: "\uCCB4\uB825\uC744 20 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
   itemEffects:
-  - {fileID: 11400000, guid: 80f4d9ac71ffefc43a1de2dbc29ecc92, type: 2}
+  - rid: 6105002535239024712
   useMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6105002535239024712
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 20

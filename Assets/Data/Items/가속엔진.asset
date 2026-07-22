@@ -19,5 +19,12 @@ MonoBehaviour:
   itemGetTypes: 11
   itemDescription: "\uCE74\uB4DC\uB97C \uC138 \uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
   itemEffects:
-  - {fileID: 11400000, guid: f38845f2ed830194689b2d7b1f0f72ae, type: 2}
+  - rid: 6105002535239024711
   useMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6105002535239024711
+      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 3

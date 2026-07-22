@@ -10,24 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a8e961ef58c92348810475ddf3db54c, type: 3}
-  m_Name: "\uCD5C\uB8E8\uD0C4"
+  m_Name: "\uC12C\uAD11\uD0C4"
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: "\uCD5C\uB8E8\uD0C4"
-  itemIcon: {fileID: -1305781175230066861, guid: 5ec830fdbcd9e0341a9ff1e600e2ee3a, type: 3}
+  itemName: "\uC12C\uAD11\uD0C4"
+  itemIcon: {fileID: 21300000, guid: 23c0de3aa7f96504eaa3daa981fff25e, type: 3}
   itemRarity: 0
   usableOutsideBattle: 0
-  itemGetTypes: 11
-  itemDescription: "25\uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4"
+  itemGetTypes: 9
+  itemDescription: "\uC801 \uC804\uCCB4\uC5D0\uAC8C \uC57D\uD654\uB97C 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   itemEffects:
-  - rid: 6105002535239024713
-  useMode: 1
+  - rid: 6105002535239024714
+  useMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 6105002535239024713
-      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+    - rid: 6105002535239024714
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 25
-        hitCount: 1
-        targetType: 1
-        hitInterval: 0.08
+        statusType: 1
+        amount: 2
+        target: 2

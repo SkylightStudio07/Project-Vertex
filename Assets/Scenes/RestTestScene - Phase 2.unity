@@ -302,30 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   currentEnemies:
   - {fileID: 11400000, guid: 448b92ffcbce1ba49b466c600e6263ef, type: 2}
-  playerDeck:
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  commonPool:
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
-  rarePool:
-  - {fileID: 11400000, guid: 29651ea8435a386489b1ec118f568521, type: 2}
-  - {fileID: 11400000, guid: 6e99534b633f55e49888225af7d4d7f9, type: 2}
-  - {fileID: 11400000, guid: 1aa6850b62fe8f94db2c7130e4957573, type: 2}
-  uniquePool:
-  - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
-  - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
-  - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
+  playerRewardPool: {fileID: 0}
   itemPool: []
   rewardProbabilityTable:
   - {fileID: 11400000, guid: 1f70f7d092f9d474ca02a07cdca27edc, type: 2}
@@ -335,11 +312,6 @@ MonoBehaviour:
   playerGold: 0
   chapter: 0
   floor: 0
-  strikeCard: {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  blockCard: {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  reloadCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
-  strikeCard_Debug: {fileID: 11400000, guid: f0221d85e5bb8564ea4223fa21917bb1, type: 2}
-  blockCard_Debug: {fileID: 11400000, guid: 7f61065579b5965468c193e2d9ab8fbb, type: 2}
 --- !u!114 &117956439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +327,12 @@ MonoBehaviour:
   defaultMaxEnergy: 3
   defaultAmmo: 3
   defaultDrawCount: 5
+  _passiveDebugView: []
+  turnBanner: {fileID: 0}
+  lungeOutWaitDuration: 0.2
+  lungeBackWaitDuration: 0.2
+  playerTurnBanner: {fileID: 0}
+  postActionDelay: 0.3
 --- !u!114 &117956440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +367,7 @@ MonoBehaviour:
   eventPool:
   - {fileID: 11400000, guid: 419700ce94a35f14a8825bd4482e3ae8, type: 2}
   restView: {fileID: 1518368975}
+  selectCoopCharUI: {fileID: 0}
   floorSpacing: 120
   columnSpacing: 120
   verticalPadding: 80
@@ -3875,7 +3854,7 @@ MonoBehaviour:
   mapUIController: {fileID: 117956441}
   portraitSlotParent: {fileID: 1047241229}
   portraitSlotPrefab: {fileID: 4368745059828746129, guid: 7a1c32b6b65ba8c4bbd5d8c02771393a, type: 3}
-  restHealEffect: {fileID: 11400000, guid: c97ee80917bcdd248b776072bbfed1d3, type: 2}
+  restHealAmount: 20
 --- !u!1 &1564995712
 GameObject:
   m_ObjectHideFlags: 0

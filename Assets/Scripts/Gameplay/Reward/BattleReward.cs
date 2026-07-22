@@ -117,6 +117,7 @@ public class BattleReward
             itemReward = null;
             return;
         }
+        Debug.Log("Item reward is given.");
         ItemRarity rarity = GetItemRarity(rewardData);
         ItemGetType getType = GetItemGetType(rewardData.BattleType);
         
@@ -129,6 +130,7 @@ public class BattleReward
         }
 
         itemReward = filteredPool[random.Next(0, filteredPool.Count)];
+        Debug.Log("Item reward generated: " + itemReward.ItemName);
     }
 
     // 아이템 등장 여부 결정
