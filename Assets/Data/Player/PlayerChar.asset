@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01572bd70d6ca404e870646036df1177, type: 3}
+  m_Name: PlayerChar
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCharData
+  charID: 
+  charName: 
+  charDescription: 
+  charImage: {fileID: -6483680978703746508, guid: 592d3c06efeef2d41af1a32856cb15ad, type: 3}
+  charIcon: {fileID: 0}
+  standingSprite: {fileID: -6483680978703746508, guid: 592d3c06efeef2d41af1a32856cb15ad, type: 3}
+  idleAnim: {fileID: 0}
+  attackAnim: {fileID: 0}
+  hitAnim: {fileID: 0}
+  deathAnim: {fileID: 0}
+  charSoundEffect: {fileID: 0}
+  CharMaxHp: 0
+  StartingEnegy: 0
+  StartingGold: 0
+  DrawCountPerTurn: 0
+  DefaultCardPool: []
+  BattleRewardCardPool: []
