@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         if (ItemInventoryManager.Instance != null)
             ItemInventoryManager.Instance.Clear();
 
-        MapManager.Instance.InitializeMap();
+        MapManager.Instance.InitializeMap(chapter);
 
         InitializeBattle();
     }

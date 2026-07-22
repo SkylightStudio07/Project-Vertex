@@ -20,6 +20,26 @@ public class FloorGuarantee // 층별 고정 노드.
 
 // Inspector에서 조정하는 맵 생성 파라미터 모음.
 // MapGenerator 세팅값이라고 생각하자.
+public enum EnemyEncounterType
+{
+    Normal,
+    Elite,
+    Boss
+}
+
+[System.Serializable]
+public class EnemyEncounter
+{
+    public int chapter = 1;
+    [Tooltip("0-based floor index range.")]
+    public int minFloor = 0;
+    [Tooltip("0-based floor index range.")]
+    public int maxFloor = 15;
+    public EnemyEncounterType encounterType;
+    public List<EnemyData> enemies = new();
+    [Min(0f)] public float weight = 1f;
+}
+
 [CreateAssetMenu(fileName = "MapConfig", menuName = "Game Asset/Map Config")]
 public class MapConfig : ScriptableObject
 {
@@ -48,12 +68,20 @@ public class MapConfig : ScriptableObject
     {
         if (minNodesPerFloor > maxNodesPerFloor)
             minNodesPerFloor = maxNodesPerFloor;
+
+        if (enemyEncounters == null) return;
+        foreach (var encounter in enemyEncounters)
+        {
+            if (encounter == null) continue;
+            if (encounter.minFloor > encounter.maxFloor)
+                encounter.minFloor = encounter.maxFloor;
+            if (encounter.weight < 0f)
+                encounter.weight = 0f;
+        }
     }
 
     [Header("조우 풀 (맵 생성 시 노드에 할당)")]
-    public List<EnemyData> normalEncounterPool;
-    public List<EnemyData> eliteEncounterPool;
-    public List<EnemyData> bossEncounterPool;
+    public List<EnemyEncounter> enemyEncounters = new();
 
     [Header("층별 고정 노드 설정(보스, 성소, 보물상자)")]
     // 지정한 층에 해당 타입의 노드를 반드시 1개 배치.
