@@ -19,7 +19,6 @@ public class MapNode
     public List<int> nextNodeIndices = new();
     public bool isVisited;
 
-    // 맵 생성 시 할당되는 조우 데이터 — Combat/Elite/Boss 노드에만 채워짐
-    public List<EnemyData> encounter = new();
-    
+    // 조우 데이터는 더 이상 노드에 저장하지 않는다 — 런 시작 시 생성되는 소비형 큐가 대체한다.
+    // (EncounterQueueBuilder / RunData.normalEncounterQueue 참고)
 }

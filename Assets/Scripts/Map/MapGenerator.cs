@@ -158,7 +158,8 @@ public static class MapGenerator
                     nodeIndex  = n,
                     column     = columns[n]
                 };
-                AssignEncounter(node, config, rng);
+                // 조우는 더 이상 노드에 박지 않는다 — 런 시작 시 EncounterQueueBuilder가
+                // "전투 순서" 큐로 생성하고, 전투 진입마다 소비한다(RunData 참고).
                 mapData.floors[f].Add(node);
             }
         }
@@ -404,20 +405,6 @@ public static class MapGenerator
         }
 
         return NodeType.Combat; // 부동소수점 오차 보정
-    }
-
-    private static void AssignEncounter(MapNode node, MapConfig config, System.Random rng)
-    {
-        List<EnemyData> pool = node.nodeType switch
-        {
-            NodeType.Combat => config.normalEncounterPool,
-            NodeType.Elite  => config.eliteEncounterPool,
-            NodeType.Boss   => config.bossEncounterPool,
-            _               => null
-        };
-
-        if (pool == null || pool.Count == 0) return;
-        node.encounter.Add(pool[rng.Next(0, pool.Count)]);
     }
 
     private static void Shuffle<T>(List<T> list, System.Random rng)
