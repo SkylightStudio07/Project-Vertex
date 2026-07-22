@@ -50,10 +50,18 @@ public class MapConfig : ScriptableObject
             minNodesPerFloor = maxNodesPerFloor;
     }
 
-    [Header("조우 풀 (맵 생성 시 노드에 할당)")]
+    [Header("조우 풀 (런 시작 시 소비형 큐로 생성 — EncounterQueueBuilder 참고)")]
+    // 노드에 적을 박아두는 게 아니라, 런 시작 때 이 풀들에서 "전투 순서" 큐를 미리 뽑아
+    // 전투 진입마다 앞에서 하나씩 소비한다. "어느 노드냐"가 아니라 "몇 번째 전투냐"로 조우가 정해짐.
     public List<EnemyData> normalEncounterPool;
     public List<EnemyData> eliteEncounterPool;
     public List<EnemyData> bossEncounterPool;
+
+    [Header("초반 약한 적 (weak-first)")]
+    // 런 초반 weakEncounterCount번의 일반 전투는 이 약한 풀에서만 뽑아 초반 난이도를 완화한다(슬더스식).
+    // 이후 전투부터 normalEncounterPool로 넘어간다. 비워두면 처음부터 normalEncounterPool을 쓴다.
+    public List<EnemyData> weakEncounterPool;
+    [Min(0)] public int weakEncounterCount = 3;
 
     [Header("층별 고정 노드 설정(보스, 성소, 보물상자)")]
     // 지정한 층에 해당 타입의 노드를 반드시 1개 배치.

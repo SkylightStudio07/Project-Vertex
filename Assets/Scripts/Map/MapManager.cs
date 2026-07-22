@@ -31,6 +31,9 @@ public class MapManager : MonoBehaviour
         RunData.Instance.currentFloor     = 0;
         RunData.Instance.currentNodeIndex = 0;
         RunData.Instance.CurrentNodeType  = NodeType.Blessing;
+
+        // 맵 시드가 확정된 뒤, 이 런의 전투 조우 큐를 생성한다.
+        RunData.Instance.BuildEncounterQueues(mapConfig);
     }
 
     // 지정한 노드로 이동. 이동 가능 여부는 호출 전에 확인할 것.
