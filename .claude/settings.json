@@ -10,7 +10,14 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(python -c ' *)",
-      "PowerShell($path = \"h:\\\\Unity\\\\ProjectV\\\\ProjectV\\\\Assets\\\\Scripts\\\\Player\\\\PlayerCharData.cs\"; $bytes = [System.IO.File]::ReadAllBytes\\($path\\); $euckr = [System.Text.Encoding]::GetEncoding\\(51949\\); Write-Host $euckr.GetString\\($bytes\\))"
+      "PowerShell($path = \"h:\\\\Unity\\\\ProjectV\\\\ProjectV\\\\Assets\\\\Scripts\\\\Player\\\\PlayerCharData.cs\"; $bytes = [System.IO.File]::ReadAllBytes\\($path\\); $euckr = [System.Text.Encoding]::GetEncoding\\(51949\\); Write-Host $euckr.GetString\\($bytes\\))",
+      "Bash(xargs grep -l \"PartyView\")",
+      "Bash(xargs grep -l \"MapConfig\")",
+      "Bash(grep -E \"\\\\.cs$\")",
+      "Bash(git check-ignore *)",
+      "Bash(python -c \"import uuid; print\\(uuid.uuid4\\(\\).hex\\)\")",
+      "Bash(git commit *)",
+      "Bash(unity editors *)"
     ]
   }
 }
