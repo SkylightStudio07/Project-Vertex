@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61e595b875def948a5ed08c5927f167, type: 3}
+  m_Name: "\uC774\uCE74\uB8E8\uC2A4 \uAD70 \uD569\uB958 \uC774\uBCA4\uD2B8"
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventJson: {fileID: 4900000, guid: d5c4d30844c3471884a4adef7891fff6, type: 3}
+  choiceEffects:
+  - effects:
+    - rid: 4680131133695852651
+  - effects:
+    - rid: -2
+    - rid: -2
+  dialogueJson: {fileID: 0}
+  backgroundImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4680131133695852651
+      type: {class: JoinCompanionEffect, ns: , asm: Assembly-CSharp}
+      data:
+        charID: Cp_Event_01
