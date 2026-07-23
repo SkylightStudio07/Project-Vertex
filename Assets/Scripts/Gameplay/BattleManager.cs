@@ -52,6 +52,10 @@ public class BattleManager : MonoBehaviour
     public event Action         OnBattleStarted; // StartBattle() 끝에서 1회 발화 — 씬을 갈아끼우지 않고 화면을 SetActive로만 전환하는 구조라, 전투 UI는 Start/OnEnable 대신 이 이벤트로 매 전투 진입을 감지해야 한다 (PartyView 참고)
     public event Action         OnHandChanged;
     public event Action         OnEnemiesChanged;
+    // 플레이어가 카드를 실제로 사용한 시점(비용 차감 직후, 이펙트 실행 직전)에 발화.
+    // 데미지 적용을 기다리지 않는 "구경용" 연출(PoseSequencePlayer 등)을 병행 재생하는 용도 —
+    // 구독 쪽에서 결과를 기다리지 않고 그냥 재생만 하면 된다.
+    public event Action<CardData> OnCardPlayed;
     public event Action<BattleReward> OnBattleVictory;
     public event Action         OnBattleDefeat;
 
@@ -286,6 +290,8 @@ public class BattleManager : MonoBehaviour
         {
             EndHandChangeBatch();
         }
+
+        OnCardPlayed?.Invoke(card);
 
         var ctx = new CardContext
         {

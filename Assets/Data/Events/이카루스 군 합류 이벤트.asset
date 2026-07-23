@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61e595b875def948a5ed08c5927f167, type: 3}
   m_Name: "\uC774\uCE74\uB8E8\uC2A4 \uAD70 \uD569\uB958 \uC774\uBCA4\uD2B8"
   m_EditorClassIdentifier: Assembly-CSharp::EventData
-  eventJson: {fileID: 4900000, guid: d5c4d30844c3471884a4adef7891fff6, type: 3}
+  eventJson: {fileID: 4900000, guid: 04935c6f4bae0054e8d6ee7534b9b8b9, type: 3}
   choiceEffects:
   - effects:
     - rid: 4680131133695852651
@@ -20,7 +20,8 @@ MonoBehaviour:
     - rid: -2
     - rid: -2
   dialogueJson: {fileID: 0}
-  backgroundImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  backgroundImage: {fileID: 0}
+  illustration: {fileID: 0}
   references:
     version: 2
     RefIds:
