@@ -38,6 +38,7 @@ public class CardInteractionView : MonoBehaviour
     [SerializeField] private Color debugTargetArrowColor = new Color(0.85f, 0.15f, 0.15f, 0.95f);
 
     private Canvas cardCanvas;
+    private RectTransform rootRect;
     private RectTransform targetingAnchor;
     private TargetArrow debugTargetArrow;
     private Canvas debugTargetArrowCanvas;
@@ -48,11 +49,16 @@ public class CardInteractionView : MonoBehaviour
     private Coroutine movementCoroutine;
     private Vector2 targetingPointerPosition;
 
+    // HandFanLayout이 지정한 "쉴 때" 자세. 부채꼴 미적용(레이아웃 미연결) 시 회전 0으로 그대로 둔다.
+    private Vector2 restingAnchoredPosition;
+    private float restingRotationZ;
+
     private void Awake()
     {
         cardCanvas = GetComponent<Canvas>();
         cardCanvas.overrideSorting = true;
         originalSortingOrder = cardCanvas.sortingOrder;
+        rootRect = transform as RectTransform;
 
         if (visual != null)
         {
@@ -77,6 +83,26 @@ public class CardInteractionView : MonoBehaviour
         targetingAnchor = anchor;
     }
 
+    // HandFanLayout이 손패 갱신마다 호출 — 이 카드가 손패에서 쉬고 있을 때의 위치·회전(부채꼴 슬롯)을 지정한다.
+    // 즉시 적용되며, 이후 EnterIdle()이 호출될 때마다 이 자세로 복귀한다.
+    public void SetRestingPose(Vector2 anchoredPosition, float rotationZ)
+    {
+        restingAnchoredPosition = anchoredPosition;
+        restingRotationZ = rotationZ;
+        if (rootRect == null) return;
+
+        // 부채꼴 좌표/회전은 "카드 중심이 피벗"이라고 가정한 계산이다.
+        // HorizontalLayoutGroup은 정렬 방식(기본 UpperLeft)에 따라 피벗/앵커를 모서리에
+        // 남겨두는 경우가 많아서, 그대로 두면 중심이 아니라 모서리를 축으로 돌며 자리가 어긋난다.
+        // (레이아웃 그룹 제거 후 부채꼴이 들쭉날쭉해 보이던 원인.) 매번 강제로 중앙 정렬한다.
+        rootRect.pivot     = new Vector2(0.5f, 0.5f);
+        rootRect.anchorMin = new Vector2(0.5f, 0.5f);
+        rootRect.anchorMax = new Vector2(0.5f, 0.5f);
+
+        rootRect.anchoredPosition = restingAnchoredPosition;
+        rootRect.localRotation = Quaternion.Euler(0f, 0f, restingRotationZ);
+    }
+
     public void EnterIdle()
     {
         StopMovement();
@@ -87,6 +113,8 @@ public class CardInteractionView : MonoBehaviour
             visual.localPosition = originalLocalPosition;
         }
         cardCanvas.sortingOrder = originalSortingOrder;
+        // 부채꼴 각도로 복귀. 레이아웃 미연결 카드는 restingRotationZ가 0이라 무영향.
+        if (rootRect != null) rootRect.localRotation = Quaternion.Euler(0f, 0f, restingRotationZ);
     }
 
     public void EnterHover()
@@ -94,6 +122,8 @@ public class CardInteractionView : MonoBehaviour
         StopMovement();
         if (visual != null) visual.localScale = hoverScale;
         BringCardToFront();
+        // 부채꼴 각도를 펴서 카드 내용을 똑바로 보여준다 (STS 호버 연출).
+        if (rootRect != null) rootRect.localRotation = Quaternion.identity;
     }
 
     public void EnterDragging()
@@ -102,6 +132,7 @@ public class CardInteractionView : MonoBehaviour
         HideDebugTargetArrow();
         if (visual != null) visual.localScale = originalScale;
         BringCardToFront();
+        if (rootRect != null) rootRect.localRotation = Quaternion.identity;
     }
 
     public void EnterTargeting(Vector2 pointerPosition)
@@ -110,6 +141,7 @@ public class CardInteractionView : MonoBehaviour
         targetingPointerPosition = pointerPosition;
         if (visual != null) visual.localScale = originalScale;
         BringCardToFront();
+        if (rootRect != null) rootRect.localRotation = Quaternion.identity;
         EnsureDebugTargetArrow();
         BringDebugArrowToFront();
         UpdateDebugTargetArrow(pointerPosition);

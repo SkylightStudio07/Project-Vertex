@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f054c2d02f411bb02185270ae2410d, type: 3}
+  m_Name: QuestBoard
+  m_EditorClassIdentifier: Assembly-CSharp::Facility
+  facilityId: QuestBoard
+  facilityType: 6
+  displayName: "\uC758\uB8B0 \uAC8C\uC2DC\uD310"
+  description: "\uACBD\uD5D8\uCE58\uB97C \uD68D\uB4DD\uD560 \uC218 \uC788\uB294 \uAC00\uBCBC\uC6B4
+    \uC758\uB8B0\uB97C \uC81C\uACF5\uD569\uB2C8\uB2E4. "
+  defaultActive: 0
+  requiredRunCount: 3
+  isUpgradedFacility: 0
+  upgradeFacility: {fileID: 11400000, guid: 99f4c64d22f14eb58c9afec6e93a7a46, type: 2}
+  upgradeRequiredExp: 250

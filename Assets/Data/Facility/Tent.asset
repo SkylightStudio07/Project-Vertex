@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f054c2d02f411bb02185270ae2410d, type: 3}
+  m_Name: Tent
+  m_EditorClassIdentifier: Assembly-CSharp::Facility
+  facilityId: Tent
+  facilityType: 1
+  displayName: "\uD150\uD2B8"
+  description: "\uAE30\uCD08\uC801\uC778 \uD150\uD2B8\uC785\uB2C8\uB2E4. "
+  defaultActive: 1
+  requiredRunCount: 0
+  isUpgradedFacility: 0
+  upgradeFacility: {fileID: 11400000, guid: 285761032c5046daa9083b2e700dca54, type: 2}
+  upgradeRequiredExp: 300

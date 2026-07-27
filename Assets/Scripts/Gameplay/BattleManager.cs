@@ -49,6 +49,7 @@ public class BattleManager : MonoBehaviour
     public IReadOnlyList<CardData>      Hand    => _state?.Hand    ?? new List<CardData>();
     public IReadOnlyList<EnemyInstance> Enemies => _state?.Enemies ?? new List<EnemyInstance>();
 
+    public event Action         OnBattleStarted; // StartBattle() 끝에서 1회 발화 — 씬을 갈아끼우지 않고 화면을 SetActive로만 전환하는 구조라, 전투 UI는 Start/OnEnable 대신 이 이벤트로 매 전투 진입을 감지해야 한다 (PartyView 참고)
     public event Action         OnHandChanged;
     public event Action         OnEnemiesChanged;
     public event Action<BattleReward> OnBattleVictory;
@@ -93,6 +94,7 @@ public class BattleManager : MonoBehaviour
         SetupEnemies(enemyDataList);
         SetupBattleDeck(masterDeck);
         _state.Player.OnDied += Defeat;
+        OnBattleStarted?.Invoke();
         OnEnemiesChanged?.Invoke();
 
         _isInBattle = true;

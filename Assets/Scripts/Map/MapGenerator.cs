@@ -9,15 +9,10 @@ public static class MapGenerator
     public static MapData Generate(MapConfig config)
     {
         int seed = new System.Random().Next(int.MinValue, int.MaxValue);
-        return Generate(config, seed, 1);
+        return Generate(config, seed);
     }
 
     public static MapData Generate(MapConfig config, int seed)
-    {
-        return Generate(config, seed, 1);
-    }
-
-    public static MapData Generate(MapConfig config, int seed, int chapter)
     {
 
         //=========== Phase 0: 초기화 =============== //
@@ -80,15 +75,13 @@ public static class MapGenerator
         });
 
         // 마지막 층: Boss 1개, 가운데 열 고정 (보장 노드 무관. 그건 그냥 시각화용이다.)
-        var bossNode = new MapNode
+        mapData.floors[config.totalFloors - 1].Add(new MapNode
         {
             nodeType   = NodeType.Boss,
             floorIndex = lastFloor,
             nodeIndex  = 0,
             column     = centerCol
-        };
-        AssignEncounter(bossNode, config, chapter, lastFloor, rng);
-        mapData.floors[config.totalFloors - 1].Add(bossNode);
+        });
 
 
 
@@ -165,7 +158,8 @@ public static class MapGenerator
                     nodeIndex  = n,
                     column     = columns[n]
                 };
-                AssignEncounter(node, config, chapter, f, rng);
+                // 조우는 더 이상 노드에 박지 않는다 — 런 시작 시 EncounterQueueBuilder가
+                // "전투 순서" 큐로 생성하고, 전투 진입마다 소비한다(RunData 참고).
                 mapData.floors[f].Add(node);
             }
         }
@@ -411,79 +405,6 @@ public static class MapGenerator
         }
 
         return NodeType.Combat; // 부동소수점 오차 보정
-    }
-
-    private static void AssignEncounter(MapNode node, MapConfig config, int chapter, int floorIndex, System.Random rng)
-    {
-        if (!TryGetEncounterType(node.nodeType, out var encounterType))
-            return;
-        if (config.enemyEncounters == null)
-            return;
-
-        var candidates = new List<EnemyEncounter>();
-        foreach (var encounter in config.enemyEncounters)
-        {
-            if (encounter == null) continue;
-            if (encounter.chapter != chapter) continue;
-            if (floorIndex < encounter.minFloor || floorIndex > encounter.maxFloor) continue;
-            if (encounter.encounterType != encounterType) continue;
-            if (encounter.enemies == null || encounter.enemies.Count == 0) continue;
-            if (encounter.weight <= 0f) continue;
-
-            candidates.Add(encounter);
-        }
-
-        var picked = PickWeightedEncounter(candidates, rng);
-        if (picked == null) return;
-
-        foreach (var enemy in picked.enemies)
-        {
-            if (enemy != null)
-                node.encounter.Add(enemy);
-        }
-    }
-
-    private static bool TryGetEncounterType(NodeType nodeType, out EnemyEncounterType encounterType)
-    {
-        switch (nodeType)
-        {
-            case NodeType.Combat:
-                encounterType = EnemyEncounterType.Normal;
-                return true;
-            case NodeType.Elite:
-                encounterType = EnemyEncounterType.Elite;
-                return true;
-            case NodeType.Boss:
-                encounterType = EnemyEncounterType.Boss;
-                return true;
-            default:
-                encounterType = default;
-                return false;
-        }
-    }
-
-    private static EnemyEncounter PickWeightedEncounter(List<EnemyEncounter> candidates, System.Random rng)
-    {
-        if (candidates == null || candidates.Count == 0)
-            return null;
-
-        float totalWeight = 0f;
-        foreach (var candidate in candidates)
-            totalWeight += candidate.weight;
-
-        if (totalWeight <= 0f)
-            return null;
-
-        float roll = (float)(rng.NextDouble() * totalWeight);
-        float cumulative = 0f;
-        foreach (var candidate in candidates)
-        {
-            cumulative += candidate.weight;
-            if (roll <= cumulative)
-                return candidate;
-        }
-
-        return candidates[candidates.Count - 1];
     }
 
     private static void Shuffle<T>(List<T> list, System.Random rng)

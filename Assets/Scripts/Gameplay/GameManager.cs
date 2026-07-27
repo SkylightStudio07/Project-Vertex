@@ -104,11 +104,18 @@ public class GameManager : MonoBehaviour
             _              => BattleType.Normal,
         };
 
-        // 노드에 조우가 할당돼 있으면 그걸 쓰고, 없으면 Inspector 기본값(currentEnemies) 사용
-        var node = RunData.Instance.CurrentNode;
-        var enemies = (node?.encounter != null && node.encounter.Count > 0)
-            ? node.encounter
-            : currentEnemies;
+        // 조우는 노드에 박힌 값이 아니라 "몇 번째 전투냐"로 정해지는 소비형 큐에서 꺼낸다.
+        // Combat/Elite는 큐를 소비하고, Boss는 런 시작 때 뽑아둔 고정 조우를 쓴다.
+        // 그 외(런 시작 직후 Blessing 진입 등 비전투 케이스)는 큐를 소비하지 않고 폴백한다.
+        // 큐가 비었거나(풀 미설정) 바닥나면 Inspector 기본값(currentEnemies)로 폴백.
+        EnemyData pulled = RunData.Instance.CurrentNodeType switch
+        {
+            NodeType.Combat => RunData.Instance.PullNextCombatEncounter(),
+            NodeType.Elite  => RunData.Instance.PullNextEliteEncounter(),
+            NodeType.Boss   => RunData.Instance.bossEncounter,
+            _               => null,
+        };
+        var enemies = pulled != null ? new List<EnemyData> { pulled } : currentEnemies;
 
         // 전투 RNG 시드 — 맵 시드를 그대로 쓰면 런 내 모든 전투가 같은 난수열(같은 셔플 스트림)을 공유한다.
         // 노드 좌표를 섞어 전투마다 다른 스트림을 쓰되, 같은 노드 재진입은 같은 전투가 되도록 결정론 유지.
