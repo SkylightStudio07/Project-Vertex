@@ -192,6 +192,9 @@ public class MapUIController : MonoBehaviour
             case NodeType.Sanctuary:
                 OpenSanctuary();
                 break;
+            case NodeType.Shop:
+                OpenShop(node);
+                break;
             default:
                 Debug.Log($"[Map] 노드 타입 {node.nodeType} — 미구현");
                 break;
@@ -239,5 +242,12 @@ public class MapUIController : MonoBehaviour
 
         selectCoopCharUI.gameObject.SetActive(true);
         selectCoopCharUI.Init();
+    }
+
+    private void OpenShop(MapNode node)
+    {
+        var shopRng = RunRng.For(RngStream.Shop, node.floorIndex, node.nodeIndex);
+        ShopStock stock = new ShopStock(GameManager.Instance.cardPools, GameManager.Instance.ItemPool, shopRng);
+        Debug.Log($"Shop 재고 생성 :카드 {stock.CardGoods.Count}종, 아이템 {stock.ItemGoods.Count}종");
     }
 }

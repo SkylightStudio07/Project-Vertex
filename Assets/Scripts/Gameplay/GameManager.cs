@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<CardData.CardRarity, List<CardData>> cardPools = new Dictionary<CardData.CardRarity, List<CardData>>();
     // 아이템 보상 풀
     [SerializeField] private List<ItemData> itemPool;
+    public List<ItemData> ItemPool => itemPool;
     // 챕터, 전투 유형 별 카드 보상 확률 데이터
     [SerializeField] private List<RewardProbabilityData> rewardProbabilityTable;
 

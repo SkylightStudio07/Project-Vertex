@@ -3,7 +3,7 @@ using UnityEngine;
 using static CardData;
 using static ItemData;
 
-// 카드&아이템 랜덤 생성 범용 클래스
+// 카드&아이템 랜덤 생성 범용 정적 클래스
 public static class Picker
 {
     // 가중치 기반 카드 레어도 추첨. 가중치 합이 0이면(테이블 미입력) Common 폴백.
@@ -12,7 +12,7 @@ public static class Picker
         int total = commonProb + rareProb + uniqueProb;
         if (total <= 0)
         {
-            Debug.LogWarning($"[RewardPicker] '{context}' 카드 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
+            Debug.LogWarning($"[Picker] '{context}' 카드 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
             return CardRarity.Common;
         }
 
@@ -27,7 +27,7 @@ public static class Picker
         int total = commonProb + uncommonProb + rareProb;
         if (total <= 0)
         {
-            Debug.LogWarning($"[RewardPicker] '{context}' 아이템 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
+            Debug.LogWarning($"[Picker] '{context}' 아이템 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
             return ItemRarity.Common;
         }
 

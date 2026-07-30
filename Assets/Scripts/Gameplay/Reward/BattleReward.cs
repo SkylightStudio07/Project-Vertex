@@ -73,7 +73,7 @@ public class BattleReward
         cardRewards.Clear();
         for (int i = 0; i < numCardReward; i++)
         {
-            CardRarity rarity = Picker.PickCardRarity(rewardData.CommonCardProb, rewardData.RareCardProb, rewardData.UniqueCardProb, random);
+            CardRarity rarity = Picker.PickCardRarity(rewardData.CommonCardProb, rewardData.RareCardProb, rewardData.UniqueCardProb, random, rewardData.name);
             CardData cardData = Picker.PickCard(cardRewardsPool, rarity, random, cardRewards);
 
             if (cardData != null)
@@ -114,7 +114,7 @@ public class BattleReward
             itemReward = null;
             return;
         }
-        ItemRarity rarity = Picker.PickItemRarity(rewardData.CommonItemProb, rewardData.UncommonItemProb, rewardData.RareItemProb, random);
+        ItemRarity rarity = Picker.PickItemRarity(rewardData.CommonItemProb, rewardData.UncommonItemProb, rewardData.RareItemProb, random, rewardData.name);
         ItemGetType getType = GetItemGetType(rewardData.BattleType);
         itemReward = Picker.PickItem(itemRewardsPool, rarity, getType, random);
     }
