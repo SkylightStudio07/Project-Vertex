@@ -67,26 +67,23 @@ public class BattleReward
 
     // 카드 보상 생성 메서드
     // 카드 레어도 결정 -> 해당 레어도 카드 풀에서 카드 선택 -> 카드 보상 리스트에 추가 - 카드 보상 수 만큼 반복
+    // RewardPicker의 카드 데이터 생성 함수 사용
     private void GenerateCardReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
     {
         cardRewards.Clear();
         for (int i = 0; i < numCardReward; i++)
         {
-            CardRarity rarity = GetCardRarity(rewardData);
-
-            // 굴린 레어도의 풀이 비어 있으면 한 단계 낮은 레어도로 폴백.
-            // 예전에 "3장 생성인데 2장만 표시"류 무증상 결함이 있었어서, 조용히 장수가 줄지 않게 한다.
-            CardData cardData = null;
-            for (int r = (int)rarity; r >= (int)CardRarity.Common && cardData == null; r--)
-            {
-                if (cardRewardsPool.TryGetValue((CardRarity)r, out var pool))
-                    cardData = PickCard(pool);
-            }
+            CardRarity rarity = Picker.PickCardRarity(rewardData.CommonCardProb, rewardData.RareCardProb, rewardData.UniqueCardProb, random);
+            CardData cardData = Picker.PickCard(cardRewardsPool, rarity, random, cardRewards);
 
             if (cardData != null)
+            {
                 cardRewards.Add(cardData);
+            }
             else
+            {
                 Debug.LogWarning("[BattleReward] 모든 레어도 풀이 비어 있어 카드 보상을 생성하지 못함. PlayerRewardPool 확인 필요.");
+            }
         }
     }
     private void GenerateGoldReward(BattleType battleType)
@@ -117,18 +114,9 @@ public class BattleReward
             itemReward = null;
             return;
         }
-        ItemRarity rarity = GetItemRarity(rewardData);
+        ItemRarity rarity = Picker.PickItemRarity(rewardData.CommonItemProb, rewardData.UncommonItemProb, rewardData.RareItemProb, random);
         ItemGetType getType = GetItemGetType(rewardData.BattleType);
-        
-        List<ItemData> filteredPool = itemRewardsPool.FindAll(item => item.Rarity == rarity && (item.ItemTypes & getType) != 0);
-
-        if(filteredPool.Count == 0)
-        {
-            itemReward = null;
-            return;
-        }
-
-        itemReward = filteredPool[random.Next(0, filteredPool.Count)];
+        itemReward = Picker.PickItem(itemRewardsPool, rarity, getType, random);
     }
 
     // 아이템 등장 여부 결정
@@ -136,65 +124,6 @@ public class BattleReward
     {
         int roll = random.Next(0, 100);
         return roll < rewardData.ItemProbability;
-    }
-
-    // 레어도 결정 메서드들 - 카드/아이템 각각 확률 데이터에서 확률에 따라 레어도 결정
-    private CardRarity GetCardRarity(RewardProbabilityData rewardData)
-    {
-        int total = rewardData.CommonCardProb + rewardData.RareCardProb + rewardData.UniqueCardProb;
-
-        // 가중치 합 0 = 테이블 미입력. 이전엔 Next(0,0)=0이 분기를 전부 미끄러져
-        // 조용히 Unique로 떨어졌다 (엘리트 테이블 미입력 때 실제 발생) — 명시적으로 잡는다.
-        if (total <= 0)
-        {
-            Debug.LogWarning($"[BattleReward] '{rewardData.name}' 카드 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
-            return CardRarity.Common;
-        }
-
-        int roll = random.Next(0, total);
-
-        if (roll < rewardData.CommonCardProb)
-            return CardRarity.Common;
-        else if (roll < rewardData.CommonCardProb + rewardData.RareCardProb)
-            return CardRarity.Rare;
-        else
-            return CardRarity.Unique;
-    }
-    private ItemRarity GetItemRarity(RewardProbabilityData rewardData)
-    {
-        int total = rewardData.CommonItemProb + rewardData.UncommonItemProb + rewardData.RareItemProb;
-
-        // 카드 쪽 GetCardRarity와 같은 이유의 가드 — 미입력 시 조용히 Rare로 떨어지던 것 방지
-        if (total <= 0)
-        {
-            Debug.LogWarning($"[BattleReward] '{rewardData.name}' 아이템 가중치 합이 0 — 데이터 미입력. Common으로 폴백.");
-            return ItemRarity.Common;
-        }
-
-        int roll = random.Next(0, total);
-
-        if (roll < rewardData.CommonItemProb)
-            return ItemRarity.Common;
-        else if (roll < rewardData.CommonItemProb + rewardData.UncommonItemProb)
-            return ItemRarity.Uncommon;
-        else
-            return ItemRarity.Rare;
-    }
-
-    // 카드 풀에서 카드 선택하는 메서드
-    // 이미 뽑힌 카드를 제외한 후보에서 선택 -> 한 보상 화면에 같은 카드 중복 방지
-    // 후보가 없을 경우(레어도 풀 < 보상 수, 사실상 발생 안 함)에만 중복 허용 폴백 -> 무한 재귀/StackOverflow 방지
-    private CardData PickCard(List<CardData> cardPool)
-    {
-        if (cardPool == null || cardPool.Count == 0)
-            return null;
-
-        List<CardData> availableCards = cardPool.FindAll(card => card != null && !cardRewards.Contains(card));
-        if (availableCards.Count == 0)
-            availableCards = cardPool;
-
-        int index = random.Next(0, availableCards.Count);
-        return availableCards[index];
     }
 
     // BattleType - ItemGetType 매핑 메서드
