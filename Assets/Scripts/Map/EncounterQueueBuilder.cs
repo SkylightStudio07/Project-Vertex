@@ -10,11 +10,11 @@ using System.Collections.Generic;
 public static class EncounterQueueBuilder
 {
     // 일반 전투 큐: 앞의 weakEncounterCount개는 약한 풀에서, 이후는 일반 풀에서 뽑는다.
-    // 직전 조우와 겹치면 재추첨해 같은 적이 연속으로 나오지 않게 한다(anti-repeat).
-    public static List<EnemyData> BuildNormalQueue(MapConfig config, int length, System.Random rng)
+    // 직전 조우와 겹치면 재추첨해 같은 적 구성이 연속으로 나오지 않게 한다(anti-repeat).
+    public static List<EnemyEncounter> BuildNormalQueue(MapConfig config, int length, System.Random rng)
     {
-        var queue = new List<EnemyData>();
-        EnemyData prev = null;
+        var queue = new List<EnemyEncounter>();
+        EnemyEncounter prev = null;
         for (int i = 0; i < length; i++)
         {
             bool useWeak = i < config.weakEncounterCount
@@ -31,10 +31,10 @@ public static class EncounterQueueBuilder
     }
 
     // 엘리트 전투 큐: 약적 우선 개념 없이 엘리트 풀에서만 뽑고, anti-repeat만 적용.
-    public static List<EnemyData> BuildEliteQueue(MapConfig config, int length, System.Random rng)
+    public static List<EnemyEncounter> BuildEliteQueue(MapConfig config, int length, System.Random rng)
     {
-        var queue = new List<EnemyData>();
-        EnemyData prev = null;
+        var queue = new List<EnemyEncounter>();
+        EnemyEncounter prev = null;
         for (int i = 0; i < length; i++)
         {
             var pick = DrawWithAntiRepeat(config.eliteEncounterPool, prev, rng);
@@ -45,14 +45,14 @@ public static class EncounterQueueBuilder
         return queue;
     }
 
-    // 직전 조우(previous)와 같은 적이 뽑히면 다시 뽑는다. 풀 원소가 1개뿐이면 재추첨이 무의미하므로 그대로 반환.
+    // 직전 조우(previous)와 같은 조우가 뽑히면 다시 뽑는다. 풀 원소가 1개뿐이면 재추첨이 무의미하므로 그대로 반환.
     // guard는 사실상 선택지가 하나뿐인 풀에서 무한 루프에 빠지지 않게 하는 안전장치.
-    private static EnemyData DrawWithAntiRepeat(List<EnemyData> pool, EnemyData previous, System.Random rng)
+    private static EnemyEncounter DrawWithAntiRepeat(List<EnemyEncounter> pool, EnemyEncounter previous, System.Random rng)
     {
         if (pool == null || pool.Count == 0) return null;
         if (pool.Count == 1) return pool[0];
 
-        EnemyData pick;
+        EnemyEncounter pick;
         int guard = 0;
         do
         {

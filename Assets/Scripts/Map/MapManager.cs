@@ -25,7 +25,7 @@ public class MapManager : MonoBehaviour
     // 맵을 생성하고 RunData에 저장한 뒤 0층(Blessing)에 배치한다.
     public void InitializeMap(int chapter = 1)
     {
-        MapData mapData = MapGenerator.Generate(mapConfig, new System.Random().Next(int.MinValue, int.MaxValue), chapter);
+        MapData mapData = MapGenerator.Generate(mapConfig, new System.Random().Next(int.MinValue, int.MaxValue));
 
         RunData.Instance.mapData          = mapData;
         RunData.Instance.currentFloor     = 0;

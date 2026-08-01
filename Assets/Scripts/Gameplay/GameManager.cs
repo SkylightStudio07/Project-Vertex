@@ -108,14 +108,16 @@ public class GameManager : MonoBehaviour
         // Combat/Elite는 큐를 소비하고, Boss는 런 시작 때 뽑아둔 고정 조우를 쓴다.
         // 그 외(런 시작 직후 Blessing 진입 등 비전투 케이스)는 큐를 소비하지 않고 폴백한다.
         // 큐가 비었거나(풀 미설정) 바닥나면 Inspector 기본값(currentEnemies)로 폴백.
-        EnemyData pulled = RunData.Instance.CurrentNodeType switch
+        EnemyEncounter pulled = RunData.Instance.CurrentNodeType switch
         {
             NodeType.Combat => RunData.Instance.PullNextCombatEncounter(),
             NodeType.Elite  => RunData.Instance.PullNextEliteEncounter(),
             NodeType.Boss   => RunData.Instance.bossEncounter,
             _               => null,
         };
-        var enemies = pulled != null ? new List<EnemyData> { pulled } : currentEnemies;
+        var enemies = pulled?.enemies != null && pulled.enemies.Count > 0
+            ? pulled.enemies
+            : currentEnemies;
 
         // 전투 RNG 시드 — 맵 시드를 그대로 쓰면 런 내 모든 전투가 같은 난수열(같은 셔플 스트림)을 공유한다.
         // 노드 좌표를 섞어 전투마다 다른 스트림을 쓰되, 같은 노드 재진입은 같은 전투가 되도록 결정론 유지.

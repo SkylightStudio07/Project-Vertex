@@ -27,9 +27,9 @@ public class RunData : MonoBehaviour
     // ── 전투 조우 큐 (런/막 시작 시 생성, 메모리 전용) ──────────────────
     // "몇 번째 전투냐"로 조우를 정하는 소비형 큐. 설계 상세는 EncounterQueueBuilder 참고.
     // [NonSerialized] — 저장하지 않는다(A안: 런은 앱 재시작을 넘겨 이어지지 않음).
-    [System.NonSerialized] public List<EnemyData> normalEncounterQueue = new();
-    [System.NonSerialized] public List<EnemyData> eliteEncounterQueue  = new();
-    [System.NonSerialized] public EnemyData bossEncounter;   // 보스는 런 시작 때 한 번 뽑아 고정
+    [System.NonSerialized] public List<EnemyEncounter> normalEncounterQueue = new();
+    [System.NonSerialized] public List<EnemyEncounter> eliteEncounterQueue  = new();
+    [System.NonSerialized] public EnemyEncounter bossEncounter;   // 보스는 런 시작 때 한 번 뽑아 고정
     [System.NonSerialized] public int combatsFought;         // 소비 인덱스 (일반 전투)
     [System.NonSerialized] public int elitesFought;          // 소비 인덱스 (엘리트)
 
@@ -53,14 +53,14 @@ public class RunData : MonoBehaviour
     }
 
     // 다음 일반 전투 조우를 꺼내고 인덱스를 전진시킨다. 큐가 바닥나면 null(호출측에서 폴백).
-    public EnemyData PullNextCombatEncounter()
+    public EnemyEncounter PullNextCombatEncounter()
     {
         if (normalEncounterQueue == null || combatsFought >= normalEncounterQueue.Count) return null;
         return normalEncounterQueue[combatsFought++];
     }
 
     // 다음 엘리트 조우를 꺼내고 인덱스를 전진시킨다. 큐가 바닥나면 null(호출측에서 폴백).
-    public EnemyData PullNextEliteEncounter()
+    public EnemyEncounter PullNextEliteEncounter()
     {
         if (eliteEncounterQueue == null || elitesFought >= eliteEncounterQueue.Count) return null;
         return eliteEncounterQueue[elitesFought++];
