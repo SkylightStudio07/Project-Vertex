@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: CH_01_C09
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: 0}
+  CardBackground: {fileID: 0}
+  cardType: 0
+  cardRarity: 0
+  cardOwner: 1
+  cardDescription: 
+  useMode: 0
+  isUpgraded: 0
+  normalState:
+    cardName: "\uC0C1\uCC98 \uBC8C\uB9AC\uAE30"
+    energyCost: 0
+    ammoCost: 0
+    effects:
+    - rid: 2470581257654239323
+    - rid: 2470581257654239324
+    isExhaust: 1
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: "\uC0C1\uCC98 \uBC8C\uB9AC\uAE30+"
+    energyCost: 1
+    ammoCost: 0
+    effects:
+    - rid: 2470581257654239325
+    - rid: 2470581257654239326
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 2470581257654239323
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 5
+        hitCount: 1
+        targetType: 1
+        hitInterval: 0.08
+    - rid: 2470581257654239324
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusType: 0
+        operation: 1
+        amount: 2
+        target: 0
+    - rid: 2470581257654239325
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 5
+        hitCount: 1
+        targetType: 1
+        hitInterval: 0.08
+    - rid: 2470581257654239326
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusType: 0
+        operation: 1
+        amount: 2
+        target: 0

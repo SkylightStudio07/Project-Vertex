@@ -16,4 +16,5 @@ public interface IPassiveLogic
     DamageInfo PreviewIncomingDamage(DamageInfo info, BattleState state);
 
     void OnAfterDamageTaken(int actualDamage, BattleState state, ICombatant owner);
+    void OnAfterDamageDealt(int actualDamage, ICombatant target, BattleState state, ICombatant owner);
 }
