@@ -98,7 +98,7 @@ public class ShopStock
             ItemData item = null;
             for (int r = (int)rarity; r >= (int)ItemRarity.Common && item == null; r--)
             {   
-                item = Picker.PickItem(itemPool, rarity, ItemGetType.ShopPurchase, rng, pickedItems);
+                item = Picker.PickItem(itemPool, (ItemRarity)r, ItemGetType.ShopPurchase, rng, pickedItems);
             }
 
             if (item == null)

@@ -63,4 +63,9 @@ public class DeckManager : MonoBehaviour
         PlayerDeck.Add(Instantiate(card));
         Debug.Log("플레이어 덱에 카드 추가완료.");
     }
+
+    public void ViewDeck()
+    {
+        CardListView.Instance?.OpenAsViewer("플레이어 덱", PlayerDeck);
+    }
 }
