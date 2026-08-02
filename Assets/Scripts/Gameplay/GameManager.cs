@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public int PlayerHP    { get; private set; }
 
     [Header("플레이어 골드")]
-    [SerializeField] private int playerGold = 0;
+    [SerializeField] private int playerGold = 100;
     public int PlayerGold
     {
         get => playerGold;

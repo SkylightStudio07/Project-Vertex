@@ -542,6 +542,7 @@ GameObject:
   - component: {fileID: 117956443}
   - component: {fileID: 117956442}
   - component: {fileID: 117956444}
+  - component: {fileID: 117956445}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -579,7 +580,10 @@ MonoBehaviour:
   currentEnemies:
   - {fileID: 11400000, guid: 448b92ffcbce1ba49b466c600e6263ef, type: 2}
   playerRewardPool: {fileID: 11400000, guid: 1abc2608217e25c4d88a264bc9af934c, type: 2}
-  itemPool: []
+  itemPool:
+  - {fileID: 11400000, guid: 02a21998af712674da8558d399e09de0, type: 2}
+  - {fileID: 11400000, guid: 88a6498d93aebe140b42d4ed1416a165, type: 2}
+  - {fileID: 11400000, guid: 4ae6c7a579b7cbd41a0d2faf1cdba8bb, type: 2}
   rewardProbabilityTable:
   - {fileID: 11400000, guid: 1f70f7d092f9d474ca02a07cdca27edc, type: 2}
   - {fileID: 11400000, guid: 2b8494ab46065984680216adcad5e735, type: 2}
@@ -644,6 +648,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 419700ce94a35f14a8825bd4482e3ae8, type: 2}
   restView: {fileID: 1367776488}
   selectCoopCharUI: {fileID: 1868777513}
+  shopView: {fileID: 0}
   floorSpacing: 120
   columnSpacing: 120
   verticalPadding: 80
@@ -693,6 +698,19 @@ MonoBehaviour:
   reloadCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
   strikeCard_Debug: {fileID: 11400000, guid: f0221d85e5bb8564ea4223fa21917bb1, type: 2}
   blockCard_Debug: {fileID: 11400000, guid: 7f61065579b5965468c193e2d9ab8fbb, type: 2}
+--- !u!114 &117956445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117956436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e810204f29d443948b5d189f68f89e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemInventoryManager
+  maxCapacityHint: 3
 --- !u!1 &132138586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,6 +2773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9897fb7794fc95b448346a339467af3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunData
+  cardRemoveCount: 0
   mapData:
     seed: 0
   currentFloor: 0

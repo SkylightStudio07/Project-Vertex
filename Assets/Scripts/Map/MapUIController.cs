@@ -23,6 +23,8 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private RestView restView;
     [Header("성소")]
     [SerializeField] private SelectCoopCharUI selectCoopCharUI;
+    [Header("상점")]
+    [SerializeField] private ShopView shopView;
 
     [Header("배치 설정")]
     [SerializeField] private float floorSpacing    = 120f;
@@ -248,6 +250,6 @@ public class MapUIController : MonoBehaviour
     {
         var shopRng = RunRng.For(RngStream.Shop, node.floorIndex, node.nodeIndex);
         ShopStock stock = new ShopStock(GameManager.Instance.cardPools, GameManager.Instance.ItemPool, shopRng);
-        Debug.Log($"Shop 재고 생성 :카드 {stock.CardGoods.Count}종, 아이템 {stock.ItemGoods.Count}종");
+        shopView.Open(stock);
     }
 }

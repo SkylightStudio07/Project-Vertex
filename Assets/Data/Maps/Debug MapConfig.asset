@@ -36,13 +36,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 448b92ffcbce1ba49b466c600e6263ef, type: 2}
   eliteEncounterPool: []
   bossEncounterPool: []
+  weakEncounterPool: []
+  weakEncounterCount: 3
   guaranteedNodes:
   - floorIndex: 0
     nodeType: 8
   - floorIndex: 1
     nodeType: 0
   - floorIndex: 2
-    nodeType: 7
+    nodeType: 2
   - floorIndex: 9
     nodeType: 6
   - floorIndex: 14

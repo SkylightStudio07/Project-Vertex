@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -21,10 +20,12 @@ public class CardListView : MonoBehaviour
     // 선택 모드에서 카드를 고르면 호출. 보기 전용이면 null.
     private Action<CardData> onCardSelected;
     // 목록에 띄우되 선택은 막을 카드 판별식 (예: 제거 불가 카드). null이면 전부 선택 가능.
-    // 근데 애초에 선택이 안되는 카드는 애초에 리스트에 안띄우는 방식이지 않나 싶긴한데 일단 구현함
+    // 근데 애초에 선택이 안되는 카드는 애초에 리스트에 뜨지 않는 방식이지 않나 싶긴한데 일단 구현함
     private Predicate<CardData> selectableFilter;
 
     private List<CardListEntry> cardEntries = new();
+
+    private bool closeOnSelect = true;
 
     private void Awake()
     {
@@ -37,14 +38,15 @@ public class CardListView : MonoBehaviour
     // 보기 전용 — 덱 확인, 뽑을/버린 카드 더미 확인
     public void OpenAsViewer(string title, IReadOnlyList<CardData> cards)
     { 
-        Open(title, cards, null, null, canClose: true); 
+        Open(title, cards, null, null, canClose: true, closeOnSelect: true); 
     }
     // 선택 모드 — 카드 제거, 강화 등
     // 카드 선택 후 onCardSelected 호출
     // canClose가 false면 선택 후 반드시 onCardSelected 호출해야 닫힘. (취소 버튼 없음)
-    public void OpenAsSelector(string title, IReadOnlyList<CardData> cards, Action<CardData> onCardSelected, Predicate<CardData> selectableFilter = null, bool canClose = true)
+    public void OpenAsSelector(string title, IReadOnlyList<CardData> cards, Action<CardData> onCardSelected, 
+        Predicate<CardData> selectableFilter = null, bool canClose = true, bool closeOnSelect = true)
     {
-        Open(title, cards, onCardSelected, selectableFilter, canClose);
+        Open(title, cards, onCardSelected, selectableFilter, canClose, closeOnSelect);
     }
 
     private void Refresh(IReadOnlyList<CardData> cards)
@@ -83,11 +85,22 @@ public class CardListView : MonoBehaviour
     }
     private void HandleCardClicked(CardData card)
     {
+        if (closeOnSelect)
+        {
+            // Close()가 콜백 참조를 비우므로 먼저 잡아둔다
+            var callback = onCardSelected;
+            Close();
+            callback?.Invoke(card);
+            return;
+        }
+
+        // 목록을 유지한 채 콜백만 호출 — 확인 UI가 이 목록 위에 뜬다.
+        // 취소 시 목록이 그대로 남아 다른 카드를 고를 수 있다.
         onCardSelected?.Invoke(card);
-        Close();
     }
 
-    private void Open(string title, IReadOnlyList<CardData> cards, Action<CardData> onCardSelected, Predicate<CardData> selectableFilter, bool canClose)
+    private void Open(string title, IReadOnlyList<CardData> cards, Action<CardData> onCardSelected, 
+        Predicate<CardData> selectableFilter, bool canClose, bool closeOnSelect)
     {
         if(panel == null || cardPrefab == null || cardContainer == null)
         {
@@ -96,6 +109,7 @@ public class CardListView : MonoBehaviour
 
         this.onCardSelected = onCardSelected;
         this.selectableFilter = selectableFilter;
+        this.closeOnSelect = closeOnSelect;
 
         if (titleText != null) titleText.text = title;
         if (closeButton != null) closeButton.gameObject.SetActive(canClose);
