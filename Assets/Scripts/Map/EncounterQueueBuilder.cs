@@ -9,7 +9,7 @@ using System.Collections.Generic;
 // 넘겨 이어지지 않으므로(A안) 직렬화하지 않는다.
 public static class EncounterQueueBuilder
 {
-    // 일반 전투 큐: 앞의 weakEncounterCount개는 약한 풀에서, 이후는 일반 풀에서 뽑는다.
+    // 일반 전투 큐: 앞의 weakEncounterCount개는 약한 풀에서, 이후는 일반 풀에서 가중치 추첨한다.
     // 직전 조우와 겹치면 재추첨해 같은 적 구성이 연속으로 나오지 않게 한다(anti-repeat).
     public static List<EnemyEncounter> BuildNormalQueue(MapConfig config, int length, System.Random rng)
     {
@@ -30,7 +30,7 @@ public static class EncounterQueueBuilder
         return queue;
     }
 
-    // 엘리트 전투 큐: 약적 우선 개념 없이 엘리트 풀에서만 뽑고, anti-repeat만 적용.
+    // 엘리트 전투 큐: 약적 우선 개념 없이 엘리트 풀에서 가중치 추첨하고 anti-repeat를 적용한다.
     public static List<EnemyEncounter> BuildEliteQueue(MapConfig config, int length, System.Random rng)
     {
         var queue = new List<EnemyEncounter>();
@@ -45,20 +45,51 @@ public static class EncounterQueueBuilder
         return queue;
     }
 
-    // 직전 조우(previous)와 같은 조우가 뽑히면 다시 뽑는다. 풀 원소가 1개뿐이면 재추첨이 무의미하므로 그대로 반환.
-    // guard는 사실상 선택지가 하나뿐인 풀에서 무한 루프에 빠지지 않게 하는 안전장치.
+    public static EnemyEncounter PickBossEncounter(MapConfig config, System.Random rng)
+    {
+        return DrawWeighted(config.bossEncounterPool, rng);
+    }
+
+    // 직전 조우(previous)와 같은 조우가 뽑히면 다시 뽑는다.
+    // guard는 가중치가 양수인 선택지가 사실상 하나뿐일 때 무한 루프에 빠지지 않게 하는 안전장치다.
     private static EnemyEncounter DrawWithAntiRepeat(List<EnemyEncounter> pool, EnemyEncounter previous, System.Random rng)
     {
-        if (pool == null || pool.Count == 0) return null;
-        if (pool.Count == 1) return pool[0];
-
         EnemyEncounter pick;
         int guard = 0;
         do
         {
-            pick = pool[rng.Next(0, pool.Count)];
+            pick = DrawWeighted(pool, rng);
+            if (pick == null) return null;
         }
         while (pick == previous && ++guard < 10);
         return pick;
+    }
+
+    private static EnemyEncounter DrawWeighted(List<EnemyEncounter> pool, System.Random rng)
+    {
+        if (pool == null || pool.Count == 0) return null;
+
+        double totalWeight = 0d;
+        EnemyEncounter lastEligible = null;
+        foreach (var encounter in pool)
+        {
+            if (encounter == null || encounter.weight <= 0f) continue;
+            totalWeight += encounter.weight;
+            lastEligible = encounter;
+        }
+
+        if (lastEligible == null || totalWeight <= 0d) return null;
+
+        double roll = rng.NextDouble() * totalWeight;
+        double cumulativeWeight = 0d;
+        foreach (var encounter in pool)
+        {
+            if (encounter == null || encounter.weight <= 0f) continue;
+            cumulativeWeight += encounter.weight;
+            if (roll < cumulativeWeight)
+                return encounter;
+        }
+
+        return lastEligible;
     }
 }

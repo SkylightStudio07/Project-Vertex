@@ -44,9 +44,7 @@ public class RunData : MonoBehaviour
 
         normalEncounterQueue = EncounterQueueBuilder.BuildNormalQueue(config, length, rng);
         eliteEncounterQueue  = EncounterQueueBuilder.BuildEliteQueue(config, length, rng);
-        bossEncounter = (config.bossEncounterPool != null && config.bossEncounterPool.Count > 0)
-            ? config.bossEncounterPool[rng.Next(0, config.bossEncounterPool.Count)]
-            : null;
+        bossEncounter        = EncounterQueueBuilder.PickBossEncounter(config, rng);
 
         combatsFought = 0;
         elitesFought  = 0;
