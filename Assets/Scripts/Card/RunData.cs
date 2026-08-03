@@ -36,15 +36,15 @@ public class RunData : MonoBehaviour
     // 런(막) 시작 시 호출 — 맵 시드에서 조우 큐를 새로 뽑고 소비 카운터를 0으로 초기화한다.
     // 맵 시드가 세팅된 뒤(MapManager.InitializeMap) 불려야 한다.
     // 막(Act) 개념이 생기면 막 전환 시점에 다시 호출해 큐를 갈아끼우면 된다.
-    public void BuildEncounterQueues(MapConfig config)
+    public void BuildEncounterQueues(MapConfig config, int chapter)
     {
         // 다른 난수 스트림과 겹치지 않도록 Encounter salt로 시드를 분리한다(RunRng 참고).
         var rng = new System.Random(SeedUtil.Mix(mapData.seed, 0, 0, (int)RngStream.Encounter));
         int length = config.totalFloors; // 한 런에서 치를 수 있는 전투 수 상한(층당 최대 1전투)
 
-        normalEncounterQueue = EncounterQueueBuilder.BuildNormalQueue(config, length, rng);
-        eliteEncounterQueue  = EncounterQueueBuilder.BuildEliteQueue(config, length, rng);
-        bossEncounter        = EncounterQueueBuilder.PickBossEncounter(config, rng);
+        normalEncounterQueue = EncounterQueueBuilder.BuildNormalQueue(config, chapter, length, rng);
+        eliteEncounterQueue  = EncounterQueueBuilder.BuildEliteQueue(config, chapter, length, rng);
+        bossEncounter        = EncounterQueueBuilder.PickBossEncounter(config, chapter, rng);
 
         combatsFought = 0;
         elitesFought  = 0;

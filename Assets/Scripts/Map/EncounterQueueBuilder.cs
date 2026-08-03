@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 // 런 시작 시 전투 조우 "순서"를 미리 뽑아 큐로 만들어 두는 생성기.
 // 노드에 적을 박아두던 방식(옛 MapGenerator.AssignEncounter)을 대체한다 —
@@ -11,16 +12,17 @@ public static class EncounterQueueBuilder
 {
     // 일반 전투 큐: 앞의 weakEncounterCount개는 약한 풀에서, 이후는 일반 풀에서 가중치 추첨한다.
     // 직전 조우와 겹치면 재추첨해 같은 적 구성이 연속으로 나오지 않게 한다(anti-repeat).
-    public static List<EnemyEncounter> BuildNormalQueue(MapConfig config, int length, System.Random rng)
+    public static List<EnemyEncounter> BuildNormalQueue(MapConfig config, int chapter, int length, System.Random rng)
     {
+        var weakPool = FilterByChapter(config.weakEncounterPool, chapter);
+        var normalPool = FilterByChapter(config.normalEncounterPool, chapter);
         var queue = new List<EnemyEncounter>();
         EnemyEncounter prev = null;
         for (int i = 0; i < length; i++)
         {
             bool useWeak = i < config.weakEncounterCount
-                        && config.weakEncounterPool != null
-                        && config.weakEncounterPool.Count > 0;
-            var pool = useWeak ? config.weakEncounterPool : config.normalEncounterPool;
+                        && weakPool.Count > 0;
+            var pool = useWeak ? weakPool : normalPool;
 
             var pick = DrawWithAntiRepeat(pool, prev, rng);
             if (pick == null) break; // 풀이 비어 있으면 거기서 큐 생성을 멈춘다 (소비 시 currentEnemies로 폴백)
@@ -31,13 +33,14 @@ public static class EncounterQueueBuilder
     }
 
     // 엘리트 전투 큐: 약적 우선 개념 없이 엘리트 풀에서 가중치 추첨하고 anti-repeat를 적용한다.
-    public static List<EnemyEncounter> BuildEliteQueue(MapConfig config, int length, System.Random rng)
+    public static List<EnemyEncounter> BuildEliteQueue(MapConfig config, int chapter, int length, System.Random rng)
     {
+        var elitePool = FilterByChapter(config.eliteEncounterPool, chapter);
         var queue = new List<EnemyEncounter>();
         EnemyEncounter prev = null;
         for (int i = 0; i < length; i++)
         {
-            var pick = DrawWithAntiRepeat(config.eliteEncounterPool, prev, rng);
+            var pick = DrawWithAntiRepeat(elitePool, prev, rng);
             if (pick == null) break;
             queue.Add(pick);
             prev = pick;
@@ -45,9 +48,18 @@ public static class EncounterQueueBuilder
         return queue;
     }
 
-    public static EnemyEncounter PickBossEncounter(MapConfig config, System.Random rng)
+    public static EnemyEncounter PickBossEncounter(MapConfig config, int chapter, System.Random rng)
     {
-        return DrawWeighted(config.bossEncounterPool, rng);
+        var bossPool = FilterByChapter(config.bossEncounterPool, chapter);
+        return DrawWeighted(bossPool, rng);
+    }
+
+    private static List<EnemyEncounter> FilterByChapter(List<EnemyEncounter> pool, int chapter)
+    {
+        return pool?
+            .Where(encounter => encounter != null && encounter.chapter == chapter)
+            .ToList()
+            ?? new List<EnemyEncounter>();
     }
 
     // 직전 조우(previous)와 같은 조우가 뽑히면 다시 뽑는다.
