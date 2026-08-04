@@ -17,7 +17,8 @@ MonoBehaviour:
   cardType: 0
   cardRarity: 0
   cardOwner: 1
-  cardDescription: 
+  cardDescription: "{0.targetType}\uC5D0\uAC8C {0.amount}\uC758 \uB370\uBBF8\uC9C0\uB97C
+    \uC8FC\uACE0 {1.statusType}\uB97C {1.amount} \uBD80\uC5EC\uD55C\uB2E4. \uC18C\uBA78"
   useMode: 1
   isUpgraded: 0
   normalState:
@@ -38,7 +39,7 @@ MonoBehaviour:
     effects:
     - rid: 2470581257654239321
     - rid: 2470581257654239322
-    isExhaust: 0
+    isExhaust: 1
     isEthereal: 0
     isInnate: 0
     isRetain: 0

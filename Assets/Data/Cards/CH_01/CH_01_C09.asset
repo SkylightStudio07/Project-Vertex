@@ -17,12 +17,14 @@ MonoBehaviour:
   cardType: 0
   cardRarity: 0
   cardOwner: 1
-  cardDescription: 
-  useMode: 0
+  cardDescription: "{0.targetType}\uC5D0\uAC8C \uD53C\uD574\uB97C {0.amount} \uC8FC\uACE0
+    {0.targetType}\uC5D0\uAC8C \uAC78\uB9B0 {1.statusType}\uB97C {1.amount}\uBC30\uB85C
+    \uB9CC\uB4E0\uB2E4. \uC18C\uBA78"
+  useMode: 1
   isUpgraded: 0
   normalState:
     cardName: "\uC0C1\uCC98 \uBC8C\uB9AC\uAE30"
-    energyCost: 0
+    energyCost: 2
     ammoCost: 0
     effects:
     - rid: 2470581257654239323
@@ -60,7 +62,7 @@ MonoBehaviour:
         statusType: 0
         operation: 1
         amount: 2
-        target: 0
+        target: 1
     - rid: 2470581257654239325
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -74,4 +76,4 @@ MonoBehaviour:
         statusType: 0
         operation: 1
         amount: 2
-        target: 0
+        target: 1

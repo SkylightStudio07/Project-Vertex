@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: 0}
   CardBackground: {fileID: 0}
-  cardType: 0
+  cardType: 2
   cardRarity: 0
   cardOwner: 0
   cardDescription: "\uC801\uC744 \uD0C0\uACA9\uD560 \uB54C \uB9C8\uB2E4 {0.statusType}\uB97C
@@ -23,7 +23,7 @@ MonoBehaviour:
   isUpgraded: 0
   normalState:
     cardName: "\uC810\uD608"
-    energyCost: 10
+    energyCost: 3
     ammoCost: 0
     effects:
     - rid: 2470581257654239329
@@ -33,7 +33,7 @@ MonoBehaviour:
     isRetain: 0
   upgradedState:
     cardName: "\uC810\uD608+"
-    energyCost: 9
+    energyCost: 2
     ammoCost: 0
     effects:
     - rid: 2470581257654239330

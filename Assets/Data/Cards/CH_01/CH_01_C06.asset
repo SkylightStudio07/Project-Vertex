@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 1
   cardOwner: 1
-  cardDescription: "\uC0C1\uB300\uBC29\uC758 \uCCB4\uB825\uC744 \uAC10\uC18C\uC2DC\uD0AC
+  cardDescription: "\uC120\uD0DD\uD55C \uC801\uC758 \uCCB4\uB825\uC744 \uAC10\uC18C\uC2DC\uD0AC
     \uB54C \uB9C8\uB2E4 \uCCB4\uB825\uC744 {0.amount} \uD68C\uBCF5\uD55C\uB2E4."
   useMode: 1
   isUpgraded: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     isRetain: 0
   upgradedState:
     cardName: "\uCC29\uD608+"
-    energyCost: 2
+    energyCost: 1
     ammoCost: 0
     effects:
     - rid: 2470581257654239315
@@ -63,4 +63,4 @@ MonoBehaviour:
     - rid: 2470581257654239316
       type: {class: HealEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 3
+        amount: 5

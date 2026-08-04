@@ -18,8 +18,8 @@ MonoBehaviour:
   cardRarity: 1
   cardOwner: 1
   cardDescription: "\uCCB4\uB825\uC744 {0.amount}\uB97C \uD68C\uBCF5\uD55C\uB2E4.
-    \uC774\uBC88 \uD134\uC5D0 \uCCB4\uB825\uC744 \uC783\uC5C8\uB2E4\uBA74 \uCCB4\uB825\uC744
-    \uCD94\uAC00\uB85C {0.amount} \uD68C\uBCF5\uD55C\uB2E4.  \uC18C\uBA78"
+    {1.condition}\uC774\uB77C\uBA74 \uCCB4\uB825\uC744 \uCD94\uAC00\uB85C {0.amount}
+    \uD68C\uBCF5\uD55C\uB2E4.  \uC18C\uBA78"
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -34,11 +34,12 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: 
+    cardName: "\uD608\uC561\uD329+"
     energyCost: 2
     ammoCost: 0
     effects:
     - rid: 2470581146967605258
+    - rid: 652272181589573633
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -48,6 +49,21 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 652272181589573633
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 652272181589573634
+        effectsWhenMet:
+        - rid: 652272181589573635
+    - rid: 652272181589573634
+      type: {class: PlayerLostHpThisTurnCondition, ns: , asm: Assembly-CSharp}
+      data:
+        expected: 1
+    - rid: 652272181589573635
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 5
     - rid: 2470581146967605257
       type: {class: HealEffect, ns: , asm: Assembly-CSharp}
       data:
