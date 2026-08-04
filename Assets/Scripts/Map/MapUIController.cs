@@ -23,6 +23,8 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private RestView restView;
     [Header("성소")]
     [SerializeField] private SelectCoopCharUI selectCoopCharUI;
+    [Header("상점")]
+    [SerializeField] private ShopView shopView;
 
     [Header("배치 설정")]
     [SerializeField] private float floorSpacing    = 120f;
@@ -192,6 +194,9 @@ public class MapUIController : MonoBehaviour
             case NodeType.Sanctuary:
                 OpenSanctuary();
                 break;
+            case NodeType.Shop:
+                OpenShop(node);
+                break;
             default:
                 Debug.Log($"[Map] 노드 타입 {node.nodeType} — 미구현");
                 break;
@@ -239,5 +244,12 @@ public class MapUIController : MonoBehaviour
 
         selectCoopCharUI.gameObject.SetActive(true);
         selectCoopCharUI.Init();
+    }
+
+    private void OpenShop(MapNode node)
+    {
+        var shopRng = RunRng.For(RngStream.Shop, node.floorIndex, node.nodeIndex);
+        ShopStock stock = new ShopStock(GameManager.Instance.cardPools, GameManager.Instance.ItemPool, shopRng);
+        shopView.Open(stock);
     }
 }
