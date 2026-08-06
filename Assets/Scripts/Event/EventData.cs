@@ -22,6 +22,22 @@ public class EventData : ScriptableObject
     // dialogueJson이 있으면 그쪽 DialogueView의 캐릭터 슬롯을 쓰므로 이 필드는 선택 사항 —
     // 비워두면 그냥 표시 안 됨(배경만 남음), 기존 이벤트엔 영향 없음.
     public Sprite illustration;
+
+    // JSON의 choices[] 개수와 choiceEffects 개수가 어긋나면 인덱스가 밀려서 엉뚱한 선택지에
+    // 엉뚱한 효과가 실행된다(에러 없이 조용히). 저장/인스펙터 수정 시마다 자동 체크해서 경고.
+    private void OnValidate()
+    {
+        if (eventJson == null || choiceEffects == null) return;
+
+        EventJsonData json;
+        try { json = JsonUtility.FromJson<EventJsonData>(eventJson.text); }
+        catch { return; } // 작성 중인 JSON이 일시적으로 깨진 상태일 수 있으니 파싱 실패는 조용히 무시
+
+        if (json?.choices == null) return;
+
+        if (json.choices.Length != choiceEffects.Count)
+            Debug.LogWarning($"[EventData] '{name}': JSON 선택지 수({json.choices.Length})와 choiceEffects 수({choiceEffects.Count})가 다름 — 인덱스가 밀려서 엉뚱한 선택지에 엉뚱한 효과가 실행될 수 있음.");
+    }
 }
 
 // 여기서 선택지별 효과 처리.

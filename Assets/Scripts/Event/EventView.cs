@@ -33,6 +33,7 @@ public class EventView : MonoBehaviour
     [SerializeField] private Button choiceButtonPrefab;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button textAdvanceButton; // description/resultText 공용 페이지 진행 버튼
+    [SerializeField] private float typewriterCharsPerSecond = 40f; // 0 이하면 즉시 전체 표시(연출 끄기)
 
     [Header("참조 - 다이얼로그 뷰 없어도 정상 작동")]
     [SerializeField] private MapUIController mapUIController;
@@ -47,6 +48,7 @@ public class EventView : MonoBehaviour
     private string[] _pages;
     private int _pageIndex;
     private Action _onPagesComplete;
+    private TypewriterPrinter typewriter;
 
     private void Awake()
     {
@@ -57,6 +59,7 @@ public class EventView : MonoBehaviour
         Instance = this;
         continueButton.onClick.AddListener(OnContinueClicked);
         textAdvanceButton.onClick.AddListener(OnTextAdvanceClicked);
+        typewriter = new TypewriterPrinter(this);
     }
 
     // 선택지 표시 중(advanceButton 비활성)에는 키보드 입력을 무시 — DialogueView.Update()와 동일한 관례.
@@ -148,12 +151,14 @@ public class EventView : MonoBehaviour
             return;
         }
 
-        _pageTarget.text = _pages[_pageIndex];
+        typewriter.Play(_pageTarget, _pages[_pageIndex], typewriterCharsPerSecond);
         textAdvanceButton.gameObject.SetActive(true);
     }
 
     private void OnTextAdvanceClicked()
     {
+        if (typewriter.CompleteImmediately()) return; // 타이핑 중이었으면 이번 클릭은 완성 처리로 소비
+
         _pageIndex++;
         if (_pages == null || _pageIndex >= _pages.Length)
         {
