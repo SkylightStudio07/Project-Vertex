@@ -49,8 +49,13 @@ public class BattleManager : MonoBehaviour
     public IReadOnlyList<CardData>      Hand    => _state?.Hand    ?? new List<CardData>();
     public IReadOnlyList<EnemyInstance> Enemies => _state?.Enemies ?? new List<EnemyInstance>();
 
+    public event Action         OnBattleStarted; // StartBattle() 끝에서 1회 발화 — 씬을 갈아끼우지 않고 화면을 SetActive로만 전환하는 구조라, 전투 UI는 Start/OnEnable 대신 이 이벤트로 매 전투 진입을 감지해야 한다 (PartyView 참고)
     public event Action         OnHandChanged;
     public event Action         OnEnemiesChanged;
+    // 플레이어가 카드를 실제로 사용한 시점(비용 차감 직후, 이펙트 실행 직전)에 발화.
+    // 데미지 적용을 기다리지 않는 "구경용" 연출(PoseSequencePlayer 등)을 병행 재생하는 용도 —
+    // 구독 쪽에서 결과를 기다리지 않고 그냥 재생만 하면 된다.
+    public event Action<CardData> OnCardPlayed;
     public event Action<BattleReward> OnBattleVictory;
     public event Action         OnBattleDefeat;
 
@@ -93,6 +98,7 @@ public class BattleManager : MonoBehaviour
         SetupEnemies(enemyDataList);
         SetupBattleDeck(masterDeck);
         _state.Player.OnDied += Defeat;
+        OnBattleStarted?.Invoke();
         _state.Player.OnDamaged += HandlePlayerDamaged;
         OnEnemiesChanged?.Invoke();
 
@@ -111,7 +117,7 @@ public class BattleManager : MonoBehaviour
                 Debug.LogWarning("[BattleManager] enemyDataList에 null 항목이 있어 건너뜀. Inspector 확인 필요.");
                 continue;
             }
-            var enemy = new EnemyInstance(data);
+            var enemy = new EnemyInstance(data, _rnd);
             enemy.OnDied += CheckVictory;
             _state.Enemies.Add(enemy);
         }
@@ -286,6 +292,8 @@ public class BattleManager : MonoBehaviour
         {
             EndHandChangeBatch();
         }
+
+        OnCardPlayed?.Invoke(card);
 
         var ctx = new CardContext
         {
@@ -475,12 +483,12 @@ public class BattleManager : MonoBehaviour
         }
 
         var rewardData = GameManager.Instance.GetRewardProbability(_currentBattleType);
-        // 보상 생성 랜덤값. 노드 위치 기반 고정 시드로 생성 (이벤트 노드와 동일 방식)
-        // → 같은 노드면 항상 같은 보상
-        int rewardSeed = RunData.Instance.mapData.seed
-                         + RunData.Instance.currentFloor * 100
-                         + RunData.Instance.currentNodeIndex;
-        var reward     = new BattleReward(GameManager.Instance.cardPools, rewardData, rewardSeed);
+        // 보상 RNG — 노드 좌표로 재시드된 스트림이라 같은 노드면 항상 같은 보상.
+        // 시드 규칙/스트림 구분은 RunRng에 통합돼 있다.
+        var rewardRng = RunRng.For(RngStream.Reward,
+                                   RunData.Instance.currentFloor,
+                                   RunData.Instance.currentNodeIndex);
+        var reward    = new BattleReward(GameManager.Instance.cardPools, rewardData, rewardRng);
         OnBattleVictory?.Invoke(reward);
         foreach (var e in _state.Enemies)
             e.OnDied -= CheckVictory;

@@ -16,7 +16,14 @@ public class EnemyInstance : ICombatant
     private int _hp;
     private int _block;
     private readonly List<IPassiveLogic> _passives = new();
+
+    // 패턴 진행 인덱스. openingActions가 있으면 우선 그걸 먼저 진행하고, 끝나면 activityPatterns로 넘어감
+    private int _openingIndex;
     private int _patternIndex;
+    // 랜덤 패턴일 때 직전 행동과 다른 것을 뽑기 위한 난수
+    private System.Random _rng;
+    // 적의 현재 인텐트
+    private EnemyAction _action;
 
     public int  HP     => _hp;
     public int  MaxHP  => Data.health;
@@ -32,11 +39,14 @@ public class EnemyInstance : ICombatant
     public event Action      OnIntentChanged; // GetCurrentAction()이 가리키는 행동이 바뀜 (TakeTurn 후)
     public event Action      OnActionStarted; // 행동 실행 직전 발화 — EnemyView가 공격 모션 재생에 사용
 
-    public EnemyInstance(EnemyData data)
+    public EnemyInstance(EnemyData data, System.Random rng = null)
     {
         Data        = data;
         _hp         = data.health;
         EnemySprite = data.enemyImage;
+        _rng = rng ?? new System.Random();
+        // 첫 인텐트 결정
+        DetermineCurrentAction();
     }
 
     // 블록 흡수 → HP 감소. 패시브 배율은 DamageCalculator가 호출 전에 이미 적용함.
@@ -123,13 +133,59 @@ public class EnemyInstance : ICombatant
         if (Data.activityPatterns == null || Data.activityPatterns.Count == 0)
             return null;
 
-        return Data.activityPatterns[_patternIndex % Data.activityPatterns.Count];
+        return _action;
     }
 
     public void AdvancePattern()
     {
-        if (Data.activityPatterns != null && Data.activityPatterns.Count > 0)
+        if(Data.openingActions != null && _openingIndex < Data.openingActions.Count)
+        {
+            _openingIndex++;
+        }
+        else if (Data.activityPatterns != null && Data.activityPatterns.Count > 0 && Data.activityPatternType == EnemyActivityPatternType.Sequential)
             _patternIndex = (_patternIndex + 1) % Data.activityPatterns.Count;
+
+        DetermineCurrentAction();
+    }
+
+    private void DetermineCurrentAction()
+    {
+        if (Data.openingActions != null && _openingIndex < Data.openingActions.Count)
+        {
+            _action = Data.openingActions[_openingIndex];
+            return;
+        }
+
+        var patterns = Data.activityPatterns;
+        if(patterns == null || patterns.Count == 0)
+        {
+            _action = null;
+            return;
+        }
+
+        if (Data.activityPatternType == EnemyActivityPatternType.Random)
+        {
+            _action = GetRandomAction(patterns);
+        }
+        else
+        {
+            _action = patterns[_patternIndex % patterns.Count];
+        }
+    }
+
+    private EnemyAction GetRandomAction(List<EnemyAction> patterns)
+    {
+        if (patterns == null || patterns.Count == 0)
+            return null;
+        if (patterns.Count == 1)
+            return patterns[0];
+
+        // 직전 확정 행동과 다른 것을 우선 뽑아 같은 행동 연속을 완화한다. 전투 시드(_rng)로 결정론 보장.
+        EnemyAction next;
+        int guard = 0;
+        do { next = patterns[_rng.Next(patterns.Count)]; }
+        while (next == _action && ++guard < 16);
+        return next;
     }
 
     // Intent UI에서 공격 수치를 미리 보여주기 위한 헬퍼.

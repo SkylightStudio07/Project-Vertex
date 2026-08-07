@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f054c2d02f411bb02185270ae2410d, type: 3}
+  m_Name: BonfireExpanded
+  m_EditorClassIdentifier: Assembly-CSharp::Facility
+  facilityId: Bonfire
+  facilityType: 2
+  displayName: "\uD655\uC7A5\uB41C \uBAA8\uB2E5\uBD88"
+  description: "\uD569\uB958 \uCE90\uB9AD\uD130\uC640 \uB300\uD654\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
+    \uC870\uAE08 \uB354 \uB9CE\uC740 \uC774\uBCA4\uD2B8\uAC00 \uBC1C\uC0DD\uD569\uB2C8\uB2E4."
+  defaultActive: 1
+  requiredRunCount: 0
+  isUpgradedFacility: 1
+  upgradeFacility: {fileID: 0}
+  upgradeRequiredExp: 0

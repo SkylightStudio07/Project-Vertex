@@ -12,11 +12,20 @@ public class ApplyStatusEffect : CardEffect
     {
         if (context.State == null) return;
 
+        bool isActingEnemy = context.ActingEnemy != null;
+
         switch (target)
         {
             case TargetType.SingleEnemy:
-                if (context.Target != null && !context.Target.IsDead)
+                if (isActingEnemy)
+                {
+                    // 적 입장에서 "단일 대상" = 플레이어
+                    ApplyToPlayer(context.State.Player);
+                }
+                else if (context.Target != null && !context.Target.IsDead)
+                {
                     ApplyToEnemy(context.Target);
+                }
                 break;
 
             case TargetType.AllEnemies:
@@ -30,7 +39,10 @@ public class ApplyStatusEffect : CardEffect
                 break;
 
             case TargetType.Self:
-                ApplyToPlayer(context.State.Player);
+                if (isActingEnemy)
+                    ApplyToEnemy(context.ActingEnemy);
+                else
+                    ApplyToPlayer(context.State.Player);
                 break;
         }
     }

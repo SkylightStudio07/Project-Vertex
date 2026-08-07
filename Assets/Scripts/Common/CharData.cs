@@ -2,24 +2,28 @@ using UnityEngine;
 
 public class CharData : ScriptableObject
 {
-    [Header("Ä³¸¯ÅÍ ±âº» Á¤º¸")]
+    [Header("ìºë¦­í„° ê¸°ë³¸ ì •ë³´")]
     public string charID;
     public string charName;
     public string charDescription;
 
-    [Header("Ä³¸¯ÅÍ ÀÌ¹ÌÁö(ÀÓ½Ã ¿ëÀÓ. ³ªÁß¿£ Addressable.Load·Î ºÒ·¯¿Àµµ·Ï ¼³Á¤)")]
-    public Sprite charImage;
+    [Header("ìºë¦­í„° ì´ë¯¸ì§€(ì„ì‹œ ìƒíƒœ. ë‚˜ì¤‘ì— Addressable.Loadë¡œ ë¶ˆëŸ¬ì˜¤ë„ë¡ ë³€ê²½)")]
+    public Sprite charImage;   // ì´ˆìƒí™”. ì„±ì†Œ ì„ íƒ ë²„íŠ¼, íœ´ì‹ í™”ë©´ ë“± ì•„ì´ì½˜/UIìš©
     public Sprite charIcon;
+    public Sprite standingSprite; // ì „íˆ¬ í™”ë©´ ìŠ¤íƒ ë”©(ì „ì‹ ) ìŠ¤í”„ë¼ì´íŠ¸. charImageì™€ ë³„ê°œ ì•„íŠ¸
 
-    [Header("Ä³¸¯ÅÍ ¾Ö´Ï¸ŞÀÌ¼Ç")]
+    [Header("ìºë¦­í„° ì• ë‹ˆë©”ì´ì…˜")]
     public AnimationClip idleAnim;
     public AnimationClip attackAnim;
     public AnimationClip hitAnim;
     public AnimationClip deathAnim;
 
-    [Header("Ä³¸¯ÅÍ »ç¿îµå")]
+    [Header("ê³µê²© ì—°ì¶œ (í‚¤í”„ë ˆì„ í™€ë“œ ë°©ì‹ â€” PoseSequencePlayer ì°¸ê³ )")]
+    public AttackKeyframe[] attackSequence;
+
+    [Header("ìºë¦­í„° ì‚¬ìš´ë“œ")]
     public AudioClip charSoundEffect;
 
-    [Header("ÆĞ½Ãºê")]
+    [Header("íŒ¨ì‹œë¸Œ")]
     public IPassiveLogic passive;
 }

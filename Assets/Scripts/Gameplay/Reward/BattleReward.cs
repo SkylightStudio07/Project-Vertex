@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 using static CardData;
 using static ItemData;
 
@@ -40,20 +38,28 @@ public class BattleReward
     private ItemData itemReward = null;
     private int numCardReward;
     private readonly List<CardData> cardRewards = new List<CardData>();
-    // 노드 고정 시드로 자체 생성하는 보상 전용 RNG
+    // 보상 전용 RNG — RunRng.For(RngStream.Reward, ...)로 노드 고정 재시드된 것을 주입받는다
     private readonly System.Random random;
 
     public int NumofCardReward => numCardReward;
 
-    public BattleReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, int seed, int numCardReward = 3)
+    public BattleReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData, System.Random rng, int numCardReward = 3)
     {
-        this.random = new System.Random(seed);
+        this.random = rng;
         this.numCardReward = numCardReward;
         GenerateReward(cardRewardsPool, rewardData);
     }
 
     private void GenerateReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
     {
+        // 테이블 누락(GetRewardProbability 폴백까지 실패) 시에도 골드는 지급 — 보상 화면이 완전히 비는 것 방지
+        if (rewardData == null)
+        {
+            Debug.LogError("[BattleReward] RewardProbabilityData가 null — 골드만 지급. 보상 테이블 등록 확인 필요.");
+            GenerateGoldReward(BattleType.Normal);
+            return;
+        }
+
         GenerateCardReward(cardRewardsPool, rewardData);
         GenerateGoldReward(rewardData.BattleType);
         GenerateItemReward(rewardData);
@@ -61,15 +67,23 @@ public class BattleReward
 
     // 카드 보상 생성 메서드
     // 카드 레어도 결정 -> 해당 레어도 카드 풀에서 카드 선택 -> 카드 보상 리스트에 추가 - 카드 보상 수 만큼 반복
+    // RewardPicker의 카드 데이터 생성 함수 사용
     private void GenerateCardReward(Dictionary<CardRarity, List<CardData>> cardRewardsPool, RewardProbabilityData rewardData)
     {
         cardRewards.Clear();
         for (int i = 0; i < numCardReward; i++)
         {
-            CardRarity rarity = GetCardRarity(rewardData);
-            CardData cardData = PickCard(cardRewardsPool[rarity]);
+            CardRarity rarity = Picker.PickCardRarity(rewardData.CommonCardProb, rewardData.RareCardProb, rewardData.UniqueCardProb, random, rewardData.name);
+            CardData cardData = Picker.PickCard(cardRewardsPool, rarity, random, cardRewards);
+
             if (cardData != null)
+            {
                 cardRewards.Add(cardData);
+            }
+            else
+            {
+                Debug.LogWarning("[BattleReward] 모든 레어도 풀이 비어 있어 카드 보상을 생성하지 못함. PlayerRewardPool 확인 필요.");
+            }
         }
     }
     private void GenerateGoldReward(BattleType battleType)
@@ -100,18 +114,9 @@ public class BattleReward
             itemReward = null;
             return;
         }
-        ItemRarity rarity = GetItemRarity(rewardData);
+        ItemRarity rarity = Picker.PickItemRarity(rewardData.CommonItemProb, rewardData.UncommonItemProb, rewardData.RareItemProb, random, rewardData.name);
         ItemGetType getType = GetItemGetType(rewardData.BattleType);
-        
-        List<ItemData> filteredPool = itemRewardsPool.FindAll(item => item.Rarity == rarity && (item.ItemTypes & getType) != 0);
-
-        if(filteredPool.Count == 0)
-        {
-            itemReward = null;
-            return;
-        }
-
-        itemReward = filteredPool[random.Next(0, filteredPool.Count)];
+        itemReward = Picker.PickItem(itemRewardsPool, rarity, getType, random);
     }
 
     // 아이템 등장 여부 결정
@@ -119,48 +124,6 @@ public class BattleReward
     {
         int roll = random.Next(0, 100);
         return roll < rewardData.ItemProbability;
-    }
-
-    // 레어도 결정 메서드들 - 카드/아이템 각각 확률 데이터에서 확률에 따라 레어도 결정
-    private CardRarity GetCardRarity(RewardProbabilityData rewardData)
-    {
-        int total = rewardData.CommonCardProb + rewardData.RareCardProb + rewardData.UniqueCardProb;
-        int roll = random.Next(0, total);
-
-        if (roll < rewardData.CommonCardProb)
-            return CardRarity.Common;
-        else if (roll < rewardData.CommonCardProb + rewardData.RareCardProb)
-            return CardRarity.Rare;
-        else
-            return CardRarity.Unique;
-    }
-    private ItemRarity GetItemRarity(RewardProbabilityData rewardData)
-    {
-        int total = rewardData.CommonItemProb + rewardData.UncommonItemProb + rewardData.RareItemProb;
-        int roll = random.Next(0, total);
-
-        if (roll < rewardData.CommonItemProb)
-            return ItemRarity.Common;
-        else if (roll < rewardData.CommonItemProb + rewardData.UncommonItemProb)
-            return ItemRarity.Uncommon;
-        else
-            return ItemRarity.Rare;
-    }
-
-    // 카드 풀에서 카드 선택하는 메서드
-    // 이미 뽑힌 카드를 제외한 후보에서 선택 -> 한 보상 화면에 같은 카드 중복 방지
-    // 후보가 없을 경우(레어도 풀 < 보상 수, 사실상 발생 안 함)에만 중복 허용 폴백 -> 무한 재귀/StackOverflow 방지
-    private CardData PickCard(List<CardData> cardPool)
-    {
-        if (cardPool == null || cardPool.Count == 0)
-            return null;
-
-        List<CardData> availableCards = cardPool.FindAll(card => card != null && !cardRewards.Contains(card));
-        if (availableCards.Count == 0)
-            availableCards = cardPool;
-
-        int index = random.Next(0, availableCards.Count);
-        return availableCards[index];
     }
 
     // BattleType - ItemGetType 매핑 메서드

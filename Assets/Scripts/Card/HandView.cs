@@ -11,6 +11,8 @@ public class HandView : MonoBehaviour
 {
     [SerializeField] private CardView cardPrefab;    // 카드 프리팹 (CardView 부착된 것)
     [SerializeField] private RectTransform cardContainer; // 카드들이 나열될 부모 Transform
+    // 부채꼴 배치 담당. 비워두면 카드가 부모의 기본 배치(레이아웃 그룹 등)를 그대로 따름.
+    [SerializeField] private HandFanLayout fanLayout;
 
     private void Start()
     {
@@ -32,6 +34,8 @@ public class HandView : MonoBehaviour
 
         // 손패의 각 CardData마다 CardView 생성. 늘 그렇듯 이런 식이 퍼포먼스에 썩 좋을지는 모르겠는데, 달리 대안이 없음.
         IReadOnlyList<CardData> hand = BattleManager.Instance.Hand;
+        var interactionViews = new List<CardInteractionView>(hand.Count);
+
         for (int i = 0; i < hand.Count; i++)
         {
             var view = Instantiate(cardPrefab, cardContainer);
@@ -42,7 +46,12 @@ public class HandView : MonoBehaviour
             {
                 interactionView.SetRestingSortingOrder(i);
                 interactionView.SetTargetingAnchor(cardContainer);
+                interactionViews.Add(interactionView);
             }
         }
+
+        // 카드를 전부 생성한 뒤 한 번에 배치 — 개수(n)를 알아야 부채꼴 간격/각도를 계산할 수 있다.
+        if (fanLayout != null)
+            fanLayout.Arrange(interactionViews);
     }
 }
