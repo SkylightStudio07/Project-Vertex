@@ -99,6 +99,7 @@ public class BattleManager : MonoBehaviour
         SetupBattleDeck(masterDeck);
         _state.Player.OnDied += Defeat;
         OnBattleStarted?.Invoke();
+        _state.Player.OnDamaged += HandlePlayerDamaged;
         OnEnemiesChanged?.Invoke();
 
         _isInBattle = true;
@@ -154,6 +155,7 @@ public class BattleManager : MonoBehaviour
 
         // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
         // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
+        _state.PlayerLostHpThisTurn = false;
         _state.Player.ResetBlock();
 
         BeginHandChangeBatch();
@@ -355,6 +357,12 @@ public class BattleManager : MonoBehaviour
             if (effect != null)
                 yield return StartCoroutine(effect.ExecuteCoroutine(ctx));
         }
+    }
+
+    private void HandlePlayerDamaged(int actualDamage)
+    {
+        if (actualDamage > 0 && _state != null)
+            _state.PlayerLostHpThisTurn = true;
     }
 
     // ─────────────────────────────────────────────

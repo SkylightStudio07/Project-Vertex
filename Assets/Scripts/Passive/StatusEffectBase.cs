@@ -22,6 +22,46 @@ public abstract class StatusEffectBase : IPassiveLogic
         return true;
     }
 
+    public void ReduceMagnitude(int amount)
+    {
+        if (amount <= 0) return;
+
+        if (Stacks > 0)
+            Stacks = Math.Max(0, Stacks - amount);
+        else if (Stacks < 0)
+            Stacks = Math.Min(0, Stacks + amount);
+    }
+
+    public void SetMagnitude(int amount)
+    {
+        amount = Math.Max(0, amount);
+
+        if (Stacks > 0)
+            Stacks = amount;
+        else if (Stacks < 0)
+            Stacks = -amount;
+    }
+
+    public void AddMagnitude(int amount)
+    {
+        if (amount == 0) return;
+
+        if (Stacks > 0)
+            Stacks = Math.Max(0, Stacks + amount);
+        else if (Stacks < 0)
+            Stacks = Math.Min(0, Stacks - amount);
+    }
+
+    public void MultiplyMagnitude(int multiplier)
+    {
+        if (multiplier < 0) return;
+
+        if (Stacks > 0)
+            Stacks *= multiplier;
+        else if (Stacks < 0)
+            Stacks *= multiplier;
+    }
+
     // 매 턴 끝에 스택 1 감소 (Strength처럼 영구 효과는 override해서 막을 것)
     public virtual void TickDown() => Stacks = Math.Max(0, Stacks - 1);
 
@@ -32,6 +72,7 @@ public abstract class StatusEffectBase : IPassiveLogic
     public virtual DamageInfo ModifyOutgoingDamage(DamageInfo info, BattleState state) => info;
     public virtual DamageInfo ModifyIncomingDamage(DamageInfo info, BattleState state) => info;
     public virtual void OnAfterDamageTaken(int actualDamage, BattleState state, ICombatant owner) { }
+    public virtual void OnAfterDamageDealt(int actualDamage, ICombatant target, BattleState state, ICombatant owner) { }
 
     // 표시용 미리보기 — 기본은 Modify 위임.
     // Modify에서 내부 상태를 소모하는 패시브는 반드시 소모 없는 버전으로 override할 것.
