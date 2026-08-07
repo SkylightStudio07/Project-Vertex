@@ -245,9 +245,11 @@ public class MapUIController : MonoBehaviour
         eventView.Open(data);
     }
 
+    // entries/fallbackEvents는 필드 선언 시 기본값(new())이 있어 정상 직렬화 경로로는 null이 되지
+    // 않지만, SO YAML을 수동 편집하는 경우가 잦은 프로젝트라 방어적으로 null도 처리해둔다.
     private static void CollectEligible(EventRosterSO roster, List<EventData> into)
     {
-        if (roster == null) return;
+        if (roster == null || roster.entries == null) return;
         foreach (var entry in roster.entries)
             if (entry != null && entry.IsEligible())
                 into.Add(entry.eventData);
@@ -255,7 +257,7 @@ public class MapUIController : MonoBehaviour
 
     private static void CollectFallback(EventRosterSO roster, List<EventData> into)
     {
-        if (roster == null) return;
+        if (roster == null || roster.fallbackEvents == null) return;
         into.AddRange(roster.fallbackEvents);
     }
 

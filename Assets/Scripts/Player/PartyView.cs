@@ -49,6 +49,12 @@ public class PartyView : MonoBehaviour
         }
     }
 
+    // OnCardPlayed는 공격 카드를 낼 때마다(전투 중 빈번히) 불리므로, 설정 미비 경고는
+    // 매번 다시 찍지 않고 한 번만 띄운다 — 안 그러면 콘솔이 같은 경고로 도배돼서 다른 로그를 가린다.
+    private bool warnedMissingPoseSequencer;
+    private bool warnedMissingPlayerCharData;
+    private bool warnedEmptyAttackSequence;
+
     // 공격 카드를 냈을 때 플레이어 스탠딩에 연출을 재생한다. 데미지 적용을 기다리지 않는
     // "구경용" 재생 — 결과와 무관하게 그냥 재생만 하고 끝난다.
     private void OnCardPlayed(CardData card)
@@ -57,17 +63,29 @@ public class PartyView : MonoBehaviour
 
         if (playerPoseSequencer == null)
         {
-            Debug.LogWarning("[PartyView] playerPoseSequencer가 비어있음. Inspector 연결 확인 필요.");
+            if (!warnedMissingPoseSequencer)
+            {
+                Debug.LogWarning("[PartyView] playerPoseSequencer가 비어있음. Inspector 연결 확인 필요.");
+                warnedMissingPoseSequencer = true;
+            }
             return;
         }
         if (playerCharData == null)
         {
-            Debug.LogWarning("[PartyView] playerCharData가 비어있음. Inspector 연결 확인 필요.");
+            if (!warnedMissingPlayerCharData)
+            {
+                Debug.LogWarning("[PartyView] playerCharData가 비어있음. Inspector 연결 확인 필요.");
+                warnedMissingPlayerCharData = true;
+            }
             return;
         }
         if (playerCharData.attackSequence == null || playerCharData.attackSequence.Length == 0)
         {
-            Debug.LogWarning($"[PartyView] '{playerCharData.name}'의 attackSequence가 비어있음.");
+            if (!warnedEmptyAttackSequence)
+            {
+                Debug.LogWarning($"[PartyView] '{playerCharData.name}'의 attackSequence가 비어있음.");
+                warnedEmptyAttackSequence = true;
+            }
             return;
         }
 

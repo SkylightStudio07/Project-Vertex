@@ -14,7 +14,7 @@ public class PoseSequencePlayer : MonoBehaviour
 
     private Sprite restingSprite;
     private Vector2 restingAnchoredPosition;
-    private Vector2 restingScale;
+    private Vector3 restingScale; // localScale은 Vector3 — Vector2로 다루면 대입 시 z가 0으로 날아간다
     private float restingRotation;
     private Vector2 restingSizeDelta;
     private bool hasResting; // restingXxx가 실제 대기 포즈를 담고 있는지(트랜지션 중간값이 아닌지)
@@ -74,11 +74,11 @@ public class PoseSequencePlayer : MonoBehaviour
             if (frame == null) continue;
 
             Vector2 fromPos = rt.anchoredPosition;
-            Vector2 fromScale = rt.localScale;
+            Vector3 fromScale = rt.localScale;
             float fromRot = rt.localEulerAngles.z;
 
             Vector2 toPos = restingAnchoredPosition + frame.positionOffset;
-            Vector2 toScale = Vector2.Scale(restingScale, frame.scale);
+            Vector3 toScale = Vector3.Scale(restingScale, new Vector3(frame.scale.x, frame.scale.y, 1f));
             float toRot = restingRotation + frame.rotation;
 
             if (frame.pose != null)
@@ -109,7 +109,7 @@ public class PoseSequencePlayer : MonoBehaviour
                     t += Time.deltaTime;
                     float p = Mathf.Clamp01(t / frame.moveDuration);
                     rt.anchoredPosition = Vector2.Lerp(fromPos, toPos, p);
-                    rt.localScale = Vector2.Lerp(fromScale, toScale, p);
+                    rt.localScale = Vector3.Lerp(fromScale, toScale, p);
                     rt.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(fromRot, toRot, p));
                     yield return null;
                 }
