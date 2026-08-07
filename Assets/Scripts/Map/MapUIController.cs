@@ -17,7 +17,11 @@ public class MapUIController : MonoBehaviour
 
     [Header("이벤트")]
     [SerializeField] private EventView eventView;
-    [SerializeField] private List<EventData> eventPool;
+    // 모든 챕터에서 공통으로 후보가 되는 로스터. chapter 필드는 무시된다(리스트에 있으면 무조건 합류).
+    [SerializeField] private List<EventRosterSO> commonEventRosters;
+    // 챕터별 이벤트 후보 목록 SO. RewardProbabilityData와 동일하게 챕터별로 리스트에 등록해두고
+    // 런타임에 GameManager.Chapter로 조회한다. (구 버전: eventPool을 씬에 직접 박아두던 방식)
+    [SerializeField] private List<EventRosterSO> eventRosters;
 
     [Header("휴식")]
     [SerializeField] private RestView restView;
@@ -211,16 +215,55 @@ public class MapUIController : MonoBehaviour
             return;
         }
 
-        if (eventPool == null || eventPool.Count == 0)
+        int chapter = GameManager.Instance != null ? GameManager.Instance.Chapter : 1;
+        EventRosterSO chapterRoster = eventRosters?.Find(r => r != null && r.chapter == chapter);
+        if (chapterRoster == null && (commonEventRosters == null || commonEventRosters.Count == 0))
         {
-            Debug.LogWarning("[Map] eventPool이 비어있음.");
+            Debug.LogWarning($"[Map] 챕터 {chapter}에 해당하는 EventRosterSO가 없고, commonEventRosters도 비어있음.");
             return;
         }
 
-        // 노드 위치 기반 재시드로 같은 노드는 항상 같은 이벤트 선택.
+        var eligible = new List<EventData>();
+        CollectEligible(chapterRoster, eligible);
+        if (commonEventRosters != null)
+            foreach (var common in commonEventRosters)
+                CollectEligible(common, eligible);
+
+        // 조건부 이벤트가 전부 미충족이면(공통+챕터 로스터 모두) 무조건 등장 풀로 폴백.
+        if (eligible.Count == 0)
+        {
+            CollectFallback(chapterRoster, eligible);
+            if (commonEventRosters != null)
+                foreach (var common in commonEventRosters)
+                    CollectFallback(common, eligible);
+        }
+
+        if (eligible.Count == 0)
+        {
+            Debug.LogWarning($"[Map] 챕터 {chapter} — 공통/챕터 로스터 어디에도 현재 등장 가능한 이벤트가 없음(fallbackEvents도 비어있음).");
+            return;
+        }
+
+        // 노드 위치 기반 재시드로 같은 노드는 항상 같은 이벤트 선택(단, 후보군은 조건 상태에 따라 달라질 수 있음).
         var rnd = RunRng.For(RngStream.Event, node.floorIndex, node.nodeIndex);
-        var data = eventPool[rnd.Next(0, eventPool.Count)];
+        var data = eligible[rnd.Next(0, eligible.Count)];
         eventView.Open(data);
+    }
+
+    // entries/fallbackEvents는 필드 선언 시 기본값(new())이 있어 정상 직렬화 경로로는 null이 되지
+    // 않지만, SO YAML을 수동 편집하는 경우가 잦은 프로젝트라 방어적으로 null도 처리해둔다.
+    private static void CollectEligible(EventRosterSO roster, List<EventData> into)
+    {
+        if (roster == null || roster.entries == null) return;
+        foreach (var entry in roster.entries)
+            if (entry != null && entry.IsEligible())
+                into.Add(entry.eventData);
+    }
+
+    private static void CollectFallback(EventRosterSO roster, List<EventData> into)
+    {
+        if (roster == null || roster.fallbackEvents == null) return;
+        into.AddRange(roster.fallbackEvents);
     }
 
     private void OpenRest(MapNode node)

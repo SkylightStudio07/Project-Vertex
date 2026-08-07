@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // 전투 화면에 플레이어 스프라이트와 합류한 협력자들을 보여준다.
-// 애니메이션 없이 정적 스프라이트만 표시 (연출은 추후 과제).
+// 기본은 정적 스프라이트, 플레이어가 공격 카드를 내면 PoseSequencePlayer로 키프레임 홀드 연출 재생
+// (BattleManager.OnCardPlayed 구독). 합류 캐릭터 쪽 연출은 아직 없음(플레이어만 우선 적용).
 // 협력자는 최대 3명 고정. companionSlots는 시각 요소 없는 빈 오브젝트(위치 마커)로,
 // 인스펙터에서 원하는 좌표에 미리 배치해두면 그 자리에 companionPrefab을 실제로 생성해 채운다.
 // 합류 인원이 3명 미만이면 남는 슬롯은 그대로 비워둔다.
@@ -19,6 +20,8 @@ public class PartyView : MonoBehaviour
     [Header("플레이어")]
     [SerializeField] private PlayerCharData playerCharData;
     [SerializeField] private Image playerImage;
+    // playerImage와 같은 오브젝트에 붙는 PoseSequencePlayer. 공격 카드 사용 시 연출 재생용(없어도 정상 작동).
+    [SerializeField] private PoseSequencePlayer playerPoseSequencer;
 
     [Header("합류 캐릭터 — 스프라이트를 생성해 넣을 프리팹과 위치 마커(빈 오브젝트, 최대 3명)")]
     [SerializeField] private GameObject companionPrefab; // 루트 밑에 "CharacterSprite"(Image) 자식 필요 — 발밑 그림자(Shadow)도 같이 딸려옴
@@ -27,7 +30,10 @@ public class PartyView : MonoBehaviour
     private void Start()
     {
         if (BattleManager.Instance != null)
+        {
             BattleManager.Instance.OnBattleStarted += Refresh;
+            BattleManager.Instance.OnCardPlayed += OnCardPlayed;
+        }
 
         // 이 오브젝트가 활성화되기 전에 이미 전투가 시작돼 있었을 경우(에디터에서 오브젝트를
         // 나중에 켜서 테스트하는 경우 등)를 대비해 최초 1회는 바로 그려본다.
@@ -37,7 +43,53 @@ public class PartyView : MonoBehaviour
     private void OnDestroy()
     {
         if (BattleManager.Instance != null)
+        {
             BattleManager.Instance.OnBattleStarted -= Refresh;
+            BattleManager.Instance.OnCardPlayed -= OnCardPlayed;
+        }
+    }
+
+    // OnCardPlayed는 공격 카드를 낼 때마다(전투 중 빈번히) 불리므로, 설정 미비 경고는
+    // 매번 다시 찍지 않고 한 번만 띄운다 — 안 그러면 콘솔이 같은 경고로 도배돼서 다른 로그를 가린다.
+    private bool warnedMissingPoseSequencer;
+    private bool warnedMissingPlayerCharData;
+    private bool warnedEmptyAttackSequence;
+
+    // 공격 카드를 냈을 때 플레이어 스탠딩에 연출을 재생한다. 데미지 적용을 기다리지 않는
+    // "구경용" 재생 — 결과와 무관하게 그냥 재생만 하고 끝난다.
+    private void OnCardPlayed(CardData card)
+    {
+        if (card == null || card.Type != CardData.CardType.Attack) return;
+
+        if (playerPoseSequencer == null)
+        {
+            if (!warnedMissingPoseSequencer)
+            {
+                Debug.LogWarning("[PartyView] playerPoseSequencer가 비어있음. Inspector 연결 확인 필요.");
+                warnedMissingPoseSequencer = true;
+            }
+            return;
+        }
+        if (playerCharData == null)
+        {
+            if (!warnedMissingPlayerCharData)
+            {
+                Debug.LogWarning("[PartyView] playerCharData가 비어있음. Inspector 연결 확인 필요.");
+                warnedMissingPlayerCharData = true;
+            }
+            return;
+        }
+        if (playerCharData.attackSequence == null || playerCharData.attackSequence.Length == 0)
+        {
+            if (!warnedEmptyAttackSequence)
+            {
+                Debug.LogWarning($"[PartyView] '{playerCharData.name}'의 attackSequence가 비어있음.");
+                warnedEmptyAttackSequence = true;
+            }
+            return;
+        }
+
+        playerPoseSequencer.Play(playerCharData.attackSequence);
     }
 
     private void Refresh()

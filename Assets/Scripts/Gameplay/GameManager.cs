@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     [Header("막, 층")]
     [SerializeField] private int chapter = 1;
     [SerializeField] private int floor   = 1;
+    public int Chapter => chapter;
 
 
     void Start()

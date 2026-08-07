@@ -18,6 +18,7 @@ public class DialogueView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speakerNameText;
     [SerializeField] private TextMeshProUGUI lineText;
     [SerializeField] private Button advanceButton;
+    [SerializeField] private float typewriterCharsPerSecond = 40f; // 0 이하면 즉시 전체 표시(연출 끄기)
 
     [Header("선택지 UI")]
     [SerializeField] private Transform choiceContainer;
@@ -29,6 +30,7 @@ public class DialogueView : MonoBehaviour
     private int _lineIndex;
     private Action _onComplete;
     private readonly List<Button> _choiceButtons = new();
+    private TypewriterPrinter typewriter;
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class DialogueView : MonoBehaviour
         // 여기서 SetActive(false)를 부르면 Play()가 호출하는 최초 SetActive(true)를
         // 같은 프레임에서 취소해버려 첫 호출만 패널이 안 뜨는 버그가 생긴다 (EventView와 동일 이슈).
         advanceButton.onClick.AddListener(OnAdvanceClicked);
+        typewriter = new TypewriterPrinter(this);
     }
 
     public void Play(TextAsset json, Action onComplete)
@@ -137,7 +140,7 @@ public class DialogueView : MonoBehaviour
     {
         advanceButton.gameObject.SetActive(true);
         speakerNameText.text = GetCharacterName(line.speaker);
-        lineText.text = line.text;
+        typewriter.Play(lineText, line.text, typewriterCharsPerSecond);
         UpdateSpeakerHighlight(line.speaker, line.emotion);
     }
 
@@ -230,6 +233,8 @@ public class DialogueView : MonoBehaviour
 
     private void OnAdvanceClicked()
     {
+        if (typewriter.CompleteImmediately()) return; // 타이핑 중이었으면 이번 클릭은 완성 처리로 소비
+
         _lineIndex++;
         ShowCurrentLine();
     }
