@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uBC29\uD0C4\uBCF5"
+  m_Name: "\uBB34\uC801"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
   cardType: 1
   cardRarity: 0
   cardOwner: 0
-  cardDescription: "\uBC29\uC5B4\uB3C4\uAC00 {0.amount}\uB9CC\uD07C \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  cardDescription: "\uC18C\uBA78. \uBC29\uC5B4\uB3C4\uAC00 {0.amount}\uB9CC\uD07C
+    \uC99D\uAC00\uD569\uB2C8\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
-    cardName: "\uBC29\uD0C4\uBCF5"
+    cardName: "\uBB34\uC801"
     energyCost: 2
     ammoCost: 0
     effects:
@@ -31,7 +32,7 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uBC29\uD0C4\uBCF5+"
+    cardName: "\uBB34\uC801+"
     energyCost: 2
     ammoCost: 0
     effects:
@@ -48,8 +49,8 @@ MonoBehaviour:
     - rid: 4680130923130519624
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 15
+        amount: 30
     - rid: 4680130923130519625
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 20
+        amount: 40

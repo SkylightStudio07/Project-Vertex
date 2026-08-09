@@ -10,33 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uBC29\uD0C4\uBCF5"
+  m_Name: "\uC218\uB958\uD0C4"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
-  cardType: 1
+  cardType: 0
   cardRarity: 0
   cardOwner: 0
-  cardDescription: "\uBC29\uC5B4\uB3C4\uAC00 {0.amount}\uB9CC\uD07C \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  cardDescription: "{0.amount} \uB9CC\uD07C\uC758 \uB300\uBBF8\uC9C0\uB97C {0.targetType}\uC5D0\uAC8C
+    \uAC00\uD569\uB2C8\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
-    cardName: "\uBC29\uD0C4\uBCF5"
-    energyCost: 2
+    cardName: "\uC218\uB958\uD0C4"
+    energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 4680130923130519624
-    isExhaust: 0
+    - rid: 4680130923130519632
+    isExhaust: 1
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uBC29\uD0C4\uBCF5+"
-    energyCost: 2
+    cardName: "\uC218\uB958\uD0C4+"
+    energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 4680130923130519625
-    isExhaust: 0
+    - rid: 4680130923130519633
+    isExhaust: 1
     isEthereal: 0
     isInnate: 0
     isRetain: 0
@@ -45,11 +46,17 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4680130923130519624
-      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+    - rid: 4680130923130519632
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 15
-    - rid: 4680130923130519625
-      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+        amount: 8
+        hitCount: 1
+        targetType: 2
+        hitInterval: 0.08
+    - rid: 4680130923130519633
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 20
+        amount: 12
+        hitCount: 1
+        targetType: 2
+        hitInterval: 0.08
