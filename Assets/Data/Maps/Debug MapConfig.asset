@@ -34,8 +34,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d67f8b54f8762db4ba6d147c8a97f971, type: 2}
   - {fileID: 11400000, guid: 3a9f6ce03af11304b806ce5dfc141059, type: 2}
   - {fileID: 11400000, guid: 448b92ffcbce1ba49b466c600e6263ef, type: 2}
-  eliteEncounterPool: []
-  bossEncounterPool: []
+  eliteEncounterPool:
+  - {fileID: 11400000, guid: 90f3c922d5c03a54b82118ca1d27d05d, type: 2}
+  bossEncounterPool:
+  - {fileID: 11400000, guid: fb1d66430982e92458431561533717ac, type: 2}
   weakEncounterPool: []
   weakEncounterCount: 3
   guaranteedNodes:
