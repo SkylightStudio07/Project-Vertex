@@ -53,6 +53,7 @@ public class ApplyStatusEffect : CardEffect
         StatusType.Strength   => new StrengthStatus(amount),
         StatusType.Poison     => new PoisonStatus(amount),
         StatusType.DamageNullified => new DamageNullifiedStatus(amount),
+        StatusType.Gaze       => new PressuredStatus(amount),
         _                     => null,
     };
 }

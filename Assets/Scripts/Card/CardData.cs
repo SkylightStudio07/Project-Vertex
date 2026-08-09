@@ -146,7 +146,7 @@ public class CardData : ScriptableObject
         });
     }
 
-    public enum CardType  { Attack, Skill, Power }
+    public enum CardType  { Attack, Skill, Power, Status }
     public enum CardRarity { Common, Rare, Unique }
     public enum CardUseMode { DropToPlayArea, SelectEnemy }
     public enum CardOwner

@@ -17,8 +17,8 @@ public class FloorGuarantee // 층별 고정 노드.
     public NodeType nodeType;
 }
 
-[System.Serializable]
-public class EnemyEncounter
+[System.Serializable, CreateAssetMenu(fileName = "EnemyEncounter", menuName = "Game Asset/Create EnemyEncounterData", order = 1)]
+public class EnemyEncounter : ScriptableObject
 {
     public int chapter = 1;
     public EnemyEncounterType encounterType;

@@ -172,9 +172,28 @@ public class BattleManager : MonoBehaviour
         BeginHandChangeBatch();
         try
         {
+            bool shouldShuffleDrawPile = false;
             foreach (var card in _state.Hand)
-                _state.DiscardPile.Add(card);
+            {
+                var ctx = new CardContext
+                {
+                    State      = _state,
+                    Battle     = this,
+                    Card       = card,
+                    AllEnemies = _state.Enemies,
+                };
+
+                foreach (var effect in card.ActiveEffects)
+                {
+                    if (effect is ICardEndTurnInHandEffect endTurnEffect)
+                        endTurnEffect.OnTurnEndInHand(ctx);
+                }
+            }
             _state.Hand.Clear();
+
+            if (shouldShuffleDrawPile)
+                Shuffle(_state.DrawPile);
+
             NotifyHandChanged();
         }
         finally

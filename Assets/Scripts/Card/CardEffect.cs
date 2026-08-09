@@ -42,7 +42,7 @@ public abstract class CardEffect
 
 // 타게팅. 자기 자신/단일 적/전체 적/랜덤 적.
 public enum TargetType { Self, SingleEnemy, AllEnemies, RandomEnemy }
-public enum StatusType { Weak, Vulnerable, Poison, Strength, Dexterity, DamageNullified }
+public enum StatusType { Weak, Vulnerable, Poison, Strength, Dexterity, DamageNullified, Gaze }
 
 // 플레이어 덱의 어느 더미에 카드를 넣을지.
 public enum PileType { DrawPile, DiscardPile, Hand }
