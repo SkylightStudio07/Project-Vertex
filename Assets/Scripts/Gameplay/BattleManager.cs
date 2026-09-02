@@ -173,6 +173,8 @@ public class BattleManager : MonoBehaviour
     public void PlayerTurnEnd()
     {
         if (_state.Phase != BattlePhase.PlayerTurn) return;
+        // 카드 선택 중 턴이 끝나면 손패가 사라져 진행 중인 효과가 깨진다
+        if (HandCardSelector.IsSelecting) return;
 
         // 손패 → 버린 카드 더미
         BeginHandChangeBatch();
@@ -309,7 +311,9 @@ public class BattleManager : MonoBehaviour
     }
 
     // 지금 아이템을 사용할 수 있는 상태인지 (전투 중 + 플레이어 턴). UI 버튼 활성 판정용.
-    public bool CanUseItemNow => _isInBattle && _state != null && _state.Phase == BattlePhase.PlayerTurn;
+    public bool CanUseItemNow => _isInBattle && _state != null
+                                 && _state.Phase == BattlePhase.PlayerTurn
+                                 && !HandCardSelector.IsSelecting; // 손패 선택 중에는 아이템 사용 불가
 
     // 아이템 사용. 카드 사용(TryPlayCard)과 동일 구조, 차이는 비용 없음 / 인벤토리에서 소비 / ctx.Item 세팅.
     public bool TryUseItem(ItemData item, EnemyInstance target)
@@ -435,6 +439,18 @@ public class BattleManager : MonoBehaviour
     public void AddCardToDiscardPile(CardData card)
     {
         _state.DiscardPile.Add(Instantiate(card));
+    }
+
+    // 손패의 특정 카드를 버린 카드 더미로 보낸다 (DiscardEffect 등에서 호출).
+    // 이미 손패에 없으면 아무 일도 하지 않는다 — 선택 대기 중 손패가 비는 경우를 조용히 흘려보낸다.
+    public bool DiscardCardFromHand(CardData card)
+    {
+        if (_state == null || card == null) return false;
+        if (!_state.Hand.Remove(card)) return false;
+
+        _state.DiscardPile.Add(card);
+        NotifyHandChanged();
+        return true;
     }
 
     public void AddCardToHand(CardData card) => AddCardsToHand(new[] { card });
