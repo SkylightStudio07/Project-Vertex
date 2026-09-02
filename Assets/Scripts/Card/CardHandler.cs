@@ -15,7 +15,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Canvas), typeof(GraphicRaycaster), typeof(CardView))]
 [RequireComponent(typeof(CardInteractionView))]
 public class CardHandler : MonoBehaviour,
-    IPointerEnterHandler, IPointerExitHandler,
+    IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public enum CardState { Idle, Hover, Dragging, Targeting, Returning, Playing }
@@ -31,6 +31,7 @@ public class CardHandler : MonoBehaviour,
     private static bool IsInteractable =>
         BattleManager.Instance != null &&
         BattleManager.Instance.State?.Phase == BattlePhase.PlayerTurn &&
+        !HandCardSelector.IsSelecting &&   // 손패 선택 모드 중에는 카드 사용 불가
         (MapUIController.Instance == null || !MapUIController.Instance.IsMapOpen) &&
         (EventView.Instance == null || !EventView.Instance.IsEventOpen);
 
@@ -51,9 +52,21 @@ public class CardHandler : MonoBehaviour,
     public void OnPointerEnter(PointerEventData eventData)
     {
         isPointerOverCard = true;
-        if (state != CardState.Idle || isAnyDragging || !IsInteractable) return;
+        if (state != CardState.Idle || isAnyDragging) return;
+        // 선택 모드에서는 드래그(사용)는 막되 호버 확대는 유지 — 어떤 카드를 고르는지 보여야 한다
+        if (!IsInteractable && !HandCardSelector.IsSelecting) return;
 
         SetState(CardState.Hover);
+    }
+
+    // 선택 모드 전용 — 평소 카드 사용은 드래그로 하므로 클릭은 무시된다.
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!HandCardSelector.IsSelecting) return;
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        if (cardView.Data == null) return;
+
+        HandCardSelector.Instance.NotifyCardClicked(cardView.Data);
     }
 
     public void OnPointerExit(PointerEventData eventData)
