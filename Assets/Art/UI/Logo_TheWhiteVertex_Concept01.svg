@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" width="1600" height="520">
+  <defs>
+    <style>
+      .ink { fill: #171717; }
+      .soft { fill: #4a4a46; }
+      .line { stroke: #171717; stroke-width: 2; fill: none; stroke-linecap: square; }
+      .thin { stroke: #171717; stroke-width: 1.1; fill: none; stroke-linecap: square; opacity: .62; }
+      .hair { stroke: #171717; stroke-width: .7; fill: none; opacity: .36; }
+      .title {
+        font-family: "Didot", "Bodoni 72", "Baskerville", "Times New Roman", serif;
+        font-size: 154px;
+        font-weight: 400;
+        letter-spacing: 18px;
+      }
+      .small {
+        font-family: "Cinzel", "Trajan Pro", "Times New Roman", serif;
+        font-size: 33px;
+        letter-spacing: 13px;
+      }
+      .kr {
+        font-family: "Noto Serif KR", "Nanum Myeongjo", "Malgun Gothic", serif;
+        font-size: 25px;
+        letter-spacing: 7px;
+      }
+    </style>
+  </defs>
+
+  <rect width="1600" height="520" fill="none"/>
+
+  <g transform="translate(112 70)">
+    <path class="thin" d="M0 37H448"/>
+    <path class="thin" d="M994 37h226"/>
+    <path class="hair" d="M0 360h1218"/>
+    <path class="ink" d="M615 32l7 7-7 7-7-7z"/>
+    <path class="ink" d="M1218 355l5 5-5 5-5-5z"/>
+    <text class="small ink" x="476" y="49">THE WHITE</text>
+
+    <g transform="translate(15 105)">
+      <text class="title ink" x="0" y="154">VERT</text>
+      <text class="title ink" x="750" y="154">EX</text>
+
+      <g transform="translate(681 71)">
+        <path class="hair" d="M0 83h182M91-8v182"/>
+        <path class="hair" d="M26 18c45-25 85-25 130 0"/>
+        <path class="hair" d="M26 148c45 25 85 25 130 0"/>
+        <path class="thin" d="M91-56v37M91 205v37M-46 83h37M191 83h37"/>
+        <path class="ink" d="M91 3l16 61 61 19-61 19-16 61-16-61-61-19 61-19z"/>
+        <path fill="#f3f0e8" stroke="#171717" stroke-width="2" d="M91 18l10 52 52 13-52 13-10 52-10-52-52-13 52-13z"/>
+        <path class="ink" d="M91 53l30 30-30 30-30-30z"/>
+        <path class="thin" d="M91 18v130M26 83h130"/>
+      </g>
+    </g>
+
+    <g transform="translate(298 338)">
+      <path class="line" d="M0 0h620"/>
+      <path class="ink" d="M310-6l6 6-6 6-6-6z"/>
+      <text class="kr soft" x="235" y="57">더 화이트 버텍스</text>
+    </g>
+  </g>
+</svg>

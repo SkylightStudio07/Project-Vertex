@@ -7,13 +7,13 @@
 public class EventJsonData
 {
     public string title;
-    public string description;
+    public string[] description; // 페이지 단위. 화살표/스페이스/엔터로 한 페이지씩 진행(EventView 참고).
     public EventChoiceJson[] choices;
 }
 
 [System.Serializable]
 public class EventChoiceJson
 {
-    public string choiceText; // 선택지 버튼에 표시될 문구
-    public string resultText; // 선택 후 표시되는 결과 텍스트
+    public string choiceText;   // 선택지 버튼에 표시될 문구
+    public string[] resultText; // 선택 후 표시되는 결과 텍스트. description과 동일하게 페이지 단위.
 }

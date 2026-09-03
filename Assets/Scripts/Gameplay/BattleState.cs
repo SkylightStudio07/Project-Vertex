@@ -14,6 +14,7 @@ public class BattleState
     public int Ammo;
     public int DrawCount;
     public int TurnNumber;
+    public bool PlayerLostHpThisTurn;
     public BattlePhase Phase;
 
     public List<CardData> Hand        = new();

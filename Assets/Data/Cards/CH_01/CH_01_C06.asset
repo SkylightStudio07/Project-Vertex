@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: CH_01_C06
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: 0}
+  CardBackground: {fileID: 0}
+  cardType: 1
+  cardRarity: 1
+  cardOwner: 1
+  cardDescription: "\uC120\uD0DD\uD55C \uC801\uC758 \uCCB4\uB825\uC744 \uAC10\uC18C\uC2DC\uD0AC
+    \uB54C \uB9C8\uB2E4 \uCCB4\uB825\uC744 {0.amount} \uD68C\uBCF5\uD55C\uB2E4."
+  useMode: 1
+  isUpgraded: 0
+  normalState:
+    cardName: "\uCC29\uD608"
+    energyCost: 2
+    ammoCost: 0
+    effects:
+    - rid: 2470581257654239313
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: "\uCC29\uD608+"
+    energyCost: 1
+    ammoCost: 0
+    effects:
+    - rid: 2470581257654239315
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 2470581257654239313
+      type: {class: TriggerEffectsOnTargetHpLossEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effectsOnHpLoss:
+        - rid: 2470581257654239314
+    - rid: 2470581257654239314
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 3
+    - rid: 2470581257654239315
+      type: {class: TriggerEffectsOnTargetHpLossEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effectsOnHpLoss:
+        - rid: 2470581257654239316
+    - rid: 2470581257654239316
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 5

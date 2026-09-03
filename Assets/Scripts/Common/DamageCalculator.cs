@@ -18,6 +18,19 @@ public static class DamageCalculator
         target.RemoveExpiredPassives();
 
         // 3. 블록 흡수 + HP 감소 (TakeDamage 내부에서 처리)
+        int hpBefore = target.HP;
         target.TakeDamage(info);
+        int actualDamage = System.Math.Max(0, hpBefore - target.HP);
+        if (actualDamage <= 0) return;
+
+        var targetPassives = new System.Collections.Generic.List<IPassiveLogic>(target.Passives);
+        foreach (var p in targetPassives)
+            p.OnAfterDamageTaken(actualDamage, state, target);
+
+        if (info.Source == null) return;
+
+        var sourcePassives = new System.Collections.Generic.List<IPassiveLogic>(info.Source.Passives);
+        foreach (var p in sourcePassives)
+            p.OnAfterDamageDealt(actualDamage, target, state, info.Source);
     }
 }

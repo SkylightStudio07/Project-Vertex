@@ -63,4 +63,22 @@ public class DeckManager : MonoBehaviour
         PlayerDeck.Add(Instantiate(card));
         Debug.Log("플레이어 덱에 카드 추가완료.");
     }
+    // 플레이어 덱에서 카드를 제거하는 메소드
+    public bool RemoveCardFromPlayerDeck(CardData card)
+    {
+        if (card == null) return false;
+
+        if (!PlayerDeck.Remove(card))
+        {
+            Debug.LogWarning($"[DeckManager] 덱에 없는 카드를 제거하려 함: {card.CardName}");
+            return false;
+        }
+        Destroy(card);
+        return true;
+    }
+
+    public void ViewDeck()
+    {
+        CardListView.Instance?.OpenAsViewer("플레이어 덱", PlayerDeck);
+    }
 }

@@ -18,6 +18,9 @@ public class CharData : ScriptableObject
     public AnimationClip hitAnim;
     public AnimationClip deathAnim;
 
+    [Header("공격 연출 (키프레임 홀드 방식 — PoseSequencePlayer 참고)")]
+    public AttackKeyframe[] attackSequence;
+
     [Header("캐릭터 사운드")]
     public AudioClip charSoundEffect;
 

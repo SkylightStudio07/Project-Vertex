@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<CardData.CardRarity, List<CardData>> cardPools = new Dictionary<CardData.CardRarity, List<CardData>>();
     // 아이템 보상 풀
     [SerializeField] private List<ItemData> itemPool;
+    public List<ItemData> ItemPool => itemPool;
     // 챕터, 전투 유형 별 카드 보상 확률 데이터
     [SerializeField] private List<RewardProbabilityData> rewardProbabilityTable;
 
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
     public int PlayerHP    { get; private set; }
 
     [Header("플레이어 골드")]
-    [SerializeField] private int playerGold = 0;
+    [SerializeField] private int playerGold = 100;
     public int PlayerGold
     {
         get => playerGold;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
     [Header("막, 층")]
     [SerializeField] private int chapter = 1;
     [SerializeField] private int floor   = 1;
+    public int Chapter => chapter;
 
 
     void Start()

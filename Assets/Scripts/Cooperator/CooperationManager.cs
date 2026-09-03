@@ -200,6 +200,12 @@ public class CooperationManager : MonoBehaviour
         charState.isJoinedInRun = true;
     }
 
+    // 특정 협력자가 이번 런에 합류했는지 여부. 이벤트 조건(CompanionJoinedCondition) 등에서 사용.
+    public bool IsJoinedInRun(string charID)
+    {
+        return coopCharDict.TryGetValue(charID, out var charState) && charState.isJoinedInRun;
+    }
+
     // 현재 런에 합류한 캐릭터들의 상태를 반환하는 메소드
     public List<CoopCharState> GetJoinedInRunCharStates()
     {

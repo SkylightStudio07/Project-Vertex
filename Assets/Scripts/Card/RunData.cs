@@ -11,6 +11,13 @@ public class RunData : MonoBehaviour
 
     public static RunData Instance { get; private set; }
 
+    // ==== 상점(카드 제거) ====
+    private const int CardRemoveBasePrice = 75;
+    private const int CardRemovePriceIncrement = 25;
+    public int cardRemoveCount = 0;
+    public int GetCardRemovePrice() => CardRemoveBasePrice + CardRemovePriceIncrement * Instance.cardRemoveCount;
+
+
     [Header("맵")]
     public MapData mapData;          // MapGenerator가 생성한 맵 전체 구조
     public int currentFloor;         // 현재 층 인덱스
