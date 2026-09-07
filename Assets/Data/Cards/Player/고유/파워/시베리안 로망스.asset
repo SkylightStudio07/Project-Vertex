@@ -17,8 +17,8 @@ MonoBehaviour:
   cardType: 2
   cardRarity: 2
   cardOwner: 0
-  cardDescription: "\uB9E4 \uD134, \uD798\uC774 {0.strengthPerTurn} \uC0C1\uC2B9\uD558\uC9C0\uB9CC
-    \uBBFC\uCCA9\uC774 {0.dexPenalty}\uB9CC\uD07C \uD558\uB77D\uD569\uB2C8\uB2E4."
+  cardDescription: "\uB9E4 \uD134, \uD798\uC774 {0.potency} \uC0C1\uC2B9\uD558\uC9C0\uB9CC
+    \uBBFC\uCCA9\uC774 {0.secondaryPotency}\uB9CC\uD07C \uD558\uB77D\uD569\uB2C8\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -47,12 +47,22 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 4680130923130519638
-      type: {class: SiberianRomancePowerEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        strengthPerTurn: 2
-        dexPenalty: 1
+        status: {fileID: 11400000, guid: 1000000000000000000000000000000d, type: 2}
+        operation: 0
+        amount: 1
+        potency: 2
+        secondaryPotency: 1
+        targets:
+          mode: 0
     - rid: 4680130923130519639
-      type: {class: SiberianRomancePowerEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        strengthPerTurn: 3
-        dexPenalty: 1
+        status: {fileID: 11400000, guid: 1000000000000000000000000000000d, type: 2}
+        operation: 0
+        amount: 1
+        potency: 3
+        secondaryPotency: 1
+        targets:
+          mode: 0

@@ -6,6 +6,7 @@
 // ============================================================
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class EnemyInstance : ICombatant
     private int _hp;
     private int _block;
     private readonly List<IPassiveLogic> _passives = new();
+    private readonly StatusContainer _statuses;
 
     // 패턴 진행 인덱스. openingActions가 있으면 우선 그걸 먼저 진행하고, 끝나면 activityPatterns로 넘어감
     private int _openingIndex;
@@ -30,6 +32,7 @@ public class EnemyInstance : ICombatant
     public int  Block  => _block;
     public bool IsDead => _hp <= 0;
     public List<IPassiveLogic> Passives => _passives;
+    public StatusContainer Statuses => _statuses;
 
     public Sprite EnemySprite { get; private set; }
 
@@ -45,6 +48,7 @@ public class EnemyInstance : ICombatant
         _hp         = data.health;
         EnemySprite = data.enemyImage;
         _rng = rng ?? new System.Random();
+        _statuses = new StatusContainer(_passives);
         // 첫 인텐트 결정
         DetermineCurrentAction();
     }
@@ -79,9 +83,16 @@ public class EnemyInstance : ICombatant
 
     public void AddBlock(int amount)
     {
+        amount = _statuses.ModifyBlockGain(amount, this);
         if (amount <= 0) return;
         _block += amount;
         OnBlockChanged?.Invoke(_block);
+    }
+
+    public void Heal(int amount)
+    {
+        if (amount <= 0 || IsDead) return;
+        _hp = Math.Min(MaxHP, _hp + amount);
     }
 
     public void ResetBlock()
@@ -92,40 +103,20 @@ public class EnemyInstance : ICombatant
     }
 
     // 패시브 추가 — 같은 타입이면 스택 합산
-    public void AddPassive(StatusEffectBase passive)
+    public void AddPassive(IPassiveLogic passive)
     {
-        foreach (var p in _passives)
-        {
-            if (p is StatusEffectBase existing && existing.TryMerge(passive))
-                return;
-        }
-        _passives.Add(passive);
+        _statuses.Add(passive);
     }
 
     // 적 턴 시작: 패시브 OnTurnStart 호출 후 임시 패시브 스택 감소
     public void TickPassives(BattleState state)
     {
-        foreach (var p in _passives)
-            p.OnTurnStart(state, this);
-
-        for (int i = _passives.Count - 1; i >= 0; i--)
-        {
-            if (_passives[i] is StatusEffectBase s)
-            {
-                s.TickDown();
-            }
-        }
-
-        RemoveExpiredPassives();
+        _statuses.Tick(state, this);
     }
 
     public void RemoveExpiredPassives()
     {
-        for (int i = _passives.Count - 1; i >= 0; i--)
-        {
-            if (_passives[i] is StatusEffectBase s && s.IsExpired)
-                _passives.RemoveAt(i);
-        }
+        _statuses.RemoveExpired();
     }
 
     public EnemyAction GetCurrentAction()
@@ -196,17 +187,19 @@ public class EnemyInstance : ICombatant
         var action = GetCurrentAction();
         if (action == null || action.effects == null) return null;
 
-        int total = 0;
-        bool found = false;
-        foreach (var effect in action.effects)
+        var context = new CardContext
         {
-            if (effect is DamageEffect dmg)
-            {
-                total += dmg.amount * dmg.hitCount;
-                found = true;
-            }
-        }
-        return found ? total : null;
+            State = BattleManager.Instance?.State,
+            Battle = BattleManager.Instance,
+            ActingEnemy = this,
+            SourceOverride = this,
+            PrimaryTargetOverride = BattleManager.Instance?.State?.Player,
+            AllEnemies = BattleManager.Instance?.State?.Enemies,
+        };
+        if (context.State == null) return null;
+
+        var preview = EffectRunner.Preview(action.effects, context);
+        return preview.HasDamage ? preview.TotalDamage : null;
     }
 
     // 행동 실행 직전 알림. EnemyView가 공격 모션(전진→후퇴 등)을 트리거하는 데 사용.
@@ -228,12 +221,32 @@ public class EnemyInstance : ICombatant
                 ActingEnemy = this,
                 AllEnemies  = state.Enemies,
             };
-            foreach (var effect in action.effects)
-                if (effect != null) effect.Execute(ctx);
+            EffectRunner.ExecuteImmediate(action.effects, ctx);
         }
 
         AdvancePattern();
         OnIntentChanged?.Invoke(); // 다음 턴에 보여줄 인텐트가 바뀌었으니 뷰 갱신 알림
+    }
+
+    public IEnumerator ExecuteCurrentActionCoroutine(BattleState state, BattleManager battle)
+    {
+        var action = GetCurrentAction();
+        if (action != null && action.effects != null)
+        {
+            var context = new CardContext
+            {
+                State = state,
+                Battle = battle,
+                ActingEnemy = this,
+                SourceOverride = this,
+                PrimaryTargetOverride = state.Player,
+                AllEnemies = state.Enemies,
+            };
+            yield return EffectRunner.ExecuteSequence(action.effects, context);
+        }
+
+        AdvancePattern();
+        OnIntentChanged?.Invoke();
     }
 
     // 패시브 틱 → 생존 확인 → 행동 실행을 한 번에 처리하는 동기 버전.

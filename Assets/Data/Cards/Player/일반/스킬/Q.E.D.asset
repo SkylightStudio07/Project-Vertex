@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 0
   cardOwner: 0
-  cardDescription: "{0.turns}\uD134\uB3D9\uC548, {0.blockPerTurn}\uC758 \uBC29\uC5B4\uB3C4\uB97C
+  cardDescription: "{0.amount}\uD134\uB3D9\uC548, {0.potency}\uC758 \uBC29\uC5B4\uB3C4\uB97C
     \uC5BB\uC2B5\uB2C8\uB2E4."
   useMode: 0
   isUpgraded: 0
@@ -47,12 +47,22 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 4680130923130519636
-      type: {class: TimedBlockEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        turns: 3
-        blockPerTurn: 6
+        status: {fileID: 11400000, guid: 10000000000000000000000000000009, type: 2}
+        operation: 0
+        amount: 3
+        potency: 6
+        secondaryPotency: 0
+        targets:
+          mode: 0
     - rid: 4680130923130519637
-      type: {class: TimedBlockEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        turns: 4
-        blockPerTurn: 8
+        status: {fileID: 11400000, guid: 10000000000000000000000000000009, type: 2}
+        operation: 0
+        amount: 4
+        potency: 8
+        secondaryPotency: 0
+        targets:
+          mode: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 0
   cardRarity: 0
   cardOwner: 1
-  cardDescription: "\uCCB4\uB825\uC744 {0.amount} \uC18C\uBE44\uD558\uACE0 {1.targetType}\uC5D0\uAC8C 
+  cardDescription: "\uCCB4\uB825\uC744 {0.amount} \uC18C\uBE44\uD558\uACE0 {1.targets}\uC5D0\uAC8C
     {1.amount}\uC758 \uB370\uBBF8\uC9C0\uB97C {1.hitCount} \uBC88 \uC900\uB2E4."
   useMode: 0
   isUpgraded: 0
@@ -57,7 +57,8 @@ MonoBehaviour:
       data:
         amount: 5
         hitCount: 2
-        targetType: 2
+        targets:
+          mode: 2
         hitInterval: 0.08
     - rid: 2470581146967605261
       type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
@@ -68,5 +69,6 @@ MonoBehaviour:
       data:
         amount: 6
         hitCount: 2
-        targetType: 2
+        targets:
+          mode: 2
         hitInterval: 0.08

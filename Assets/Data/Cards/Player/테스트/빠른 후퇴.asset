@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: "\uBE60\uB978 \uD6C4\uD1F4"
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
+  cardType: 1
+  cardRarity: 0
+  cardOwner: 0
+  isWeaponShootingCard: 0
+  cardDescription: "\uC801\uC5D0\uAC8C \uC57D\uD654\uB97C {0.amount} \uBD80\uC5EC\uD569\uB2C8\uB2E4.
+    \uC2A4\uB098\uC774\uD37C\uB85C \uAD50\uCCB4\uD558\uACE0 \uD0C4\uC57D\uC744 1\uB85C
+    \uC124\uC815\uD569\uB2C8\uB2E4."
+  useMode: 1
+  isUpgraded: 0
+  normalState:
+    cardName: "\uBE60\uB978 \uD6C4\uD1F4"
+    energyCost: 1
+    ammoCost: 0
+    effects:
+    - rid: 7338471726968995946
+    - rid: 7338471726968995947
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: "\uBE60\uB978 \uD6C4\uD1F4+"
+    energyCost: 1
+    ammoCost: 0
+    effects:
+    - rid: 7338471726968995948
+    - rid: 7338471726968995949
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7338471726968995946
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
+    - rid: 7338471726968995947
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}
+    - rid: 7338471726968995948
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
+    - rid: 7338471726968995949
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}

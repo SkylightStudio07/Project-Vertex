@@ -12,19 +12,14 @@ public class ConditionalEffect : CardEffect
     {
         if (!IsConditionMet(context)) return;
 
-        foreach (var effect in effectsWhenMet)
-            effect?.Execute(context);
+        EffectRunner.ExecuteImmediate(effectsWhenMet, context);
     }
 
     public override IEnumerator ExecuteCoroutine(CardContext context)
     {
         if (!IsConditionMet(context)) yield break;
 
-        foreach (var effect in effectsWhenMet)
-        {
-            if (effect != null)
-                yield return effect.ExecuteCoroutine(context);
-        }
+        yield return EffectRunner.ExecuteSequence(effectsWhenMet, context);
     }
 
     private bool IsConditionMet(CardContext context)
