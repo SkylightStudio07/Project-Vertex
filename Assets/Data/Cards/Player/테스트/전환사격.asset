@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: "\uC804\uD658\uC0AC\uACA9"
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
+  cardType: 0
+  cardRarity: 0
+  cardOwner: 0
+  isWeaponShootingCard: 0
+  cardDescription: "\uAD8C\uCD1D\uC73C\uB85C \uAD50\uCCB4\uD558\uACE0 \uD0C4\uC57D\uC744
+    3\uC73C\uB85C \uC124\uC815\uD569\uB2C8\uB2E4. \uBAA8\uB4E0 \uD0C4\uC57D\uC744
+    \uC18C\uBE44\uD558\uC5EC \uC801\uC5D0\uAC8C {1.damagePerAmmo} \uD53C\uD574\uB97C
+    \uC18C\uBE44\uD55C \uD0C4\uC57D \uC218\uB9CC\uD07C \uC90D\uB2C8\uB2E4. \uD0C4\uC57D\uC744
+    {2.amount} \uC5BB\uC2B5\uB2C8\uB2E4."
+  useMode: 1
+  isUpgraded: 0
+  normalState:
+    cardName: "\uC804\uD658\uC0AC\uACA9"
+    energyCost: 1
+    ammoCost: 0
+    effects:
+    - rid: 7338471726968995940
+    - rid: 7338471726968995941
+    - rid: 7338471726968995942
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: "\uC804\uD658\uC0AC\uACA9+"
+    energyCost: 1
+    ammoCost: 0
+    effects:
+    - rid: 7338471726968995943
+    - rid: 7338471726968995944
+    - rid: 7338471726968995945
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7338471726968995940
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 7338471726968995941
+      type: {class: AmmoConsumeAllDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damagePerAmmo: 2
+        separateHits: 1
+        targets:
+          mode: 1
+    - rid: 7338471726968995942
+      type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 2
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+    - rid: 7338471726968995943
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 7338471726968995944
+      type: {class: AmmoConsumeAllDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damagePerAmmo: 2
+        separateHits: 1
+        targets:
+          mode: 1
+    - rid: 7338471726968995945
+      type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 2
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0

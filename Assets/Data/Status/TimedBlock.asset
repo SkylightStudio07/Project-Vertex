@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: TimedBlock
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: power.timed-block
+  displayName: 지속 방어
+  description: 턴 시작마다 지정된 방어도를 얻습니다.
+  icon: {fileID: 0}
+  disposition: 1
+  stackPolicy: 3
+  durationPolicy: 0
+  maxStacks: 0
+  dispellable: 0
+  behaviors:
+  - rid: 1009
+  references:
+    version: 2
+    RefIds:
+    - rid: 1009
+      type: {class: OnTurnStartEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 2009
+    - rid: 2009
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 0
+        scaling:
+          source: 8
+          target: 0
+          status: {fileID: 0}
+          multiplier: 1
+          flatBonus: 0
+        targets:
+          mode: 0

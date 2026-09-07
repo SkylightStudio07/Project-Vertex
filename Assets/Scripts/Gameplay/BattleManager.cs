@@ -21,6 +21,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private int defaultMaxEnergy = 3;
     [SerializeField] private int defaultAmmo      = 3;
     [SerializeField] private int defaultDrawCount = 5;
+    [SerializeField] private WeaponData defaultWeapon;
 
     // 런타임 전투 상태 — 모든 읽기/쓰기는 여기를 통함
     private BattleState _state;
@@ -36,6 +37,7 @@ public class BattleManager : MonoBehaviour
     public int MaxEnergy   => _state?.MaxEnergy   ?? defaultMaxEnergy;
     public int Ammo        => _state?.Ammo        ?? 0;
     public int PlayerBlock => _state?.Player?.Block ?? 0;
+    public WeaponData CurrentWeapon => _state?.CurrentWeapon;
 
 #if UNITY_EDITOR
     [Header("디버그")]
@@ -52,6 +54,7 @@ public class BattleManager : MonoBehaviour
     public event Action         OnBattleStarted; // StartBattle() 끝에서 1회 발화 — 씬을 갈아끼우지 않고 화면을 SetActive로만 전환하는 구조라, 전투 UI는 Start/OnEnable 대신 이 이벤트로 매 전투 진입을 감지해야 한다 (PartyView 참고)
     public event Action         OnHandChanged;
     public event Action         OnEnemiesChanged;
+    public event Action<WeaponData> OnWeaponChanged;
     // 플레이어가 카드를 실제로 사용한 시점(비용 차감 직후, 이펙트 실행 직전)에 발화.
     // 데미지 적용을 기다리지 않는 "구경용" 연출(PoseSequencePlayer 등)을 병행 재생하는 용도 —
     // 구독 쪽에서 결과를 기다리지 않고 그냥 재생만 하면 된다.
@@ -82,6 +85,8 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck, int seed, BattleType battleType = BattleType.Normal)
     {
+        StopAllCoroutines();
+        _state?.ReleaseRuntimeCards();
         _currentBattleType = battleType;
         _rnd = new System.Random(seed);
 
@@ -96,7 +101,11 @@ public class BattleManager : MonoBehaviour
         };
 
         SetupEnemies(enemyDataList);
+        _state.ChangePlayerWeapon(defaultWeapon);
         SetupBattleDeck(masterDeck);
+        _state.Player.Statuses.NotifyBattleStart(_state, _state.Player);
+        foreach (var enemy in _state.Enemies)
+            enemy.Statuses.NotifyBattleStart(_state, enemy);
         _state.Player.OnDied += Defeat;
         OnBattleStarted?.Invoke();
         _state.Player.OnDamaged += HandlePlayerDamaged;
@@ -131,7 +140,7 @@ public class BattleManager : MonoBehaviour
         _state.ExhaustPile.Clear();
 
         foreach (var card in masterDeck)
-            _state.DrawPile.Add(Instantiate(card));
+            if (card != null) _state.DrawPile.Add(_state.CreateCard(card));
         Shuffle(_state.DrawPile);
     }
 
@@ -178,9 +187,49 @@ public class BattleManager : MonoBehaviour
         BeginHandChangeBatch();
         try
         {
+            bool shouldShuffleDrawPile = false;
+            var retainedCards = new List<CardData>();
             foreach (var card in _state.Hand)
-                _state.DiscardPile.Add(card);
+            {
+                var ctx = new CardContext
+                {
+                    State      = _state,
+                    Battle     = this,
+                    Card       = card,
+                    AllEnemies = _state.Enemies,
+                };
+
+                bool returnToDrawPile = false;
+                foreach (var effect in card.ActiveEffects)
+                {
+                    if (effect is ICardEndTurnInHandEffect endTurnEffect)
+                        returnToDrawPile |= endTurnEffect.OnTurnEndInHand(ctx);
+                }
+
+                if (returnToDrawPile)
+                {
+                    _state.DrawPile.Add(card);
+                    shouldShuffleDrawPile = true;
+                }
+                else if (card.IsRetain)
+                {
+                    retainedCards.Add(card);
+                }
+                else if (card.IsEthereal)
+                {
+                    _state.ExhaustPile.Add(card);
+                }
+                else
+                {
+                    _state.DiscardPile.Add(card);
+                }
+            }
             _state.Hand.Clear();
+            _state.Hand.AddRange(retainedCards);
+
+            if (shouldShuffleDrawPile)
+                Shuffle(_state.DrawPile);
+
             NotifyHandChanged();
         }
         finally
@@ -223,7 +272,7 @@ public class BattleManager : MonoBehaviour
             enemy.NotifyActionStarted();
             yield return new WaitForSeconds(lungeOutWaitDuration);
 
-            enemy.ExecuteCurrentAction(_state, this); // 전진 피크 시점에 데미지 적용
+            yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
 
             yield return new WaitForSeconds(lungeBackWaitDuration + postActionDelay);
 
@@ -303,6 +352,7 @@ public class BattleManager : MonoBehaviour
             Target     = target,
             AllEnemies = _state.Enemies,
         };
+        _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
         StartCoroutine(ExecuteEffectsSequence(card.ActiveEffects, ctx));
 
         return true;
@@ -335,8 +385,7 @@ public class BattleManager : MonoBehaviour
                 AllEnemies = _state.Enemies,
             };
 
-            foreach (var effect in item.ItemEffects)
-                effect?.Execute(ctx);
+            EffectRunner.ExecuteImmediate(item.ItemEffects, ctx);
         }
         finally
         {
@@ -352,11 +401,7 @@ public class BattleManager : MonoBehaviour
     
     private IEnumerator ExecuteEffectsSequence(System.Collections.Generic.IReadOnlyList<CardEffect> effects, CardContext ctx)
     {
-        foreach (var effect in effects)
-        {
-            if (effect != null)
-                yield return StartCoroutine(effect.ExecuteCoroutine(ctx));
-        }
+        yield return EffectRunner.ExecuteSequence(effects, ctx);
     }
 
     private void HandlePlayerDamaged(int actualDamage)
@@ -428,26 +473,28 @@ public class BattleManager : MonoBehaviour
 
     public void AddCardToDrawPile(CardData card)
     {
-        _state.DrawPile.Add(Instantiate(card));
+        if (_state == null || card == null) return;
+        _state.DrawPile.Add(_state.CreateCard(card));
         Shuffle(_state.DrawPile);
     }
 
     public void AddCardToDiscardPile(CardData card)
     {
-        _state.DiscardPile.Add(Instantiate(card));
+        if (_state == null || card == null) return;
+        _state.DiscardPile.Add(_state.CreateCard(card));
     }
 
     public void AddCardToHand(CardData card) => AddCardsToHand(new[] { card });
 
     public void AddCardsToHand(IEnumerable<CardData> cards)
     {
-        if (cards == null) return;
+        if (_state == null || cards == null) return;
         bool added = false;
         foreach (var card in cards)
         {
             if (_state.Hand.Count >= 10) break;
             if (card == null) continue;
-            _state.Hand.Add(Instantiate(card));
+            _state.Hand.Add(_state.CreateCard(card));
             added = true;
         }
         if (added) NotifyHandChanged();
@@ -508,6 +555,20 @@ public class BattleManager : MonoBehaviour
     {
         if (_handChangeBatchDepth > 0) { _hasPendingHandChange = true; return; }
         OnHandChanged?.Invoke();
+    }
+
+    public bool ChangePlayerWeapon(WeaponData weapon)
+    {
+        if (_state == null || !_state.ChangePlayerWeapon(weapon)) return false;
+        NotifyHandChanged();
+        OnWeaponChanged?.Invoke(weapon);
+        return true;
+    }
+
+    private void OnDestroy()
+    {
+        _state?.ReleaseRuntimeCards();
+        if (Instance == this) Instance = null;
     }
 
     private void BeginHandChangeBatch() => _handChangeBatchDepth++;

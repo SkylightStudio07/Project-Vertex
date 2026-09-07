@@ -17,8 +17,8 @@ MonoBehaviour:
   cardType: 0
   cardRarity: 0
   cardOwner: 1
-  cardDescription: "{0.targetType}\uC5D0\uAC8C {0.amount}\uC758 \uB370\uBBF8\uC9C0\uB97C
-    \uC8FC\uACE0 {1.statusType}\uB97C {1.amount} \uBD80\uC5EC\uD55C\uB2E4. \uC18C\uBA78"
+  cardDescription: "{0.targets}\uC5D0\uAC8C {0.amount}\uC758 \uB370\uBBF8\uC9C0\uB97C
+    \uC8FC\uACE0 {1.status}\uB97C {1.amount} \uBD80\uC5EC\uD55C\uB2E4. \uC18C\uBA78"
   useMode: 1
   isUpgraded: 0
   normalState:
@@ -53,26 +53,34 @@ MonoBehaviour:
       data:
         amount: 5
         hitCount: 1
-        targetType: 1
+        targets:
+          mode: 1
         hitInterval: 0.08
     - rid: 2470581257654239320
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
         operation: 0
         amount: 3
-        target: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0
     - rid: 2470581257654239321
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 5
         hitCount: 1
-        targetType: 1
+        targets:
+          mode: 1
         hitInterval: 0.08
     - rid: 2470581257654239322
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
         operation: 0
         amount: 4
-        target: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0
