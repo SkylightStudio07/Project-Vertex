@@ -115,6 +115,11 @@ public class CardData : ScriptableObject
     public bool IsInnate          => ActiveState.isInnate;
     public bool IsRetain          => ActiveState.isRetain;
 
+    // 강화 가능 여부. upgradedState가 비어 있으면(미작성 카드) 강화 시 이름·효과가 사라지므로 제외한다.
+    public bool CanUpgrade => !isUpgraded
+                              && upgradedState.HasEffects
+                              && !string.IsNullOrEmpty(upgradedState.cardName);
+
     // cardDescription의 {인덱스.필드명} 토큰을 ActiveEffects[인덱스]의 public 필드값으로 치환한다.
     // 예) "적에게 {0.amount}의 피해를 {0.hitCount}회 줍니다." → "적에게 5의 피해를 3회 줍니다."
     // ActiveEffects가 강화 여부에 따라 다른 리스트를 반환하므로 강화 수치는 자동 반영됨.
