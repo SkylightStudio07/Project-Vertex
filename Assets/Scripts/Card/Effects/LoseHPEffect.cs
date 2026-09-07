@@ -2,14 +2,11 @@
 public class LoseHPEffect : CardEffect
 {
     public int amount;
+    public EffectTargetSelector targets = EffectTargetSelector.Source;
 
     public override void Execute(CardContext context)
     {
-        if (GameManager.Instance == null) return;
-        int hpBefore = GameManager.Instance.PlayerHP;
-        GameManager.Instance.TakeDamage(amount);
-
-        if (context.State != null && GameManager.Instance.PlayerHP < hpBefore)
-            context.State.PlayerLostHpThisTurn = true;
+        foreach (var target in targets.Resolve(context))
+            target.TakeDamage(new DamageInfo(amount, context.Source, true));
     }
 }

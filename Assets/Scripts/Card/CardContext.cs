@@ -23,6 +23,55 @@ public class CardContext
     public EnemyInstance Target;           // 단일 대상용 (플레이어가 적을 타겟팅할 때)
     public List<EnemyInstance> AllEnemies; // 광역기용
 
+    // 신규 효과 시스템의 진영 중립 필드. 레거시 필드는 마이그레이션 호환을 위해 유지한다.
+    public ICombatant SourceOverride;
+    public ICombatant PrimaryTargetOverride;
+    public int ExecutionDepth;
+
+    // 패시브가 CardEffect를 발사할 때 채워지는 이벤트 정보.
+    // 일반 카드/아이템/적 행동에서는 null/0이다.
+    public IPassiveLogic TriggeringPassive;
+    public int ActualDamage;
+    public StatusInstance TriggeringStatus => TriggeringPassive as StatusInstance;
+
     // 공격자를 ICombatant로 반환 — 플레이어 행동이면 Player, 적 행동이면 ActingEnemy
-    public ICombatant Attacker => ActingEnemy ?? (ICombatant)State?.Player;
+    public ICombatant Source => SourceOverride ?? ActingEnemy ?? (ICombatant)State?.Player;
+    public ICombatant PrimaryTarget
+    {
+        get
+        {
+            // 패시브 사건에는 상대가 없을 수 있음.
+            if (TriggeringPassive != null) return PrimaryTargetOverride;
+            if (PrimaryTargetOverride != null) return PrimaryTargetOverride;
+            if (Target != null) return Target;
+            return ActingEnemy != null ? State?.Player : null;
+        }
+    }
+    public ICombatant Attacker => Source;
+
+    public static CardContext CreatePassiveContext(
+        BattleState state,
+        ICombatant owner,
+        ICombatant primaryTarget,
+        IPassiveLogic passive,
+        int actualDamage = 0,
+        CardContext parent = null)
+    {
+        state ??= parent?.State;
+        return new CardContext
+        {
+            State = state,
+            Battle = parent?.Battle ?? BattleManager.Instance,
+            Card = parent?.Card,
+            Item = parent?.Item,
+            ActingEnemy = owner as EnemyInstance,
+            Target = primaryTarget as EnemyInstance,
+            AllEnemies = state?.Enemies ?? parent?.AllEnemies,
+            SourceOverride = owner,
+            PrimaryTargetOverride = primaryTarget,
+            TriggeringPassive = passive,
+            ActualDamage = actualDamage,
+            ExecutionDepth = parent?.ExecutionDepth ?? 0,
+        };
+    }
 }

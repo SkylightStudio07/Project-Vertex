@@ -72,6 +72,17 @@ public class PlayerEnergyCondition : CardCondition
 }
 
 [System.Serializable]
+public class PlayerWeaponCondition : CardCondition
+{
+    public WeaponData weapon;
+
+    public override bool IsMet(CardContext context)
+    {
+        return weapon != null && context?.State?.CurrentWeapon == weapon;
+    }
+}
+
+[System.Serializable]
 public class PlayerLostHpThisTurnCondition : CardCondition
 {
     public bool expected = true;
@@ -84,52 +95,112 @@ public class PlayerLostHpThisTurnCondition : CardCondition
 }
 
 [System.Serializable]
-public class PlayerHasStatusCondition : CardCondition
+public class HasStatusCondition : CardCondition
 {
-    public StatusType statusType;
+    public EffectTargetSelector targets = EffectTargetSelector.PrimaryTarget;
+    public StatusDefinition status;
     public int minimumMagnitude = 1;
-    public bool debuffOnly;
 
     public override bool IsMet(CardContext context)
     {
-        var player = context.State?.Player;
-        if (player == null) return false;
-
-        foreach (var passive in player.Passives)
-        {
-            if (passive is not StatusEffectBase status) continue;
-            if (!MatchesStatusType(status, statusType)) continue;
-            if (debuffOnly && !IsDebuff(status)) continue;
-            if (Math.Abs(status.Stacks) >= minimumMagnitude) return true;
-        }
-
+        foreach (var target in targets.Resolve(context))
+            if (target.Statuses.Has(status, minimumMagnitude)) return true;
         return false;
     }
+}
 
-    private static bool MatchesStatusType(StatusEffectBase status, StatusType type)
-    {
-        return type switch
-        {
-            StatusType.Weak => status is WeakStatus,
-            StatusType.Vulnerable => status is VulnerableStatus,
-            StatusType.Poison => status is PoisonStatus,
-            StatusType.Strength => status is StrengthStatus,
-            StatusType.Dexterity => status is DexterityStatus,
-            StatusType.DamageNullified => status is DamageNullifiedStatus,
-            _ => false,
-        };
-    }
+[System.Serializable]
+public class HasStatusDispositionCondition : CardCondition
+{
+    public EffectTargetSelector targets = EffectTargetSelector.PrimaryTarget;
+    public StatusDisposition disposition = StatusDisposition.Debuff;
+    public int minimumMagnitude = 1;
 
-    private static bool IsDebuff(StatusEffectBase status)
+    public override bool IsMet(CardContext context)
     {
-        return status switch
-        {
-            WeakStatus => true,
-            VulnerableStatus => true,
-            PoisonStatus => true,
-            StrengthStatus strength => strength.Stacks < 0,
-            DexterityStatus dexterity => dexterity.Stacks < 0,
-            _ => false,
-        };
+        foreach (var target in targets.Resolve(context))
+            if (target.Statuses.HasDisposition(disposition, minimumMagnitude)) return true;
+        return false;
     }
+}
+
+public enum CombatantValue
+{
+    Hp,
+    MissingHp,
+    Block,
+    StatusStacks,
+    DebuffStacks,
+    BuffStacks,
+}
+
+[System.Serializable]
+public class CombatantValueCondition : CardCondition
+{
+    public EffectTargetSelector targets = EffectTargetSelector.PrimaryTarget;
+    public CombatantValue value;
+    public StatusDefinition status;
+    public IntComparison comparison;
+    public int amount;
+
+    public override bool IsMet(CardContext context)
+    {
+        foreach (var target in targets.Resolve(context))
+        {
+            int current = value switch
+            {
+                CombatantValue.Hp => target.HP,
+                CombatantValue.MissingHp => Math.Max(0, target.MaxHP - target.HP),
+                CombatantValue.Block => target.Block,
+                CombatantValue.StatusStacks => target.Statuses.GetMagnitude(status),
+                CombatantValue.DebuffStacks => target.Statuses.GetTotalMagnitude(StatusDisposition.Debuff),
+                CombatantValue.BuffStacks => target.Statuses.GetTotalMagnitude(StatusDisposition.Buff),
+                _ => 0,
+            };
+            if (Compare(current, comparison, amount)) return true;
+        }
+        return false;
+    }
+}
+
+[System.Serializable]
+public class AllConditions : CardCondition
+{
+    [UnityEngine.SerializeReference, SubclassPicker] public System.Collections.Generic.List<CardCondition> conditions = new();
+
+    public override bool IsMet(CardContext context)
+    {
+        if (conditions.Count == 0) return false;
+        foreach (var condition in conditions)
+            if (condition == null || !condition.IsMet(context)) return false;
+        return true;
+    }
+}
+
+[System.Serializable]
+public class AnyCondition : CardCondition
+{
+    [UnityEngine.SerializeReference, SubclassPicker] public System.Collections.Generic.List<CardCondition> conditions = new();
+
+    public override bool IsMet(CardContext context)
+    {
+        foreach (var condition in conditions)
+            if (condition != null && condition.IsMet(context)) return true;
+        return false;
+    }
+}
+
+[System.Serializable]
+public class NotCondition : CardCondition
+{
+    [UnityEngine.SerializeReference, SubclassPicker] public CardCondition condition;
+    public override bool IsMet(CardContext context) => condition != null && !condition.IsMet(context);
+}
+
+// 기존 직렬화 타입을 보존하기 위한 호환 셸. 신규 데이터에서는 HasStatusCondition을 사용한다.
+[Obsolete("Use HasStatusCondition with an explicit target selector.")]
+[System.Serializable]
+public class PlayerHasStatusCondition : HasStatusCondition
+{
+    public PlayerHasStatusCondition() => targets = EffectTargetSelector.Source;
 }

@@ -22,7 +22,7 @@ MonoBehaviour:
   isUpgraded: 0
   normalState:
     cardName: "\uC7AC\uC7A5\uC804"
-    energyCost: 2
+    energyCost: 1
     ammoCost: 0
     effects:
     - rid: 4680130923130519622
@@ -52,4 +52,4 @@ MonoBehaviour:
     - rid: 4680130923130519622
       type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 2
+        amount: 3

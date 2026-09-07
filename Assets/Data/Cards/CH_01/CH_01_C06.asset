@@ -18,7 +18,7 @@ MonoBehaviour:
   cardRarity: 1
   cardOwner: 1
   cardDescription: "\uC120\uD0DD\uD55C \uC801\uC758 \uCCB4\uB825\uC744 \uAC10\uC18C\uC2DC\uD0AC
-    \uB54C \uB9C8\uB2E4 \uCCB4\uB825\uC744 {0.amount} \uD68C\uBCF5\uD55C\uB2E4."
+    \uB54C \uB9C8\uB2E4 \uCCB4\uB825\uC744 {0.potency} \uD68C\uBCF5\uD55C\uB2E4."
   useMode: 1
   isUpgraded: 0
   normalState:
@@ -47,19 +47,29 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 2470581257654239313
-      type: {class: TriggerEffectsOnTargetHpLossEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        effectsOnHpLoss:
-        - rid: 2470581257654239314
+        status: {fileID: 11400000, guid: 1000000000000000000000000000000f, type: 2}
+        operation: 0
+        amount: 1
+        potency: 3
+        secondaryPotency: 0
+        targets:
+          mode: 1
     - rid: 2470581257654239314
       type: {class: HealEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 3
     - rid: 2470581257654239315
-      type: {class: TriggerEffectsOnTargetHpLossEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        effectsOnHpLoss:
-        - rid: 2470581257654239316
+        status: {fileID: 11400000, guid: 1000000000000000000000000000000f, type: 2}
+        operation: 0
+        amount: 1
+        potency: 5
+        secondaryPotency: 0
+        targets:
+          mode: 1
     - rid: 2470581257654239316
       type: {class: HealEffect, ns: , asm: Assembly-CSharp}
       data:

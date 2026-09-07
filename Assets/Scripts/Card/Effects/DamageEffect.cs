@@ -1,142 +1,86 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class DamageEffect : CardEffect
 {
     public int amount;
+    public EffectValue scaling;
     public int hitCount = 1;
-    public TargetType targetType = TargetType.SingleEnemy;
-    // hitCount > 1일 때만 적용. 0이면 딜레이 없이 동기 실행(Execute()와 동일)
+    public EffectTargetSelector targets = EffectTargetSelector.PrimaryTarget;
+    public bool piercing;
+    public bool environmentalDamage;
     public float hitInterval = 0.08f;
 
     public override void Execute(CardContext context)
     {
-        if (context.State == null) return;
-
-        ICombatant attacker = context.Attacker;
-        bool isAmmoAttack = context.Card != null && context.Card.AmmoCost > 0;
-
-        switch (targetType)
-        {
-            case TargetType.SingleEnemy:
-                ICombatant single = ResolveSingleTarget(context);
-                if (single == null || single.IsDead) return;
-                for (int i = 0; i < hitCount; i++)
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), single, context.State);
-                break;
-
-            case TargetType.AllEnemies:
-                foreach (var enemy in context.AllEnemies)
-                {
-                    if (enemy.IsDead) continue;
-                    for (int i = 0; i < hitCount; i++)
-                        DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), enemy, context.State);
-                }
-                break;
-
-            case TargetType.RandomEnemy:
-                var alive = new List<EnemyInstance>();
-                foreach (var e in context.AllEnemies)
-                    if (!e.IsDead) alive.Add(e);
-                if (alive.Count == 0) return;
-                for (int i = 0; i < hitCount; i++)
-                {
-                    int idx = context.Battle != null
-                        ? context.Battle.Rnd.Next(0, alive.Count)
-                        : UnityEngine.Random.Range(0, alive.Count);
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), alive[idx], context.State);
-                }
-                break;
-        }
+        if (context?.State == null) return;
+        foreach (var target in targets.Resolve(context))
+            for (int i = 0; i < hitCount && !target.IsDead; i++)
+                DealDamage(context, target);
     }
 
-    // hitCount == 1이거나 hitInterval == 0이면 동기 Execute()로 폴백.
-    // 그 외에는 히트 사이에 hitInterval만큼 대기하면서 데미지를 순차 적용한다.
-    public override IEnumerator ExecuteCoroutine(CardContext ctx)
+    public override IEnumerator ExecuteCoroutine(CardContext context)
     {
         if (hitCount <= 1 || hitInterval <= 0f)
         {
-            Execute(ctx);
+            Execute(context);
             yield break;
         }
-
-        if (ctx.State == null) yield break;
-        ICombatant attacker = ctx.Attacker;
-        bool isAmmoAttack = ctx.Card != null && ctx.Card.AmmoCost > 0;
+        if (context?.State == null) yield break;
 
         var delay = new WaitForSeconds(hitInterval);
-
-        switch (targetType)
+        foreach (var target in targets.Resolve(context))
         {
-            case TargetType.SingleEnemy:
-                ICombatant single = ResolveSingleTarget(ctx);
-                if (single == null || single.IsDead) yield break;
-                for (int i = 0; i < hitCount; i++)
-                {
-                    if (single.IsDead) yield break;
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), single, ctx.State);
-                    if (i < hitCount - 1) yield return delay;
-                }
-                break;
-
-            case TargetType.AllEnemies:
-                var targets = new List<EnemyInstance>(ctx.AllEnemies);
-                foreach (var enemy in targets)
-                {
-                    if (enemy.IsDead) continue;
-                    for (int i = 0; i < hitCount; i++)
-                    {
-                        if (enemy.IsDead) break;
-                        DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), enemy, ctx.State);
-                        if (i < hitCount - 1) yield return delay;
-                    }
-                }
-                break;
-
-            case TargetType.RandomEnemy:
-                var alive = new List<EnemyInstance>();
-                foreach (var e in ctx.AllEnemies)
-                    if (!e.IsDead) alive.Add(e);
-                if (alive.Count == 0) yield break;
-                for (int i = 0; i < hitCount; i++)
-                {
-                    alive.RemoveAll(e => e.IsDead);
-                    if (alive.Count == 0) yield break;
-                    int idx = ctx.Battle != null
-                        ? ctx.Battle.Rnd.Next(0, alive.Count)
-                        : UnityEngine.Random.Range(0, alive.Count);
-                    DamageCalculator.Resolve(new DamageInfo(amount, attacker, false, isAmmoAttack), alive[idx], ctx.State);
-                    if (i < hitCount - 1) yield return delay;
-                }
-                break;
+            for (int i = 0; i < hitCount && !target.IsDead; i++)
+            {
+                DealDamage(context, target);
+                if (i < hitCount - 1 && !target.IsDead) yield return delay;
+            }
         }
     }
 
-    // 표시용 보정 데미지 — 실제 파이프라인(DamageCalculator)과 같은 순서로 Preview 훅을 돌린다.
-    // 공격자 측(힘·약화·전술보행)은 항상, 대상 측(취약·버퍼)은 타겟팅 중(target != null)에만 반영.
     public override int GetDisplayValue(string fieldName, int rawValue, BattleState state, CardData card, EnemyInstance target = null)
     {
         if (fieldName != nameof(amount) || state?.Player == null) return rawValue;
 
+        int baseValue = rawValue;
+        if (scaling.source != EffectValueSource.None)
+        {
+            var previewContext = new CardContext
+            {
+                State = state,
+                Card = card,
+                Target = target,
+                AllEnemies = state.Enemies,
+            };
+            baseValue += scaling.Evaluate(previewContext, target);
+        }
+
         bool isAmmoAttack = card != null && card.AmmoCost > 0;
-        var info = new DamageInfo(rawValue, state.Player, false, isAmmoAttack);
-        foreach (var p in state.Player.Passives)
-            info = p.PreviewOutgoingDamage(info, state);
+        var info = new DamageInfo(baseValue, state.Player, piercing, isAmmoAttack);
+        foreach (var passive in state.Player.Passives)
+            info = passive.PreviewOutgoingDamage(info, state);
 
         if (target != null)
-            foreach (var p in target.Passives)
-                info = p.PreviewIncomingDamage(info, state);
+            foreach (var passive in target.Passives)
+                info = passive.PreviewIncomingDamage(info, state);
 
         return info.Amount;
     }
 
-    // 플레이어 카드 → ctx.Target(적), 적 행동 → 플레이어
-    private static ICombatant ResolveSingleTarget(CardContext ctx)
+    public int GetRawAmount(CardContext context, ICombatant target)
+        => amount + scaling.Evaluate(context, target);
+
+    private void DealDamage(CardContext context, ICombatant target)
     {
-        if (ctx.Target != null) return ctx.Target;
-        if (ctx.ActingEnemy != null) return ctx.State?.Player;
-        return null;
+        int resolvedAmount = GetRawAmount(context, target);
+        if (resolvedAmount <= 0) return;
+        bool isAmmoAttack = context.Card != null && context.Card.AmmoCost > 0;
+        DamageCalculator.Resolve(
+            new DamageInfo(resolvedAmount, environmentalDamage ? null : context.Source, piercing, isAmmoAttack),
+            target,
+            context.State,
+            context);
     }
 }

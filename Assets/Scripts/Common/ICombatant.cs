@@ -7,9 +7,12 @@ public interface ICombatant
     int Block { get; }
     bool IsDead { get; }
     List<IPassiveLogic> Passives { get; }
+    StatusContainer Statuses { get; }
 
     void TakeDamage(DamageInfo info);
     void AddBlock(int amount);
+    void Heal(int amount);
+    void AddPassive(IPassiveLogic passive);
     void ResetBlock();
     void RemoveExpiredPassives();
 }
