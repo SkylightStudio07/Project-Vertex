@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: "\uAC00\uC18D\uC5D4\uC9C4"
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: "\uAC00\uC18D \uC5D4\uC9C4"
-  itemIcon: {fileID: 3389322465521877323, guid: 5ec830fdbcd9e0341a9ff1e600e2ee3a, type: 3}
+  itemIcon: {fileID: 21300000, guid: 383e9569909d0df47bd87e6437b621c5, type: 3}
   itemRarity: 1
   usableOutsideBattle: 0
   itemGetTypes: 11
   itemDescription: "\uCE74\uB4DC\uB97C \uC138 \uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
   itemEffects:
-  - {fileID: 11400000, guid: f38845f2ed830194689b2d7b1f0f72ae, type: 2}
+  - rid: 3673691716342251931
   useMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 3673691716342251931
+      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 3
