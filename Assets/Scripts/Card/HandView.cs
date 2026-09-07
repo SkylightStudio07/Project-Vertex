@@ -17,6 +17,8 @@ public class HandView : MonoBehaviour
     private void Start()
     {
         BattleManager.Instance.OnHandChanged += Refresh;
+        // 손패 선택 모드 진입/종료 시 대상 아닌 카드의 흐림 표시를 갱신한다
+        HandCardSelector.OnSelectionModeChanged += Refresh;
         Refresh();
     }
 
@@ -24,6 +26,7 @@ public class HandView : MonoBehaviour
     {
         if (BattleManager.Instance != null)
             BattleManager.Instance.OnHandChanged -= Refresh;
+        HandCardSelector.OnSelectionModeChanged -= Refresh;
     }
 
     private void Refresh()
@@ -40,6 +43,15 @@ public class HandView : MonoBehaviour
         {
             var view = Instantiate(cardPrefab, cardContainer);
             view.SetCard(hand[i]);
+
+            // 선택 모드에서 대상이 아닌 카드는 흐리게 — 어떤 카드를 고를 수 있는지 보이도록
+            if (HandCardSelector.IsSelecting && HandCardSelector.Instance != null &&
+                !HandCardSelector.Instance.IsSelectable(hand[i]))
+            {
+                var group = view.GetComponent<CanvasGroup>();
+                if (group == null) group = view.gameObject.AddComponent<CanvasGroup>();
+                group.alpha = 0.4f;
+            }
 
             CardInteractionView interactionView = view.GetComponent<CardInteractionView>();
             if (interactionView != null)

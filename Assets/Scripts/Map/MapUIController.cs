@@ -58,6 +58,18 @@ public class MapUIController : MonoBehaviour
         mapPanel.SetActive(false);
     }
 
+    // 현재 층에서 끝내야 할 행동(전투/이벤트/휴식/상점/성소 선택)이 안 끝난 상태인지 검사.
+    // 전투 중이거나, 이벤트/휴식/상점/성소 UI가 열려있으면 다음 노드로 이동할 수 없다.
+    private bool CanAdvanceToNextNode()
+    {
+        if (BattleManager.Instance != null && BattleManager.Instance.IsInBattle) return false;
+        if (eventView != null && eventView.IsEventOpen) return false;
+        if (restView != null && restView.gameObject.activeSelf) return false;
+        if (shopView != null && shopView.gameObject.activeSelf) return false;
+        if (selectCoopCharUI != null && selectCoopCharUI.gameObject.activeSelf) return false;
+        return true;
+    }
+
     // Map 버튼 OnClick()에 바인딩
     public void ToggleMap()
     {
@@ -158,6 +170,7 @@ public class MapUIController : MonoBehaviour
     {
         MapNode currentNode      = RunData.Instance.CurrentNode;
         List<MapNode> accessible = MapManager.Instance.GetAccessibleNodes();
+        bool canAdvance = CanAdvanceToNextNode();
 
         foreach (var view in nodeViews)
         {
@@ -167,7 +180,7 @@ public class MapUIController : MonoBehaviour
                 state = MapNodeState.Current;
             else if (view.Data.isVisited)
                 state = MapNodeState.Visited;
-            else if (accessible.Contains(view.Data))
+            else if (canAdvance && accessible.Contains(view.Data))
                 state = MapNodeState.Accessible;
             else
                 state = MapNodeState.Locked;
@@ -178,6 +191,12 @@ public class MapUIController : MonoBehaviour
 
     private void OnNodeClicked(MapNode node)
     {
+        if (!CanAdvanceToNextNode())
+        {
+            Debug.LogWarning("[Map] 현재 층에서 끝내야 할 행동이 남아있어 다음 노드로 이동할 수 없습니다.");
+            return;
+        }
+
         MapManager.Instance.MoveToNode(node);
         RefreshNodeStates();
         CloseMap();

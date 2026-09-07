@@ -30,7 +30,6 @@ public class MapConfig : ScriptableObject
         new NodeTypeWeight { nodeType = NodeType.Combat, weight = 1f },
         new NodeTypeWeight { nodeType = NodeType.Elite, weight = 0.3f },
         new NodeTypeWeight { nodeType = NodeType.Sanctuary, weight = 0.1f },
-        new NodeTypeWeight { nodeType = NodeType.Treasure_Box, weight = 0.1f },
         new NodeTypeWeight { nodeType = NodeType.Event, weight = 0.4f },
         new NodeTypeWeight { nodeType = NodeType.Shop, weight = 0.1f },
         new NodeTypeWeight { nodeType = NodeType.Rest, weight = 0.1f },
@@ -58,13 +57,12 @@ public class MapConfig : ScriptableObject
 
     [Header("층별 고정 노드 설정(보스, 성소, 보물상자)")]
     // 지정한 층에 해당 타입의 노드를 반드시 1개 배치.
-    // 성소, 보물상자, 보스 전 휴식 노드는 고정임.
+    // 성소, 보스 전 휴식 노드는 고정임.
     public List<FloorGuarantee> guaranteedNodes = new()
     {
         new FloorGuarantee { floorIndex = 0, nodeType = NodeType.Blessing }, // 1층 (0-based), 시작은 축복 노드로 고정
         new FloorGuarantee { floorIndex = 1, nodeType = NodeType.Combat },  // 2층 (0-based)
         new FloorGuarantee { floorIndex = 2, nodeType = NodeType.Sanctuary },  // 3층 (0-based)
-        new FloorGuarantee { floorIndex = 9, nodeType = NodeType.Treasure_Box },  // 10층 (0-based)
         new FloorGuarantee { floorIndex = 14, nodeType = NodeType.Rest },  // 15층 (0-based), 보스전 직전 휴식 보장
         new FloorGuarantee { floorIndex = 15, nodeType = NodeType.Boss },  // 16층 (0-based), 보스 고정
     };

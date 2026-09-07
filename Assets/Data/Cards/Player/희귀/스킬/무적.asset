@@ -10,33 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC7AC\uC7A5\uC804"
+  m_Name: "\uBB34\uC801"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
   cardType: 1
-  cardRarity: 0
+  cardRarity: 1
   cardOwner: 0
-  cardDescription: "{0.amount}\uAC1C \uB9CC\uD07C \uD0C4\uC57D\uC744 \uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
+  cardDescription: "\uC18C\uBA78. \uBC29\uC5B4\uB3C4\uAC00 {0.amount}\uB9CC\uD07C
+    \uC99D\uAC00\uD569\uB2C8\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
-    cardName: "\uC7AC\uC7A5\uC804"
-    energyCost: 1
+    cardName: "\uBB34\uC801"
+    energyCost: 2
     ammoCost: 0
     effects:
-    - rid: 4680130923130519622
-    isExhaust: 0
+    - rid: 4680130923130519624
+    isExhaust: 1
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uC7AC\uC7A5\uC804+"
-    energyCost: 0
+    cardName: "\uBB34\uC801+"
+    energyCost: 2
     ammoCost: 0
     effects:
-    - rid: 4680130923130519621
-    isExhaust: 0
+    - rid: 4680130923130519625
+    isExhaust: 1
     isEthereal: 0
     isInnate: 0
     isRetain: 0
@@ -45,11 +46,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4680130923130519621
-      type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
+    - rid: 4680130923130519624
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 3
-    - rid: 4680130923130519622
-      type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
+        amount: 30
+    - rid: 4680130923130519625
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 3
+        amount: 40
