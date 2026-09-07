@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: Dexterity
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: status.dexterity
+  displayName: 민첩
+  description: 얻는 방어도가 스택만큼 변합니다.
+  icon: {fileID: 0}
+  disposition: 3
+  stackPolicy: 0
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 1006
+  references:
+    version: 2
+    RefIds:
+    - rid: 1006
+      type: {class: BlockModifierStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        magnitudeSource: 1
+        constantAmount: 0

@@ -51,12 +51,14 @@ MonoBehaviour:
       data:
         amount: 6
         hitCount: 2
-        targetType: 1
+        targets:
+          mode: 1
         hitInterval: 0.08
     - rid: 4680130923130519633
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 8
         hitCount: 2
-        targetType: 1
+        targets:
+          mode: 1
         hitInterval: 0.08

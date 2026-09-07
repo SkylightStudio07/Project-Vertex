@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c854a75a493ec1e4e8963bb23c501a44, type: 3}
+  m_Name: "\uC2E0\uC131\uD55C \uBD80\uB984"
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
+  intentType: 2
+  effects:
+  - rid: 5918324932946165763
+  references:
+    version: 2
+    RefIds:
+    - rid: 5918324932946165763
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000005, type: 2}
+        operation: 0
+        amount: 3
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0

@@ -23,9 +23,9 @@ public class MapManager : MonoBehaviour
 
     // 런 시작 시 GameManager에서 호출.
     // 맵을 생성하고 RunData에 저장한 뒤 0층(Blessing)에 배치한다.
-    public void InitializeMap()
+    public void InitializeMap(int chapter = 1)
     {
-        MapData mapData = MapGenerator.Generate(mapConfig);
+        MapData mapData = MapGenerator.Generate(mapConfig, new System.Random().Next(int.MinValue, int.MaxValue));
 
         RunData.Instance.mapData          = mapData;
         RunData.Instance.currentFloor     = 0;
@@ -33,7 +33,7 @@ public class MapManager : MonoBehaviour
         RunData.Instance.CurrentNodeType  = NodeType.Blessing;
 
         // 맵 시드가 확정된 뒤, 이 런의 전투 조우 큐를 생성한다.
-        RunData.Instance.BuildEncounterQueues(mapConfig);
+        RunData.Instance.BuildEncounterQueues(mapConfig, chapter);
     }
 
     // 지정한 노드로 이동. 이동 가능 여부는 호출 전에 확인할 것.

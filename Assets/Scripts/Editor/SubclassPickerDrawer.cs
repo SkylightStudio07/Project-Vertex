@@ -85,6 +85,7 @@ public class SubclassPickerDrawer : PropertyDrawer
         => TypeCache.GetTypesDerivedFrom(baseType)
             .Where(t => !t.IsAbstract
                         && !t.IsGenericType
+                        && !Attribute.IsDefined(t, typeof(ObsoleteAttribute))
                         && !typeof(UnityEngine.Object).IsAssignableFrom(t) // SO/MB는 인라인 직렬화 불가
                         && t.GetConstructor(Type.EmptyTypes) != null)
             .OrderBy(t => t.Name);

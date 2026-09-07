@@ -17,8 +17,8 @@ MonoBehaviour:
   cardType: 2
   cardRarity: 0
   cardOwner: 0
-  cardDescription: "\uC801\uC744 \uD0C0\uACA9\uD560 \uB54C \uB9C8\uB2E4 {0.statusType}\uB97C
-    {0.amount} \uBD80\uC5EC\uD55C\uB2E4."
+  cardDescription: "\uC801\uC744 \uD0C0\uACA9\uD560 \uB54C \uB9C8\uB2E4 {0.status}\uB97C
+    {0.potency} \uBD80\uC5EC\uD55C\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -47,12 +47,22 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 2470581257654239329
-      type: {class: ApplyStatusOnHitPowerEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 1000000000000000000000000000000e, type: 2}
+        operation: 0
         amount: 1
+        potency: 1
+        secondaryPotency: 0
+        targets:
+          mode: 0
     - rid: 2470581257654239330
-      type: {class: ApplyStatusOnHitPowerEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 1000000000000000000000000000000e, type: 2}
+        operation: 0
         amount: 1
+        potency: 1
+        secondaryPotency: 0
+        targets:
+          mode: 0

@@ -19,15 +19,23 @@ MonoBehaviour:
   itemGetTypes: 11
   itemDescription: "25\uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4"
   itemEffects:
-  - rid: 3673691716342251932
+  - rid: 7338471699195101301
   useMode: 1
   references:
     version: 2
     RefIds:
-    - rid: 3673691716342251932
+    - rid: 7338471699195101301
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 25
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 11400000, guid: 1000000000000000000000000000000a, type: 2}
+          multiplier: 0
+          flatBonus: 0
         hitCount: 1
-        targetType: 1
+        targets:
+          mode: 1
+        piercing: 0
         hitInterval: 0.08

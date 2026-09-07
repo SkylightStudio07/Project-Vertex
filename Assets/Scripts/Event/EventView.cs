@@ -208,8 +208,7 @@ public class EventView : MonoBehaviour
             if (effects != null)
             {
                 var ctx = new CardContext();
-                foreach (var effect in effects)
-                    if (effect != null) effect.Execute(ctx);
+                EffectRunner.ExecuteImmediate(effects, ctx);
             }
         }
 

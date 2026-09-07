@@ -18,7 +18,7 @@ MonoBehaviour:
   cardRarity: 1
   cardOwner: 1
   cardDescription: "\uCCB4\uB825 {0.amount}\uB97C \uC18C\uBE44\uD558\uACE0 \uC790\uC2E0\uC5D0\uAC8C
-    \uAC78\uB9B0 {1.statusType}\uC744 {1.amount}\uC18C\uBE44\uD55C\uB2E4."
+    \uAC78\uB9B0 {1.status}\uC744 {1.amount}\uC18C\uBE44\uD55C\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -57,12 +57,22 @@ MonoBehaviour:
       data:
         amount: 5
     - rid: 2470581257654239302
-      type: {class: RemovePlayerDebuffEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 1
         amount: 2
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0
     - rid: 2470581257654239303
-      type: {class: RemovePlayerDebuffEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 1
         amount: 3
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0
