@@ -46,10 +46,14 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 7201000000000000006
-      type: {class: PressureStatusCardEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusAtEndTurnInHandEffect, ns: , asm: Assembly-CSharp}
       data:
-        gazeAmount: 1
+        status: {fileID: 11400000, guid: 10000000000000000000000000000008, type: 2}
+        amount: 1
+        returnToDrawPile: 1
     - rid: 7201000000000000007
-      type: {class: PressureStatusCardEffect, ns: , asm: Assembly-CSharp}
+      type: {class: ApplyStatusAtEndTurnInHandEffect, ns: , asm: Assembly-CSharp}
       data:
-        gazeAmount: 1
+        status: {fileID: 11400000, guid: 10000000000000000000000000000008, type: 2}
+        amount: 1
+        returnToDrawPile: 1

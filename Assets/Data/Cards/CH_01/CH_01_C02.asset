@@ -17,8 +17,8 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 1
   cardOwner: 1
-  cardDescription: "\uCCB4\uB825\uC744 {0.amount}\uB97C \uC783\uACE0 {1.target}\uC5D0\uAC8C
-    {1.amount}\uC758 {1.statusType}\uB97C \uC900\uB2E4."
+  cardDescription: "\uCCB4\uB825\uC744 {0.amount}\uB97C \uC783\uACE0 {1.targets}\uC5D0\uAC8C
+    {1.amount}\uC758 {1.status}\uB97C \uC900\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -55,9 +55,13 @@ MonoBehaviour:
     - rid: 2470581146967605253
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 0
         amount: 2
-        target: 2
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 2
     - rid: 2470581146967605254
       type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -65,6 +69,10 @@ MonoBehaviour:
     - rid: 2470581146967605255
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 0
         amount: 3
-        target: 2
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 2

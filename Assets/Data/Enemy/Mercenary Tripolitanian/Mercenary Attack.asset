@@ -22,6 +22,15 @@ MonoBehaviour:
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 6
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
         hitCount: 1
-        targetType: 1
+        targets:
+          mode: 1
+        piercing: 0
+        environmentalDamage: 0
         hitInterval: 0.08

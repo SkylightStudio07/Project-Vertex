@@ -194,8 +194,7 @@ public class DialogueView : MonoBehaviour
         if (option.effects != null)
         {
             var ctx = new CardContext();
-            foreach (var effect in option.effects)
-                if (effect != null) effect.Execute(ctx);
+            EffectRunner.ExecuteImmediate(option.effects, ctx);
         }
 
         // Dictionary.TryGetValue는 key가 null이면 ArgumentNullException을 던진다 (못 찾는 것과 다름).

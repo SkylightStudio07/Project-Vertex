@@ -1,12 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class NodeTypeWeight // 노드 타입에 따른 가중치. 승천마다 다르게 세팅해야 할 가능성도?
-{
-    public NodeType nodeType;
-    [Min(0)] public float weight;   // 0이면 해당 타입은 등장하지 않아야 함... 일단은.
-}
 
 // 특정 층에 반드시 등장해야 하는 노드 타입 지정
 [System.Serializable]
@@ -16,23 +10,6 @@ public class FloorGuarantee // 층별 고정 노드.
     public int floorIndex;      // 0층부터 시작하는 거 주의
     public NodeType nodeType;
 }
-
-[System.Serializable, CreateAssetMenu(fileName = "EnemyEncounter", menuName = "Game Asset/Create EnemyEncounterData", order = 1)]
-public class EnemyEncounter : ScriptableObject
-{
-    public int chapter = 1;
-    public EnemyEncounterType encounterType;
-    public List<EnemyData> enemies = new();
-    [Min(0f)] public float weight = 1f;
-}
-
-public enum EnemyEncounterType
-{
-    Normal,
-    Elite,
-    Boss
-}
-
 
 // Inspector에서 조정하는 맵 생성 파라미터 모음.
 // MapGenerator 세팅값이라고 생각하자.

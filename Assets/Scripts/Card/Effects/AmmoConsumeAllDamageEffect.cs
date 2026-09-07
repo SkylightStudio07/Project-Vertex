@@ -5,7 +5,7 @@
 public class AmmoConsumeAllDamageEffect : CardEffect
 {
     public int damagePerAmmo = 8;
-    public TargetType targetType = TargetType.SingleEnemy;
+    public EffectTargetSelector targets = EffectTargetSelector.PrimaryTarget;
 
     public override void Execute(CardContext ctx)
     {
@@ -17,30 +17,7 @@ public class AmmoConsumeAllDamageEffect : CardEffect
         ctx.State.Ammo = 0;
 
         int totalDamage = damagePerAmmo * ammo;
-        ICombatant attacker = ctx.Attacker;
-
-        switch (targetType)
-        {
-            case TargetType.SingleEnemy:
-                ICombatant target = ResolveSingleTarget(ctx);
-                if (target == null || target.IsDead) return;
-                DamageCalculator.Resolve(new DamageInfo(totalDamage, attacker, false, true), target, ctx.State);
-                break;
-
-            case TargetType.AllEnemies:
-                foreach (var enemy in ctx.AllEnemies)
-                {
-                    if (enemy.IsDead) continue;
-                    DamageCalculator.Resolve(new DamageInfo(totalDamage, attacker, false, true), enemy, ctx.State);
-                }
-                break;
-        }
-    }
-
-    private static ICombatant ResolveSingleTarget(CardContext ctx)
-    {
-        if (ctx.Target != null) return ctx.Target;
-        if (ctx.ActingEnemy != null) return ctx.State?.Player;
-        return null;
+        foreach (var target in targets.Resolve(ctx))
+            DamageCalculator.Resolve(new DamageInfo(totalDamage, ctx.Source, false, true), target, ctx.State, ctx);
     }
 }

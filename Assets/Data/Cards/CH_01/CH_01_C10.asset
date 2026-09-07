@@ -17,8 +17,8 @@ MonoBehaviour:
   cardType: 0
   cardRarity: 0
   cardOwner: 1
-  cardDescription: "{0.targetType}\uC5D0\uAC8C {0.damagePerStack} * {0.targetType}\uAC00
-    \uBCF4\uC720\uD558\uACE0 \uC788\uB294 {0.statusType} \uB2F9  {0.damagePerStack}\uC758
+  cardDescription: "{0.targets}\uC5D0\uAC8C {0.scaling.multiplier} * {0.targets}\uAC00
+    \uBCF4\uC720\uD558\uACE0 \uC788\uB294 {0.scaling.status} \uB2F9  {0.scaling.multiplier}\uC758
     \uD53C\uD574\uB97C \uC900\uB2E4. "
   useMode: 1
   isUpgraded: 0
@@ -48,14 +48,32 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 2470581257654239327
-      type: {class: DamageByTargetDebuffEffect, ns: , asm: Assembly-CSharp}
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
-        damagePerStack: 5
-        targetType: 1
+        amount: 0
+        scaling:
+          source: 1
+          target: 1
+          status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+          multiplier: 5
+          flatBonus: 0
+        hitCount: 1
+        targets:
+          mode: 1
+        piercing: 0
+        hitInterval: 0.08
     - rid: 2470581257654239328
-      type: {class: DamageByTargetDebuffEffect, ns: , asm: Assembly-CSharp}
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusType: 0
-        damagePerStack: 7
-        targetType: 1
+        amount: 0
+        scaling:
+          source: 1
+          target: 1
+          status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+          multiplier: 7
+          flatBonus: 0
+        hitCount: 1
+        targets:
+          mode: 1
+        piercing: 0
+        hitInterval: 0.08

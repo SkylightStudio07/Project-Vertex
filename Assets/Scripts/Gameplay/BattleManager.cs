@@ -97,6 +97,9 @@ public class BattleManager : MonoBehaviour
 
         SetupEnemies(enemyDataList);
         SetupBattleDeck(masterDeck);
+        _state.Player.Statuses.NotifyBattleStart(_state, _state.Player);
+        foreach (var enemy in _state.Enemies)
+            enemy.Statuses.NotifyBattleStart(_state, enemy);
         _state.Player.OnDied += Defeat;
         OnBattleStarted?.Invoke();
         _state.Player.OnDamaged += HandlePlayerDamaged;
@@ -179,6 +182,7 @@ public class BattleManager : MonoBehaviour
         try
         {
             bool shouldShuffleDrawPile = false;
+            var retainedCards = new List<CardData>();
             foreach (var card in _state.Hand)
             {
                 var ctx = new CardContext
@@ -189,13 +193,33 @@ public class BattleManager : MonoBehaviour
                     AllEnemies = _state.Enemies,
                 };
 
+                bool returnToDrawPile = false;
                 foreach (var effect in card.ActiveEffects)
                 {
                     if (effect is ICardEndTurnInHandEffect endTurnEffect)
-                        endTurnEffect.OnTurnEndInHand(ctx);
+                        returnToDrawPile |= endTurnEffect.OnTurnEndInHand(ctx);
+                }
+
+                if (returnToDrawPile)
+                {
+                    _state.DrawPile.Add(card);
+                    shouldShuffleDrawPile = true;
+                }
+                else if (card.IsRetain)
+                {
+                    retainedCards.Add(card);
+                }
+                else if (card.IsEthereal)
+                {
+                    _state.ExhaustPile.Add(card);
+                }
+                else
+                {
+                    _state.DiscardPile.Add(card);
                 }
             }
             _state.Hand.Clear();
+            _state.Hand.AddRange(retainedCards);
 
             if (shouldShuffleDrawPile)
                 Shuffle(_state.DrawPile);
@@ -242,7 +266,7 @@ public class BattleManager : MonoBehaviour
             enemy.NotifyActionStarted();
             yield return new WaitForSeconds(lungeOutWaitDuration);
 
-            enemy.ExecuteCurrentAction(_state, this); // 전진 피크 시점에 데미지 적용
+            yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
 
             yield return new WaitForSeconds(lungeBackWaitDuration + postActionDelay);
 
@@ -322,6 +346,7 @@ public class BattleManager : MonoBehaviour
             Target     = target,
             AllEnemies = _state.Enemies,
         };
+        _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
         StartCoroutine(ExecuteEffectsSequence(card.ActiveEffects, ctx));
 
         return true;
@@ -354,8 +379,7 @@ public class BattleManager : MonoBehaviour
                 AllEnemies = _state.Enemies,
             };
 
-            foreach (var effect in item.ItemEffects)
-                effect?.Execute(ctx);
+            EffectRunner.ExecuteImmediate(item.ItemEffects, ctx);
         }
         finally
         {
@@ -371,11 +395,7 @@ public class BattleManager : MonoBehaviour
     
     private IEnumerator ExecuteEffectsSequence(System.Collections.Generic.IReadOnlyList<CardEffect> effects, CardContext ctx)
     {
-        foreach (var effect in effects)
-        {
-            if (effect != null)
-                yield return StartCoroutine(effect.ExecuteCoroutine(ctx));
-        }
+        yield return EffectRunner.ExecuteSequence(effects, ctx);
     }
 
     private void HandlePlayerDamaged(int actualDamage)

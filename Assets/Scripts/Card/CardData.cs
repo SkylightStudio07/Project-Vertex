@@ -126,7 +126,7 @@ public class CardData : ScriptableObject
     public string GetFullDescription(BattleState state = null, EnemyInstance target = null)
     {
         if (string.IsNullOrEmpty(cardDescription)) return string.Empty;
-        return Regex.Replace(cardDescription, @"\{(\d+)\.(\w+)\}", match =>
+        return Regex.Replace(cardDescription, @"\{(\d+)\.([\w.]+)\}", match =>
         {
             if (!int.TryParse(match.Groups[1].Value, out int idx)) return match.Value;
             var effects = ActiveEffects;
@@ -135,12 +135,28 @@ public class CardData : ScriptableObject
             var effect = effects[idx];
             if (effect == null) return match.Value; // 슬롯은 늘렸지만 아직 타입을 안 고른 빈 이펙트
 
-            var field = effect.GetType().GetField(match.Groups[2].Value);
-            object value = field?.GetValue(effect);
+            object value = effect;
+            string finalFieldName = null;
+            foreach (string memberName in match.Groups[2].Value.Split('.'))
+            {
+                if (value == null) return match.Value;
+                var valueType = value.GetType();
+                var field = valueType.GetField(memberName);
+                if (field != null)
+                {
+                    value = field.GetValue(value);
+                    finalFieldName = field.Name;
+                    continue;
+                }
+                var property = valueType.GetProperty(memberName);
+                if (property == null) return match.Value;
+                value = property.GetValue(value);
+                finalFieldName = property.Name;
+            }
             if (value == null) return match.Value;
 
             if (state != null && value is int intValue)
-                return effect.GetDisplayValue(field.Name, intValue, state, this, target).ToString();
+                return effect.GetDisplayValue(finalFieldName, intValue, state, this, target).ToString();
 
             return value.ToString();
         });

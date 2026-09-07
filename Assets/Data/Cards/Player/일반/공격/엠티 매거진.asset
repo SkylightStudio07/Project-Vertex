@@ -51,9 +51,11 @@ MonoBehaviour:
       type: {class: AmmoConsumeAllDamageEffect, ns: , asm: Assembly-CSharp}
       data:
         damagePerAmmo: 8
-        targetType: 1
+        targets:
+          mode: 1
     - rid: 4680130923130519635
       type: {class: AmmoConsumeAllDamageEffect, ns: , asm: Assembly-CSharp}
       data:
         damagePerAmmo: 10
-        targetType: 1
+        targets:
+          mode: 1
