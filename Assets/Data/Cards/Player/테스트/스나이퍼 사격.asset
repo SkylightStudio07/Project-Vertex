@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC0AC\uACA9"
+  m_Name: "\uC2A4\uB098\uC774\uD37C \uC0AC\uACA9"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
@@ -23,7 +23,7 @@ MonoBehaviour:
   useMode: 1
   isUpgraded: 0
   normalState:
-    cardName: "\uC0AC\uACA9"
+    cardName: "\uC2A4\uB098\uC774\uD37C \uC0AC\uACA9"
     energyCost: 1
     ammoCost: 1
     effects:
@@ -33,7 +33,7 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uC0AC\uACA9+"
+    cardName: "\uC2A4\uB098\uC774\uD37C \uC0AC\uACA9+"
     energyCost: 1
     ammoCost: 1
     effects:
@@ -50,7 +50,7 @@ MonoBehaviour:
     - rid: 4680130923130519620
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 9
+        amount: 12
         scaling:
           source: 0
           target: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
     - rid: 4680130923130519623
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 6
+        amount: 9
         scaling:
           source: 0
           target: 0

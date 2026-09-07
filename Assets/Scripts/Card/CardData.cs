@@ -66,6 +66,19 @@ public class CardData : ScriptableObject
     [SerializeField] private CardRarity cardRarity;
     [SerializeField] private CardOwner cardOwner;
 
+    [Tooltip("현재 무기에 따라 카드 전체가 교체되는 사격 카드입니다. 일반 공격 카드에는 사용하지 않습니다.")]
+    [SerializeField] private bool isWeaponShootingCard;
+    public bool IsWeaponShootingCard => isWeaponShootingCard;
+
+    // 무기 변형도 다음 무기 변경의 대상이며, 장별 강화 상태는 원래 카드를 따른다.
+    public CardData CreateWeaponVariant(CardData template)
+    {
+        var copy = Instantiate(template);
+        copy.isWeaponShootingCard = true;
+        copy.isUpgraded = isUpgraded;
+        return copy;
+    }
+
     [Header("카드 설명 및 효과")]
     // {인덱스.필드명} 토큰 지원 — GetFullDescription() 참고. 기본/강화 공용 템플릿 하나만 작성.
     // EffectTokenHint가 인스펙터에 사용 가능 토큰 목록과 치환 미리보기를 띄워준다.

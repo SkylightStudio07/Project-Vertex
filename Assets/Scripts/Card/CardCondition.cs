@@ -72,6 +72,17 @@ public class PlayerEnergyCondition : CardCondition
 }
 
 [System.Serializable]
+public class PlayerWeaponCondition : CardCondition
+{
+    public WeaponData weapon;
+
+    public override bool IsMet(CardContext context)
+    {
+        return weapon != null && context?.State?.CurrentWeapon == weapon;
+    }
+}
+
+[System.Serializable]
 public class PlayerLostHpThisTurnCondition : CardCondition
 {
     public bool expected = true;
