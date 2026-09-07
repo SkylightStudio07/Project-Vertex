@@ -22,14 +22,12 @@ MonoBehaviour:
     weight: 0.3
   - nodeType: 7
     weight: 0.1
-  - nodeType: 6
-    weight: 0.1
   - nodeType: 1
     weight: 0.4
   - nodeType: 2
     weight: 0.1
   - nodeType: 3
-    weight: 0.1
+    weight: 0.2
   normalEncounterPool:
   - {fileID: 11400000, guid: d67f8b54f8762db4ba6d147c8a97f971, type: 2}
   - {fileID: 11400000, guid: 3a9f6ce03af11304b806ce5dfc141059, type: 2}
@@ -46,9 +44,7 @@ MonoBehaviour:
   - floorIndex: 1
     nodeType: 0
   - floorIndex: 2
-    nodeType: 2
-  - floorIndex: 9
-    nodeType: 6
+    nodeType: 7
   - floorIndex: 14
     nodeType: 3
   - floorIndex: 15
