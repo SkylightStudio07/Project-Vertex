@@ -93,7 +93,16 @@ public class GameManager : MonoBehaviour
 
         MapManager.Instance.InitializeMap(chapter);
 
-        InitializeBattle();
+        // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행
+        var blessingView = BlessingView.Instance ?? FindObjectOfType<BlessingView>(true);
+        if (blessingView != null)
+        {
+            blessingView.Open();
+        }
+        else
+        {
+            InitializeBattle();
+        }
     }
 
     // 매 전투 시작 시 호출.

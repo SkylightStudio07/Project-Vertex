@@ -29,6 +29,8 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private SelectCoopCharUI selectCoopCharUI;
     [Header("상점")]
     [SerializeField] private ShopView shopView;
+    [Header("축복")]
+    [SerializeField] private BlessingView blessingView;
 
     [Header("배치 설정")]
     [SerializeField] private float floorSpacing    = 120f;
@@ -67,6 +69,7 @@ public class MapUIController : MonoBehaviour
         if (restView != null && restView.gameObject.activeSelf) return false;
         if (shopView != null && shopView.gameObject.activeSelf) return false;
         if (selectCoopCharUI != null && selectCoopCharUI.gameObject.activeSelf) return false;
+        if (blessingView != null && blessingView.gameObject.activeSelf) return false;
         return true;
     }
 
@@ -220,9 +223,28 @@ public class MapUIController : MonoBehaviour
             case NodeType.Shop:
                 OpenShop(node);
                 break;
+            case NodeType.Blessing:
+                OpenBlessing();
+                break;
             default:
                 Debug.Log($"[Map] 노드 타입 {node.nodeType} — 미구현");
                 break;
+        }
+    }
+
+    private void OpenBlessing()
+    {
+        if (blessingView != null)
+        {
+            blessingView.Open();
+        }
+        else if (BlessingView.Instance != null)
+        {
+            BlessingView.Instance.Open();
+        }
+        else
+        {
+            Debug.LogWarning("[Map] blessingView 참조가 없음. Inspector 연결 확인 필요.");
         }
     }
 

@@ -75,6 +75,7 @@ public class RewardsView : MonoBehaviour
 
     private void OnDestroy()
     {
-        BattleManager.Instance.OnBattleVictory -= Open;
+        if (BattleManager.Instance != null)
+            BattleManager.Instance.OnBattleVictory -= Open;
     }
 }
