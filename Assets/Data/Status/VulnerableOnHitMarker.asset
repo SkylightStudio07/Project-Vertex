@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: VulnerableOnHitMarker
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: marker.vulnerable-on-hit
+  displayName: "\uD0C0\uACA9 \uCDE8\uC57D"
+  description: "HP \uD53C\uD574\uB97C \uBC1B\uC744 \uB54C\uB9C8\uB2E4
+    \uC790\uC2E0\uC5D0\uAC8C \uCDE8\uC57D\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  icon: {fileID: 0}
+  disposition: 2
+  stackPolicy: 1
+  durationPolicy: 1
+  maxStacks: 1
+  dispellable: 1
+  behaviors:
+  - rid: 1017
+  references:
+    version: 2
+    RefIds:
+    - rid: 1017
+      type: {class: AfterDamageTakenEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 2017
+    - rid: 2017
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000002, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: LostBloodAttack
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: 
+  displayName: 
+  description: 
+  icon: {fileID: 0}
+  disposition: 0
+  stackPolicy: 0
+  durationPolicy: 0
+  maxStacks: 0
+  dispellable: 1
+  behaviors: []
+  references:
+    version: 2
+    RefIds: []

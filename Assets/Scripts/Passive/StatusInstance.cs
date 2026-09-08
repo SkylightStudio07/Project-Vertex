@@ -115,6 +115,14 @@ public sealed class StatusInstance : IPassiveLogic
         return amount;
     }
 
+    public CardPlayCost ModifyCardPlayCost(CardPlayCost cost, CardContext context)
+    {
+        if (Definition == null) return cost;
+        foreach (var behavior in Definition.Behaviors)
+            if (behavior != null) cost = behavior.ModifyCardPlayCost(this, cost, context);
+        return cost;
+    }
+
     public void OnAfterDamageTaken(CardContext context, ICombatant owner)
     {
         if (Definition == null) return;
