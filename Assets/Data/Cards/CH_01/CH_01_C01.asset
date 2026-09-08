@@ -17,28 +17,27 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 0
   cardOwner: 1
-  cardDescription: "\uCCB4\uB825\uC744 {0.amount} \uAC10\uC18C\uC2DC\uD0A4\uACE0
-    \uBC29\uC5B4\uB3C4 {1.amount}\uB97C \uC5BB\uC2B5\uB2C8\uB2E4. "
+  isWeaponShootingCard: 0
+  cardDescription: "{0.amount}\uD134\uB3D9\uC548 \uCE74\uB4DC \uCF54\uC2A4\uD2B8\uAC00
+    \uCCB4\uB825 \uAC10\uC18C\uB85C \uC9C4\uD589\uB41C\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
-    cardName: "\uD53C\uC758 \uBB34\uC7A5"
-    energyCost: 0
+    cardName: "\uD608\uC561 \uCE58\uD658"
+    energyCost: 2
     ammoCost: 0
     effects:
-    - rid: 2470581146967605248
-    - rid: 2470581146967605249
-    isExhaust: 0
+    - rid: 5573463091696369758
+    isExhaust: 1
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uD53C\uC758 \uBB34\uC7A5+"
-    energyCost: 0
+    cardName: "\uD608\uC561 \uCE58\uD658+"
+    energyCost: 2
     ammoCost: 0
     effects:
-    - rid: 2470581146967605250
-    - rid: 2470581146967605251
+    - rid: 5573463091696369759
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -48,19 +47,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2470581146967605248
-      type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
+    - rid: 5573463091696369758
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 5
-    - rid: 2470581146967605249
-      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+        status: {fileID: 11400000, guid: 30e890364fd9d23459784102d8090640, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0
+    - rid: 5573463091696369759
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 10
-    - rid: 2470581146967605250
-      type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 3
-    - rid: 2470581146967605251
-      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 12
+        status: {fileID: 11400000, guid: 30e890364fd9d23459784102d8090640, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0

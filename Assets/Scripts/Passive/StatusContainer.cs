@@ -70,6 +70,16 @@ public sealed class StatusContainer
         return Math.Max(0, amount);
     }
 
+    public CardPlayCost ModifyCardPlayCost(CardPlayCost cost, CardContext context)
+    {
+        foreach (var entry in _entries)
+            if (entry is StatusInstance status)
+                cost = status.ModifyCardPlayCost(cost, context);
+
+        cost.ClampToNonNegative();
+        return cost;
+    }
+
     public void NotifyBattleStart(BattleState state, ICombatant owner)
     {
         var snapshot = new List<IPassiveLogic>(_entries);
