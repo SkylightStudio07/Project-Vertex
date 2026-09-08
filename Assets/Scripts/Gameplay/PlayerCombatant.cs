@@ -74,9 +74,14 @@ public class PlayerCombatant : ICombatant
         _statuses.Add(passive);
     }
 
-    public void TickPassives(BattleState state)
+    public void StartTurnPassives(BattleState state)
     {
-        _statuses.Tick(state, this);
+        _statuses.NotifyTurnStart(state, this);
+    }
+
+    public void EndTurnPassives(BattleState state)
+    {
+        _statuses.NotifyTurnEnd(state, this);
     }
 
     public void RemoveExpiredPassives()

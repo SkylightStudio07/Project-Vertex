@@ -8,6 +8,7 @@ public abstract class StatusBehavior
 {
     public virtual void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner) { }
+    public virtual void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnCardPlayed(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual DamageInfo ModifyOutgoingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;
     public virtual DamageInfo ModifyIncomingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;
@@ -111,6 +112,13 @@ public sealed class OnBattleStartEffectsStatusBehavior : TriggeredEffectsStatusB
 public sealed class OnTurnStartEffectsStatusBehavior : TriggeredEffectsStatusBehavior
 {
     public override void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner)
+        => Execute(context);
+}
+
+[Serializable]
+public sealed class OnTurnEndEffectsStatusBehavior : TriggeredEffectsStatusBehavior
+{
+    public override void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner)
         => Execute(context);
 }
 

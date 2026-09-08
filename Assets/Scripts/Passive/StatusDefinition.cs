@@ -70,7 +70,8 @@ public enum StatusStackPolicy
 
 public enum StatusDurationPolicy
 {
-    DecreaseOnTurnStart,
-    Permanent,
-    ConsumeOnly,
+    DecreaseOnTurnStart = 0,
+    Permanent = 1,
+    ConsumeOnly = 2,
+    DecreaseOnTurnEnd = 3,
 }

@@ -108,10 +108,14 @@ public class EnemyInstance : ICombatant
         _statuses.Add(passive);
     }
 
-    // 적 턴 시작: 패시브 OnTurnStart 호출 후 임시 패시브 스택 감소
-    public void TickPassives(BattleState state)
+    public void StartTurnPassives(BattleState state)
     {
-        _statuses.Tick(state, this);
+        _statuses.NotifyTurnStart(state, this);
+    }
+
+    public void EndTurnPassives(BattleState state)
+    {
+        _statuses.NotifyTurnEnd(state, this);
     }
 
     public void RemoveExpiredPassives()
@@ -207,7 +211,7 @@ public class EnemyInstance : ICombatant
     public void NotifyActionStarted() => OnActionStarted?.Invoke();
 
     // 현재 패턴의 효과를 실행하고 다음 패턴으로 진행한다.
-    // TickPassives/생존 확인은 호출부(BattleManager의 코루틴 등) 책임.
+    // 턴 시작·종료 패시브와 생존 확인은 호출부(BattleManager의 코루틴 등) 책임.
     // battle은 CardContext.Battle을 채우기 위해서만 필요 (DrawEffect 등 일부 효과가 참조).
     public void ExecuteCurrentAction(BattleState state, BattleManager battle)
     {
@@ -249,7 +253,7 @@ public class EnemyInstance : ICombatant
         OnIntentChanged?.Invoke();
     }
 
-    // 패시브 틱 → 생존 확인 → 행동 실행을 한 번에 처리하는 동기 버전.
+    // 턴 시작 패시브 → 생존 확인 → 행동 실행 → 턴 종료 패시브의 동기 버전.
     // BattleManager는 이제 코루틴으로 단계별 호출하지만, 연출 없이 즉시 처리해야 하는
     // 테스트/디버그 코드를 위해 남겨둔다.
     // 반환값: 이번 턴에 실제로 행동을 실행했는지 여부.
@@ -257,11 +261,12 @@ public class EnemyInstance : ICombatant
     {
         if (IsDead) return false;
 
-        TickPassives(state);
+        StartTurnPassives(state);
         if (IsDead) return false; // 패시브로 죽었으면 행동하지 않음
 
         NotifyActionStarted();
         ExecuteCurrentAction(state, battle);
+        if (!IsDead && !state.Player.IsDead) EndTurnPassives(state);
         return true;
     }
 }

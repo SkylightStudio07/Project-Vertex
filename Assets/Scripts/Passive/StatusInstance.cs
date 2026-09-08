@@ -67,11 +67,14 @@ public sealed class StatusInstance : IPassiveLogic
     public void MultiplyMagnitude(int multiplier) => Stacks = multiplier < 0 ? Stacks : Clamp(Stacks * multiplier);
     public void RemoveAll() => Stacks = 0;
 
-    public void TickDown()
+    public void TickDown(StatusDurationPolicy timing)
     {
-        if (Definition == null || Definition.DurationPolicy != StatusDurationPolicy.DecreaseOnTurnStart) return;
+        if (timing != StatusDurationPolicy.DecreaseOnTurnStart && timing != StatusDurationPolicy.DecreaseOnTurnEnd) return;
+        if (Definition == null || Definition.DurationPolicy != timing) return;
         ReduceMagnitude(1);
     }
+
+    public void ResetTurnUsage() => _usedThisTurn.Clear();
 
     public bool WasUsedThisTurn(StatusBehavior behavior) => _usedThisTurn.Contains(behavior);
     public void MarkUsedThisTurn(StatusBehavior behavior) => _usedThisTurn.Add(behavior);
@@ -84,9 +87,14 @@ public sealed class StatusInstance : IPassiveLogic
 
     public void OnTurnStart(CardContext context, ICombatant owner)
     {
-        _usedThisTurn.Clear();
         if (Definition == null) return;
         foreach (var behavior in Definition.Behaviors) behavior?.OnTurnStart(this, context, owner);
+    }
+
+    public void OnTurnEnd(CardContext context, ICombatant owner)
+    {
+        if (Definition == null) return;
+        foreach (var behavior in Definition.Behaviors) behavior?.OnTurnEnd(this, context, owner);
     }
 
     public void OnCardPlayed(CardContext context, ICombatant owner)
