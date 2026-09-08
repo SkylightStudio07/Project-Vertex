@@ -94,13 +94,39 @@ public sealed class StatusContainer
         RemoveExpired();
     }
 
-    public void Tick(BattleState state, ICombatant owner)
+    public void NotifyTurnStart(BattleState state, ICombatant owner)
     {
+        RemoveExpired();
         var snapshot = new List<IPassiveLogic>(_entries);
         foreach (var passive in snapshot)
-            passive.OnTurnStart(CardContext.CreatePassiveContext(state, owner, null, passive), owner);
+            if (passive is StatusInstance status) status.ResetTurnUsage();
         foreach (var passive in snapshot)
-            if (passive is StatusInstance status) status.TickDown();
+        {
+            if (owner.IsDead) break;
+            if (!_entries.Contains(passive)) continue;
+            passive.OnTurnStart(CardContext.CreatePassiveContext(state, owner, null, passive), owner);
+        }
+        TickDurations(snapshot, StatusDurationPolicy.DecreaseOnTurnStart);
+    }
+
+    public void NotifyTurnEnd(BattleState state, ICombatant owner)
+    {
+        RemoveExpired();
+        var snapshot = new List<IPassiveLogic>(_entries);
+        foreach (var passive in snapshot)
+        {
+            if (owner.IsDead) break;
+            if (!_entries.Contains(passive)) continue;
+            passive.OnTurnEnd(CardContext.CreatePassiveContext(state, owner, null, passive), owner);
+        }
+        TickDurations(snapshot, StatusDurationPolicy.DecreaseOnTurnEnd);
+    }
+
+    private void TickDurations(List<IPassiveLogic> snapshot, StatusDurationPolicy timing)
+    {
+        // 이번 이벤트에서 새로 등록된 인스턴스는 즉시 감소시키지 않는다. 기존 인스턴스에 병합된 수치는 감소 대상이다.
+        foreach (var passive in snapshot)
+            if (passive is StatusInstance status && _entries.Contains(passive)) status.TickDown(timing);
         RemoveExpired();
     }
 

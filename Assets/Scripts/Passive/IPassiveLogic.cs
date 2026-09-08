@@ -2,6 +2,7 @@ public interface IPassiveLogic
 {
     void OnBattleStart(CardContext context, ICombatant owner);
     void OnTurnStart(CardContext context, ICombatant owner);
+    void OnTurnEnd(CardContext context, ICombatant owner);
     void OnCardPlayed(CardContext context, ICombatant owner);
 
     // 피해 파이프라인 훅 — DamageCalculator가 attacker → target 순으로 호출

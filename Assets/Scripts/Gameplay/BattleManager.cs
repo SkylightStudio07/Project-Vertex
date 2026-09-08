@@ -171,6 +171,8 @@ public class BattleManager : MonoBehaviour
         try
         {
             _state.Energy = _state.MaxEnergy;
+            _state.Player.StartTurnPassives(_state);
+            if (!_isInBattle || _state.Player.IsDead) yield break;
             TakeOutCardtoHand();
         }
         finally
@@ -239,7 +241,8 @@ public class BattleManager : MonoBehaviour
             EndHandChangeBatch();
         }
 
-        _state.Player.TickPassives(_state);
+        _state.Player.EndTurnPassives(_state);
+        if (!_isInBattle || _state.Player.IsDead) return;
 
         EnemyTurnStart();
     }
@@ -268,13 +271,18 @@ public class BattleManager : MonoBehaviour
         {
             if (enemy == null || enemy.IsDead) continue;
 
-            enemy.TickPassives(_state);
+            enemy.StartTurnPassives(_state);
+            if (!_isInBattle || _state.Player.IsDead) yield break;
             if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음
 
             enemy.NotifyActionStarted();
             yield return new WaitForSeconds(lungeOutWaitDuration);
 
             yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
+
+            if (!_isInBattle || _state.Player.IsDead) yield break;
+            if (!enemy.IsDead) enemy.EndTurnPassives(_state);
+            if (!_isInBattle || _state.Player.IsDead) yield break;
 
             yield return new WaitForSeconds(lungeBackWaitDuration + postActionDelay);
 
