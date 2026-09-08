@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
         };
         var enemies = pulled?.enemies != null && pulled.enemies.Count > 0
             ? pulled.enemies
+            : currentEnemies;
         string encounterName = pulled != null ? pulled.name : "기본 폴백(currentEnemies)";
         string enemyNames = enemies != null && enemies.Count > 0
             ? string.Join(", ", enemies.Where(e => e != null).Select(e => $"'{e.enemyName}'(HP:{e.health})"))
