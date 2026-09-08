@@ -21,25 +21,51 @@ public class SelectCoopCharUI : MonoBehaviour
 
     public void Init()
     {
+        List<string> candidates = CollectCandidates();
+
+        // 후보가 없으면 성소를 건너뛰고 바로 맵으로 돌아간다.
+        // 이 UI는 캐릭터를 고르는 것 외에 나갈 방법(닫기 버튼)이 없어서, 빈 화면을 띄우면 갇힌다.
+        if (candidates.Count == 0)
+        {
+            Debug.Log("[성소] 현재 층에 선택 가능한 협력자가 없어 성소를 건너뜁니다.");
+            CloseUI();
+            return;
+        }
+
         fadeController.FadeIn();
+
+        // 후보 수와 버튼 수가 다를 수 있으므로 남는 버튼은 끈다.
+        for (int i = 0; i < selectCoopCharBtns.Count; i++)
+        {
+            bool hasCandidate = i < candidates.Count;
+            selectCoopCharBtns[i].gameObject.SetActive(hasCandidate);
+            if (hasCandidate) selectCoopCharBtns[i].SetBtn(candidates[i]);
+        }
+    }
+
+    // 이번 층의 성소 후보 중 아직 합류하지 않은 캐릭터만 추린다.
+    // 주의: GetSeletableChar()는 HolyPlaceData(SO) 내부 리스트의 참조를 그대로 반환하므로
+    //       반환된 리스트를 직접 수정하면 에셋이 영구 변경된다. 반드시 새 리스트에 담는다.
+    private List<string> CollectCandidates()
+    {
+        var candidates = new List<string>();
 
         if (HolyPlaceManager.Instance == null)
         {
             Debug.LogWarning("[SelectCoopCharUI] HolyPlaceManager.Instance가 없음. 씬(또는 부트 씬)에 HolyPlaceManager가 있는지 확인 필요.");
-            return;
+            return candidates;
         }
 
-        List<string> selectableCharIDList = HolyPlaceManager.Instance.GetSeletableChar(RunData.Instance.currentFloor);
-        if (selectableCharIDList == null || selectableCharIDList.Count == 0)
+        List<string> selectable = HolyPlaceManager.Instance.GetSeletableChar(RunData.Instance.currentFloor);
+        if (selectable == null) return candidates;
+
+        foreach (string charID in selectable)
         {
-            Debug.Log("현재 층에 선택 가능한 협력자 캐릭터 없음");
-            return;
+            if (CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charID)) continue;
+            candidates.Add(charID);
         }
 
-        for (int i = 0; i < selectCoopCharBtns.Count; i++)
-        {
-            selectCoopCharBtns[i].SetBtn(selectableCharIDList[i]);
-        }
+        return candidates;
     }
 
     // 선택된 캐릭터 창의 위치에 선택 표시 UI를 이동시키는 메소드

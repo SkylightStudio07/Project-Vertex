@@ -8,10 +8,12 @@ public abstract class StatusBehavior
 {
     public virtual void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner) { }
+    public virtual void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnCardPlayed(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual DamageInfo ModifyOutgoingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;
     public virtual DamageInfo ModifyIncomingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;
     public virtual int ModifyBlockGain(StatusInstance status, int amount, ICombatant owner) => amount;
+    public virtual CardPlayCost ModifyCardPlayCost(StatusInstance status, CardPlayCost cost, CardContext context) => cost;
     public virtual void OnAfterDamageTaken(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnAfterDamageDealt(StatusInstance status, CardContext context, ICombatant owner) { }
 }
@@ -19,6 +21,48 @@ public abstract class StatusBehavior
 public enum DamageModifierSide { Outgoing, Incoming }
 public enum DamageModifierOperation { Add, Multiply, Nullify }
 public enum StatusMagnitudeSource { Constant, Stacks, Potency, SecondaryPotency }
+
+[Serializable]
+public sealed class CardBloodCostStatusBehavior : StatusBehavior
+{
+    public bool convertEnergyCost = true;
+    public bool convertAmmoCost = true;
+    public int hpPerEnergy = 1;
+    public int hpPerAmmo = 1;
+    public StatusMagnitudeSource flatHpCostSource = StatusMagnitudeSource.Constant;
+    public int constantFlatHpCost;
+    public bool attackCardsOnly;
+
+    public override CardPlayCost ModifyCardPlayCost(StatusInstance status, CardPlayCost cost, CardContext context)
+    {
+        if (context?.Card == null) return cost;
+        if (attackCardsOnly && context.Card.Type != CardData.CardType.Attack) return cost;
+
+        int hpCost = ResolveFlatHpCost(status);
+        if (convertEnergyCost)
+        {
+            hpCost += cost.Energy * Math.Max(0, hpPerEnergy);
+            cost.Energy = 0;
+        }
+
+        if (convertAmmoCost)
+        {
+            hpCost += cost.Ammo * Math.Max(0, hpPerAmmo);
+            cost.Ammo = 0;
+        }
+
+        if (hpCost > 0) cost.Hp += hpCost;
+        return cost;
+    }
+
+    private int ResolveFlatHpCost(StatusInstance status) => flatHpCostSource switch
+    {
+        StatusMagnitudeSource.Stacks => Math.Abs(status.Stacks),
+        StatusMagnitudeSource.Potency => Math.Abs(status.Potency),
+        StatusMagnitudeSource.SecondaryPotency => Math.Abs(status.SecondaryPotency),
+        _ => Math.Max(0, constantFlatHpCost),
+    };
+}
 
 [Serializable]
 public sealed class DamageModifierStatusBehavior : StatusBehavior
@@ -111,6 +155,13 @@ public sealed class OnBattleStartEffectsStatusBehavior : TriggeredEffectsStatusB
 public sealed class OnTurnStartEffectsStatusBehavior : TriggeredEffectsStatusBehavior
 {
     public override void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner)
+        => Execute(context);
+}
+
+[Serializable]
+public sealed class OnTurnEndEffectsStatusBehavior : TriggeredEffectsStatusBehavior
+{
+    public override void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner)
         => Execute(context);
 }
 

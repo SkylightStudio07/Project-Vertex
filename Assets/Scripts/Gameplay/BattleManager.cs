@@ -146,8 +146,12 @@ public class BattleManager : MonoBehaviour
         _state.DiscardPile.Clear();
         _state.ExhaustPile.Clear();
 
+        if (masterDeck == null) return;
         foreach (var card in masterDeck)
-            if (card != null) _state.DrawPile.Add(_state.CreateCard(card));
+        {
+            if (card == null) continue;
+            _state.DrawPile.Add(_state.CreateCard(card));
+        }
         Shuffle(_state.DrawPile);
     }
 
@@ -178,6 +182,8 @@ public class BattleManager : MonoBehaviour
         try
         {
             _state.Energy = _state.MaxEnergy;
+            _state.Player.StartTurnPassives(_state);
+            if (!_isInBattle || _state.Player.IsDead) yield break;
             TakeOutCardtoHand();
         }
         finally
@@ -246,7 +252,8 @@ public class BattleManager : MonoBehaviour
             EndHandChangeBatch();
         }
 
-        _state.Player.TickPassives(_state);
+        _state.Player.EndTurnPassives(_state);
+        if (!_isInBattle || _state.Player.IsDead) return;
 
         EnemyTurnStart();
     }
@@ -275,7 +282,8 @@ public class BattleManager : MonoBehaviour
         {
             if (enemy == null || enemy.IsDead) continue;
 
-            enemy.TickPassives(_state);
+            enemy.StartTurnPassives(_state);
+            if (!_isInBattle || _state.Player.IsDead) yield break;
             if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음
 
             var action = enemy.GetCurrentAction();
@@ -287,6 +295,10 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(lungeOutWaitDuration);
 
             yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
+
+            if (!_isInBattle || _state.Player.IsDead) yield break;
+            if (!enemy.IsDead) enemy.EndTurnPassives(_state);
+            if (!_isInBattle || _state.Player.IsDead) yield break;
 
             yield return new WaitForSeconds(lungeBackWaitDuration + postActionDelay);
 
@@ -312,10 +324,24 @@ public class BattleManager : MonoBehaviour
 
     public bool IsCardPlayable(CardData card) => EvaluateCardPlayability(card);
 
+    public CardPlayCost GetCardPlayCost(CardData card, EnemyInstance target = null)
+    {
+        if (card == null) return new CardPlayCost();
+
+        var cost = new CardPlayCost(card.EnergyCost, card.AmmoCost);
+        if (_state?.Player == null)
+        {
+            cost.ClampToNonNegative();
+            return cost;
+        }
+
+        return _state.Player.Statuses.ModifyCardPlayCost(cost, CreateCardPlayContext(card, target));
+    }
+
     private bool EvaluateCardPlayability(CardData card)
     {
-        if (card == null || !_state.Hand.Contains(card)) return false;
-        if (_state.Energy < card.EnergyCost || _state.Ammo < card.AmmoCost) return false;
+        if (card == null || _state == null || !_state.Hand.Contains(card)) return false;
+        if (!CanPayCardPlayCost(GetCardPlayCost(card))) return false;
 
         if (card.UseMode == CardData.CardUseMode.SelectEnemy)
         {
@@ -334,13 +360,16 @@ public class BattleManager : MonoBehaviour
             (target == null || target.IsDead || !_state.Enemies.Contains(target)))
             return false;
 
+        var cost = GetCardPlayCost(card, target);
+        if (!CanPayCardPlayCost(cost)) return false;
+        var ctx = CreateCardPlayContext(card, target);
+
         // 비용 차감·패 제거는 즉시 처리해 UI가 바로 반영되도록 한다.
         // 이펙트 실행만 코루틴으로 분리해, 연타처럼 히트 사이 딜레이가 필요한 경우를 지원한다.
         BeginHandChangeBatch();
         try
         {
-            _state.Energy -= card.EnergyCost;
-            _state.Ammo   -= card.AmmoCost;
+            PayCardPlayCost(cost);
 
             _state.Hand.Remove(card);
             // 파워 카드는 isExhaust 설정과 무관하게 항상 소멸 — 패시브가 영구 등록되므로
@@ -356,20 +385,43 @@ public class BattleManager : MonoBehaviour
             EndHandChangeBatch();
         }
 
-        OnCardPlayed?.Invoke(card);
+        if (_state.Player.IsDead) return true;
 
-        var ctx = new CardContext
+        OnCardPlayed?.Invoke(card);
+        _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
+        StartCoroutine(ExecuteEffectsSequence(card.ActiveEffects, ctx));
+
+        return true;
+    }
+
+    private bool CanPayCardPlayCost(CardPlayCost cost)
+    {
+        if (_state?.Player == null) return false;
+        if (_state.Energy < cost.Energy) return false;
+        if (_state.Ammo < cost.Ammo) return false;
+        if (_state.Player.HP < cost.Hp) return false;
+        return true;
+    }
+
+    private void PayCardPlayCost(CardPlayCost cost)
+    {
+        _state.Energy -= cost.Energy;
+        _state.Ammo -= cost.Ammo;
+
+        if (cost.Hp > 0)
+            _state.Player.TakeDamage(new DamageInfo(cost.Hp, null, true));
+    }
+
+    private CardContext CreateCardPlayContext(CardData card, EnemyInstance target)
+    {
+        return new CardContext
         {
             State      = _state,
             Battle     = this,
             Card       = card,
             Target     = target,
-            AllEnemies = _state.Enemies,
+            AllEnemies = _state?.Enemies,
         };
-        _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
-        StartCoroutine(ExecuteEffectsSequence(card.ActiveEffects, ctx));
-
-        return true;
     }
 
     // 지금 아이템을 사용할 수 있는 상태인지 (전투 중 + 플레이어 턴). UI 버튼 활성 판정용.
@@ -537,6 +589,34 @@ public class BattleManager : MonoBehaviour
             added = true;
         }
         if (added) NotifyHandChanged();
+    }
+
+    public List<CardData> GetRandomCardsFromPlayerDeck(int count, bool allowDuplicates = false)
+    {
+        var selectedCards = new List<CardData>();
+        var playerDeck = DeckManager.Instance?.PlayerDeck;
+        if (count <= 0 || playerDeck == null || playerDeck.Count == 0) return selectedCards;
+
+        var candidates = new List<CardData>();
+        foreach (var card in playerDeck)
+        {
+            if (card != null) candidates.Add(card);
+        }
+
+        if (candidates.Count == 0) return selectedCards;
+
+        for (int i = 0; i < count; i++)
+        {
+            if (candidates.Count == 0) break;
+
+            int index = _rnd.Next(0, candidates.Count);
+            selectedCards.Add(candidates[index]);
+
+            if (!allowDuplicates)
+                candidates.RemoveAt(index);
+        }
+
+        return selectedCards;
     }
 
     // ─────────────────────────────────────────────

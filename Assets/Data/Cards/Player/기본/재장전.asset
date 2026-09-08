@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "\uC7AC\uC7A5\uC804"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  cardImage: {fileID: 21300000, guid: 01bca8a41fa738f4ea77396fde081b2f, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
   cardType: 1
   cardRarity: 0
   cardOwner: 0
+  isWeaponShootingCard: 0
   cardDescription: "{0.amount}\uAC1C \uB9CC\uD07C \uD0C4\uC57D\uC744 \uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
   useMode: 0
   isUpgraded: 0
@@ -49,7 +50,19 @@ MonoBehaviour:
       type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 3
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
     - rid: 4680130923130519622
       type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 3
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
