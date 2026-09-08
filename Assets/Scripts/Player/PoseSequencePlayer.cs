@@ -20,11 +20,17 @@ public class PoseSequencePlayer : MonoBehaviour
     private bool hasResting; // restingXxx가 실제 대기 포즈를 담고 있는지(트랜지션 중간값이 아닌지)
 
     private Coroutine playing;
+    private Animator animator;
+    private bool wasAnimatorEnabled;
+    private UISpriteSheetAnimator sheetAnimator;
+    private bool wasSheetAnimatorPlaying;
 
     private void Awake()
     {
         image = GetComponent<Image>();
         rt = GetComponent<RectTransform>();
+        animator = GetComponent<Animator>();
+        sheetAnimator = GetComponent<UISpriteSheetAnimator>();
 
         // 포즈마다 원본 스프라이트의 픽셀 비율이 다를 수 있어(예: 대기 포즈는 세로로 긴 초상,
         // 공격 포즈는 정사각형에 가까움) — preserveAspect 없이 고정 박스에 늘려 넣으면
@@ -46,11 +52,35 @@ public class PoseSequencePlayer : MonoBehaviour
             RestoreResting();
         }
 
+        if (sheetAnimator != null && sheetAnimator.IsPlaying)
+        {
+            wasSheetAnimatorPlaying = true;
+            sheetAnimator.Pause();
+        }
+
+        if (animator != null && animator.enabled)
+        {
+            wasAnimatorEnabled = true;
+            animator.enabled = false;
+        }
+
         playing = StartCoroutine(PlaySequence(frames));
     }
 
     private void RestoreResting()
     {
+        if (sheetAnimator != null && wasSheetAnimatorPlaying)
+        {
+            sheetAnimator.Resume();
+            wasSheetAnimatorPlaying = false;
+        }
+
+        if (animator != null && wasAnimatorEnabled)
+        {
+            animator.enabled = true;
+            wasAnimatorEnabled = false;
+        }
+
         if (!hasResting) return;
         image.sprite = restingSprite;
         rt.anchoredPosition = restingAnchoredPosition;

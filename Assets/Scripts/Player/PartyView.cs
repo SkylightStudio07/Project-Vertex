@@ -22,6 +22,7 @@ public class PartyView : MonoBehaviour
     [SerializeField] private Image playerImage;
     // playerImage와 같은 오브젝트에 붙는 PoseSequencePlayer. 공격 카드 사용 시 연출 재생용(없어도 정상 작동).
     [SerializeField] private PoseSequencePlayer playerPoseSequencer;
+    [SerializeField] private UISpriteSheetAnimator playerSheetAnimator;
 
     [Header("합류 캐릭터 — 스프라이트를 생성해 넣을 프리팹과 위치 마커(빈 오브젝트, 최대 3명)")]
     [SerializeField] private GameObject companionPrefab; // 루트 밑에 "CharacterSprite"(Image) 자식 필요 — 발밑 그림자(Shadow)도 같이 딸려옴
@@ -33,6 +34,7 @@ public class PartyView : MonoBehaviour
         {
             BattleManager.Instance.OnBattleStarted += Refresh;
             BattleManager.Instance.OnCardPlayed += OnCardPlayed;
+            BattleManager.Instance.OnWeaponChanged += OnWeaponChanged;
         }
 
         // 이 오브젝트가 활성화되기 전에 이미 전투가 시작돼 있었을 경우(에디터에서 오브젝트를
@@ -46,7 +48,13 @@ public class PartyView : MonoBehaviour
         {
             BattleManager.Instance.OnBattleStarted -= Refresh;
             BattleManager.Instance.OnCardPlayed -= OnCardPlayed;
+            BattleManager.Instance.OnWeaponChanged -= OnWeaponChanged;
         }
+    }
+
+    private void OnWeaponChanged(WeaponData weapon)
+    {
+        BindPlayer();
     }
 
     // OnCardPlayed는 공격 카드를 낼 때마다(전투 중 빈번히) 불리므로, 설정 미비 경고는
@@ -79,7 +87,9 @@ public class PartyView : MonoBehaviour
             }
             return;
         }
-        if (playerCharData.attackSequence == null || playerCharData.attackSequence.Length == 0)
+        WeaponData currentWeapon = BattleManager.Instance?.State?.CurrentWeapon;
+        var sequence = playerCharData.GetAttackSequence(currentWeapon);
+        if (sequence == null || sequence.Length == 0)
         {
             if (!warnedEmptyAttackSequence)
             {
@@ -89,7 +99,7 @@ public class PartyView : MonoBehaviour
             return;
         }
 
-        playerPoseSequencer.Play(playerCharData.attackSequence);
+        playerPoseSequencer.Play(sequence);
     }
 
     private void Refresh()
@@ -108,12 +118,36 @@ public class PartyView : MonoBehaviour
         if (playerCharData == null)
             Debug.LogWarning("[PartyView] playerCharData가 비어있음. Inspector 연결 확인 필요.");
 
-        Sprite sprite = playerCharData != null ? playerCharData.standingSprite : null;
+        if (playerSheetAnimator == null && playerImage != null)
+            playerSheetAnimator = playerImage.GetComponent<UISpriteSheetAnimator>();
+
+        WeaponData currentWeapon = BattleManager.Instance?.State?.CurrentWeapon;
+        Sprite sprite = playerCharData != null
+            ? playerCharData.GetStandingSprite(currentWeapon)
+            : null;
+
         if (playerCharData != null && sprite == null)
             Debug.LogWarning($"[PartyView] '{playerCharData.name}'의 standingSprite가 비어있음.");
 
         playerImage.sprite  = sprite;
         playerImage.enabled = sprite != null;
+
+        // 스프라이트 시트 기반 대기(Idle) 애니메이션 제어
+        if (playerSheetAnimator != null && playerCharData != null)
+        {
+            var frames = playerCharData.GetIdleFrames(currentWeapon, out float fps);
+            if (frames != null && frames.Length > 0)
+            {
+                playerSheetAnimator.enabled = true;
+                playerSheetAnimator.Configure(frames, fps, true);
+            }
+            else
+            {
+                playerSheetAnimator.Stop();
+                playerSheetAnimator.enabled = false;
+                playerImage.sprite = sprite;
+            }
+        }
     }
 
     private void BindCompanions()
