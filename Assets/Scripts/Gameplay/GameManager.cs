@@ -90,6 +90,11 @@ public class GameManager : MonoBehaviour
         if (ItemInventoryManager.Instance != null)
             ItemInventoryManager.Instance.Clear();
 
+        // 협력자 합류 상태(isJoinedInRun)도 런 단위 상태라 같이 초기화한다.
+        // CooperationManager는 DontDestroyOnLoad라 초기화하지 않으면 이전 런의 합류가 남는다.
+        if (CooperationManager.Instance != null)
+            CooperationManager.Instance.ResetOnRunStart();
+
         MapManager.Instance.InitializeMap(chapter);
 
         InitializeBattle();

@@ -77,6 +77,24 @@ public class DeckManager : MonoBehaviour
         return true;
     }
 
+    // 강화 가능한 카드만 추린다. 목록 표시와 강화 버튼 활성화 판정에 공용으로 쓴다.
+    public List<CardData> GetUpgradableCards() => PlayerDeck.FindAll(c => c != null && c.CanUpgrade);
+
+    // 덱의 카드를 강화한다. 덱에는 Instantiate 복사본이 들어있으므로 원본 SO는 영향받지 않는다.
+    public bool UpgradeCard(CardData card)
+    {
+        if (card == null || !card.CanUpgrade) return false;
+
+        if (!PlayerDeck.Contains(card))
+        {
+            Debug.LogWarning($"[DeckManager] 덱에 없는 카드를 강화하려 함: {card.CardName}");
+            return false;
+        }
+
+        card.isUpgraded = true;
+        return true;
+    }
+
     public void ViewDeck()
     {
         CardListView.Instance?.OpenAsViewer("플레이어 덱", PlayerDeck);
