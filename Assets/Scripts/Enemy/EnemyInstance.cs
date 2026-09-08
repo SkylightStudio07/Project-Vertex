@@ -51,9 +51,12 @@ public class EnemyInstance : ICombatant
         EnemySprite = data.enemyImage;
         _rng = rng ?? new System.Random();
         _statuses = new StatusContainer(_passives);
+        _statuses.OnChanged += () => OnIntentChanged?.Invoke();
         // 첫 인텐트 결정
         DetermineCurrentAction();
     }
+
+    public void NotifyIntentChanged() => OnIntentChanged?.Invoke();
 
     // 블록 흡수 → HP 감소. 패시브 배율은 DamageCalculator가 호출 전에 이미 적용함.
     public void TakeDamage(DamageInfo info)
@@ -80,7 +83,10 @@ public class EnemyInstance : ICombatant
         }
 
         if (IsDead)
+        {
+            Debug.Log($"<color=#F87171>[Battle] 적 처치 완료: '{Data?.enemyName}' 사망!</color>");
             OnDied?.Invoke();
+        }
     }
 
     public void AddBlock(int amount)

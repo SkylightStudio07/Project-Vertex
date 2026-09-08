@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
@@ -119,7 +120,11 @@ public class GameManager : MonoBehaviour
         };
         var enemies = pulled?.enemies != null && pulled.enemies.Count > 0
             ? pulled.enemies
-            : currentEnemies;
+        string encounterName = pulled != null ? pulled.name : "기본 폴백(currentEnemies)";
+        string enemyNames = enemies != null && enemies.Count > 0
+            ? string.Join(", ", enemies.Where(e => e != null).Select(e => $"'{e.enemyName}'(HP:{e.health})"))
+            : "없음";
+        Debug.Log($"<color=#38BDF8>[GameManager] 전투 노드 진입! 노드: {RunData.Instance.CurrentNodeType} (Floor {RunData.Instance.currentFloor}, Node {RunData.Instance.currentNodeIndex}) | 조우: '{encounterName}' | 대전 적 [{enemies?.Count ?? 0}명]: {enemyNames}</color>");
 
         // 전투 RNG 시드 — 맵 시드를 그대로 쓰면 런 내 모든 전투가 같은 난수열(같은 셔플 스트림)을 공유한다.
         // 노드 좌표를 섞어 전투마다 다른 스트림을 쓰되, 같은 노드 재진입은 같은 전투가 되도록 결정론 유지.
