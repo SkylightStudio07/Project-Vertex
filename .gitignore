@@ -73,5 +73,15 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-출처: https://i-believe-in-me.tistory.com/148 [Do you believe in you?:티스토리]
+# Modern Visual Studio Solution & caches
+*.slnx
+*.csproj.lscache
+
+# AI Coding Agents & Skills
+.agents/
+skills-lock.json
+.gemini/
+
+# Local logs
+*.log
 Project Vertex (1)/hwp_mcp_stdio_server.log

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
+  m_Name: 탈주 용병 사격수
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "탈주 용병 사격수"
+  health: 20
+  enemyImage: {fileID: -8722211630961929171, guid: 51b3862dc69cd6e4d914a4b1ef9cf795, type: 3}
+  activityPatternType: 0
+  openingActions: []
+  activityPatterns:
+  - {fileID: 11400000, guid: d6f01c85d9305675a4614244d11a89e5, type: 2}
+  - {fileID: 11400000, guid: f6a5f7f98c48554d8b10b4697496c7c2, type: 2}
+  - {fileID: 11400000, guid: 252efdb5eadb54998d396fe6d1d7b252, type: 2}

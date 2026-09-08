@@ -29,14 +29,19 @@ MonoBehaviour:
   - nodeType: 3
     weight: 0.2
   normalEncounterPool:
-  - {fileID: 11400000, guid: d67f8b54f8762db4ba6d147c8a97f971, type: 2}
-  - {fileID: 11400000, guid: 3a9f6ce03af11304b806ce5dfc141059, type: 2}
-  - {fileID: 11400000, guid: 448b92ffcbce1ba49b466c600e6263ef, type: 2}
+  - {fileID: 11400000, guid: a46c476622c953968d16d85334612307, type: 2}
+  - {fileID: 11400000, guid: edd1226cc9ba5fdfba53b7e0148deb96, type: 2}
+  - {fileID: 11400000, guid: 5b1c572c02b251c0ad3205fe6de008a3, type: 2}
+  - {fileID: 11400000, guid: 5fcab9c7f30759fd8f08783dca01176a, type: 2}
+  - {fileID: 11400000, guid: 55b9db48196c516ea1d4545e26407553, type: 2}
   eliteEncounterPool:
   - {fileID: 11400000, guid: 90f3c922d5c03a54b82118ca1d27d05d, type: 2}
   bossEncounterPool:
   - {fileID: 11400000, guid: fb1d66430982e92458431561533717ac, type: 2}
-  weakEncounterPool: []
+  weakEncounterPool:
+  - {fileID: 11400000, guid: 11bb3c5c2755529ab547dafeee2e3ffa, type: 2}
+  - {fileID: 11400000, guid: 0e8e699bb4c05a1b840b91ce16be549d, type: 2}
+
   weakEncounterCount: 3
   guaranteedNodes:
   - floorIndex: 0

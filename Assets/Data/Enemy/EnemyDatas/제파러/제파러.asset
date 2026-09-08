@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
+  m_Name: 제파러
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "제파러"
+  health: 40
+  enemyImage: {fileID: -8722211630961929171, guid: 51b3862dc69cd6e4d914a4b1ef9cf795, type: 3}
+  activityPatternType: 0
+  openingActions: []
+  activityPatterns:
+  - {fileID: 11400000, guid: 2b7511c2c1855a1f868e315b4d6e916d, type: 2}
+  - {fileID: 11400000, guid: a3a90d08a23c51b4bccfeebbb77a791d, type: 2}
+  - {fileID: 11400000, guid: ea5fd23a59075fb89f7b99a5636655d1, type: 2}
+  - {fileID: 11400000, guid: a3a90d08a23c51b4bccfeebbb77a791d, type: 2}
