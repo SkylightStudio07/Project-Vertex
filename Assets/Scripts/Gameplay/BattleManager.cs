@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -107,9 +108,15 @@ public class BattleManager : MonoBehaviour
         foreach (var enemy in _state.Enemies)
             enemy.Statuses.NotifyBattleStart(_state, enemy);
         _state.Player.OnDied += Defeat;
+        _state.Player.Statuses.OnChanged += RefreshAllEnemyIntents;
         OnBattleStarted?.Invoke();
         _state.Player.OnDamaged += HandlePlayerDamaged;
         OnEnemiesChanged?.Invoke();
+
+        string enemyRoster = enemyDataList != null && enemyDataList.Count > 0
+            ? string.Join(", ", enemyDataList.Where(e => e != null).Select(e => $"'{e.enemyName}'(HP:{e.health})"))
+            : "없음";
+        Debug.Log($"<color=#4ADE80>==================================================\n[BattleManager] 전투 개시! (타입: {battleType}, 시드: {seed})\n▶ 현재 대전 중인 적 목록 [{enemyDataList?.Count ?? 0}명]: {enemyRoster}\n==================================================</color>");
 
         _isInBattle = true;
     }
@@ -278,6 +285,11 @@ public class BattleManager : MonoBehaviour
             enemy.StartTurnPassives(_state);
             if (!_isInBattle || _state.Player.IsDead) yield break;
             if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음
+
+            var action = enemy.GetCurrentAction();
+            string actionName = action != null ? action.name : "없음";
+            string intentDesc = action != null ? action.intentType.ToString() : "없음";
+            Debug.Log($"[BattleManager] 적 턴 진행: '{enemy.Data?.enemyName}' -> 행동: '{actionName}' (인텐트: {intentDesc}, 현재 HP: {enemy.HP}/{enemy.MaxHP})");
 
             enemy.NotifyActionStarted();
             yield return new WaitForSeconds(lungeOutWaitDuration);
@@ -458,6 +470,17 @@ public class BattleManager : MonoBehaviour
     private IEnumerator ExecuteEffectsSequence(System.Collections.Generic.IReadOnlyList<CardEffect> effects, CardContext ctx)
     {
         yield return EffectRunner.ExecuteSequence(effects, ctx);
+        RefreshAllEnemyIntents();
+    }
+
+    public void RefreshAllEnemyIntents()
+    {
+        if (_state?.Enemies == null) return;
+        foreach (var enemy in _state.Enemies)
+        {
+            if (enemy != null && !enemy.IsDead)
+                enemy.NotifyIntentChanged();
+        }
     }
 
     private void HandlePlayerDamaged(int actualDamage)
@@ -632,6 +655,7 @@ public class BattleManager : MonoBehaviour
                                    RunData.Instance.currentFloor,
                                    RunData.Instance.currentNodeIndex);
         var reward    = new BattleReward(GameManager.Instance.cardPools, rewardData, rewardRng);
+        Debug.Log($"<color=#4ADE80>[BattleManager] 전투 승리! ({_currentBattleType}) 모든 적을 무찔렀습니다.</color>");
         OnBattleVictory?.Invoke(reward);
         foreach (var e in _state.Enemies)
             e.OnDied -= CheckVictory;
@@ -640,6 +664,7 @@ public class BattleManager : MonoBehaviour
     private void Defeat()
     {
         _isInBattle = false;
+        Debug.Log($"<color=#F87171>[BattleManager] 전투 패배... 플레이어가 쓰러졌습니다.</color>");
         OnBattleDefeat?.Invoke();
     }
 

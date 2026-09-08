@@ -585,6 +585,7 @@ MonoBehaviour:
   hpFill: {fileID: 792510951698008644}
   hpText: {fileID: 5701463750861153931}
   intentIcon: {fileID: 7000200879120951743}
+  intentField: {fileID: 0}
   intentValueText: {fileID: 5975634853204776868}
   intentSprites:
   - intentType: 0
@@ -668,9 +669,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6953828119341480526, guid: b9a155ad98650f548846ae7f853e2dc3, type: 3}
+  m_Sprite: {fileID: 5295612725816706851, guid: 912ea4091569d5f498c65f58f8fc3d19, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

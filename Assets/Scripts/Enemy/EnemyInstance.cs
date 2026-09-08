@@ -35,6 +35,8 @@ public class EnemyInstance : ICombatant
     public StatusContainer Statuses => _statuses;
 
     public Sprite EnemySprite { get; private set; }
+    public float SpriteScale => (Data != null && Data.spriteScale > 0.01f) ? Data.spriteScale : 1.0f;
+    public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
 
     public event Action<int> OnDamaged;       // 실제 HP 감소량
     public event Action<int> OnBlockChanged;  // 현재 블록 수치
@@ -49,9 +51,12 @@ public class EnemyInstance : ICombatant
         EnemySprite = data.enemyImage;
         _rng = rng ?? new System.Random();
         _statuses = new StatusContainer(_passives);
+        _statuses.OnChanged += () => OnIntentChanged?.Invoke();
         // 첫 인텐트 결정
         DetermineCurrentAction();
     }
+
+    public void NotifyIntentChanged() => OnIntentChanged?.Invoke();
 
     // 블록 흡수 → HP 감소. 패시브 배율은 DamageCalculator가 호출 전에 이미 적용함.
     public void TakeDamage(DamageInfo info)
@@ -78,7 +83,10 @@ public class EnemyInstance : ICombatant
         }
 
         if (IsDead)
+        {
+            Debug.Log($"<color=#F87171>[Battle] 적 처치 완료: '{Data?.enemyName}' 사망!</color>");
             OnDied?.Invoke();
+        }
     }
 
     public void AddBlock(int amount)

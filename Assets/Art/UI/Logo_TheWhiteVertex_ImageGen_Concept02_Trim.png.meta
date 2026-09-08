@@ -1,0 +1,520 @@
+fileFormatVersion: 2
+guid: 149dec194d02f54458cc9a6ce8b041a7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5895982872652315609
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_0
+  - first:
+      213: -4375533476085569175
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_1
+  - first:
+      213: 4590398332657611044
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_2
+  - first:
+      213: -7702766908819030232
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_3
+  - first:
+      213: 5134016410762104350
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_4
+  - first:
+      213: -1685764158401842643
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_5
+  - first:
+      213: 369321053120580354
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_6
+  - first:
+      213: -4745767037438477460
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_7
+  - first:
+      213: -4224657601470790512
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_8
+  - first:
+      213: -6338841353086042514
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_9
+  - first:
+      213: 7781761500887007623
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_10
+  - first:
+      213: 3547148489971900448
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_11
+  - first:
+      213: 897152274660408494
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_12
+  - first:
+      213: -2695733741558386484
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_13
+  - first:
+      213: -1370549991075593239
+    second: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_0
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 544
+        width: 84
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72485c9c0d24d2ea0800000000000000
+      internalID: -5895982872652315609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_1
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 544
+        width: 93
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 969e61f6c7bf643c0800000000000000
+      internalID: -4375533476085569175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_2
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 544
+        width: 70
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4213a9b66fe54bf30800000000000000
+      internalID: 4590398332657611044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_3
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 541
+        width: 147
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82f3534be464a1590800000000000000
+      internalID: -7702766908819030232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_4
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 544
+        width: 93
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1e408279b0bf3740800000000000000
+      internalID: 5134016410762104350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_5
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 544
+        width: 28
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d227f53fd66fa98e0800000000000000
+      internalID: -1685764158401842643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_6
+      rect:
+        serializedVersion: 2
+        x: 1353
+        y: 544
+        width: 86
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b43538a87102500800000000000000
+      internalID: 369321053120580354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_7
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 544
+        width: 68
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6bb8ba0606a32eb0800000000000000
+      internalID: -4745767037438477460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_8
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 477
+        width: 1733
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0940eae6b400f55c0800000000000000
+      internalID: -4224657601470790512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_9
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 81
+        width: 331
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6effbdbf59e708a0800000000000000
+      internalID: -6338841353086042514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_10
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 160
+        width: 186
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7814e230bde5efb60800000000000000
+      internalID: 7781761500887007623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_11
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 158
+        width: 246
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 020a65e02c00a3130800000000000000
+      internalID: 3547148489971900448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_12
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 160
+        width: 211
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eac31909d33537c00800000000000000
+      internalID: 897152274660408494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_13
+      rect:
+        serializedVersion: 2
+        x: 1174
+        y: 160
+        width: 180
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc0b065d174d69ad0800000000000000
+      internalID: -2695733741558386484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo_TheWhiteVertex_ImageGen_Concept02_Trim_14
+      rect:
+        serializedVersion: 2
+        x: 1355
+        y: 31
+        width: 350
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e3460b6b04dafce0800000000000000
+      internalID: -1370549991075593239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_0: -5895982872652315609
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_1: -4375533476085569175
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_10: 7781761500887007623
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_11: 3547148489971900448
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_12: 897152274660408494
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_13: -2695733741558386484
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_14: -1370549991075593239
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_2: 4590398332657611044
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_3: -7702766908819030232
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_4: 5134016410762104350
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_5: -1685764158401842643
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_6: 369321053120580354
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_7: -4745767037438477460
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_8: -4224657601470790512
+      Logo_TheWhiteVertex_ImageGen_Concept02_Trim_9: -6338841353086042514
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

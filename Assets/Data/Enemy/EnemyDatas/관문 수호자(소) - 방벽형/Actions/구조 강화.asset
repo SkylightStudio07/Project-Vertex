@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c854a75a493ec1e4e8963bb23c501a44, type: 3}
+  m_Name: 구조 강화
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
+  intentType: 1
+  effects:
+  - rid: 6003
+  - rid: 6004
+  references:
+    version: 2
+    RefIds:
+    - rid: 6003
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 8
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        targets:
+          mode: 0
+    - rid: 6004
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000005, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0

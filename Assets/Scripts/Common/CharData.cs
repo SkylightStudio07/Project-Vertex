@@ -12,7 +12,13 @@ public class CharData : ScriptableObject
     public Sprite charIcon;
     public Sprite standingSprite; // 전투 화면 스탠딩(전신) 스프라이트. charImage와 별개 아트
 
-    [Header("캐릭터 애니메이션")]
+    [Header("캐릭터 애니메이션 (스프라이트 시트 기반)")]
+    [Tooltip("기본 대기(Idle) 루프 애니메이션 스프라이트 프레임 목록")]
+    public Sprite[] idleFrames;
+    [Tooltip("대기 애니메이션 초당 프레임 수 (기본 24 FPS)")]
+    public float idleFrameRate = 24f;
+
+    [Header("레거시 애니메이션 클립")]
     public AnimationClip idleAnim;
     public AnimationClip attackAnim;
     public AnimationClip hitAnim;

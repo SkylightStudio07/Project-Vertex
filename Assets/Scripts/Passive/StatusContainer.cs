@@ -6,6 +6,8 @@ public sealed class StatusContainer
 {
     private readonly List<IPassiveLogic> _entries;
 
+    public event Action OnChanged;
+
     public StatusContainer(List<IPassiveLogic> entries) => _entries = entries;
     public IReadOnlyList<IPassiveLogic> Entries => _entries;
 
@@ -16,10 +18,17 @@ public sealed class StatusContainer
         if (passive is StatusInstance incoming)
         {
             foreach (var entry in _entries)
-                if (entry is StatusInstance existing && existing.TryMerge(incoming)) return;
+            {
+                if (entry is StatusInstance existing && existing.TryMerge(incoming))
+                {
+                    OnChanged?.Invoke();
+                    return;
+                }
+            }
         }
 
         _entries.Add(passive);
+        OnChanged?.Invoke();
     }
 
     public StatusInstance Find(StatusDefinition definition)
@@ -61,6 +70,7 @@ public sealed class StatusContainer
             case StatusStackOperation.RemoveAll: status.RemoveAll(); break;
         }
         RemoveExpired();
+        OnChanged?.Invoke();
     }
 
     public int ModifyBlockGain(int amount, ICombatant owner)
@@ -138,6 +148,7 @@ public sealed class StatusContainer
         foreach (var passive in snapshot)
             if (passive is StatusInstance status && _entries.Contains(passive)) status.TickDown(timing);
         RemoveExpired();
+        OnChanged?.Invoke();
     }
 
     public void NotifyAfterDamageTaken(
@@ -186,10 +197,16 @@ public sealed class StatusContainer
 
     public void RemoveExpired()
     {
+        bool anyRemoved = false;
         for (int i = _entries.Count - 1; i >= 0; i--)
         {
             if (_entries[i] is StatusInstance status && status.IsExpired)
+            {
                 _entries.RemoveAt(i);
+                anyRemoved = true;
+            }
         }
+        if (anyRemoved)
+            OnChanged?.Invoke();
     }
 }

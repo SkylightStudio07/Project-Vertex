@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
+  m_Name: 게회언터 훈트
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "게회언터 훈트"
+  health: 46
+  enemyImage: {fileID: -8722211630961929171, guid: 51b3862dc69cd6e4d914a4b1ef9cf795, type: 3}
+  spriteScale: 0.9
+  intentOffsetY: 0
+  activityPatternType: 1
+  openingActions: []
+  activityPatterns:
+  - {fileID: 11400000, guid: 8d45754ce30b586e95889d7ce291780f, type: 2}
+  - {fileID: 11400000, guid: f7c9d6e82b775d18878d683f9f3e288d, type: 2}
+  - {fileID: 11400000, guid: 94df9b483c36514297f4f935fb190f92, type: 2}

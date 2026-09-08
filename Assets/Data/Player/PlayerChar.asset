@@ -15,38 +15,65 @@ MonoBehaviour:
   charID: Player
   charName: "\uC8FC\uC778\uACF5"
   charDescription: 
-  charImage: {fileID: -6483680978703746508, guid: 592d3c06efeef2d41af1a32856cb15ad, type: 3}
+  charImage: {fileID: 21300000, guid: 450319bd2b4928743bb7bd1620987c5c, type: 3}
   charIcon: {fileID: 0}
-  standingSprite: {fileID: -6483680978703746508, guid: 592d3c06efeef2d41af1a32856cb15ad, type: 3}
-  idleAnim: {fileID: 0}
+  standingSprite: {fileID: 21300000, guid: 450319bd2b4928743bb7bd1620987c5c, type: 3}
+  idleFrames:
+  - {fileID: -8524567730182408873, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -1362152343, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 47910390, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -604390923, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -1249697834, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1536272731, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1314054548, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 792237398, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -545239553, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -11660187, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 2108609921, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1145328905, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 48072407, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 552167817, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 428134675, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1476970739, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -1251772124, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -1398202193, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -1908172496, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -2143332234, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -597215805, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -981816060, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -1438192699, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 878790163, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -636033441, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 226510489, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1289441959, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 500178302, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 179317977, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1456005256, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 322182320, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 920515592, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 796084384, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -150790825, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -1958399963, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -145360067, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1422407347, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 663346687, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 956644701, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 804212968, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1665590595, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -40604594, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 524338994, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 24542088, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1571748124, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 942222626, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: -630082925, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 941672649, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  - {fileID: 1182338403, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
+  idleFrameRate: 18
+  idleAnim: {fileID: 7400000, guid: 59ab04409cae5db499aa82b07a044dde, type: 2}
   attackAnim: {fileID: 0}
   hitAnim: {fileID: 0}
   deathAnim: {fileID: 0}
-  attackSequence:
-  - pose: {fileID: -6483680978703746508, guid: 592d3c06efeef2d41af1a32856cb15ad, type: 3}
-    positionOffset: {x: -20, y: 8}
-    scale: {x: 1, y: 1}
-    rotation: 0
-    moveDuration: 0.07
-    holdDuration: 0.08
-  - pose: {fileID: 781929511226199784, guid: 07474fe44e5c3244dac42be20cb1901a, type: 3}
-    positionOffset: {x: 45, y: -6}
-    scale: {x: 1, y: 1}
-    rotation: 0
-    moveDuration: 0.09
-    holdDuration: 0.09
-  - pose: {fileID: -3508195048503325055, guid: 6f3936739bf81f84bb4b9995579afa2a, type: 3}
-    positionOffset: {x: 15, y: 2}
-    scale: {x: 1, y: 1}
-    rotation: 0
-    moveDuration: 0.09
-    holdDuration: 0.15
-  - pose: {fileID: 860848840337420476, guid: 916d4d59c82a8c94895bbfa1fb397f74, type: 3}
-    positionOffset: {x: 3, y: 0}
-    scale: {x: 1, y: 1}
-    rotation: 0
-    moveDuration: 0.1
-    holdDuration: 0.05
+  attackSequence: []
   charSoundEffect: {fileID: 0}
   CharMaxHp: 0
   StartingEnegy: 0
@@ -54,3 +81,14 @@ MonoBehaviour:
   DrawCountPerTurn: 0
   DefaultCardPool: []
   BattleRewardCardPool: []
+  weaponVisuals:
+  - weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    standingSprite: {fileID: 21300000, guid: 450319bd2b4928743bb7bd1620987c5c, type: 3}
+    idleFrames: []
+    idleFrameRate: 24
+    attackSequence: []
+  - weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}
+    standingSprite: {fileID: 21300000, guid: 608c01635da0ca248a924ce72ce90e18, type: 3}
+    idleFrames: []
+    idleFrameRate: 24
+    attackSequence: []

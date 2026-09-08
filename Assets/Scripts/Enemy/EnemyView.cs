@@ -47,27 +47,52 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private GameObject hitEffectPrefab;
 
     private RectTransform _intentIconRect;
+    private Vector2 _initialIntentIconPos;
     private Vector2 _intentIconBasePos;
+
     private RectTransform _intentValueRect;
+    private Vector2 _initialIntentValuePos;
     private Vector2 _intentValueBasePos;
 
+    private RectTransform _intentFieldRect;
+    private Vector2 _initialIntentFieldPos;
+    private Vector2 _intentFieldBasePos;
+
+    private Vector3 _enemyImageBaseScale = Vector3.one;
     private RectTransform _rect;
 
     public EnemyInstance Instance { get; private set; }
 
     private void Awake()
     {
+        if (enemyImage != null)
+        {
+            _enemyImageBaseScale = enemyImage.rectTransform.localScale;
+            if (_enemyImageBaseScale == Vector3.zero) _enemyImageBaseScale = Vector3.one;
+        }
+
         if (intentIcon != null)
         {
             _intentIconRect = intentIcon.rectTransform;
-            // 부유 애니메이션의 기준점. 매 프레임 여기에 오프셋을 더해서 위아래로 움직인다.
-            _intentIconBasePos = _intentIconRect.anchoredPosition;
+            _initialIntentIconPos = _intentIconRect.anchoredPosition;
+            _intentIconBasePos = _initialIntentIconPos;
         }
 
         if (intentValueText != null)
         {
             _intentValueRect = intentValueText.rectTransform;
-            _intentValueBasePos = _intentValueRect.anchoredPosition;
+            _initialIntentValuePos = _intentValueRect.anchoredPosition;
+            _intentValueBasePos = _initialIntentValuePos;
+        }
+
+        if (intentField != null)
+        {
+            _intentFieldRect = intentField.transform as RectTransform;
+            if (_intentFieldRect != null)
+            {
+                _initialIntentFieldPos = _intentFieldRect.anchoredPosition;
+                _intentFieldBasePos = _initialIntentFieldPos;
+            }
         }
 
         _rect = transform as RectTransform;
@@ -85,6 +110,8 @@ public class EnemyView : MonoBehaviour
         _intentIconRect.anchoredPosition = _intentIconBasePos + new Vector2(0f, offsetY);
         if (_intentValueRect != null)
             _intentValueRect.anchoredPosition = _intentValueBasePos + new Vector2(0f, offsetY);
+        if (_intentFieldRect != null)
+            _intentFieldRect.anchoredPosition = _intentFieldBasePos + new Vector2(0f, offsetY);
     }
 
     public void Bind(EnemyInstance instance)
@@ -99,8 +126,7 @@ public class EnemyView : MonoBehaviour
 
         Instance = instance;
 
-        enemyImage.sprite  = instance.EnemySprite;
-        enemyImage.enabled = instance.EnemySprite != null;
+        ApplySpriteAndScale(instance);
 
         instance.OnDamaged       += HandleDamaged;
         instance.OnDied          += HandleDied;
@@ -109,6 +135,43 @@ public class EnemyView : MonoBehaviour
 
         RefreshHP();
         RefreshIntent();
+    }
+
+    private void ApplySpriteAndScale(EnemyInstance instance)
+    {
+        float scale = instance.SpriteScale;
+        float extraOffsetY = instance.IntentOffsetY;
+
+        if (enemyImage != null)
+        {
+            enemyImage.sprite  = instance.EnemySprite;
+            enemyImage.enabled = instance.EnemySprite != null;
+            enemyImage.rectTransform.localScale = new Vector3(_enemyImageBaseScale.x * scale, _enemyImageBaseScale.y * scale, 1f);
+
+            if (instance.EnemySprite == null)
+            {
+                Debug.LogWarning($"[EnemyView] '{instance.Data?.enemyName}'의 Sprite가 null입니다! 텍스처 임포트 설정(Sprite Mode: Multiple)이나 EnemyData 에셋을 확인하세요.");
+            }
+        }
+
+        // 인텐트 위치를 스프라이트 크기에 맞춰 상대적으로 이동.
+        // 스프라이트 높이와 피벗을 기준으로 스케일 변화에 따른 상단(Top) 변위를 계산한다.
+        float spriteHeight = enemyImage != null ? enemyImage.rectTransform.rect.height : 100f;
+        float pivotTopFactor = enemyImage != null ? (1f - enemyImage.rectTransform.pivot.y) : 0.5f;
+        float topOffset = spriteHeight * pivotTopFactor;
+        float deltaY = topOffset * (scale - 1.0f) + extraOffsetY;
+
+        _intentIconBasePos = _initialIntentIconPos + new Vector2(0f, deltaY);
+        _intentValueBasePos = _initialIntentValuePos + new Vector2(0f, deltaY);
+        if (_intentFieldRect != null)
+            _intentFieldBasePos = _initialIntentFieldPos + new Vector2(0f, deltaY);
+
+        if (_intentIconRect != null)
+            _intentIconRect.anchoredPosition = _intentIconBasePos;
+        if (_intentValueRect != null)
+            _intentValueRect.anchoredPosition = _intentValueBasePos;
+        if (_intentFieldRect != null)
+            _intentFieldRect.anchoredPosition = _intentFieldBasePos;
     }
 
     private void OnDestroy() => Unbind();
@@ -121,6 +184,21 @@ public class EnemyView : MonoBehaviour
         Instance.OnIntentChanged -= RefreshIntent;
         Instance.OnActionStarted -= PlayLungeMotion;
         Instance = null;
+
+        if (enemyImage != null)
+            enemyImage.rectTransform.localScale = _enemyImageBaseScale;
+
+        _intentIconBasePos = _initialIntentIconPos;
+        _intentValueBasePos = _initialIntentValuePos;
+        if (_intentFieldRect != null)
+            _intentFieldBasePos = _initialIntentFieldPos;
+
+        if (_intentIconRect != null)
+            _intentIconRect.anchoredPosition = _initialIntentIconPos;
+        if (_intentValueRect != null)
+            _intentValueRect.anchoredPosition = _initialIntentValuePos;
+        if (_intentFieldRect != null)
+            _intentFieldRect.anchoredPosition = _initialIntentFieldPos;
     }
 
     private void HandleDamaged(int _)

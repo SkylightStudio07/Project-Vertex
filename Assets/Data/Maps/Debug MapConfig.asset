@@ -29,14 +29,18 @@ MonoBehaviour:
   - nodeType: 3
     weight: 0.2
   normalEncounterPool:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a46c476622c953968d16d85334612307, type: 2}
+  - {fileID: 11400000, guid: edd1226cc9ba5fdfba53b7e0148deb96, type: 2}
+  - {fileID: 11400000, guid: 5b1c572c02b251c0ad3205fe6de008a3, type: 2}
+  - {fileID: 11400000, guid: 5fcab9c7f30759fd8f08783dca01176a, type: 2}
+  - {fileID: 11400000, guid: 55b9db48196c516ea1d4545e26407553, type: 2}
   eliteEncounterPool:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e29a8d59fe084503b2b1c6894e35f67a, type: 2}
   bossEncounterPool:
-  - {fileID: 0}
-  weakEncounterPool: []
+  - {fileID: 11400000, guid: 0105cc21e3e74f6591ca0b750db35001, type: 2}
+  weakEncounterPool:
+  - {fileID: 11400000, guid: 11bb3c5c2755529ab547dafeee2e3ffa, type: 2}
+  - {fileID: 11400000, guid: 0e8e699bb4c05a1b840b91ce16be549d, type: 2}
   weakEncounterCount: 3
   guaranteedNodes:
   - floorIndex: 0
@@ -45,6 +49,8 @@ MonoBehaviour:
     nodeType: 0
   - floorIndex: 2
     nodeType: 7
+  - floorIndex: 9
+    nodeType: 6
   - floorIndex: 14
     nodeType: 3
   - floorIndex: 15
