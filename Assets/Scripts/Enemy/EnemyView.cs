@@ -68,6 +68,7 @@ public class EnemyView : MonoBehaviour
         if (enemyImage != null)
         {
             _enemyImageBaseScale = enemyImage.rectTransform.localScale;
+            if (_enemyImageBaseScale == Vector3.zero) _enemyImageBaseScale = Vector3.one;
         }
 
         if (intentIcon != null)
@@ -146,6 +147,11 @@ public class EnemyView : MonoBehaviour
             enemyImage.sprite  = instance.EnemySprite;
             enemyImage.enabled = instance.EnemySprite != null;
             enemyImage.rectTransform.localScale = new Vector3(_enemyImageBaseScale.x * scale, _enemyImageBaseScale.y * scale, 1f);
+
+            if (instance.EnemySprite == null)
+            {
+                Debug.LogWarning($"[EnemyView] '{instance.Data?.enemyName}'의 Sprite가 null입니다! 텍스처 임포트 설정(Sprite Mode: Multiple)이나 EnemyData 에셋을 확인하세요.");
+            }
         }
 
         // 인텐트 위치를 스프라이트 크기에 맞춰 상대적으로 이동.

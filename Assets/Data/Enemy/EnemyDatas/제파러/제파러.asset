@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
-  m_Name: 제파러
+  m_Name: "\uC81C\uD30C\uB7EC"
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: "제파러"
+  enemyName: "\uC81C\uD30C\uB7EC"
   health: 40
-  enemyImage: {fileID: -8722211630961929171, guid: 51b3862dc69cd6e4d914a4b1ef9cf795, type: 3}
-  spriteScale: 1.0
+  enemyImage: {fileID: 21300000, guid: fcbfdb1b938f7e644bd503bfb11173d5, type: 3}
+  spriteScale: 1.8
   intentOffsetY: 0
   activityPatternType: 0
   openingActions: []
