@@ -14,6 +14,13 @@ public class EnemyData : ScriptableObject
     public int health;
     public Sprite enemyImage;
 
+    [Header("스프라이트 연출")]
+    [Tooltip("스프라이트 크기 배율 (기본값 1.0f). 적마다 0.9, 1.2 등으로 조절 가능합니다.")]
+    public float spriteScale = 1.0f;
+
+    [Tooltip("인텐트 UI 추가 Y 오프셋 (기본 0, 필요시 머리 위 위치 미세 조정)")]
+    public float intentOffsetY = 0f;
+
     [Header("행동 패턴")]
     [Tooltip("행동 패턴 타입(랜덤/순차)")]
     public EnemyActivityPatternType activityPatternType;

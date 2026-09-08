@@ -15,5 +15,7 @@ MonoBehaviour:
   enemyName: "\uD2B8\uB9AC\uD3F4\uB9AC\uD0C0\uB2C8\uC544 \uC6A9\uBCD1"
   health: 40
   enemyImage: {fileID: -6953828119341480526, guid: b9a155ad98650f548846ae7f853e2dc3, type: 3}
+  spriteScale: 1.0
+  intentOffsetY: 0
   activityPatterns:
   - {fileID: 11400000, guid: d4cf7583484a2aa4b9b4fab38c26b9d5, type: 2}

@@ -35,6 +35,8 @@ public class EnemyInstance : ICombatant
     public StatusContainer Statuses => _statuses;
 
     public Sprite EnemySprite { get; private set; }
+    public float SpriteScale => (Data != null && Data.spriteScale > 0.01f) ? Data.spriteScale : 1.0f;
+    public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
 
     public event Action<int> OnDamaged;       // 실제 HP 감소량
     public event Action<int> OnBlockChanged;  // 현재 블록 수치
