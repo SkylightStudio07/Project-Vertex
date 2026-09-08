@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "\uAC1C\uBA38\uB9AC\uD310 \uD0C0\uACA9"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  cardImage: {fileID: 21300000, guid: 295652b6c5769c340b0e99bf3bdca365, type: 3}
   CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
   cardType: 0
   cardRarity: 0
   cardOwner: 0
+  isWeaponShootingCard: 0
   cardDescription: "\uAC1C\uBA38\uB9AC\uD310\uC73C\uB85C \uD0C0\uACA9\uD574, {0.amount}
     \uB300\uBBF8\uC9C0\uB97C \uC801\uC5D0\uAC8C \uAC00\uD569\uB2C8\uB2E4."
   useMode: 1
@@ -50,15 +51,31 @@ MonoBehaviour:
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 8
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
         hitCount: 1
         targets:
           mode: 1
+        piercing: 0
+        environmentalDamage: 0
         hitInterval: 0.08
     - rid: 4680130923130519633
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 11
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
         hitCount: 1
         targets:
           mode: 1
+        piercing: 0
+        environmentalDamage: 0
         hitInterval: 0.08
