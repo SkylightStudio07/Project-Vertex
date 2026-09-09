@@ -88,18 +88,28 @@ public class PartyView : MonoBehaviour
             return;
         }
         WeaponData currentWeapon = BattleManager.Instance?.State?.CurrentWeapon;
-        var sequence = playerCharData.GetAttackSequence(currentWeapon);
-        if (sequence == null || sequence.Length == 0)
+
+        // 1. 스프라이트 시트 기반 공격 애니메이션 우선 재생
+        var attackFrames = playerCharData.GetAttackFrames(currentWeapon, out float attackFps);
+        if (attackFrames != null && attackFrames.Length > 0)
         {
-            if (!warnedEmptyAttackSequence)
-            {
-                Debug.LogWarning($"[PartyView] '{playerCharData.name}'의 attackSequence가 비어있음.");
-                warnedEmptyAttackSequence = true;
-            }
+            playerPoseSequencer.Play(attackFrames, attackFps);
             return;
         }
 
-        playerPoseSequencer.Play(sequence);
+        // 2. 키프레임 공격 시퀀스 재생
+        var sequence = playerCharData.GetAttackSequence(currentWeapon);
+        if (sequence != null && sequence.Length > 0)
+        {
+            playerPoseSequencer.Play(sequence);
+            return;
+        }
+
+        if (!warnedEmptyAttackSequence)
+        {
+            Debug.LogWarning($"[PartyView] '{playerCharData.name}'의 attackFrames 및 attackSequence가 비어있음.");
+            warnedEmptyAttackSequence = true;
+        }
     }
 
     private void Refresh()
