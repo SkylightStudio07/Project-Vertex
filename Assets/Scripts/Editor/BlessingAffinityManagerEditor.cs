@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -13,22 +13,6 @@ using UnityEngine;
 public class BlessingAffinityManagerEditor : Editor
 {
     private string flagToAdd = "";
-
-    [MenuItem("Tools/Vertex/Open or Select Blessing Affinity Manager", priority = 100)]
-    public static void SelectAffinityManager()
-    {
-        var mgr = Object.FindObjectOfType<BlessingAffinityManager>();
-        if (mgr == null)
-        {
-            var go = new GameObject("[BlessingAffinityManager]");
-            mgr = go.AddComponent<BlessingAffinityManager>();
-            Undo.RegisterCreatedObjectUndo(go, "Create BlessingAffinityManager");
-            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        }
-
-        Selection.activeGameObject = mgr.gameObject;
-        EditorGUIUtility.PingObject(mgr.gameObject);
-    }
 
     public override void OnInspectorGUI()
     {
