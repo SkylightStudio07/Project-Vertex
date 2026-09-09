@@ -12,16 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
   m_Name: LostBloodAttack
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
-  statusId: 
-  displayName: 
-  description: 
+  statusId: LostBloodAttack
+  displayName: "\uCCB4\uB825\uAC10\uC18C \uACF5\uACA9"
+  description: "\uCCB4\uB825\uC774 \uAC10\uC18C\uB420 \uB54C \uB9C8\uB2E4 \uBAA8\uB4E0
+    \uC801\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4."
   icon: {fileID: 0}
   disposition: 0
   stackPolicy: 0
-  durationPolicy: 0
+  durationPolicy: 1
   maxStacks: 0
   dispellable: 1
-  behaviors: []
+  behaviors:
+  - rid: 5573463116610797697
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5573463116610797697
+      type: {class: AfterDamageTakenEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 5573463116610797698
+    - rid: 5573463116610797698
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 2
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        hitCount: 1
+        targets:
+          mode: 2
+        piercing: 0
+        environmentalDamage: 0
+        hitInterval: 0.08
