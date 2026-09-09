@@ -12,32 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: CH_01_C10
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: 0}
-  CardBackground: {fileID: 0}
-  cardType: 0
-  cardRarity: 0
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
+  cardType: 2
+  cardRarity: 1
   cardOwner: 1
-  cardDescription: "{0.targets}\uC5D0\uAC8C {0.scaling.multiplier} * {0.targets}\uAC00
-    \uBCF4\uC720\uD558\uACE0 \uC788\uB294 {0.scaling.status} \uB2F9  {0.scaling.multiplier}\uC758
-    \uD53C\uD574\uB97C \uC900\uB2E4. "
-  useMode: 1
+  isWeaponShootingCard: 0
+  cardDescription: "\uCCB4\uB825\uC744 {0.amount} \uAC10\uC18C\uD558\uACE0 \uBF51\uC744
+    \uCE74\uB4DC \uB354\uBBF8\uC5D0\uC11C \uCE74\uB4DC\uB97C {1.count} \uAC00\uC838\uC628\uB2E4."
+  useMode: 0
   isUpgraded: 0
   normalState:
-    cardName: "\uD608\uD754 \uD3ED\uBC1C"
-    energyCost: 1
+    cardName: "\uD608\uC561 \uCE74\uB4DC"
+    energyCost: 0
     ammoCost: 0
     effects:
-    - rid: 2470581257654239327
+    - rid: 5573463116610797700
+    - rid: 5573463116610797701
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uD608\uD754+"
-    energyCost: 1
+    cardName: "\uD608\uC561 \uCE74\uB4DC+"
+    energyCost: 0
     ammoCost: 0
     effects:
-    - rid: 2470581257654239328
+    - rid: 5573463116610797702
+    - rid: 5573463116610797703
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -47,33 +49,31 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2470581257654239327
-      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+    - rid: 5573463116610797700
+      type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 0
-        scaling:
-          source: 1
-          target: 1
-          status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
-          multiplier: 5
-          flatBonus: 0
-        hitCount: 1
+        amount: 5
         targets:
-          mode: 1
-        piercing: 0
-        hitInterval: 0.08
-    - rid: 2470581257654239328
-      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+          mode: 0
+    - rid: 5573463116610797701
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 0
-        scaling:
-          source: 1
-          target: 1
-          status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
-          multiplier: 7
-          flatBonus: 0
-        hitCount: 1
+        sourceMode: 1
+        cardToAdd: {fileID: 0}
+        targetPile: 2
+        count: 3
+        allowDuplicateRandomCards: 0
+    - rid: 5573463116610797702
+      type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 5
         targets:
-          mode: 1
-        piercing: 0
-        hitInterval: 0.08
+          mode: 0
+    - rid: 5573463116610797703
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 1
+        cardToAdd: {fileID: 0}
+        targetPile: 2
+        count: 4
+        allowDuplicateRandomCards: 0
