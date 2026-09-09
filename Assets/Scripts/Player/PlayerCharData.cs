@@ -17,6 +17,12 @@ public class WeaponVisualSet
     [Tooltip("대기 애니메이션 초당 프레임 수 (기본 24 FPS)")]
     public float idleFrameRate = 24f;
 
+    [Tooltip("해당 무기 공격 시 재생될 스프라이트 시트 프레임 (비워둘 시 기본 attackFrames 또는 attackSequence 사용)")]
+    public Sprite[] attackFrames;
+
+    [Tooltip("공격 애니메이션 초당 프레임 수 (기본 24 FPS)")]
+    public float attackFrameRate = 24f;
+
     [Tooltip("해당 무기 사용 시 재생될 공격 연출 시퀀스 (비워둘 시 기본 attackSequence 사용)")]
     public AttackKeyframe[] attackSequence;
 }
@@ -83,6 +89,28 @@ public class PlayerCharData : CharData
                 return match.standingSprite;
         }
         return standingSprite;
+    }
+
+    /// <summary>
+    /// 현재 무기에 해당하는 공격 스프라이트 프레임 배열과 FPS를 반환합니다.
+    /// 전용 무기에 attackFrames가 등록되어 있다면 이를 반환하고,
+    /// 없으면 기본 attackFrames를 반환합니다.
+    /// </summary>
+    public Sprite[] GetAttackFrames(WeaponData weapon, out float frameRate)
+    {
+        frameRate = attackFrameRate > 0f ? attackFrameRate : 24f;
+
+        if (weapon != null && weaponVisuals != null)
+        {
+            var match = weaponVisuals.Find(v => v != null && v.weapon == weapon);
+            if (match != null && match.attackFrames != null && match.attackFrames.Length > 0)
+            {
+                frameRate = match.attackFrameRate > 0f ? match.attackFrameRate : 24f;
+                return match.attackFrames;
+            }
+        }
+
+        return (attackFrames != null && attackFrames.Length > 0) ? attackFrames : null;
     }
 
     /// <summary>
