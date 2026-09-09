@@ -6,6 +6,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Image charImage;
+    [SerializeField] private Sprite emptySlotSprite;
     private SelectCoopCharUI selectCoopCharUI;
     private string charID;
 
@@ -22,6 +23,12 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
 
     public void SetBtn(string charID)
     {
+        if (string.IsNullOrEmpty(charID))
+        {
+            SetEmptySlot();
+            return;
+        }
+
         this.charID = charID;
 
         if (CooperationManager.Instance == null)
@@ -37,6 +44,14 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
         }
 
         charImage.sprite = CooperationManager.Instance.GetCoopSprite(charID);
+        charImage.SetNativeSize();
+        transform.localScale = Vector3.one * 0.7f;
+    }
+
+    public void SetEmptySlot()
+    {
+        charID = null;
+        charImage.sprite = emptySlotSprite;
     }
 
     // 마우스가 캐릭터 창 위에 위치했을 때 선택되었다는 표시가 나타나도록 함
@@ -48,6 +63,8 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler
     // 버튼 OnClick 이벤트에 사용할 메소드 ( 현재 선택한 캐릭터의 카드 추가 )
     public void OnClickBtn()
     {
+        if (string.IsNullOrEmpty(charID)) return;
+
         if (CooperationManager.Instance == null)
         {
             Debug.LogWarning("[SelectCoopCharBtn] CooperationManager.Instance가 없음. 씬(또는 부트 씬)에 CooperationManager가 있는지 확인 필요.");

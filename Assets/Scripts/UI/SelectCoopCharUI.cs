@@ -34,12 +34,13 @@ public class SelectCoopCharUI : MonoBehaviour
 
         fadeController.FadeIn();
 
-        // 후보 수와 버튼 수가 다를 수 있으므로 남는 버튼은 끈다.
+        // 후보 수와 버튼 수가 다를 수 있으므로 남는 버튼은 빈 슬롯 이미지로 표시한다.
         for (int i = 0; i < selectCoopCharBtns.Count; i++)
         {
             bool hasCandidate = i < candidates.Count;
-            selectCoopCharBtns[i].gameObject.SetActive(hasCandidate);
+            selectCoopCharBtns[i].gameObject.SetActive(true);
             if (hasCandidate) selectCoopCharBtns[i].SetBtn(candidates[i]);
+            else selectCoopCharBtns[i].SetEmptySlot();
         }
     }
 
