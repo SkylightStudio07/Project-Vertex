@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public enum BattleType { Normal, Elite, Boss }
 
@@ -11,18 +12,25 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
 
-    void Awake()
+    // 싱글톤 인스턴스와 반복 사용할 대기 객체를 초기화한다.
+    private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        RefreshWaitCache();
     }
 
     // Inspector 기본값 — StartBattle 시 BattleState 초기화에 사용
     [Header("전투 기본 설정")]
-    [SerializeField] private int defaultMaxEnergy = 3;
-    [SerializeField] private int defaultAmmo      = 3;
-    [SerializeField] private int defaultDrawCount = 5;
-    [SerializeField] private WeaponData defaultWeapon;
+    [FormerlySerializedAs("defaultMaxEnergy")]
+    [SerializeField] private int _defaultMaxEnergy = 3; // 전투 시작 시 적용할 기본 최대 에너지.
+    [FormerlySerializedAs("defaultAmmo")]
+    [SerializeField] private int _defaultAmmo = 3; // 전투 시작 시 적용할 기본 탄약 수.
+    [FormerlySerializedAs("defaultDrawCount")]
+    [SerializeField] private int _defaultDrawCount = 5; // 플레이어 턴 시작 시 기본으로 뽑을 카드 수.
+    [FormerlySerializedAs("defaultWeapon")]
+    [SerializeField] private WeaponData _defaultWeapon; // 전투 시작 시 장착할 기본 무기.
 
     // 런타임 전투 상태 — 모든 읽기/쓰기는 여기를 통함
     private BattleState _state;
@@ -35,7 +43,7 @@ public class BattleManager : MonoBehaviour
 
     // 하위 호환 래퍼 (UI/외부 코드용)
     public int Energy      => _state?.Energy      ?? 0;
-    public int MaxEnergy   => _state?.MaxEnergy   ?? defaultMaxEnergy;
+    public int MaxEnergy   => _state?.MaxEnergy   ?? _defaultMaxEnergy;
     public int Ammo        => _state?.Ammo        ?? 0;
     public int PlayerBlock => _state?.Player?.Block ?? 0;
     public WeaponData CurrentWeapon => _state?.CurrentWeapon;
@@ -48,12 +56,15 @@ public class BattleManager : MonoBehaviour
     // 손패 변경 배치 처리
     private int  _handChangeBatchDepth;
     private bool _hasPendingHandChange;
+    private bool _isEndingPlayerTurn; // 플레이어 턴 종료 처리가 진행 중인지 나타낸다.
 
-    public IReadOnlyList<CardData>      Hand    => _state?.Hand    ?? new List<CardData>();
-    public IReadOnlyList<EnemyInstance> Enemies => _state?.Enemies ?? new List<EnemyInstance>();
+    public IReadOnlyList<CardData>      Hand    => _state != null ? _state.Hand : Array.Empty<CardData>();
+    public IReadOnlyList<EnemyInstance> Enemies => _state != null ? _state.Enemies : Array.Empty<EnemyInstance>();
+    public bool IsPlayerTurnEnding => _isEndingPlayerTurn; // 턴 종료 연출/정리 중 카드 입력을 막기 위한 읽기 전용 상태.
 
     public event Action         OnBattleStarted; // StartBattle() 끝에서 1회 발화 — 씬을 갈아끼우지 않고 화면을 SetActive로만 전환하는 구조라, 전투 UI는 Start/OnEnable 대신 이 이벤트로 매 전투 진입을 감지해야 한다 (PartyView 참고)
     public event Action         OnHandChanged;
+    public event Func<float> OnHandExitAnimationRequested; // 손패 카드가 사라지기 전 퇴장 애니메이션을 요청하고 예상 시간을 돌려받는다.
     public event Action         OnEnemiesChanged;
     public event Action<WeaponData> OnWeaponChanged;
     // 플레이어가 카드를 실제로 사용한 시점(비용 차감 직후, 이펙트 실행 직전)에 발화.
@@ -65,20 +76,27 @@ public class BattleManager : MonoBehaviour
 
     private BattleType   _currentBattleType;
     private System.Random _rnd = new();
+    private WaitForSeconds _lungeOutWait; // 적 전진 타이밍 대기에 재사용할 객체.
+    private WaitForSeconds _lungeBackAndPostActionWait; // 적 후퇴와 후처리 대기에 재사용할 객체.
     // 카드 이펙트(DamageEffect 등)가 RandomEnemy 타겟을 결정할 때 이 인스턴스를 사용해야
     // 전투 시드 기반의 결정론적 동작이 보장된다. UnityEngine.Random.Range는 시드와 무관하다.
     public System.Random Rnd => _rnd;
 
     [Header("적 턴 연출")]
-    [SerializeField] private EnemyTurnBannerView turnBanner;
+    [FormerlySerializedAs("turnBanner")]
+    [SerializeField] private EnemyTurnBannerView _turnBanner; // 적 턴 시작 배너를 표시하는 뷰.
     // 전진(lunge out)이 끝나는 시점 = 공격이 닿는 타이밍이라 여기서 데미지를 적용한다.
     // EnemyView.lungeOutDuration과 값을 맞춰야 모션과 타격감이 어긋나지 않는다.
-    [SerializeField] private float lungeOutWaitDuration  = 0.2f;
-    [SerializeField] private float lungeBackWaitDuration = 0.2f; // 후퇴 모션 + 피격 리액션 대기
+    [FormerlySerializedAs("lungeOutWaitDuration")]
+    [SerializeField] private float _lungeOutWaitDuration = 0.2f; // 적 전진 모션이 공격 지점에 도달할 때까지 기다릴 시간.
+    [FormerlySerializedAs("lungeBackWaitDuration")]
+    [SerializeField] private float _lungeBackWaitDuration = 0.2f; // 후퇴 모션과 피격 리액션을 기다릴 시간.
 
     [Header("플레이어 턴 연출")]
-    [SerializeField] private EnemyTurnBannerView playerTurnBanner; // 전투 첫 진입 시에는 PlayerTurnStart(false)로 건너뜀
-    [SerializeField] private float postActionDelay       = 0.3f; // 추가 후처리 대기
+    [FormerlySerializedAs("playerTurnBanner")]
+    [SerializeField] private EnemyTurnBannerView _playerTurnBanner; // 플레이어 턴 시작 배너를 표시하는 뷰.
+    [FormerlySerializedAs("postActionDelay")]
+    [SerializeField] private float _postActionDelay = 0.3f; // 적 행동 후 추가 후처리를 기다릴 시간.
 
     // ─────────────────────────────────────────────
     // 초기화
@@ -90,19 +108,20 @@ public class BattleManager : MonoBehaviour
         _state?.ReleaseRuntimeCards();
         _currentBattleType = battleType;
         _rnd = new System.Random(seed);
+        _isEndingPlayerTurn = false;
 
         _state = new BattleState
         {
             Player    = new PlayerCombatant(),
-            Energy    = defaultMaxEnergy,
-            MaxEnergy = defaultMaxEnergy,
-            Ammo      = defaultAmmo,
-            DrawCount = defaultDrawCount,
+            Energy    = _defaultMaxEnergy,
+            MaxEnergy = _defaultMaxEnergy,
+            Ammo      = _defaultAmmo,
+            DrawCount = _defaultDrawCount,
             Phase     = BattlePhase.PlayerTurn,
         };
 
         SetupEnemies(enemyDataList);
-        _state.ChangePlayerWeapon(defaultWeapon);
+        _state.ChangePlayerWeapon(_defaultWeapon);
         SetupBattleDeck(masterDeck);
         _state.Player.Statuses.NotifyBattleStart(_state, _state.Player);
         foreach (var enemy in _state.Enemies)
@@ -170,8 +189,8 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator PlayerTurnStartSequence(bool showBanner)
     {
-        if (showBanner && playerTurnBanner != null)
-            yield return playerTurnBanner.ShowAndWait();
+        if (showBanner && _playerTurnBanner != null)
+            yield return _playerTurnBanner.ShowAndWait();
 
         // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
         // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
@@ -194,68 +213,108 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTurnEnd()
     {
-        if (_state.Phase != BattlePhase.PlayerTurn) return;
+        if (_state.Phase != BattlePhase.PlayerTurn || _isEndingPlayerTurn) return;
         // 카드 선택 중 턴이 끝나면 손패가 사라져 진행 중인 효과가 깨진다
         if (HandCardSelector.IsSelecting) return;
 
-        // 손패 → 버린 카드 더미
-        BeginHandChangeBatch();
+        StartCoroutine(PlayerTurnEndSequence());
+    }
+
+    // 플레이어 턴 종료 연출을 기다린 뒤 손패를 정리하고 적 턴을 시작한다.
+    private IEnumerator PlayerTurnEndSequence()
+    {
+        _isEndingPlayerTurn = true;
+        bool shouldStartEnemyTurn = false; // 턴 종료 정리가 정상 완료되면 적 턴을 시작하기 위한 플래그.
+
         try
         {
-            bool shouldShuffleDrawPile = false;
-            var retainedCards = new List<CardData>();
-            foreach (var card in _state.Hand)
-            {
-                var ctx = new CardContext
-                {
-                    State      = _state,
-                    Battle     = this,
-                    Card       = card,
-                    AllEnemies = _state.Enemies,
-                };
+            EndPlayerTurnCards();
 
-                bool returnToDrawPile = false;
-                foreach (var effect in card.ActiveEffects)
-                {
-                    if (effect is ICardEndTurnInHandEffect endTurnEffect)
-                        returnToDrawPile |= endTurnEffect.OnTurnEndInHand(ctx);
-                }
-
-                if (returnToDrawPile)
-                {
-                    _state.DrawPile.Add(card);
-                    shouldShuffleDrawPile = true;
-                }
-                else if (card.IsRetain)
-                {
-                    retainedCards.Add(card);
-                }
-                else if (card.IsEthereal)
-                {
-                    _state.ExhaustPile.Add(card);
-                }
-                else
-                {
-                    _state.DiscardPile.Add(card);
-                }
-            }
-            _state.Hand.Clear();
-            _state.Hand.AddRange(retainedCards);
-
-            if (shouldShuffleDrawPile)
-                Shuffle(_state.DrawPile);
+            float handExitDuration = OnHandExitAnimationRequested?.Invoke() ?? 0f; // 손패 퇴장 애니메이션의 총 대기 시간.
+            if (handExitDuration > 0f)
+                yield return WaitSecondsByFrame(handExitDuration);
 
             NotifyHandChanged();
+
+            _state.Player.EndTurnPassives(_state);
+            if (!_isInBattle || _state.Player.IsDead) yield break;
+
+            shouldStartEnemyTurn = true;
         }
         finally
         {
-            EndHandChangeBatch();
+            _isEndingPlayerTurn = false;
         }
 
-        _state.Player.EndTurnPassives(_state);
-        if (!_isInBattle || _state.Player.IsDead) return;
+        if (shouldStartEnemyTurn)
+            EnemyTurnStart();
+    }
 
-        EnemyTurnStart();
+    // 손패 카드를 기존 더미로 이동시키고 Retain 카드는 Hand에 남긴다.
+    private void EndPlayerTurnCards()
+    {
+        bool shouldShuffleDrawPile = false; // 드로우 더미로 돌아가는 카드가 있을 때 true가 된다.
+        for (int i = 0; i < _state.Hand.Count;)
+        {
+            CardData card = _state.Hand[i]; // 현재 턴 종료 처리를 검사할 손패 카드.
+            bool returnToDrawPile = ShouldReturnToDrawPileAtTurnEnd(card); // 카드 효과가 드로우 더미 복귀를 요구하는지 저장한다.
+
+            if (returnToDrawPile)
+            {
+                _state.Hand.RemoveAt(i);
+                _state.DrawPile.Add(card);
+                shouldShuffleDrawPile = true;
+            }
+            else if (card.IsRetain)
+            {
+                i++;
+            }
+            else if (card.IsEthereal)
+            {
+                _state.Hand.RemoveAt(i);
+                _state.ExhaustPile.Add(card);
+            }
+            else
+            {
+                _state.Hand.RemoveAt(i);
+                _state.DiscardPile.Add(card);
+            }
+        }
+
+        if (shouldShuffleDrawPile)
+            Shuffle(_state.DrawPile);
+    }
+
+    // 카드의 턴 종료 손패 효과를 실행하고 DrawPile 복귀 여부를 반환한다.
+    private bool ShouldReturnToDrawPileAtTurnEnd(CardData card)
+    {
+        var ctx = new CardContext // 턴 종료 손패 효과 계산에 사용할 카드 실행 맥락.
+        {
+            State      = _state,
+            Battle     = this,
+            Card       = card,
+            AllEnemies = _state.Enemies,
+        };
+
+        bool returnToDrawPile = false; // 효과가 DrawPile 복귀를 요구하는지 저장한다.
+        foreach (var effect in card.ActiveEffects)
+        {
+            if (effect is ICardEndTurnInHandEffect endTurnEffect)
+                returnToDrawPile |= endTurnEffect.OnTurnEndInHand(ctx);
+        }
+
+        return returnToDrawPile;
+    }
+
+    // WaitForSeconds 할당 없이 지정 시간만큼 프레임 단위로 대기한다.
+    private IEnumerator WaitSecondsByFrame(float duration)
+    {
+        float elapsed = 0f; // 지금까지 대기한 누적 시간.
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void EnemyTurnStart()
@@ -270,8 +329,8 @@ public class BattleManager : MonoBehaviour
     {
         _state.Phase = BattlePhase.EnemyTurn;
 
-        if (turnBanner != null)
-            yield return turnBanner.ShowAndWait();
+        if (_turnBanner != null)
+            yield return _turnBanner.ShowAndWait();
 
         // _state.Enemies를 직접 foreach하면 yield return 대기 중 OnDied 등이 리스트를 수정했을 때
         // InvalidOperationException(Collection was modified)이 발생할 수 있다.
@@ -292,7 +351,7 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"[BattleManager] 적 턴 진행: '{enemy.Data?.enemyName}' -> 행동: '{actionName}' (인텐트: {intentDesc}, 현재 HP: {enemy.HP}/{enemy.MaxHP})");
 
             enemy.NotifyActionStarted();
-            yield return new WaitForSeconds(lungeOutWaitDuration);
+            yield return _lungeOutWait;
 
             yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
 
@@ -300,7 +359,7 @@ public class BattleManager : MonoBehaviour
             if (!enemy.IsDead) enemy.EndTurnPassives(_state);
             if (!_isInBattle || _state.Player.IsDead) yield break;
 
-            yield return new WaitForSeconds(lungeBackWaitDuration + postActionDelay);
+            yield return _lungeBackAndPostActionWait;
 
             if (_state.Player.IsDead) yield break; // OnDied → Defeat()는 이미 구독되어 있음
         }
@@ -427,6 +486,7 @@ public class BattleManager : MonoBehaviour
     // 지금 아이템을 사용할 수 있는 상태인지 (전투 중 + 플레이어 턴). UI 버튼 활성 판정용.
     public bool CanUseItemNow => _isInBattle && _state != null
                                  && _state.Phase == BattlePhase.PlayerTurn
+                                 && !_isEndingPlayerTurn
                                  && !HandCardSelector.IsSelecting; // 손패 선택 중에는 아이템 사용 불가
 
     // 아이템 사용. 카드 사용(TryPlayCard)과 동일 구조, 차이는 비용 없음 / 인벤토리에서 소비 / ctx.Item 세팅.
@@ -575,7 +635,14 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
-    public void AddCardToHand(CardData card) => AddCardsToHand(new[] { card });
+    // 카드 한 장을 런타임 복사본으로 만들어 손패에 추가한다.
+    public void AddCardToHand(CardData card)
+    {
+        if (_state == null || card == null || _state.Hand.Count >= 10) return;
+
+        _state.Hand.Add(_state.CreateCard(card));
+        NotifyHandChanged();
+    }
 
     public void AddCardsToHand(IEnumerable<CardData> cards)
     {
@@ -711,6 +778,21 @@ public class BattleManager : MonoBehaviour
             (deck[i], deck[j]) = (deck[j], deck[i]);
         }
     }
+
+    // 반복 사용되는 WaitForSeconds 객체를 현재 설정값 기준으로 다시 만든다.
+    private void RefreshWaitCache()
+    {
+        _lungeOutWait = new WaitForSeconds(_lungeOutWaitDuration);
+        _lungeBackAndPostActionWait = new WaitForSeconds(_lungeBackWaitDuration + _postActionDelay);
+    }
+
+#if UNITY_EDITOR
+    // Inspector 값 변경 시 에디터에서 대기 객체 캐시를 최신 값으로 갱신한다.
+    private void OnValidate()
+    {
+        RefreshWaitCache();
+    }
+#endif
 
     // ─────────────────────────────────────────────
     // 테스트용 (빌드 전 제거)
