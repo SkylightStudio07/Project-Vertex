@@ -39,8 +39,12 @@ public static class BlessingUISetup
         Sprite iconUpgrade = itemIcons.Find(s => s.name == "ItemIcon_1") ?? itemIcons.FirstOrDefault();
         Sprite iconItem = itemIcons.Find(s => s.name == "ItemIcon_2") ?? itemIcons.FirstOrDefault();
 
-        var machinaSprites = AssetDatabase.LoadAllAssetsAtPath("Assets/Art/Blessing/Machina/machina_idle_sprite_sheet.png").OfType<Sprite>().ToList();
-        Sprite speakerAvatar = machinaSprites.Find(s => s.name == "machina_idle_sprite_sheet_0") ?? machinaSprites.FirstOrDefault();
+        var machinaSprites = AssetDatabase.LoadAllAssetsAtPath("Assets/Art/Blessing/Machina/machina_idle_sprite_64_sheet.png").OfType<Sprite>().ToList();
+        if (machinaSprites.Count == 0)
+        {
+            machinaSprites = AssetDatabase.LoadAllAssetsAtPath("Assets/Art/Blessing/Machina/machina_idle_sprite_sheet.png").OfType<Sprite>().ToList();
+        }
+        Sprite speakerAvatar = machinaSprites.Find(s => s.name == "sheet_64_af572cf5dedeca31_0" || s.name == "machina_idle_sprite_sheet_0") ?? machinaSprites.FirstOrDefault();
 
         // 1. Create or Load BlessingData SO Asset
         string dirPath = "Assets/Data/Blessing";
