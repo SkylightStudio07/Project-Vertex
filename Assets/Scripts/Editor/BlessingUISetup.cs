@@ -740,6 +740,16 @@ public static class BlessingUISetup
 
         bvSo.ApplyModifiedProperties();
 
+        // Ensure [BlessingAffinityManager] exists in scene hierarchy for easy Inspector debugging
+        var affinityMgr = Object.FindObjectOfType<BlessingAffinityManager>();
+        if (affinityMgr == null)
+        {
+            var mgrGo = new GameObject("[BlessingAffinityManager]");
+            affinityMgr = mgrGo.AddComponent<BlessingAffinityManager>();
+            Undo.RegisterCreatedObjectUndo(mgrGo, "Create BlessingAffinityManager");
+        }
+        affinityMgr.SyncInspectorFields();
+
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         EditorSceneManager.SaveOpenScenes();
 

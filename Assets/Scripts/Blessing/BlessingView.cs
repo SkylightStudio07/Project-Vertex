@@ -55,6 +55,10 @@ public class BlessingView : MonoBehaviour
     [Header("연결 컨트롤러")]
     [SerializeField] private MapUIController mapUIController;
 
+    [Header("🔍 호감도 실시간 모니터 (Read-Only)")]
+    [SerializeField] private float debugCurrentAffinity;
+    [SerializeField] private int debugCurrentTier;
+
     // 대화 시퀀스 제어 런타임 변수
     private DialogueFlowMode currentFlowMode = DialogueFlowMode.None;
     private BlessingDialogueSequence currentSequence;
@@ -145,6 +149,17 @@ public class BlessingView : MonoBehaviour
         {
             Setup(defaultBlessingData);
         }
+        UpdateAffinityDebugDisplay();
+    }
+
+    public void UpdateAffinityDebugDisplay()
+    {
+        if (BlessingAffinityManager.Instance != null)
+        {
+            string id = currentBlessingData != null && !string.IsNullOrEmpty(currentBlessingData.entityId) ? currentBlessingData.entityId : "machina";
+            debugCurrentAffinity = BlessingAffinityManager.Instance.GetAffinity(id);
+            debugCurrentTier = BlessingAffinityManager.Instance.GetAffinityTier(id);
+        }
     }
 
     /// <summary>
@@ -200,6 +215,7 @@ public class BlessingView : MonoBehaviour
             BlessingAffinityManager.Instance.AddAffinity(data.entityId, 0.5f);
             hasEncounterAwarded = true;
         }
+        UpdateAffinityDebugDisplay();
 
         // 5. 조건에 맞는 조우 핑퐁 시퀀스 선별
         float currentAffinity = BlessingAffinityManager.Instance.GetAffinity(data.entityId);
@@ -457,6 +473,7 @@ public class BlessingView : MonoBehaviour
 
         // 친밀도 +1.0 적립
         BlessingAffinityManager.Instance.AddAffinity(currentBlessingData.entityId, 1.0f);
+        UpdateAffinityDebugDisplay();
 
         float currentAffinity = BlessingAffinityManager.Instance.GetAffinity(currentBlessingData.entityId);
         var flags = BlessingAffinityManager.Instance.GetAllFlags();
