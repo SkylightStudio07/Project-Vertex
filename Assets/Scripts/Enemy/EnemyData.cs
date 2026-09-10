@@ -21,6 +21,13 @@ public class EnemyData : ScriptableObject
     [Tooltip("인텐트 UI 추가 Y 오프셋 (기본 0, 필요시 머리 위 위치 미세 조정)")]
     public float intentOffsetY = 0f;
 
+    [Header("대기(Idle) 애니메이션")]
+    [Tooltip("대기 스프라이트 시트 프레임 (비어있으면 enemyImage 단독 표시)")]
+    public Sprite[] idleFrames;
+
+    [Tooltip("대기 애니메이션 초당 프레임 수 (기본 12 FPS)")]
+    public float idleFrameRate = 12f;
+
     [Header("행동 패턴")]
     [Tooltip("행동 패턴 타입(랜덤/순차)")]
     public EnemyActivityPatternType activityPatternType;

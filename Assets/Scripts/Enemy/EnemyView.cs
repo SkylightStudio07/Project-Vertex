@@ -144,11 +144,23 @@ public class EnemyView : MonoBehaviour
 
         if (enemyImage != null)
         {
-            enemyImage.sprite  = instance.EnemySprite;
-            enemyImage.enabled = instance.EnemySprite != null;
+            var sheetAnim = enemyImage.GetComponent<UISpriteSheetAnimator>();
+            if (instance.IdleFrames != null && instance.IdleFrames.Length > 0)
+            {
+                if (sheetAnim == null) sheetAnim = enemyImage.gameObject.AddComponent<UISpriteSheetAnimator>();
+                sheetAnim.Configure(instance.IdleFrames, instance.IdleFrameRate, true);
+                enemyImage.enabled = true;
+            }
+            else
+            {
+                if (sheetAnim != null) sheetAnim.Stop();
+                enemyImage.sprite  = instance.EnemySprite;
+                enemyImage.enabled = instance.EnemySprite != null;
+            }
+
             enemyImage.rectTransform.localScale = new Vector3(_enemyImageBaseScale.x * scale, _enemyImageBaseScale.y * scale, 1f);
 
-            if (instance.EnemySprite == null)
+            if (instance.EnemySprite == null && (instance.IdleFrames == null || instance.IdleFrames.Length == 0))
             {
                 Debug.LogWarning($"[EnemyView] '{instance.Data?.enemyName}'의 Sprite가 null입니다! 텍스처 임포트 설정(Sprite Mode: Multiple)이나 EnemyData 에셋을 확인하세요.");
             }
@@ -186,7 +198,11 @@ public class EnemyView : MonoBehaviour
         Instance = null;
 
         if (enemyImage != null)
+        {
+            var sheetAnim = enemyImage.GetComponent<UISpriteSheetAnimator>();
+            if (sheetAnim != null) sheetAnim.Stop();
             enemyImage.rectTransform.localScale = _enemyImageBaseScale;
+        }
 
         _intentIconBasePos = _initialIntentIconPos;
         _intentValueBasePos = _initialIntentValuePos;

@@ -14,9 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uC81C\uD30C\uB7EC"
   health: 40
-  enemyImage: {fileID: 21300000, guid: fcbfdb1b938f7e644bd503bfb11173d5, type: 3}
+  enemyImage: {fileID: 1599376612, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
   spriteScale: 1.8
   intentOffsetY: 0
+  idleFrames:
+  - {fileID: 1599376612, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: 616475131, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: 30748312, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: 767526656, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -687645137, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: 262141703, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: 1017403511, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -2045883584, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -1312194251, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -1649627056, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -886686045, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: 1843442905, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: 1080486244, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -1897191300, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -936685702, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  - {fileID: -1324352623, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
+  idleFrameRate: 12
   activityPatternType: 0
   openingActions: []
   activityPatterns:
