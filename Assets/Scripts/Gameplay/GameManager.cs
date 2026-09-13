@@ -44,7 +44,10 @@ public class GameManager : MonoBehaviour
 
     [Header("플레이어 HP")]
     [SerializeField] private int maxPlayerHP = 80; // 기획서 10.1 기준
-    public int MaxPlayerHP => maxPlayerHP;
+    // maxPlayerHP(인스펙터 값)는 기본 최대 체력. 런 중 증감분은 maxHPModifier로 따로 들고 InitializeRun에서 초기화한다.
+    // GameManager는 DontDestroyOnLoad라 maxPlayerHP를 직접 바꾸면 다음 런까지 줄어든 값이 남는다.
+    private int maxHPModifier;
+    public int MaxPlayerHP => Mathf.Max(1, maxPlayerHP + maxHPModifier);
     public int PlayerHP    { get; private set; }
 
     [Header("플레이어 골드")]
@@ -77,7 +80,8 @@ public class GameManager : MonoBehaviour
     void InitializeRun()
     {
         chapter = 1;
-        PlayerHP = maxPlayerHP;
+        maxHPModifier = 0;
+        PlayerHP = MaxPlayerHP;
 
         // 카드 풀 초기화 — SO 원본이 아닌 복사본으로 시작해야 런 간 데이터 누적을 막는다.
         cardPools[CardData.CardRarity.Common] = playerRewardPool != null ? new List<CardData>(playerRewardPool.commonCards) : new List<CardData>();
@@ -184,7 +188,16 @@ public class GameManager : MonoBehaviour
 
     public void HealPlayer(int amount)
     {
-        PlayerHP = Mathf.Min(maxPlayerHP, PlayerHP + amount);
+        PlayerHP = Mathf.Min(MaxPlayerHP, PlayerHP + amount);
+    }
+
+    // 최대 체력 증감(음수면 감소). 현재 체력이 새 상한보다 높으면 상한에 맞춰 자르고, 낮으면 건드리지 않는다.
+    // 최대 체력 증가 시 현재 체력도 함께 증가시킨다.(슬더스 방식)
+    public void ModifyMaxHP(int amount)
+    {
+        maxHPModifier += amount;
+        if (amount > 0) PlayerHP += amount;
+        PlayerHP = Mathf.Min(PlayerHP, MaxPlayerHP);
     }
 
     public bool IsPlayerDead() => PlayerHP <= 0;
