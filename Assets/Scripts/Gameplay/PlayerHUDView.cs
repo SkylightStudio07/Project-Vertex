@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,12 @@ public class PlayerHUDView : MonoBehaviour
     [SerializeField] private GameObject blockEffectPrefab;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip blockSound;
+
+    [Header("방어도 획득 사운드")]
+    // 방패/파티클 등 캐릭터 스프라이트 위 시각 연출은 PartyView가 맡는다(파티원 전원에게 재생돼야
+    // 해서 — 협력자는 CoopCharState에 자기 HP/방어도가 없는 순수 장식 캐릭터라, "방어도 획득"은
+    // 파티 전체가 함께 막아내는 연출로 보여주는 게 맞다. PlayerHUDView는 HUD 쪽 피드백만 담당).
+    [SerializeField] private AudioClip blockGainSound; // 막기(피해 흡수) 사운드와는 다른 클립을 권장
 
     // 아직 한 번도 갱신 안 된 상태를 나타내는 값. HP/블록/에너지/탄약은 음수가 될 수 없으므로 안전한 sentinel.
     private const int Unset = int.MinValue;
@@ -121,12 +128,14 @@ public class PlayerHUDView : MonoBehaviour
         {
             _subscribedPlayer.OnDamaged -= HandlePlayerDamaged;
             _subscribedPlayer.OnBlocked -= HandleBlocked;
+            _subscribedPlayer.OnBlockGained -= HandleBlockGained;
         }
         _subscribedPlayer = current;
         if (_subscribedPlayer != null)
         {
             _subscribedPlayer.OnDamaged += HandlePlayerDamaged;
             _subscribedPlayer.OnBlocked += HandleBlocked;
+            _subscribedPlayer.OnBlockGained += HandleBlockGained;
         }
 
         if (statusList != null)
@@ -141,12 +150,30 @@ public class PlayerHUDView : MonoBehaviour
 
     private void HandleBlocked(int absorbed) => SpawnBlockEffect();
 
+    private void HandleBlockGained(int amount)
+    {
+        // 방어도 배지가 훅 튀는 느낌. blockText가 이번 프레임 아직 안 켜져 있을 수 있어
+        // (Update()의 폴링 갱신보다 이벤트가 먼저 올 수 있음) 강제로 켜준다.
+        if (blockText != null)
+        {
+            blockText.gameObject.SetActive(true);
+            blockText.transform.DOKill(); // 연타로 방어도를 얻으면 이전 펀치가 겹치지 않도록 정리 후 재생
+            blockText.transform.DOPunchScale(Vector3.one * 0.25f, 0.3f, vibrato: 6, elasticity: 0.6f);
+        }
+
+        // 캐릭터 스프라이트 쪽 시각 연출(방패/파티클)은 PartyView가 같은 이벤트를 구독해 처리한다
+        // (파티원 전원에게 재생돼야 해서 — HandleBlockGained 위 주석 참고). 사운드만 여기서.
+        if (audioSource != null && blockGainSound != null)
+            audioSource.PlayOneShot(blockGainSound);
+    }
+
     private void OnDisable()
     {
         if (_subscribedPlayer != null)
         {
             _subscribedPlayer.OnDamaged -= HandlePlayerDamaged;
             _subscribedPlayer.OnBlocked -= HandleBlocked;
+            _subscribedPlayer.OnBlockGained -= HandleBlockGained;
             // null로 초기화해야 재활성화 시 UpdateDamageSubscription()이
             // 변경을 감지하고 재구독한다. null 없이 해제만 하면 재구독이 안 된다.
             _subscribedPlayer = null;

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5aa7ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#5aa7ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="128" cy="128" r="128" fill="url(#glow)"/>
+  <path d="
+    M 128 22.69999999999999
+    L 211.7 52.39999999999999
+    L 211.7 122.6
+    C 211.7 192.8 168.5 241.4 128 257.6
+    C 87.5 241.4 44.3 192.8 44.3 122.6
+    L 44.3 52.39999999999999
+    Z" fill="#5aa7ff" fill-opacity="0.25" stroke="none" stroke-width="0"/>
+  <path d="
+    M 128 50
+    L 190 72
+    L 190 124
+    C 190 176 158 212 128 224
+    C 98 212 66 176 66 124
+    L 66 72
+    Z" fill="#5aa7ff" fill-opacity="0.95" stroke="#2f6fd6" stroke-width="5"/>
+  <!-- 광택 하이라이트: 방패 왼쪽 위를 가로지르는 흰 사선 -->
+  <path d="M 92 88 L 108 74" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 92 108 L 128 74" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round"/>
+</svg>

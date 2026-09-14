@@ -41,7 +41,9 @@ public class EnemyInstance : ICombatant
     public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
 
     public event Action<int> OnDamaged;       // 실제 HP 감소량
-    public event Action<int> OnBlockChanged;  // 현재 블록 수치
+    public event Action<int> OnBlockChanged;  // 현재 블록 수치(흡수/리셋 포함 — 모든 변화에 발화)
+    public event Action<int> OnBlockGained;   // 실제로 늘어난 방어도량. AddBlock에서만, 0 이하면 발화 안 함
+                                               // (OnBlockChanged는 흡수/리셋에도 같이 울려서 "획득 연출" 트리거로 못 씀)
     public event Action      OnDied;
     public event Action      OnIntentChanged; // GetCurrentAction()이 가리키는 행동이 바뀜 (TakeTurn 후)
     public event Action      OnActionStarted; // 행동 실행 직전 발화 — EnemyView가 공격 모션 재생에 사용
@@ -97,6 +99,7 @@ public class EnemyInstance : ICombatant
         if (amount <= 0) return;
         _block += amount;
         OnBlockChanged?.Invoke(_block);
+        OnBlockGained?.Invoke(amount);
     }
 
     public void Heal(int amount)

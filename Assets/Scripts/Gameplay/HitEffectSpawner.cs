@@ -11,7 +11,7 @@ public static class HitEffectSpawner
     {
         if (prefab == null || anchor == null) return;
 
-        Vector3 position = anchor.position;
+        Vector3 position = ResolveWorldPosition(anchor);
         Quaternion rotation = Quaternion.identity;
 
         Camera cam = Camera.main;
@@ -28,5 +28,20 @@ public static class HitEffectSpawner
         // 단발성 이펙트는 앵커를 따라다닐 필요가 없고, 파티클 시스템의 Stop Action을
         // Destroy로 설정해두면 재생 후 자동 정리된다.
         Object.Instantiate(prefab, position, rotation);
+    }
+
+    // RectTransform.position은 피벗의 월드 좌표일 뿐 스프라이트의 시각적 중앙이 아니다.
+    // 캐릭터 스탠딩 스프라이트는 흔히 피벗을 발밑(0.5, 0)에 둬서 바닥에 붙는 것처럼 보이게 하는데
+    // (예: PartyView.playerImage), 그 anchor.position을 그대로 쓰면 이펙트가 발밑에서 튀어나온다.
+    // RectTransform이면 rect의 실제 중앙을 계산해서 쓴다 — 피벗이 이미 중앙(0.5, 0.5)인
+    // 오브젝트(대부분의 협력자 스프라이트 등)에는 결과가 그대로 같아 안전하다.
+    private static Vector3 ResolveWorldPosition(Transform anchor)
+    {
+        if (anchor is RectTransform rt)
+        {
+            Vector2 center = rt.rect.center;
+            return rt.TransformPoint(new Vector3(center.x, center.y, 0f));
+        }
+        return anchor.position;
     }
 }

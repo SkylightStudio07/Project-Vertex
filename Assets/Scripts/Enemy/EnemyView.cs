@@ -49,6 +49,12 @@ public class EnemyView : MonoBehaviour
     [Header("피격 이펙트")]
     [SerializeField] private GameObject hitEffectPrefab;
 
+    [Header("방어도 획득 이펙트")]
+    // 플레이어/협력자 쪽(PartyView.HandleBlockGained)과 같은 프리팹을 그대로 재사용한다 —
+    // "적이 방어도를 올릴 때도 동일한 연출"이 요구사항이라 별도로 만들지 않았다.
+    [SerializeField] private GameObject blockGainShieldPrefab;
+    [SerializeField] private GameObject blockGainParticlePrefab;
+
     private RectTransform _intentIconRect;
     private Vector2 _initialIntentIconPos;
     private Vector2 _intentIconBasePos;
@@ -135,6 +141,7 @@ public class EnemyView : MonoBehaviour
         instance.OnDied          += HandleDied;
         instance.OnIntentChanged += RefreshIntent;
         instance.OnActionStarted += PlayLungeMotion;
+        instance.OnBlockGained   += HandleBlockGained;
 
         if (statusList != null) statusList.Bind(instance.Statuses);
 
@@ -200,6 +207,7 @@ public class EnemyView : MonoBehaviour
         Instance.OnDied          -= HandleDied;
         Instance.OnIntentChanged -= RefreshIntent;
         Instance.OnActionStarted -= PlayLungeMotion;
+        Instance.OnBlockGained   -= HandleBlockGained;
         Instance = null;
 
         if (statusList != null) statusList.Unbind();
@@ -252,6 +260,13 @@ public class EnemyView : MonoBehaviour
         // 루트 RectTransform의 피벗/레이아웃 위치가 enemyImage와 다를 수 있어서 어긋나는 문제가 있었음.
         Transform anchor = enemyImage != null ? enemyImage.transform : transform;
         HitEffectSpawner.Spawn(hitEffectPrefab, anchor);
+    }
+
+    private void HandleBlockGained(int amount)
+    {
+        Transform anchor = enemyImage != null ? enemyImage.transform : transform;
+        HitEffectSpawner.Spawn(blockGainShieldPrefab, anchor);
+        HitEffectSpawner.Spawn(blockGainParticlePrefab, anchor);
     }
 
     private void RefreshHP()

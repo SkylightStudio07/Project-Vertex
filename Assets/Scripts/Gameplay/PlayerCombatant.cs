@@ -23,6 +23,7 @@ public class PlayerCombatant : ICombatant
 
     public event Action<int> OnDamaged;
     public event Action<int> OnBlocked; // 블록으로 흡수한 데미지량. ResetBlock()으로 0이 되는 것과는 구분된 신호.
+    public event Action<int> OnBlockGained; // 방어도 카드 등으로 실제로 늘어난 방어도량(패시브 보정 후). 0 이하면 발화 안 함.
     public event Action      OnDied;
 
     public void TakeDamage(DamageInfo info)
@@ -48,9 +49,14 @@ public class PlayerCombatant : ICombatant
     }
 
     // 최종 방어도가 음수가 되지 않도록 패시브 보정 후 Max(0)로 하한 처리.
+    // 실제로 증가한 만큼만 OnBlockGained로 알린다 — 패시브가 보정을 음수로 걸어서
+    // 순증가가 없거나(0 이하) 오히려 줄어드는 경우엔 "방어도 획득" 연출을 띄우면 안 되기 때문.
     public void AddBlock(int amount)
     {
+        int before = _block;
         _block = Math.Max(0, _block + PreviewBlockGain(amount));
+        int gained = _block - before;
+        if (gained > 0) OnBlockGained?.Invoke(gained);
     }
 
     public void Heal(int amount)

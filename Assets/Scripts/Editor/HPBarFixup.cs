@@ -21,7 +21,8 @@ public static class HPBarFixup
     private static readonly Vector2 PlayerFillPos  = new(-24f, -21f);
     private static readonly Vector2 PlayerFillSize = new(152f, 9f);
 
-    [MenuItem("Tools/Vertex/Fix HP Bars")]
+    // 1회성 버그 수정 스크립트라 툴바 메뉴엔 안 올린다(적용 후엔 다시 누를 일이 없음).
+    // 필요하면 Unity CLI로 직접 호출: unity command eval 'HPBarFixup.Fix();'
     public static void Fix()
     {
         string enemy  = FixEnemy();

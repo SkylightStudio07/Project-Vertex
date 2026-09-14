@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 // 전투 화면에 플레이어 스프라이트와 합류한 협력자들을 보여준다.
 // 기본은 정적 스프라이트, 플레이어가 공격 카드를 내면 PoseSequencePlayer로 키프레임 홀드 연출 재생
-// (BattleManager.OnCardPlayed 구독). 합류 캐릭터 쪽 연출은 아직 없음(플레이어만 우선 적용).
+// (BattleManager.OnCardPlayed 구독) — 이건 아직 플레이어만 적용(협력자 쪽 공격 포즈는 없음).
+// 방어도 획득 이펙트(HandleBlockGained)는 반대로 파티 전원에게 재생한다 — 협력자는 자기
+// HP/방어도가 없는 장식 캐릭터라 "누구 방어도인가"를 따질 필요가 없고, 파티가 함께 막아내는
+// 연출로 보여주는 쪽이 더 자연스럽기 때문.
 // 협력자는 최대 3명 고정. companionSlots는 시각 요소 없는 빈 오브젝트(위치 마커)로,
 // 인스펙터에서 원하는 좌표에 미리 배치해두면 그 자리에 companionPrefab을 실제로 생성해 채운다.
 // 합류 인원이 3명 미만이면 남는 슬롯은 그대로 비워둔다.
@@ -28,6 +31,21 @@ public class PartyView : MonoBehaviour
     [SerializeField] private GameObject companionPrefab; // 루트 밑에 "CharacterSprite"(Image) 자식 필요 — 발밑 그림자(Shadow)도 같이 딸려옴
     [SerializeField] private Transform[] companionSlots = new Transform[3];
 
+    [Header("방어도 획득 이펙트 — 파티 전원에게 재생")]
+    // 협력자(CoopCharState)는 자기 HP/방어도가 없는 순수 장식 캐릭터라(호감도/카드 언락만 가짐),
+    // 방어도는 여전히 PlayerCombatant 하나의 값이다. 그래도 "파티 전체가 함께 막아낸다"는
+    // 연출로 보여주는 게 자연스러워서, 방어 카드를 낼 때 플레이어 + 합류 중인 협력자 전원의
+    // 스프라이트 위치에 이 이펙트를 재생한다. 프리팹 자체는 PlayerHUDView가 쓰던 것과 동일 —
+    // 사운드만 HUD 쪽에서 한 번 재생하고(파티원 수만큼 중복 재생 안 함), 시각 연출은 여기서.
+    [SerializeField] private GameObject blockGainShieldPrefab;
+    [SerializeField] private GameObject blockGainParticlePrefab;
+
+    // PlayerCombatant는 전투마다 새 인스턴스라, 매 전투 시작(Refresh)마다 재구독해야 한다.
+    // PartyView는 매 프레임 폴링하지 않는 완전 이벤트 기반 구조라, PlayerHUDView처럼 Update()에서
+    // 비교하는 대신 Refresh()(OnBattleStarted 구독)에서 갈아탄다 — BattleManager.StartBattle()이
+    // OnBattleStarted를 발화하기 전에 이미 새 PlayerCombatant를 State.Player에 대입해두므로 안전하다.
+    private PlayerCombatant _subscribedPlayer;
+
     private void Start()
     {
         if (BattleManager.Instance != null)
@@ -50,6 +68,9 @@ public class PartyView : MonoBehaviour
             BattleManager.Instance.OnCardPlayed -= OnCardPlayed;
             BattleManager.Instance.OnWeaponChanged -= OnWeaponChanged;
         }
+
+        if (_subscribedPlayer != null)
+            _subscribedPlayer.OnBlockGained -= HandleBlockGained;
     }
 
     private void OnWeaponChanged(WeaponData weapon)
@@ -116,6 +137,48 @@ public class PartyView : MonoBehaviour
     {
         BindPlayer();
         BindCompanions();
+        UpdateBlockGainSubscription();
+    }
+
+    private void UpdateBlockGainSubscription()
+    {
+        PlayerCombatant current = BattleManager.Instance?.State?.Player;
+        if (current == _subscribedPlayer) return;
+
+        if (_subscribedPlayer != null) _subscribedPlayer.OnBlockGained -= HandleBlockGained;
+        _subscribedPlayer = current;
+        if (_subscribedPlayer != null) _subscribedPlayer.OnBlockGained += HandleBlockGained;
+    }
+
+    // 방어 카드로 방어도를 얻었을 때 — 지금 화면에 있는 파티원 전원(플레이어 + 합류 중인
+    // 협력자)의 스프라이트 위치에 방패/파티클을 재생한다.
+    private void HandleBlockGained(int amount)
+    {
+        if (blockGainShieldPrefab == null && blockGainParticlePrefab == null) return;
+
+        foreach (Transform anchor in GetActivePartyAnchors())
+        {
+            HitEffectSpawner.Spawn(blockGainShieldPrefab, anchor);
+            HitEffectSpawner.Spawn(blockGainParticlePrefab, anchor);
+        }
+    }
+
+    // 플레이어 스프라이트 + 합류 중인 협력자 슬롯의 CharacterSprite를 모은다.
+    // "CharacterSprite"는 슬롯의 직속 자식이 아니라 손자다 — 슬롯 밑에 companionPrefab
+    // 인스턴스가 하나 생기고, 그 인스턴스 밑에 CharacterSprite가 있다(BindCompanions 참고).
+    // Transform.Find는 재귀 탐색이 아니라서 슬롯에 바로 Find를 걸면 못 찾는다.
+    // 미합류 슬롯은 BindCompanions()가 자식을 안 만들어두므로 childCount==0이라 자동으로 빠진다.
+    private IEnumerable<Transform> GetActivePartyAnchors()
+    {
+        if (playerImage != null) yield return playerImage.transform;
+
+        if (companionSlots == null) yield break;
+        foreach (var slot in companionSlots)
+        {
+            if (slot == null || slot.childCount == 0) continue;
+            Transform sprite = slot.GetChild(0).Find("CharacterSprite");
+            if (sprite != null) yield return sprite;
+        }
     }
 
     private void BindPlayer()

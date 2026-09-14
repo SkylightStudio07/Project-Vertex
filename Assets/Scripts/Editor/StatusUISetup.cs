@@ -21,7 +21,9 @@ public static class StatusUISetup
     // 한 줄 최대 칩 수. 34px 칩 + 4px 간격 기준 6개 = 224px로, 플레이어 HP 패널 폭(253px) 안에 들어간다.
     private const int DefaultMaxPerRow = 6;
 
-    [MenuItem("Tools/Vertex/Setup Status (Buff/Debuff) UI")]
+    // 적 프리팹이 EnemyView.prefab 하나뿐이라 배선을 다시 할 일이 사실상 없어서
+    // 툴바 메뉴엔 안 올린다. 필요하면 Unity CLI로 직접 호출:
+    // unity command eval 'StatusUISetup.Setup();'
     public static void Setup()
     {
         var chipPrefab = CreateOrLoadChipPrefab();
