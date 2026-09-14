@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 플레이어 HP·블록·에너지·탄약 표시.
 // 값 변경 지점이 GameManager(HP)/BattleManager(에너지,탄약)/PlayerCombatant(블록)로 흩어져 있어
@@ -20,9 +21,15 @@ using UnityEngine;
 public class PlayerHUDView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI hpText;
+    // HP 게이지. Image Type은 Filled(Horizontal)여야 하고 Sprite가 반드시 있어야 한다.
+    // Sprite가 비어 있으면 Unity의 Image는 type을 무시하고 꽉 찬 사각형만 그려서 fillAmount가 먹지 않는다.
+    [SerializeField] private Image hpFill;
     [SerializeField] private TextMeshProUGUI blockText;
     [SerializeField] private TextMeshProUGUI energyText;
     [SerializeField] private TextMeshProUGUI ammoText;
+
+    [Header("버프/디버프")]
+    [SerializeField] private StatusListView statusList;
 
     [Header("피격 이펙트")]
     [SerializeField] private GameObject hitEffectPrefab;
@@ -61,6 +68,8 @@ public class PlayerHUDView : MonoBehaviour
                 _lastHp = hp;
                 _lastMaxHp = maxHp;
                 hpText.text = $"{hp} / {maxHp}";
+                if (hpFill != null)
+                    hpFill.fillAmount = maxHp > 0 ? (float)hp / maxHp : 0f;
             }
         }
 
@@ -102,6 +111,7 @@ public class PlayerHUDView : MonoBehaviour
     }
 
     // PlayerCombatant는 전투마다 새 인스턴스라, 매 프레임 현재 인스턴스와 비교해서 바뀌었으면 구독을 옮긴다.
+    // 상태 목록(StatusListView)도 전투마다 대상이 바뀌므로 같은 지점에서 바인딩을 갱신한다.
     private void UpdateDamageSubscription()
     {
         PlayerCombatant current = BattleManager.Instance != null ? BattleManager.Instance.State?.Player : null;
@@ -117,6 +127,12 @@ public class PlayerHUDView : MonoBehaviour
         {
             _subscribedPlayer.OnDamaged += HandlePlayerDamaged;
             _subscribedPlayer.OnBlocked += HandleBlocked;
+        }
+
+        if (statusList != null)
+        {
+            if (_subscribedPlayer != null) statusList.Bind(_subscribedPlayer.Statuses);
+            else statusList.Unbind();
         }
     }
 
@@ -135,6 +151,8 @@ public class PlayerHUDView : MonoBehaviour
             // 변경을 감지하고 재구독한다. null 없이 해제만 하면 재구독이 안 된다.
             _subscribedPlayer = null;
         }
+
+        if (statusList != null) statusList.Unbind();
     }
 
     private void SpawnHitEffect()

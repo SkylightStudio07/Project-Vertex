@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Weak
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: status.weak
-  displayName: 약화
-  description: 가하는 피해가 25% 감소합니다.
-  icon: {fileID: 0}
+  displayName: "\uC57D\uD654"
+  description: "\uAC00\uD558\uB294 \uD53C\uD574\uAC00 25% \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: f72e5d943c62ffe448126e7da1603b44, type: 3}
   disposition: 2
   stackPolicy: 0
   durationPolicy: 3

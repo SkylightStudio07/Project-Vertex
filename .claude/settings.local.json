@@ -8,7 +8,13 @@
       "PowerShell([guid]::NewGuid\\(\\).ToString\\(\"N\"\\))",
       "WebFetch(domain:github.com)",
       "Read(//c/Program Files/Unity/Hub/Editor//**)",
-      "Read(//c/Program Files/Unity/**)"
+      "Read(//c/Program Files/Unity/**)",
+      "Bash(mkdir -p /c/Users/SKYLIGHT/AppData/Local/Temp/claude/c--Users-SKYLIGHT-Documents-Graduation-Project-Vertex/b5e06995-1cd0-4e79-b7aa-3c3bbfedf58e/scratchpad/icons)",
+      "Read(//c/Users/SKYLIGHT/AppData/Local/Temp/claude/c--Users-SKYLIGHT-Documents-Graduation-Project-Vertex/b5e06995-1cd0-4e79-b7aa-3c3bbfedf58e/scratchpad/**)",
+      "Bash(npm install *)",
+      "Read(//c/Users/SKYLIGHT/AppData/Local/Unity/Editor/**)",
+      "Bash(node /c/Users/SKYLIGHT/AppData/Local/Temp/claude/c--Users-SKYLIGHT-Documents-Graduation-Project-Vertex/b5e06995-1cd0-4e79-b7aa-3c3bbfedf58e/scratchpad/gen-icons.js /c/Users/SKYLIGHT/AppData/Local/Temp/claude/c--Users-SKYLIGHT-Documents-Graduation-Project-Vertex/b5e06995-1cd0-4e79-b7aa-3c3bbfedf58e/scratchpad/icons)",
+      "Bash(node /c/Users/SKYLIGHT/AppData/Local/Temp/claude/c--Users-SKYLIGHT-Documents-Graduation-Project-Vertex/b5e06995-1cd0-4e79-b7aa-3c3bbfedf58e/scratchpad/sheet.js /c/Users/SKYLIGHT/AppData/Local/Temp/claude/c--Users-SKYLIGHT-Documents-Graduation-Project-Vertex/b5e06995-1cd0-4e79-b7aa-3c3bbfedf58e/scratchpad/icons /c/Users/SKYLIGHT/AppData/Local/Temp/claude/c--Users-SKYLIGHT-Documents-Graduation-Project-Vertex/b5e06995-1cd0-4e79-b7aa-3c3bbfedf58e/scratchpad/sheet.png)"
     ]
   }
 }

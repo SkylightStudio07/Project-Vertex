@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: SiberianRomance
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: power.siberian-romance
-  displayName: 시베리안 로망스
-  description: 턴 시작마다 힘을 얻고 민첩을 잃습니다.
-  icon: {fileID: 0}
+  displayName: "\uC2DC\uBCA0\uB9AC\uC548 \uB85C\uB9DD\uC2A4"
+  description: "\uD134 \uC2DC\uC791\uB9C8\uB2E4 \uD798\uC744 \uC5BB\uACE0 \uBBFC\uCCA9\uC744
+    \uC783\uC2B5\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 6482bd1485b21d74997f3e28da97c2ac, type: 3}
   disposition: 1
   stackPolicy: 0
   durationPolicy: 1

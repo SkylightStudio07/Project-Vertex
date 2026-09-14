@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Poison
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: status.poison
-  displayName: 독
-  description: 턴 시작에 스택만큼 관통 피해를 받고 1 감소합니다.
-  icon: {fileID: 0}
+  displayName: "\uB3C5"
+  description: "\uD134 \uC2DC\uC791\uC5D0 \uC2A4\uD0DD\uB9CC\uD07C \uAD00\uD1B5 \uD53C\uD574\uB97C
+    \uBC1B\uACE0 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 9cf60abf0af096a42b7e1dc01a413fe0, type: 3}
   disposition: 2
   stackPolicy: 0
   durationPolicy: 0

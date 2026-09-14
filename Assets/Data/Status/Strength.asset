@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Strength
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: status.strength
-  displayName: 힘
-  description: 가하는 피해가 스택만큼 변합니다.
-  icon: {fileID: 0}
+  displayName: "\uD798"
+  description: "\uAC00\uD558\uB294 \uD53C\uD574\uAC00 \uC2A4\uD0DD\uB9CC\uD07C \uBCC0\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: e8c9834bdb39550438872b224deaa05a, type: 3}
   disposition: 3
   stackPolicy: 0
   durationPolicy: 1

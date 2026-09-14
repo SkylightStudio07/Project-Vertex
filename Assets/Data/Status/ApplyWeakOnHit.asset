@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ApplyWeakOnHit
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: power.apply-weak-on-hit
-  displayName: 점혈
-  description: 피해를 주면 대상에게 약화를 부여합니다.
-  icon: {fileID: 0}
+  displayName: "\uC810\uD608"
+  description: "\uD53C\uD574\uB97C \uC8FC\uBA74 \uB300\uC0C1\uC5D0\uAC8C \uC57D\uD654\uB97C
+    \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 40c3ad83573db184eb4dec4b9b21c5ea, type: 3}
   disposition: 1
   stackPolicy: 0
   durationPolicy: 1

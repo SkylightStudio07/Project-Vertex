@@ -43,6 +43,9 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private float lungeOutDuration = 0.2f;
     [SerializeField] private float lungeBackDuration = 0.2f;
 
+    [Header("버프/디버프")]
+    [SerializeField] private StatusListView statusList;
+
     [Header("피격 이펙트")]
     [SerializeField] private GameObject hitEffectPrefab;
 
@@ -133,6 +136,8 @@ public class EnemyView : MonoBehaviour
         instance.OnIntentChanged += RefreshIntent;
         instance.OnActionStarted += PlayLungeMotion;
 
+        if (statusList != null) statusList.Bind(instance.Statuses);
+
         RefreshHP();
         RefreshIntent();
     }
@@ -196,6 +201,8 @@ public class EnemyView : MonoBehaviour
         Instance.OnIntentChanged -= RefreshIntent;
         Instance.OnActionStarted -= PlayLungeMotion;
         Instance = null;
+
+        if (statusList != null) statusList.Unbind();
 
         if (enemyImage != null)
         {

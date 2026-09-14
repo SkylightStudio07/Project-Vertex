@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: DamageNullified
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: status.damage-nullified
-  displayName: 버퍼
-  description: 다음 공격 피해를 무효화하고 1 감소합니다.
-  icon: {fileID: 0}
+  displayName: "\uBC84\uD37C"
+  description: "\uB2E4\uC74C \uACF5\uACA9 \uD53C\uD574\uB97C \uBB34\uD6A8\uD654\uD558\uACE0
+    1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 46a3eaae3147b3140ab1ee688c8b5319, type: 3}
   disposition: 1
   stackPolicy: 0
   durationPolicy: 2

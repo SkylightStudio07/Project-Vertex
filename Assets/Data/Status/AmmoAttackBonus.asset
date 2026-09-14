@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: AmmoAttackBonus
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: power.ammo-attack-bonus
-  displayName: 죄와 벌
-  description: 탄약을 사용하는 공격의 피해가 증가합니다.
-  icon: {fileID: 0}
+  displayName: "\uC8C4\uC640 \uBC8C"
+  description: "\uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uB294 \uACF5\uACA9\uC758 \uD53C\uD574\uAC00
+    \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: a677ed44b4f3f5f4b8ce4178b06b43f3, type: 3}
   disposition: 1
   stackPolicy: 0
   durationPolicy: 1
