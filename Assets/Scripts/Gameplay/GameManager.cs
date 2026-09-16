@@ -140,6 +140,54 @@ public class GameManager : MonoBehaviour
             ? pulled.enemies
             : currentEnemies;
         string encounterName = pulled != null ? pulled.name : "기본 폴백(currentEnemies)";
+
+        StartBattleInternal(enemies, battleType, encounterName);
+    }
+
+    // 조우를 직접 지정해 전투를 시작한다(이벤트 선택지 등).
+    // InitializeBattle과 달리 전투 조우 큐를 소비하지 않으므로 일반 전투 순서에 영향이 없다.
+    // onVictory는 이번 전투 승리 시 한 번만 실행되고 바로 해제된다(패배해도 해제).
+    public void StartEncounterBattle(EnemyEncounter encounter, BattleType battleType = BattleType.Normal, System.Action onVictory = null)
+    {
+        if (encounter == null || encounter.enemies == null || encounter.enemies.Count == 0)
+        {
+            Debug.LogWarning("[GameManager] StartEncounterBattle: 조우가 비어 있어 전투를 시작할 수 없음.");
+            return;
+        }
+
+        if (onVictory != null) RegisterOneShotVictory(onVictory);
+        StartBattleInternal(encounter.enemies, battleType, encounter.name);
+    }
+
+    // 다음 전투 결과에만 반응하는 1회성 구독. 승리/패배 어느 쪽이든 두 핸들러를 모두 해제해
+    // 다음 전투까지 살아남지 않게 한다.
+    private void RegisterOneShotVictory(System.Action onVictory)
+    {
+        var battle = BattleManager.Instance;
+        if (battle == null) return;
+
+        System.Action<BattleReward> victoryHandler = null;
+        System.Action defeatHandler = null;
+
+        victoryHandler = _ =>
+        {
+            battle.OnBattleVictory -= victoryHandler;
+            battle.OnBattleDefeat  -= defeatHandler;
+            onVictory();
+        };
+        defeatHandler = () =>
+        {
+            battle.OnBattleVictory -= victoryHandler;
+            battle.OnBattleDefeat  -= defeatHandler;
+        };
+
+        battle.OnBattleVictory += victoryHandler;
+        battle.OnBattleDefeat  += defeatHandler;
+    }
+
+    // 전투 시작 공통부 — 로그, RNG 시드, BattleManager 호출.
+    private void StartBattleInternal(List<EnemyData> enemies, BattleType battleType, string encounterName)
+    {
         string enemyNames = enemies != null && enemies.Count > 0
             ? string.Join(", ", enemies.Where(e => e != null).Select(e => $"'{e.enemyName}'(HP:{e.health})"))
             : "없음";

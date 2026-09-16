@@ -50,6 +50,9 @@ public class EventView : MonoBehaviour
     private Action _onPagesComplete;
     private TypewriterPrinter typewriter;
 
+    // 선택지에 들어있던 전투 시작 효과. 진행 버튼을 누를 때까지 보류했다가 실행한다.
+    private CardEffect _pendingBattleEffect;
+
     private void Awake()
     {
         // 주의: 이 오브젝트는 씬에서 비활성 상태로 시작해야 함.
@@ -82,6 +85,7 @@ public class EventView : MonoBehaviour
         }
 
         _data = data;
+        _pendingBattleEffect = null;
         _json = JsonUtility.FromJson<EventJsonData>(data.eventJson.text);
 
         if (_json == null || _json.choices == null || _json.choices.Length == 0)
@@ -207,8 +211,14 @@ public class EventView : MonoBehaviour
             var effects = _data.choiceEffects[index].effects;
             if (effects != null)
             {
+                // 전투 시작 효과는 진행 버튼까지 보류 — 결과 텍스트를 읽는 동안 전투가 시작되면
+                // 이벤트 창 뒤에서 전투가 돌아가고, 진행 버튼이 전투 위에 맵을 띄워버린다.
+                _pendingBattleEffect = effects.Find(e => e is StartBattleEffect);
+
                 var ctx = new CardContext();
-                EffectRunner.ExecuteImmediate(effects, ctx);
+                EffectRunner.ExecuteImmediate(
+                    _pendingBattleEffect == null ? effects : effects.FindAll(e => !(e is StartBattleEffect)),
+                    ctx);
             }
         }
 
@@ -221,6 +231,15 @@ public class EventView : MonoBehaviour
     private void OnContinueClicked()
     {
         gameObject.SetActive(false);
+
+        // 보류해 둔 전투 시작 효과가 있으면 맵 대신 전투로 넘어간다.
+        if (_pendingBattleEffect != null)
+        {
+            var battleEffect = _pendingBattleEffect;
+            _pendingBattleEffect = null;
+            EffectRunner.ExecuteImmediate(new List<CardEffect> { battleEffect }, new CardContext());
+            return;
+        }
 
         if (mapUIController == null)
         {
