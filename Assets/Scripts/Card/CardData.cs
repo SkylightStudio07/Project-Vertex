@@ -120,6 +120,8 @@ public class CardData : ScriptableObject
         }
     }
     public CardUseMode UseMode    => useMode;
+    // 저주 등 사용 불가 카드. 손패에는 남지만 플레이가 막힌다(드래그해서 놓아도 사용되지 않음).
+    public bool IsUnplayable      => useMode == CardUseMode.Unplayable;
     public CardType   Type        => cardType;
     public CardRarity Rarity      => cardRarity;
     public CardOwner  Owner       => cardOwner;
@@ -182,7 +184,9 @@ public class CardData : ScriptableObject
 
     public enum CardType  { Attack, Skill, Power, Status }
     public enum CardRarity { Common, Rare, Unique }
-    public enum CardUseMode { DropToPlayArea, SelectEnemy }
+    // Unplayable = 저주 등 사용 불가 카드. CardHandler.TryDrop의 default가 사용을 막아준다.
+    // 주의: 값이 에셋에 정수로 저장되므로 새 항목은 반드시 끝에 추가할 것(기존 카드는 0/1).
+    public enum CardUseMode { DropToPlayArea, SelectEnemy, Unplayable }
     public enum CardOwner
     {
         Player, Jogasaki, CanadaMarine, GermanDeserter,

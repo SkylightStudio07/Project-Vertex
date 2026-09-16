@@ -189,13 +189,25 @@ public class EventView : MonoBehaviour
             int index = i;
             var btn = Instantiate(choiceButtonPrefab, choiceContainer);
             btn.GetComponentInChildren<TextMeshProUGUI>().text = _json.choices[i].choiceText;
+            btn.interactable = IsChoiceSelectable(index);   // 조건 미충족 선택지는 회색으로 잠금
             btn.onClick.AddListener(() => OnChoiceSelected(index));
             _choiceButtons.Add(btn);
         }
     }
 
+    // 선택지에 조건이 걸려 있으면(예: 인벤토리 빈 칸) 미충족 시 고를 수 없다.
+    private bool IsChoiceSelectable(int index)
+    {
+        if (_data == null || _data.choiceEffects == null || index >= _data.choiceEffects.Count) return true;
+
+        var choice = _data.choiceEffects[index];
+        return choice == null || choice.IsSelectable();
+    }
+
     private void OnChoiceSelected(int index)
     {
+        if (!IsChoiceSelectable(index)) return;   // 버튼을 눌러도 다음 화면으로 넘어가지 않는다
+
         foreach (var b in _choiceButtons)
             b.gameObject.SetActive(false);
 

@@ -25,6 +25,12 @@ public class ItemData : ScriptableObject
     [SerializeReference, SubclassPicker] public List<CardEffect> itemEffects = new();
     [SerializeField] private ItemUseMode useMode;
 
+    [Header("지속 효과 (0이면 일반 소모품)")]
+    // 사용하면 아이템 자체는 소모되지만, 여기 효과가 앞으로 lingeringBattleCount 전투 동안
+    // 매 전투 시작 시 다시 적용된다(사용한 전투도 1회로 센다). 관리는 ItemInventoryManager.
+    [SerializeField, Min(0)] private int lingeringBattleCount;
+    [SerializeReference, SubclassPicker] public List<CardEffect> lingeringEffects = new();
+
     // --- Public Accessors ---
     public string ItemName => itemName;
     public Sprite ItemIcon => itemIcon;
@@ -33,6 +39,7 @@ public class ItemData : ScriptableObject
     public string ItemDescription => itemDescription;
     public List<CardEffect> ItemEffects => itemEffects;
     public ItemUseMode UseMode => useMode;
+    public int LingeringBattleCount => lingeringBattleCount;
     public ItemGetType ItemTypes => itemGetTypes;
 
     // --- enum ---

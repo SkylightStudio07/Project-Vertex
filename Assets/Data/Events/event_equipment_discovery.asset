@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61e595b875def948a5ed08c5927f167, type: 3}
+  m_Name: event_equipment_discovery
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventJson: {fileID: 4900000, guid: 900c98b7897640f48b66ce19f531cf85, type: 3}
+  choiceEffects:
+  - effects:
+    - rid: 3673691916408717421
+    - rid: 3673691916408717422
+    conditions:
+    - rid: 3673691916408717423
+  - effects: []
+    conditions: []
+  dialogueJson: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  illustration: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3673691916408717421
+      type: {class: GainItemEffect, ns: , asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: 580934ace60a51f4793757366f34b8d5, type: 2}
+    - rid: 3673691916408717422
+      type: {class: AddCardToDeckEffect, ns: , asm: Assembly-CSharp}
+      data:
+        card: {fileID: 11400000, guid: cf3897f00bf703a40a6e233dae2dcfa7, type: 2}
+        count: 1
+    - rid: 3673691916408717423
+      type: {class: InventoryHasSpaceCondition, ns: , asm: Assembly-CSharp}
+      data: 
