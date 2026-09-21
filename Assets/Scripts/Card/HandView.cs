@@ -47,6 +47,7 @@ public class HandView : MonoBehaviour
     private readonly Dictionary<CardData, CardView> _cardViewByCard = new(); // CardData 참조로 현재 CardView를 찾기 위한 재사용 맵.
     private readonly Dictionary<CardData, CardInteractionView> _interactionViewByCard = new(); // CardData 참조로 현재 CardInteractionView를 찾기 위한 재사용 맵.
     private readonly HashSet<CardData> _discardPileCards = new(); // 현재 DiscardPile에 들어 있는 카드 참조 집합.
+    private WaitForSeconds _drawInDurationWait; // 카드 한 장의 진입 완료 대기에 재사용할 대기 객체.
     private WaitForSeconds _drawInStaggerWait; // 카드별 순차 지연에 재사용할 대기 객체.
     private WaitForSeconds _discardOutStaggerWait; // 카드별 퇴장 지연에 재사용할 대기 객체.
     private Coroutine _drawInRoutine; // 현재 실행 중인 손패 진입 애니메이션 코루틴.
@@ -55,6 +56,7 @@ public class HandView : MonoBehaviour
     // 순차 드로우 애니메이션에서 반복 사용할 대기 객체를 준비한다.
     private void Awake()
     {
+        _drawInDurationWait = new WaitForSeconds(_drawInDuration);
         _drawInStaggerWait = new WaitForSeconds(_drawInStaggerDelay);
         _discardOutStaggerWait = new WaitForSeconds(_discardOutStaggerDelay);
     }
@@ -90,6 +92,7 @@ public class HandView : MonoBehaviour
         {
             StopCoroutine(_drawInRoutine);
             _drawInRoutine = null;
+            CancelHandAnimations();
         }
         if (_discardOutRoutine != null)
         {
@@ -120,13 +123,15 @@ public class HandView : MonoBehaviour
             _layoutInteractionViews.Add(interactionView);
         }
 
-        // 카드를 전부 생성한 뒤 한 번에 배치 — 개수(n)를 알아야 부채꼴 간격/각도를 계산할 수 있다.
-        if (_fanLayout != null)
-            _fanLayout.Arrange(_layoutInteractionViews);
-
-        if (_playDrawInAnimation && _drawStartPoint != null && _newInteractionViews.Count > 0)
+        if (_playDrawInAnimation && _drawStartPoint != null &&
+            _fanLayout != null && _newInteractionViews.Count > 0)
         {
-            _drawInRoutine = StartCoroutine(PlayDrawInRoutine(_newInteractionViews));
+            _drawInRoutine = StartCoroutine(
+                PlayDrawInRoutine(_layoutInteractionViews, _newInteractionViews));
+        }
+        else if (_fanLayout != null)
+        {
+            _fanLayout.Arrange(_layoutInteractionViews);
         }
     }
 
@@ -329,27 +334,76 @@ public class HandView : MonoBehaviour
         return Mathf.Max(0f, duration) + Mathf.Max(0f, staggerDelay) * (count - 1);
     }
 
-    // 새 카드들을 시작 위치에 먼저 모아둔 뒤 순서대로 손패 위치까지 이동시킨다.
-    private IEnumerator PlayDrawInRoutine(IReadOnlyList<CardInteractionView> cards)
+    // 중단된 드로우에 참여하던 카드들의 이동 상태와 입력 잠금을 정리한다.
+    private void CancelHandAnimations()
+    {
+        for (int i = 0; i < _layoutInteractionViews.Count; i++)
+        {
+            if (_layoutInteractionViews[i] != null)
+                _layoutInteractionViews[i].CancelHandAnimation();
+        }
+    }
+
+    // 새 카드가 들어올 때마다 현재 카드 전체를 다음 패 개수의 자세로 재배치한다.
+    private IEnumerator PlayDrawInRoutine(
+        IReadOnlyList<CardInteractionView> allCards,
+        IReadOnlyList<CardInteractionView> newCards)
     {
         Vector2 startPosition = GetDrawStartPosition(); // 진입 카드들이 대기할 cardContainer 기준 좌표.
+        int existingCount = allCards.Count - newCards.Count; // 이번 드로우 전에 이미 표시 중이던 카드 수.
 
-        for (int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < allCards.Count; i++)
         {
-            if (cards[i] != null)
-            {
-                int sortingOrder = _drawInSortingOrderBase + cards.Count - i; // 먼저 나오는 카드가 앞에 보이도록 계산한 임시 순서.
-                cards[i].PrepareDrawIn(startPosition, sortingOrder);
-            }
+            if (allCards[i] != null)
+                allCards[i].SetHandAnimationLocked(true);
         }
 
-        for (int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < newCards.Count; i++)
         {
-            if (cards[i] != null)
-                cards[i].PlayPreparedDrawIn(_drawInDuration);
+            if (newCards[i] == null) continue;
+
+            int sortingOrder = _drawInSortingOrderBase + newCards.Count - i; // 먼저 나오는 카드가 앞에 보이도록 계산한 임시 순서.
+            newCards[i].PrepareDrawIn(startPosition, sortingOrder);
+        }
+
+        for (int newIndex = 0; newIndex < newCards.Count; newIndex++)
+        {
+            int activeCount = existingCount + newIndex + 1; // 현재 화면에 표시할 손패 수.
+            CardInteractionView incomingCard = newCards[newIndex]; // 이번 단계에서 새로 들어오는 카드.
+
+            for (int cardIndex = 0; cardIndex < activeCount; cardIndex++)
+            {
+                CardInteractionView card = allCards[cardIndex]; // 이번 단계에서 재배치할 카드.
+                if (card == null) continue;
+
+                HandFanLayout.HandPose pose =
+                    _fanLayout.GetPose(cardIndex, activeCount); // 현재 패 개수와 순서에 대응하는 목표 자세.
+
+                if (card == incomingCard)
+                {
+                    int sortingOrder =
+                        _drawInSortingOrderBase + newCards.Count - newIndex; // 진입 중인 카드의 임시 표시 순서.
+                    card.SetRestingPose(pose.Position, pose.RotationZ);
+                    card.PrepareDrawIn(startPosition, sortingOrder);
+                    card.PlayPreparedDrawIn(_drawInDuration);
+                }
+                else
+                {
+                    card.PlayLayoutTransition(pose.Position, pose.RotationZ, _drawInDuration);
+                }
+            }
+
+            if (_drawInDuration > 0f)
+                yield return _drawInDurationWait;
 
             if (_drawInStaggerDelay > 0f)
                 yield return _drawInStaggerWait;
+        }
+
+        for (int i = 0; i < allCards.Count; i++)
+        {
+            if (allCards[i] != null)
+                allCards[i].SetHandAnimationLocked(false);
         }
 
         _drawInRoutine = null;

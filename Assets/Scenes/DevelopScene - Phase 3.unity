@@ -604,16 +604,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fee6ab72c55ff844b88038e133dc165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
-  defaultMaxEnergy: 3
-  defaultAmmo: 3
-  defaultDrawCount: 5
-  defaultWeapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+  _defaultMaxEnergy: 3
+  _defaultAmmo: 3
+  _defaultDrawCount: 5
+  _defaultWeapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
   _passiveDebugView: []
-  turnBanner: {fileID: 1901336938}
-  lungeOutWaitDuration: 0.2
-  lungeBackWaitDuration: 0.2
-  playerTurnBanner: {fileID: 1158864460}
-  postActionDelay: 0.3
+  _turnBanner: {fileID: 1901336938}
+  _lungeOutWaitDuration: 0.2
+  _lungeBackWaitDuration: 0.2
+  _playerTurnBanner: {fileID: 1158864460}
+  _postActionDelay: 0.3
 --- !u!114 &117956440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,6 +1413,7 @@ RectTransform:
   - {fileID: 1900332880}
   - {fileID: 2142279660}
   - {fileID: 523753937}
+  - {fileID: 1524281369}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4348,7 +4349,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4397,6 +4398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectCoopCharBtn
   rectTransform: {fileID: 494741277}
   charImage: {fileID: 494741280}
+  emptySlotSprite: {fileID: 6075484406621767098, guid: 868bd831e90926b4583d489358a12599, type: 3}
 --- !u!114 &494741280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4880,7 +4882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 80}
+  m_AnchoredPosition: {x: 0, y: -111}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &545739264
@@ -11456,14 +11458,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53162b51dc1682478c8ffa601957956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandView
-  cardPrefab: {fileID: 324129827944308415, guid: e3cfe6cad59611b419b1bcc0547c3c54, type: 3}
-  cardContainer: {fileID: 1486399160}
-  fanLayout: {fileID: 1486399164}
-  playDrawInAnimation: 1
-  drawStartPoint: {fileID: 523753937}
-  drawInDuration: 0.25
-  drawInStaggerDelay: 0.04
-  drawInSortingOrderBase: 200
+  _cardPrefab: {fileID: 324129827944308415, guid: e3cfe6cad59611b419b1bcc0547c3c54, type: 3}
+  _cardContainer: {fileID: 1486399160}
+  _fanLayout: {fileID: 1486399164}
+  _playDrawInAnimation: 1
+  _drawStartPoint: {fileID: 523753937}
+  _drawInDuration: 0.2
+  _drawInStaggerDelay: 0.06
+  _drawInSortingOrderBase: 200
+  _playDiscardOutAnimation: 1
+  _discardEndPoint: {fileID: 1524281369}
+  _discardOutDuration: 0.2
+  _discardOutStaggerDelay: 0.04
+  _discardOutSortingOrderBase: 200
 --- !u!223 &1486399163
 Canvas:
   m_ObjectHideFlags: 0
@@ -11499,10 +11506,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f5389ece35da3449bc84fd61ce632a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandFanLayout
-  maxCardSpacing: 140
-  maxWidth: 900
-  totalFanAngle: 32
-  arcSag: 60
+  _maxCardSpacing: 140
+  _maxWidth: 900
+  _maxTotalFanAngle: 32
+  _anglePerCardGap: 8
+  _arcSag: 60
+  _maxHandSize: 10
 --- !u!1 &1494846968
 GameObject:
   m_ObjectHideFlags: 0
@@ -11914,6 +11923,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1524281368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524281369}
+  m_Layer: 5
+  m_Name: CardObjAnimTransform2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1524281369
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524281368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 169565602}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1858, y: -111}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1534743952
 GameObject:
   m_ObjectHideFlags: 0
@@ -13908,7 +13952,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0.4933104, b: 0, a: 1}
+    m_NormalColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -13957,6 +14001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectCoopCharBtn
   rectTransform: {fileID: 1874912609}
   charImage: {fileID: 1874912612}
+  emptySlotSprite: {fileID: 6075484406621767098, guid: 868bd831e90926b4583d489358a12599, type: 3}
 --- !u!114 &1874912612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15701,7 +15746,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.51523685, g: 0, b: 1, a: 1}
+    m_NormalColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -15750,6 +15795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectCoopCharBtn
   rectTransform: {fileID: 2141140132}
   charImage: {fileID: 2141140135}
+  emptySlotSprite: {fileID: 6075484406621767098, guid: 868bd831e90926b4583d489358a12599, type: 3}
 --- !u!114 &2141140135
 MonoBehaviour:
   m_ObjectHideFlags: 0

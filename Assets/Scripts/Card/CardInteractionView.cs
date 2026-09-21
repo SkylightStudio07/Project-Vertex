@@ -65,6 +65,12 @@ public class CardInteractionView : MonoBehaviour
     private Vector2 _discardOutStartPosition; // 턴 종료 퇴장 애니메이션의 시작 위치.
     private Vector2 _discardOutEndPosition; // 턴 종료 퇴장 애니메이션의 최종 위치.
     private Action<CardInteractionView> _discardOutCompleted; // 퇴장 애니메이션 완료 후 호출할 콜백.
+    private bool _isLayoutTransitionPlaying; // 손패 재배치 애니메이션 중인지 나타내는 상태값.
+    private Vector2 _layoutStartPosition; // 손패 재배치 애니메이션의 시작 위치.
+    private Vector2 _layoutEndPosition; // 손패 재배치 애니메이션의 최종 위치.
+    private float _layoutStartRotationZ; // 손패 재배치 애니메이션의 시작 회전값.
+    private float _layoutEndRotationZ; // 손패 재배치 애니메이션의 최종 회전값.
+    private bool _isHandAnimationLocked; // 전체 드로우 순서가 끝날 때까지 입력을 막는 상태값.
     private bool _isDestroying; // 오브젝트가 파괴 중인지 나타내는 상태값.
 
     // HandFanLayout이 지정한 "쉴 때" 자세. 부채꼴 미적용(레이아웃 미연결) 시 회전 0으로 그대로 둔다.
@@ -75,7 +81,11 @@ public class CardInteractionView : MonoBehaviour
     public bool IsDrawInPlaying => _isDrawInPlaying;
 
     // 카드 이동 애니메이션 중이면 카드 입력을 막기 위해 true를 반환한다.
-    public bool IsInteractionLocked => _isDrawInPlaying || _isDiscardOutPlaying;
+    public bool IsInteractionLocked =>
+        _isDrawInPlaying ||
+        _isDiscardOutPlaying ||
+        _isLayoutTransitionPlaying ||
+        _isHandAnimationLocked;
 
     private void Awake()
     {
@@ -105,6 +115,25 @@ public class CardInteractionView : MonoBehaviour
     public void SetTargetingAnchor(RectTransform anchor)
     {
         _targetingAnchor = anchor;
+    }
+
+    // 전체 드로우 순서가 진행되는 동안 카드 입력 잠금 상태를 설정한다.
+    public void SetHandAnimationLocked(bool isLocked)
+    {
+        _isHandAnimationLocked = isLocked;
+    }
+
+    // 손패 갱신으로 드로우가 중단되면 이동 상태와 입력 잠금을 즉시 정리한다.
+    public void CancelHandAnimation()
+    {
+        if (_movementCoroutine != null && (_isDrawInPlaying || _isLayoutTransitionPlaying))
+            StopCoroutine(_movementCoroutine);
+
+        _movementCoroutine = null;
+        _isDrawInPlaying = false;
+        _isLayoutTransitionPlaying = false;
+        _isHandAnimationLocked = false;
+        _cardCanvas.sortingOrder = _originalSortingOrder;
     }
 
     // HandFanLayout이 손패 갱신마다 호출 — 이 카드가 손패에서 쉬고 있을 때의 위치·회전(부채꼴 슬롯)을 지정한다.
@@ -219,6 +248,22 @@ public class CardInteractionView : MonoBehaviour
         _movementCoroutine = StartCoroutine(DrawInCoroutine(duration));
     }
 
+    // 현재 자세에서 새로운 손패 위치와 각도까지 재배치 애니메이션을 시작한다.
+    public void PlayLayoutTransition(Vector2 targetPosition, float targetRotationZ, float duration)
+    {
+        StopMovement();
+        if (_rootRect == null) return;
+
+        _restingAnchoredPosition = targetPosition;
+        _restingRotationZ = targetRotationZ;
+        _layoutStartPosition = _rootRect.anchoredPosition;
+        _layoutEndPosition = targetPosition;
+        _layoutStartRotationZ = _rootRect.localEulerAngles.z;
+        _layoutEndRotationZ = targetRotationZ;
+        _isLayoutTransitionPlaying = true;
+        _movementCoroutine = StartCoroutine(LayoutTransitionCoroutine(duration));
+    }
+
     // 턴 종료 시 현재 손패 위치에서 EndPoint까지 이동하는 퇴장 애니메이션을 시작한다.
     public void PlayDiscardOut(
         Vector2 endAnchoredPosition,
@@ -305,6 +350,44 @@ public class CardInteractionView : MonoBehaviour
 
         _cardCanvas.sortingOrder = _originalSortingOrder;
         _isDrawInPlaying = false;
+        _movementCoroutine = null;
+    }
+
+    // 현재 손패 자세에서 새 위치와 각도까지 부드럽게 변경한다.
+    private IEnumerator LayoutTransitionCoroutine(float duration)
+    {
+        float elapsed = 0f; // 지금까지 진행된 손패 재배치 시간.
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = duration <= 0f
+                ? 1f
+                : Mathf.Clamp01(elapsed / duration); // 0부터 1까지의 진행률.
+            float eased = 1f - Mathf.Pow(1f - t, 2f); // 끝으로 갈수록 부드럽게 감속하는 진행률.
+            float rotationZ = Mathf.LerpAngle(
+                _layoutStartRotationZ,
+                _layoutEndRotationZ,
+                eased); // 현재 프레임에 적용할 회전값.
+
+            _rootRect.anchoredPosition = Vector2.Lerp(_layoutStartPosition, _layoutEndPosition, eased);
+            _rootRect.localRotation = Quaternion.Euler(0f, 0f, rotationZ);
+            yield return null;
+        }
+
+        CompleteLayoutTransition();
+    }
+
+    // 손패 재배치를 목표 위치와 각도로 확정한다.
+    private void CompleteLayoutTransition()
+    {
+        if (_rootRect != null)
+        {
+            _rootRect.anchoredPosition = _layoutEndPosition;
+            _rootRect.localRotation = Quaternion.Euler(0f, 0f, _layoutEndRotationZ);
+        }
+
+        _isLayoutTransitionPlaying = false;
         _movementCoroutine = null;
     }
 
@@ -452,6 +535,8 @@ public class CardInteractionView : MonoBehaviour
             CompleteDrawIn();
         else if (_isDiscardOutPlaying)
             CompleteDiscardOut();
+        else if (_isLayoutTransitionPlaying)
+            CompleteLayoutTransition();
         else
             _movementCoroutine = null;
     }
