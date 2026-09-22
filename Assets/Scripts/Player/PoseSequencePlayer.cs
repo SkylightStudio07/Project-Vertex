@@ -67,6 +67,35 @@ public class PoseSequencePlayer : MonoBehaviour
         playing = StartCoroutine(PlaySequence(frames));
     }
 
+    /// <summary>
+    /// 스프라이트 시트 프레임 배열을 순서대로 지정한 FPS 속도로 1회 재생합니다.
+    /// 재생 중에는 UISpriteSheetAnimator(대기 모션)가 일시정지되며, 완료 시 자동으로 대기 모션으로 복귀합니다.
+    /// </summary>
+    public void Play(Sprite[] frames, float fps)
+    {
+        if (frames == null || frames.Length == 0) return;
+
+        if (playing != null)
+        {
+            StopCoroutine(playing);
+            RestoreResting();
+        }
+
+        if (sheetAnimator != null && sheetAnimator.IsPlaying)
+        {
+            wasSheetAnimatorPlaying = true;
+            sheetAnimator.Pause();
+        }
+
+        if (animator != null && animator.enabled)
+        {
+            wasAnimatorEnabled = true;
+            animator.enabled = false;
+        }
+
+        playing = StartCoroutine(PlaySpriteFrames(frames, fps));
+    }
+
     private void RestoreResting()
     {
         if (sheetAnimator != null && wasSheetAnimatorPlaying)
@@ -147,6 +176,38 @@ public class PoseSequencePlayer : MonoBehaviour
 
             if (frame.holdDuration > 0f)
                 yield return new WaitForSeconds(frame.holdDuration);
+        }
+
+        RestoreResting();
+        playing = null;
+    }
+
+    private IEnumerator PlaySpriteFrames(Sprite[] frames, float fps)
+    {
+        // 대기 포즈 기록 — 시퀀스 끝나면 여기로 복귀.
+        restingSprite = image.sprite;
+        restingAnchoredPosition = rt.anchoredPosition;
+        restingScale = rt.localScale;
+        restingRotation = rt.localEulerAngles.z;
+        restingSizeDelta = rt.sizeDelta;
+        hasResting = true;
+
+        float delay = 1f / Mathf.Max(1f, fps);
+
+        for (int i = 0; i < frames.Length; i++)
+        {
+            Sprite f = frames[i];
+            if (f != null)
+            {
+                image.sprite = f;
+                Rect r = f.rect;
+                if (r.height > 0f)
+                {
+                    float aspect = r.width / r.height;
+                    rt.sizeDelta = new Vector2(restingSizeDelta.y * aspect, restingSizeDelta.y);
+                }
+            }
+            yield return new WaitForSeconds(delay);
         }
 
         RestoreResting();

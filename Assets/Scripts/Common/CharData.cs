@@ -17,6 +17,10 @@ public class CharData : ScriptableObject
     public Sprite[] idleFrames;
     [Tooltip("대기 애니메이션 초당 프레임 수 (기본 24 FPS)")]
     public float idleFrameRate = 24f;
+    [Tooltip("기본 공격 애니메이션 스프라이트 프레임 목록 (비워둘 시 attackSequence 사용)")]
+    public Sprite[] attackFrames;
+    [Tooltip("공격 애니메이션 초당 프레임 수 (기본 24 FPS)")]
+    public float attackFrameRate = 24f;
 
     [Header("레거시 애니메이션 클립")]
     public AnimationClip idleAnim;

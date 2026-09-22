@@ -19,13 +19,6 @@ MonoBehaviour:
   charIcon: {fileID: 0}
   standingSprite: {fileID: 21300000, guid: 450319bd2b4928743bb7bd1620987c5c, type: 3}
   idleFrames:
-  - {fileID: -8524567730182408873, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: -1362152343, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: 47910390, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: -604390923, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: -1249697834, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: 1536272731, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: 1314054548, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
   - {fileID: 792237398, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
   - {fileID: -545239553, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
   - {fileID: -11660187, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
@@ -64,11 +57,22 @@ MonoBehaviour:
   - {fileID: 524338994, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
   - {fileID: 24542088, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
   - {fileID: 1571748124, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: 942222626, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: -630082925, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: 941672649, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  - {fileID: 1182338403, guid: dd881bc12c6da354abff9f1dea5bc2fd, type: 3}
-  idleFrameRate: 18
+  idleFrameRate: 24
+  attackFrames:
+  - {fileID: 226895499, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: -1208273643, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 658415605, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: -1783443240, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 597168967, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 1983713540, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 1283637039, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 473523526, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: -228795741, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 167955072, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 1877662273, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: -1968264014, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  - {fileID: 511344173, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+  attackFrameRate: 40
   idleAnim: {fileID: 7400000, guid: 59ab04409cae5db499aa82b07a044dde, type: 2}
   attackAnim: {fileID: 0}
   hitAnim: {fileID: 0}
@@ -86,9 +90,28 @@ MonoBehaviour:
     standingSprite: {fileID: 21300000, guid: 450319bd2b4928743bb7bd1620987c5c, type: 3}
     idleFrames: []
     idleFrameRate: 24
+    attackFrames:
+    - {fileID: -1842734655, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 271226082, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 226895499, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: -1208273643, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 658415605, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: -1783443240, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 597168967, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 1983713540, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 1283637039, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 473523526, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: -228795741, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 167955072, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 1877662273, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: -1968264014, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    - {fileID: 511344173, guid: b0caa62f7cc22dc4e95194cf47503f65, type: 3}
+    attackFrameRate: 38
     attackSequence: []
   - weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}
     standingSprite: {fileID: 21300000, guid: 608c01635da0ca248a924ce72ce90e18, type: 3}
     idleFrames: []
     idleFrameRate: 24
+    attackFrames: []
+    attackFrameRate: 24
     attackSequence: []

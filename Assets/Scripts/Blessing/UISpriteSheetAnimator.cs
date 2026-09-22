@@ -186,11 +186,17 @@ public class UISpriteSheetAnimator : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    [ContextMenu("Machina Idle 스프라이트(32종) 수동 로드")]
+    [ContextMenu("Machina Idle 스프라이트 수동 로드")]
     public void LoadMachinaFramesFromEditor()
     {
-        string assetPath = "Assets/Art/Blessing/Machina/machina_idle_sprite_sheet.png";
+        string assetPath = "Assets/Art/Blessing/Machina/machina_idle_sprite_64_sheet.png";
         UnityEngine.Object[] subAssets = AssetDatabase.LoadAllAssetsAtPath(assetPath);
+        if (subAssets == null || subAssets.Length == 0)
+        {
+            assetPath = "Assets/Art/Blessing/Machina/machina_idle_sprite_sheet.png";
+            subAssets = AssetDatabase.LoadAllAssetsAtPath(assetPath);
+        }
+
         var list = new List<Sprite>();
         foreach (var obj in subAssets)
         {
@@ -206,7 +212,13 @@ public class UISpriteSheetAnimator : MonoBehaviour
                 return ia.CompareTo(ib);
             });
 
+            if (list.Count == 64)
+            {
+                list = list.GetRange(0, 62);
+            }
+
             frames = list.ToArray();
+            frameRate = 16f;
             Debug.Log($"[UISpriteSheetAnimator] {assetPath}에서 {frames.Length}종의 프레임을 번호순으로 자동 로드했습니다.");
             EditorUtility.SetDirty(this);
             ApplyFrame();

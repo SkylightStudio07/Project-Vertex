@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: marker.vulnerable-on-hit
   displayName: "\uD0C0\uACA9 \uCDE8\uC57D"
-  description: "HP \uD53C\uD574\uB97C \uBC1B\uC744 \uB54C\uB9C8\uB2E4
-    \uC790\uC2E0\uC5D0\uAC8C \uCDE8\uC57D\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  description: "\uD0C0\uACA9\uD560 \uB54C \uB9C8\uB2E4 \uC801\uC5D0\uAC8C \uCDE8\uC57D\uC744
+    \uBD80\uC5EC\uD55C\uB2E4."
   icon: {fileID: 0}
   disposition: 2
   stackPolicy: 1
@@ -23,16 +23,16 @@ MonoBehaviour:
   maxStacks: 1
   dispellable: 1
   behaviors:
-  - rid: 1017
+  - rid: 5573463116610797722
   references:
     version: 2
     RefIds:
-    - rid: 1017
-      type: {class: AfterDamageTakenEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+    - rid: 5573463116610797722
+      type: {class: AfterDamageDealtEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
       data:
         effects:
-        - rid: 2017
-    - rid: 2017
+        - rid: 5573463116610797723
+    - rid: 5573463116610797723
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         status: {fileID: 11400000, guid: 10000000000000000000000000000002, type: 2}
@@ -47,4 +47,4 @@ MonoBehaviour:
         potency: 0
         secondaryPotency: 0
         targets:
-          mode: 0
+          mode: 1

@@ -35,6 +35,8 @@ public class EnemyInstance : ICombatant
     public StatusContainer Statuses => _statuses;
 
     public Sprite EnemySprite { get; private set; }
+    public Sprite[] IdleFrames => Data != null ? Data.idleFrames : null;
+    public float IdleFrameRate => (Data != null && Data.idleFrameRate > 0.01f) ? Data.idleFrameRate : 12f;
     public float SpriteScale => (Data != null && Data.spriteScale > 0.01f) ? Data.spriteScale : 1.0f;
     public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
 
