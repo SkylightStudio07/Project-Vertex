@@ -250,6 +250,7 @@ public class HandView : MonoBehaviour
         {
             StopCoroutine(_drawInRoutine);
             _drawInRoutine = null;
+            CancelHandAnimations();
         }
 
         if (_discardOutRoutine != null)
