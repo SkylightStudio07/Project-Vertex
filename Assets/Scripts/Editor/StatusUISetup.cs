@@ -177,8 +177,10 @@ public static class StatusUISetup
             var listView = FindOrCreateListView(root.transform, "StatusList", chipPrefab,
                 anchorMin: new Vector2(0.5f, 0f),
                 anchorMax: new Vector2(0.5f, 0f),
-                pivot:     new Vector2(0.5f, 1f),
-                anchoredPosition: new Vector2(0f, -40f)); // HP 바 아래.
+                pivot:     new Vector2(0f, 1f),
+                anchoredPosition: Vector2.zero);
+            MatchEnemyChipScaleToPlayer(root.transform, listView.transform);
+            PlaceUnderHpBar(root.transform as RectTransform, (RectTransform)listView.transform);
 
             var so = new SerializedObject(view);
             so.FindProperty("statusList").objectReferenceValue = listView;
@@ -191,6 +193,67 @@ public static class StatusUISetup
         {
             PrefabUtility.UnloadPrefabContents(root);
         }
+    }
+
+    // 적 상태 목록을 HP바(Fill 막대)의 왼쪽 아래 모서리 바로 아래에 왼쪽 정렬로 붙인다.
+    // 처음엔 "EnemyView 루트 하단 중앙 (0, -40)"에 뒀는데, 루트 rect가 스프라이트보다 커서
+    // 실제로는 적과 동떨어진 화면 하단 중앙에 떴다(제파러 등에서 버프 칩이 안 보인다는 제보의 원인).
+    // HP Bar는 0.33 스케일 + Fill 비균등 스케일이 걸려 있어 숫자로 짐작하지 않고
+    // Fill의 실제 월드 모서리를 루트 로컬 좌표로 역산한다. HP바를 옮기면 이 함수를 다시 돌리면 된다.
+    private const float HpBarGap = 6f;
+
+    // 적 칩이 플레이어 칩과 화면상 같은 크기가 되도록 적 상태 목록의 localScale을 맞춘다.
+    // 적은 EnemyArea(enemyContainer) 밑에 생성되는데 그쪽 계층 스케일이 플레이어 HP 패널보다
+    // 3배 커서, 같은 칩 프리팹이 적 쪽에서만 3배 크게 보였다(실측 102px vs 34px).
+    // 1/3을 박아두면 씬 스케일이 바뀔 때 다시 어긋나므로, 씬의 실제 월드 스케일로 비율을 계산한다.
+    private static void MatchEnemyChipScaleToPlayer(Transform prefabRoot, Transform enemyList)
+    {
+        var hud = Object.FindFirstObjectByType<PlayerHUDView>(FindObjectsInactive.Include);
+        var zone = Object.FindFirstObjectByType<EnemyZoneView>(FindObjectsInactive.Include);
+        if (hud == null || zone == null)
+        {
+            Debug.LogWarning("[StatusUISetup] PlayerHUDView/EnemyZoneView를 씬에서 못 찾아 적 칩 크기를 맞추지 않음.");
+            return;
+        }
+
+        var playerList = new SerializedObject(hud).FindProperty("statusList").objectReferenceValue as Component;
+        var container = new SerializedObject(zone).FindProperty("enemyContainer").objectReferenceValue as Transform;
+        if (container == null) container = zone.transform;
+        if (playerList == null)
+        {
+            Debug.LogWarning("[StatusUISetup] PlayerHUDView.statusList가 비어 있어 적 칩 크기를 맞추지 않음.");
+            return;
+        }
+
+        // 런타임 적 목록의 월드 스케일 = 컨테이너 월드 스케일 × 프리팹 루트 로컬 × 목록 로컬.
+        float enemyParentScale = container.lossyScale.x * prefabRoot.localScale.x;
+        if (enemyParentScale <= 0f) return;
+
+        float scale = playerList.transform.lossyScale.x / enemyParentScale;
+        enemyList.localScale = new Vector3(scale, scale, 1f);
+    }
+
+    private static void PlaceUnderHpBar(RectTransform root, RectTransform list)
+    {
+        var fill = root.Find("HP Bar/Fill") as RectTransform;
+        if (fill == null)
+        {
+            Debug.LogWarning("[StatusUISetup] 적 프리팹에서 'HP Bar/Fill'을 못 찾아 상태 목록 위치를 조정하지 않음.");
+            return;
+        }
+
+        var corners = new Vector3[4];
+        fill.GetWorldCorners(corners); // 0 = 왼쪽 아래
+        Vector2 bottomLeft = root.InverseTransformPoint(corners[0]);
+
+        // anchoredPosition은 부모 rect의 앵커 기준점에서의 오프셋이다.
+        Rect r = root.rect;
+        Vector2 anchorRef = new(
+            Mathf.Lerp(r.xMin, r.xMax, list.anchorMin.x),
+            Mathf.Lerp(r.yMin, r.yMax, list.anchorMin.y));
+
+        list.pivot = new Vector2(0f, 1f);
+        list.anchoredPosition = bottomLeft - anchorRef + new Vector2(0f, -HpBarGap);
     }
 
     // ---------- 공통 ----------

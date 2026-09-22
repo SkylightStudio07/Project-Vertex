@@ -44,15 +44,39 @@ public class ItemInventoryView : MonoBehaviour
         RefreshInventory();
     }
 
+    // 슬롯은 항상 최대 슬롯 수(ItemInventoryManager.MaxSlots)만큼 그린다.
+    // 앞에서부터 소지 아이템을 채우고, 남는 칸은 빈 칸 이미지(ItemSlot.emptyIcon)로 남긴다.
+    // 슬롯을 매번 파괴/재생성하지 않고 재사용한다 — 아이템을 쓸 때마다 전부 다시 만들면
+    // 그 시점에 마우스가 올라가 있던 슬롯의 OnPointerExit가 유실돼 툴팁이 남는 문제가 있다.
     private void RefreshInventory()
     {
-        foreach (var s in _slots) if (s != null) Destroy(s.gameObject);
-        _slots.Clear();
+        var manager = ItemInventoryManager.Instance;
+        if (manager == null || slotParent == null || itemPrefab == null) return;
 
-        foreach (var item in ItemInventoryManager.Instance.Items)
+        int slotCount = manager.MaxSlots;
+        SyncSlotCount(slotCount);
+
+        var items = manager.Items;
+        for (int i = 0; i < _slots.Count; i++)
+            _slots[i].SetItem(i < items.Count ? items[i] : null, this);
+    }
+
+    private void SyncSlotCount(int slotCount)
+    {
+        for (int i = _slots.Count - 1; i >= slotCount; i--)
+        {
+            if (_slots[i] != null) Destroy(_slots[i].gameObject);
+            _slots.RemoveAt(i);
+        }
+
+        while (_slots.Count < slotCount)
         {
             var slot = Instantiate(itemPrefab, slotParent).GetComponent<ItemSlot>();
-            slot.SetItem(item, this);        // 슬롯에 데이터 + 공용 툴팁 소유자(this) 주입
+            if (slot == null)
+            {
+                Debug.LogError("[ItemInventoryView] itemPrefab에 ItemSlot 컴포넌트가 없습니다.");
+                return;
+            }
             _slots.Add(slot);
         }
     }

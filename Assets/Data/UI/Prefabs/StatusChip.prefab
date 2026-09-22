@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 2506143647703477698}
   - component: {fileID: 7806312122101047886}
   - component: {fileID: 7859895194855038164}
+  - component: {fileID: 6289310334725956060}
   m_Layer: 0
   m_Name: StatusChip
   m_TagString: Untagged
@@ -331,6 +332,20 @@ MonoBehaviour:
   buffColor: {r: 0.2, g: 0.55, b: 0.25, a: 0.85}
   debuffColor: {r: 0.65, g: 0.18, b: 0.18, a: 0.85}
   neutralColor: {r: 0.3, g: 0.3, b: 0.35, a: 0.85}
+--- !u!114 &6289310334725956060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715261282869876558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28668f0da6919a94381c00eb40453885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverScaleEffect
+  hoverScaleMultiplier: 1.4
+  animationDuration: 0.1
 --- !u!1 &7053712056518335584
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +414,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 344148b6ccbacf84a83c7ecef3902e92, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 217728622651580723, guid: 344148b6ccbacf84a83c7ecef3902e92, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
