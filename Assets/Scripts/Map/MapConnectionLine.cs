@@ -16,14 +16,16 @@ public class MapConnectionLine : MonoBehaviour
 
         RectTransform rt = GetComponent<RectTransform>();
 
-        // 노드와 같은 좌표계를 쓰도록 anchor를 bottom-center로 통일
-        rt.anchorMin = new Vector2(0.5f, 0f);
-        rt.anchorMax = new Vector2(0.5f, 0f);
+        // 가로 맵의 노드와 같은 left-center 좌표계를 사용한다.
+        rt.anchorMin = new Vector2(0f, 0.5f);
+        rt.anchorMax = new Vector2(0f, 0.5f);
         // pivot은 (0.5, 0.5)로 유지해야 중점 기준으로 회전이 올바르게 됨
         rt.pivot = new Vector2(0.5f, 0.5f);
 
         rt.anchoredPosition = (from + to) * 0.5f;           // 중점
         rt.sizeDelta        = new Vector2(distance, rt.sizeDelta.y); // 길이 (두께는 프리팹에서)
         rt.localRotation    = Quaternion.Euler(0f, 0f, angle);
+        lineImage.color = new Color(0.22f, 0.24f, 0.26f, 0.7f);
+        lineImage.raycastTarget = false;
     }
 }

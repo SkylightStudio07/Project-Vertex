@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "school-image": {
+      "type": "stdio",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\SKYLIGHT\\Documents\\New project\\tools\\school-image-mcp\\src\\server.js"
+      ],
+      "env": {
+        "SCHOOL_AI_TRANSPORT": "browser",
+        "ALLOWED_OUTPUT_ROOT": "C:\\Users\\SKYLIGHT\\Documents\\Graduation\\Project-Vertex\\GeneratedAssets\\SchoolAI",
+        "ALLOWED_REFERENCE_ROOT": "C:\\Users\\SKYLIGHT\\Documents\\Graduation\\Project-Vertex"
+      }
+    }
+  }
+}

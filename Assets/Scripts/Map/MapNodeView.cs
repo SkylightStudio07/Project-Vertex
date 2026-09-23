@@ -9,7 +9,7 @@ public enum MapNodeState
 {
     Locked,     // 아직 갈 수 없는 노드 (회색). 디폴트
     Accessible, // 현재 위치에서 이동 가능한 노드 (흰색, 클릭 가능) - 살짝 백색 색조 더하기
-    Current,    // 플레이어가 현재 있는 노드 (황금색) - 일단 디버깅 차원임.
+    Current,    // 플레이어가 현재 있는 노드 (시안)
     Visited     // 이미 방문한 노드 - 회색
 }
 
@@ -22,22 +22,25 @@ public class MapNodeView : MonoBehaviour
     {
         public NodeType nodeType;
         public Sprite sprite;
+        public bool hasIntegratedFrame;
     }
 
     [SerializeField] private List<NodeSprite> nodeSprites;
 
     [SerializeField] private Image iconImage; // 노드 아이콘 표시용 Image 컴포넌트 (프리팹에서 연결)
+    [SerializeField] private Image nodeBackdrop;
     [SerializeField] private Button button; 
     [SerializeField] private GameObject currentMarker;    // 현재 위치 마커
 
     // 각 상태별 색상 (iconImage에 tinting으로 적용) - 클로드야 고마워
     private static readonly Color ColorLocked     = new(0.35f, 0.35f, 0.35f, 1f);
     private static readonly Color ColorAccessible = Color.white;
-    private static readonly Color ColorCurrent    = new(1f, 0.95f, 0.6f, 1f);
+    private static readonly Color ColorCurrent    = new(0.65f, 0.92f, 1f, 1f);
     private static readonly Color ColorVisited    = new(0.55f, 0.55f, 0.55f, 1f);
 
     // 이 View가 표현하는 MapNode 데이터
     public MapNode Data { get; private set; }
+    private bool hasIntegratedFrame;
 
     // 노드 초기화. MapUIController가 프리팹을 생성한 직후 호출함.
     // Action<MapNode>: "MapNode를 인자로 받는 함수"를 변수처럼 전달하는 C# 문법.
@@ -45,7 +48,10 @@ public class MapNodeView : MonoBehaviour
     public void Setup(MapNode data, Action<MapNode> onClick)
     {
         Data = data;
-        iconImage.sprite = GetSprite(data.nodeType); // 타입에 맞는 스프라이트를 내부에서 조회
+        var presentation = GetNodeSprite(data.nodeType);
+        iconImage.sprite = presentation.sprite;
+        hasIntegratedFrame = presentation.hasIntegratedFrame;
+        if (nodeBackdrop != null) nodeBackdrop.enabled = !hasIntegratedFrame;
 
         // 중복 등록 방지 후 클릭 리스너 등록
         button.onClick.RemoveAllListeners();
@@ -58,10 +64,10 @@ public class MapNodeView : MonoBehaviour
         // switch expression: state 값에 따라 색상을 결정하는 간결한 분기 문법
         iconImage.color = state switch
         {
-            MapNodeState.Locked     => ColorLocked,
+            MapNodeState.Locked     => hasIntegratedFrame ? new Color(0.72f, 0.72f, 0.72f, 1f) : ColorLocked,
             MapNodeState.Accessible => ColorAccessible,
             MapNodeState.Current    => ColorCurrent,
-            MapNodeState.Visited    => ColorVisited,
+            MapNodeState.Visited    => hasIntegratedFrame ? new Color(0.86f, 0.86f, 0.86f, 1f) : ColorVisited,
             _                       => Color.white  // 예외 케이스 (발생하지 않음)
         };
 
@@ -74,10 +80,10 @@ public class MapNodeView : MonoBehaviour
     }
 
     // nodeType에 맞는 스프라이트 반환. 일반 선형 탐색.
-    private Sprite GetSprite(NodeType type)
+    private NodeSprite GetNodeSprite(NodeType type)
     {
         foreach (var entry in nodeSprites)
-            if (entry.nodeType == type) return entry.sprite;
-        return null;
+            if (entry.nodeType == type) return entry;
+        return default;
     }
 }

@@ -35,7 +35,8 @@ public class MapUIController : MonoBehaviour
     [Header("배치 설정")]
     [SerializeField] private float floorSpacing    = 120f;
     [SerializeField] private float columnSpacing   = 120f;
-    [SerializeField] private float verticalPadding = 80f; // 맵 상하 여백 (픽셀)
+    [UnityEngine.Serialization.FormerlySerializedAs("verticalPadding")]
+    [SerializeField] private float horizontalPadding = 160f;
 
     private readonly List<MapNodeView>       nodeViews = new();
     private readonly List<MapConnectionLine> lineViews = new();
@@ -101,18 +102,23 @@ public class MapUIController : MonoBehaviour
             return;
         }
 
-        float totalHeight = mapData.floors.Count * floorSpacing + verticalPadding * 2f;
-        mapContent.sizeDelta = new Vector2(mapContent.sizeDelta.x, totalHeight);
-
-        // column 0부터 시작하므로 최대 column 기준으로 가로 중앙 정렬
+        // 층은 왼쪽에서 오른쪽으로, 기존 column은 위에서 아래로 배치한다.
         int maxCol = 0;
         foreach (var floor in mapData.floors)
             foreach (var node in floor)
                 if (node.column > maxCol) maxCol = node.column;
-        float xOffset = -(maxCol * columnSpacing) / 2f;
+        float yOffset = maxCol * columnSpacing * 0.5f;
+        float totalWidth = Mathf.Max(0, mapData.floors.Count - 1) * floorSpacing + horizontalPadding * 2f;
+        float viewportWidth = scrollRect.viewport.rect.width;
+        mapContent.anchorMin = new Vector2(0f, 0f);
+        mapContent.anchorMax = new Vector2(0f, 1f);
+        mapContent.pivot = new Vector2(0f, 0.5f);
+        mapContent.sizeDelta = new Vector2(Mathf.Max(totalWidth, viewportWidth), 0f);
+        scrollRect.horizontal = true;
+        scrollRect.vertical = false;
 
         // 선은 노드보다 먼저 생성해야 계층 순서상 노드 뒤에 렌더링됨
-        BuildLines(mapData, xOffset);
+        BuildLines(mapData, yOffset);
 
         foreach (var floor in mapData.floors)
         {
@@ -120,9 +126,10 @@ public class MapUIController : MonoBehaviour
             {
                 MapNodeView view = Instantiate(nodePrefab, mapContent);
 
-                float x = node.column * columnSpacing + xOffset;
-                float y = node.floorIndex * floorSpacing + verticalPadding;
-                view.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+                var nodeRect = view.GetComponent<RectTransform>();
+                nodeRect.anchorMin = nodeRect.anchorMax = new Vector2(0f, 0.5f);
+                nodeRect.pivot = new Vector2(0.5f, 0.5f);
+                nodeRect.anchoredPosition = GetNodePosition(node, yOffset);
 
                 view.Setup(node, OnNodeClicked);
                 nodeViews.Add(view);
@@ -131,18 +138,21 @@ public class MapUIController : MonoBehaviour
 
         RefreshNodeStates();
 
-        // Instantiate 직후 레이아웃을 강제 갱신한 뒤 스크롤을 하단(0층)으로 고정
+        // 새로운 챕터는 왼쪽 시작점에서 연다. 재오픈 시에는 기존 스크롤을 유지한다.
         Canvas.ForceUpdateCanvases();
         scrollRect.velocity = Vector2.zero;
-        mapContent.anchoredPosition = new Vector2(mapContent.anchoredPosition.x, 0f);
+        mapContent.anchoredPosition = Vector2.zero;
+        scrollRect.horizontalNormalizedPosition = 0f;
     }
 
-    private void BuildLines(MapData mapData, float xOffset)
+    private Vector2 GetNodePosition(MapNode node, float yOffset)
     {
-        // 노드 pivot이 (0.5, 0)이므로 anchoredPosition이 노드 하단 기준.
-        // 선이 노드 중앙에 연결되도록 절반 높이만큼 Y 오프셋 적용.
-        float nodeHalfHeight = nodePrefab.GetComponent<RectTransform>().sizeDelta.y * 0.5f;
+        return new Vector2(node.floorIndex * floorSpacing + horizontalPadding,
+            yOffset - node.column * columnSpacing);
+    }
 
+    private void BuildLines(MapData mapData, float yOffset)
+    {
         foreach (var floor in mapData.floors)
         {
             foreach (var node in floor)
@@ -150,16 +160,12 @@ public class MapUIController : MonoBehaviour
                 int nextFloor = node.floorIndex + 1;
                 if (nextFloor >= mapData.floors.Count) continue;
 
-                Vector2 from = new(
-                    node.column * columnSpacing + xOffset,
-                    node.floorIndex * floorSpacing + verticalPadding + nodeHalfHeight);
+                Vector2 from = GetNodePosition(node, yOffset);
 
                 foreach (int nextIndex in node.nextNodeIndices)
                 {
                     MapNode nextNode = mapData.GetNode(nextFloor, nextIndex);
-                    Vector2 to = new(
-                        nextNode.column * columnSpacing + xOffset,
-                        nextNode.floorIndex * floorSpacing + verticalPadding + nodeHalfHeight);
+                    Vector2 to = GetNodePosition(nextNode, yOffset);
 
                     MapConnectionLine line = Instantiate(linePrefab, mapContent);
                     line.Setup(from, to);

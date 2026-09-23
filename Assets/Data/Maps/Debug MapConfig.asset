@@ -43,14 +43,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e8e699bb4c05a1b840b91ce16be549d, type: 2}
   weakEncounterCount: 3
   guaranteedNodes:
-  - floorIndex: 0
+  - floorIndex: -1
     nodeType: 8
   - floorIndex: 1
     nodeType: 0
   - floorIndex: 2
     nodeType: 7
-  - floorIndex: 9
-    nodeType: 6
   - floorIndex: 14
     nodeType: 3
   - floorIndex: 15
