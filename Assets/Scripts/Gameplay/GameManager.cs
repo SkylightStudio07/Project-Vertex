@@ -44,7 +44,10 @@ public class GameManager : MonoBehaviour
 
     [Header("플레이어 HP")]
     [SerializeField] private int maxPlayerHP = 80; // 기획서 10.1 기준
-    public int MaxPlayerHP => maxPlayerHP;
+    // maxPlayerHP(인스펙터 값)는 기본 최대 체력. 런 중 증감분은 maxHPModifier로 따로 들고 InitializeRun에서 초기화한다.
+    // GameManager는 DontDestroyOnLoad라 maxPlayerHP를 직접 바꾸면 다음 런까지 줄어든 값이 남는다.
+    private int maxHPModifier;
+    public int MaxPlayerHP => Mathf.Max(1, maxPlayerHP + maxHPModifier);
     public int PlayerHP    { get; private set; }
 
     [Header("플레이어 골드")]
@@ -77,7 +80,8 @@ public class GameManager : MonoBehaviour
     void InitializeRun()
     {
         chapter = 1;
-        PlayerHP = maxPlayerHP;
+        maxHPModifier = 0;
+        PlayerHP = MaxPlayerHP;
 
         // 카드 풀 초기화 — SO 원본이 아닌 복사본으로 시작해야 런 간 데이터 누적을 막는다.
         cardPools[CardData.CardRarity.Common] = playerRewardPool != null ? new List<CardData>(playerRewardPool.commonCards) : new List<CardData>();
@@ -136,6 +140,54 @@ public class GameManager : MonoBehaviour
             ? pulled.enemies
             : currentEnemies;
         string encounterName = pulled != null ? pulled.name : "기본 폴백(currentEnemies)";
+
+        StartBattleInternal(enemies, battleType, encounterName);
+    }
+
+    // 조우를 직접 지정해 전투를 시작한다(이벤트 선택지 등).
+    // InitializeBattle과 달리 전투 조우 큐를 소비하지 않으므로 일반 전투 순서에 영향이 없다.
+    // onVictory는 이번 전투 승리 시 한 번만 실행되고 바로 해제된다(패배해도 해제).
+    public void StartEncounterBattle(EnemyEncounter encounter, BattleType battleType = BattleType.Normal, System.Action onVictory = null)
+    {
+        if (encounter == null || encounter.enemies == null || encounter.enemies.Count == 0)
+        {
+            Debug.LogWarning("[GameManager] StartEncounterBattle: 조우가 비어 있어 전투를 시작할 수 없음.");
+            return;
+        }
+
+        if (onVictory != null) RegisterOneShotVictory(onVictory);
+        StartBattleInternal(encounter.enemies, battleType, encounter.name);
+    }
+
+    // 다음 전투 결과에만 반응하는 1회성 구독. 승리/패배 어느 쪽이든 두 핸들러를 모두 해제해
+    // 다음 전투까지 살아남지 않게 한다.
+    private void RegisterOneShotVictory(System.Action onVictory)
+    {
+        var battle = BattleManager.Instance;
+        if (battle == null) return;
+
+        System.Action<BattleReward> victoryHandler = null;
+        System.Action defeatHandler = null;
+
+        victoryHandler = _ =>
+        {
+            battle.OnBattleVictory -= victoryHandler;
+            battle.OnBattleDefeat  -= defeatHandler;
+            onVictory();
+        };
+        defeatHandler = () =>
+        {
+            battle.OnBattleVictory -= victoryHandler;
+            battle.OnBattleDefeat  -= defeatHandler;
+        };
+
+        battle.OnBattleVictory += victoryHandler;
+        battle.OnBattleDefeat  += defeatHandler;
+    }
+
+    // 전투 시작 공통부 — 로그, RNG 시드, BattleManager 호출.
+    private void StartBattleInternal(List<EnemyData> enemies, BattleType battleType, string encounterName)
+    {
         string enemyNames = enemies != null && enemies.Count > 0
             ? string.Join(", ", enemies.Where(e => e != null).Select(e => $"'{e.enemyName}'(HP:{e.health})"))
             : "없음";
@@ -184,7 +236,16 @@ public class GameManager : MonoBehaviour
 
     public void HealPlayer(int amount)
     {
-        PlayerHP = Mathf.Min(maxPlayerHP, PlayerHP + amount);
+        PlayerHP = Mathf.Min(MaxPlayerHP, PlayerHP + amount);
+    }
+
+    // 최대 체력 증감(음수면 감소). 현재 체력이 새 상한보다 높으면 상한에 맞춰 자르고, 낮으면 건드리지 않는다.
+    // 최대 체력 증가 시 현재 체력도 함께 증가시킨다.(슬더스 방식)
+    public void ModifyMaxHP(int amount)
+    {
+        maxHPModifier += amount;
+        if (amount > 0) PlayerHP += amount;
+        PlayerHP = Mathf.Min(PlayerHP, MaxPlayerHP);
     }
 
     public bool IsPlayerDead() => PlayerHP <= 0;

@@ -11,6 +11,14 @@ public class FloorGuarantee // 층별 고정 노드.
     public NodeType nodeType;
 }
 
+// 특정 타입이 몇 층부터 등장할 수 있는지 지정
+[System.Serializable]
+public class NodeTypeMinFloor
+{
+    public NodeType nodeType;
+    public int minFloorIndex;   // 이 층(0-based)부터 등장 가능. 그보다 아래 층에서는 후보에서 아예 빠진다.
+}
+
 // Inspector에서 조정하는 맵 생성 파라미터 모음.
 // MapGenerator 세팅값이라고 생각하자.
 [CreateAssetMenu(fileName = "MapConfig", menuName = "Game Asset/Map Config")]
@@ -34,6 +42,37 @@ public class MapConfig : ScriptableObject
         new NodeTypeWeight { nodeType = NodeType.Shop, weight = 0.1f },
         new NodeTypeWeight { nodeType = NodeType.Rest, weight = 0.1f },
     };
+
+    [Header("노드 배치 규칙")]
+    // 지정한 층 이전에는 해당 타입이 아예 후보에서 빠진다.
+    // floorIndex 기준(0-based)이라 "표시상 6층부터" = minFloorIndex 5 다.
+    // 목록에 없는 타입은 제한 없음(0층부터 가능).
+    public List<NodeTypeMinFloor> minFloorRules = new()
+    {
+        new NodeTypeMinFloor { nodeType = NodeType.Elite, minFloorIndex = 5 }, // 표시상 6층부터
+        new NodeTypeMinFloor { nodeType = NodeType.Rest,  minFloorIndex = 5 }, // 표시상 6층부터
+    };
+
+    // 경로상 부모 노드와 같은 타입이 되지 않게 막을 타입 목록.
+    // 층 단위가 아니라 "경로" 단위 제약이다. 휴식 노드에 서 있으면 다음 선택지에 휴식이 안 뜬다.
+    // 전투/이벤트는 여기 안 넣는다. 연속으로 나와도 상관없는 타입이라.
+    public List<NodeType> noConsecutiveTypes = new()
+    {
+        NodeType.Elite, NodeType.Rest, NodeType.Shop,
+    };
+
+    // 같은 부모를 공유하는 형제 노드끼리 같은 타입이 되지 않게 한다.
+    // 선택지가 "휴식 vs 휴식"처럼 무의미해지는 걸 막는 용도.
+    // noConsecutiveTypes에 올라간 타입에만 적용된다. 끄고 싶으면 false.
+    public bool forbidSiblingDuplicates = true;
+
+    // minFloorRules 조회용. 목록에 없으면 0(제한 없음)을 돌려준다.
+    public int GetMinFloorIndex(NodeType type)
+    {
+        foreach (var rule in minFloorRules)
+            if (rule.nodeType == type) return rule.minFloorIndex;
+        return 0;
+    }
 
     // minNodesPerFloor가 maxNodesPerFloor보다 값 안넘게 보정.
     private void OnValidate()

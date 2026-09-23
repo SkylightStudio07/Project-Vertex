@@ -400,6 +400,7 @@ public class BattleManager : MonoBehaviour
     private bool EvaluateCardPlayability(CardData card)
     {
         if (card == null || _state == null || !_state.Hand.Contains(card)) return false;
+        if (card.IsUnplayable) return false;   // 저주 등 사용 불가 카드 — 손패에는 남지만 플레이 불가
         if (!CanPayCardPlayCost(GetCardPlayCost(card))) return false;
 
         if (card.UseMode == CardData.CardUseMode.SelectEnemy)
@@ -500,19 +501,19 @@ public class BattleManager : MonoBehaviour
             (target == null || target.IsDead || !_state.Enemies.Contains(target)))
             return false;
 
+        var ctx = new CardContext
+        {
+            State      = _state,
+            Battle     = this,
+            Card       = null,     // 카드 아님
+            Item       = item,     // 아이템
+            Target     = target,
+            AllEnemies = _state.Enemies,
+        };
+
         BeginHandChangeBatch();   // 아이템 효과가 손패를 건드릴 수 있어 카드와 동일하게 배치로 묶음
         try
         {
-            var ctx = new CardContext
-            {
-                State      = _state,
-                Battle     = this,
-                Card       = null,     // 카드 아님
-                Item       = item,     // 아이템
-                Target     = target,
-                AllEnemies = _state.Enemies,
-            };
-
             EffectRunner.ExecuteImmediate(item.ItemEffects, ctx);
         }
         finally
@@ -522,7 +523,9 @@ public class BattleManager : MonoBehaviour
 
         if (ItemInventoryManager.Instance != null)
         {
-            ItemInventoryManager.Instance.RemoveItem(item);   // 소비 → OnInventoryChanged로 바 자동 갱신
+            // 지속 효과가 있으면 이번 전투에 즉시 적용 + 남은 전투 수 등록 후 소비.
+            // 없으면 그냥 소비 → OnInventoryChanged로 바 자동 갱신.
+            ItemInventoryManager.Instance.ConsumeWithLingering(item, ctx);
         }
         return true;
     }

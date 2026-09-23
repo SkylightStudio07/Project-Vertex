@@ -29,24 +29,26 @@ public static class MapGenerator
 
         // 보장 노드 처리.
         // 자세한 사항은 MapConfig의 FloorGuarantee 참고. 그러니까 0층이나 9층, 16층처럼 타입이 정해진 층.
-        // guaranteedNodes 리스트  { 층 인덱스 / 고정 타입 목록 } 딕셔너리화해서 통합 관리(한 층에 보장 노드들 몰려있는 경우 예외처리용)
-        // 보장 노드가 있는 층은 일단 그 타입으로 채움.
-        // 3층 -> [Elite]
-        // 6층 -> [Shop, Event] 뭐 이런 식.
+        // guaranteedNodes 리스트를 { 층 인덱스 → 고정 타입 } 딕셔너리로 바꿔서 통합 관리.
+        // 보장 노드가 있는 층은 "그 층 전체"가 그 타입으로 채워진다.
+        // 단, 노드 수는 다른 층과 똑같이 랜덤으로 뽑는다. 보장 노드는 "무슨 타입이냐"만 정하지 "몇 개냐"는 정하지 않는다.
 
         //========================================== //
-        
-        var guaranteeMap = new Dictionary<int, List<NodeType>>();
 
-        // 혹여 중복 보장 노드가 있을 수 있으니 층별로 리스트에 추가하는 방식으로 처리.
+        var guaranteeMap = new Dictionary<int, NodeType>();
 
         foreach (var guarantee in config.guaranteedNodes)
         {
-            // 그러니까 같은 층에 보장 노드가 여러개 있어도 리스트에 계속 추가한다는 것. 
-            // 이 상황이 발생하면 맵 생성에 무언가 문제가 생겼다는 것.
-            if (!guaranteeMap.ContainsKey(guarantee.floorIndex))
-                guaranteeMap[guarantee.floorIndex] = new List<NodeType>();
-            guaranteeMap[guarantee.floorIndex].Add(guarantee.nodeType);
+            // 한 층에 보장 노드를 두 개 이상 지정하는 건 "층 전체를 이 타입으로"와 의미상 모순이다.
+            // 맵 생성 설정에 문제가 생겼다는 뜻이므로, 경고만 띄우고 첫 항목을 쓴다.
+            if (guaranteeMap.ContainsKey(guarantee.floorIndex))
+            {
+                Debug.LogWarning(
+                    $"[MapGenerator] {guarantee.floorIndex}층에 보장 노드가 중복 지정됨 " +
+                    $"({guaranteeMap[guarantee.floorIndex]} / {guarantee.nodeType}). 첫 항목만 적용한다.");
+                continue;
+            }
+            guaranteeMap[guarantee.floorIndex] = guarantee.nodeType;
         }
 
         //=========== Phase 2: 일반 노드 배치 =============== //
@@ -89,31 +91,6 @@ public static class MapGenerator
         // 1층 ~ 마지막 층까지 순차 배치 (이전 층 column에 의존)
         for (int f = 1; f < config.totalFloors - 1; f++)
         {
-            // 이 층의 보장 노드가 있는지 체크 : 있으면 그 타입으로 일단 채우고 본다는 것.
-            // TryGetValue 함수 : 처음 본다. 여기서 out var guarantees는 보장 노드 리스트를 담을 변수. 
-            // hasGuarantee는 자체는 보장 노드 존재 여부 bool.
-            // 그러니까 false면 이 층에는 보장 노드가 없는 거고, true면 guarantees 변수에 보장 노드 리스트가 담긴다는 것.
-            // guarantees 타입 자체는 List<NodeType>. var로 관리하는게 속편하다.
-            bool hasGuarantee = guaranteeMap.TryGetValue(f, out var guarantees);
-
-            List<NodeType> types;
-            int nodeCount; // 이 층의 노드 수. 보장 노드가 있으면 그 수로 고정, 없으면 랜덤 (config 범위 내에서)
-
-            if (hasGuarantee) // 만약 보장 노드가 있으면 그 타입들로 채우고 노드 수도 고정한다. (보장 노드가 여러개일 수 있으니 리스트로 관리한다는 것.)
-            {
-                types     = new List<NodeType>(guarantees);
-                nodeCount = guarantees.Count;
-            }
-            else // 보장 노드가 없는 케이스.
-            // 노드 수를 랜덤으로 뽑고, 타입도 가중치 기반으로 랜덤 추첨한다.
-            // 타입 추첨 알고리즘은 GetRandomNodeType 함수 참고.
-            {
-                nodeCount = rng.Next(config.minNodesPerFloor, config.maxNodesPerFloor + 1);
-                types     = new List<NodeType>();
-                for (int i = 0; i < nodeCount; i++)
-                    types.Add(GetRandomNodeType(config.nodeTypeWeights, rng));
-            }
-
             //=========== Phase 3: 이전 층 컬럼 수집 =============== //
 
             // 단순 노드를 배열하는 게 아니라, 배열 배치가 문제라서 이전 층 열 정보를 수집한다.
@@ -133,27 +110,24 @@ public static class MapGenerator
                 prevCols.Add(prev.column); 
             }
 
+            // 이 층의 노드 수. 보장 노드가 있든 없든 항상 config 범위에서 랜덤으로 뽑는다.
+            // (예전엔 보장 노드 개수를 그대로 노드 수로 썼다. 그래서 보장 층이 죄다 1노드짜리 병목이 됐었음.
+            //  보장 노드는 층을 "무슨 타입으로 채울지"만 정하지, "몇 개 놓을지"는 정하지 않는다.)
+            int nodeCount = rng.Next(config.minNodesPerFloor, config.maxNodesPerFloor + 1);
+
             // 이 층의 column 후보군 뽑기.
             // 하단의 PickColumns 함수 참고. 이전 층 column ±1 범위에서 nodeCount개를 랜덤 선택해서 반환한다.
-
+            // 허용 슬롯이 모자라면 PickColumns가 알아서 줄여서 돌려주니까, 노드 수는 그 결과를 그대로 따라간다.
+            // (예전에 여기서 한 번 더 축소 + types 잘라내기를 했는데, 아래처럼 타입을 나중에 만들면 잘라낼 게 없다.)
             var columns = PickColumns(columnCount, nodeCount, prevCols, rng);
+            nodeCount = columns.Count;
 
-            // 허용 슬롯이 nodeCount보다 적으면 자동 축소. 
-            // 일차적으로는 pickColumns 함수 내에서 먼저 수행하는데, 클로드가 여기서도 한 번 더 수행하라고 권해서 여기도 이렇게 함.
-            // 당연히 이 경우 types도 같이 잘라낸다.
-
-            if (columns.Count < nodeCount)
-            {
-                nodeCount = columns.Count;
-                if (types.Count > nodeCount) types = types.GetRange(0, nodeCount);
-            }
-
-            // 여기서부터 실제 노드 생성 및 배치.
+            // 타입은 여기서 정하지 않는다. 간선이 다 만들어진 뒤 Phase 5에서 부모 타입을 보고 정한다.
+            // (간선은 column만 보고 만들어지므로, 타입이 비어 있어도 연결에는 아무 지장이 없다)
             for (int n = 0; n < nodeCount; n++)
             {
                 var node = new MapNode
                 {
-                    nodeType   = types[n],
                     floorIndex = f,
                     nodeIndex  = n,
                     column     = columns[n]
@@ -176,6 +150,17 @@ public static class MapGenerator
         for (int f = 0; f < config.totalFloors - 1; f++)
             ConnectFloors(mapData.floors[f], mapData.floors[f + 1], rng);
 
+        //=========== Phase 5: 노드 타입 배정 =============== //
+
+        // 간선이 다 만들어진 뒤에야 "이 노드의 부모가 누구인지"를 알 수 있다.
+        // 그래서 타입 배정을 연결 다음으로 뺐다. 배치 규칙(최소 등장 층 / 경로상 연속 금지 /
+        // 형제 중복 금지)이 전부 부모 정보를 필요로 하기 때문.
+        // 자세한 건 AssignNodeTypes 참고.
+
+        //========================================== //
+
+        AssignNodeTypes(mapData, config, guaranteeMap, rng);
+
         return mapData;
     }
 
@@ -187,7 +172,129 @@ public static class MapGenerator
     // 2. ConnectFloors:
     // 현재 층 노드들과 다음 층 노드들을 간선 연결.
 
+    // 3. AssignNodeTypes / PickNodeType / IsTypeAllowed:
+    // 간선까지 다 만들어진 맵에 노드 타입을 배정. 배치 규칙은 전부 여기 모여 있다.
+
     //========================================== //
+
+
+    // 층을 아래에서 위로 훑으면서 타입을 정한다.
+    // 아래에서 위로 가는 이유 : f층 타입을 정하려면 f-1층 타입이 이미 확정돼 있어야 하니까.
+    private static void AssignNodeTypes(
+        MapData mapData, MapConfig config, Dictionary<int, NodeType> guaranteeMap, System.Random rng)
+    {
+        int lastFloor = mapData.floors.Count - 1;
+
+        // 0층(Blessing)과 마지막 층(Boss)은 Phase 2에서 이미 박아뒀으니 건너뛴다.
+        for (int f = 1; f < lastFloor; f++)
+        {
+            var floor = mapData.floors[f];
+
+            // 보장 층은 규칙 무시하고 층 전체를 그 타입으로 도배한다.
+            // (14층 휴식처럼 "어느 경로로 와도 이건 나온다"가 목적이라 규칙보다 우선이다)
+            if (guaranteeMap.TryGetValue(f, out var guaranteedType))
+            {
+                foreach (var node in floor) 
+                    node.nodeType = guaranteedType;
+                continue;
+            }
+
+            // 이 층 각 노드의 부모 목록을 역인덱싱해둔다.
+            // 간선은 이전 층 노드의 nextNodeIndices에 들어 있어서, 자식 입장에선 뒤집어야 부모를 안다.
+            var parents = new List<List<int>>(floor.Count);
+            for (int i = 0; i < floor.Count; i++) 
+                parents.Add(new List<int>());
+
+            foreach (var prev in mapData.floors[f - 1])
+                foreach (int childIndex in prev.nextNodeIndices)
+                    if (childIndex >= 0 && childIndex < floor.Count)
+                        parents[childIndex].Add(prev.nodeIndex);
+
+            for (int n = 0; n < floor.Count; n++)
+            {
+                // 규칙 2용 : 이 노드의 부모들이 무슨 타입인지
+                var parentTypes = new List<NodeType>();
+                foreach (int p in parents[n])
+                    parentTypes.Add(mapData.floors[f - 1][p].nodeType);
+
+                // 규칙 3용 : 부모를 공유하면서 이미 타입이 정해진 형제들
+                // m < n 으로만 도는 이유 : 아직 타입이 안 정해진 오른쪽 노드는 볼 게 없다.
+                var siblingTypes = new List<NodeType>();
+                if (config.forbidSiblingDuplicates)
+                {
+                    for (int m = 0; m < n; m++)
+                    {
+                        bool sharesParent = false;
+                        foreach (int p in parents[m])
+                        {
+                            if (parents[n].Contains(p)) { sharesParent = true; break; }
+                        }
+                        if (sharesParent) 
+                            siblingTypes.Add(floor[m].nodeType);
+                    }
+                }
+
+                floor[n].nodeType = PickNodeType(config, f, parentTypes, siblingTypes, guaranteeMap, rng);
+            }
+        }
+    }
+
+    // 규칙을 통과하는 타입만 남겨놓고 가중치 추첨.
+    // 재추첨 루프를 돌리는 대신 후보를 먼저 걸러내는 방식이라, 무한루프도 없고 가중치 비율도 그대로 유지된다.
+    private static NodeType PickNodeType(
+        MapConfig config, int floorIndex,
+        List<NodeType> parentTypes, List<NodeType> siblingTypes,
+        Dictionary<int, NodeType> guaranteeMap, System.Random rng)
+    {
+        var allowed = new List<NodeTypeWeight>();
+        foreach (var w in config.nodeTypeWeights)
+        {
+            if (w.weight <= 0f) continue;   // 가중치 0이면 애초에 안 나오는 타입
+            if (IsTypeAllowed(config, w.nodeType, floorIndex, parentTypes, siblingTypes, guaranteeMap))
+                allowed.Add(w);
+        }
+
+        // 규칙이 후보를 전부 막아버리는 경우 대비.
+        // 전투는 어느 층에서든, 어떤 부모 밑에서든 허용되는 타입이라 폴백으로 안전하다.
+        if (allowed.Count == 0) 
+            return NodeType.Combat;
+
+        return GetRandomNodeType(allowed, rng);
+    }
+
+    // 배치 규칙 판정. 규칙을 추가하고 싶으면 여기에 조건을 하나 더 붙이면 된다.
+    private static bool IsTypeAllowed(
+        MapConfig config, NodeType type, int floorIndex,
+        List<NodeType> parentTypes, List<NodeType> siblingTypes,
+        Dictionary<int, NodeType> guaranteeMap)
+    {
+        // 규칙 1 : 최소 등장 층. 이 층 전에는 후보에서 아예 빠진다.
+        // 엘리트/휴식은 표시상 6층부터 = minFloorIndex 5.
+        if (floorIndex < config.GetMinFloorIndex(type)) 
+            return false;
+
+        // 규칙 2, 3은 "연속 금지" 목록에 올라간 타입한테만 건다.
+        // 전투/이벤트는 연속으로 나와도 상관없으니 여기서 바로 통과.
+        if (!config.noConsecutiveTypes.Contains(type)) 
+            return true;
+
+        // 규칙 2 : 경로상 부모와 같은 타입 금지.
+        // 휴식 노드에 서 있으면 다음 선택지에 휴식이 안 뜬다는 뜻.
+        if (parentTypes.Contains(type)) 
+            return false;
+
+        // 규칙 2-b : 다음 층이 같은 타입으로 도배되는 보장 층이면 이 층엔 놓지 않는다.
+        // 이게 없으면 13층 휴식 -> 14층(보장 휴식층) 휴식으로 규칙 2가 그냥 뚫린다.
+        if (guaranteeMap.TryGetValue(floorIndex + 1, out var nextGuaranteed) && nextGuaranteed == type)
+            return false;
+
+        // 규칙 3 : 부모를 공유하는 형제와 같은 타입 금지.
+        // 선택지가 "휴식 vs 휴식"처럼 무의미해지는 걸 막는다.
+        if (config.forbidSiblingDuplicates && siblingTypes.Contains(type)) 
+            return false;
+
+        return true;
+    }
 
 
     private static List<int> PickColumns(int columnCount, int count, HashSet<int> prevCols, System.Random rng)
@@ -378,7 +485,7 @@ public static class MapGenerator
     {
 
         // 가장 가까운 노드 찾는 기준은 column 간의 절대값 차이.
-        if(candidates.Count == 0 || candidates == null) 
+        if(candidates == null || candidates.Count == 0) 
             return null; // 예외처리용. 후보가 없으면 null 반환.
         MapNode closest = candidates[0];
         int minDist = Mathf.Abs(from.column - closest.column);
