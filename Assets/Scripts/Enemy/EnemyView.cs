@@ -28,6 +28,10 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private Image  hpFill;     // Image Type: Filled (Horizontal)
     [SerializeField] private TextMeshProUGUI hpText;
 
+    [Header("현재 방어도")]
+    [SerializeField] private GameObject blockBadge;
+    [SerializeField] private TextMeshProUGUI blockText;
+
     [Header("인텐트")]
     [SerializeField] private Image intentIcon;
     [SerializeField] private GameObject intentField; // 단순 blob 용도
@@ -142,10 +146,12 @@ public class EnemyView : MonoBehaviour
         instance.OnIntentChanged += RefreshIntent;
         instance.OnActionStarted += PlayLungeMotion;
         instance.OnBlockGained   += HandleBlockGained;
+        instance.OnBlockChanged  += RefreshBlock;
 
         if (statusList != null) statusList.Bind(instance.Statuses);
 
         RefreshHP();
+        RefreshBlock(instance.Block);
         RefreshIntent();
     }
 
@@ -208,7 +214,9 @@ public class EnemyView : MonoBehaviour
         Instance.OnIntentChanged -= RefreshIntent;
         Instance.OnActionStarted -= PlayLungeMotion;
         Instance.OnBlockGained   -= HandleBlockGained;
+        Instance.OnBlockChanged  -= RefreshBlock;
         Instance = null;
+        RefreshBlock(0);
 
         if (statusList != null) statusList.Unbind();
 
@@ -267,6 +275,12 @@ public class EnemyView : MonoBehaviour
         Transform anchor = enemyImage != null ? enemyImage.transform : transform;
         HitEffectSpawner.Spawn(blockGainShieldPrefab, anchor);
         HitEffectSpawner.Spawn(blockGainParticlePrefab, anchor);
+    }
+
+    private void RefreshBlock(int amount)
+    {
+        if (blockText != null) blockText.text = amount.ToString();
+        if (blockBadge != null) blockBadge.SetActive(amount > 0);
     }
 
     private void RefreshHP()

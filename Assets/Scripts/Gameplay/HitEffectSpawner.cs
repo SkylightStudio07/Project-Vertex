@@ -17,8 +17,11 @@ public static class HitEffectSpawner
         Camera cam = Camera.main;
         if (cam != null)
         {
-            Vector3 toCamera = (cam.transform.position - position).normalized;
-            position += toCamera * cameraOffset;
+            // 깊이만 당긴다. 직교 카메라에서 카메라 위치 쪽으로 대각선 이동하면
+            // 화면 가장자리의 적 이펙트가 캐릭터가 아니라 화면 중앙 쪽에 나타난다.
+            Vector3 screenPosition = cam.WorldToScreenPoint(position);
+            screenPosition.z = Mathf.Max(cam.nearClipPlane + 0.01f, screenPosition.z - cameraOffset);
+            position = cam.ScreenToWorldPoint(screenPosition);
             rotation = Quaternion.LookRotation(cam.transform.position - position);
         }
 

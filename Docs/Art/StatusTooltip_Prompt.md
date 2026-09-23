@@ -1,0 +1,7 @@
+# Status tooltip artwork
+
+Generated with the built-in image generator. Output: Assets/Art/UI/UI_StatusTooltip_WhiteVertex.png.
+
+Applied: sprite import, scene background assignment, clean text material and foreground Canvas sorting order 200. Play verification confirmed hover enter/exit, no raycast interception and no overflow for current status descriptions. Earlier approval-service failures were resolved before applying these changes.
+
+Use case: stylized-concept. Production 2D game UI status-effect tooltip background for VERTEX. Exactly one rectangular information plaque aspect ratio about 3:1, isolated on genuinely TRANSPARENT canvas outside the plaque with small even margins. Cold off-white #F0EFE9 solid opaque interior. Thin single charcoal #252B31 outline, small precisely clipped upper-right and lower-left corners. At bottom-right a tiny charcoal four-point compass star. At upper-left edge three very short fine measurement ticks, extremely subtle. Broad completely BLANK interior reserved for runtime status icon, title and wrapped description; do not draw a divider across the interior. Minimal flat observation-system graphic consistent with white geometric dialogue UI. No text, glyphs, numbers, letters, icons in center, status symbols, glow, shadows, bevels, metal, thick rims, double borders, gradients, scene background or mockup. Crisp clean flat asset with transparent outer margins.
