@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e961ef58c92348810475ddf3db54c, type: 3}
+  m_Name: "\uD3ED\uBC1C \uD0C4\uC57D \uD0C4\uCC3D"
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "\uD3ED\uBC1C \uD0C4\uC57D \uD0C4\uCC3D"
+  itemIcon: {fileID: 4486214379844310365, guid: 32df088dfb14c9a438d7b076fe1c291e, type: 3}
+  itemRarity: 1
+  usableOutsideBattle: 1
+  itemGetTypes: 16
+  itemDescription: "\uC55E\uC73C\uB85C \uC138 \uBC88\uC758 \uC804\uD22C \uB3D9\uC548
+    \uD798\uC774 2 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  itemEffects: []
+  useMode: 0
+  lingeringBattleCount: 3
+  lingeringEffects:
+  - rid: 3673691916408717420
+  references:
+    version: 2
+    RefIds:
+    - rid: 3673691916408717420
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000005, type: 2}
+        operation: 0
+        amount: 2
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0

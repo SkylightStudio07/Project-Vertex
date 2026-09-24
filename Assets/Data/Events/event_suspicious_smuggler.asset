@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61e595b875def948a5ed08c5927f167, type: 3}
+  m_Name: event_suspicious_smuggler
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventJson: {fileID: 4900000, guid: 2ad461a3063be394eb1635ac6a61a1e9, type: 3}
+  choiceEffects:
+  - effects:
+    - rid: 3673691850256941147
+    - rid: 3673691850256941148
+  - effects: []
+  dialogueJson: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  illustration: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3673691850256941147
+      type: {class: ModifyMaxHPEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: -10
+    - rid: 3673691850256941148
+      type: {class: AddCardToDeckEffect, ns: , asm: Assembly-CSharp}
+      data:
+        card: {fileID: 11400000, guid: bd1279b4d575aab4486b14c77aea4bf3, type: 2}
+        count: 1

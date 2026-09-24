@@ -16,13 +16,16 @@ MonoBehaviour:
   charName: "\uCE58\uD558\uB77C \uC1FC"
   charDescription: "\uD53C\uB97C \uB9E4\uAC1C\uB85C \uC0C1\uB300\uB97C \uBCA0\uC5B4\uBC84\uB9AC\uB294
     \uCE90\uB9AD\uD130"
-  charImage: {fileID: -1795282074631900718, guid: 0d8c306917f3f1740b93d57e02fdc14f, type: 3}
+  charImage: {fileID: 1208040086343421634, guid: d4bc5696e090072499c4fd4b27043d8a, type: 3}
   charIcon: {fileID: 0}
   standingSprite: {fileID: -4441471344451506041, guid: 5a974cd7ef47c7a49bb4cda67d8a4d45, type: 3}
+  idleFrames: []
+  idleFrameRate: 24
   idleAnim: {fileID: 0}
   attackAnim: {fileID: 0}
   hitAnim: {fileID: 0}
   deathAnim: {fileID: 0}
+  attackSequence: []
   charSoundEffect: {fileID: 0}
   unlockCardCoopLevel:
   - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}

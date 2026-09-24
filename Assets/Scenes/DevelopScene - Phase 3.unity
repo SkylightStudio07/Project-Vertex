@@ -913,16 +913,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fee6ab72c55ff844b88038e133dc165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
-  defaultMaxEnergy: 3
-  defaultAmmo: 3
-  defaultDrawCount: 5
-  defaultWeapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+  _defaultMaxEnergy: 3
+  _defaultAmmo: 3
+  _defaultDrawCount: 5
+  _defaultWeapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
   _passiveDebugView: []
-  turnBanner: {fileID: 1901336938}
-  lungeOutWaitDuration: 0.2
-  lungeBackWaitDuration: 0.2
-  playerTurnBanner: {fileID: 1158864460}
-  postActionDelay: 0.3
+  _turnBanner: {fileID: 1901336938}
+  _lungeOutWaitDuration: 0.2
+  _lungeBackWaitDuration: 0.2
+  _playerTurnBanner: {fileID: 1158864460}
+  _postActionDelay: 0.3
 --- !u!114 &117956440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1909,6 +1909,8 @@ RectTransform:
   - {fileID: 2115800726}
   - {fileID: 370436656}
   - {fileID: 1821255986}
+  - {fileID: 1071614726}
+  - {fileID: 723207456}
   - {fileID: 1866325586}
   - {fileID: 1736007618}
   - {fileID: 1091963215}
@@ -1921,8 +1923,8 @@ RectTransform:
   - {fileID: 1898036352}
   - {fileID: 1900332880}
   - {fileID: 2142279660}
-  - {fileID: 1071614726}
-  - {fileID: 723207456}
+  - {fileID: 523753937}
+  - {fileID: 1524281369}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6769,6 +6771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372f4cfcb906ea146a5deaabecb02b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectCoopCharBtn
+  emptySlotSprite: {fileID: 6075484406621767098, guid: 868bd831e90926b4583d489358a12599, type: 3}
 --- !u!1 &515119227
 GameObject:
   m_ObjectHideFlags: 0
@@ -7182,6 +7185,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519905463}
   m_CullTransparentMesh: 1
+--- !u!1 &523753936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523753937}
+  m_Layer: 5
+  m_Name: CardObjAnimTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &523753937
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523753936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 169565602}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -111}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &522861937
 GameObject:
   m_ObjectHideFlags: 0
@@ -12876,9 +12914,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 986644165}
-  - {fileID: 1053569371}
+  m_Children: [{fileID: 986644165}, {fileID: 1053569371}]
   m_Father: {fileID: 1757690340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -12997,8 +13033,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6684185, y: 0.6684185, z: 0.6684185}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1146494055}
+  m_Children: [{fileID: 1146494055}]
   m_Father: {fileID: 169565602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -13483,8 +13518,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBAA8\uD5D8\uC5D0 \uB3C4\uC6C0\uC774 \uB418\uB294 \uC18C\uBAA8\uD488
-    \uC544\uC774\uD15C 2\uAC1C\uB97C \uAC00\uBC29\uC5D0 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+  m_text: "\uBAA8\uD5D8\uC5D0 \uB3C4\uC6C0\uC774 \uB418\uB294 \uC18C\uBAA8\uD488 \uC544\uC774\uD15C
+    2\uAC1C\uB97C \uAC00\uBC29\uC5D0 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 344148b6ccbacf84a83c7ecef3902e92, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cba8a294f7aa5514993d936f0c91eb32, type: 2}
@@ -14407,8 +14442,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1494846969}
+  m_Children: [{fileID: 1494846969}]
   m_Father: {fileID: 370436656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
@@ -15474,8 +15508,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 952225040}
+  m_Children: [{fileID: 952225040}]
   m_Father: {fileID: 621897468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -18013,9 +18046,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53162b51dc1682478c8ffa601957956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandView
-  cardPrefab: {fileID: 324129827944308415, guid: e3cfe6cad59611b419b1bcc0547c3c54, type: 3}
-  cardContainer: {fileID: 1486399160}
-  fanLayout: {fileID: 1486399164}
+  _cardPrefab: {fileID: 324129827944308415, guid: e3cfe6cad59611b419b1bcc0547c3c54, type: 3}
+  _cardContainer: {fileID: 1486399160}
+  _fanLayout: {fileID: 1486399164}
+  _playDrawInAnimation: 1
+  _drawStartPoint: {fileID: 523753937}
+  _drawInDuration: 0.2
+  _drawInStaggerDelay: 0.06
+  _drawInSortingOrderBase: 200
+  _playDiscardOutAnimation: 1
+  _discardEndPoint: {fileID: 1524281369}
+  _discardOutDuration: 0.2
+  _discardOutStaggerDelay: 0.04
+  _discardOutSortingOrderBase: 200
   drawPileAnchor: {fileID: 0}
   fallbackDrawOffset: {x: -900, y: -300}
   drawDuration: 0.3
@@ -18058,10 +18101,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f5389ece35da3449bc84fd61ce632a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandFanLayout
-  maxCardSpacing: 140
-  maxWidth: 900
-  totalFanAngle: 32
-  arcSag: 60
+  _maxCardSpacing: 140
+  _maxWidth: 900
+  _maxTotalFanAngle: 32
+  _anglePerCardGap: 8
+  _arcSag: 60
+  _maxHandSize: 10
 --- !u!1 &1494846968
 GameObject:
   m_ObjectHideFlags: 0
@@ -18230,8 +18275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlessingAffinityManager
   machinaAffinity: 0
   machinaTier: 0
-  activeFlags:
-  - tonya_met
+  activeFlags: [tonya_met]
 --- !u!4 &1502612121
 Transform:
   m_ObjectHideFlags: 0
@@ -18522,6 +18566,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1524281368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524281369}
+  m_Layer: 5
+  m_Name: CardObjAnimTransform2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1524281369
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524281368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 169565602}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1858, y: -111}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1534743952
 GameObject:
   m_ObjectHideFlags: 0
@@ -19345,8 +19424,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 207379934}
+  m_Children: [{fileID: 207379934}]
   m_Father: {fileID: 748837807}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -19929,8 +20007,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1479831390}
+  m_Children: [{fileID: 1479831390}]
   m_Father: {fileID: 169565602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -21039,8 +21116,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1304834009}
+  m_Children: [{fileID: 1304834009}]
   m_Father: {fileID: 621897468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
@@ -22506,10 +22582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   selectedUI: {fileID: 930441477}
-  selectCoopCharBtns:
-  - {fileID: 494741279}
-  - {fileID: 1080779703}
-  - {fileID: 1385843093}
+  selectCoopCharBtns: [{fileID: 494741279}, {fileID: 1080779703}, {fileID: 1385843093}]
   fadeController: {fileID: 1868777510}
   dialogueView: {fileID: 1138833855}
   sanctuaryBackground: {fileID: 21300000, guid: 0013daa7d08ebf24f8fc344cdaa18e41, type: 3}
@@ -25583,10 +25656,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6283342203845081021, guid: 4290fc7141d6a964ca6a69158c502e99, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1250815195}
+    m_AddedComponents: [{targetCorrespondingSourceObject: {fileID: 6283342203845081021, guid: 4290fc7141d6a964ca6a69158c502e99, type: 3}, insertIndex: -1, addedObject: {fileID: 1250815195}}]
   m_SourcePrefab: {fileID: 100100000, guid: 4290fc7141d6a964ca6a69158c502e99, type: 3}
 --- !u!1001 &8335149209388269813
 PrefabInstance:

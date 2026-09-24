@@ -45,4 +45,20 @@ public class EventData : ScriptableObject
 public class EventChoiceEffect
 {
     [SerializeReference, SubclassPicker] public List<CardEffect> effects;
+
+    // 선택 조건. 전부 만족해야 고를 수 있고, 미충족이면 버튼이 잠긴다(예: 인벤토리 빈 칸 필요).
+    // 비어 있으면 항상 선택 가능.
+    [SerializeReference, SubclassPicker] public List<EventCondition> conditions = new();
+
+    public bool IsSelectable()
+    {
+        if (conditions == null) return true;
+
+        foreach (var condition in conditions)
+        {
+            // 슬롯만 늘리고 타입을 안 고른 빈 조건은 미충족 취급 — EventRosterEntry와 동일한 관례.
+            if (condition == null || !condition.IsMet()) return false;
+        }
+        return true;
+    }
 }
