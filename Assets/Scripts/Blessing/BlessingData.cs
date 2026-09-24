@@ -97,6 +97,10 @@ public class BlessingData : ScriptableObject
     [Tooltip("교감 선택 시 친밀도 티어 및 플래그에 따라 진행되는 심화 대사들")]
     public List<BlessingDialogueSequence> affinityTalkSequences = new();
 
+    [Header("5. 0층 은총 선택 후 전별 대화 풀")]
+    [Tooltip("보상 또는 교감이 끝난 뒤 맵으로 떠나기 전에 재생. 비어 있으면 마키나의 호감도 티어별 기본 대사를 사용")]
+    public List<BlessingDialogueSequence> farewellSequences = new();
+
     /// <summary>
     /// 조건 풀에서 우선순위가 가장 높고 조건을 만족하는 시퀀스 1개 선별
     /// </summary>

@@ -75,6 +75,8 @@ UI는 평범한 직사각형 박스를 반복하지 않는다. 모서리가 잘�
 
 캐릭터를 중심에 두고 UI는 얇고 평면적으로 배치한다. 카드형 상세 정보 레이아웃을 참고해 패시브, 고유 카드, 역할을 아이콘 중심으로 정리한다.
 
+성소의 합류 후보 화면은 화면 전체를 `/` 방향 대각선 경계로 빈틈없이 분할한다. 대각선 칸은 캐릭터 그림을 잘라 넣는 프레임이 아니라 오프화이트·회백색의 독립된 백그라운드/UI 패널이다. 캐릭터 스플래시는 기울이거나 크롭하지 않고 원본 비율과 전체 실루엣을 유지한 채 패널 위에 배치한다. 각 칸에는 작은 관측 시스템 라벨, 캐릭터 이름, 짧은 설명, 선택 액션을 넣고 검정·오프화이트를 기본으로 제한된 시안 포인트만 사용한다. 독립된 작은 카드 프레임이나 계단식 배치는 사용하지 않는다. 후보 수에 맞춰 칸 너비를 조정하고, 호버 시 별도 스플래시 아트·소폭 확대·시안 구분선과 선택 액션으로 강조한다. 클릭하면 기존 전신 아트와 설명·합류 카드가 있는 상세 화면으로 이동한다. 캐릭터별 `sanctuarySelectionArt` / `sanctuaryHoverArt` / `sanctuaryFullArt`를 분리하며, 선택·호버 그림의 `Focus` 값은 크롭이 아니라 패널 내 정렬에만 사용한다.
+
 ### Title / Main Menu
 
 굵고 큰 대문자 타이포, 과감한 실루엣과 면 분할, 큰 Vertex Mark를 사용할 수 있는 화면이다.
@@ -112,4 +114,3 @@ UI는 평범한 직사각형 박스를 반복하지 않는다. 모서리가 잘�
 - 상태 툴팁: [UI_StatusTooltip_WhiteVertex](../Assets/Art/UI/UI_StatusTooltip_WhiteVertex.png)
 - 적 방어도 배지: [UI_EnemyBlockBadge_WhiteVertex](../Assets/Art/UI/UI_EnemyBlockBadge_WhiteVertex.png)
 - 방어 획득 효과: [BlockGainShield_ArtDirection](../Assets/Art/VFX/BlockGainShield_ArtDirection.png)
-

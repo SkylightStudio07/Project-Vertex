@@ -4,6 +4,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCoopChar", menuName = "Game Asset/Coop Character")]
 public class CoopCharData : CharData
 {
+    [Header("성소 선택 화면 아트 (비어 있으면 기존 캐릭터 이미지 사용)")]
+    public Sprite sanctuarySelectionArt;
+    public Sprite sanctuaryHoverArt;
+
+    [Tooltip("성소 기본 아트의 패널 내 정렬 위치. 원본 비율과 전체 이미지는 유지됩니다. (0,0)은 좌하단, (1,1)은 우상단")]
+    public Vector2 sanctuarySelectionFocus = new Vector2(0.5f, 0.5f);
+    [Tooltip("호버 아트의 패널 내 정렬 위치. 아트가 미지정이면 기본 아트의 정렬 위치를 사용")]
+    public Vector2 sanctuaryHoverFocus = new Vector2(0.5f, 0.5f);
+
+    [Header("성소 선택 상세 화면 전신 아트 (초상화와 별도)")]
+    public Sprite sanctuaryFullArt;
+
     [Header("호감도 레벨 당 해금 카드")]
     public List<CardData> unlockCardCoopLevel = new();
 

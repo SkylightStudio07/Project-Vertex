@@ -22,7 +22,8 @@ public class BlessingView : MonoBehaviour
     {
         None,
         Encounter,
-        AffinityTalk
+        AffinityTalk,
+        Farewell
     }
 
     [Header("컴포넌트")]
@@ -64,6 +65,7 @@ public class BlessingView : MonoBehaviour
     private BlessingDialogueSequence currentSequence;
     private int currentStepIndex = 0;
     private bool hasEncounterAwarded = false;
+    private bool hasFinishedBlessing = false;
 
     private void Awake()
     {
@@ -167,10 +169,14 @@ public class BlessingView : MonoBehaviour
     /// </summary>
     public void Open(BlessingData data = null)
     {
-        gameObject.SetActive(true);
-        hasEncounterAwarded = false;
-
         BlessingData targetData = data ?? currentBlessingData ?? defaultBlessingData;
+        hasEncounterAwarded = false;
+        hasFinishedBlessing = false;
+        currentFlowMode = DialogueFlowMode.None;
+        currentSequence = null;
+        currentBlessingData = targetData;
+        gameObject.SetActive(true);
+
         if (targetData != null)
         {
             Setup(targetData);
@@ -379,6 +385,12 @@ public class BlessingView : MonoBehaviour
 
             FinishBlessing();
         }
+        else if (currentFlowMode == DialogueFlowMode.Farewell)
+        {
+            currentFlowMode = DialogueFlowMode.None;
+            currentSequence = null;
+            Close();
+        }
     }
 
     #endregion
@@ -524,7 +536,73 @@ public class BlessingView : MonoBehaviour
 
     public void FinishBlessing()
     {
-        Close();
+        if (hasFinishedBlessing) return;
+        hasFinishedBlessing = true;
+
+        // 이후 층의 축복 노드는 기존처럼 곧바로 맵으로 돌아간다.
+        if (RunData.Instance == null || RunData.Instance.currentFloor != 0 || currentBlessingData == null)
+        {
+            Close();
+            return;
+        }
+
+        float affinity = BlessingAffinityManager.Instance.GetAffinity(currentBlessingData.entityId);
+        var farewell = currentBlessingData.SelectDialogueSequence(
+            currentBlessingData.farewellSequences,
+            affinity,
+            charId => CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charId),
+            BlessingAffinityManager.Instance.GetAllFlags());
+
+        if (farewell == null && currentBlessingData.entityId == "machina")
+        {
+            farewell = CreateMachinaFarewell(BlessingAffinityManager.Instance.GetAffinityTier("machina"));
+        }
+
+        if (farewell == null || dialogueText == null ||
+            (playerAnswerButton == null && dialogueBubblePanel == null))
+        {
+            Close();
+            return;
+        }
+
+        StartDialogueSequence(farewell, DialogueFlowMode.Farewell);
+    }
+
+    private static BlessingDialogueSequence CreateMachinaFarewell(int tier)
+    {
+        string line;
+        switch (tier)
+        {
+            case 0:
+                line = "「내 은총은 여기까지다, 방랑자여. 버텍스의 문턱을 넘어라. 돌아올 수 있다면, 그때 네 이름을 묻지.」";
+                break;
+            case 1:
+                line = "「또 길을 나서는구나. 이번에는 네 발자국을 기억해 두마. 부디 꽃이 지기 전에 돌아오렴.」";
+                break;
+            case 2:
+                line = "「가거라. 길이 너를 속이더라도 네가 지키려던 것은 잊지 마. 나는 이곳에서 네 귀환을 기다리마.」";
+                break;
+            case 3:
+                line = "「버텍스 깊은 곳의 진실을 마주하게 되겠지. 두려워도 눈을 돌리지 마라. 흩날리는 백색 꽃잎이 네 길을 비출 테니.」";
+                break;
+            default:
+                line = "「나의 방랑자여, 이제 네게 길을 명하지 않겠다. 네가 고른 끝까지 가거라. 무슨 결말이 오든, 나는 네 이름을 기억하마.」";
+                break;
+        }
+
+        return new BlessingDialogueSequence
+        {
+            sequenceId = $"farewell_machina_tier{tier}",
+            steps = new List<BlessingDialogueStep>
+            {
+                new BlessingDialogueStep
+                {
+                    speakerName = "마키나",
+                    npcDialogue = line,
+                    playerAnswerText = "[방랑자] 길을 떠난다."
+                }
+            }
+        };
     }
 
     // 1. 카드 제거

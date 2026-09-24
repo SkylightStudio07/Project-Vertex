@@ -62,6 +62,17 @@ public class PlayerHUDView : MonoBehaviour
     // 매 프레임 현재 인스턴스와 비교해 바뀌었으면 재구독한다.
     private PlayerCombatant _subscribedPlayer;
 
+    private void OnEnable()
+    {
+        // HPBackground는 별도 Canvas다. sortingOrder=-1이면 합류 캐릭터가
+        // 나중에 생성될 때 체력 패널 위를 덮으므로 전투 UI 기본 레이어 위에 둔다.
+        Canvas hpCanvas = hpText != null && hpText.transform.parent != null
+            ? hpText.transform.parent.GetComponent<Canvas>()
+            : null;
+        if (hpCanvas != null && hpCanvas.overrideSorting && hpCanvas.sortingOrder < 1)
+            hpCanvas.sortingOrder = 1;
+    }
+
     private void Update()
     {
         UpdateDamageSubscription();
