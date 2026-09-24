@@ -13,6 +13,9 @@ public class SelectCoopCharUI : MonoBehaviour
     [SerializeField] private DialogueView dialogueView;
     [Header("Sanctuary visuals (character art remains data-driven)")]
     [SerializeField] private Sprite sanctuaryBackground;
+    [SerializeField] private Sprite candidateFrameSprite;
+    [SerializeField] private Sprite candidateActionButtonSprite;
+    [SerializeField] private SelectCoopCharBtn candidateFramePrefab;
     [Tooltip("화면 높이 대비 대각선의 가로 이동량")]
     [SerializeField, Range(0f, 0.7f)] private float diagonalSlope = 0.5f;
     [Header("Sanctuary detail")]
@@ -162,7 +165,8 @@ public class SelectCoopCharUI : MonoBehaviour
 
         while (selectCoopCharBtns.Count < count)
         {
-            SelectCoopCharBtn button = Instantiate(selectCoopCharBtns[0], selectCoopCharBtns[0].transform.parent);
+            SelectCoopCharBtn source = candidateFramePrefab != null ? candidateFramePrefab : selectCoopCharBtns[0];
+            SelectCoopCharBtn button = Instantiate(source, selectCoopCharBtns[0].transform.parent);
             button.name = $"Character Choice {selectCoopCharBtns.Count + 1}";
             Button unityButton = button.GetComponent<Button>();
             unityButton.onClick = new Button.ButtonClickedEvent();
@@ -191,10 +195,11 @@ public class SelectCoopCharUI : MonoBehaviour
         }
 
         RectTransform choiceLayer = selectCoopCharBtns[0].transform.parent as RectTransform;
+        bool useEditorialFrame = candidateFrameSprite != null;
         choiceLayer.anchorMin = Vector2.zero;
         choiceLayer.anchorMax = Vector2.one;
-        choiceLayer.offsetMin = Vector2.zero;
-        choiceLayer.offsetMax = Vector2.zero;
+        choiceLayer.offsetMin = useEditorialFrame ? new Vector2(18f, 28f) : Vector2.zero;
+        choiceLayer.offsetMax = useEditorialFrame ? new Vector2(-18f, -155f) : Vector2.zero;
         choiceLayer.localScale = Vector3.one;
         if (choiceLayer.GetComponent<UnityEngine.UI.RectMask2D>() == null)
             choiceLayer.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
@@ -208,7 +213,7 @@ public class SelectCoopCharUI : MonoBehaviour
         if (width <= 0f || height <= 0f) return;
         lastChoiceSize = choiceLayer.rect.size;
         float cellWidth = width / count;
-        float skew = count > 1 ? Mathf.Min(height * diagonalSlope, cellWidth * 0.85f) : 0f;
+        float skew = !useEditorialFrame && count > 1 ? Mathf.Min(height * diagonalSlope, cellWidth * 0.85f) : 0f;
         TMP_FontAsset uiFont = detailName != null && detailName.font != null
             ? detailName.font
             : TMP_Settings.defaultFontAsset;
@@ -219,10 +224,10 @@ public class SelectCoopCharUI : MonoBehaviour
             if (i >= count) continue;
             RectTransform rect = choice.transform as RectTransform;
             // Shared boundaries tile the entire screen. Outer edges remain flush with the viewport.
-            float bottomLeft = i == 0 ? 0f : i * cellWidth - skew * 0.5f;
-            float topLeft = i == 0 ? 0f : i * cellWidth + skew * 0.5f;
-            float bottomRight = i == count - 1 ? width : (i + 1) * cellWidth - skew * 0.5f;
-            float topRight = i == count - 1 ? width : (i + 1) * cellWidth + skew * 0.5f;
+            float bottomLeft = useEditorialFrame ? i * cellWidth : i == 0 ? 0f : i * cellWidth - skew * 0.5f;
+            float topLeft = useEditorialFrame ? i * cellWidth : i == 0 ? 0f : i * cellWidth + skew * 0.5f;
+            float bottomRight = useEditorialFrame ? (i + 1) * cellWidth : i == count - 1 ? width : (i + 1) * cellWidth - skew * 0.5f;
+            float topRight = useEditorialFrame ? (i + 1) * cellWidth : i == count - 1 ? width : (i + 1) * cellWidth + skew * 0.5f;
             float boundsWidth = topRight - bottomLeft;
 
             rect.anchorMin = Vector2.zero;
@@ -234,7 +239,8 @@ public class SelectCoopCharUI : MonoBehaviour
             rect.localRotation = Quaternion.identity;
             choice.ConfigureDiagonalStrip(new Vector4(
                 0f, (bottomRight - bottomLeft) / boundsWidth,
-                (topLeft - bottomLeft) / boundsWidth, 1f), i == 0, i == count - 1, i, uiFont);
+                (topLeft - bottomLeft) / boundsWidth, 1f), i == 0, i == count - 1, i, uiFont,
+                candidateFrameSprite, candidateActionButtonSprite);
         }
     }
 

@@ -15,6 +15,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private SanctuarySliceGraphic sliceMask;
     private SanctuarySliceGraphic sliceOutline;
     private UnityEngine.UI.Image panelBackground;
+    [SerializeField] private UnityEngine.UI.Image editorialFrame;
     private UnityEngine.UI.Image selectAction;
     private TextMeshProUGUI candidateLabel;
     private TextMeshProUGUI characterName;
@@ -69,7 +70,8 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
-    public void ConfigureDiagonalStrip(Vector4 edges, bool first, bool last, int index, TMP_FontAsset font)
+    public void ConfigureDiagonalStrip(Vector4 edges, bool first, bool last, int index, TMP_FontAsset font,
+        Sprite frameSprite = null, Sprite actionSprite = null)
     {
         sliceEdges = edges;
         candidateIndex = index;
@@ -106,7 +108,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
 
         if (charImage.transform.parent != transform) charImage.transform.SetParent(transform, false);
-        EnsurePanelVisuals();
+        EnsurePanelVisuals(frameSprite, actionSprite);
 
         if (sliceOutline == null)
         {
@@ -122,9 +124,11 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
 
         sliceMask.Configure(edges, false, false, false);
-        sliceOutline.Configure(edges, true, !first, !last);
+        sliceOutline.Configure(edges, true, frameSprite == null && !first, frameSprite == null && !last);
         LayoutPanelVisuals();
         charImage.transform.SetAsLastSibling();
+        if (editorialFrame != null && editorialFrame.gameObject.activeSelf)
+            editorialFrame.transform.SetAsLastSibling();
         sliceOutline.transform.SetAsLastSibling();
         if (transform.Find("Info Header") != null) transform.Find("Info Header").SetAsLastSibling();
         if (transform.Find("Info Footer") != null) transform.Find("Info Footer").SetAsLastSibling();
@@ -157,9 +161,11 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
                     ? new Color(0.93f, 0.91f, 0.86f, 1f)
                     : new Color(0.86f, 0.88f, 0.86f, 1f);
         if (selectAction != null)
-            selectAction.color = isHovered
-                ? new Color(0.25f, 0.8f, 0.94f, 0.96f)
-                : new Color(0.035f, 0.055f, 0.065f, 0.94f);
+            selectAction.color = selectAction.sprite != null
+                ? (isHovered ? new Color(0.86f, 0.98f, 1f, 1f) : Color.white)
+                : isHovered
+                    ? new Color(0.25f, 0.8f, 0.94f, 0.96f)
+                    : new Color(0.035f, 0.055f, 0.065f, 0.94f);
         if (selectLabel != null)
             selectLabel.color = isHovered
                 ? new Color(0.02f, 0.08f, 0.1f, 1f)
@@ -170,8 +176,9 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         // not an image crop frame; this supports tall, wide, and differently sized source art.
         Vector2 viewport = sliceMask.rectTransform.rect.size;
         if (viewport.x <= 0f || viewport.y <= 0f) return;
+        bool useEditorialFrame = editorialFrame != null && editorialFrame.sprite != null;
         float panelWidth = Mathf.Min(sliceEdges.y - sliceEdges.x, sliceEdges.w - sliceEdges.z) * viewport.x;
-        Vector2 artArea = new Vector2(panelWidth * 0.92f, viewport.y * 0.76f);
+        Vector2 artArea = new Vector2(panelWidth * (useEditorialFrame ? 0.56f : 0.92f), viewport.y * 0.76f);
         float scale = Mathf.Min(artArea.x / art.rect.width, artArea.y / art.rect.height);
         Vector2 size = art.rect.size * scale * (isHovered ? 1.035f : 1f);
         RectTransform artRect = charImage.rectTransform;
@@ -181,7 +188,9 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         float artCenterY = 0.52f;
         float left = Mathf.Lerp(sliceEdges.x, sliceEdges.z, artCenterY);
         float right = Mathf.Lerp(sliceEdges.y, sliceEdges.w, artCenterY);
-        float centerX = Mathf.Lerp(left, right, Mathf.Clamp01(focus.x));
+        float centerX = useEditorialFrame
+            ? Mathf.Lerp(0.47f, 0.92f, Mathf.Clamp01(focus.x))
+            : Mathf.Lerp(left, right, Mathf.Clamp01(focus.x));
         float remainingY = Mathf.Max(0f, artArea.y - size.y);
         artRect.anchoredPosition = new Vector2(
             (centerX - 0.5f) * viewport.x,
@@ -189,7 +198,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         charImage.preserveAspect = false;
     }
 
-    private void EnsurePanelVisuals()
+    private void EnsurePanelVisuals(Sprite frameSprite, Sprite actionSprite)
     {
         Transform background = sliceMask.transform.Find("Panel Background");
         if (background == null)
@@ -203,6 +212,22 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         panelBackground.sprite = null;
         panelBackground.raycastTarget = false;
         panelBackground.transform.SetAsFirstSibling();
+
+        Transform frame = transform.Find("Editorial Frame");
+        if (frame == null)
+        {
+            GameObject go = new GameObject("Editorial Frame", typeof(RectTransform), typeof(UnityEngine.UI.Image));
+            go.transform.SetParent(transform, false);
+            frame = go.transform;
+        }
+        editorialFrame = frame.GetComponent<UnityEngine.UI.Image>();
+        Stretch(editorialFrame.rectTransform);
+        editorialFrame.sprite = frameSprite;
+        editorialFrame.color = Color.white;
+        editorialFrame.preserveAspect = false;
+        editorialFrame.raycastTarget = false;
+        editorialFrame.gameObject.SetActive(frameSprite != null);
+        panelBackground.gameObject.SetActive(frameSprite == null);
 
         RectTransform header = GetOrCreateRect("Info Header");
         candidateLabel = GetOrCreateText(header, "Candidate Label");
@@ -219,6 +244,9 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
             action = go.transform;
         }
         selectAction = action.GetComponent<UnityEngine.UI.Image>();
+        selectAction.sprite = actionSprite;
+        selectAction.type = UnityEngine.UI.Image.Type.Simple;
+        selectAction.preserveAspect = false;
         selectAction.raycastTarget = false;
         selectLabel = GetOrCreateText((RectTransform)action, "Select Label");
     }
@@ -229,12 +257,21 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         Vector2 viewport = sliceMask.rectTransform.rect.size;
         if (viewport.x <= 0f || viewport.y <= 0f) return;
         float panelWidth = Mathf.Min(sliceEdges.y - sliceEdges.x, sliceEdges.w - sliceEdges.z) * viewport.x;
-        float safeWidth = Mathf.Max(180f, panelWidth * 0.78f);
+        bool useEditorialFrame = editorialFrame != null && editorialFrame.sprite != null;
+        float safeWidth = Mathf.Max(150f, panelWidth * (useEditorialFrame ? 0.32f : 0.78f));
 
         RectTransform header = transform.Find("Info Header") as RectTransform;
         RectTransform footer = transform.Find("Info Footer") as RectTransform;
-        PlaceBand(header, 0.84f, safeWidth, Mathf.Min(170f, viewport.y * 0.2f));
-        PlaceBand(footer, 0.12f, safeWidth, Mathf.Min(112f, viewport.y * 0.14f));
+        if (useEditorialFrame)
+        {
+            PlaceEditorialBand(header, 0.22f, 0.72f, safeWidth, Mathf.Min(360f, viewport.y * 0.42f));
+            PlaceEditorialBand(footer, 0.20f, 0.11f, safeWidth, Mathf.Min(112f, viewport.y * 0.14f));
+        }
+        else
+        {
+            PlaceBand(header, 0.84f, safeWidth, Mathf.Min(170f, viewport.y * 0.2f));
+            PlaceBand(footer, 0.12f, safeWidth, Mathf.Min(112f, viewport.y * 0.14f));
+        }
 
         float titleSize = Mathf.Clamp(panelWidth * 0.072f, 25f, 46f);
         SetTextRect(candidateLabel, new Vector2(0f, 0.76f), new Vector2(1f, 1f), 11f, FontStyles.Normal, TextAlignmentOptions.TopLeft);
@@ -245,7 +282,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         SetTextRect(coordinateLabel, new Vector2(0f, 0.68f), new Vector2(1f, 1f), 11f, FontStyles.Normal, TextAlignmentOptions.TopLeft);
         RectTransform actionRect = selectAction.rectTransform;
         actionRect.anchorMin = new Vector2(0f, 0.06f);
-        actionRect.anchorMax = new Vector2(0.74f, 0.62f);
+        actionRect.anchorMax = new Vector2(useEditorialFrame ? 1f : 0.74f, 0.62f);
         actionRect.offsetMin = actionRect.offsetMax = Vector2.zero;
         SetTextRect(selectLabel, Vector2.zero, Vector2.one, 13f, FontStyles.Bold, TextAlignmentOptions.Center);
     }
@@ -259,6 +296,15 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         band.anchorMin = band.anchorMax = band.pivot = new Vector2(0.5f, 0.5f);
         band.sizeDelta = new Vector2(width, height);
         band.anchoredPosition = new Vector2(((left + right) * 0.5f - 0.5f) * viewport.x, (y - 0.5f) * viewport.y);
+    }
+
+    private void PlaceEditorialBand(RectTransform band, float x, float y, float width, float height)
+    {
+        if (band == null) return;
+        Vector2 viewport = sliceMask.rectTransform.rect.size;
+        band.anchorMin = band.anchorMax = band.pivot = new Vector2(0.5f, 0.5f);
+        band.sizeDelta = new Vector2(width, height);
+        band.anchoredPosition = new Vector2((x - 0.5f) * viewport.x, (y - 0.5f) * viewport.y);
     }
 
     private void ApplyCopy()
