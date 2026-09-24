@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,72 @@ public class MapNodeView : MonoBehaviour
     public MapNode Data { get; private set; }
     private bool hasIntegratedFrame;
 
+    // 상태 연출: 현재 위치는 마커가 천천히 숨 쉬듯 커졌다 작아지고, 이동 가능한 노드는 아이콘이 살짝 떠오른다.
+    private const float PulseScale = 1.12f;
+    private const float PulsePeriod = 1.1f;
+    private const float FloatHeight = 4f;
+    private const float FloatPeriod = 0.9f;
+
+    private Vector3 _markerBaseScale = Vector3.one;
+    private Vector2 _iconBasePos;
+    private bool _hasBase;
+    private MapNodeState _state;
+
+    private void CaptureBase()
+    {
+        if (_hasBase) return;
+        if (currentMarker != null) _markerBaseScale = currentMarker.transform.localScale;
+        _iconBasePos = iconImage.rectTransform.anchoredPosition;
+        _hasBase = true;
+    }
+
+    // 맵을 열 때 MapUIController가 층 순서대로 지연을 줘서 호출한다.
+    public void PlayReveal(float delay, float duration)
+    {
+        transform.DOKill();
+        transform.localScale = Vector3.zero;
+        transform.DOScale(1f, duration).SetDelay(delay).SetEase(Ease.OutBack)
+                 .SetUpdate(true).SetLink(gameObject);
+    }
+
+    // 루프 트윈은 맵 패널이 꺼지면 멈췄다가, 다시 켜질 때 현재 상태 기준으로 재시작한다.
+    private void OnEnable()
+    {
+        if (Data != null) PlayStateMotion(_state);
+    }
+
+    private void OnDisable() => StopStateMotion();
+
+    private void StopStateMotion()
+    {
+        if (!_hasBase) return;
+        iconImage.rectTransform.DOKill();
+        iconImage.rectTransform.anchoredPosition = _iconBasePos;
+        if (currentMarker != null)
+        {
+            currentMarker.transform.DOKill();
+            currentMarker.transform.localScale = _markerBaseScale;
+        }
+    }
+
+    private void PlayStateMotion(MapNodeState state)
+    {
+        CaptureBase();
+        StopStateMotion();
+        if (!isActiveAndEnabled) return;
+
+        if (state == MapNodeState.Current && currentMarker != null)
+        {
+            currentMarker.transform.DOScale(_markerBaseScale * PulseScale, PulsePeriod * 0.5f)
+                         .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
+        }
+        else if (state == MapNodeState.Accessible)
+        {
+            iconImage.rectTransform.DOAnchorPos(_iconBasePos + new Vector2(0f, FloatHeight), FloatPeriod * 0.5f)
+                     .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
+        }
+    }
+
     // 노드 초기화. MapUIController가 프리팹을 생성한 직후 호출함.
     // Action<MapNode>: "MapNode를 인자로 받는 함수"를 변수처럼 전달하는 C# 문법.
     // 클릭 시 이 함수를 호출해서 MapUIController 쪽에 "어떤 노드가 눌렸는지" 알려줌.
@@ -77,6 +144,9 @@ public class MapNodeView : MonoBehaviour
         // 현재 위치 마커는 Current 상태일 때만 표시
         if (currentMarker != null)
             currentMarker.SetActive(state == MapNodeState.Current);
+
+        _state = state;
+        PlayStateMotion(state);
     }
 
     // nodeType에 맞는 스프라이트 반환. 일반 선형 탐색.

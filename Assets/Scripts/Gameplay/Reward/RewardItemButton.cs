@@ -16,6 +16,11 @@ public class RewardItemButton : MonoBehaviour
 
     public event Action<List<CardData>, RewardItemButton> OnCardReward;
 
+    // 획득 연출(RewardsView)에서 아이콘 위치·보상 종류를 읽는 용도
+    public RewardItem Item => rewardItem;
+    public UnityEngine.UI.Image Icon => iconImage;
+    public TextMeshProUGUI Label => buttonText;
+
     // 버튼 삭제 위한 이벤트. 보상 획득 후 실제 버튼 오브젝트 삭제는 RewardsView에서 처리.
     public event Action<RewardItemButton> OnDestroyed;
 

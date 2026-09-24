@@ -220,6 +220,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2839389672627290232, guid: 7a1f664acb3ffe64a8c9cd6597f7f970, type: 3}
+      propertyPath: bringToFront
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839389672627290232, guid: 7a1f664acb3ffe64a8c9cd6597f7f970, type: 3}
+      propertyPath: keepInsideScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839389672627290232, guid: 7a1f664acb3ffe64a8c9cd6597f7f970, type: 3}
+      propertyPath: animationDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839389672627290232, guid: 7a1f664acb3ffe64a8c9cd6597f7f970, type: 3}
+      propertyPath: hoverScaleMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3319252093806831319, guid: 7a1f664acb3ffe64a8c9cd6597f7f970, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

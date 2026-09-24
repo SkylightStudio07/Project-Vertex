@@ -35,7 +35,7 @@ public class ShopGoods
 public class ShopStock
 {
     // == 가격/구성 상수 변수 ==
-    private const int CardSlotCount = 5;
+    private const int CardSlotCount = 6;
     private const int ItemSlotCount = 5;
 
     private const int CommonCardPrice = 50;

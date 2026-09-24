@@ -892,6 +892,10 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 8038344524183138613, guid: 0277167a12290af47801444830a2be97, type: 3}
   blockGainShieldPrefab: {fileID: 4986837140460443603, guid: 7aab14fa78795a24b83a94fd2ed28a96, type: 3}
   blockGainParticlePrefab: {fileID: 4002322668372973626, guid: d7d2b4ca53a3b334bb7bb3dc198e1acd, type: 3}
+  deathDissolveNoise: {fileID: 2800000, guid: 5a9e7b253d8344331a9ef15185eaa629, type: 3}
+  deathDissolveDuration: 0.6
+  enterSlideDistance: 120
+  enterDuration: 0.4
 --- !u!1 &8349714043615962576
 GameObject:
   m_ObjectHideFlags: 0

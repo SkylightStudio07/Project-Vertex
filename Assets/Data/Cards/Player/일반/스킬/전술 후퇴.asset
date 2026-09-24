@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: "\uC804\uC220 \uD6C4\uD1F4"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
-  CardBackground: {fileID: 7423118656095115987, guid: c1d306c77e093274d847610618119cb8, type: 3}
+  CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
   cardType: 1
   cardRarity: 0
   cardOwner: 0
+  isWeaponShootingCard: 0
   cardDescription: "\uBC29\uC5B4\uB3C4\uAC00 {0.amount}\uB9CC\uD07C \uC99D\uAC00\uD569\uB2C8\uB2E4.
     \uCE74\uB4DC\uB97C {1.count}\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
   useMode: 0
@@ -52,10 +53,26 @@ MonoBehaviour:
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 7
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        targets:
+          mode: 0
     - rid: 4680130923130519625
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 11
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        targets:
+          mode: 0
     - rid: 6172254970720551001
       type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
       data:

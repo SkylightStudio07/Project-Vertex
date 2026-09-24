@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // 상점의 상품 하나
-public class ShopStockEntry : MonoBehaviour, IPointerClickHandler
+public class ShopStockEntry : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private CardView cardView;      // 카드 상품일 때 사용
     [SerializeField] private Image itemIconImage;    // 아이템 상품일 때 사용
@@ -18,6 +18,16 @@ public class ShopStockEntry : MonoBehaviour, IPointerClickHandler
     public event Action<ShopGoods> OnPurchased;
 
     public ShopGoods Goods => goods;
+
+    public void ApplyFont(TMP_FontAsset font)
+    {
+        if (font == null) return;
+
+        foreach (var text in GetComponentsInChildren<TMP_Text>(true))
+        {
+            text.font = font;
+        }
+    }
 
     public void Bind(ShopGoods goods)
     {
@@ -56,6 +66,26 @@ public class ShopStockEntry : MonoBehaviour, IPointerClickHandler
 
         bool affordable = GameManager.Instance != null && GameManager.Instance.PlayerGold >= goods.Price;
         priceText.color = affordable ? affordableColor : unaffordableColor;
+    }
+
+    // 아이템 상품은 호버 시 아이템바와 같은 공용 툴팁(이름·설명)을 상품 위쪽에 띄운다.
+    // 카드는 호버 확대(HoverScaleEffect)로 설명이 보이므로 툴팁을 쓰지 않는다.
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (goods == null || goods.Type == ShopGoodsType.Card) return;
+        var anchor = itemIconImage != null ? itemIconImage.rectTransform : transform as RectTransform;
+        ItemInventoryView.Instance?.ShowTooltipAbove(goods.Data as ItemData, anchor);
+    }
+
+    public void OnPointerExit(PointerEventData eventData) => HideItemTooltip();
+
+    // 호버 중에 상점이 닫히거나 목록이 갱신되면 Exit가 오지 않아 툴팁이 남는다
+    private void OnDisable() => HideItemTooltip();
+
+    private void HideItemTooltip()
+    {
+        if (goods != null && goods.Type != ShopGoodsType.Card)
+            ItemInventoryView.Instance?.HideTooltip();
     }
 
     public void OnPointerClick(PointerEventData eventData)

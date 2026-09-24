@@ -21,9 +21,18 @@ public class ItemInventoryView : MonoBehaviour
     private readonly List<ItemSlot> _slots = new();
     private bool _subscribed;
 
+    // 상점 등 아이템바 밖의 UI도 같은 툴팁을 빌려 쓴다(UpperPanel이 캔버스 뒤쪽이라 대부분의 화면 위에 그려짐).
+    public static ItemInventoryView Instance { get; private set; }
+
     private void Awake()
     {
+        Instance = this;
         if (tooltipObj != null) tooltipObj.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 
     private void OnEnable() => TrySubscribe();
@@ -81,6 +90,10 @@ public class ItemInventoryView : MonoBehaviour
         }
     }
 
+    // 보상 획득 연출에서 아이콘이 날아갈 목표 슬롯. 범위 밖이면 null.
+    public RectTransform GetSlotRect(int index)
+        => index >= 0 && index < _slots.Count && _slots[index] != null ? _slots[index].transform as RectTransform : null;
+
     // 슬롯 호버 시 호출 — 공용 툴팁에 내용 채우고 표시
     public void ShowTooltip(ItemData item, Vector3 worldPos)
     {
@@ -89,6 +102,25 @@ public class ItemInventoryView : MonoBehaviour
         if (tooltipDescText != null) tooltipDescText.text = item.ItemDescription;
         tooltipObj.position = worldPos;      // 슬롯 위치 기준 (오프셋은 씬에서 조정)
         tooltipObj.gameObject.SetActive(true);
+    }
+
+    // anchor 바로 위에 툴팁을 띄운다(가운데 정렬). 툴팁 배경은 프리팹에서 슬롯 오른쪽 아래로 오프셋돼 있어서,
+    // 자식까지 포함한 실제 영역을 구해 그 아래 끝이 anchor 위 끝 + margin에 오도록 맞춘다.
+    public void ShowTooltipAbove(ItemData item, RectTransform anchor, float margin = 16f)
+    {
+        if (tooltipObj == null || item == null || anchor == null) return;
+        if (tooltipNameText != null) tooltipNameText.text = item.ItemName;
+        if (tooltipDescText != null) tooltipDescText.text = item.ItemDescription;
+        tooltipObj.gameObject.SetActive(true);
+
+        var corners = new Vector3[4];
+        anchor.GetWorldCorners(corners);
+        Vector3 anchorTop = (corners[1] + corners[2]) * 0.5f;
+
+        Bounds b = RectTransformUtility.CalculateRelativeRectTransformBounds(tooltipObj);
+        Vector3 localBottomCenter = new(b.center.x, b.min.y, 0f);
+        Vector3 up = tooltipObj.TransformVector(new Vector3(0f, margin, 0f));
+        tooltipObj.position = anchorTop + up - tooltipObj.TransformVector(localBottomCenter);
     }
 
     public void HideTooltip()

@@ -59,6 +59,17 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private GameObject blockGainShieldPrefab;
     [SerializeField] private GameObject blockGainParticlePrefab;
 
+    [Header("사망 연출")]
+    // 스프라이트는 디졸브로 부서지고, HP바·인텐트 등 부속 UI는 먼저 페이드아웃된다.
+    // 결과창 지연(RewardsView.openDelay, 0.75초) 안에 끝나도록 짧게 잡는다.
+    [SerializeField] private Texture deathDissolveNoise;
+    [SerializeField, Min(0f)] private float deathDissolveDuration = 0.6f;
+
+    [Header("등장 연출")]
+    // 전투 시작 시 오른쪽에서 미끄러져 들어오며 나타난다. EnemyZoneView가 순서대로 지연을 준다.
+    [SerializeField] private float enterSlideDistance = 120f;
+    [SerializeField, Min(0f)] private float enterDuration = 0.4f;
+
     private RectTransform _intentIconRect;
     private Vector2 _initialIntentIconPos;
     private Vector2 _intentIconBasePos;
@@ -209,12 +220,7 @@ public class EnemyView : MonoBehaviour
     private void Unbind()
     {
         if (Instance == null) return;
-        Instance.OnDamaged       -= HandleDamaged;
-        Instance.OnDied          -= HandleDied;
-        Instance.OnIntentChanged -= RefreshIntent;
-        Instance.OnActionStarted -= PlayLungeMotion;
-        Instance.OnBlockGained   -= HandleBlockGained;
-        Instance.OnBlockChanged  -= RefreshBlock;
+        Unsubscribe();
         Instance = null;
         RefreshBlock(0);
 
@@ -240,13 +246,61 @@ public class EnemyView : MonoBehaviour
             _intentFieldRect.anchoredPosition = _initialIntentFieldPos;
     }
 
+    private void Unsubscribe()
+    {
+        Instance.OnDamaged       -= HandleDamaged;
+        Instance.OnDied          -= HandleDied;
+        Instance.OnIntentChanged -= RefreshIntent;
+        Instance.OnActionStarted -= PlayLungeMotion;
+        Instance.OnBlockGained   -= HandleBlockGained;
+        Instance.OnBlockChanged  -= RefreshBlock;
+    }
+
     private void HandleDamaged(int _)
     {
         RefreshHP();
         SpawnHitEffect();
     }
 
-    private void HandleDied() => Destroy(gameObject);
+    private void HandleDied()
+    {
+        // 구독만 끊는다 — 사라지는 동안 인텐트 갱신·피격 이펙트 등이 더 들어오지 않도록.
+        // Unbind()는 스프라이트 크기·인텐트 위치를 기본값으로 되돌려 죽는 순간 적이 작아져 보이므로 쓰지 않는다.
+        // (Instance.IsDead가 true라 EnemyTargeting도 이 뷰를 대상으로 잡지 않는다)
+        if (Instance != null) Unsubscribe();
+        enabled = false; // 인텐트 부유(Update) 정지
+
+        var keepSprite = enemyImage != null ? new[] { (UnityEngine.UI.Graphic)enemyImage } : null;
+        var seq = UIDissolve.Out(gameObject, null, deathDissolveDuration * 0.5f, UIDissolve.DefaultEdge, keepSprite);
+        if (enemyImage != null)
+        {
+            enemyImage.raycastTarget = false;
+            var fx = UIDissolve.Prepare(enemyImage, deathDissolveNoise, UIDissolve.DefaultEdge);
+            if (fx != null)
+            {
+                fx.transitionRate = 0f;
+                seq.Join(DOTween.To(() => fx.transitionRate, r => fx.transitionRate = r, 1f, deathDissolveDuration)
+                                .SetEase(Ease.InQuad));
+            }
+            else seq.Join(enemyImage.DOFade(0f, deathDissolveDuration));
+        }
+        seq.OnComplete(() => Destroy(gameObject));
+    }
+
+    // EnemyZoneView가 생성 직후 호출. delay만큼 기다렸다가 오른쪽에서 슬라이드 + 페이드로 등장.
+    public void PlayEnter(float delay)
+    {
+        if (_rect == null) return;
+        if (!TryGetComponent<CanvasGroup>(out var group)) group = gameObject.AddComponent<CanvasGroup>();
+
+        Vector2 target = _rect.anchoredPosition;
+        _rect.anchoredPosition = target + new Vector2(enterSlideDistance, 0f);
+        group.alpha = 0f;
+
+        DOTween.Sequence().SetLink(gameObject)
+               .Insert(delay, _rect.DOAnchorPos(target, enterDuration).SetEase(Ease.OutCubic))
+               .Insert(delay, group.DOFade(1f, enterDuration * 0.8f));
+    }
 
     // 공격 행동 직전 — 앞으로 살짝 전진했다가 원위치로 후퇴.
     // 복귀 기준 위치는 Awake 시점 캐싱값이 아니라 호출 시점의 실제 anchoredPosition을 사용한다.

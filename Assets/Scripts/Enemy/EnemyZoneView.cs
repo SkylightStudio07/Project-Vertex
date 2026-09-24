@@ -28,6 +28,9 @@ public class EnemyZoneView : MonoBehaviour
     [SerializeField] private EnemyView enemyPrefab;
     [SerializeField] private Transform enemyContainer;
 
+    [Header("등장 연출")]
+    [SerializeField, Min(0f)] private float enterStagger = 0.1f; // 적 사이 등장 간격
+
     [Header("적 배치 프리셋 (마리 수별 오프셋)")]
     [Tooltip("적 수에 따른 각 적의 anchoredPosition 오프셋 목록입니다. 인스펙터에서 마리 수별로 세부 조정할 수 있습니다.")]
     [SerializeField] private List<FormationPreset> formationPresets = new()
@@ -129,6 +132,11 @@ public class EnemyZoneView : MonoBehaviour
         {
             spawnedViews[i].transform.SetSiblingIndex(i);
         }
+
+        // 전투 시작 등장 연출 — 앞(플레이어 쪽)에서부터 하나씩. 에디터 모드 Refresh에선 재생하지 않는다.
+        if (Application.isPlaying)
+            for (int i = 0; i < spawnedViews.Count; i++)
+                spawnedViews[spawnedViews.Count - 1 - i].PlayEnter(enterStagger * i);
     }
 
     /// <summary>

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,15 @@ public class MapConnectionLine : MonoBehaviour
 {
     [SerializeField] private Image lineImage; // 선 이미지 (색상/투명도 조절용)
 
+    private static readonly Color LineColor = new(0.22f, 0.24f, 0.26f, 0.7f);
+
+    // 출발 노드의 층. 맵 열기 연출에서 왼쪽 층부터 차례로 켜기 위해 쓴다.
+    public int FromFloor { get; private set; }
+
     // from, to: MapContent 기준 anchoredPosition (노드와 같은 좌표계)
-    public void Setup(Vector2 from, Vector2 to)
+    public void Setup(Vector2 from, Vector2 to, int fromFloor = 0)
     {
+        FromFloor = fromFloor;
         Vector2 dir      = to - from;
         float distance   = dir.magnitude;
         float angle      = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -25,7 +32,14 @@ public class MapConnectionLine : MonoBehaviour
         rt.anchoredPosition = (from + to) * 0.5f;           // 중점
         rt.sizeDelta        = new Vector2(distance, rt.sizeDelta.y); // 길이 (두께는 프리팹에서)
         rt.localRotation    = Quaternion.Euler(0f, 0f, angle);
-        lineImage.color = new Color(0.22f, 0.24f, 0.26f, 0.7f);
+        lineImage.color = LineColor;
         lineImage.raycastTarget = false;
+    }
+
+    public void PlayReveal(float delay, float duration)
+    {
+        lineImage.DOKill();
+        lineImage.color = new Color(LineColor.r, LineColor.g, LineColor.b, 0f);
+        lineImage.DOFade(LineColor.a, duration).SetDelay(delay).SetUpdate(true).SetLink(gameObject);
     }
 }

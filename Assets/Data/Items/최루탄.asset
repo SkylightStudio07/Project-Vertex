@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\uCD5C\uB8E8\uD0C4"
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: "\uCD5C\uB8E8\uD0C4"
-  itemIcon: {fileID: 21300000, guid: 22478884ad86b274b825c983d16fba47, type: 3}
+  itemIcon: {fileID: 21300000, guid: aeb39c722c6a4ea4c995537abc3081b7, type: 3}
   itemRarity: 0
   usableOutsideBattle: 0
   itemGetTypes: 11
@@ -38,4 +38,5 @@ MonoBehaviour:
         targets:
           mode: 1
         piercing: 0
+        environmentalDamage: 0
         hitInterval: 0.08

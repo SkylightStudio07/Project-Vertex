@@ -38,6 +38,13 @@ public class MapUIController : MonoBehaviour
     [UnityEngine.Serialization.FormerlySerializedAs("verticalPadding")]
     [SerializeField] private float horizontalPadding = 160f;
 
+    [Header("열기 연출")]
+    // mapPanel에 붙은 UIPanelTransition(오른쪽 슬라이드). 비워두면 연출 없이 즉시 켜고 끈다.
+    [SerializeField] private UIPanelTransition mapTransition;
+    [SerializeField, Min(0f)] private float nodeRevealDelay = 0.12f;   // 패널이 어느 정도 들어온 뒤 노드 시작
+    [SerializeField, Min(0f)] private float nodeRevealPerFloor = 0.035f; // 층(왼→오)마다 늘어나는 지연
+    [SerializeField, Min(0f)] private float nodeRevealDuration = 0.22f;
+
     private readonly List<MapNodeView>       nodeViews = new();
     private readonly List<MapConnectionLine> lineViews = new();
     private MapData builtMapData;
@@ -47,18 +54,37 @@ public class MapUIController : MonoBehaviour
         mapPanel.SetActive(false);
     }
 
-    public bool IsMapOpen => mapPanel != null && mapPanel.activeSelf;
+    // 닫힘 연출 중(IsHiding)엔 아직 activeSelf지만 닫힌 것으로 본다.
+    public bool IsMapOpen => mapPanel != null && mapPanel.activeSelf
+                             && (mapTransition == null || !mapTransition.IsHiding);
 
     public void OpenMap()
     {
-        mapPanel.SetActive(true);
+        if (mapTransition != null) mapTransition.Show();
+        else mapPanel.SetActive(true);
+
         if (builtMapData != RunData.Instance.mapData) BuildMap();
         else RefreshNodeStates();
+
+        PlayNodeReveal();
     }
 
     public void CloseMap()
     {
-        mapPanel.SetActive(false);
+        if (mapTransition != null) mapTransition.Hide();
+        else mapPanel.SetActive(false);
+    }
+
+    // 노드와 연결선이 왼쪽 층부터 차례로 켜진다. 층 수가 많아도 전체가 0.6초 안쪽에 끝나도록 지연 상한을 둔다.
+    private void PlayNodeReveal()
+    {
+        foreach (var view in nodeViews)
+        {
+            float d = nodeRevealDelay + Mathf.Min(view.Data.floorIndex * nodeRevealPerFloor, 0.45f);
+            view.PlayReveal(d, nodeRevealDuration);
+        }
+        foreach (var line in lineViews)
+            line.PlayReveal(nodeRevealDelay + Mathf.Min(line.FromFloor * nodeRevealPerFloor, 0.45f), nodeRevealDuration);
     }
 
     // 현재 층에서 끝내야 할 행동(전투/이벤트/휴식/상점/성소 선택)이 안 끝난 상태인지 검사.
@@ -77,7 +103,7 @@ public class MapUIController : MonoBehaviour
     // Map 버튼 OnClick()에 바인딩
     public void ToggleMap()
     {
-        if (mapPanel.activeSelf) CloseMap();
+        if (IsMapOpen) CloseMap();
         else OpenMap();
     }
     // 맵 데이터에 따라 노드와 연결선을 생성. 기존 뷰는 모두 제거 후 새로 만듦.
@@ -168,7 +194,7 @@ public class MapUIController : MonoBehaviour
                     Vector2 to = GetNodePosition(nextNode, yOffset);
 
                     MapConnectionLine line = Instantiate(linePrefab, mapContent);
-                    line.Setup(from, to);
+                    line.Setup(from, to, node.floorIndex);
                     lineViews.Add(line);
                 }
             }

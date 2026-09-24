@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea57348c810fcd459e714d3667d8635, type: 3}
+  m_Name: Shopkeeper_Tonya
+  m_EditorClassIdentifier: Assembly-CSharp::ShopkeeperData
+  entityId: tonya
+  entityName: "\uD1A0\uB0D0"
+  chapter: 1
+  visitAffinityGain: 0.5
+  visitSequences:
+  - sequenceId: tonya_first_meet
+    priority: 100
+    minAffinity: 0
+    maxAffinity: 999
+    requiredCompanionCharId: 
+    requiredEventFlag: 
+    forbiddenEventFlag: tonya_met
+    setEventFlagOnComplete: tonya_met
+    steps:
+    - speakerName: 
+      npcDialogue: "\u2026\u2026\uC544. \uC190\uB2D8\uC778 \uAC70\uC5D0\uC694. \uC774
+        \uAD6C\uC5ED\uAE4C\uC9C0 \uAC78\uC5B4\uC11C \uC628 \uC0AC\uB78C\uC740 \uC624\uB79C\uB9CC\uC778
+        \uAC70\uC5D0\uC694."
+      playerAnswerText: 
+      speakerAvatar: {fileID: 0}
+    - speakerName: 
+      npcDialogue: "\uD1A0\uB0D0\uC778 \uAC70\uC5D0\uC694. \uC774 \uCE35 \uBCF4\uAE09\uC18C\uB97C
+        \uB9E1\uACE0 \uC788\uB294 \uAC70\uC5D0\uC694. \uB9CC\uB098\uC11C \uBC18\uAC00\uC6B4
+        \uAC70\uC5D0\uC694."
+      playerAnswerText: 
+      speakerAvatar: {fileID: 0}
+    - speakerName: 
+      npcDialogue: "\uADF8\uCABD\uC740\u2026 \uAD00\uCE21 \uAE30\uB85D\uC5D0 \uC5C6\uB294
+        \uC5BC\uAD74\uC778 \uAC70\uC5D0\uC694. \uBC29\uB791\uC790, \uB9DE\uB294 \uAC70\uC5D0\uC694?"
+      playerAnswerText: 
+      speakerAvatar: {fileID: 0}
+    - speakerName: 
+      npcDialogue: "\uAD1C\uCC2E\uC740 \uAC70\uC5D0\uC694, \uCE90\uBB3B\uC9C0\uB294
+        \uC54A\uC744 \uAC70\uC5D0\uC694. \uD06C\uB808\uB527\uB9CC \uC788\uC73C\uBA74
+        \uB204\uAD6C\uB4E0 \uC190\uB2D8\uC778 \uAC70\uC5D0\uC694."
+      playerAnswerText: 
+      speakerAvatar: {fileID: 0}
+    - speakerName: 
+      npcDialogue: "\uD544\uC694\uD55C \uAC8C \uC788\uC73C\uBA74 \uCC9C\uCC9C\uD788
+        \uACE8\uB77C \uBCF4\uB294 \uAC70\uC5D0\uC694."
+      playerAnswerText: 
+      speakerAvatar: {fileID: 0}
+  - sequenceId: tonya_tier1_event
+    priority: 50
+    minAffinity: 2
+    maxAffinity: 999
+    requiredCompanionCharId: 
+    requiredEventFlag: 
+    forbiddenEventFlag: tonya_tier1
+    setEventFlagOnComplete: tonya_tier1
+    steps:
+    - speakerName: 
+      npcDialogue: "\u2026\uC800\uAE30, \uBC29\uB791\uC790. \uC7A0\uAE50 \uC2DC\uAC04
+        \uC788\uB294 \uAC70\uC5D0\uC694?"
+      playerAnswerText: "[\uBC29\uB791\uC790] \uBB34\uC2A8 \uC77C\uC774\uC57C?"
+      speakerAvatar: {fileID: 0}
+    - speakerName: 
+      npcDialogue: "\uB9E4\uBC88 \uC0B4\uC544\uC11C \uB3CC\uC544\uC624\uB294 \uAC70\uC5D0\uC694.
+        \uAE30\uB85D\uB300\uB85C\uB77C\uBA74 \uBC8C\uC368 \uC0AC\uB77C\uC84C\uC5B4\uC57C
+        \uD558\uB294 \uD655\uB960\uC778 \uAC70\uC5D0\uC694."
+      playerAnswerText: "[\uBC29\uB791\uC790] \uC6B4\uC774 \uC88B\uC558\uC744 \uBFD0\uC774\uC57C."
+      speakerAvatar: {fileID: 0}
+    - speakerName: 
+      npcDialogue: "\u2026\u2026\uADF8\uB7FC \uADF8 \uC6B4, \uD1A0\uB0D0\uB3C4 \uC870\uAE08
+        \uBBFF\uC5B4 \uBCF4\uB294 \uAC70\uC5D0\uC694. \uB2E4\uC74C\uC5D0\uB3C4 \uAF2D
+        \uB4E4\uB974\uB294 \uAC70\uC5D0\uC694."
+      playerAnswerText: "[\uBC29\uB791\uC790] \uC57D\uC18D\uD560\uAC8C."
+      speakerAvatar: {fileID: 0}
+  - sequenceId: tonya_greet_t1
+    priority: 1
+    minAffinity: 2
+    maxAffinity: 999
+    requiredCompanionCharId: 
+    requiredEventFlag: 
+    forbiddenEventFlag: 
+    setEventFlagOnComplete: 
+    steps:
+    - speakerName: 
+      npcDialogue: "\uB610 \uC628 \uAC70\uC5D0\uC694. \u2026\uBB34\uC0AC\uD574\uC11C
+        \uB2E4\uD589\uC778 \uAC70\uC5D0\uC694."
+      playerAnswerText: 
+      speakerAvatar: {fileID: 0}
+  - sequenceId: tonya_greet_default
+    priority: 0
+    minAffinity: 0
+    maxAffinity: 999
+    requiredCompanionCharId: 
+    requiredEventFlag: 
+    forbiddenEventFlag: 
+    setEventFlagOnComplete: 
+    steps:
+    - speakerName: 
+      npcDialogue: "\uC5B4\uC11C \uC624\uB294 \uAC70\uC5D0\uC694. \uC624\uB298\uB3C4
+        \uBCF4\uAE09\uC18C\uB294 \uC5F4\uB824 \uC788\uB294 \uAC70\uC5D0\uC694."
+      playerAnswerText: 
+      speakerAvatar: {fileID: 0}
+  idleLines:
+  - "\uD544\uC694\uD55C \uAC8C \uC788\uB294 \uAC70\uC5D0\uC694?"
+  - "\uC88B\uC740 \uC120\uD0DD\uC774 \uB418\uAE38 \uBC14\uB77C\uB294 \uAC70\uC5D0\uC694."
+  - "\uADF8\uAC74 \uD1A0\uB0D0\uAC00 \uC9C1\uC811 \uC810\uAC80\uD55C \uBB3C\uAC74\uC778
+    \uAC70\uC5D0\uC694."
+  - "\uD06C\uB808\uB527\uC774 \uBAA8\uC790\uB77C\uBA74\u2026 \uC5B4\uCA54 \uC218
+    \uC5C6\uB294 \uAC70\uC5D0\uC694."
+  - "\uAD6C\uACBD\uB9CC \uD558\uACE0 \uC548 \uC0AC\uB294 \uAC74 \uACE4\uB780\uD55C
+    \uAC70\uC5D0\uC694."
+  - "\uC624\uB298\uC740 \uC785\uACE0\uAC00 \uAD1C\uCC2E\uC740 \uD3B8\uC778 \uAC70\uC5D0\uC694."
+  - "\u2026\uC65C \uC790\uAFB8 \uCC0C\uB974\uB294 \uAC70\uC5D0\uC694?"
