@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEditor;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 // Assets/Art/UI/StatusIcons의 PNG를 Sprite로 임포트하고,
@@ -64,6 +65,14 @@ public static class StatusIconAssigner
         Debug.Log($"[StatusIconAssigner] {report}");
     }
 
+    // 아이콘 원본(1254px 안팎)은 칩(40px대)보다 훨씬 커서, 밉맵 없이 줄이면 검은 외곽선이 샘플링에서
+    // 빠져 흰 덩어리로 뭉개진다. 밉맵을 켜고, 텍스처는 256으로 제한한다(칩 크기의 5~6배면 충분).
+    private const int MaxTextureSize = 256;
+    // 원본마다 투명 여백이 10~50%라 그대로 쓰면 칩 안의 실제 그림이 절반 크기가 된다.
+    // 스프라이트 영역을 그림이 있는 부분(알파 > 임계값)의 정사각형으로 잘라낸다. 원본 PNG는 건드리지 않는다.
+    private const byte AlphaThreshold = 8;
+    private const float TrimPadding = 0.03f; // 잘라낸 영역 둘레에 남길 여백(한 변 대비)
+
     // PNG를 UI용 Sprite로 임포트 설정한 뒤 이름 -> Sprite 사전을 만든다.
     private static Dictionary<string, Sprite> ImportAndCollectSprites()
     {
@@ -76,45 +85,97 @@ public static class StatusIconAssigner
 
             if (AssetImporter.GetAtPath(assetPath) is TextureImporter importer)
             {
-                bool changed = false;
+                importer.textureType = TextureImporterType.Sprite;
+                importer.spriteImportMode = SpriteImportMode.Multiple; // 영역을 잘라내려면 Multiple이어야 한다
+                importer.alphaIsTransparency = true;
+                // 작은 아이콘이라 압축 아티팩트가 그대로 보인다. 무압축 유지.
+                importer.textureCompression = TextureImporterCompression.Uncompressed;
+                importer.mipmapEnabled = true;
+                importer.filterMode = FilterMode.Trilinear;
+                importer.maxTextureSize = MaxTextureSize;
+                importer.SaveAndReimport();
 
-                if (importer.textureType != TextureImporterType.Sprite)
-                {
-                    importer.textureType = TextureImporterType.Sprite;
-                    changed = true;
-                }
-                if (importer.spriteImportMode != SpriteImportMode.Single)
-                {
-                    importer.spriteImportMode = SpriteImportMode.Single;
-                    changed = true;
-                }
-                if (!importer.alphaIsTransparency)
-                {
-                    importer.alphaIsTransparency = true;
-                    changed = true;
-                }
-                // 34px 칩에 들어가는 작은 아이콘이라 압축 아티팩트가 그대로 보인다. 무압축 유지.
-                if (importer.textureCompression != TextureImporterCompression.Uncompressed)
-                {
-                    importer.textureCompression = TextureImporterCompression.Uncompressed;
-                    changed = true;
-                }
-                if (importer.mipmapEnabled)
-                {
-                    importer.mipmapEnabled = false;
-                    changed = true;
-                }
-
-                if (changed)
-                {
-                    importer.SaveAndReimport();
-                }
+                TrimToContent(importer, assetPath);
             }
 
-            var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
-            if (sprite != null) result[sprite.name] = sprite;
+            foreach (var asset in AssetDatabase.LoadAllAssetRepresentationsAtPath(assetPath))
+                if (asset is Sprite sprite) result[sprite.name] = sprite;
         }
 
         return result;
+    }
+
+    // 스프라이트 영역(원본 해상도 좌표)을 그림이 있는 부분의 정사각형으로 맞춘다.
+    // 스프라이트 이름은 파일명과 같게 두어 StatusDefinition 이름과 매칭되게 한다.
+    private static void TrimToContent(TextureImporter importer, string assetPath)
+    {
+        // 임포트된 텍스처는 256으로 줄어 있으므로, 원본 파일을 직접 읽어 원본 좌표로 계산한다.
+        var source = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+        if (!source.LoadImage(System.IO.File.ReadAllBytes(assetPath)))
+        {
+            Object.DestroyImmediate(source);
+            return;
+        }
+
+        RectInt content = FindOpaqueBounds(source);
+        int width = source.width, height = source.height;
+        Object.DestroyImmediate(source);
+        if (content.width <= 0 || content.height <= 0) return;
+
+        int side = Mathf.CeilToInt(Mathf.Max(content.width, content.height) * (1f + TrimPadding * 2f));
+        side = Mathf.Min(side, Mathf.Min(width, height));
+        int x = Mathf.Clamp(Mathf.RoundToInt(content.center.x - side * 0.5f), 0, width - side);
+        int y = Mathf.Clamp(Mathf.RoundToInt(content.center.y - side * 0.5f), 0, height - side);
+
+        var factory = new SpriteDataProviderFactories();
+        factory.Init();
+        var provider = factory.GetSpriteEditorDataProviderFromObject(importer);
+        if (provider == null) return;
+        provider.InitSpriteEditorDataProvider();
+
+        var editCapability = provider.GetDataProvider<ISpriteFrameEditCapability>();
+        if (editCapability == null ||
+            !editCapability.GetEditCapability().HasCapability(EEditCapability.EditSpriteRect) ||
+            !editCapability.GetEditCapability().HasCapability(EEditCapability.CreateAndDeleteSprite))
+        {
+            Debug.LogWarning($"[StatusIconAssigner] {assetPath}: 임포터가 스프라이트 영역 편집을 지원하지 않아 트림을 건너뜀.");
+            return;
+        }
+
+        var rects = provider.GetSpriteRects();
+        var rect = rects.Length > 0 ? rects[0] : new SpriteRect { spriteID = GUID.Generate() };
+        rect.name = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+        rect.rect = new Rect(x, y, side, side);
+        rect.alignment = SpriteAlignment.Center;
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        provider.SetSpriteRects(new[] { rect }); // 한 장만 남긴다
+
+        // 이름 ↔ 파일 ID 매핑도 맞춰야 이후 재임포트에서 참조가 유지된다
+        var nameIds = provider.GetDataProvider<ISpriteNameFileIdDataProvider>();
+        nameIds?.SetNameFileIdPairs(new[] { new SpriteNameFileIdPair(rect.name, rect.spriteID) });
+
+        provider.Apply();
+        importer.SaveAndReimport();
+    }
+
+    // 알파가 임계값을 넘는 픽셀의 경계 상자 (텍스처 좌표: 왼쪽 아래 원점 — 스프라이트 rect와 같은 기준)
+    private static RectInt FindOpaqueBounds(Texture2D texture)
+    {
+        Color32[] pixels = texture.GetPixels32();
+        int w = texture.width, h = texture.height;
+        int minX = w, minY = h, maxX = -1, maxY = -1;
+        for (int y = 0; y < h; y++)
+        {
+            int row = y * w;
+            for (int x = 0; x < w; x++)
+            {
+                if (pixels[row + x].a <= AlphaThreshold) continue;
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
+            }
+        }
+        return maxX < 0 ? new RectInt() : new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1);
     }
 }

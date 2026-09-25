@@ -15,7 +15,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -43,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 2
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -52,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -78,7 +78,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -106,15 +106,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ApplyWeakOnHit_0
+      name: ApplyWeakOnHit
       rect:
         serializedVersion: 2
-        x: 6
-        y: 6
-        width: 64
-        height: 64
+        x: 76
+        y: 128
+        width: 983
+        height: 983
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -123,50 +123,6 @@ TextureImporter:
       bones: []
       spriteID: e220df21fb720c210800000000000000
       internalID: 1351123589821956654
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ApplyWeakOnHit_1
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 44
-        width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a6e185bbf85c09c50800000000000000
-      internalID: 6670048269249814122
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ApplyWeakOnHit_2
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 58
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 08ebeb3da957b36d0800000000000000
-      internalID: -3009682618129138048
       vertices: []
       indices: 
       edges: []
@@ -185,9 +141,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ApplyWeakOnHit_0: 1351123589821956654
-      ApplyWeakOnHit_1: 6670048269249814122
-      ApplyWeakOnHit_2: -3009682618129138048
+      ApplyWeakOnHit: 1351123589821956654
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

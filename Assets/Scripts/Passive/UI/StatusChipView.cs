@@ -19,10 +19,17 @@ public class StatusChipView : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private TextMeshProUGUI labelText; // 아이콘 없을 때의 대체 표시
     [SerializeField] private TextMeshProUGUI stackText;
 
-    [Header("성향별 배경색")]
-    [SerializeField] private Color buffColor    = new(0.20f, 0.55f, 0.25f, 0.85f);
-    [SerializeField] private Color debuffColor  = new(0.65f, 0.18f, 0.18f, 0.85f);
-    [SerializeField] private Color neutralColor = new(0.30f, 0.30f, 0.35f, 0.85f);
+    [Tooltip("스택 숫자 배지(구석). 스택이 0이면 숨긴다")]
+    [SerializeField] private GameObject stackBadge;
+    [Tooltip("성향(버프/디버프) 색을 칠할 띠. 비워두면 배경 전체에 칠한다(이전 방식)")]
+    [SerializeField] private Image accentBar;
+
+    [Header("성향별 색")]
+    // 아이콘은 검은 외곽선 + 흰 면 + 시안 포인트로 그려져 있어서, 채도 높은 배경 위에선 흰 면이 묻힌다.
+    // 배경은 종이색으로 두고 성향은 하단 띠 색으로만 구분한다(아트 디렉션: 오프화이트 바탕, 색은 최소한).
+    [SerializeField] private Color buffColor    = new(0.30f, 0.72f, 0.88f, 1f);
+    [SerializeField] private Color debuffColor  = new(0.82f, 0.20f, 0.20f, 1f);
+    [SerializeField] private Color neutralColor = new(0.45f, 0.47f, 0.50f, 1f);
 
     public StatusInstance Bound { get; private set; }
 
@@ -63,16 +70,17 @@ public class StatusChipView : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         if (stackText != null)
             stackText.text = status.Stacks.ToString();
+        if (stackBadge != null)
+            stackBadge.SetActive(status.Stacks != 0);
 
-        if (background != null)
+        Color dispositionColor = definition.GetDisposition(status.Stacks) switch
         {
-            background.color = definition.GetDisposition(status.Stacks) switch
-            {
-                StatusDisposition.Buff   => buffColor,
-                StatusDisposition.Debuff => debuffColor,
-                _                        => neutralColor,
-            };
-        }
+            StatusDisposition.Buff   => buffColor,
+            StatusDisposition.Debuff => debuffColor,
+            _                        => neutralColor,
+        };
+        if (accentBar != null) accentBar.color = dispositionColor;
+        else if (background != null) background.color = dispositionColor;
 
         // 인스펙터/하이어라키에서 어떤 상태인지 바로 알아보기 위함. 전투 디버깅용.
         gameObject.name = $"Chip_{definition.Id}";
