@@ -144,12 +144,39 @@ public class CardData : ScriptableObject
     // 힘·민첩 등 패시브 보정이 반영된 값으로 표시한다. state가 null이면(보상·덱 화면) 원시값 그대로.
     // target까지 넘기면(타겟팅 드래그 중) 취약·버퍼 등 대상 측 보정도 반영된다.
     public string GetFullDescription(BattleState state = null, EnemyInstance target = null)
+        => GetDescription(isUpgraded, state, target);
+
+    // ---- 강화 전/후 비교용 (강화 표시: CardUpgradeHighlight) ----
+    // 현재 isUpgraded와 무관하게 지정한 상태 기준으로 계산한다. isUpgraded를 잠깐 뒤집지 않아도 되게.
+    private CardUpgradeState StateOf(bool upgraded) => upgraded ? upgradedState : normalState;
+    private IReadOnlyList<CardEffect> EffectsOf(bool upgraded)
+    {
+        var effects = StateOf(upgraded).effects;
+        if (effects != null) return effects;
+        return normalState.effects != null ? normalState.effects : System.Array.Empty<CardEffect>();
+    }
+    public int GetEnergyCost(bool upgraded) => StateOf(upgraded).energyCost;
+    public int GetAmmoCost(bool upgraded)   => StateOf(upgraded).ammoCost;
+
+    // 상태 플래그로 정해지는 키워드 (표시 이름). 설명문 템플릿에 직접 적는 대신 강화로 생기는 키워드를 자동 표기할 때 쓴다.
+    public List<string> GetKeywords(bool upgraded)
+    {
+        var st = StateOf(upgraded);
+        var list = new List<string>();
+        if (st.isInnate)   list.Add("선천성");
+        if (st.isRetain)   list.Add("보존");
+        if (st.isEthereal) list.Add("휘발성");
+        if (st.isExhaust)  list.Add("소멸");
+        return list;
+    }
+
+    public string GetDescription(bool upgraded, BattleState state = null, EnemyInstance target = null)
     {
         if (string.IsNullOrEmpty(cardDescription)) return string.Empty;
+        var effects = EffectsOf(upgraded);
         return Regex.Replace(cardDescription, @"\{(\d+)\.([\w.]+)\}", match =>
         {
             if (!int.TryParse(match.Groups[1].Value, out int idx)) return match.Value;
-            var effects = ActiveEffects;
             if (idx >= effects.Count) return match.Value;
 
             var effect = effects[idx];

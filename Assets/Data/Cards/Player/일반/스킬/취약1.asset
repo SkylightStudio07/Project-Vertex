@@ -39,6 +39,7 @@ MonoBehaviour:
     ammoCost: 0
     effects:
     - rid: 7338471699195101438
+    - rid: 4386673737357328796
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -48,6 +49,22 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 4386673737357328796
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000005, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0
     - rid: 7338471699195101412
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:

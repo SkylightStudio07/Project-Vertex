@@ -25,13 +25,32 @@ public class CardView : MonoBehaviour
 
     public CardData Data { get; private set; }
 
+    // 강화된 카드는 이름과, 강화로 달라진 코스트를 강조색으로 칠한다 (설명문은 CardUpgradeHighlight).
+    private static readonly Color UpgradeNameColor = new(1f, 0.32f, 0.28f, 1f);   // 검은 이름 바 위
+    private static readonly Color UpgradeCostColor = new(0.82f, 0.16f, 0.14f, 1f); // 흰 코스트 원 위
+    private Color _nameColor, _energyColor, _ammoColor;
+    private bool _hasBaseColors;
+
     public void SetCard(CardData card)
     {
         Data = card;
 
+        if (!_hasBaseColors)
+        {
+            _nameColor = nameText.color;
+            _energyColor = energyCostText.color;
+            _ammoColor = ammoCostText.color;
+            _hasBaseColors = true;
+        }
+
         nameText.text        = card.CardName;
         energyCostText.text  = card.EnergyCost.ToString();
         ammoCostText.text    = card.AmmoCost.ToString();
+
+        bool up = card.isUpgraded;
+        nameText.color       = up ? UpgradeNameColor : _nameColor;
+        energyCostText.color = up && card.GetEnergyCost(true) != card.GetEnergyCost(false) ? UpgradeCostColor : _energyColor;
+        ammoCostText.color   = up && card.GetAmmoCost(true) != card.GetAmmoCost(false) ? UpgradeCostColor : _ammoColor;
         if (typeText != null) typeText.text = GetTypeLabel(card.Type);
         RefreshDescription();
 
@@ -53,7 +72,7 @@ public class CardView : MonoBehaviour
         BattleState battleState = BattleManager.Instance != null && BattleManager.Instance.IsInBattle
             ? BattleManager.Instance.State
             : null;
-        descriptionText.text = Data.GetFullDescription(battleState, target);
+        descriptionText.text = CardUpgradeHighlight.Describe(Data, battleState, target);
     }
 
     private static string GetTypeLabel(CardData.CardType type) => type switch
