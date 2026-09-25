@@ -181,8 +181,9 @@ public class RewardsView : MonoBehaviour
         var icon = CloneForEffect(button.Icon.gameObject);
         GameObject label = null;
         var seq = DOTween.Sequence().SetLink(icon);
-        Transform slot = item.Type == RewardType.Item && itemBar != null && ItemInventoryManager.Instance != null
-            ? itemBar.GetSlotRect(ItemInventoryManager.Instance.Items.Count - 1)
+        int slotIndex = ItemInventoryManager.Instance != null ? ItemInventoryManager.Instance.Items.Count - 1 : -1;
+        Transform slot = item.Type == RewardType.Item && itemBar != null
+            ? itemBar.GetSlotRect(slotIndex)
             : null;
 
         if (slot != null)
@@ -196,8 +197,8 @@ public class RewardsView : MonoBehaviour
             seq.AppendCallback(() =>
             {
                 slotGroup.alpha = 1f;
-                slot.DOKill(true);
-                slot.DOPunchScale(Vector3.one * 0.2f, 0.3f, 6, 0.6f);
+                // 날아온 아이콘이 꽂히는 순간 슬롯의 나타나는 연출(디졸브 + 튀어오름)을 다시 재생
+                itemBar.PlayAppear(slotIndex);
             });
         }
         else

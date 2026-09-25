@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -30,6 +31,19 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (iconImage == null) return;
 
         iconImage.sprite = item != null ? item.ItemIcon : emptyIcon;
+    }
+
+    // 새 아이템이 들어왔을 때: 아이콘이 디졸브로 나타나며 살짝 튀어오른다 (ItemInventoryView가 호출)
+    public void PlayAppear(Texture noise, float duration)
+    {
+        if (iconImage == null) iconImage = GetComponent<Image>();
+        if (iconImage == null) return;
+
+        transform.DOKill(true);
+        var baseScale = transform.localScale;
+        transform.localScale = baseScale * 0.7f;
+        transform.DOScale(baseScale, duration).SetEase(Ease.OutBack).SetLink(gameObject);
+        UIDissolve.In(iconImage, noise, duration, UIDissolve.DefaultEdge);
     }
 
     // 호버 시 공용 툴팁 표시 (이름/설명은 View가 채움).

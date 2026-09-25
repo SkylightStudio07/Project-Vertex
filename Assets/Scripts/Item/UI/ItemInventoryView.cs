@@ -18,7 +18,13 @@ public class ItemInventoryView : MonoBehaviour
     [Header("공용 사용/버리기 팝업")]
     [SerializeField] private ItemActionPopup actionPopup;
 
+    [Header("획득 연출")]
+    [SerializeField] private Texture appearNoise;              // 디졸브 노이즈 (비우면 페이드)
+    [SerializeField, Min(0f)] private float appearDuration = 0.5f;
+
     private readonly List<ItemSlot> _slots = new();
+    private readonly List<ItemData> _lastItems = new();        // 직전 갱신 때 칸별 아이템 — 새로 들어온 칸을 찾는 용도
+    private bool _hasSnapshot;                                 // 첫 갱신(씬 시작·로드)엔 연출하지 않는다
     private bool _subscribed;
 
     // 상점 등 아이템바 밖의 UI도 같은 툴팁을 빌려 쓴다(UpperPanel이 캔버스 뒤쪽이라 대부분의 화면 위에 그려짐).
@@ -67,7 +73,19 @@ public class ItemInventoryView : MonoBehaviour
 
         var items = manager.Items;
         for (int i = 0; i < _slots.Count; i++)
-            _slots[i].SetItem(i < items.Count ? items[i] : null, this);
+        {
+            var item = i < items.Count ? items[i] : null;
+            _slots[i].SetItem(item, this);
+
+            // 이 칸에 전에 없던 아이템이 들어왔으면 나타나는 연출. 아이템을 써서 앞으로 당겨진 칸은
+            // 직전에도 소지하던 아이템이라 연출하지 않는다.
+            bool isNew = item != null && !_lastItems.Contains(item);
+            if (_hasSnapshot && isNew && _slots[i].gameObject.activeInHierarchy)
+                _slots[i].PlayAppear(appearNoise, appearDuration);
+        }
+        _lastItems.Clear();
+        _lastItems.AddRange(items);
+        _hasSnapshot = true;
     }
 
     private void SyncSlotCount(int slotCount)
@@ -88,6 +106,13 @@ public class ItemInventoryView : MonoBehaviour
             }
             _slots.Add(slot);
         }
+    }
+
+    // 특정 칸의 나타나는 연출을 다시 재생 (보상 아이콘이 날아와 꽂히는 순간 등)
+    public void PlayAppear(int index)
+    {
+        if (index >= 0 && index < _slots.Count && _slots[index] != null)
+            _slots[index].PlayAppear(appearNoise, appearDuration);
     }
 
     // 보상 획득 연출에서 아이콘이 날아갈 목표 슬롯. 범위 밖이면 null.
