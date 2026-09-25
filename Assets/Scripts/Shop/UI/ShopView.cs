@@ -27,9 +27,12 @@ public class ShopView : MonoBehaviour
     // 막마다 다른 상점 주인. GameManager.Chapter와 일치하는 것을 쓰고, 없으면 첫 번째.
     [SerializeField] private List<ShopkeeperData> shopkeepers = new();
     [SerializeField] private NpcDialogueOverlay dialogueOverlay;
-    [Tooltip("상점 화면의 고정 말풍선 텍스트 — 상점 주인/말풍선 클릭 시 ShopkeeperData.idleLines에서 바뀐다")]
-    [SerializeField] private TextMeshProUGUI shopkeeperBubbleText;
+    [Tooltip("상점 주인 말풍선 — 입장·구매·클릭·가만히 있을 때 잠깐 떴다 사라진다 (ShopkeeperData의 말풍선 대사)")]
+    [SerializeField] private SpeechBubble shopkeeperBubble;
     [SerializeField] private Button shopkeeperBubbleButton;
+
+    private float _idleTimer;     // 마지막 말풍선이 사라진 뒤 흐른 시간
+    private bool _bubbleReady;    // 입장 대사가 끝나기 전에는 말풍선을 띄우지 않는다
 
     [Header("공통")]
     [SerializeField] private TextMeshProUGUI goldText;
@@ -55,9 +58,9 @@ public class ShopView : MonoBehaviour
         if (shopkeeperButton != null)
         {
             shopkeeperButton.onClick.AddListener(OpenGoods);
-            shopkeeperButton.onClick.AddListener(ChangeBubbleLine);
+            shopkeeperButton.onClick.AddListener(SayClickLine);
         }
-        if (shopkeeperBubbleButton != null) shopkeeperBubbleButton.onClick.AddListener(ChangeBubbleLine);
+        if (shopkeeperBubbleButton != null) shopkeeperBubbleButton.onClick.AddListener(SayClickLine);
         if (closeGoodsButton != null) closeGoodsButton.onClick.AddListener(CloseGoods);
         if (proceedButton != null) proceedButton.onClick.AddListener(Proceed);
         if (cardRemoveButton != null) cardRemoveButton.onClick.AddListener(OpenCardRemove);
@@ -80,11 +83,13 @@ public class ShopView : MonoBehaviour
     // 대사 오버레이가 화면 전체 입력을 막으므로, 대사가 끝나야 상품을 고를 수 있다.
     private void PlayShopkeeperGreeting()
     {
+        _bubbleReady = false;
+        _idleTimer = 0f;
+        if (shopkeeperBubble != null) shopkeeperBubble.HideImmediate();
+
         var keeper = ResolveShopkeeper();
         if (keeper == null) return;
-        // 입장 시엔 목록 첫 줄(인사말)로 시작하고, 클릭할 때부터 무작위로 바뀐다
-        if (shopkeeperBubbleText != null && keeper.idleLines.Count > 0) shopkeeperBubbleText.text = keeper.idleLines[0];
-        if (dialogueOverlay == null) return;
+        if (dialogueOverlay == null) { OnGreetingDialogueDone(); return; }
 
         var affinity = BlessingAffinityManager.Instance;
         affinity.AddAffinity(keeper.entityId, keeper.visitAffinityGain);
@@ -93,14 +98,54 @@ public class ShopView : MonoBehaviour
             affinity.GetAffinity(keeper.entityId),
             charId => CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charId),
             affinity.GetAllFlags());
-        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, null);
+        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, OnGreetingDialogueDone);
+        else OnGreetingDialogueDone();
     }
 
-    private void ChangeBubbleLine()
+    // 입장 대사(하단 대사창)가 끝나면 말풍선으로 인사 한 번
+    private void OnGreetingDialogueDone()
+    {
+        _bubbleReady = true;
+        var keeper = ResolveShopkeeper();
+        if (keeper != null) Say(keeper.greetingLine);
+    }
+
+    private void Update()
+    {
+        // 가만히 있으면 잡담: 말풍선이 사라진 뒤 idleInterval초가 지나면 한마디
+        if (!_bubbleReady || shopkeeperBubble == null || shopkeeperBubble.IsShowing) return;
+        if (dialogueOverlay != null && dialogueOverlay.IsPlaying) return;
+        var keeper = ResolveShopkeeper();
+        if (keeper == null) return;
+
+        _idleTimer += Time.deltaTime;
+        if (_idleTimer >= keeper.idleInterval)
+            Say(ShopkeeperData.PickLine(keeper.idleLines, null));
+    }
+
+    private void SayClickLine()
     {
         var keeper = ResolveShopkeeper();
-        if (keeper == null || shopkeeperBubbleText == null) return;
-        shopkeeperBubbleText.text = keeper.PickIdleLine(shopkeeperBubbleText.text);
+        if (keeper != null) Say(ShopkeeperData.PickLine(keeper.clickLines, CurrentBubbleText()));
+    }
+
+    private void SayPurchaseLine()
+    {
+        var keeper = ResolveShopkeeper();
+        if (keeper != null) Say(ShopkeeperData.PickLine(keeper.purchaseLines, CurrentBubbleText()));
+    }
+
+    private void Say(string line)
+    {
+        if (!_bubbleReady || shopkeeperBubble == null || string.IsNullOrEmpty(line)) return;
+        shopkeeperBubble.Show(line);
+        _idleTimer = 0f;
+    }
+
+    private string CurrentBubbleText()
+    {
+        var t = shopkeeperBubble != null ? shopkeeperBubble.GetComponentInChildren<TextMeshProUGUI>() : null;
+        return t != null ? t.text : null;
     }
 
     private ShopkeeperData ResolveShopkeeper()
@@ -286,6 +331,7 @@ public class ShopView : MonoBehaviour
         GameManager.Instance.PlayerGold -= goods.Price;
         Debug.Log("[Shop] 구매 완료: " + goods.DisplayName + " / 남은 골드: " + GameManager.Instance.PlayerGold);
         goods.IsSold = true;
+        SayPurchaseLine();
 
         // 품절 표시·가격 색·골드 표기 갱신. 골드가 줄었으니 제거 버튼 활성화 조건도 다시 평가한다.
         RefreshGold();
@@ -323,19 +369,23 @@ public class ShopView : MonoBehaviour
 
     private void RemoveCard(CardData card, int price)
     {
-        if (!DeckManager.Instance.RemoveCardFromPlayerDeck(card)) return;
-
-        GameManager.Instance.PlayerGold -= price;
-        RunData.Instance.cardRemoveCount++;
+        if (card == null || !DeckManager.Instance.PlayerDeck.Contains(card)) return;
 
         CardListView.Instance.Close();
+        // 카드를 크게 띄운 뒤 불타 없어지는 연출. 실제 제거는 카드 모습을 떠 둔 직후 실행된다.
+        CardActionFx.Remove(card, () =>
+        {
+            if (!DeckManager.Instance.RemoveCardFromPlayerDeck(card)) return;
 
-        removedCardThisVisit = true;
+            GameManager.Instance.PlayerGold -= price;
+            RunData.Instance.cardRemoveCount++;
+            removedCardThisVisit = true;
 
-        // 골드 차감·제거 1회 소진을 표시에 반영 (RefreshRemovePrice가 removedCardThisVisit을 읽는다)
-        RefreshGold();
-        RefreshAll();
-        RefreshRemovePrice();
+            // 골드 차감·제거 1회 소진을 표시에 반영 (RefreshRemovePrice가 removedCardThisVisit을 읽는다)
+            RefreshGold();
+            RefreshAll();
+            RefreshRemovePrice();
+        }, SayPurchaseLine);
     }
 
     private void RefreshRemovePrice()

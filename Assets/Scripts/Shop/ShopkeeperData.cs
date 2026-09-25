@@ -31,19 +31,25 @@ public class ShopkeeperData : ScriptableObject
     [Header("방문 대사")]
     public List<BlessingDialogueSequence> visitSequences = new();
 
-    [Header("말풍선 잡담")]
-    [Tooltip("상점 화면의 고정 말풍선 문구. 상점 주인이나 말풍선을 클릭할 때마다 무작위로 바뀐다")]
-    [TextArea(1, 3)]
-    public List<string> idleLines = new();
+    [Header("말풍선 (잠깐 떴다 사라지는 한마디)")]
+    [Tooltip("상점에 들어왔을 때 (입장 대사가 끝난 뒤) 한 번")]
+    public string greetingLine = "필요한 게 있는 거에요?";
+    [Tooltip("가만히 있을 때 idleInterval초마다 무작위로")]
+    [TextArea(1, 3)] public List<string> idleLines = new();
+    [Tooltip("상점 주인이나 말풍선을 클릭했을 때")]
+    [TextArea(1, 3)] public List<string> clickLines = new();
+    [Tooltip("상품을 사거나 카드를 제거했을 때")]
+    [TextArea(1, 3)] public List<string> purchaseLines = new();
+    [Min(1f)] public float idleInterval = 12f;
 
-    // 직전 문구와 다른 것을 무작위로 고른다(2개 이상일 때)
-    public string PickIdleLine(string current)
+    // 직전 문구와 다른 것을 무작위로 고른다(2개 이상일 때). 목록이 비면 null.
+    public static string PickLine(List<string> lines, string current)
     {
-        if (idleLines == null || idleLines.Count == 0) return current;
-        if (idleLines.Count == 1) return idleLines[0];
+        if (lines == null || lines.Count == 0) return null;
+        if (lines.Count == 1) return lines[0];
         string next = current;
         for (int i = 0; i < 8 && next == current; i++) // 같은 문구만 들어 있어도 멈추지 않도록 시도 횟수 제한
-            next = idleLines[UnityEngine.Random.Range(0, idleLines.Count)];
+            next = lines[UnityEngine.Random.Range(0, lines.Count)];
         return next;
     }
 
