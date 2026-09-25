@@ -21,16 +21,35 @@ MonoBehaviour:
   standingSprite: {fileID: -4441471344451506041, guid: 5a974cd7ef47c7a49bb4cda67d8a4d45, type: 3}
   idleFrames: []
   idleFrameRate: 24
+  attackFrames: []
+  attackFrameRate: 24
   idleAnim: {fileID: 0}
   attackAnim: {fileID: 0}
   hitAnim: {fileID: 0}
   deathAnim: {fileID: 0}
   attackSequence: []
   charSoundEffect: {fileID: 0}
+  sanctuarySelectionArt: {fileID: 0}
+  sanctuaryHoverArt: {fileID: 0}
+  sanctuarySelectionFocus: {x: 0.5, y: 0.5}
+  sanctuaryHoverFocus: {x: 0.5, y: 0.5}
+  sanctuaryFullArt: {fileID: 0}
   unlockCardCoopLevel:
   - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
   - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
   - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
+  campSprite: {fileID: 0}
+  campActivity: "\uB2E8\uAC80 \uC190\uC9C8 \uC911"
+  campLines:
+  - "\u2026\u2026"
+  - "\uB2E4\uCE5C \uB370 \uC788\uC73C\uBA74 \uB9D0\uD574. \uC228\uAE30\uC9C0 \uB9D0\uACE0."
+  - "\u2026\u2026\uCCA0\uBD84\uC774 \uBD80\uC871\uD574."
+  - "(\uD5C8\uACF5\uC744 \uBCF4\uBA70) \u2026\uC751. \uC54C\uC544. \uC870\uC6A9\uD788
+    \uD560\uAC8C."
+  - "\uD53C \uBB3B\uC740 \uC637 \uC788\uC73C\uBA74 \uC918. \uAE08\uBC29 \uC9C0\uC6CC."
+  - "\uBC25\uC740 2\uC778\uBD84. \u2026\uC774\uC720\uB294 \uBB3B\uC9C0 \uB9C8."
+  - "\uCE7C\uB0A0\uC740 \uB9E4\uC77C \uB2E6\uC544. \uD53C\uAC00 \uAD73\uC73C\uBA74
+    \uBB34\uB38C\uC838."
   joinRewardCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
   joinDialogueJson: {fileID: 4900000, guid: f40cfa2b9a87d7b43a02d1241cc149fb, type: 3}
   rewardPoolCommon: []
@@ -40,7 +59,7 @@ MonoBehaviour:
   rankEventDatas:
   - targetLevel: 1
     requiredPoint: 2
-    dialogueJson: {fileID: 0}
+    dialogueJson: {fileID: 4900000, guid: c62032aeaca6bf346b1219069db85804, type: 3}
   - targetLevel: 2
     requiredPoint: 2
-    dialogueJson: {fileID: 0}
+    dialogueJson: {fileID: 4900000, guid: 3f9c1005ea3ff484597d5520a7b881a3, type: 3}

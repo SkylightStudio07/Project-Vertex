@@ -1,0 +1,40 @@
+{
+  "characters": [
+    { "id": "Cp_01", "name": "치하라 쇼", "slot": 0 },
+    { "id": "player", "name": "방랑자", "slot": 3 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(쇼는 오늘도 2인분을 부탁했다. 한 그릇은 손도 대지 않은 채 옆자리에 놓여 있다.)" },
+        { "type": "line", "speaker": "Cp_01", "emotion": "idle", "text": "…식기 전에 먹어. 응. 오늘 건 맛있어." },
+        {
+          "type": "choice",
+          "options": [
+            { "text": "[묻는다] …누구랑 얘기하는 거야?", "next": "ask" },
+            { "text": "[말없이] 옆자리에 같이 앉는다.", "next": "sit" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ask",
+      "lines": [
+        { "type": "line", "speaker": "Cp_01", "emotion": "idle", "text": "…동생." },
+        { "type": "line", "speaker": "Cp_01", "emotion": "sad", "text": "여기 있어. 맛있는 건 같이 먹기로 했거든." },
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(쇼의 등 뒤, 피로 된 날개가 아주 조금 흔들린다.)" },
+        { "type": "end" }
+      ]
+    },
+    {
+      "id": "sit",
+      "lines": [
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(쇼는 아무 말 없이 두 번째 그릇을 조금 이쪽으로 밀었다.)" },
+        { "type": "line", "speaker": "Cp_01", "emotion": "blush", "text": "……셋이 먹어도 돼. 오늘은." },
+        { "type": "end" }
+      ]
+    }
+  ]
+}

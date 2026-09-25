@@ -1,0 +1,41 @@
+{
+  "characters": [
+    { "id": "Cp_01", "name": "치하라 쇼", "slot": 0 },
+    { "id": "player", "name": "방랑자", "slot": 3 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(쇼가 말없이 시금치나물을 씹고 있다. 시금치전, 시금치된장국… 오늘도 반찬은 전부 시금치다.)" },
+        { "type": "line", "speaker": "Cp_01", "emotion": "idle", "text": "……철분이 부족해." },
+        {
+          "type": "choice",
+          "options": [
+            { "text": "[걱정] 어디 다쳤어?", "next": "worry" },
+            { "text": "[농담] 그렇게 먹다간 초록색 되겠다.", "next": "joke" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "worry",
+      "lines": [
+        { "type": "line", "speaker": "Cp_01", "emotion": "idle", "text": "…다친 건 아니야. 쓴 만큼 채워야 할 뿐." },
+        { "type": "line", "speaker": "Cp_01", "emotion": "annoyed", "text": "그쪽은? 팔. 긁혔잖아. 숨기지 마." },
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(쇼가 반찬 한 접시를 말없이 이쪽으로 밀어 준다.)" },
+        { "type": "end" }
+      ]
+    },
+    {
+      "id": "joke",
+      "lines": [
+        { "type": "line", "speaker": "Cp_01", "emotion": "annoyed", "text": "……." },
+        { "type": "line", "speaker": "Cp_01", "emotion": "idle", "text": "초록색 피는… 아직 안 흘려 봤어." },
+        { "type": "line", "speaker": "Cp_01", "emotion": "confident", "text": "너도 먹어. 너도 피 흘리잖아." },
+        { "type": "end" }
+      ]
+    }
+  ]
+}
