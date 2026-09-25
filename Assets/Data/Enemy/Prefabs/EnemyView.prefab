@@ -520,6 +520,7 @@ GameObject:
   - component: {fileID: 5895652225431053790}
   - component: {fileID: 7000200879120951743}
   - component: {fileID: 3674286551403237769}
+  - component: {fileID: 1036358210600367128}
   m_Layer: 5
   m_Name: Intent Icon
   m_TagString: Untagged
@@ -574,7 +575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -55702203006513449, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 858af4f56ede9394a8da912337e42784, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -599,6 +600,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
+--- !u!114 &1036358210600367128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668397739709896794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45e6d69202f2c148a1b953b930a29b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IntentTooltipTrigger
 --- !u!1 &6068292757442153213
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,15 +887,15 @@ MonoBehaviour:
   intentValueText: {fileID: 5975634853204776868}
   intentSprites:
   - intentType: 0
-    sprite: {fileID: -1018138221582106572, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
+    sprite: {fileID: 21300000, guid: 858af4f56ede9394a8da912337e42784, type: 3}
   - intentType: 1
-    sprite: {fileID: -8615907805357774769, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
+    sprite: {fileID: 21300000, guid: d373b17f08520194a90e500f3115f9de, type: 3}
   - intentType: 2
-    sprite: {fileID: -3117382119761062844, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
+    sprite: {fileID: 21300000, guid: bf21cd73663e5e24b9f4bb97f7d56a6b, type: 3}
   - intentType: 3
-    sprite: {fileID: 936468029, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
+    sprite: {fileID: 21300000, guid: ae8d45aac8a35cb4aac012d86cb96425, type: 3}
   - intentType: 4
-    sprite: {fileID: 3135245866846812400, guid: 3e5e6293c5819fd4fa1b0a7ac7de790c, type: 3}
+    sprite: {fileID: 21300000, guid: 10c82cea9cf01f64ba5e6c9c622fc268, type: 3}
   bobAmplitude: 6
   bobSpeed: 2
   lungeDistance: 40

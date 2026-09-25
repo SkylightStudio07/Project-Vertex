@@ -70,7 +70,10 @@ public class PartyView : MonoBehaviour
         }
 
         if (_subscribedPlayer != null)
+        {
             _subscribedPlayer.OnBlockGained -= HandleBlockGained;
+            _subscribedPlayer.OnDamaged -= HandlePlayerDamaged;
+        }
     }
 
     private void OnWeaponChanged(WeaponData weapon)
@@ -145,9 +148,26 @@ public class PartyView : MonoBehaviour
         PlayerCombatant current = BattleManager.Instance?.State?.Player;
         if (current == _subscribedPlayer) return;
 
-        if (_subscribedPlayer != null) _subscribedPlayer.OnBlockGained -= HandleBlockGained;
+        if (_subscribedPlayer != null)
+        {
+            _subscribedPlayer.OnBlockGained -= HandleBlockGained;
+            _subscribedPlayer.OnDamaged -= HandlePlayerDamaged;
+        }
         _subscribedPlayer = current;
-        if (_subscribedPlayer != null) _subscribedPlayer.OnBlockGained += HandleBlockGained;
+        if (_subscribedPlayer != null)
+        {
+            _subscribedPlayer.OnBlockGained += HandleBlockGained;
+            _subscribedPlayer.OnDamaged += HandlePlayerDamaged;
+        }
+    }
+
+    // 피격 시 파티원 전원이 붉게 물들었다 돌아온다 — 방어도 연출과 같은 이유로 파티 전체가 함께 맞는 것으로 표현.
+    // amount가 0이면 방어도로 전부 막은 것이라 연출하지 않는다.
+    private void HandlePlayerDamaged(int amount)
+    {
+        if (amount <= 0) return;
+        foreach (Transform anchor in GetActivePartyAnchors())
+            HitFlash.Play(anchor.GetComponent<Graphic>());
     }
 
     // 방어 카드로 방어도를 얻었을 때 — 지금 화면에 있는 파티원 전원(플레이어 + 합류 중인

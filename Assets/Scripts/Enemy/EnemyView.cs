@@ -41,6 +41,8 @@ public class EnemyView : MonoBehaviour
     [Header("인텐트 부유 애니메이션")]
     [SerializeField] private float bobAmplitude = 6f; // 위아래로 움직이는 폭(px)
     [SerializeField] private float bobSpeed     = 2f; // 초당 진동 속도
+    [Tooltip("적 그림 위 끝과 인텐트 아이콘 아래 끝 사이 간격 (이 뷰의 로컬 단위)")]
+    [SerializeField] private float intentGap    = 4f;
 
     [Header("공격 모션 (전진→후퇴)")]
     [SerializeField] private float lungeDistance    = 40f; // 전진 거리(px). 좌우 방향은 Inspector에서 부호로 조정
@@ -195,12 +197,25 @@ public class EnemyView : MonoBehaviour
             }
         }
 
-        // 인텐트 위치를 스프라이트 크기에 맞춰 상대적으로 이동.
-        // 스프라이트 높이와 피벗을 기준으로 스케일 변화에 따른 상단(Top) 변위를 계산한다.
-        float spriteHeight = enemyImage != null ? enemyImage.rectTransform.rect.height : 100f;
-        float pivotTopFactor = enemyImage != null ? (1f - enemyImage.rectTransform.pivot.y) : 0.5f;
-        float topOffset = spriteHeight * pivotTopFactor;
-        float deltaY = topOffset * (scale - 1.0f) + extraOffsetY;
+        // 인텐트를 적 그림의 실제 머리 위에 붙인다.
+        // 스프라이트 박스(Image rect) 위 끝을 기준으로 하면, 시트 프레임 위쪽의 투명 여백만큼 붕 떠서
+        // 화면 위쪽(DECK 버튼 근처)에 뜨게 된다. 스프라이트의 Tight 메시에서 불투명 영역 위 끝을 구해 쓴다.
+        float deltaY = extraOffsetY;
+        if (_intentIconRect != null && enemyImage != null && TryGetVisibleTopLocal(out float visibleTop))
+        {
+            // 아이콘 아래 끝이 그림 위 끝 + intentGap 에 오도록, 초기 배치 기준의 이동량을 구한다
+            // 아이콘에 localScale(현재 0.2)이 걸려 있어 부모 좌표 기준 높이는 rect × scale 이다
+            float iconBottomAtInitial = _initialIntentIconPos.y
+                                        - _intentIconRect.rect.height * _intentIconRect.pivot.y * _intentIconRect.localScale.y;
+            deltaY += visibleTop + intentGap - iconBottomAtInitial;
+        }
+        else
+        {
+            // 메시 정보를 못 얻으면 예전 방식(박스 위 끝 기준)
+            float spriteHeight = enemyImage != null ? enemyImage.rectTransform.rect.height : 100f;
+            float pivotTopFactor = enemyImage != null ? (1f - enemyImage.rectTransform.pivot.y) : 0.5f;
+            deltaY += spriteHeight * pivotTopFactor * (scale - 1.0f);
+        }
 
         _intentIconBasePos = _initialIntentIconPos + new Vector2(0f, deltaY);
         _intentValueBasePos = _initialIntentValuePos + new Vector2(0f, deltaY);
@@ -213,6 +228,40 @@ public class EnemyView : MonoBehaviour
             _intentValueRect.anchoredPosition = _intentValueBasePos;
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _intentFieldBasePos;
+    }
+
+    // 적 그림(현재 스프라이트)의 불투명 영역 위 끝을, 인텐트 아이콘과 같은 좌표계(이 뷰의 로컬)에서 구한다.
+    // Image는 preserveAspect로 rect 안에 맞춰 그리므로 그 배치까지 반영한다.
+    private bool TryGetVisibleTopLocal(out float top)
+    {
+        top = 0f;
+        var sprite = enemyImage.sprite;
+        if (sprite == null) return false;
+        var verts = sprite.vertices;
+        if (verts == null || verts.Length == 0) return false;
+
+        float maxY = float.MinValue;
+        foreach (var v in verts) maxY = Mathf.Max(maxY, v.y);
+        Rect sr = sprite.rect;
+        float topPx = sprite.pivot.y + maxY * sprite.pixelsPerUnit;     // 스프라이트 아래 끝 기준 픽셀
+        float normalized = Mathf.Clamp01(topPx / sr.height);
+
+        Rect r = enemyImage.rectTransform.rect;
+        float drawnH = r.height;
+        if (enemyImage.preserveAspect && sr.width > 0f)
+            drawnH = Mathf.Min(r.height, r.width * sr.height / sr.width);
+        float localTop = r.center.y - drawnH * 0.5f + normalized * drawnH; // Image 로컬
+
+        Vector3 world = enemyImage.rectTransform.TransformPoint(new Vector3(r.center.x, localTop, 0f));
+        var parent = _intentIconRect.parent as RectTransform;
+        top = parent != null ? parent.InverseTransformPoint(world).y : world.y;
+        // anchoredPosition 기준으로 맞추기 위해 앵커 오프셋을 뺀다 (앵커가 부모 중앙이 아닐 때 대비)
+        if (parent != null)
+        {
+            Vector2 anchorRef = Vector2.Lerp(_intentIconRect.anchorMin, _intentIconRect.anchorMax, 0.5f);
+            top -= parent.rect.yMin + parent.rect.height * anchorRef.y;
+        }
+        return true;
     }
 
     private void OnDestroy() => Unbind();
@@ -256,10 +305,11 @@ public class EnemyView : MonoBehaviour
         Instance.OnBlockChanged  -= RefreshBlock;
     }
 
-    private void HandleDamaged(int _)
+    private void HandleDamaged(int amount)
     {
         RefreshHP();
         SpawnHitEffect();
+        if (amount > 0) HitFlash.Play(enemyImage); // 피격 시 붉게 물들었다 돌아옴
     }
 
     private void HandleDied()
@@ -351,6 +401,10 @@ public class EnemyView : MonoBehaviour
         if (Instance == null) return;
 
         EnemyAction action = Instance.GetCurrentAction();
+
+        // 인텐트 아이콘 호버 툴팁 — 대상 적/내용 갱신 (프리팹에 IntentTooltipTrigger가 붙어 있을 때만)
+        if (intentIcon != null && intentIcon.TryGetComponent<IntentTooltipTrigger>(out var tooltip))
+            tooltip.SetOwner(Instance);
 
         if (intentIcon != null)
         {
