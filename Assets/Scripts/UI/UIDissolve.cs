@@ -17,7 +17,8 @@ public static class UIDissolve
     public static readonly Color DefaultEdge = new(0.55f, 0.85f, 0.95f, 1f);
 
     // graphic 하나를 디졸브 준비 상태로 만든다. 이미 UIEffect가 있으면 그 설정(텍스처·색)을 존중한다.
-    public static UIEffect Prepare(Graphic graphic, Texture noise, Color edge)
+    public static UIEffect Prepare(Graphic graphic, Texture noise, Color edge,
+                                   TransitionFilter filter = TransitionFilter.Dissolve)
     {
         if (graphic == null || noise == null) return null;
 
@@ -30,7 +31,7 @@ public static class UIDissolve
             fx.transitionColorFilter = ColorFilter.Replace;
             fx.transitionColor = edge;
         }
-        fx.transitionFilter = TransitionFilter.Dissolve;
+        fx.transitionFilter = filter;
         return fx;
     }
 
@@ -46,8 +47,9 @@ public static class UIDissolve
     }
 
     // root 아래 보이는 요소 전부를 디졸브로 사라지게(rate 0→1) 한다. exclude에 든 Graphic은 건드리지 않는다.
+    // filter: 기본 Dissolve. 카드 제거처럼 불타 없어지는 연출은 Burn.
     public static Sequence Out(GameObject root, Texture noise, float duration, Color edge,
-                               ICollection<Graphic> exclude = null)
+                               ICollection<Graphic> exclude = null, TransitionFilter filter = TransitionFilter.Dissolve)
     {
         var seq = DOTween.Sequence().SetLink(root);
 
@@ -57,7 +59,7 @@ public static class UIDissolve
             g.raycastTarget = false; // 사라지는 중인 UI가 클릭·타게팅을 가로채지 않도록
 
             // 글자, 또는 노이즈가 없을 때는 페이드로 처리
-            var fx = g is TMP_Text ? null : Prepare(g, noise, edge);
+            var fx = g is TMP_Text ? null : Prepare(g, noise, edge, filter);
             if (fx == null)
             {
                 seq.Join(FadeOut(g, duration * 0.6f));

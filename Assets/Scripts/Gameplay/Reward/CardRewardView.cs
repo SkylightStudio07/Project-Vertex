@@ -35,11 +35,13 @@ public class CardRewardView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    // 연출 중 클릭을 막을 대상은 카드들뿐이다. 패널 전체(CanvasGroup on 이 오브젝트)를 막으면
+    // 패널 배경까지 클릭이 통과해서, 뒤에 있는 "Cards" 보상 버튼이 다시 눌려 보상 창이 한 번 더 열린다.
     private CanvasGroup Group
     {
         get
         {
-            if (_group == null && !TryGetComponent(out _group)) _group = gameObject.AddComponent<CanvasGroup>();
+            if (_group == null && !cardContainer.TryGetComponent(out _group)) _group = cardContainer.gameObject.AddComponent<CanvasGroup>();
             return _group;
         }
     }
@@ -99,6 +101,7 @@ public class CardRewardView : MonoBehaviour
     {
         _seq?.Kill();
         Group.blocksRaycasts = false; // 연타로 같은 보상을 두 번 받는 것 방지
+        if (button != null) button.MarkClaimed(); // 날아가는 동안 보상 버튼이 다시 눌려도 반응하지 않게
 
         // 날아가는 동안 나머지 카드가 재배치되며 밀리지 않도록 레이아웃을 멈춘다
         if (cardContainer.TryGetComponent<LayoutGroup>(out var layout)) layout.enabled = false;

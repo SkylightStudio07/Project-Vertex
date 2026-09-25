@@ -634,9 +634,8 @@ public class BlessingView : MonoBehaviour
                         "제거",
                         onConfirm: () =>
                         {
-                            DeckManager.Instance.RemoveCardFromPlayerDeck(card);
                             CardListView.Instance.Close();
-                            FinishBlessing();
+                            CardActionFx.Remove(card, () => DeckManager.Instance.RemoveCardFromPlayerDeck(card), FinishBlessing);
                         });
                 }
                 else
@@ -696,17 +695,22 @@ public class BlessingView : MonoBehaviour
                         "강화",
                         onConfirm: () =>
                         {
-                            card.isUpgraded = true;
-                            Debug.Log($"[Blessing] 카드 강화 ({currentStep}/{totalSteps}): {card.CardName}");
-                            if (currentStep < totalSteps)
+                            CardActionFx.Upgrade(card, () =>
                             {
-                                StartUpgradeStep(currentStep + 1, totalSteps);
-                            }
-                            else
+                                card.isUpgraded = true;
+                                Debug.Log($"[Blessing] 카드 강화 ({currentStep}/{totalSteps}): {card.CardName}");
+                            }, () =>
                             {
-                                CardListView.Instance.Close();
-                                FinishBlessing();
-                            }
+                                if (currentStep < totalSteps)
+                                {
+                                    StartUpgradeStep(currentStep + 1, totalSteps);
+                                }
+                                else
+                                {
+                                    CardListView.Instance.Close();
+                                    FinishBlessing();
+                                }
+                            });
                         });
                 }
                 else

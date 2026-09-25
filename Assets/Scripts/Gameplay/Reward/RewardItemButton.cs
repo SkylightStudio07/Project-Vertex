@@ -48,8 +48,18 @@ public class RewardItemButton : MonoBehaviour
         iconImage.enabled = icon != null;
     }
 
+    // 보상을 이미 받았는지. 카드 보상은 고른 뒤 연출이 끝나야 버튼이 사라지므로, 그 사이 재클릭을 막는다.
+    private bool _claimed;
+
+    public void MarkClaimed()
+    {
+        _claimed = true;
+        if (TryGetComponent<UnityEngine.UI.Button>(out var uiButton)) uiButton.interactable = false;
+    }
+
     public void OnClick()
     {
+        if (_claimed) return;
         switch(rewardItem.Type)
         {
             case RewardType.Gold:
