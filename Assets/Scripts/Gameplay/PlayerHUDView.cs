@@ -26,6 +26,9 @@ public class PlayerHUDView : MonoBehaviour
     // Sprite가 비어 있으면 Unity의 Image는 type을 무시하고 꽉 찬 사각형만 그려서 fillAmount가 먹지 않는다.
     [SerializeField] private Image hpFill;
     [SerializeField] private TextMeshProUGUI blockText;
+    // 적 HP바와 같은 방패 배지(아이콘 + 숫자). 연결돼 있으면 방어도가 있을 때 배지 전체를 켜고 끈다.
+    // 비워두면 예전처럼 blockText만 켜고 끈다.
+    [SerializeField] private GameObject blockBadge;
     [SerializeField] private TextMeshProUGUI energyText;
     [SerializeField] private TextMeshProUGUI ammoText;
 
@@ -61,6 +64,8 @@ public class PlayerHUDView : MonoBehaviour
     // PlayerCombatant.OnBlocked 이벤트로 정확히 구분한다. PlayerCombatant는 전투마다 새로 생성되므로
     // 매 프레임 현재 인스턴스와 비교해 바뀌었으면 재구독한다.
     private PlayerCombatant _subscribedPlayer;
+
+    private GameObject BlockRoot => blockBadge != null ? blockBadge : blockText.gameObject;
 
     private void OnEnable()
     {
@@ -100,7 +105,7 @@ public class PlayerHUDView : MonoBehaviour
             {
                 _lastBlock = block;
                 bool hasBlock = block > 0;
-                blockText.gameObject.SetActive(hasBlock);
+                BlockRoot.SetActive(hasBlock);
                 if (hasBlock) blockText.text = block.ToString();
             }
         }
@@ -167,9 +172,10 @@ public class PlayerHUDView : MonoBehaviour
         // (Update()의 폴링 갱신보다 이벤트가 먼저 올 수 있음) 강제로 켜준다.
         if (blockText != null)
         {
-            blockText.gameObject.SetActive(true);
-            blockText.transform.DOKill(); // 연타로 방어도를 얻으면 이전 펀치가 겹치지 않도록 정리 후 재생
-            blockText.transform.DOPunchScale(Vector3.one * 0.25f, 0.3f, vibrato: 6, elasticity: 0.6f);
+            var root = BlockRoot;
+            root.SetActive(true);
+            root.transform.DOKill(true); // 연타로 방어도를 얻으면 이전 펀치가 겹치지 않도록 정리 후 재생
+            root.transform.DOPunchScale(Vector3.one * 0.25f, 0.3f, vibrato: 6, elasticity: 0.6f);
         }
 
         // 캐릭터 스프라이트 쪽 시각 연출(방패/파티클)은 PartyView가 같은 이벤트를 구독해 처리한다

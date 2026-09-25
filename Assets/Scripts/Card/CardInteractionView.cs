@@ -24,6 +24,7 @@ public class CardInteractionView : MonoBehaviour
     [Header("Hover")]
     [FormerlySerializedAs("hoverScale")]
     [SerializeField] private Vector3 _hoverScale = new Vector3(0.45f, 0.45f, 1f); // 호버 상태에서 적용할 카드 확대 비율.
+    [SerializeField] private float _hoverScreenMargin = 12f; // 호버로 커진 카드가 화면 아래 끝에서 띄울 여백(px). 이만큼 위로 들어 올린다.
 
     [Header("Dragging")]
     [FormerlySerializedAs("dragSortingOrder")]
@@ -177,6 +178,30 @@ public class CardInteractionView : MonoBehaviour
         BringCardToFront();
         // 부채꼴 각도를 펴서 카드 내용을 똑바로 보여준다 (STS 호버 연출).
         if (_rootRect != null) _rootRect.localRotation = Quaternion.identity;
+        LiftVisualIntoScreen();
+    }
+
+    // 손패는 화면 아래에 반쯤 걸쳐 있어서, 제자리에서 확대만 하면 설명문이 있는 아래 절반이 화면 밖으로 잘린다.
+    // 확대된 카드의 아래 끝이 화면 아래 끝 + 여백에 오도록 비주얼만 위로 올린다(EnterIdle에서 원위치).
+    private void LiftVisualIntoScreen()
+    {
+        if (_visual == null || _visual.parent is not RectTransform parent) return;
+
+        Canvas root = _cardCanvas != null ? _cardCanvas.rootCanvas : null;
+        Camera cam = root != null && root.renderMode != RenderMode.ScreenSpaceOverlay ? root.worldCamera : null;
+
+        var corners = new Vector3[4];
+        _visual.GetWorldCorners(corners);
+        float bottom = float.MaxValue;
+        for (int i = 0; i < 4; i++)
+            bottom = Mathf.Min(bottom, RectTransformUtility.WorldToScreenPoint(cam, corners[i]).y);
+        if (bottom >= _hoverScreenMargin) return;
+
+        Vector2 from = RectTransformUtility.WorldToScreenPoint(cam, _visual.position);
+        Vector2 to = from + new Vector2(0f, _hoverScreenMargin - bottom);
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, from, cam, out Vector3 wFrom) &&
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, to, cam, out Vector3 wTo))
+            _visual.position += wTo - wFrom;
     }
 
     public void EnterDragging()
