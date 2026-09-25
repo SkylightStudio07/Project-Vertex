@@ -25,6 +25,10 @@ public class PoseSequencePlayer : MonoBehaviour
     private UISpriteSheetAnimator sheetAnimator;
     private bool wasSheetAnimatorPlaying;
 
+    // 스프라이트 프레임 재생 중 각 프레임이 표시된 직후 호출 (재생 중인 프레임 배열, 인덱스).
+    // 총구 섬광 등 특정 프레임에 맞춰 덧그리는 연출(MuzzleFlashOverlay)이 구독한다.
+    public event System.Action<Sprite[], int> OnSpriteFrameShown;
+
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -207,6 +211,7 @@ public class PoseSequencePlayer : MonoBehaviour
                     rt.sizeDelta = new Vector2(restingSizeDelta.y * aspect, restingSizeDelta.y);
                 }
             }
+            OnSpriteFrameShown?.Invoke(frames, i);
             yield return new WaitForSeconds(delay);
         }
 
