@@ -232,6 +232,10 @@ public class MapUIController : MonoBehaviour
             return;
         }
 
+        // 노드 화면 참조가 비어 있으면 이동 자체를 막는다 — 이동부터 해 버리면 화면이 안 열린 채
+        // 현재 노드만 바뀌어서 맵이 닫히고 진행이 막힌다.
+        if (!CanOpenNode(node)) return;
+
         MapManager.Instance.MoveToNode(node);
         RefreshNodeStates();
         CloseMap();
@@ -261,6 +265,37 @@ public class MapUIController : MonoBehaviour
             default:
                 Debug.Log($"[Map] 노드 타입 {node.nodeType} — 미구현");
                 break;
+        }
+    }
+
+    private bool CanOpenNode(MapNode node)
+    {
+        if (node == null) return false;
+
+        switch (node.nodeType)
+        {
+            case NodeType.Rest:
+                if (restView != null) return true;
+                Debug.LogError("[Map] restView 참조가 없어 휴식 노드로 이동하지 않습니다. Inspector 연결을 확인하세요.");
+                return false;
+            case NodeType.Event:
+                if (eventView != null) return true;
+                Debug.LogError("[Map] eventView 참조가 없어 이벤트 노드로 이동하지 않습니다. Inspector 연결을 확인하세요.");
+                return false;
+            case NodeType.Sanctuary:
+                if (selectCoopCharUI != null) return true;
+                Debug.LogError("[Map] selectCoopCharUI 참조가 없어 성소 노드로 이동하지 않습니다. Inspector 연결을 확인하세요.");
+                return false;
+            case NodeType.Shop:
+                if (shopView != null) return true;
+                Debug.LogError("[Map] shopView 참조가 없어 상점 노드로 이동하지 않습니다. Inspector 연결을 확인하세요.");
+                return false;
+            case NodeType.Blessing:
+                if (blessingView != null || BlessingView.Instance != null) return true;
+                Debug.LogError("[Map] BlessingView가 없어 축복 노드로 이동하지 않습니다. Inspector 연결을 확인하세요.");
+                return false;
+            default:
+                return true;
         }
     }
 

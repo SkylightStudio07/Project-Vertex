@@ -32,15 +32,19 @@ public class MapConfig : ScriptableObject
     [Range(2, 5)] public int maxNodesPerFloor = 5;
 
     [Header("노드 타입 가중치")]
-    // 가중치가 높을수록 해당 타입이 더 자주 등장한다.
+    // 가중치가 높을수록 해당 타입이 더 자주 등장한다. 층마다 배치 규칙(최소 등장 층 등)을 통과한 타입끼리 비율로 뽑는다.
+    // 슬더스 1막 비율(전투 53 / 이벤트 22 / 엘리트 8 / 휴식 12 / 상점 5)을 기준으로 하되,
+    // 우리 맵은 층당 노드가 3~5개라(슬더스 7열) 노드 총량이 적어서 상점·엘리트를 조금 올렸다.
+    // 1000판 시뮬레이션 기준: 상점 맵당 3.3개(상점 없는 판 2%), 엘리트 맵당 3.2개(한 경로 최대 약 2개, 거의 다 회피 가능).
+    // 보물상자(Treasure_Box)는 폐기된 기획이라 넣지 않는다.
     public List<NodeTypeWeight> nodeTypeWeights = new()
     {
-        new NodeTypeWeight { nodeType = NodeType.Combat, weight = 1f },
-        new NodeTypeWeight { nodeType = NodeType.Elite, weight = 0.3f },
-        new NodeTypeWeight { nodeType = NodeType.Sanctuary, weight = 0.1f },
-        new NodeTypeWeight { nodeType = NodeType.Event, weight = 0.4f },
-        new NodeTypeWeight { nodeType = NodeType.Shop, weight = 0.1f },
-        new NodeTypeWeight { nodeType = NodeType.Rest, weight = 0.1f },
+        new NodeTypeWeight { nodeType = NodeType.Combat,    weight = 0.48f },
+        new NodeTypeWeight { nodeType = NodeType.Event,     weight = 0.22f },
+        new NodeTypeWeight { nodeType = NodeType.Elite,     weight = 0.10f },
+        new NodeTypeWeight { nodeType = NodeType.Rest,      weight = 0.12f },
+        new NodeTypeWeight { nodeType = NodeType.Shop,      weight = 0.08f },
+        new NodeTypeWeight { nodeType = NodeType.Sanctuary, weight = 0.02f },
     };
 
     [Header("노드 배치 규칙")]

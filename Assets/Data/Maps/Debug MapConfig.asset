@@ -17,17 +17,24 @@ MonoBehaviour:
   maxNodesPerFloor: 5
   nodeTypeWeights:
   - nodeType: 0
-    weight: 1
-  - nodeType: 4
-    weight: 0.3
-  - nodeType: 7
-    weight: 0.02
+    weight: 0.48
   - nodeType: 1
-    weight: 0.4
-  - nodeType: 2
+    weight: 0.22
+  - nodeType: 4
     weight: 0.1
   - nodeType: 3
-    weight: 0.2
+    weight: 0.12
+  - nodeType: 2
+    weight: 0.08
+  - nodeType: 7
+    weight: 0.02
+  minFloorRules:
+  - nodeType: 4
+    minFloorIndex: 5
+  - nodeType: 3
+    minFloorIndex: 5
+  noConsecutiveTypes: 040000000300000002000000
+  forbidSiblingDuplicates: 1
   normalEncounterPool:
   - {fileID: 11400000, guid: a46c476622c953968d16d85334612307, type: 2}
   - {fileID: 11400000, guid: edd1226cc9ba5fdfba53b7e0148deb96, type: 2}
