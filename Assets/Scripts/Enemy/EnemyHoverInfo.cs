@@ -29,7 +29,8 @@ public class EnemyHoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         if (nameText != null) nameText.text = enemy.Data != null ? enemy.Data.enemyName : string.Empty;
         if (nameLabel != null) nameLabel.SetActive(true);
-        if (intentTooltip != null) intentTooltip.Show();
+        // 카드로 겨냥 중엔 툴팁이 조준선·예상 피해를 가리므로 이름만 보여준다
+        if (intentTooltip != null && !CardHandler.IsAnyDragging) intentTooltip.Show();
     }
 
     public void OnPointerExit(PointerEventData eventData) => Hide();

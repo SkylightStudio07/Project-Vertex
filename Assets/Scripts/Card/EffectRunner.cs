@@ -66,7 +66,9 @@ public static class EffectRunner
                                 info = passive.PreviewOutgoingDamage(info, context.State);
                         foreach (var passive in target.Passives)
                             info = passive.PreviewIncomingDamage(info, context.State);
-                        preview.TotalDamage += System.Math.Max(0, info.Amount) * damage.hitCount;
+                        int dealt = System.Math.Max(0, info.Amount) * damage.hitCount;
+                        preview.TotalDamage += dealt;
+                        preview.AddTargetDamage(target, dealt, info.IsPiercing);
                         preview.HitCount += damage.hitCount;
                         preview.HasDamage = true;
                     }
@@ -93,4 +95,21 @@ public sealed class EffectPreview
     public int TotalDamage;
     public int HitCount;
     public readonly List<StatusDefinition> Statuses = new();
+
+    // 대상별 피해 (HP바 예상 피해 표시용). 관통 피해는 방어도를 무시하므로 따로 모은다.
+    public readonly Dictionary<ICombatant, (int normal, int piercing)> DamageByTarget = new();
+
+    public void AddTargetDamage(ICombatant target, int amount, bool piercing)
+    {
+        if (target == null || amount <= 0) return;
+        DamageByTarget.TryGetValue(target, out var d);
+        DamageByTarget[target] = piercing ? (d.normal, d.piercing + amount) : (d.normal + amount, d.piercing);
+    }
+
+    // 방어도를 먼저 깎고 남은 만큼 + 관통 피해 = 실제로 줄어들 HP
+    public int GetHpLoss(ICombatant target, int block)
+    {
+        if (target == null || !DamageByTarget.TryGetValue(target, out var d)) return 0;
+        return System.Math.Max(0, d.normal - System.Math.Max(0, block)) + d.piercing;
+    }
 }

@@ -28,6 +28,7 @@ public class CardHandler : MonoBehaviour,
     [SerializeField] private float _targetCancelYThreshold = 330f; // 타겟팅을 취소하고 드래그로 되돌아갈 화면 높이 기준값.
 
     private static bool _isAnyDragging; // 현재 어떤 카드든 드래그 중인지 공유하는 상태값.
+    public static bool IsAnyDragging => _isAnyDragging; // 드래그·겨냥 중 (적 호버 툴팁 억제 등)
 
     // 카드 호버/드래그 가능 조건: 전투 중 + 플레이어 턴 + 맵/이벤트 화면이 안 열려있을 때.
     // 다른 풀스크린 UI(보상, 상점 등)가 추가되면 같은 패턴으로 조건을 늘릴 것.
@@ -110,6 +111,7 @@ public class CardHandler : MonoBehaviour,
             {
                 _hoveredTarget = hovered;
                 _cardView.RefreshDescription(hovered);
+                DamagePreview.Show(_cardView.Data, hovered); // 겨냥한 적 HP바에 예상 피해 표시
             }
 
             if (eventData.position.y <= _targetCancelYThreshold)
@@ -217,6 +219,7 @@ public class CardHandler : MonoBehaviour,
             case CardState.Targeting:
                 _isAnyDragging = false;
                 _interactionView.ExitTargeting();
+                DamagePreview.Clear();
                 // 타겟팅 종료 — 대상 측 보정이 반영됐던 설명문을 원래 표시로 되돌린다.
                 if (_hoveredTarget != null)
                 {

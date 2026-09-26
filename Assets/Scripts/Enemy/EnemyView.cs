@@ -406,6 +406,67 @@ public class EnemyView : MonoBehaviour
         float ratio = Instance.MaxHP > 0 ? (float)Instance.HP / Instance.MaxHP : 0f;
         if (hpFill != null) hpFill.fillAmount = ratio;
         if (hpText != null) hpText.text = $"{Instance.HP} / {Instance.MaxHP}";
+        if (_previewLoss > 0) ApplyDamagePreview(); // 미리보기 중에 HP가 바뀌면 다시 그린다
+    }
+
+    // ---- 예상 피해 미리보기 (카드로 겨냥 중일 때) ----
+    // 깎일 구간을 붉게 깜빡이는 막대로 보여주고, HP 숫자는 남을 체력을 붉게 표시한다.
+    // 막대는 hpFill을 복제해 바로 뒤에 깐다: hpFill은 남을 체력까지만, 복제본은 현재 체력까지 채운다.
+    private static readonly Color PreviewColor = new(0.9f, 0.2f, 0.18f, 1f);
+    private Image _previewFill;
+    private int _previewLoss;
+
+    public void ShowDamagePreview(int hpLoss)
+    {
+        if (Instance == null || hpFill == null) return;
+        _previewLoss = Mathf.Max(0, hpLoss);
+        if (_previewLoss == 0) { ClearDamagePreview(); return; }
+        ApplyDamagePreview();
+    }
+
+    public void ClearDamagePreview()
+    {
+        if (_previewLoss == 0 && (_previewFill == null || !_previewFill.gameObject.activeSelf)) return;
+        _previewLoss = 0;
+        if (_previewFill != null)
+        {
+            _previewFill.DOKill();
+            _previewFill.gameObject.SetActive(false);
+        }
+        RefreshHP();
+    }
+
+    private void ApplyDamagePreview()
+    {
+        if (_previewFill == null)
+        {
+            _previewFill = Instantiate(hpFill, hpFill.transform.parent);
+            _previewFill.name = "DamagePreview";
+            _previewFill.raycastTarget = false;
+            _previewFill.transform.SetSiblingIndex(hpFill.transform.GetSiblingIndex()); // hpFill 바로 뒤
+        }
+        // hpFill 앵커는 Slider가 바꿀 수 있어 매번 맞춘다
+        var src = hpFill.rectTransform; var dst = _previewFill.rectTransform;
+        dst.anchorMin = src.anchorMin; dst.anchorMax = src.anchorMax;
+        dst.offsetMin = src.offsetMin; dst.offsetMax = src.offsetMax; dst.pivot = src.pivot;
+
+        int max = Mathf.Max(1, Instance.MaxHP);
+        int after = Mathf.Max(0, Instance.HP - _previewLoss);
+        hpFill.fillAmount = (float)after / max;
+        _previewFill.fillAmount = (float)Instance.HP / max;
+        _previewFill.gameObject.SetActive(true);
+
+        if (!DOTween.IsTweening(_previewFill))
+        {
+            _previewFill.color = PreviewColor;
+            _previewFill.DOFade(0.35f, 0.45f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
+        }
+
+        if (hpText != null)
+        {
+            string hex = ColorUtility.ToHtmlStringRGB(PreviewColor);
+            hpText.text = $"<color=#{hex}>{after}</color> / {Instance.MaxHP}";
+        }
     }
 
     private void RefreshIntent()
