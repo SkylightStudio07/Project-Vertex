@@ -53,6 +53,29 @@ public class RestView : MonoBehaviour
         // 베이스캠프가 있으면 메뉴는 캠프를 눌러야 열린다
         if (actionPanel != null) actionPanel.SetActive(baseCampButton == null);
         RefreshUpgradeButton();
+        PlayArrivalLine();
+    }
+
+    // 합류 캐릭터가 있으면 그중 한 명이 호감도 레벨에 맞는 진입 대사를 한 마디 한다
+    private void PlayArrivalLine()
+    {
+        if (dialogueOverlay == null || CooperationManager.Instance == null) return;
+
+        var candidates = new List<(CoopCharData data, string line)>();
+        foreach (var state in CooperationManager.Instance.GetJoinedInRunCharStates())
+        {
+            string line = state.charData != null ? state.charData.PickRestArrivalLine(state.currentCoopLevel) : null;
+            if (!string.IsNullOrWhiteSpace(line)) candidates.Add((state.charData, line));
+        }
+        if (candidates.Count == 0) return;
+
+        var pick = candidates[Random.Range(0, candidates.Count)];
+        var sequence = new BlessingDialogueSequence
+        {
+            sequenceId = $"rest_arrival_{pick.data.charID}",
+            steps = new List<BlessingDialogueStep> { new() { npcDialogue = pick.line, playerAnswerText = "" } },
+        };
+        dialogueOverlay.Play(sequence, pick.data.charName, null);
     }
 
     private void ToggleActionPanel()

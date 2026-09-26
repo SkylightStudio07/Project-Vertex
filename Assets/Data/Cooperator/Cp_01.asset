@@ -50,6 +50,23 @@ MonoBehaviour:
   - "\uBC25\uC740 2\uC778\uBD84. \u2026\uC774\uC720\uB294 \uBB3B\uC9C0 \uB9C8."
   - "\uCE7C\uB0A0\uC740 \uB9E4\uC77C \uB2E6\uC544. \uD53C\uAC00 \uAD73\uC73C\uBA74
     \uBB34\uB38C\uC838."
+  restArrivalLines:
+  - minCoopLevel: 0
+    lines:
+    - "\uD734\uC2DD\u2026 \uD544\uC694\uD560\uAE4C."
+    - "\u2026\u2026\uC26C\uC5B4. \uB9DD\uC740 \uB0B4\uAC00 \uBD10."
+    - "\uC5EC\uAE30\uC11C \uBA48\uCD94\uB294 \uAC70\uC57C? \u2026\uC54C\uC558\uC5B4."
+  - minCoopLevel: 2
+    lines:
+    - "\uC790, \uC880 \uC26C\uC5B4 \uBCFC\uAE4C."
+    - "\uBD88\uC740 \uB0B4\uAC00 \uD53C\uC6B8\uAC8C. \uB108\uB294 \uC549\uC544 \uC788\uC5B4."
+    - "\u2026\uC624\uB298\uC740 \uC880 \uAE38\uAC8C \uC26C\uC5B4\uB3C4 \uB3FC."
+  - minCoopLevel: 3
+    lines:
+    - "\uB290\uAE0B\uD558\uAC8C \uAC00 \uBCF4\uC790. \u2026\uC11C\uB450\uB97C \uC774\uC720
+      \uC5C6\uC796\uC544."
+    - "\uC606\uC5D0 \uC549\uC544. \u2026\uADF8\uB0E5, \uADF8\uB7EC\uACE0 \uC2F6\uC5B4\uC11C."
+    - "\uC26C\uB294 \uAC83\uB3C4 \uB098\uC058\uC9C0 \uC54A\uB124. \uB108\uB791\uC774\uBA74."
   joinRewardCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
   joinDialogueJson: {fileID: 4900000, guid: f40cfa2b9a87d7b43a02d1241cc149fb, type: 3}
   rewardPoolCommon: []

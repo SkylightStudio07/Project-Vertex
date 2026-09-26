@@ -27,6 +27,8 @@ public class CoopCharData : CharData
     [Tooltip("캐릭터를 눌렀을 때 무작위로 나오는 잡담 한 줄")]
     [TextArea(1, 3)]
     public List<string> campLines = new();
+    [Tooltip("휴식 노드에 들어설 때 하는 한 마디. 현재 호감도 레벨 이하인 묶음 중 minCoopLevel이 가장 높은 묶음에서 무작위")]
+    public List<LeveledLines> restArrivalLines = new();
 
     [Header("합류 시 획득 카드")]
     public CardData joinRewardCard;
@@ -44,6 +46,27 @@ public class CoopCharData : CharData
 
     [Header("호감도 랭크 별 이벤트 데이터")]
     public List<RankEventData> rankEventDatas;
+
+    // 호감도 레벨에 맞는 휴식 진입 대사 한 줄. 해당하는 묶음이 없으면 null.
+    public string PickRestArrivalLine(int coopLevel)
+    {
+        LeveledLines best = null;
+        foreach (var group in restArrivalLines)
+        {
+            if (group == null || group.lines == null || group.lines.Count == 0 || group.minCoopLevel > coopLevel) continue;
+            if (best == null || group.minCoopLevel > best.minCoopLevel) best = group;
+        }
+        return best != null ? best.lines[Random.Range(0, best.lines.Count)] : null;
+    }
+}
+
+// 호감도 레벨별로 달라지는 대사 묶음. minCoopLevel 이상이면 이 묶음을 쓸 수 있다.
+[System.Serializable]
+public class LeveledLines
+{
+    public int minCoopLevel;
+    [TextArea(1, 3)]
+    public List<string> lines = new();
 }
 
 // 호감도 랭크업 시 재생할 이벤트 데이터.
