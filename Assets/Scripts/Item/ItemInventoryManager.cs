@@ -138,6 +138,7 @@ public class ItemInventoryManager : MonoBehaviour
         if (_battleSubscribed || BattleManager.Instance == null) return;
         BattleManager.Instance.OnBattleStarted += ApplyLingeringOnBattleStart;
         BattleManager.Instance.OnBattleVictory += TickLingeringOnVictory;
+        BattleManager.Instance.OnBattleEscaped += TickLingeringOnEscape;
         _battleSubscribed = true;
     }
 
@@ -146,6 +147,7 @@ public class ItemInventoryManager : MonoBehaviour
         if (!_battleSubscribed || BattleManager.Instance == null) return;
         BattleManager.Instance.OnBattleStarted -= ApplyLingeringOnBattleStart;
         BattleManager.Instance.OnBattleVictory -= TickLingeringOnVictory;
+        BattleManager.Instance.OnBattleEscaped -= TickLingeringOnEscape;
     }
 
     // 전투 시작 시 남아있는 지속 효과를 다시 적용한다.
@@ -165,8 +167,14 @@ public class ItemInventoryManager : MonoBehaviour
         }
     }
 
-    // 전투를 이겼을 때만 횟수를 소모한다.
+    // 한 전투가 끝나면(승리 또는 도주) 적용 횟수를 소모한다.
     private void TickLingeringOnVictory(BattleReward _)
+        => TickLingeringBattleCount();
+
+    private void TickLingeringOnEscape()
+        => TickLingeringBattleCount();
+
+    private void TickLingeringBattleCount()
     {
         for (int i = _lingering.Count - 1; i >= 0; i--)
         {

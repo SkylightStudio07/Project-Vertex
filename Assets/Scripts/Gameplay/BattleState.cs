@@ -66,6 +66,8 @@ public class BattleState
     public int MaxEnergy;
     public int Ammo;
     public int DrawCount;
+    // 0이면 현재 의도만, 양수면 각 적의 향후 행동을 해당 개수만큼 추가 표시한다.
+    public int EnemyIntentLookahead;
     public int TurnNumber;
     public bool PlayerLostHpThisTurn;
     public BattlePhase Phase;

@@ -24,6 +24,9 @@ public class EnemyInstance : ICombatant
     private int _patternIndex;
     // 랜덤 패턴일 때 직전 행동과 다른 것을 뽑기 위한 난수
     private System.Random _rng;
+    // 자동 매핑처럼 미래 인텐트를 확인했을 때 랜덤 적의 다음 행동도 실제 실행과 일치해야 한다.
+    // 미리 뽑은 행동을 큐에 보존하고 AdvancePattern에서 그대로 소비한다.
+    private readonly List<EnemyAction> _queuedRandomActions = new();
     // 적의 현재 인텐트
     private EnemyAction _action;
 
@@ -173,12 +176,99 @@ public class EnemyInstance : ICombatant
 
         if (Data.activityPatternType == EnemyActivityPatternType.Random)
         {
-            _action = GetRandomAction(patterns);
+            if (_queuedRandomActions.Count > 0)
+            {
+                _action = _queuedRandomActions[0];
+                _queuedRandomActions.RemoveAt(0);
+            }
+            else
+            {
+                _action = GetRandomAction(patterns);
+            }
         }
         else
         {
             _action = patterns[_patternIndex % patterns.Count];
         }
+    }
+
+    // 현재 행동 다음에 실행될 행동들을 반환한다. 랜덤 패턴은 여기서 미리 결정해 큐에 넣으므로
+    // UI에 보인 결과와 실제 행동 순서가 달라지지 않는다.
+    public IReadOnlyList<EnemyAction> GetUpcomingActions(int count)
+    {
+        var result = new List<EnemyAction>();
+        if (count <= 0 || Data == null) return result;
+
+        var openings = Data.openingActions;
+        var patterns = Data.activityPatterns;
+        int openingIndex = _openingIndex;
+        int patternIndex = _patternIndex;
+        bool inOpening = openings != null && openingIndex < openings.Count;
+        int randomQueueIndex = 0;
+        EnemyAction previous = _action;
+
+        for (int i = 0; i < count; i++)
+        {
+            EnemyAction next = null;
+            if (inOpening)
+            {
+                openingIndex++;
+                if (openingIndex < openings.Count)
+                {
+                    next = openings[openingIndex];
+                }
+                else
+                {
+                    inOpening = false;
+                    next = GetPatternPreview(patterns, ref patternIndex, ref randomQueueIndex, previous, false);
+                }
+            }
+            else
+            {
+                next = GetPatternPreview(patterns, ref patternIndex, ref randomQueueIndex, previous, true);
+            }
+
+            if (next == null) break;
+            result.Add(next);
+            previous = next;
+        }
+
+        return result;
+    }
+
+    private EnemyAction GetPatternPreview(
+        List<EnemyAction> patterns,
+        ref int patternIndex,
+        ref int randomQueueIndex,
+        EnemyAction previous,
+        bool advanceSequential)
+    {
+        if (patterns == null || patterns.Count == 0) return null;
+
+        if (Data.activityPatternType == EnemyActivityPatternType.Sequential)
+        {
+            if (advanceSequential) patternIndex = (patternIndex + 1) % patterns.Count;
+            return patterns[patternIndex % patterns.Count];
+        }
+
+        while (_queuedRandomActions.Count <= randomQueueIndex)
+        {
+            EnemyAction prior = _queuedRandomActions.Count > 0
+                ? _queuedRandomActions[_queuedRandomActions.Count - 1]
+                : previous;
+            _queuedRandomActions.Add(GetRandomActionAvoiding(patterns, prior));
+        }
+        return _queuedRandomActions[randomQueueIndex++];
+    }
+
+    private EnemyAction GetRandomActionAvoiding(List<EnemyAction> patterns, EnemyAction previous)
+    {
+        if (patterns.Count == 1) return patterns[0];
+        EnemyAction next;
+        int guard = 0;
+        do { next = patterns[_rng.Next(patterns.Count)]; }
+        while (next == previous && ++guard < 16);
+        return next;
     }
 
     private EnemyAction GetRandomAction(List<EnemyAction> patterns)

@@ -1,13 +1,18 @@
 {
   "characters": [
-    { "id": "Cp_01", "name": "Cp_01", "slot": 0 }
+    { "id": "Cp_01", "name": "치하라 쇼", "slot": 0 },
+    { "id": "player", "name": "방랑자", "slot": 3 }
   ],
   "startNode": "start",
   "nodes": [
     {
       "id": "start",
       "lines": [
-        { "type": "line", "speaker": "Cp_01", "emotion": "confident", "text": "좋아, 어디 한 번 해 보자고." },
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(흰 셔츠의 소녀가 단검을 거두며 이쪽을 돌아본다. 손끝에 맺힌 피가 공중에서 천천히 흩어진다.)" },
+        { "type": "line", "speaker": "Cp_01", "emotion": "idle", "text": "……치하라 쇼. 죠가사키 출신 용병." },
+        { "type": "line", "speaker": "Cp_01", "emotion": "idle", "text": "말은 잘 못 해. 대신 싸움은 해." },
+        { "type": "line", "speaker": "Cp_01", "emotion": "annoyed", "text": "다치면 말해. 숨기면… 곤란해." },
+        { "type": "line", "speaker": "Cp_01", "emotion": "confident", "text": "…가자. 우리 둘, 따라갈게." },
         { "type": "end" }
       ]
     }

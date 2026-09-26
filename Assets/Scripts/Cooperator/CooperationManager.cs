@@ -112,6 +112,15 @@ public class CooperationManager : MonoBehaviour
         return null;
     }
 
+    // 경고 없이 조회 (대사 화자 ID처럼 협력자가 아닐 수도 있는 값을 확인할 때)
+    public bool TryGetCoopCharData(string charID, out CoopCharData data)
+    {
+        data = null;
+        if (string.IsNullOrEmpty(charID) || !coopCharDict.TryGetValue(charID, out var charState)) return false;
+        data = charState.charData;
+        return data != null;
+    }
+
     public Sprite GetCoopSprite(string CharID)
     {
         if (coopCharDict.TryGetValue(CharID, out var charState))

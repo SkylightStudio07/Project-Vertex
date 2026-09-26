@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e961ef58c92348810475ddf3db54c, type: 3}
+  m_Name: "\uACE0\uB18D \uC9C4\uD1B5\uC81C"
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "\uACE0\uB18D \uC9C4\uD1B5\uC81C"
+  itemIcon: {fileID: 21300000, guid: 9791a70f9133d3b44b730b66079531b9, type: 3}
+  itemRarity: 1
+  usableOutsideBattle: 1
+  itemGetTypes: 24
+  itemDescription: "\uCCB4\uB825\uC744 40 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  itemEffects:
+  - rid: 4386673760634929263
+  useMode: 0
+  lingeringBattleCount: 0
+  lingeringEffects: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4386673760634929263
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 40
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        targets:
+          mode: 0

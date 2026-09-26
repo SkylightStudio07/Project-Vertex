@@ -44,7 +44,7 @@ public class ItemActionPopup : MonoBehaviour
         if (item == null) return false;
 
         bool inBattle = BattleManager.Instance != null && BattleManager.Instance.IsInBattle;
-        if (inBattle) return BattleManager.Instance.CanUseItemNow;
+        if (inBattle) return BattleManager.Instance.CanUseItem(item);
 
         return item.UsableOutsideBattle && item.UseMode == ItemData.ItemUseMode.Immediate;
     }

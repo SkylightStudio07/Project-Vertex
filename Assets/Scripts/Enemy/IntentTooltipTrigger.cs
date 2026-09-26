@@ -1,12 +1,13 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// 적 인텐트 아이콘에 마우스를 올리면 "이 적이 무엇을 하려는지" 툴팁을 띄운다.
+// 적 인텐트 아이콘 옆에 "이 적이 무엇을 하려는지" 툴팁을 띄운다.
 // 툴팁 패널은 상태 칩과 같은 StatusTooltipView를 공유하고, 인텐트 아이콘 왼쪽에 뜬다.
-// EnemyView가 Bind 때 SetOwner로 대상 적을 넘겨준다.
+// 마우스 판정은 적 전체를 받는 EnemyHoverInfo(적 루트)가 하고, 여기서는 표시만 맡는다 —
+// 아이콘과 적 스프라이트를 오갈 때 따로 Enter/Exit가 오면 툴팁이 깜빡이기 때문.
+// EnemyView가 인텐트 갱신 때 SetOwner로 대상 적을 넘겨준다.
 [RequireComponent(typeof(Graphic))]
-public class IntentTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class IntentTooltipTrigger : MonoBehaviour
 {
     private EnemyInstance _enemy;
     private Image _icon;
@@ -15,40 +16,32 @@ public class IntentTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
     private void Awake()
     {
         _icon = GetComponent<Image>();
-        GetComponent<Graphic>().raycastTarget = true; // 인텐트 아이콘은 원래 클릭을 받지 않아서 켜 준다
+        GetComponent<Graphic>().raycastTarget = true; // 아이콘 위에서도 적 호버로 잡히게
     }
 
     public void SetOwner(EnemyInstance enemy)
     {
         _enemy = enemy;
-        if (_shown) Refresh(); // 떠 있는 중에 인텐트가 바뀌면 내용 갱신
+        if (_shown) Show(); // 떠 있는 중에 인텐트가 바뀌면 내용 갱신
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void Show()
     {
-        if (_enemy == null || _enemy.IsDead || _enemy.GetCurrentAction() == null) return;
+        var action = _enemy != null && !_enemy.IsDead ? _enemy.GetCurrentAction() : null;
+        if (action == null || _icon == null || !_icon.enabled) { Hide(); return; }
         _shown = true;
-        Refresh();
+        Describe(action.intentType, _enemy.GetIntentDamageAmount(), out string title, out string desc);
+        StatusTooltipView.Instance?.ShowNear((RectTransform)transform, _icon.sprite, title, desc);
     }
 
-    public void OnPointerExit(PointerEventData eventData) => Hide();
-
-    private void OnDisable() => Hide();
-
-    private void Hide()
+    public void Hide()
     {
         if (!_shown) return;
         _shown = false;
         StatusTooltipView.Instance?.Hide();
     }
 
-    private void Refresh()
-    {
-        var action = _enemy?.GetCurrentAction();
-        if (action == null) { Hide(); return; }
-        Describe(action.intentType, _enemy.GetIntentDamageAmount(), out string title, out string desc);
-        StatusTooltipView.Instance?.ShowNear((RectTransform)transform, _icon != null ? _icon.sprite : null, title, desc);
-    }
+    private void OnDisable() => Hide();
 
     private static void Describe(IntentType type, int? damage, out string title, out string desc)
     {

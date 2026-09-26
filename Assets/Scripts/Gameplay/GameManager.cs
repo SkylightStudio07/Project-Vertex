@@ -168,21 +168,26 @@ public class GameManager : MonoBehaviour
 
         System.Action<BattleReward> victoryHandler = null;
         System.Action defeatHandler = null;
+        System.Action escapeHandler = null;
 
         victoryHandler = _ =>
         {
             battle.OnBattleVictory -= victoryHandler;
             battle.OnBattleDefeat  -= defeatHandler;
+            battle.OnBattleEscaped -= escapeHandler;
             onVictory();
         };
         defeatHandler = () =>
         {
             battle.OnBattleVictory -= victoryHandler;
             battle.OnBattleDefeat  -= defeatHandler;
+            battle.OnBattleEscaped -= escapeHandler;
         };
+        escapeHandler = defeatHandler;
 
         battle.OnBattleVictory += victoryHandler;
         battle.OnBattleDefeat  += defeatHandler;
+        battle.OnBattleEscaped += escapeHandler;
     }
 
     // 전투 시작 공통부 — 로그, RNG 시드, BattleManager 호출.

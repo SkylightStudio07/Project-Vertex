@@ -14,6 +14,12 @@ public class DialogueView : MonoBehaviour
     [Header("캐릭터 슬롯 (좌→우, 최대 4명)")]
     [SerializeField] private CharacterSlotView[] characterSlots;
 
+    [Header("화자 그림 (캐릭터 슬롯 대신 한 명만 크게)")]
+    // 화자 ID가 협력자 charID(예: Cp_01)면 그 캐릭터 아트를 띄운다(성소 전신 아트 → 스탠딩 → 초상화 순).
+    // 지문(화자 없음)이나 협력자가 아닌 화자일 때는 직전 그림을 어둡게 남긴다.
+    [SerializeField] private Image speakerImage;
+    [SerializeField] private GameObject speakerNameplate; // 지문일 때 숨길 이름표 (비우면 이름 텍스트만 비움)
+
     [Header("대사 UI")]
     [SerializeField] private TextMeshProUGUI speakerNameText;
     [SerializeField] private TextMeshProUGUI lineText;
@@ -61,6 +67,9 @@ public class DialogueView : MonoBehaviour
             return;
         }
 
+        // 새 대화마다 화자 그림을 비운다 (이전 대화 캐릭터가 남지 않게)
+        if (speakerImage != null) { speakerImage.sprite = null; speakerImage.enabled = false; }
+
         _nodeMap = new Dictionary<string, DialogueNodeData>();
         foreach (var node in _script.nodes)
             _nodeMap[node.id] = node;
@@ -75,7 +84,8 @@ public class DialogueView : MonoBehaviour
     {
         if (characterSlots == null || characterSlots.Length == 0)
         {
-            Debug.LogWarning("[Dialogue] characterSlots가 비어있음. Inspector 연결 확인 필요.");
+            // 화자 그림(speakerImage) 방식이면 슬롯이 없는 게 정상
+            if (speakerImage == null) Debug.LogWarning("[Dialogue] characterSlots가 비어있음. Inspector 연결 확인 필요.");
             return;
         }
 
@@ -139,9 +149,38 @@ public class DialogueView : MonoBehaviour
     private void ShowLine(DialogueLineData line)
     {
         advanceButton.gameObject.SetActive(true);
-        speakerNameText.text = GetCharacterName(line.speaker);
+        bool narration = string.IsNullOrEmpty(line.speaker);
+        speakerNameText.text = narration ? string.Empty : GetCharacterName(line.speaker);
+        if (speakerNameplate != null) speakerNameplate.SetActive(!narration);
         typewriter.Play(lineText, line.text, typewriterCharsPerSecond);
         UpdateSpeakerHighlight(line.speaker, line.emotion);
+        UpdateSpeakerImage(line.speaker);
+    }
+
+    private static readonly Color SpeakerActive = Color.white;
+    private static readonly Color SpeakerDimmed = new(0.45f, 0.47f, 0.5f, 1f);
+
+    private void UpdateSpeakerImage(string speakerId)
+    {
+        if (speakerImage == null) return;
+
+        Sprite art = null;
+        if (CooperationManager.Instance != null && CooperationManager.Instance.TryGetCoopCharData(speakerId, out var data))
+            art = data.sanctuaryFullArt != null ? data.sanctuaryFullArt
+                : data.standingSprite != null ? data.standingSprite
+                : data.charImage;
+
+        if (art != null)
+        {
+            speakerImage.sprite = art;
+            speakerImage.enabled = true;
+            speakerImage.preserveAspect = true;
+            speakerImage.color = SpeakerActive;
+        }
+        else if (speakerImage.sprite != null)
+        {
+            speakerImage.color = SpeakerDimmed; // 지문·다른 화자: 직전 캐릭터를 어둡게
+        }
     }
 
     private void UpdateSpeakerHighlight(string speakerId, string emotion)

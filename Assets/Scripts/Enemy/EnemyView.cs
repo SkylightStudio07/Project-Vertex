@@ -84,6 +84,12 @@ public class EnemyView : MonoBehaviour
     private Vector2 _initialIntentFieldPos;
     private Vector2 _intentFieldBasePos;
 
+    // 자동 매핑 기기 사용 시 현재 인텐트 오른쪽에 표시되는 향후 행동 아이콘.
+    // 프리팹 직렬화 참조를 늘리지 않도록 현재 인텐트 Image의 시각 속성을 복제해 런타임 생성한다.
+    private readonly List<UnityEngine.UI.Image> _lookaheadIcons = new();
+    private readonly List<RectTransform> _lookaheadRects = new();
+    private readonly List<Vector2> _lookaheadBasePositions = new();
+
     private Vector3 _enemyImageBaseScale = Vector3.one;
     private RectTransform _rect;
 
@@ -138,6 +144,9 @@ public class EnemyView : MonoBehaviour
             _intentValueRect.anchoredPosition = _intentValueBasePos + new Vector2(0f, offsetY);
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _intentFieldBasePos + new Vector2(0f, offsetY);
+        for (int i = 0; i < _lookaheadRects.Count && i < _lookaheadBasePositions.Count; i++)
+            if (_lookaheadRects[i] != null)
+                _lookaheadRects[i].anchoredPosition = _lookaheadBasePositions[i] + new Vector2(0f, offsetY);
     }
 
     public void Bind(EnemyInstance instance)
@@ -228,6 +237,7 @@ public class EnemyView : MonoBehaviour
             _intentValueRect.anchoredPosition = _intentValueBasePos;
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _intentFieldBasePos;
+        LayoutLookaheadIcons();
     }
 
     // 적 그림(현재 스프라이트)의 불투명 영역 위 끝을, 인텐트 아이콘과 같은 좌표계(이 뷰의 로컬)에서 구한다.
@@ -293,6 +303,7 @@ public class EnemyView : MonoBehaviour
             _intentValueRect.anchoredPosition = _initialIntentValuePos;
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _initialIntentFieldPos;
+        HideLookaheadIcons();
     }
 
     private void Unsubscribe()
@@ -318,6 +329,7 @@ public class EnemyView : MonoBehaviour
         // Unbind()는 스프라이트 크기·인텐트 위치를 기본값으로 되돌려 죽는 순간 적이 작아져 보이므로 쓰지 않는다.
         // (Instance.IsDead가 true라 EnemyTargeting도 이 뷰를 대상으로 잡지 않는다)
         if (Instance != null) Unsubscribe();
+        if (TryGetComponent<EnemyHoverInfo>(out var hover)) hover.Hide(); // 호버 이름·툴팁 정리
         enabled = false; // 인텐트 부유(Update) 정지
 
         var keepSprite = enemyImage != null ? new[] { (UnityEngine.UI.Graphic)enemyImage } : null;
@@ -419,6 +431,85 @@ public class EnemyView : MonoBehaviour
             intentValueText.gameObject.SetActive(amount.HasValue);
             if (amount.HasValue) intentValueText.text = amount.Value.ToString();
         }
+
+        RefreshLookaheadIcons();
+    }
+
+    private void RefreshLookaheadIcons()
+    {
+        int count = BattleManager.Instance?.State?.EnemyIntentLookahead ?? 0;
+        if (Instance == null || intentIcon == null || count <= 0)
+        {
+            HideLookaheadIcons();
+            return;
+        }
+
+        IReadOnlyList<EnemyAction> upcoming = Instance.GetUpcomingActions(count);
+        EnsureLookaheadIconCount(upcoming.Count);
+        for (int i = 0; i < _lookaheadIcons.Count; i++)
+        {
+            bool visible = i < upcoming.Count;
+            var image = _lookaheadIcons[i];
+            if (image == null) continue;
+            image.gameObject.SetActive(visible);
+            if (!visible) continue;
+
+            image.sprite = GetIntentSprite(upcoming[i].intentType);
+            image.enabled = image.sprite != null;
+        }
+        LayoutLookaheadIcons();
+    }
+
+    private void EnsureLookaheadIconCount(int count)
+    {
+        while (_lookaheadIcons.Count < count)
+        {
+            var go = new GameObject(
+                $"NextIntent{_lookaheadIcons.Count + 1}",
+                typeof(RectTransform),
+                typeof(CanvasRenderer),
+                typeof(UnityEngine.UI.Image));
+            go.layer = intentIcon.gameObject.layer;
+
+            var rect = go.GetComponent<RectTransform>();
+            rect.SetParent(intentIcon.transform.parent, false);
+            rect.anchorMin = _intentIconRect.anchorMin;
+            rect.anchorMax = _intentIconRect.anchorMax;
+            rect.pivot = _intentIconRect.pivot;
+            rect.sizeDelta = _intentIconRect.sizeDelta;
+            rect.localScale = _intentIconRect.localScale * 0.62f;
+            rect.SetSiblingIndex(intentIcon.transform.GetSiblingIndex() + 1 + _lookaheadIcons.Count);
+
+            var image = go.GetComponent<UnityEngine.UI.Image>();
+            image.preserveAspect = intentIcon.preserveAspect;
+            image.material = intentIcon.material;
+            image.color = new Color(intentIcon.color.r, intentIcon.color.g, intentIcon.color.b, intentIcon.color.a * 0.72f);
+            image.raycastTarget = false;
+
+            _lookaheadRects.Add(rect);
+            _lookaheadIcons.Add(image);
+        }
+    }
+
+    private void LayoutLookaheadIcons()
+    {
+        if (_intentIconRect == null) return;
+        _lookaheadBasePositions.Clear();
+        float currentWidth = Mathf.Abs(_intentIconRect.rect.width * _intentIconRect.localScale.x);
+        float spacing = Mathf.Max(24f, currentWidth * 0.72f);
+        for (int i = 0; i < _lookaheadRects.Count; i++)
+        {
+            Vector2 basePosition = _intentIconBasePos + new Vector2(spacing * (i + 1), 0f);
+            _lookaheadBasePositions.Add(basePosition);
+            if (_lookaheadRects[i] != null)
+                _lookaheadRects[i].anchoredPosition = basePosition;
+        }
+    }
+
+    private void HideLookaheadIcons()
+    {
+        foreach (var image in _lookaheadIcons)
+            if (image != null) image.gameObject.SetActive(false);
     }
 
     private Sprite GetIntentSprite(IntentType type)

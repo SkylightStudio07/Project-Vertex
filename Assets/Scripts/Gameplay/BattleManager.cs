@@ -73,6 +73,7 @@ public class BattleManager : MonoBehaviour
     public event Action<CardData> OnCardPlayed;
     public event Action<BattleReward> OnBattleVictory;
     public event Action         OnBattleDefeat;
+    public event Action         OnBattleEscaped;
 
     private BattleType   _currentBattleType;
     private System.Random _rnd = new();
@@ -490,11 +491,24 @@ public class BattleManager : MonoBehaviour
                                  && !_isEndingPlayerTurn
                                  && !HandCardSelector.IsSelecting; // 손패 선택 중에는 아이템 사용 불가
 
+    public bool CanUseItem(ItemData item)
+    {
+        if (item == null || !CanUseItemNow) return false;
+        if (_currentBattleType == BattleType.Boss &&
+            item.ItemEffects.Any(effect => effect is EscapeBattleEffect))
+            return false;
+        // 자동 매핑 기기는 '다음 전투' 예약형이라 전투 밖에서만 사용한다.
+        if (item.lingeringEffects != null &&
+            item.lingeringEffects.Any(effect => effect is RevealEnemyIntentsEffect))
+            return false;
+        return true;
+    }
+
     // 아이템 사용. 카드 사용(TryPlayCard)과 동일 구조, 차이는 비용 없음 / 인벤토리에서 소비 / ctx.Item 세팅.
     public bool TryUseItem(ItemData item, EnemyInstance target)
     {
         if (_state == null || item == null) return false;
-        if (!CanUseItemNow) return false;   // 적 턴 중 사용 금지
+        if (!CanUseItem(item)) return false;
 
         // SelectTarget 아이템은 유효한 적 타겟 필요 (타겟팅 UI 미구현)
         if (item.UseMode == ItemData.ItemUseMode.SelectTarget &&
@@ -528,6 +542,80 @@ public class BattleManager : MonoBehaviour
             ItemInventoryManager.Instance.ConsumeWithLingering(item, ctx);
         }
         return true;
+    }
+
+    // 연막 수류탄 전용. 보상 없이 전투를 끝내고 맵으로 돌아간다. 보스전에서는 실패한다.
+    public bool TryEscapeBattle()
+    {
+        if (!_isInBattle || _state == null || _currentBattleType == BattleType.Boss)
+            return false;
+
+        StopAllCoroutines();
+        _isEndingPlayerTurn = false;
+        _isInBattle = false;
+
+        foreach (var enemy in _state.Enemies)
+            if (enemy != null) enemy.OnDied -= CheckVictory;
+
+        OnBattleEscaped?.Invoke();
+        if (GameManager.Instance != null) GameManager.Instance.SetPhase(GamePhase.Map);
+        if (MapUIController.Instance != null) MapUIController.Instance.OpenMap();
+        Debug.Log("[BattleManager] 연막 수류탄으로 전투에서 이탈했습니다. 보상은 생성되지 않습니다.");
+        return true;
+    }
+
+    // 드로우 더미의 끝을 '위'로 보고 지정 장수만큼 비용 없이 순서대로 사용한다.
+    // 대상 지정 카드는 살아있는 적 하나를 무작위로 고르며, 사용 불가 카드는 버린 더미로 보낸다.
+    public void PlayTopDrawPileCardsForFree(int count)
+    {
+        if (!CanUseItemNow || count <= 0) return;
+        StartCoroutine(PlayTopDrawPileCardsForFreeSequence(count));
+    }
+
+    private IEnumerator PlayTopDrawPileCardsForFreeSequence(int count)
+    {
+        for (int i = 0; i < count && _isInBattle; i++)
+        {
+            if (_state.DrawPile.Count == 0)
+            {
+                if (_state.DiscardPile.Count == 0) yield break;
+                _state.DrawPile.AddRange(_state.DiscardPile);
+                _state.DiscardPile.Clear();
+                Shuffle(_state.DrawPile);
+            }
+
+            int topIndex = _state.DrawPile.Count - 1;
+            CardData card = _state.DrawPile[topIndex];
+            _state.DrawPile.RemoveAt(topIndex);
+            if (card == null) continue;
+
+            if (card.IsUnplayable)
+            {
+                _state.DiscardPile.Add(card);
+                continue;
+            }
+
+            EnemyInstance target = null;
+            if (card.UseMode == CardData.CardUseMode.SelectEnemy)
+            {
+                var living = _state.Enemies.Where(e => e != null && !e.IsDead).ToList();
+                if (living.Count == 0) yield break;
+                target = living[_rnd.Next(living.Count)];
+            }
+
+            var ctx = CreateCardPlayContext(card, target);
+            OnCardPlayed?.Invoke(card);
+            _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
+            yield return EffectRunner.ExecuteSequence(card.ActiveEffects, ctx);
+
+            if (card.IsExhaust || card.Type == CardData.CardType.Power)
+                _state.ExhaustPile.Add(card);
+            else
+                _state.DiscardPile.Add(card);
+
+            RefreshAllEnemyIntents();
+            yield return null;
+        }
     }
     
     private IEnumerator ExecuteEffectsSequence(System.Collections.Generic.IReadOnlyList<CardEffect> effects, CardContext ctx)

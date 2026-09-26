@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\uAD70\uC6A9\uAD6C\uAE09\uD0A4\uD2B8"
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: "\uAD70\uC6A9 \uAD6C\uAE09\uD0A4\uD2B8"
-  itemIcon: {fileID: 21300000, guid: a3d20d1b0488ff84c8cda76b5b8e5299, type: 3}
+  itemIcon: {fileID: 21300000, guid: 94fca2a80f2d87a43a532ad628f99c06, type: 3}
   itemRarity: 0
   usableOutsideBattle: 1
   itemGetTypes: 11
@@ -21,6 +21,8 @@ MonoBehaviour:
   itemEffects:
   - rid: 7338471699195101300
   useMode: 0
+  lingeringBattleCount: 0
+  lingeringEffects: []
   references:
     version: 2
     RefIds:
