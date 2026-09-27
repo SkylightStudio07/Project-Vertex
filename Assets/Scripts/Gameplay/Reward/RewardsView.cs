@@ -154,6 +154,12 @@ public class RewardsView : MonoBehaviour
     {
         _openSequence?.Kill();
         gameObject.SetActive(false);
+        // 보스 보상을 닫으면 막 클리어(다음 막 또는 런 클리어)로 넘어간다
+        if (BattleManager.Instance != null && BattleManager.Instance.CurrentBattleType == BattleType.Boss && GameManager.Instance != null)
+        {
+            GameManager.Instance.CompleteAct();
+            return;
+        }
         mapUIController.OpenMap();
     }
 

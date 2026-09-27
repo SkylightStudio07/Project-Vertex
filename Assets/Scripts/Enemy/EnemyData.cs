@@ -37,4 +37,31 @@ public class EnemyData : ScriptableObject
 
     [Tooltip("오프닝 이후 반복하는 행동 풀. Sequential이면 순서 순환, Random이면 매 턴 랜덤 1개.")]
     public List<EnemyAction> activityPatterns = new();
+
+    [Header("페이즈 (보스·엘리트용, 비워 두면 위 패턴만 사용)")]
+    [Tooltip("조건(HP 비율 / 동료 사망 수)을 만족하면 해당 페이즈의 행동 패턴으로 넘어간다. 위에서부터 순서대로 한 번씩만 진입")]
+    public List<EnemyPhase> phases = new();
+}
+
+public enum EnemyPhaseTrigger
+{
+    HpRatio,        // 자신의 HP가 비율 이하
+    AlliesDefeated, // 같은 전투의 다른 적이 N명 이상 쓰러짐 (3인 보스 등)
+}
+
+// 조건(HP 비율 또는 동료 사망)을 만족하면 바뀌는 행동 패턴 묶음.
+[System.Serializable]
+public class EnemyPhase
+{
+    public EnemyPhaseTrigger trigger = EnemyPhaseTrigger.HpRatio;
+    [Tooltip("HpRatio: HP가 최대 HP의 이 비율 이하가 되면 진입 (0.5 = 절반)")]
+    [Range(0f, 1f)] public float hpRatioThreshold = 0.5f;
+    [Tooltip("AlliesDefeated: 다른 적이 이 수 이상 쓰러지면 진입")]
+    [Min(1)] public int alliesDefeated = 1;
+    [Tooltip("전환될 때 적 머리 위에 잠깐 띄우는 대사 (비우면 없음)")]
+    [TextArea(1, 3)] public string transitionLine;
+    [Tooltip("전환 직후 순서대로 1회씩 실행하는 행동")]
+    public List<EnemyAction> openingActions = new();
+    public EnemyActivityPatternType activityPatternType;
+    public List<EnemyAction> activityPatterns = new();
 }

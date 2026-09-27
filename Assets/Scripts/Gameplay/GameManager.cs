@@ -144,7 +144,35 @@ public class GameManager : MonoBehaviour
             : currentEnemies;
         string encounterName = pulled != null ? pulled.name : "기본 폴백(currentEnemies)";
 
+        // 보스전: 등장 배너 → 스토리 대사가 끝난 뒤 첫 턴을 연다
+        if (battleType == BattleType.Boss && BossBattleDirector.Instance != null)
+        {
+            StartBattleInternal(enemies, battleType, encounterName, startFirstTurn: false);
+            BossBattleDirector.Instance.PlayIntro(pulled, () => BattleManager.Instance.PlayerTurnStart(false));
+            return;
+        }
+
         StartBattleInternal(enemies, battleType, encounterName);
+    }
+
+    // 보스 격파 후 보상 화면을 닫으면 호출된다.
+    // 마지막 막(ActData.isFinalAct)이면 런 클리어 화면, 아니면 막 번호를 올려 새 맵을 만들고 다음 막을 연다.
+    // 다음 막 콘텐츠(조우·이벤트)가 아직 없으면 가장 가까운 이전 막 데이터로 대체된다(EncounterQueueBuilder 등).
+    public void CompleteAct()
+    {
+        var act = CurrentAct;
+        Debug.Log($"<color=#FACC15>[GameManager] {chapter}막 클리어!</color>");
+        // 스토리 진행도용 영구 플래그 (보스 대사 조건 등에서 사용: act1_cleared …)
+        BlessingAffinityManager.Instance.SetFlag($"act{chapter}_cleared", true);
+        if (act != null && act.isFinalAct && RunClearView.Instance != null)
+        {
+            RunClearView.Instance.Open(act);
+            return;
+        }
+
+        chapter++;
+        MapManager.Instance.InitializeMap(chapter);
+        if (MapUIController.Instance != null) MapUIController.Instance.OpenMap(); // 새 맵이라 막 도입 연출이 재생된다
     }
 
     // 조우를 직접 지정해 전투를 시작한다(이벤트 선택지 등).
@@ -194,7 +222,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 전투 시작 공통부 — 로그, RNG 시드, BattleManager 호출.
-    private void StartBattleInternal(List<EnemyData> enemies, BattleType battleType, string encounterName)
+    private void StartBattleInternal(List<EnemyData> enemies, BattleType battleType, string encounterName, bool startFirstTurn = true)
     {
         string enemyNames = enemies != null && enemies.Count > 0
             ? string.Join(", ", enemies.Where(e => e != null).Select(e => $"'{e.enemyName}'(HP:{e.health})"))
@@ -207,7 +235,8 @@ public class GameManager : MonoBehaviour
                                         RunData.Instance.currentFloor,
                                         RunData.Instance.currentNodeIndex);
         BattleManager.Instance.StartBattle(enemies, DeckManager.Instance.PlayerDeck, battleSeed, battleType);
-        BattleManager.Instance.PlayerTurnStart(false); // 전투 첫 진입이라 턴 배너는 건너뜀
+        if (startFirstTurn)
+            BattleManager.Instance.PlayerTurnStart(false); // 전투 첫 진입이라 턴 배너는 건너뜀
     }
 
     // 단일 카드를 카드 자체의 Rarity에 맞는 풀에 추가. unlockCardCoopLevel 등 단건 추가용.

@@ -29,10 +29,16 @@ public class ActTitleBanner : MonoBehaviour
     public void Play(ActData act)
     {
         if (act == null || string.IsNullOrWhiteSpace(act.actName)) return;
+        PlayText($"{act.actNumber}막", act.actName);
+    }
 
+    // 윗줄(작은 글씨)·제목을 직접 넣어 띄운다(보스 등장 등). 전체 재생 시간(초)을 돌려준다.
+    public float PlayText(string label, string title)
+    {
+        if (_group == null) Awake();
         _sequence?.Kill();
-        if (actLabel != null) actLabel.text = $"{act.actNumber}막";
-        if (titleText != null) titleText.text = act.actName;
+        if (actLabel != null) actLabel.text = label;
+        if (titleText != null) titleText.text = title;
 
         _group.alpha = 0f;
         var titleRect = titleText != null ? titleText.rectTransform : null;
@@ -45,5 +51,6 @@ public class ActTitleBanner : MonoBehaviour
             .Append(_group.DOFade(0f, fadeOut).SetEase(Ease.InOutSine));
         // 제목이 아주 살짝 가라앉으며 자리 잡는다
         if (titleRect != null) _sequence.Insert(delay, titleRect.DOScale(1f, fadeIn + hold).SetEase(Ease.OutCubic));
+        return delay + fadeIn + hold + fadeOut;
     }
 }

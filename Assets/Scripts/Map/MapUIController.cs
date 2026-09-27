@@ -356,6 +356,11 @@ public class MapUIController : MonoBehaviour
 
         int chapter = GameManager.Instance != null ? GameManager.Instance.Chapter : 1;
         EventRosterSO chapterRoster = eventRosters?.Find(r => r != null && r.chapter == chapter);
+        // 그 막 로스터가 아직 없으면 가장 가까운 이전 막 로스터로 대체
+        if (chapterRoster == null && eventRosters != null)
+            foreach (var r in eventRosters)
+                if (r != null && r.chapter < chapter && (chapterRoster == null || r.chapter > chapterRoster.chapter))
+                    chapterRoster = r;
         if (chapterRoster == null && (commonEventRosters == null || commonEventRosters.Count == 0))
         {
             Debug.LogWarning($"[Map] 챕터 {chapter}에 해당하는 EventRosterSO가 없고, commonEventRosters도 비어있음.");

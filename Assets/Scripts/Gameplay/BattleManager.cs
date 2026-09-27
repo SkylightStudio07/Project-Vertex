@@ -76,6 +76,7 @@ public class BattleManager : MonoBehaviour
     public event Action         OnBattleEscaped;
 
     private BattleType   _currentBattleType;
+    public BattleType CurrentBattleType => _currentBattleType;
     private System.Random _rnd = new();
     private WaitForSeconds _lungeOutWait; // 적 전진 타이밍 대기에 재사용할 객체.
     private WaitForSeconds _lungeBackAndPostActionWait; // 적 후퇴와 후처리 대기에 재사용할 객체.
@@ -783,6 +784,13 @@ public class BattleManager : MonoBehaviour
 
     private void CheckVictory()
     {
+        // 살아남은 적에게 쓰러진 동료 수를 알린다 (3인 보스의 동료 사망 페이즈 등)
+        int dead = 0;
+        foreach (var e in _state.Enemies)
+            if (e.IsDead) dead++;
+        foreach (var e in _state.Enemies)
+            if (!e.IsDead) e.NotifyAlliesDefeated(dead);
+
         foreach (var e in _state.Enemies)
             if (!e.IsDead) return;
         Victory();

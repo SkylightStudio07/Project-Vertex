@@ -13,4 +13,8 @@ public class ActData : ScriptableObject
     [Header("맵 도입 연출")]
     [Tooltip("새 막 맵을 처음 열 때 보스 쪽 끝에서 시작점까지 당겨 오는 시간(초). 0이면 패닝 없이 시작점에서 연다")]
     [Min(0f)] public float mapPanDuration = 3.2f;
+
+    [Header("막 클리어")]
+    [Tooltip("이 막 보스를 격파하면 런 클리어. 끄면 다음 막으로 넘어간다 (다음 막 ActData가 없어도 막 번호만 올려 진행)")]
+    public bool isFinalAct;
 }
