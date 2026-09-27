@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "kind": "unity-2d-animation-draft",
+  "canvas": {
+    "width": 1024,
+    "height": 1024,
+    "origin": "top-left"
+  },
+  "bounds": {
+    "left": 244,
+    "top": 101,
+    "right": 793,
+    "bottom": 912
+  },
+  "bones": [
+    {
+      "name": "hips",
+      "parent": null,
+      "x": 552.634,
+      "y": 555.16,
+      "length": 49.958
+    },
+    {
+      "name": "spine",
+      "parent": "hips",
+      "x": 552.634,
+      "y": 505.202,
+      "length": 56.594
+    },
+    {
+      "name": "chest",
+      "parent": "spine",
+      "x": 571.014,
+      "y": 451.676,
+      "length": 74.936
+    },
+    {
+      "name": "neck",
+      "parent": "chest",
+      "x": 571.014,
+      "y": 376.74,
+      "length": 65.795
+    },
+    {
+      "name": "head",
+      "parent": "neck",
+      "x": 568.626,
+      "y": 310.988,
+      "length": 44.605
+    },
+    {
+      "name": "shoulder_l",
+      "parent": "chest",
+      "x": 499.644,
+      "y": 451.676,
+      "length": 80.818
+    },
+    {
+      "name": "arm_l",
+      "parent": "shoulder_l",
+      "x": 453.254,
+      "y": 517.854,
+      "length": 77.167
+    },
+    {
+      "name": "hand_l",
+      "parent": "arm_l",
+      "x": 424.706,
+      "y": 589.546,
+      "length": 44.605
+    },
+    {
+      "name": "shoulder_r",
+      "parent": "chest",
+      "x": 642.384,
+      "y": 451.676,
+      "length": 80.818
+    },
+    {
+      "name": "arm_r",
+      "parent": "shoulder_r",
+      "x": 688.775,
+      "y": 517.854,
+      "length": 77.167
+    },
+    {
+      "name": "hand_r",
+      "parent": "arm_r",
+      "x": 717.323,
+      "y": 589.546,
+      "length": 44.605
+    },
+    {
+      "name": "leg_l",
+      "parent": "hips",
+      "x": 511.459,
+      "y": 555.16,
+      "length": 185.66
+    },
+    {
+      "name": "knee_l",
+      "parent": "leg_l",
+      "x": 505.283,
+      "y": 740.717,
+      "length": 149.929
+    },
+    {
+      "name": "foot_l",
+      "parent": "knee_l",
+      "x": 501.166,
+      "y": 890.59,
+      "length": 44.605
+    },
+    {
+      "name": "leg_r",
+      "parent": "hips",
+      "x": 593.809,
+      "y": 555.16,
+      "length": 185.66
+    },
+    {
+      "name": "knee_r",
+      "parent": "leg_r",
+      "x": 599.986,
+      "y": 740.717,
+      "length": 149.929
+    },
+    {
+      "name": "foot_r",
+      "parent": "knee_r",
+      "x": 604.103,
+      "y": 890.59,
+      "length": 44.605
+    }
+  ],
+  "mesh": {
+    "columns": 5,
+    "rows": 5,
+    "maxInfluences": 2
+  },
+  "poseSource": "automatic",
+  "skirtBones": 0,
+  "warnings": [
+    "전신 본 위치는 레이어와 얼굴·목 앵커로 계산한 자동 초안입니다.",
+    "측면 자세, 교차한 팔, 무기와 가려진 팔다리는 Unity Skinning Editor에서 보정하세요."
+  ],
+  "sourceRevision": 5
+}

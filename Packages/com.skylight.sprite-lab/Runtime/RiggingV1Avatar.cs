@@ -32,6 +32,7 @@ namespace SpriteLab.RiggingV1
         private Quaternion[] hairRest = new Quaternion[0];
         private Quaternion[] equipmentRest = new Quaternion[0];
         private Quaternion[] clothRest = new Quaternion[0];
+        private Coroutine blinkRoutine;
 
         public void Configure(
             SpriteRenderer[] eyesOpen,
@@ -54,6 +55,30 @@ namespace SpriteLab.RiggingV1
             SetMouthOpen(0f);
         }
 
+        public void ApplyPreviewSettings(
+            bool blink,
+            Vector2 interval,
+            float duration,
+            bool lipSync,
+            float mouthAmount,
+            float hairSwayAngle,
+            float hairSwaySpeed,
+            float equipmentSwayAngle,
+            float clothSwayAngle)
+        {
+            automaticBlink = blink;
+            blinkInterval = new Vector2(Mathf.Max(0.1f, interval.x), Mathf.Max(Mathf.Max(0.1f, interval.x), interval.y));
+            blinkDuration = Mathf.Max(0.02f, duration);
+            automaticLipSync = lipSync;
+            mouthOpenAmount = Mathf.Clamp01(mouthAmount);
+            hairAngle = Mathf.Max(0f, hairSwayAngle);
+            hairSpeed = Mathf.Max(0f, hairSwaySpeed);
+            equipmentAngle = Mathf.Max(0f, equipmentSwayAngle);
+            clothAngle = Mathf.Max(0f, clothSwayAngle);
+            if (!automaticLipSync) SetMouthOpen(mouthOpenAmount);
+            UpdateBlinkRoutine();
+        }
+
         private void Awake()
         {
             CacheRestPose();
@@ -63,8 +88,13 @@ namespace SpriteLab.RiggingV1
 
         private void OnEnable()
         {
-            if (automaticBlink)
-                StartCoroutine(BlinkLoop());
+            UpdateBlinkRoutine();
+        }
+
+        private void OnDisable()
+        {
+            if (blinkRoutine != null) StopCoroutine(blinkRoutine);
+            blinkRoutine = null;
         }
 
         private void Update()
@@ -106,13 +136,26 @@ namespace SpriteLab.RiggingV1
 
         private IEnumerator BlinkLoop()
         {
-            while (enabled)
+            while (isActiveAndEnabled && automaticBlink)
             {
                 yield return new WaitForSeconds(Random.Range(blinkInterval.x, blinkInterval.y));
                 SetEyeOpen(0f);
                 yield return new WaitForSeconds(blinkDuration);
                 SetEyeOpen(1f);
             }
+            blinkRoutine = null;
+            SetEyeOpen(1f);
+        }
+
+        private void UpdateBlinkRoutine()
+        {
+            if (blinkRoutine != null)
+            {
+                StopCoroutine(blinkRoutine);
+                blinkRoutine = null;
+            }
+            if (isActiveAndEnabled && automaticBlink) blinkRoutine = StartCoroutine(BlinkLoop());
+            else SetEyeOpen(1f);
         }
 
         private void CacheRestPose()

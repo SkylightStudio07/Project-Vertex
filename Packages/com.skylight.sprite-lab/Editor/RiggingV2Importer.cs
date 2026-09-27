@@ -10,6 +10,7 @@ using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.U2D.Animation;
+using UnityEngine.UI;
 
 namespace SpriteLab.RiggingV2.Editor
 {
@@ -54,10 +55,31 @@ namespace SpriteLab.RiggingV2.Editor
             var diskRoot = Path.GetFullPath(assetRoot);
             Directory.CreateDirectory(diskRoot);
             ExtractAllowedFiles(zipPath, diskRoot);
+            return ImportExtractedFolder(assetRoot);
+        }
+
+        // 이미 압축을 푼 가져오기 폴더를 그 자리에서 다시 가져온다(임포터 개선 반영용).
+        // 같은 경로에 프리팹을 다시 저장하므로 GUID가 유지되어 씬의 참조와 인스턴스 설정이 보존된다.
+        [MenuItem("Tools/Sprite Lab/Reimport Selected Rigging V2 Folder")]
+        public static void ReimportSelectedFolder()
+        {
+            var assetRoot = AssetDatabase.GetAssetPath(Selection.activeObject);
+            if (string.IsNullOrEmpty(assetRoot) || !AssetDatabase.IsValidFolder(assetRoot) || !File.Exists(Path.Combine(Path.GetFullPath(assetRoot), "rig-v2.json")))
+            {
+                EditorUtility.DisplayDialog("Rigging V2 다시 가져오기", "rig-v2.json이 있는 가져오기 폴더를 Project 창에서 선택하세요.", "확인");
+                return;
+            }
+            Debug.Log("Rigging V2 prefab 다시 생성: " + ImportExtractedFolder(assetRoot));
+        }
+
+        public static string ImportExtractedFolder(string assetRoot)
+        {
+            var diskRoot = Path.GetFullPath(assetRoot);
             var manifest = JsonUtility.FromJson<Manifest>(File.ReadAllText(Path.Combine(diskRoot, "manifest.json")));
             var rig = JsonUtility.FromJson<RigData>(File.ReadAllText(Path.Combine(diskRoot, "rig-v2.json")));
             if (manifest == null || manifest.canvas == null || manifest.parts == null || rig == null || rig.bones == null || rig.bones.Length < 5)
                 throw new InvalidDataException("V2 manifest 형식이 올바르지 않습니다.");
+            AddHairBones(manifest, rig);
 
             foreach (var part in manifest.parts)
                 ConfigureTexture(assetRoot + "/" + part.file, part, rig);
@@ -191,8 +213,44 @@ namespace SpriteLab.RiggingV2.Editor
             edges = edgeList.ToArray();
         }
 
+        // 머리카락 파츠마다 머리 뼈 아래 전용 뼈를 둔다. SpriteSkin 파츠는 렌더러 Transform을 돌려도 모양이 바뀌지 않으므로,
+        // 뿌리(정수리 쪽)는 머리 뼈, 끝으로 갈수록 이 뼈를 따르게 가중치를 주고 이 뼈를 흔들어 머리카락 끝을 움직인다.
+        private const string HairBonePrefix = "hair_";
+        private const float HairRootRatio = 0.2f; // 파츠 높이 중 이 지점(위에서부터)을 머리카락 뿌리로 본다
+
+        private static bool IsHair(LayerRecord record) => (record.id ?? string.Empty).ToLowerInvariant().Contains("hair");
+
+        private static void AddHairBones(Manifest manifest, RigData rig)
+        {
+            if (rig.bones.Any(bone => bone.name.StartsWith(HairBonePrefix)) || rig.bones.All(bone => bone.name != "head")) return;
+            var extra = manifest.parts.Where(IsHair).Select(part => new BoneRecord
+            {
+                name = HairBonePrefix + part.id,
+                parent = "head",
+                x = part.left + part.width * 0.5f,
+                y = part.top + part.height * HairRootRatio,
+                length = Mathf.Max(1f, part.height * (1f - HairRootRatio)),
+            }).ToArray();
+            rig.bones = rig.bones.Concat(extra).ToArray();
+        }
+
         private static BoneWeight WeightFor(Part part, RigData rig, float x, float y)
         {
+            if (IsHair(part))
+            {
+                var hairIndex = Array.FindIndex(rig.bones, bone => bone.name == HairBonePrefix + part.id);
+                var headIndex = Array.FindIndex(rig.bones, bone => bone.name == "head");
+                if (hairIndex >= 0 && headIndex >= 0)
+                {
+                    var root = part.top + part.height * HairRootRatio;
+                    var t = Mathf.Clamp01((y - root) / Mathf.Max(1f, part.top + part.height - root));
+                    t = t * t * (3f - 2f * t);
+                    return t >= 0.5f
+                        ? new BoneWeight { boneIndex0 = hairIndex, weight0 = t, boneIndex1 = headIndex, weight1 = 1f - t }
+                        : new BoneWeight { boneIndex0 = headIndex, weight0 = 1f - t, boneIndex1 = hairIndex, weight1 = t };
+                }
+            }
+
             var names = InfluenceNames(part, rig);
             var candidates = rig.bones.Select((bone, index) => new { bone, index })
                 .Where(item => names.Contains(item.bone.name))
@@ -259,7 +317,12 @@ namespace SpriteLab.RiggingV2.Editor
                 BindSkin(renderer.gameObject, bones);
                 if (part.id.StartsWith("eyewhite") || part.id.StartsWith("irides") || part.id.StartsWith("eyelash")) eyesOpen.Add(renderer);
                 if (part.id == "mouth_open") mouthOpen = renderer;
-                if (part.id.Contains("hair")) hair.Add(renderer.transform);
+                if (IsHair(part))
+                {
+                    // 흔들림은 SpriteSkin이 따르는 머리카락 뼈에 건다 (없으면 예전처럼 렌더러)
+                    var hairBone = FindBoneOrNull(rig, bones, HairBonePrefix + part.id);
+                    hair.Add(hairBone ? hairBone : renderer.transform);
+                }
                 if (part.id.Contains("object")) equipment.Add(renderer.transform);
                 if (part.id.Contains("bottom") || part.id.Contains("skirt")) cloth.Add(renderer.transform);
             }
@@ -281,10 +344,33 @@ namespace SpriteLab.RiggingV2.Editor
                 FindBoneOrNull(rig, bones, "skirt_c"), FindBoneOrNull(rig, bones, "skirt_l"), FindBoneOrNull(rig, bones, "skirt_r"),
                 FindBoneOrNull(rig, bones, "leg_l"), FindBoneOrNull(rig, bones, "leg_r"));
             var prefabPath = assetRoot + "/RiggingV2Avatar.prefab";
-            PrefabUtility.SaveAsPrefabAsset(root, prefabPath);
+            var avatarPrefab = PrefabUtility.SaveAsPrefabAsset(root, prefabPath);
             UnityEngine.Object.DestroyImmediate(root);
+            BuildPortraitPrefab(assetRoot, avatarPrefab, manifest.canvas);
             AssetDatabase.SaveAssets();
             return prefabPath;
+        }
+
+        private static void BuildPortraitPrefab(string assetRoot, GameObject avatarPrefab, CanvasInfo canvas)
+        {
+            var root = new GameObject("RiggingV2Portrait", typeof(RectTransform), typeof(CanvasRenderer), typeof(RawImage), typeof(RiggingV2Portrait));
+            var rect = root.GetComponent<RectTransform>();
+            var height = 500f;
+            var width = height * canvas.width / Mathf.Max(1f, canvas.height);
+            if (width > 700f)
+            {
+                height *= 700f / width;
+                width = 700f;
+            }
+            rect.sizeDelta = new Vector2(Mathf.Max(100f, width), Mathf.Max(100f, height));
+            var image = root.GetComponent<RawImage>();
+            image.color = Color.white;
+            image.raycastTarget = false;
+            root.GetComponent<RiggingV2Portrait>().Configure(avatarPrefab);
+            var portraitPath = assetRoot + "/RiggingV2Portrait.prefab";
+            PrefabUtility.SaveAsPrefabAsset(root, portraitPath);
+            UnityEngine.Object.DestroyImmediate(root);
+            Debug.Log("Rigging V2 UI portrait prefab 생성: " + portraitPath);
         }
 
         private static Transform[] CreateBoneHierarchy(Transform parent, CanvasInfo canvas, RigData rig)
