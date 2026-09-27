@@ -170,6 +170,9 @@ public class CardData : ScriptableObject
         return list;
     }
 
+    private const string BuffedValueColor = "#6FE38A";   // 보정으로 오른 수치
+    private const string DebuffedValueColor = "#FF6B5E"; // 보정으로 내린 수치
+
     public string GetDescription(bool upgraded, BattleState state = null, EnemyInstance target = null)
     {
         if (string.IsNullOrEmpty(cardDescription)) return string.Empty;
@@ -203,7 +206,13 @@ public class CardData : ScriptableObject
             if (value == null) return match.Value;
 
             if (state != null && value is int intValue)
-                return effect.GetDisplayValue(finalFieldName, intValue, state, this, target).ToString();
+            {
+                // 힘·죄와 벌·민첩·약화 등 보정이 반영된 최종 수치. 보정으로 바뀐 값은 색으로 알려 준다(슬더스 방식)
+                int shown = effect.GetDisplayValue(finalFieldName, intValue, state, this, target);
+                if (shown > intValue) return $"<color={BuffedValueColor}>{shown}</color>";
+                if (shown < intValue) return $"<color={DebuffedValueColor}>{shown}</color>";
+                return shown.ToString();
+            }
 
             return value.ToString();
         });

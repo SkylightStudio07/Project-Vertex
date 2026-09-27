@@ -82,7 +82,25 @@ public class HandView : MonoBehaviour
         // 손패 선택 모드 진입/종료 시 대상 아닌 카드의 흐림 표시를 갱신한다
         HandCardSelector.OnSelectionModeChanged += Refresh;
         CardInteractionView.HoverChanged += ApplyHoverSpread;
+        BattleManager.Instance.OnBattleStarted += WatchPlayerStatuses;
+        WatchPlayerStatuses();
         Refresh();
+    }
+
+    // 힘·죄와 벌·민첩 등 플레이어 상태가 바뀌면 손패 설명의 보정 수치(색 표시 포함)를 다시 그린다.
+    private StatusContainer _watchedStatuses;
+
+    private void WatchPlayerStatuses()
+    {
+        if (_watchedStatuses != null) _watchedStatuses.OnChanged -= RefreshHandDescriptions;
+        _watchedStatuses = BattleManager.Instance?.State?.Player?.Statuses;
+        if (_watchedStatuses != null) _watchedStatuses.OnChanged += RefreshHandDescriptions;
+    }
+
+    private void RefreshHandDescriptions()
+    {
+        foreach (var view in _cardViews)
+            if (view != null) view.RefreshDescription();
     }
 
     // 호버된 카드를 기준으로 좌우 카드를 바깥쪽으로 밀고, 호버가 풀리면(null) 모두 제자리로 돌린다.
@@ -113,6 +131,8 @@ public class HandView : MonoBehaviour
         }
         HandCardSelector.OnSelectionModeChanged -= Refresh;
         CardInteractionView.HoverChanged -= ApplyHoverSpread;
+        if (BattleManager.Instance != null) BattleManager.Instance.OnBattleStarted -= WatchPlayerStatuses;
+        if (_watchedStatuses != null) _watchedStatuses.OnChanged -= RefreshHandDescriptions;
 
         if (_drawInRoutine != null)
             StopCoroutine(_drawInRoutine);
