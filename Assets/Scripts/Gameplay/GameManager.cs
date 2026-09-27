@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int chapter = 1;
     [SerializeField] private int floor   = 1;
     public int Chapter => chapter;
+    [Tooltip("막별 데이터(이름·맵 도입 연출). actNumber로 현재 막을 찾는다")]
+    [SerializeField] private List<ActData> acts = new();
+    public ActData CurrentAct => acts.Find(a => a != null && a.actNumber == chapter);
 
 
     void Start()
