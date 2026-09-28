@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: Q.E.D
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  cardImage: {fileID: 2684759201256913788, guid: f40786aad9d5be041aa80b86bb3f0df3, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
   cardType: 1
   cardRarity: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
-    isRetain: 0
+    isRetain: 1
   upgradedState:
     cardName: I.F.F
     energyCost: 2
