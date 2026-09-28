@@ -43,6 +43,9 @@ public class MapUIController : MonoBehaviour
     // mapPanel에 붙은 UIPanelTransition(오른쪽 슬라이드). 비워두면 연출 없이 즉시 켜고 끈다.
     [SerializeField] private UIPanelTransition mapTransition;
     [SerializeField] private ActTitleBanner actTitleBanner; // 새 막 맵을 처음 열 때 막 이름 표시
+    // 맵 콘텐츠 전체를 덮는 배경. 원본 비율을 지키도록 높이에 맞추고, 콘텐츠가 더 길면 가로로 거울 반복한다
+    // (텍스처 Wrap Mode U = Mirror 필요. 이음새가 대칭이라 끊겨 보이지 않는다).
+    [SerializeField] private UnityEngine.UI.RawImage mapPanorama;
     [SerializeField, Min(0f)] private float mapPanDelay = 0.35f; // 맵 패널이 들어온 뒤 패닝 시작까지
     private Tween _panTween;
     [SerializeField, Min(0f)] private float nodeRevealDelay = 0.12f;   // 패널이 어느 정도 들어온 뒤 노드 시작
@@ -171,6 +174,7 @@ public class MapUIController : MonoBehaviour
         mapContent.anchorMax = new Vector2(0f, 1f);
         mapContent.pivot = new Vector2(0f, 0.5f);
         mapContent.sizeDelta = new Vector2(Mathf.Max(totalWidth, viewportWidth), 0f);
+        FitPanoramaAspect();
         scrollRect.horizontal = true;
         scrollRect.vertical = false;
 
@@ -200,6 +204,20 @@ public class MapUIController : MonoBehaviour
         scrollRect.velocity = Vector2.zero;
         mapContent.anchoredPosition = Vector2.zero;
         scrollRect.horizontalNormalizedPosition = 0f;
+    }
+
+    private void FitPanoramaAspect()
+    {
+        if (mapPanorama == null || mapPanorama.texture == null) return;
+        Canvas.ForceUpdateCanvases();
+        Rect area = mapPanorama.rectTransform.rect;
+        float textureAspect = (float)mapPanorama.texture.width / mapPanorama.texture.height;
+        if (area.height <= 0f || textureAspect <= 0f) return;
+        float repeat = area.width / (area.height * textureAspect);
+        repeat = Mathf.Max(0.01f, repeat);
+        // 맵이 짧아 한 장보다 좁으면 양쪽을 똑같이 잘라 가운데를 보인다
+        float offset = repeat < 1f ? (1f - repeat) * 0.5f : 0f;
+        mapPanorama.uvRect = new Rect(offset, 0f, repeat, 1f);
     }
 
     private Vector2 GetNodePosition(MapNode node, float yOffset)
