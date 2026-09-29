@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: "\uC81C\uD30C\uB7EC"
   health: 40
   enemyImage: {fileID: 1599376612, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
-  spriteScale: 1.8
+  spriteScale: 2
   intentOffsetY: 0
   idleFrames:
   - {fileID: 1599376612, guid: 3777ac1290e979f4580860e30dc3dd31, type: 3}
@@ -53,6 +53,8 @@ MonoBehaviour:
   - {fileID: -5241866861706914348, guid: d55a7872166f4c641bce329e4e0bccf4, type: 3}
   - {fileID: -486682455766173938, guid: d55a7872166f4c641bce329e4e0bccf4, type: 3}
   attackFrameRate: 16
+  idleSheetPadding: 0.27
+  attackSheetPadding: 0.4
   activityPatternType: 0
   openingActions: []
   activityPatterns:

@@ -31,7 +31,7 @@ public static class BlessingUISetup
         var blessingView = blessingGo.GetComponent<BlessingView>();
         if (blessingView == null) blessingView = blessingGo.AddComponent<BlessingView>();
 
-        var fontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Font/강원교육튼튼 SDF.asset");
+        var fontAsset = TMP_Settings.defaultFontAsset; // 프로젝트 기본 폰트 (Pretendard Bold)
 
         // Load Icon & Avatar Sprites
         var itemIcons = AssetDatabase.LoadAllAssetsAtPath("Assets/Art/Items/ItemIcon.png").OfType<Sprite>().ToList();

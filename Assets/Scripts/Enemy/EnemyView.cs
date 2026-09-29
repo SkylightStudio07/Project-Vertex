@@ -449,7 +449,10 @@ public class EnemyView : MonoBehaviour
         {
             var seqPlayer = enemyImage.GetComponent<PoseSequencePlayer>();
             if (seqPlayer == null) seqPlayer = enemyImage.gameObject.AddComponent<PoseSequencePlayer>();
-            seqPlayer.Play(Instance.AttackFrames, Instance.AttackFrameRate);
+            var swingOverlay = enemyImage.GetComponent<BatSwingOverlay>();
+            if (swingOverlay != null) swingOverlay.EnsurePlayerBinding();
+            seqPlayer.Play(Instance.AttackFrames, Instance.AttackFrameRate,
+                           Instance.Data != null ? Instance.Data.AttackScaleMultiplier : 1f); // 시트 여백 차이 보정
         }
 
         Vector2 originalPos = _rect.anchoredPosition;

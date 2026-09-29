@@ -38,13 +38,26 @@ public class QuestManager : MonoBehaviour
         public List<string> pendingCompleted = new(); // 로비에서 완료 연출을 보여줄 의뢰
     }
 
-    // 게시판 카드·런 중 알림용. (의뢰, 알림 문구)
-    public event Action<QuestData, string> OnQuestProgress;
+    // 런 중 알림 종류 (토스트 틀이 다르다)
+    public enum NoticeKind { Acquired, Progress, Completed, Deferred }
+
+    // 런 중 알림 (QuestRunToastView). caption: 작은 윗줄, body: 큰 아랫줄
+    public readonly struct Notice
+    {
+        public readonly QuestData Quest;
+        public readonly NoticeKind Kind;
+        public readonly string Caption, Body;
+        public Notice(QuestData quest, NoticeKind kind, string caption, string body)
+        { Quest = quest; Kind = kind; Caption = caption; Body = body; }
+    }
+
+    public event Action<Notice> OnNotice;
     public event Action OnStateChanged;
 
     public int MaxActive { get; set; } = DefaultMaxActive;
     public int PendingExp => _state.pendingExp;
     public IReadOnlyList<string> PendingCompleted => _state.pendingCompleted;
+    public int ActiveCount => _state.accepted.Count;
 
     private QuestDatabase _db;
     private SaveState _state = new();
@@ -76,6 +89,34 @@ public class QuestManager : MonoBehaviour
 
     public bool IsAccepted(string questId) => _state.accepted.Contains(questId);
     public bool IsCompleted(string questId) => _state.completed.Contains(questId);
+
+    public bool IsUnlocked(QuestData quest) => quest != null && FlagsMet(quest.requiredFlags);
+
+    // 게시판 전체 목록: 완료 안 한 의뢰 전부 (게시 조건 미달은 잠긴 카드로 보인다)
+    public List<QuestData> Posted()
+    {
+        var list = new List<QuestData>();
+        if (_db == null) return list;
+        foreach (var q in _db.quests) if (q != null && !IsCompleted(q.questId)) list.Add(q);
+        return list;
+    }
+
+    public List<QuestData> History()
+    {
+        var list = new List<QuestData>();
+        foreach (var id in _state.completed) { var q = Find(id); if (q != null) list.Add(q); }
+        return list;
+    }
+
+    // 게시판이 완료 도장 연출을 재생한 뒤 비운다
+    public List<string> ConsumeJustCompleted()
+    {
+        var list = new List<string>(_state.pendingCompleted);
+        if (list.Count == 0) return list;
+        _state.pendingCompleted.Clear();
+        Save();
+        return list;
+    }
 
     // 게시판에 뜰 수 있는 의뢰: 아직 완료 안 했고, 게시 조건 플래그를 모두 만족
     public List<QuestData> Available()
@@ -111,12 +152,11 @@ public class QuestManager : MonoBehaviour
     public int ClaimRewards()
     {
         int exp = _state.pendingExp;
-        if (exp <= 0 && _state.pendingCompleted.Count == 0) return 0;
+        if (exp <= 0) return 0;
         var userExp = UserExpManager.Instance;
         if (userExp == null) return 0;
-        if (exp > 0) userExp.AddExperience(exp);
-        _state.pendingExp = 0;
-        _state.pendingCompleted.Clear();
+        userExp.AddExperience(exp);
+        _state.pendingExp = 0; // 완료 도장 목록(pendingCompleted)은 게시판이 연출 후 비운다
         Save();
         OnStateChanged?.Invoke();
         return exp;
@@ -170,6 +210,46 @@ public class QuestManager : MonoBehaviour
     public int DefeatProgress(QuestData quest)
         => quest != null && _defeatCounts.TryGetValue(quest.questId, out var n) ? n : 0;
 
+    public bool IsRunActive => _runActive;
+    public bool IsDoneThisRun(QuestData quest) => quest != null && _completedThisRun.Contains(quest.questId);
+
+    // 맵 노드 표식: 이 노드와 관련된 진행 중 의뢰와 말풍선 문구. 없으면 null.
+    //   - 층 도달로 물품을 주는 의뢰: 그 층 노드 (아직 못 받았을 때)
+    //   - 배달 의뢰: 배달 목적지 종류 노드 (아직 배달 안 했을 때)
+    // 적 처치 조건은 어느 노드에서 그 적이 나올지 미리 알 수 없어 표시하지 않는다.
+    public QuestData NodeQuest(MapNode node, out string line)
+    {
+        line = null;
+        if (!_runActive || node == null) return null;
+        int chapter = GameManager.Instance != null ? GameManager.Instance.Chapter : 1;
+        foreach (var quest in Accepted)
+        {
+            if (IsDoneThisRun(quest)) continue;
+            if (quest.itemTrigger == QuestItemTrigger.ReachFloor && quest.questItem != null
+                && chapter == quest.triggerChapter && node.floorIndex == quest.triggerFloor
+                && !_itemGranted.Contains(quest.questId))
+            {
+                line = $"{quest.questItem.ItemName} — 도달 시 획득";
+                return quest;
+            }
+            if (quest.goal == QuestGoal.DeliverToNode && node.nodeType == quest.deliverNodeType)
+            {
+                line = $"{(quest.questItem != null ? quest.questItem.ItemName : quest.title)} — {QuestData.NodeName(quest.deliverNodeType)}에 전달";
+                return quest;
+            }
+        }
+        return null;
+    }
+
+    // 인벤토리의 의뢰 물품이 어느 의뢰 것인지 (아이템 칸 배지·툴팁용)
+    public QuestData QuestForItem(ItemData item)
+    {
+        if (item == null || !item.IsQuestItem) return null;
+        foreach (var quest in Accepted)
+            if (quest.questItem != null && quest.questItem.ItemName == item.ItemName) return quest;
+        return null;
+    }
+
     private void HandleNodeEntered(MapNode node)
     {
         if (!_runActive || node == null) return;
@@ -188,7 +268,7 @@ public class QuestManager : MonoBehaviour
                 var held = FindHeldItem(quest);
                 if (held == null) continue;
                 ItemInventoryManager.Instance.RemoveItem(held);
-                MarkDone(quest, $"{quest.title} — 배달 완료");
+                MarkDone(quest, quest.questItem.ItemName);
             }
         }
     }
@@ -206,8 +286,8 @@ public class QuestManager : MonoBehaviour
             {
                 _defeatCounts.TryGetValue(quest.questId, out var n);
                 _defeatCounts[quest.questId] = ++n;
-                if (n >= quest.goalCount) MarkDone(quest, $"{quest.title} {n}/{quest.goalCount} — 귀환 시 보상");
-                else OnQuestProgress?.Invoke(quest, $"{quest.title} {n}/{quest.goalCount}");
+                if (n >= quest.goalCount) MarkDone(quest, quest.title);
+                else OnNotice?.Invoke(new Notice(quest, NoticeKind.Progress, quest.title, $"{n} / {quest.goalCount}"));
             }
         }
     }
@@ -221,12 +301,12 @@ public class QuestManager : MonoBehaviour
         if (!inv.AddItem(quest.questItem))
         {
             if (!_pendingGrants.Contains(quest)) _pendingGrants.Add(quest);
-            OnQuestProgress?.Invoke(quest, $"{quest.questItem.ItemName} — 아이템 칸이 가득 찼습니다");
+            OnNotice?.Invoke(new Notice(quest, NoticeKind.Deferred, "아이템 칸이 가득 찼습니다", "다음 노드에서 다시 획득"));
             return;
         }
         _itemGranted.Add(quest.questId);
         _pendingGrants.Remove(quest);
-        OnQuestProgress?.Invoke(quest, $"의뢰 물품 획득: {quest.questItem.ItemName}");
+        OnNotice?.Invoke(new Notice(quest, NoticeKind.Acquired, "의뢰 물품 획득", quest.questItem.ItemName));
         Debug.Log($"<color=#22D3EE>[Quest] '{quest.title}' 의뢰 물품 획득: {quest.questItem.ItemName}</color>");
     }
 
@@ -235,10 +315,10 @@ public class QuestManager : MonoBehaviour
         foreach (var quest in new List<QuestData>(_pendingGrants)) GrantItem(quest);
     }
 
-    private void MarkDone(QuestData quest, string message)
+    private void MarkDone(QuestData quest, string body)
     {
         _completedThisRun.Add(quest.questId);
-        OnQuestProgress?.Invoke(quest, message);
+        OnNotice?.Invoke(new Notice(quest, NoticeKind.Completed, "의뢰 달성 — 귀환 시 보상", body));
         Debug.Log($"<color=#22D3EE>[Quest] '{quest.title}' 조건 달성</color>");
     }
 

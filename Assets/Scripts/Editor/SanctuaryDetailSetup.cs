@@ -14,7 +14,7 @@ public static class SanctuaryDetailSetup
         if (ui.transform.Find("DetailView") != null) return "DetailView already exists";
 
         Undo.RegisterFullObjectHierarchyUndo(ui.gameObject, "Setup Sanctuary Detail UI");
-        TMP_FontAsset font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Font/강원교육튼튼 SDF.asset");
+        TMP_FontAsset font = TMP_Settings.defaultFontAsset; // 프로젝트 기본 폰트 (Pretendard Bold)
         Sprite background = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/UI/Sanctuary/Sanctuary_Background.png");
 
         var detail = NewImage("DetailView", ui.transform, Color.white);

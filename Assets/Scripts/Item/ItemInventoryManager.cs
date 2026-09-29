@@ -144,6 +144,7 @@ public class ItemInventoryManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (Instance == this) Instance = null;
         if (!_battleSubscribed || BattleManager.Instance == null) return;
         BattleManager.Instance.OnBattleStarted -= ApplyLingeringOnBattleStart;
         BattleManager.Instance.OnBattleVictory -= TickLingeringOnVictory;

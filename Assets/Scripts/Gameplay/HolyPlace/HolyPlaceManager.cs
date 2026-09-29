@@ -16,15 +16,9 @@ public class HolyPlaceManager : MonoBehaviour
     private void Awake()
     {
         #region 싱글톤 패턴
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // 전투(런) 씬 전용: 같은 오브젝트(GameplayManager)에 GameManager 등이 붙어 있어 DontDestroyOnLoad를 쓰지 않는다.
+        // 씬을 다시 불러오면 새 인스턴스가 Instance가 된다.
+        Instance = this;
 #endregion
 
         // 층마다 선택 가능한 캐릭터 ID 리스트를 딕셔너리에 저장
@@ -49,5 +43,10 @@ public class HolyPlaceManager : MonoBehaviour
     public void OpenHolyPlaceEvent()
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 }

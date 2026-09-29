@@ -4,27 +4,33 @@ using UnityEngine;
 // 플레이어 덱 관리 전담 (시작 덱 구성, 런 중 카드 획득).
 // 로비 등 GameManager(현재 런 상태: HP/골드/적/맵 진행)와 무관한 씬에서도
 // 덱만 따로 참조할 수 있도록 분리했다.
+//
+// 씬 전환: 덱 목록은 static이라 씬을 넘어 유지되고, 컴포넌트는 씬마다 하나씩 있는 창구다(가장 최근 씬 것이 Instance).
+// DontDestroyOnLoad를 쓰지 않는다 — 전투 씬에서는 GameManager·BattleManager 등과 같은 오브젝트(GameplayManager)에
+// 붙어 있어서, 오브젝트를 살려 두거나 중복이라 지우면 그 씬의 매니저까지 같이 살아남거나 사라진다.
+// 덱은 로비에 들어올 때(LobbyManager.Start) 시작 덱으로 다시 만든다.
 public class DeckManager : MonoBehaviour
 {
     public static DeckManager Instance { get; private set; }
 
+    private static List<CardData> s_playerDeck;
+
+    // 에디터에서 도메인 리로드를 끄고 플레이해도 이전 플레이의 덱이 남지 않게
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() { s_playerDeck = null; Instance = null; }
+
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        Instance = this;
 
-        // 로비 구현 전 임시 처리. 로비 완성 후에는 로비에서 덱을 구성한 뒤 런을 시작하는 흐름으로 이전할 것.
-        // Awake에 두는 이유: Start()보다 먼저 실행되므로, GameManager.Start() → InitializeBattle()이
-        // PlayerDeck을 참조하기 전에 덱이 준비되는 것을 보장한다.
-        InitializeStartingDeck();
+        // 첫 실행(전투 씬을 에디터에서 바로 켠 경우 포함)에만 시작 덱을 만든다.
+        // Awake에 두는 이유: GameManager.Start() → InitializeBattle()이 PlayerDeck을 참조하기 전에 덱이 준비되어야 한다.
+        if (s_playerDeck == null) InitializeStartingDeck();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 
     [Header("기본 덱")]
@@ -36,9 +42,13 @@ public class DeckManager : MonoBehaviour
     [SerializeField] private CardData strikeCard_Debug;
     [SerializeField] private CardData blockCard_Debug;
 
-    public List<CardData> PlayerDeck { get; private set; } = new();
+    public List<CardData> PlayerDeck
+    {
+        get => s_playerDeck ??= new List<CardData>();
+        private set => s_playerDeck = value;
+    }
 
-    // 기본 시작 덱을 구성한다. 로비 구현 후에는 로비에서 직접 호출하거나 커스텀 덱으로 대체한다.
+    // 기본 시작 덱을 구성한다. 로비에 들어올 때마다(LobbyManager.Start) 새 런용으로 다시 만든다.
     public void InitializeStartingDeck()
     {
         // SO 원본이 오염되지 않도록 Instantiate로 복사
@@ -95,6 +105,7 @@ public class DeckManager : MonoBehaviour
         return true;
     }
 
+    // DECK 버튼이 씬의 이 컴포넌트를 직접 부른다 (덱 목록은 static이라 어느 씬 컴포넌트든 같다)
     public void ViewDeck()
     {
         CardListView.Instance?.OpenAsViewer("플레이어 덱", PlayerDeck);

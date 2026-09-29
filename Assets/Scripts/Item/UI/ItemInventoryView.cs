@@ -120,11 +120,15 @@ public class ItemInventoryView : MonoBehaviour
         => index >= 0 && index < _slots.Count && _slots[index] != null ? _slots[index].transform as RectTransform : null;
 
     // 슬롯 호버 시 호출 — 공용 툴팁에 내용 채우고 표시
+    // 의뢰 물품은 설명 끝에 "의뢰 물품 · 사용 불가" 한 줄
+    private static string TooltipDescription(ItemData item)
+        => item.IsQuestItem ? $"{item.ItemDescription}\n<color=#0DB8F2>의뢰 물품 · 사용 불가</color>" : item.ItemDescription;
+
     public void ShowTooltip(ItemData item, Vector3 worldPos)
     {
         if (tooltipObj == null) return;
         if (tooltipNameText != null) tooltipNameText.text = item.ItemName;
-        if (tooltipDescText != null) tooltipDescText.text = item.ItemDescription;
+        if (tooltipDescText != null) tooltipDescText.text = TooltipDescription(item);
         tooltipObj.position = worldPos;      // 슬롯 위치 기준 (오프셋은 씬에서 조정)
         tooltipObj.gameObject.SetActive(true);
     }
@@ -135,7 +139,7 @@ public class ItemInventoryView : MonoBehaviour
     {
         if (tooltipObj == null || item == null || anchor == null) return;
         if (tooltipNameText != null) tooltipNameText.text = item.ItemName;
-        if (tooltipDescText != null) tooltipDescText.text = item.ItemDescription;
+        if (tooltipDescText != null) tooltipDescText.text = TooltipDescription(item);
         tooltipObj.gameObject.SetActive(true);
 
         var corners = new Vector3[4];

@@ -31,6 +31,39 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (iconImage == null) return;
 
         iconImage.sprite = item != null ? item.ItemIcon : emptyIcon;
+        RefreshQuestFrame();
+    }
+
+    // 의뢰 물품 칸: 청록 테두리 + 왼쪽 아래 유형 배지 오버레이 (QuestRunSkin, 투명 가운데)
+    private Image _questFrame;
+
+    private void RefreshQuestFrame()
+    {
+        bool quest = item != null && item.IsQuestItem;
+        var skin = QuestRunSkin.Instance;
+        if (!quest || skin == null)
+        {
+            if (_questFrame != null) _questFrame.gameObject.SetActive(false);
+            return;
+        }
+        if (_questFrame == null)
+        {
+            var size = ((RectTransform)transform).rect.size;
+            _questFrame = QuestRunSkin.Image("QuestFrame", transform, skin.itemSlot, 0f, 0f, size.x, size.y);
+            _questFrame.preserveAspect = false;
+            var rt = _questFrame.rectTransform;
+            rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
+            rt.offsetMin = rt.offsetMax = Vector2.zero;
+        }
+        _questFrame.sprite = skin.itemSlot;
+        _questFrame.gameObject.SetActive(true);
+    }
+
+    private void SetQuestFrameHover(bool hover)
+    {
+        var skin = QuestRunSkin.Instance;
+        if (_questFrame != null && _questFrame.gameObject.activeSelf && skin != null)
+            _questFrame.sprite = hover ? skin.itemSlotHover : skin.itemSlot;
     }
 
     // 새 아이템이 들어왔을 때: 아이콘이 디졸브로 나타나며 살짝 튀어오른다 (ItemInventoryView가 호출)
@@ -52,11 +85,13 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (owner == null || item == null) return;
+        SetQuestFrameHover(true);
         owner.ShowTooltip(item, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        SetQuestFrameHover(false);
         if (owner != null) owner.HideTooltip();
     }
 

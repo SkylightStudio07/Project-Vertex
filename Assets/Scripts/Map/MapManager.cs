@@ -10,15 +10,16 @@ public class MapManager : MonoBehaviour
     [Header("설정")]
     [SerializeField] private MapConfig mapConfig;
 
+    // 전투(런) 씬 전용. 맵은 런마다 GameManager.InitializeRun → InitializeMap으로 새로 만들고 RunData에 둔다.
+    // DontDestroyOnLoad를 쓰지 않는다 (GameManager 주석 참고).
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 
     // 런 시작 시 GameManager에서 호출.

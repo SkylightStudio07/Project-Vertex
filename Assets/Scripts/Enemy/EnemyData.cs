@@ -35,6 +35,58 @@ public class EnemyData : ScriptableObject
     [Tooltip("공격 애니메이션 초당 프레임 수 (기본 16 FPS)")]
     public float attackFrameRate = 16f;
 
+    [Header("시트 여백 (대기/공격 크기 맞추기)")]
+    [Tooltip("대기 시트의 여백 비율 — 캐릭터 크기 대비 한쪽 여백. 1할 = 0.1 (프레임 = 캐릭터 × (1 + 2×여백))")]
+    [Range(0f, 1f)] public float idleSheetPadding = 0.1f;
+    [Tooltip("공격 시트의 여백 비율. 보통 3할 = 0.3. 대기보다 여백이 크면 공격 재생 중 그만큼 키워서 캐릭터 크기·발 위치를 맞춘다.\n" +
+             "우클릭 → '시트 여백 자동 측정'으로 실제 그림(알파)에서 잴 수 있다.")]
+    [Range(0f, 1f)] public float attackSheetPadding = 0.3f;
+
+    // 공격 프레임 재생 중 Image에 곱할 배율. 여백이 위아래·좌우 대칭이라 가운데 기준으로 키우면 발 위치도 맞는다.
+    public float AttackScaleMultiplier => (1f + 2f * attackSheetPadding) / (1f + 2f * idleSheetPadding);
+
+#if UNITY_EDITOR
+    // 프레임별 불투명 영역 높이의 중앙값으로 여백 비율을 역산한다: 캐릭터 높이 비율 h = 1 / (1 + 2p) → p = (1/h - 1) / 2
+    [ContextMenu("시트 여백 자동 측정")]
+    private void MeasureSheetPadding()
+    {
+        float idle = MeasurePadding(idleFrames), attack = MeasurePadding(attackFrames);
+        UnityEditor.Undo.RecordObject(this, "시트 여백 측정");
+        if (idle >= 0f) idleSheetPadding = idle;
+        if (attack >= 0f) attackSheetPadding = attack;
+        UnityEditor.EditorUtility.SetDirty(this);
+        Debug.Log($"[EnemyData] '{enemyName}' 시트 여백 — 대기 {idleSheetPadding:0.00}, 공격 {attackSheetPadding:0.00} (공격 배율 ×{AttackScaleMultiplier:0.00})");
+    }
+
+    private static float MeasurePadding(Sprite[] frames)
+    {
+        if (frames == null || frames.Length == 0 || frames[0] == null) return -1f;
+        var path = UnityEditor.AssetDatabase.GetAssetPath(frames[0].texture);
+        var tex = new Texture2D(2, 2);
+        if (!tex.LoadImage(System.IO.File.ReadAllBytes(path))) return -1f; // 임포트 설정(Read/Write)과 무관하게 원본 PNG를 읽는다
+        var scale = new Vector2((float)tex.width / frames[0].texture.width, (float)tex.height / frames[0].texture.height);
+        var px = tex.GetPixels32();
+        var ratios = new List<float>();
+        foreach (var s in frames)
+        {
+            if (s == null) continue;
+            Rect r = s.rect;
+            int x0 = Mathf.RoundToInt(r.x * scale.x), y0 = Mathf.RoundToInt(r.y * scale.y);
+            int w = Mathf.RoundToInt(r.width * scale.x), h = Mathf.RoundToInt(r.height * scale.y);
+            int minY = int.MaxValue, maxY = int.MinValue;
+            for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                if (px[(y0 + y) * tex.width + x0 + x].a > 20) { minY = Mathf.Min(minY, y); maxY = Mathf.Max(maxY, y); break; }
+            if (maxY >= minY) ratios.Add((maxY - minY + 1f) / h);
+        }
+        DestroyImmediate(tex);
+        if (ratios.Count == 0) return -1f;
+        ratios.Sort();
+        float median = ratios[ratios.Count / 2];
+        return Mathf.Round((1f / median - 1f) * 0.5f * 100f) / 100f;
+    }
+#endif
+
     [Header("행동 패턴")]
     [Tooltip("행동 패턴 타입(랜덤/순차)")]
     public EnemyActivityPatternType activityPatternType;

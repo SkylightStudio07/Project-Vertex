@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // 노드가 현재 어떤 상태인지 열거형
@@ -15,7 +16,7 @@ public enum MapNodeState
 }
 
 // 노드 하나하나 시각적 처리 클래스. MapUIController가 프리팹을 Instantiate한 뒤 Setup()으로 초기화하고, 맵 이동 시마다 SetState()로 상태 갱신.
-public class MapNodeView : MonoBehaviour
+public class MapNodeView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // NodeType별 스프라이트 매핑 - 어차피 9개니까 선형으로 무식하게 해도 문제없음.
     [Serializable]
@@ -147,6 +148,68 @@ public class MapNodeView : MonoBehaviour
 
         _state = state;
         PlayStateMotion(state);
+        RefreshQuestTag();
+    }
+
+    // ── 의뢰 표식: 진행 중 의뢰와 관련된 노드(물품 획득 층·배달 목적지)의 오른쪽 위 모서리에 청록 태그 ──
+    // 이동 가능한 노드면 강조(글로우) 태그, 노드에 마우스를 올리면 위에 한 줄 말풍선.
+
+    private Image _questTag;
+    private RectTransform _questTip;
+    private TMPro.TextMeshProUGUI _questTipText;
+
+    private void RefreshQuestTag()
+    {
+        var skin = QuestRunSkin.Instance;
+        string line = null;
+        var quest = skin != null && Application.isPlaying ? QuestManager.Instance.NodeQuest(Data, out line) : null;
+        if (quest == null)
+        {
+            if (_questTag != null) _questTag.gameObject.SetActive(false);
+            if (_questTip != null) _questTip.gameObject.SetActive(false);
+            return;
+        }
+
+        if (_questTag == null)
+        {
+            // 노드 루트 영역은 아이콘보다 넓어서 아이콘 모서리에 붙인다 (이동 가능 노드의 둥실 모션도 같이 탄다)
+            _questTag = QuestRunSkin.Image("QuestTag", iconImage.transform, null, 0f, 0f, 28f, 28f);
+            var t = _questTag.rectTransform;
+            t.anchorMin = t.anchorMax = new Vector2(1f, 1f);
+            t.pivot = new Vector2(0.5f, 0.5f);
+            t.anchoredPosition = new Vector2(-4f, -4f); // 모서리에 걸친다
+
+            _questTip = QuestRunSkin.Rect("QuestTip", transform, 0f, 0f, 220f, 40f);
+            _questTip.anchorMin = _questTip.anchorMax = new Vector2(0.5f, 1f);
+            _questTip.pivot = new Vector2(0.5f, 0f);
+            _questTip.anchoredPosition = new Vector2(0f, 10f);
+            var bg = QuestRunSkin.Image("Bg", _questTip, skin.mapTooltip, 0f, 0f, 220f, 40f);
+            bg.preserveAspect = false;
+            _questTipText = skin.Text("Text", _questTip, 10f, 3f, 200f, 26f, 14f, QuestRunSkin.Graphite,
+                                      TMPro.TextAlignmentOptions.Center);
+            _questTipText.fontStyle = TMPro.FontStyles.Bold;
+            var cv = _questTip.gameObject.AddComponent<Canvas>(); // 이웃 노드 위로
+            cv.overrideSorting = true;
+            cv.sortingOrder = 60;
+        }
+
+        bool highlight = _state == MapNodeState.Accessible;
+        _questTag.sprite = skin.Tag(quest.IconKind, highlight);
+        _questTag.rectTransform.sizeDelta = highlight ? new Vector2(40f, 40f) : new Vector2(28f, 28f);
+        _questTag.gameObject.SetActive(_state != MapNodeState.Visited);
+        _questTag.transform.SetAsLastSibling();
+        _questTipText.text = line;
+        _questTip.gameObject.SetActive(false);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_questTip != null && _questTag != null && _questTag.gameObject.activeSelf) _questTip.gameObject.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_questTip != null) _questTip.gameObject.SetActive(false);
     }
 
     // nodeType에 맞는 스프라이트 반환. 일반 선형 탐색.

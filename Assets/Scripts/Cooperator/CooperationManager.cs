@@ -16,30 +16,38 @@ public class CoopCharState
 }
 
 // 협력자 호감도 관리 스크립트
+//
+// 씬 전환: 호감도 상태(coopCharDict)는 static이라 씬을 넘어 유지되고, 컴포넌트는 씬마다 하나씩 있는 창구다(가장 최근 씬 것이 Instance).
+// DontDestroyOnLoad를 쓰지 않는다 — 전투 씬에서는 GameManager 등과 같은 오브젝트(GameplayManager)에 붙어 있다.
+// 씬마다 coopCharList에 등록한 캐릭터를 합친다(이미 있는 캐릭터의 호감도는 건드리지 않음).
+// → 로비에 Cp_01만, 전투 씬에 Cp_01~03이 등록돼 있어도 로비에서 출정하면 세 명 모두 쓸 수 있다.
 public class CooperationManager : MonoBehaviour
 {
     public static CooperationManager Instance { get; private set; }
 
     [SerializeField] private List<CoopCharData> coopCharList = new List<CoopCharData>();
-    private Dictionary<string, CoopCharState> coopCharDict = new Dictionary<string, CoopCharState>();
+    private static Dictionary<string, CoopCharState> coopCharDict = new Dictionary<string, CoopCharState>();
 
-    
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() { coopCharDict = new Dictionary<string, CoopCharState>(); Instance = null; }
+
     private void Awake()
     {
-        #region 싱글톤
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        #endregion
+        Instance = this;
+        Register(coopCharList);
+    }
 
-        foreach (var coopCharData in coopCharList)
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
+    }
+
+    // 아직 없는 캐릭터만 새 상태로 등록한다
+    private static void Register(List<CoopCharData> list)
+    {
+        foreach (var coopCharData in list)
         {
+            if (coopCharData == null || coopCharDict.ContainsKey(coopCharData.charID)) continue;
             Dictionary<int, RankEventData> rankEventDatasDict = new Dictionary<int, RankEventData>();
             foreach (var rankEventData in coopCharData.rankEventDatas)
             {

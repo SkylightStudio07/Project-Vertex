@@ -15,17 +15,17 @@ public class GameManager : MonoBehaviour
 
     public void SetPhase(GamePhase phase) => Phase = phase;
 
+    // 전투(런) 씬 전용 매니저. 씬을 다시 불러오면(재출정·로비 귀환 후 출정) 새 씬의 인스턴스가 Start에서 새 런을 연다.
+    // DontDestroyOnLoad를 쓰지 않는다 — 같은 오브젝트(GameplayManager)의 BattleManager·MapUIController 등은
+    // 그 씬의 UI를 참조하므로, 이전 런의 매니저가 살아남으면 사라진 UI를 가리키게 된다.
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 
     public List<EnemyData> currentEnemies; // 현재 전투에 참여하는 적들의 데이터 리스트
@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
         chapter = 1;
         maxHPModifier = 0;
         PlayerHP = MaxPlayerHP;
+        // RunData는 씬을 넘어 유지되므로 런 단위 값은 여기서 되돌린다 (맵·조우 큐는 InitializeMap에서)
+        if (RunData.Instance != null) RunData.Instance.cardRemoveCount = 0;
 
         // 카드 풀 초기화 — SO 원본이 아닌 복사본으로 시작해야 런 간 데이터 누적을 막는다.
         cardPools[CardData.CardRarity.Common] = playerRewardPool != null ? new List<CardData>(playerRewardPool.commonCards) : new List<CardData>();
@@ -107,7 +109,10 @@ public class GameManager : MonoBehaviour
         QuestManager.Instance.BeginRun(); // 수주한 의뢰의 진행을 이번 런 기준으로 시작
 
         // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행
-        var blessingView = BlessingView.Instance ?? FindObjectOfType<BlessingView>(true);
+        // ?? 는 Unity의 파괴된 오브젝트를 null로 보지 않는다. 두 번째 런에서는 BlessingView가 비활성이라 Awake 전이고,
+        // Instance에 이전 런(파괴된 씬)의 뷰가 남아 있어서 == null 비교로 걸러야 한다.
+        var blessingView = BlessingView.Instance;
+        if (blessingView == null) blessingView = FindFirstObjectByType<BlessingView>(FindObjectsInactive.Include);
         if (blessingView != null)
         {
             blessingView.Open();

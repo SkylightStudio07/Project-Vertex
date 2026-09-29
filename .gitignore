@@ -86,3 +86,6 @@ skills-lock.json
 # Local logs
 *.log
 Project Vertex (1)/hwp_mcp_stdio_server.log
+
+# ArtSource 생성 스크립트 의존성 (npm install로 복원)
+ArtSource/node_modules/
