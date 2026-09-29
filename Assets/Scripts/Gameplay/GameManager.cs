@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
             CooperationManager.Instance.ResetOnRunStart();
 
         MapManager.Instance.InitializeMap(chapter);
+        QuestManager.Instance.BeginRun(); // 수주한 의뢰의 진행을 이번 런 기준으로 시작
 
         // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행
         var blessingView = BlessingView.Instance ?? FindObjectOfType<BlessingView>(true);

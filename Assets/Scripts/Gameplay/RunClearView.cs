@@ -29,6 +29,7 @@ public class RunClearView : MonoBehaviour
 
     public void Open(ActData clearedAct)
     {
+        QuestManager.Instance.SettleRun(); // 런 클리어 → 의뢰 정산 (보상은 로비에서 수령)
         if (titleText != null) titleText.text = "런 클리어";
         if (subtitleText != null)
             subtitleText.text = clearedAct != null && !string.IsNullOrWhiteSpace(clearedAct.actName)

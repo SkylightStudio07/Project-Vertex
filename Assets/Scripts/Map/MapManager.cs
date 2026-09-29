@@ -37,6 +37,8 @@ public class MapManager : MonoBehaviour
     }
 
     // 지정한 노드로 이동. 이동 가능 여부는 호출 전에 확인할 것.
+    public static event System.Action<MapNode> NodeEntered; // 노드에 들어설 때 (의뢰 등)
+
     public void MoveToNode(MapNode node)
     {
         node.isVisited = true;
@@ -44,6 +46,7 @@ public class MapManager : MonoBehaviour
         RunData.Instance.currentFloor     = node.floorIndex;
         RunData.Instance.currentNodeIndex = node.nodeIndex;
         RunData.Instance.CurrentNodeType  = node.nodeType;
+        NodeEntered?.Invoke(node);
     }
 
     // 현재 노드에서 이동 가능한 다음 노드 목록 반환.

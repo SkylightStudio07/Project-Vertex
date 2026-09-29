@@ -74,6 +74,7 @@ public class BattleManager : MonoBehaviour
     public event Action<BattleReward> OnBattleVictory;
     public event Action         OnBattleDefeat;
     public event Action         OnBattleEscaped;
+    public static event Action<EnemyInstance> EnemyDefeated; // 적 하나가 쓰러질 때마다
 
     private BattleType   _currentBattleType;
     public BattleType CurrentBattleType => _currentBattleType;
@@ -156,6 +157,7 @@ public class BattleManager : MonoBehaviour
             }
             var enemy = new EnemyInstance(data, _rnd);
             enemy.OnDied += CheckVictory;
+            enemy.OnDied += () => EnemyDefeated?.Invoke(enemy); // 의뢰(처치 조건) 등 전투 밖 시스템용
             _state.Enemies.Add(enemy);
         }
     }
@@ -494,7 +496,7 @@ public class BattleManager : MonoBehaviour
 
     public bool CanUseItem(ItemData item)
     {
-        if (item == null || !CanUseItemNow) return false;
+        if (item == null || !CanUseItemNow || item.IsQuestItem) return false; // 의뢰 물품은 사용 불가
         if (_currentBattleType == BattleType.Boss &&
             item.ItemEffects.Any(effect => effect is EscapeBattleEffect))
             return false;

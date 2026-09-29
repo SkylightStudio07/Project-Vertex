@@ -27,6 +27,7 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
     private void Start()
     {
         facilityManager?.Initialize(completedRunCount);
+        QuestManager.Instance.ClaimRewards(); // 지난 런에서 완료한 의뢰 보상을 로비 경험치로
     }
 
     public void AddCompletedRun()
