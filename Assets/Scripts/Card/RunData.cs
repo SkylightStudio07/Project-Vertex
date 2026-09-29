@@ -40,6 +40,11 @@ public class RunData : MonoBehaviour
     [System.NonSerialized] public int combatsFought;         // 소비 인덱스 (일반 전투)
     [System.NonSerialized] public int elitesFought;          // 소비 인덱스 (엘리트)
 
+    // ── 이벤트 중복 방지 ────────────────────────────────────────────────
+    // 이번 런에서 이미 등장한 이벤트. 후보가 전부 소진되면 비우고 다시 순환한다(MapUIController.OpenEvent).
+    // 조우 큐와 같은 이유로 저장하지 않는다.
+    [System.NonSerialized] public HashSet<EventData> seenEvents = new();
+
     // 런(막) 시작 시 호출 — 맵 시드에서 조우 큐를 새로 뽑고 소비 카운터를 0으로 초기화한다.
     // 맵 시드가 세팅된 뒤(MapManager.InitializeMap) 불려야 한다.
     // 막(Act) 개념이 생기면 막 전환 시점에 다시 호출해 큐를 갈아끼우면 된다.

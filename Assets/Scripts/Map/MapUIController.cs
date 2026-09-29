@@ -353,8 +353,18 @@ public class MapUIController : MonoBehaviour
         }
 
         // 노드 위치 기반 재시드로 같은 노드는 항상 같은 이벤트 선택(단, 후보군은 조건 상태에 따라 달라질 수 있음).
+        // 이번 런에 이미 등장한 이벤트는 제외한다. 남은 후보가 없으면 풀이 소진된 것이므로
+        // 기록을 비우고 전체 후보로 다시 순환한다.
+        var pool = eligible.FindAll(e => !RunData.Instance.seenEvents.Contains(e));
+        if (pool.Count == 0)
+        {
+            RunData.Instance.seenEvents.Clear();
+            pool = eligible;
+        }
+
         var rnd = RunRng.For(RngStream.Event, node.floorIndex, node.nodeIndex);
-        var data = eligible[rnd.Next(0, eligible.Count)];
+        var data = pool[rnd.Next(0, pool.Count)];
+        RunData.Instance.seenEvents.Add(data);
         eventView.Open(data);
     }
 
