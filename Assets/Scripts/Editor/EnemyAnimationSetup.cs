@@ -253,6 +253,194 @@ public static class EnemyAnimationSetup
         return $"Success! Sliced {sprites.Count} frames (832x1216) for 훈트_idle_sheet and assigned to '{enemyData.name}' (8 FPS loop).";
     }
 
+    public static string SetupAbandonedOne()
+    {
+        string idlePath = "Assets/Art/Characters/Enemy/버려진 자/탈주자_idle_sheet.png";
+        string attackPath = "Assets/Art/Characters/Enemy/버려진 자/탈주자_attack_sheet.png";
+        string enemyDataPath = "Assets/Data/Enemy/EnemyDatas/버려진 자/버려진 자.asset";
+
+        // 1. Idle 시트 슬라이스 (8x2, 16프레임)
+        var idleSprites = SliceGrid(idlePath, 8, 2, 832, 1216, "탈주자_idle_sheet");
+        if (idleSprites == null || idleSprites.Count == 0) return "Error: Failed to slice idle sheet";
+
+        // 2. Attack 시트 슬라이스 (8x4, 32프레임)
+        var allAttackSprites = SliceGrid(attackPath, 8, 4, 832, 1216, "탈주자_attack_sheet");
+        if (allAttackSprites == null || allAttackSprites.Count == 0) return "Error: Failed to slice attack sheet";
+
+        // 3. 움직임이 큰 활성 프레임만 분절 (10번~24번 프레임: 3점사 사격 화염, 반동, 탄피 배출, 자세 복귀 총 15프레임)
+        int ExtractIdx(string name)
+        {
+            int lastUnderscore = name.LastIndexOf('_');
+            if (lastUnderscore >= 0 && int.TryParse(name.Substring(lastUnderscore + 1), out int res))
+                return res;
+            return -1;
+        }
+
+        var activeAttackSprites = new List<Sprite>();
+        foreach (var s in allAttackSprites)
+        {
+            int idx = ExtractIdx(s.name);
+            if (idx >= 10 && idx <= 24)
+            {
+                activeAttackSprites.Add(s);
+            }
+        }
+
+        // 4. 버려진 자.asset에 할당
+        var enemyData = AssetDatabase.LoadAssetAtPath<EnemyData>(enemyDataPath);
+        if (enemyData == null) return "Error: EnemyData not found at " + enemyDataPath;
+
+        enemyData.enemyImage = idleSprites[0];
+        enemyData.idleFrames = idleSprites.ToArray();
+        enemyData.idleFrameRate = 12f; // 16프레임 기준 약 1.33초 1루프
+        enemyData.attackFrames = activeAttackSprites.ToArray();
+        enemyData.attackFrameRate = 16f; // 15프레임 기준 약 0.94초 3점사 사격
+
+        EditorUtility.SetDirty(enemyData);
+        AssetDatabase.SaveAssets();
+
+        return $"Success! Sliced {idleSprites.Count} idle frames (12 FPS) and {activeAttackSprites.Count} active attack frames (16 FPS, extracted 10-24 from 32) for '버려진 자'.";
+    }
+
+    public static string SetupZephyrusAttack()
+    {
+        string attackPath = "Assets/Art/Characters/Enemy/견마/제파러_attack_sheet.png";
+        string enemyDataPath = "Assets/Data/Enemy/EnemyDatas/제파러/제파러.asset";
+
+        // 1. Attack 시트 슬라이스 (8x4, 32프레임)
+        var allAttackSprites = SliceGrid(attackPath, 8, 4, 832, 1216, "제파러_attack_sheet");
+        if (allAttackSprites == null || allAttackSprites.Count == 0) return "Error: Failed to slice attack sheet for 제파러";
+
+        // 2. 움직임이 큰 활성 프레임만 분절 (8번~23번 프레임: 주포 발사 화염, 반동, 기체 반동 제어, 자세 복귀 총 16프레임)
+        int ExtractIdx(string name)
+        {
+            int lastUnderscore = name.LastIndexOf('_');
+            if (lastUnderscore >= 0 && int.TryParse(name.Substring(lastUnderscore + 1), out int res))
+                return res;
+            return -1;
+        }
+
+        var activeAttackSprites = new List<Sprite>();
+        foreach (var s in allAttackSprites)
+        {
+            int idx = ExtractIdx(s.name);
+            if (idx >= 8 && idx <= 23)
+            {
+                activeAttackSprites.Add(s);
+            }
+        }
+
+        // 3. 제파러.asset에 할당
+        var enemyData = AssetDatabase.LoadAssetAtPath<EnemyData>(enemyDataPath);
+        if (enemyData == null) return "Error: EnemyData not found at " + enemyDataPath;
+
+        enemyData.attackFrames = activeAttackSprites.ToArray();
+        enemyData.attackFrameRate = 16f; // 16프레임 기준 1.0초 사격 및 반동 모션
+
+        EditorUtility.SetDirty(enemyData);
+        AssetDatabase.SaveAssets();
+
+        return $"Success! Sliced 32 frames and assigned {activeAttackSprites.Count} active attack frames (8-23, 16 FPS) to '{enemyData.name}'.";
+    }
+
+    private static List<Sprite> SliceGrid(string texturePath, int cols, int rows, int fw, int fh, string prefix)
+    {
+        var importer = AssetImporter.GetAtPath(texturePath) as TextureImporter;
+        if (importer == null)
+        {
+            Debug.LogError("Error: TextureImporter not found for " + texturePath);
+            return null;
+        }
+
+        importer.textureType = TextureImporterType.Sprite;
+        importer.spriteImportMode = SpriteImportMode.Multiple;
+        importer.mipmapEnabled = false;
+        importer.alphaIsTransparency = true;
+        importer.maxTextureSize = 8192;
+        importer.filterMode = FilterMode.Bilinear;
+
+        var defaultSettings = importer.GetDefaultPlatformTextureSettings();
+        defaultSettings.maxTextureSize = 8192;
+        defaultSettings.textureCompression = TextureImporterCompression.Uncompressed;
+        importer.SetPlatformTextureSettings(defaultSettings);
+
+        var standaloneSettings = importer.GetPlatformTextureSettings("Standalone");
+        standaloneSettings.maxTextureSize = 8192;
+        standaloneSettings.textureCompression = TextureImporterCompression.Uncompressed;
+        standaloneSettings.overridden = true;
+        importer.SetPlatformTextureSettings(standaloneSettings);
+
+        EditorUtility.SetDirty(importer);
+        importer.SaveAndReimport();
+
+        var factory = new SpriteDataProviderFactories();
+        factory.Init();
+        var dataProvider = factory.GetSpriteEditorDataProviderFromObject(importer);
+        dataProvider.InitSpriteEditorDataProvider();
+
+        var editCapability = dataProvider.GetDataProvider<ISpriteFrameEditCapability>();
+        if (editCapability == null || !editCapability.GetEditCapability().HasCapability(EEditCapability.CreateAndDeleteSprite))
+        {
+            Debug.LogError("Error: CreateAndDeleteSprite capability not supported by importer.");
+            return null;
+        }
+
+        int totalH = rows * fh;
+        var rects = new List<SpriteRect>();
+        var namePairs = new List<SpriteNameFileIdPair>();
+
+        for (int r = 0; r < rows; r++)
+        {
+            int unityY = totalH - (r + 1) * fh;
+            for (int c = 0; c < cols; c++)
+            {
+                int idx = r * cols + c;
+                int unityX = c * fw;
+                string spriteName = $"{prefix}_{idx}";
+                var sr = new SpriteRect
+                {
+                    name = spriteName,
+                    spriteID = GUID.Generate(),
+                    rect = new Rect(unityX, unityY, fw, fh),
+                    alignment = SpriteAlignment.Center,
+                    pivot = new Vector2(0.5f, 0.5f)
+                };
+                rects.Add(sr);
+                namePairs.Add(new SpriteNameFileIdPair(spriteName, sr.spriteID));
+            }
+        }
+
+        dataProvider.SetSpriteRects(rects.ToArray());
+
+        var nameFileIdProvider = dataProvider.GetDataProvider<ISpriteNameFileIdDataProvider>();
+        if (nameFileIdProvider != null)
+        {
+            nameFileIdProvider.SetNameFileIdPairs(namePairs);
+        }
+
+        dataProvider.Apply();
+        importer.SaveAndReimport();
+        AssetDatabase.Refresh();
+
+        var subAssets = AssetDatabase.LoadAllAssetsAtPath(texturePath);
+        var sprites = new List<Sprite>();
+        foreach (var a in subAssets)
+        {
+            if (a is Sprite s) sprites.Add(s);
+        }
+
+        int ExtractIdx(string name)
+        {
+            int lastUnderscore = name.LastIndexOf('_');
+            if (lastUnderscore >= 0 && int.TryParse(name.Substring(lastUnderscore + 1), out int res))
+                return res;
+            return -1;
+        }
+
+        sprites.Sort((a, b) => ExtractIdx(a.name).CompareTo(ExtractIdx(b.name)));
+        return sprites;
+    }
+
     public static string AttachAnimatorToPrefab()
     {
         string prefabPath = "Assets/Data/Enemy/Prefabs/EnemyView.prefab";

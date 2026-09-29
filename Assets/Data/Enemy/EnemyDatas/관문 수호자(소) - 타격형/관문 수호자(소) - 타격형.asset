@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uAD00\uBB38 \uC218\uD638\uC790(\uC18C) - \uD0C0\uACA9\uD615"
   health: 50
-  enemyImage: {fileID: 21300000, guid: b9a155ad98650f548846ae7f853e2dc3, type: 3}
-  spriteScale: 1.15
+  enemyImage: {fileID: 21300000, guid: 1beb441a3dcacb64cb30e5d404f7a2d6, type: 3}
+  spriteScale: 1.2
   intentOffsetY: 0
+  idleFrames: []
+  idleFrameRate: 12
   activityPatternType: 0
   openingActions: []
   activityPatterns:
   - {fileID: 11400000, guid: 69bea9ebda3f52879fa1f31270042929, type: 2}
   - {fileID: 11400000, guid: 1653dc5878b959b78122e4e1e750e59d, type: 2}
   - {fileID: 11400000, guid: b6919986834d593fa05410259589ecb0, type: 2}
+  phases: []

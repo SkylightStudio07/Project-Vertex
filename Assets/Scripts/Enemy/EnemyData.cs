@@ -28,6 +28,13 @@ public class EnemyData : ScriptableObject
     [Tooltip("대기 애니메이션 초당 프레임 수 (기본 12 FPS)")]
     public float idleFrameRate = 12f;
 
+    [Header("공격(Attack) 애니메이션")]
+    [Tooltip("공격 스프라이트 시트 프레임 (비어있으면 돌진 모션 단독 재생)")]
+    public Sprite[] attackFrames;
+
+    [Tooltip("공격 애니메이션 초당 프레임 수 (기본 16 FPS)")]
+    public float attackFrameRate = 16f;
+
     [Header("행동 패턴")]
     [Tooltip("행동 패턴 타입(랜덤/순차)")]
     public EnemyActivityPatternType activityPatternType;

@@ -49,6 +49,8 @@ public class EnemyInstance : ICombatant
     public Sprite EnemySprite { get; private set; }
     public Sprite[] IdleFrames => Data != null ? Data.idleFrames : null;
     public float IdleFrameRate => (Data != null && Data.idleFrameRate > 0.01f) ? Data.idleFrameRate : 12f;
+    public Sprite[] AttackFrames => Data != null ? Data.attackFrames : null;
+    public float AttackFrameRate => (Data != null && Data.attackFrameRate > 0.01f) ? Data.attackFrameRate : 16f;
     public float SpriteScale => (Data != null && Data.spriteScale > 0.01f) ? Data.spriteScale : 1.0f;
     public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
 

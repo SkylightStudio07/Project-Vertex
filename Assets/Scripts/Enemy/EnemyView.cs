@@ -444,6 +444,14 @@ public class EnemyView : MonoBehaviour
         ShowActionName();
         if (_rect == null) return;
 
+        // 공격 스프라이트 애니메이션이 등록되어 있으면 재생 (대기 애니메이션 자동 일시정지 및 복귀)
+        if (Instance != null && Instance.AttackFrames != null && Instance.AttackFrames.Length > 0 && enemyImage != null)
+        {
+            var seqPlayer = enemyImage.GetComponent<PoseSequencePlayer>();
+            if (seqPlayer == null) seqPlayer = enemyImage.gameObject.AddComponent<PoseSequencePlayer>();
+            seqPlayer.Play(Instance.AttackFrames, Instance.AttackFrameRate);
+        }
+
         Vector2 originalPos = _rect.anchoredPosition;
         Vector2 forward = originalPos + new Vector2(-lungeDistance, 0f);
         _rect.DOAnchorPos(forward, lungeOutDuration)
