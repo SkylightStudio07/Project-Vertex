@@ -488,7 +488,12 @@ public class EnemyView : MonoBehaviour
 
         float ratio = Instance.MaxHP > 0 ? (float)Instance.HP / Instance.MaxHP : 0f;
         if (hpFill != null) hpFill.fillAmount = ratio;
-        if (hpText != null) hpText.text = $"{Instance.HP} / {Instance.MaxHP}";
+        if (hpText != null)
+        {
+            hpText.text = $"{Instance.HP} / {Instance.MaxHP}";
+            // 숫자는 바 가운데: 연회색 채움이 가운데를 덮으면 먹색, 절반 아래로 내려가 어두운 트랙 위면 흰색 (전투 HUD v3)
+            hpText.color = ratio >= 0.55f ? new Color(0.086f, 0.094f, 0.106f, 1f) : new Color(0.95f, 0.95f, 0.96f, 1f);
+        }
         if (_previewLoss > 0) ApplyDamagePreview(); // 미리보기 중에 HP가 바뀌면 다시 그린다
     }
 

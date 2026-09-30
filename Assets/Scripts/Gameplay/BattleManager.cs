@@ -193,6 +193,8 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator PlayerTurnStartSequence(bool showBanner)
     {
+        _state.TurnNumber++; // 플레이어 턴이 올 때마다 1부터 센다 (상단 작전 바 TURN 표시)
+
         if (showBanner && _playerTurnBanner != null)
             yield return _playerTurnBanner.ShowAndWait();
 
