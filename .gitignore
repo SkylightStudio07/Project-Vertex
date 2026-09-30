@@ -89,3 +89,10 @@ Project Vertex (1)/hwp_mcp_stdio_server.log
 
 # ArtSource 생성 스크립트 의존성 (npm install로 복원)
 ArtSource/node_modules/
+
+# 아트 디렉션 작업 폴더: 문서·좌표·스크립트만 올리고 이미지는 제외
+# (게임에 쓰는 조각은 Assets/Art에 복사해 커밋한다. 목업 원본 공유는 드라이브로)
+ArtDirection/**/*.png
+ArtDirection/**/*.jpg
+ArtDirection/**/*.jpeg
+ArtDirection/**/*.webp

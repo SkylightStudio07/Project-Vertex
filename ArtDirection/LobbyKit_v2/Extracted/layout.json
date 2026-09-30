@@ -1,0 +1,477 @@
+{
+  "source": "Lobby_Textless_Master.png",
+  "canvasWidth": 1672,
+  "canvasHeight": 941,
+  "coordinateOrigin": "top-left",
+  "assets": [
+    {
+      "name": "LeftHeader",
+      "file": "LeftHeader.png",
+      "x": 0,
+      "y": 0,
+      "width": 369,
+      "height": 165,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        0,
+        0
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "LeftLower_Composite",
+      "file": "LeftLower_Composite.png",
+      "x": 0,
+      "y": 789,
+      "width": 224,
+      "height": 152,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        0,
+        -789
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "RightPanel_Composite",
+      "file": "RightPanel_Composite.png",
+      "x": 599,
+      "y": 0,
+      "width": 1073,
+      "height": 941,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        599,
+        0
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Expedition_Normal",
+      "file": "Expedition_Normal.png",
+      "x": 851,
+      "y": 105,
+      "width": 785,
+      "height": 266,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        851,
+        -105
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Expedition_Normal_Hover",
+      "file": "Expedition_Normal_Hover.png",
+      "x": 851,
+      "y": 105,
+      "width": 785,
+      "height": 266,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        851,
+        -105
+      ],
+      "kind": "same crop plus cyan tint",
+      "normal": "Expedition_Normal"
+    },
+    {
+      "name": "Bonfire_Normal",
+      "file": "Bonfire_Normal.png",
+      "x": 840,
+      "y": 381,
+      "width": 795,
+      "height": 183,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        840,
+        -381
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Bonfire_Normal_Hover",
+      "file": "Bonfire_Normal_Hover.png",
+      "x": 840,
+      "y": 381,
+      "width": 795,
+      "height": 183,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        840,
+        -381
+      ],
+      "kind": "same crop plus cyan tint",
+      "normal": "Bonfire_Normal"
+    },
+    {
+      "name": "Armory_Normal",
+      "file": "Armory_Normal.png",
+      "x": 830,
+      "y": 570,
+      "width": 393,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        830,
+        -570
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Armory_Normal_Hover",
+      "file": "Armory_Normal_Hover.png",
+      "x": 830,
+      "y": 570,
+      "width": 393,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        830,
+        -570
+      ],
+      "kind": "same crop plus cyan tint",
+      "normal": "Armory_Normal"
+    },
+    {
+      "name": "QuestBoard_Normal",
+      "file": "QuestBoard_Normal.png",
+      "x": 1228,
+      "y": 570,
+      "width": 407,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1228,
+        -570
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "QuestBoard_Normal_Hover",
+      "file": "QuestBoard_Normal_Hover.png",
+      "x": 1228,
+      "y": 570,
+      "width": 407,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1228,
+        -570
+      ],
+      "kind": "same crop plus cyan tint",
+      "normal": "QuestBoard_Normal"
+    },
+    {
+      "name": "InformationBroker_Normal",
+      "file": "InformationBroker_Normal.png",
+      "x": 830,
+      "y": 710,
+      "width": 393,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        830,
+        -710
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "InformationBroker_Normal_Hover",
+      "file": "InformationBroker_Normal_Hover.png",
+      "x": 830,
+      "y": 710,
+      "width": 393,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        830,
+        -710
+      ],
+      "kind": "same crop plus cyan tint",
+      "normal": "InformationBroker_Normal"
+    },
+    {
+      "name": "TrainingGround_Normal",
+      "file": "TrainingGround_Normal.png",
+      "x": 1228,
+      "y": 710,
+      "width": 407,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1228,
+        -710
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "TrainingGround_Normal_Hover",
+      "file": "TrainingGround_Normal_Hover.png",
+      "x": 1228,
+      "y": 710,
+      "width": 407,
+      "height": 135,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1228,
+        -710
+      ],
+      "kind": "same crop plus cyan tint",
+      "normal": "TrainingGround_Normal"
+    },
+    {
+      "name": "Settings_Button_Normal",
+      "file": "Settings_Button_Normal.png",
+      "x": 1494,
+      "y": 21,
+      "width": 48,
+      "height": 48,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1494,
+        -21
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Settings_Button_Normal_Hover",
+      "file": "Settings_Button_Normal_Hover.png",
+      "x": 1494,
+      "y": 21,
+      "width": 48,
+      "height": 48,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1494,
+        -21
+      ],
+      "kind": "same crop plus cyan tint",
+      "normal": "Settings_Button_Normal"
+    },
+    {
+      "name": "Settings_Icon",
+      "file": "Settings_Icon.png",
+      "x": 1504,
+      "y": 30,
+      "width": 27,
+      "height": 29,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1504,
+        -30
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "Brand_Compass",
+      "file": "Brand_Compass.png",
+      "x": 71,
+      "y": 17,
+      "width": 50,
+      "height": 50,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        71,
+        -17
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "Armory_Icon",
+      "file": "Armory_Icon.png",
+      "x": 861,
+      "y": 609,
+      "width": 106,
+      "height": 63,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        861,
+        -609
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "QuestBoard_Icon",
+      "file": "QuestBoard_Icon.png",
+      "x": 1295,
+      "y": 604,
+      "width": 63,
+      "height": 71,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1295,
+        -604
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "InformationBroker_Icon",
+      "file": "InformationBroker_Icon.png",
+      "x": 886,
+      "y": 741,
+      "width": 67,
+      "height": 74,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        886,
+        -741
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "TrainingGround_Icon",
+      "file": "TrainingGround_Icon.png",
+      "x": 1286,
+      "y": 736,
+      "width": 82,
+      "height": 82,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1286,
+        -736
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "Expedition_Compass_Crop",
+      "file": "Expedition_Compass_Crop.png",
+      "x": 1306,
+      "y": 106,
+      "width": 290,
+      "height": 256,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1306,
+        -106
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Bonfire_Illustration_Crop",
+      "file": "Bonfire_Illustration_Crop.png",
+      "x": 1205,
+      "y": 383,
+      "width": 374,
+      "height": 175,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1205,
+        -383
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Arrow_Dark",
+      "file": "Arrow_Dark.png",
+      "x": 1581,
+      "y": 306,
+      "width": 31,
+      "height": 26,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1581,
+        -306
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "Arrow_Light_Crop",
+      "file": "Arrow_Light_Crop.png",
+      "x": 1580,
+      "y": 485,
+      "width": 34,
+      "height": 32,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1580,
+        -485
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Progress_Composite",
+      "file": "Progress_Composite.png",
+      "x": 1192,
+      "y": 37,
+      "width": 200,
+      "height": 16,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1192,
+        -37
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Progress_Track_Segment",
+      "file": "Progress_Track_Segment.png",
+      "x": 1211,
+      "y": 40,
+      "width": 99,
+      "height": 10,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1211,
+        -40
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Progress_Fill_Segment",
+      "file": "Progress_Fill_Segment.png",
+      "x": 1196,
+      "y": 42,
+      "width": 12,
+      "height": 7,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1196,
+        -42
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "CornerMark",
+      "file": "CornerMark.png",
+      "x": 1627,
+      "y": 96,
+      "width": 17,
+      "height": 19,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1627,
+        -96
+      ],
+      "kind": "luminance-extracted icon"
+    },
+    {
+      "name": "Footer_Dark",
+      "file": "Footer_Dark.png",
+      "x": 1434,
+      "y": 704,
+      "width": 238,
+      "height": 237,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1434,
+        -704
+      ],
+      "kind": "source pixel crop"
+    },
+    {
+      "name": "Header_Right_Composite",
+      "file": "Header_Right_Composite.png",
+      "x": 1138,
+      "y": 0,
+      "width": 534,
+      "height": 104,
+      "unityAnchor": "top-left",
+      "unityPosition": [
+        1138,
+        0
+      ],
+      "kind": "source pixel crop"
+    }
+  ]
+}
