@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static CardData;
 
 // 플레이어 덱 관리 전담 (시작 덱 구성, 런 중 카드 획득).
 // 로비 등 GameManager(현재 런 상태: HP/골드/적/맵 진행)와 무관한 씬에서도
@@ -93,6 +95,56 @@ public class DeckManager : MonoBehaviour
 
         card.isUpgraded = true;
         return true;
+    }
+
+    // 카드 변화 메소드
+    public CardData TransmogrifyCard(CardData card, System.Random transRng)
+    {
+        if (card == null || !PlayerDeck.Contains(card))
+        {
+            return null;
+        }
+
+        List<CardData> allCards = GetTransmogrifiableCards(card);
+        if(allCards.Count == 0)
+        {
+            return null;
+        }
+        CardData newCard = allCards[transRng.Next(allCards.Count)];
+
+        if(newCard == null)
+        {
+            return null;
+        }
+        CardData copy = Instantiate(newCard);
+
+        // 기존 카드의 위치를 유지하기 위해 인덱스를 저장한다.
+        int index = PlayerDeck.IndexOf(card);
+        RemoveCardFromPlayerDeck(card);
+        PlayerDeck.Insert(index, copy);
+
+        return newCard;
+    }
+
+    // 변화 후보: 획득 가능한 카드(보상 풀 전 등급) 중 Owner가 같은 카드. 자기 자신은 변화 대상에서 제외한다.
+    public List<CardData> GetTransmogrifiableCards(CardData card)
+    {
+        var result = new List<CardData>();
+        if (card == null || GameManager.Instance == null) 
+        {
+            return result;
+        }
+
+        foreach (var rarity in new[] { CardRarity.Common, CardRarity.Rare, CardRarity.Unique })
+        {
+            if (!GameManager.Instance.cardPools.TryGetValue(rarity, out var pool)) continue;
+            foreach (var c in pool)
+            {
+                if (c != null && c.Owner == card.Owner && c.BaseCardName != card.BaseCardName && !c.IsUnplayable && !c.IsWeaponShootingCard)
+                    result.Add(c);
+            }
+        }
+        return result;
     }
 
     public void ViewDeck()
