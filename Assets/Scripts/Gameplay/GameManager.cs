@@ -100,6 +100,10 @@ public class GameManager : MonoBehaviour
         if (CooperationManager.Instance != null)
             CooperationManager.Instance.ResetOnRunStart();
 
+        // 이벤트 중복 방지 기록도 런 단위 상태 — 비우지 않으면 이전 런에서 본 이벤트가 계속 제외된다.
+        if (RunData.Instance != null)
+            RunData.Instance.seenEvents.Clear();
+
         MapManager.Instance.InitializeMap(chapter);
 
         // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행

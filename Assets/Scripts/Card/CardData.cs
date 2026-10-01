@@ -101,6 +101,7 @@ public class CardData : ScriptableObject
     // --- Public Accessors ---
     private CardUpgradeState ActiveState => isUpgraded ? upgradedState : normalState;
     public string CardName        => ActiveState.cardName;
+    public string BaseCardName => normalState.cardName;
     public Sprite CardImage       => cardImage;
     public int    EnergyCost      => ActiveState.energyCost;
     public int    AmmoCost        => ActiveState.ammoCost;

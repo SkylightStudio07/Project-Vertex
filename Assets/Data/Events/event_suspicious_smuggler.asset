@@ -17,9 +17,14 @@ MonoBehaviour:
   - effects:
     - rid: 3673691850256941147
     - rid: 3673691850256941148
+    conditions: []
   - effects: []
+    conditions: []
   dialogueJson: {fileID: 0}
   backgroundImage: {fileID: 0}
+  eventImage: {fileID: -3256057480142343780, guid: b8811d3145b4d194591779dc72a3da77, type: 3}
+  eventImageFocus: {x: 0.5, y: 0.5}
+  eventImageZoom: 1
   illustration: {fileID: 0}
   references:
     version: 2

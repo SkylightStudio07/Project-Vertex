@@ -17,6 +17,7 @@ public enum RngStream
     Event  = 3, // 이벤트 노드의 이벤트 선택 (MapUIController)
     Encounter = 4, // 전투 조우 큐 생성 (EncounterQueueBuilder / RunData)
     Shop = 5, // 상점 판매 상품 생성 (ShopStock)
+    Transmogrify = 6, // 카드 변형 (DeckManager)
     // 새 용도는 여기에 추가. 번호는 기존과 겹치지만 않으면 됨.
     // 단, 한 번 배정한 번호를 바꾸면 같은 맵시드가 다른 결과를 뱉게 되므로 변경 금지.
 }
