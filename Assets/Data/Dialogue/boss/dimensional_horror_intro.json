@@ -1,0 +1,16 @@
+{
+  "characters": [
+    { "id": "horror", "name": "차원의 공포", "slot": 0 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(허공이 세로로 찢어진다. 균열 너머에서, 무언가가 이쪽을 내려다본다.)" },
+        { "type": "line", "speaker": "horror", "emotion": "idle", "text": "순환은 계속된다." },
+        { "type": "line", "speaker": "horror", "emotion": "idle", "text": "너희는 비옥하게 기르고, 우리가 포식한다." }
+      ]
+    }
+  ]
+}

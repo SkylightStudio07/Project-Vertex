@@ -21,6 +21,18 @@ public class EnemyData : ScriptableObject
     [Tooltip("인텐트 UI 추가 Y 오프셋 (기본 0, 필요시 머리 위 위치 미세 조정)")]
     public float intentOffsetY = 0f;
 
+    [Header("화면 고정 배치 (화면 끝에 붙는 거대 보스)")]
+    [Tooltip("켜면 슬롯 대신 screenRect 화면 좌표에 그림을 놓는다. spriteScale은 무시된다")]
+    public bool useScreenRect;
+    [Tooltip("그림 영역 (1920×1080 기준, 좌상단 원점 x, y, 너비, 높이)")]
+    public Rect screenRect;
+    [Tooltip("그림 안 INTENT 기준점 (0~1, 좌하단 원점). 이 점 바로 위에 INTENT가 붙는다")]
+    public Vector2 intentAnchor = new(0.5f, 1f);
+    [Tooltip("그림 안 HP 바 중심 (0~1, 좌하단 원점)")]
+    public Vector2 hpBarAnchor = new(0.5f, 0f);
+    [Tooltip("공격할 때 앞으로 튀어나오지 않고 제자리에서 크기만 살짝 튄다")]
+    public bool noLunge;
+
     [Header("대기(Idle) 애니메이션")]
     [Tooltip("대기 스프라이트 시트 프레임 (비어있으면 enemyImage 단독 표시)")]
     public Sprite[] idleFrames;
@@ -87,6 +99,10 @@ public class EnemyData : ScriptableObject
     }
 #endif
 
+    [Header("고유 패시브")]
+    [Tooltip("전투 시작 시 이 적에게 붙는 상태 (예: 차원의 공포 '몸부림')")]
+    public List<StartingStatus> startingStatuses = new();
+
     [Header("행동 패턴")]
     [Tooltip("행동 패턴 타입(랜덤/순차)")]
     public EnemyActivityPatternType activityPatternType;
@@ -100,6 +116,13 @@ public class EnemyData : ScriptableObject
     [Header("페이즈 (보스·엘리트용, 비워 두면 위 패턴만 사용)")]
     [Tooltip("조건(HP 비율 / 동료 사망 수)을 만족하면 해당 페이즈의 행동 패턴으로 넘어간다. 위에서부터 순서대로 한 번씩만 진입")]
     public List<EnemyPhase> phases = new();
+}
+
+[System.Serializable]
+public class StartingStatus
+{
+    public StatusDefinition status;
+    public int stacks = 1;
 }
 
 public enum EnemyPhaseTrigger

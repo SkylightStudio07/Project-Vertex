@@ -158,6 +158,24 @@ public sealed class OnTurnStartEffectsStatusBehavior : TriggeredEffectsStatusBeh
         => Execute(context);
 }
 
+// N턴마다 효과 발동. 스택이 "발동까지 남은 턴"이다 (턴 시작마다 1씩 줄고, 1에서 발동 후 interval로 되돌아감).
+// 상태 정의의 durationPolicy는 Permanent로 둘 것 (스택이 0이 되어 사라지지 않게).
+[Serializable]
+public sealed class CountdownEffectsStatusBehavior : TriggeredEffectsStatusBehavior
+{
+    [Min(1)] public int interval = 3;
+
+    public override void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner)
+    {
+        if (status.Stacks <= 1)
+        {
+            Execute(context);
+            status.SetMagnitude(interval);
+        }
+        else status.ReduceMagnitude(1);
+    }
+}
+
 [Serializable]
 public sealed class OnTurnEndEffectsStatusBehavior : TriggeredEffectsStatusBehavior
 {

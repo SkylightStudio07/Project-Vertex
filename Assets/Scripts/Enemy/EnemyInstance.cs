@@ -71,6 +71,10 @@ public class EnemyInstance : ICombatant
         _rng = rng ?? new System.Random();
         _statuses = new StatusContainer(_passives);
         _statuses.OnChanged += () => OnIntentChanged?.Invoke();
+        // 고유 패시브 (전투 시작 전에 붙여서 NotifyBattleStart도 받는다)
+        if (data.startingStatuses != null)
+            foreach (var s in data.startingStatuses)
+                if (s?.status != null) AddPassive(s.status.CreateInstance(s.stacks, source: this));
         // 첫 인텐트 결정
         DetermineCurrentAction();
     }

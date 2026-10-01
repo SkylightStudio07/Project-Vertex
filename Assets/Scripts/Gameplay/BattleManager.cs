@@ -347,6 +347,8 @@ public class BattleManager : MonoBehaviour
         {
             if (enemy == null || enemy.IsDead) continue;
 
+            // 적 방어도도 플레이어와 같은 규칙 — 쌓은 방어도는 플레이어 턴 동안 남아 있다가 자기 행동이 시작될 때 초기화된다.
+            enemy.ResetBlock();
             enemy.StartTurnPassives(_state);
             if (!_isInBattle || _state.Player.IsDead) yield break;
             if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음

@@ -251,6 +251,67 @@ public class EnemyView : MonoBehaviour
         LayoutLookaheadIcons();
     }
 
+    // 화면 고정 배치(EnemyData.useScreenRect) — 화면 끝에 붙는 거대 보스용.
+    // EnemyZoneView가 슬롯 위치를 잡은 뒤(등장 연출 전) 호출한다. 그림을 화면 좌표에 놓고,
+    // INTENT·HP 바를 그림 안 기준점(intentAnchor, hpBarAnchor)으로 옮긴다.
+    public void ApplyScreenLayout()
+    {
+        EnemyData data = Instance?.Data;
+        if (data == null || !data.useScreenRect || enemyImage == null) return;
+        Canvas canvas = GetComponentInParent<Canvas>();
+        if (canvas == null) return;
+        var root = canvas.rootCanvas.transform as RectTransform;
+        Rect cr = root.rect;
+
+        // 1920×1080 좌상단 원점 → 루트 캔버스 로컬 (비율 유지라 오른쪽 끝은 항상 화면 끝)
+        Rect s = data.screenRect;
+        Vector2 Design(float x, float y) => new(cr.xMin + x / 1920f * cr.width, cr.yMax - y / 1080f * cr.height);
+        Vector3 center = root.TransformPoint(Design(s.x + s.width * 0.5f, s.y + s.height * 0.5f));
+        Vector2 size = new(s.width / 1920f * cr.width, s.height / 1080f * cr.height);
+
+        RectTransform img = enemyImage.rectTransform;
+        img.localScale = _enemyImageBaseScale;
+        float toLocal = root.lossyScale.x / Mathf.Max(1e-6f, img.lossyScale.x);
+        img.sizeDelta = size * toLocal;
+        img.position = center;
+
+        // 그림 안 기준점(0~1, 좌하단 원점) → 월드
+        Vector3 SpritePoint(Vector2 n)
+        {
+            Rect r = img.rect;
+            return img.TransformPoint(new Vector3(r.xMin + n.x * r.width, r.yMin + n.y * r.height, 0f));
+        }
+
+        // HP 바 — 상태 아이콘 줄은 HP 바와의 간격을 그대로 따라간다
+        RectTransform hpBar = hpFill != null ? hpFill.transform.parent as RectTransform : null;
+        if (hpBar != null)
+        {
+            RectTransform status = statusList != null ? statusList.transform as RectTransform : null;
+            Vector2 statusOffset = status != null ? status.anchoredPosition - hpBar.anchoredPosition : Vector2.zero;
+            hpBar.position = SpritePoint(data.hpBarAnchor);
+            if (status != null) status.anchoredPosition = hpBar.anchoredPosition + statusOffset;
+        }
+
+        // INTENT — 아이콘 아래 끝이 기준점 + intentGap에 오도록. 수치·blob은 아이콘과의 처음 간격 유지
+        if (_intentIconRect != null && _intentIconRect.parent is RectTransform parent)
+        {
+            Vector2 local = parent.InverseTransformPoint(SpritePoint(data.intentAnchor));
+            Vector2 anchorRef = Vector2.Lerp(_intentIconRect.anchorMin, _intentIconRect.anchorMax, 0.5f);
+            local -= new Vector2(parent.rect.xMin + parent.rect.width * anchorRef.x, parent.rect.yMin + parent.rect.height * anchorRef.y);
+            float halfBelow = _intentIconRect.rect.height * _intentIconRect.pivot.y * _intentIconRect.localScale.y;
+            Vector2 iconPos = local + new Vector2(0f, intentGap + halfBelow);
+
+            Vector2 shift = iconPos - _initialIntentIconPos;
+            _intentIconBasePos = iconPos;
+            _intentValueBasePos = _initialIntentValuePos + shift;
+            if (_intentFieldRect != null) _intentFieldBasePos = _initialIntentFieldPos + shift;
+            _intentIconRect.anchoredPosition = _intentIconBasePos;
+            if (_intentValueRect != null) _intentValueRect.anchoredPosition = _intentValueBasePos;
+            if (_intentFieldRect != null) _intentFieldRect.anchoredPosition = _intentFieldBasePos;
+            LayoutLookaheadIcons();
+        }
+    }
+
     // 적 그림(현재 스프라이트)의 불투명 영역 위 끝을, 인텐트 아이콘과 같은 좌표계(이 뷰의 로컬)에서 구한다.
     // Image는 preserveAspect로 rect 안에 맞춰 그리므로 그 배치까지 반영한다.
     private bool TryGetVisibleTopLocal(out float top)
@@ -453,6 +514,18 @@ public class EnemyView : MonoBehaviour
             if (swingOverlay != null) swingOverlay.EnsurePlayerBinding();
             seqPlayer.Play(Instance.AttackFrames, Instance.AttackFrameRate,
                            Instance.Data != null ? Instance.Data.AttackScaleMultiplier : 1f); // 시트 여백 차이 보정
+        }
+
+        // 화면 끝에 붙은 보스는 앞으로 나오지 않고 제자리에서 움찔한다
+        if (Instance?.Data != null && Instance.Data.noLunge)
+        {
+            if (enemyImage != null)
+            {
+                var img = enemyImage.rectTransform;
+                img.DOComplete();
+                img.DOPunchScale(Vector3.one * 0.05f, lungeOutDuration + lungeBackDuration, 5, 0.5f).SetLink(gameObject);
+            }
+            return;
         }
 
         Vector2 originalPos = _rect.anchoredPosition;
