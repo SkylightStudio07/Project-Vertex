@@ -75,7 +75,7 @@ public class RestView : MonoBehaviour
             sequenceId = $"rest_arrival_{pick.data.charID}",
             steps = new List<BlessingDialogueStep> { new() { npcDialogue = pick.line, playerAnswerText = "" } },
         };
-        dialogueOverlay.Play(sequence, pick.data.charName, null);
+        dialogueOverlay.Play(sequence, pick.data.charName, null, pick.data.charImage, pick.data.affiliation, pick.data.themeColor);
     }
 
     private void ToggleActionPanel()
@@ -138,7 +138,7 @@ public class RestView : MonoBehaviour
             RefreshStationMarkers();
         }
 
-        if (dialogueOverlay != null) dialogueOverlay.Play(sequence, state.charData.charName, GrantTalkPoint);
+        if (dialogueOverlay != null) dialogueOverlay.Play(sequence, state.charData.charName, GrantTalkPoint, state.charData.charImage, state.charData.affiliation, state.charData.themeColor);
         else GrantTalkPoint();
     }
 

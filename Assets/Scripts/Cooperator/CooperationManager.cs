@@ -129,6 +129,13 @@ public class CooperationManager : MonoBehaviour
         return data != null;
     }
 
+    // 등록된 협력자 전체 (성소 잠긴 후보 칸 채우기 등)
+    public IEnumerable<CoopCharData> AllCharData()
+    {
+        foreach (var charState in coopCharDict.Values)
+            if (charState.charData != null) yield return charState.charData;
+    }
+
     public Sprite GetCoopSprite(string CharID)
     {
         if (coopCharDict.TryGetValue(CharID, out var charState))

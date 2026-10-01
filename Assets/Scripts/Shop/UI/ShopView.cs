@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -102,7 +103,7 @@ public class ShopView : MonoBehaviour
         }
     }
 
-    private void OnDisable() => HideScene(false);
+    private void OnDisable() { HideScene(false); _leaveTween?.Kill(); _leaveTween = null; _leaving = false; }
 
     // 방문마다 호감도를 올린 뒤, 조건에 맞는 대사(첫 만남 > 등급업 이벤트 > 일반 인사)를 하나 재생한다.
     // 대사 오버레이가 화면 전체 입력을 막으므로, 대사가 끝나야 상품을 고를 수 있다.
@@ -123,7 +124,7 @@ public class ShopView : MonoBehaviour
             affinity.GetAffinity(keeper.entityId),
             charId => CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charId),
             affinity.GetAllFlags());
-        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, OnGreetingDialogueDone);
+        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, OnGreetingDialogueDone, keeper.portrait, keeper.affiliation, keeper.themeColor);
         else OnGreetingDialogueDone();
     }
 
@@ -427,9 +428,32 @@ public class ShopView : MonoBehaviour
     }
 
 
+    [Header("작별 인사")]
+    [Tooltip("나가기를 누른 뒤 작별 한마디를 보여 주고 맵으로 넘어가기까지의 시간. 그 사이 한 번 더 누르면 바로 나간다")]
+    [SerializeField, Min(0f)] private float farewellHold = 1.6f;
+    private bool _leaving;
+    private Tween _leaveTween;
+
     private void Proceed()
     {
         if (dialogueOverlay != null && dialogueOverlay.IsPlaying) return;
+        if (_leaving) { Leave(); return; } // 작별 인사 중 한 번 더 누르면 바로
+
+        var keeper = ResolveShopkeeper();
+        string line = keeper != null ? keeper.PickFarewellLine(BlessingAffinityManager.Instance.GetAffinityTier(keeper.entityId)) : null;
+        if (string.IsNullOrEmpty(line) || shopkeeperBubble == null || farewellHold <= 0f) { Leave(); return; }
+
+        _leaving = true;
+        _bubbleReady = true; // 입장 대사를 건너뛰고 바로 나가는 경우에도 말하게
+        Say(line);
+        _leaveTween = DOVirtual.DelayedCall(farewellHold, Leave).SetLink(gameObject);
+    }
+
+    private void Leave()
+    {
+        _leaveTween?.Kill();
+        _leaveTween = null;
+        _leaving = false;
         gameObject.SetActive(false);
         mapUIController?.OpenMap();
     }
