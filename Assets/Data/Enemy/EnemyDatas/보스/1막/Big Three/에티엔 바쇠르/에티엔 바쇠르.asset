@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
+  m_Name: "\uC5D0\uD2F0\uC5D4 \uBC14\uC1E0\uB974"
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "\uC5D0\uD2F0\uC5D4 \uBC14\uC1E0\uB974"
+  health: 48
+  enemyImage: {fileID: 0}
+  spriteScale: 1
+  intentOffsetY: 0
+  idleFrames: []
+  idleFrameRate: 12
+  attackFrames: []
+  attackFrameRate: 16
+  idleSheetPadding: 0.1
+  attackSheetPadding: 0.3
+  activityPatternType: 0
+  openingActions: []
+  activityPatterns:
+  - {fileID: 11400000, guid: a8ac2bc973619c84d95e0f671ca8a9e4, type: 2}
+  - {fileID: 11400000, guid: 7cf0b9457b8f4144780b650fee55889d, type: 2}
+  - {fileID: 11400000, guid: f65b38085eb0c344e97076e3cfcbc94f, type: 2}
+  - {fileID: 11400000, guid: 75ffb377caeed8c4eb611a6da4b380db, type: 2}
+  phases: []
