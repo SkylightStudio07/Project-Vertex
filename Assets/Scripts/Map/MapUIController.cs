@@ -156,6 +156,9 @@ public class MapUIController : MonoBehaviour
 
         MapData mapData = RunData.Instance.mapData;
         builtMapData = mapData;
+        // 막 전용 지형 바탕 (ActData.mapTerrain). 없으면 씬에 넣어 둔 기존 바탕 유지
+        var act = GameManager.Instance != null ? GameManager.Instance.CurrentAct : null;
+        if (mapPanorama != null && act != null && act.mapTerrain != null) mapPanorama.texture = act.mapTerrain;
         if (mapData == null)
         {
             Debug.LogWarning("[MapUIController] mapData가 null입니다. MapManager.InitializeMap()이 호출됐는지 확인하세요.");
@@ -244,6 +247,7 @@ public class MapUIController : MonoBehaviour
 
                     MapConnectionLine line = Instantiate(linePrefab, mapContent);
                     line.Setup(from, to, node.floorIndex);
+                    line.SetNodes(node, nextNode);
                     lineViews.Add(line);
                 }
             }
@@ -262,7 +266,7 @@ public class MapUIController : MonoBehaviour
 
             if (view.Data == currentNode)
                 state = MapNodeState.Current;
-            else if (view.Data.isVisited)
+            else if (view.Data.isVisited || view.Data.floorIndex == 0)
                 state = MapNodeState.Visited;
             else if (canAdvance && accessible.Contains(view.Data))
                 state = MapNodeState.Accessible;
@@ -271,7 +275,28 @@ public class MapUIController : MonoBehaviour
 
             view.SetState(state);
         }
+
+        // 연결선: 지나온 길(방문한 두 노드 사이) / 지금 갈 수 있는 길 / 나머지
+        foreach (var line in lineViews)
+        {
+            if (line == null || line.From == null || line.To == null) continue;
+            // 시작 층(축복)은 방문 표시가 없지만 지나온 것으로 본다
+            bool fromDone = line.From.isVisited || line.From == currentNode || line.From.floorIndex == 0;
+            bool toDone = line.To.isVisited || line.To == currentNode;
+            var style = fromDone && toDone ? MapConnectionLine.Style.Traveled
+                      : line.From == currentNode && canAdvance && accessible.Contains(line.To) ? MapConnectionLine.Style.Accessible
+                      : MapConnectionLine.Style.Other;
+            line.SetStyle(style);
+        }
+        MapRefreshed?.Invoke();
     }
+
+    // 맵이 새로 그려지거나 노드 상태가 바뀐 뒤 (작전 지도 판의 층 눈금·남은 층 갱신용)
+    public event System.Action MapRefreshed;
+    public RectTransform MapContent => mapContent;
+    public UnityEngine.UI.ScrollRect ScrollRect => scrollRect;
+    public float FloorSpacing => floorSpacing;
+    public float HorizontalPadding => horizontalPadding;
 
     private void OnNodeClicked(MapNode node)
     {
