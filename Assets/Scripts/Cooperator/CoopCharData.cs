@@ -16,6 +16,19 @@ public class CoopCharData : CharData
     [Header("성소 선택 상세 화면 전신 아트 (초상화와 별도)")]
     public Sprite sanctuaryFullArt;
 
+    [Tooltip("이벤트로만 합류하는 동료 (성소 후보·잠긴 후보 실루엣에 나오지 않음)")]
+    public bool isEventCompanion;
+
+    [Header("전투 스탠딩 표시 (애니메이션이 없을 때)")]
+    [Tooltip("스탠딩 그림 크기 배율 (드론처럼 작은 동료는 1보다 작게)")]
+    public float battleScale = 1f;
+    [Tooltip("슬롯 기준 위치 보정(px). 공중에 떠 있으면 y를 올린다")]
+    public Vector2 battleOffset;
+    [Tooltip("위아래로 떠다니는 폭(px). 0이면 정지")]
+    public float floatAmplitude;
+    [Tooltip("떠다니기 한 번 왕복 시간(초)")]
+    public float floatPeriod = 2.4f;
+
     [Header("호감도 레벨 당 해금 카드")]
     public List<CardData> unlockCardCoopLevel = new();
 

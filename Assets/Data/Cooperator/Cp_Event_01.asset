@@ -13,18 +13,41 @@ MonoBehaviour:
   m_Name: Cp_Event_01
   m_EditorClassIdentifier: Assembly-CSharp::CoopCharData
   charID: Cp_Event_01
-  charName: "\uC774\uCE74\uB8E8\uC2A4 \uAD70 "
-  charDescription: "\uCE90\uB9AD\uD130 \uC124"
-  charImage: {fileID: -1239302344545342076, guid: 05feb4187e10ad640acddb36ab13afd7, type: 3}
+  charName: "\uC774\uCE74\uB8E8\uC2A4 \uAD70"
+  charDescription: "\uAE30\uACC4\uBB34\uB364\uC5D0\uC11C \uB370\uB824\uC628 \uC804\uD22C
+    \uB4DC\uB860. \uC804\uC0AC\uD55C \uC61B \uC8FC\uC778\uC758 \uC548\uBC30\uB300\uB85C,
+    \uC0C8 \uC0AC\uC6A9\uC790\uB97C \uB530\uB978\uB2E4."
+  affiliation: "FWTO \uAD6D\uC81C\uC5EC\uB2E8 / \uC804\uD22C \uB4DC\uB860"
+  themeColor: {r: 0.72156864, g: 0.9019608, b: 0.18039216, a: 1}
+  charImage: {fileID: 21300000, guid: 9c7df2af807120248a0045514a5f5f5f, type: 3}
   charIcon: {fileID: 0}
-  standingSprite: {fileID: 1208040086343421634, guid: 10bc434aab69e964fa75f9c9a65ba431, type: 3}
+  standingSprite: {fileID: 21300000, guid: 9c7df2af807120248a0045514a5f5f5f, type: 3}
+  idleFrames: []
+  idleFrameRate: 24
+  attackFrames: []
+  attackFrameRate: 24
   idleAnim: {fileID: 0}
   attackAnim: {fileID: 0}
   hitAnim: {fileID: 0}
   deathAnim: {fileID: 0}
+  attackSequence: []
   charSoundEffect: {fileID: 0}
+  sanctuarySelectionArt: {fileID: 0}
+  sanctuaryHoverArt: {fileID: 0}
+  sanctuarySelectionFocus: {x: 0.5, y: 0.5}
+  sanctuaryHoverFocus: {x: 0.5, y: 0.5}
+  sanctuaryFullArt: {fileID: 0}
+  isEventCompanion: 1
+  battleScale: 0.55
+  battleOffset: {x: 220, y: 1000}
+  floatAmplitude: 40
+  floatPeriod: 2.6
   unlockCardCoopLevel: []
-  joinRewardCard: {fileID: 11400000, guid: 77f11f60a078a5c489ab28f726443fb1, type: 2}
+  campSprite: {fileID: 0}
+  campActivity: 
+  campLines: []
+  restArrivalLines: []
+  joinRewardCard: {fileID: 11400000, guid: 0234eac721c9ae941830e1a83a6d769f, type: 2}
   joinDialogueJson: {fileID: 0}
   rewardPoolCommon: []
   rewardPoolRare: []

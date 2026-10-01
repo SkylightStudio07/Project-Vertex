@@ -256,7 +256,7 @@ public class SelectCoopCharUI : MonoBehaviour
         foreach (CoopCharData data in CooperationManager.Instance.AllCharData())
         {
             if (candidates.Contains(data.charID) || CooperationManager.Instance.IsJoinedInRun(data.charID)) continue;
-            if (data.standingSprite == null) continue;
+            if (data.standingSprite == null || data.isEventCompanion) continue;
             list.Add(data);
         }
         return list;

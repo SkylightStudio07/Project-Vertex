@@ -200,8 +200,8 @@ public class CooperationManager : MonoBehaviour
         }
 
         CoopCharData coopCharData = GetCoopCharData(charID);
+        if (coopCharData == null) return; // 씬의 coopCharList에 등록되지 않은 협력자
         int currentCoopLevel = Mathf.Min(GetCoopLevel(charID), coopCharData.unlockCardCoopLevel.Count);
-        if (coopCharData == null) return;
 
         if (coopCharData.joinRewardCard != null)
         {
