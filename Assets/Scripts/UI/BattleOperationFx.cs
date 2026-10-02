@@ -362,7 +362,8 @@ public class BattleOperationFx : MonoBehaviour
         Pic(c.Content, "Chip", k + "Chip_" + v, 694, 250, 136, 24);
         if (unique) Pic(c.Content, "Ticks", k + "Ticks_Unique", 712, 496 - dy, 250, 8);
 
-        c.Label = Text(c.Content, "Label", 648, 124, 392, 28, 17f, accent, TextAlignmentOptions.Left, 22f);
+        // 유니크 프레임은 아트 창이 넓어(위 오른쪽 끝 x 658) 사선이 라벨 줄에 걸린다 — 라벨을 아래 청록 선 시작점에 맞춘다
+        c.Label = Text(c.Content, "Label", unique ? 694 : 648, 124, unique ? 352 : 392, 28, 17f, accent, TextAlignmentOptions.Left, 22f);
         c.Label.fontStyle = FontStyles.Bold;
         c.Name = Text(c.Content, "Name", 646, 168, 392, 74, 52f, paper, TextAlignmentOptions.Left);
         c.Name.fontStyle = FontStyles.Bold;
