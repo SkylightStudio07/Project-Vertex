@@ -20,6 +20,10 @@ public class SelectCoopCharUI : MonoBehaviour
     [SerializeField] private Image detailButtonArrow;
     [Tooltip("잠긴 후보 띠 아래 해금 조건 문구")]
     [SerializeField] private string lockedHint = "구출 의뢰 · 구조 신호";
+    [SerializeField] private TextMeshProUGUI guideText;
+    [Tooltip("동행 인원(CooperationManager.MaxCompanionsInRun)이 가득 찼을 때")]
+    [SerializeField] private string partyFullHint = "동행 인원 가득 참";
+    [SerializeField, TextArea] private string partyFullGuide = "동행 인원이 가득 찼습니다. 휴식 지점에서 동료를 거점으로 돌려보내면 합류할 수 있습니다.";
 
     [Header("후보 상세")]
     [SerializeField] private RectTransform detailPanel;
@@ -49,11 +53,16 @@ public class SelectCoopCharUI : MonoBehaviour
     private SelectCoopCharBtn selectedStrip;
     private string pendingCharID;
     private bool isConfirming;
+    private bool partyFull;
+    private string defaultGuide;
+    private string defaultDetailLabel;
 
     public DialogueView DialogueView => dialogueView;
 
     private void Awake()
     {
+        if (guideText != null) defaultGuide = guideText.text;
+        if (detailButtonLabel != null) defaultDetailLabel = detailButtonLabel.text;
         if (detailButton != null) detailButton.onClick.AddListener(OpenSelectedDetails);
         if (backButton != null) backButton.onClick.AddListener(BackToCandidates);
         if (proceedButton != null) proceedButton.onClick.AddListener(ConfirmSelection);
@@ -82,10 +91,14 @@ public class SelectCoopCharUI : MonoBehaviour
         if (backButton != null) backButton.interactable = true;
         ShowSelect();
 
+        // 동행 인원이 가득 차면 후보는 보여 주되 고를 수 없고, 버튼은 "돌아가기"가 된다
+        partyFull = CooperationManager.Instance != null && CooperationManager.Instance.IsPartyFull;
+        if (guideText != null) guideText.text = partyFull ? partyFullGuide : defaultGuide;
+
         List<CoopCharData> lockedSources = CollectLockedSilhouettes(candidates);
         for (int i = 0; i < strips.Count; i++)
         {
-            if (i < candidates.Count) strips[i].SetCandidate(candidates[i], i);
+            if (i < candidates.Count) strips[i].SetCandidate(candidates[i], i, partyFull ? partyFullHint : null);
             else
             {
                 int lockedIndex = i - candidates.Count;
@@ -95,7 +108,7 @@ public class SelectCoopCharUI : MonoBehaviour
         }
 
         // 후보가 한 명이면 미리 골라 둔다 (바로 후보 확인 가능)
-        if (candidates.Count == 1) SelectCandidate(strips[0]);
+        if (candidates.Count == 1 && !partyFull) SelectCandidate(strips[0]);
         else RefreshDetailButton();
     }
 
@@ -109,14 +122,16 @@ public class SelectCoopCharUI : MonoBehaviour
 
     private void RefreshDetailButton()
     {
-        bool ready = selectedStrip != null;
+        bool ready = selectedStrip != null || partyFull;
         if (detailButton != null) detailButton.interactable = ready;
+        if (detailButtonLabel != null) detailButtonLabel.text = partyFull ? "돌아가기" : defaultDetailLabel;
         if (detailButtonLabel != null) detailButtonLabel.color = ready ? inkColor : disabledColor;
         if (detailButtonArrow != null) detailButtonArrow.color = ready ? inkColor : disabledColor;
     }
 
     private void OpenSelectedDetails()
     {
+        if (partyFull) { CloseUI(); return; }
         if (selectedStrip != null) OpenDetails(selectedStrip.CharID);
     }
 

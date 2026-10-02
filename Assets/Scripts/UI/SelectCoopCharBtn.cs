@@ -45,6 +45,8 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] private Material silhouetteMaterial;
     [SerializeField] private Color silhouetteColor = new(0.63f, 0.65f, 0.68f, 1f);
     [SerializeField] private string lockedName = "잠긴 후보";
+    [Tooltip("동행 인원이 가득 차 고를 수 없는 후보의 그림 색 (실루엣이 아니라 어둡게)")]
+    [SerializeField] private Color unavailableTint = new(0.55f, 0.56f, 0.58f, 1f);
 
     [Header("글자 색")]
     [SerializeField] private Color numberColor = new(0.086f, 0.094f, 0.106f, 1f);
@@ -56,6 +58,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private SelectCoopCharUI owner;
     private string charID;
     private bool isLocked;
+    private bool isUnavailable; // 실제 후보지만 동행 인원이 가득 차 고를 수 없음
     private bool isSelected;
     private bool isHovered;
     private Sprite portrait;
@@ -69,22 +72,23 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
         owner = GetComponentInParent<SelectCoopCharUI>(true);
     }
 
-    // 선택 가능한 후보
-    public void SetCandidate(string id, int index)
+    // 선택 가능한 후보. unavailableHint가 있으면 이름·그림은 보이되 잠긴 띠로 고를 수 없다 (동행 인원 가득 참)
+    public void SetCandidate(string id, int index, string unavailableHint = null)
     {
         charID = id;
-        isLocked = false;
+        isUnavailable = unavailableHint != null;
+        isLocked = isUnavailable;
         CoopCharData data = CooperationManager.Instance != null ? CooperationManager.Instance.GetCoopCharData(id) : null;
         portrait = PickPortrait(data);
         focus = data != null ? data.sanctuarySelectionFocus : new Vector2(0.5f, 0.5f);
 
         numberText.text = $"{index + 1:00}";
         nameText.text = data != null && !string.IsNullOrWhiteSpace(data.charName) ? data.charName : id;
-        subText.text = data != null ? data.affiliation : "";
-        subText.color = affiliationColor;
-        accentLine.enabled = true;
+        subText.text = isUnavailable ? unavailableHint : data != null ? data.affiliation : "";
+        subText.color = isUnavailable ? lockedSubColor : affiliationColor;
+        accentLine.enabled = !isUnavailable;
         accentLine.color = data != null ? data.themeColor : affiliationColor;
-        lockIcon.enabled = false;
+        lockIcon.enabled = isUnavailable;
         ResetState();
     }
 
@@ -94,6 +98,7 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         charID = null;
         isLocked = true;
+        isUnavailable = false;
         portrait = silhouetteSource != null ? silhouetteSource.standingSprite : null;
         focus = silhouetteSource != null ? silhouetteSource.sanctuarySelectionFocus : new Vector2(0.5f, 0.5f);
 
@@ -137,8 +142,8 @@ public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
         charImage.sprite = portrait;
         charImage.enabled = portrait != null;
-        charImage.material = isLocked ? silhouetteMaterial : null;
-        charImage.color = isLocked ? silhouetteColor : Color.white;
+        charImage.material = isLocked && !isUnavailable ? silhouetteMaterial : null;
+        charImage.color = isUnavailable ? unavailableTint : isLocked ? silhouetteColor : Color.white;
         LayoutPortrait();
     }
 

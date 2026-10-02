@@ -33,12 +33,29 @@ public class RestView : MonoBehaviour
     // 강화 가능한 카드가 없을 때 잠글 버튼. (MapUIController의 ScrollRect처럼 using 추가 없이 정규화 표기)
     [SerializeField] private UnityEngine.UI.Button upgradeButton;
 
+    [Header("동료 귀환 (거점으로 돌려보내기 — 그 동료 몫의 카드는 덱에서 빠진다)")]
+    [SerializeField] private UnityEngine.UI.Button dismissButton;
+    [Tooltip("캠프에서 동료를 고르는 동안 뜨는 안내 + 취소")]
+    [SerializeField] private GameObject dismissPrompt;
+    [SerializeField] private UnityEngine.UI.Button dismissCancelButton;
+    [SerializeField] private GameObject dismissConfirm;
+    [SerializeField] private TMPro.TextMeshProUGUI dismissConfirmText;
+    [SerializeField] private UnityEngine.UI.Button dismissYesButton;
+    [SerializeField] private UnityEngine.UI.Button dismissNoButton;
+
+    private bool _dismissMode;
+    private CoopCharState _dismissTarget;
+
 
     private void Awake()
     {
         if (baseCampButton != null) baseCampButton.onClick.AddListener(ToggleActionPanel);
         foreach (var station in stations)
             if (station != null) station.OnClicked += OnStationClicked;
+        if (dismissButton != null) dismissButton.onClick.AddListener(BeginDismiss);
+        if (dismissCancelButton != null) dismissCancelButton.onClick.AddListener(EndDismiss);
+        if (dismissYesButton != null) dismissYesButton.onClick.AddListener(ConfirmDismiss);
+        if (dismissNoButton != null) dismissNoButton.onClick.AddListener(() => dismissConfirm.SetActive(false));
     }
 
     public void Open()
@@ -50,9 +67,12 @@ public class RestView : MonoBehaviour
         if (stations.Count > 0) BindStations();
         else DisplayCoopPortraits();
 
+        RefreshUpgradeButton();
+        EndDismiss();
         // 베이스캠프가 있으면 메뉴는 캠프를 눌러야 열린다
         if (actionPanel != null) actionPanel.SetActive(baseCampButton == null);
-        RefreshUpgradeButton();
+        if (dismissButton != null)
+            dismissButton.interactable = CooperationManager.Instance != null && CooperationManager.Instance.GetJoinedInRunCharStates().Count > 0;
         PlayArrivalLine();
     }
 
@@ -80,6 +100,7 @@ public class RestView : MonoBehaviour
 
     private void ToggleActionPanel()
     {
+        if (_dismissMode) return;
         if (actionPanel != null) actionPanel.SetActive(!actionPanel.activeSelf);
     }
 
@@ -104,6 +125,7 @@ public class RestView : MonoBehaviour
     private void HandleCharacterClicked(CoopCharState state)
     {
         if (state == null || state.charData == null || _eventPlaying || (dialogueOverlay != null && dialogueOverlay.IsPlaying)) return;
+        if (_dismissMode) { AskDismiss(state); return; }
 
         // 랭크업 이벤트가 대기 중이면 그 대사를 재생하고, 끝나면 레벨을 확정한다
         if (state.isLevelUp && dialogueManager != null)
@@ -244,6 +266,46 @@ public class RestView : MonoBehaviour
         if (CardListView.Instance != null) CardListView.Instance.Close();
         // 카드를 크게 띄워 망치질 연출 후 강화 적용 → 끝나면 맵으로
         CardActionFx.Upgrade(card, () => DeckManager.Instance.UpgradeCard(card), Finish);
+    }
+
+    // ==== 동료 귀환 ====
+
+    // 메뉴를 닫고 캠프에서 돌려보낼 동료를 고르게 한다
+    private void BeginDismiss()
+    {
+        if (CooperationManager.Instance == null || CooperationManager.Instance.GetJoinedInRunCharStates().Count == 0) return;
+        _dismissMode = true;
+        if (actionPanel != null) actionPanel.SetActive(false);
+        if (dismissPrompt != null) dismissPrompt.SetActive(true);
+    }
+
+    private void EndDismiss()
+    {
+        _dismissMode = false;
+        _dismissTarget = null;
+        if (dismissPrompt != null) dismissPrompt.SetActive(false);
+        if (dismissConfirm != null) dismissConfirm.SetActive(false);
+        if (actionPanel != null && baseCampButton != null) actionPanel.SetActive(true);
+    }
+
+    private void AskDismiss(CoopCharState state)
+    {
+        _dismissTarget = state;
+        int inDeck = CooperationManager.Instance != null ? CooperationManager.Instance.CardsLeavingWith(state.charID).Count : 0;
+        if (dismissConfirmText != null)
+            dismissConfirmText.text = $"<b>{state.charData.charName}</b>을(를) 거점으로 돌려보냅니다.\n"
+                                    + (inDeck > 0 ? $"덱에서 {state.charData.charName}의 카드 <b>{inDeck}장</b>이 빠집니다." : "덱에서 빠지는 카드는 없습니다.");
+        if (dismissConfirm != null) dismissConfirm.SetActive(true);
+        else ConfirmDismiss();
+    }
+
+    // 귀환도 휴식에서 고르는 행동 하나 — 끝나면 맵으로
+    private void ConfirmDismiss()
+    {
+        if (_dismissTarget == null || CooperationManager.Instance == null) return;
+        CooperationManager.Instance.DismissFromRun(_dismissTarget.charID);
+        EndDismiss();
+        Finish();
     }
 
     private void Finish()

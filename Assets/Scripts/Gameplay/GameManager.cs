@@ -106,6 +106,14 @@ public class GameManager : MonoBehaviour
             CooperationManager.Instance.ResetOnRunStart();
 
         MapManager.Instance.InitializeMap(chapter);
+
+        // 훈련장 출격: 축복·맵·의뢰 없이 고른 덱·동료로 고른 적과 바로 싸운다
+        if (TrainingSession.IsActive)
+        {
+            StartTrainingBattle();
+            return;
+        }
+
         QuestManager.Instance.BeginRun(); // 수주한 의뢰의 진행을 이번 런 기준으로 시작
 
         // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행
@@ -159,6 +167,34 @@ public class GameManager : MonoBehaviour
         }
 
         StartBattleInternal(enemies, battleType, encounterName);
+    }
+
+    // 훈련장 전투. 덱은 고른 카드로 통째로 바꾸고, 동료는 합류 카드·보상 풀 없이 자리만 차지한다.
+    // 결과는 RunClearView가 받는다(보상 화면 없음). 기획: Docs/기획/훈련장.md
+    private void StartTrainingBattle()
+    {
+        EnemyEncounter encounter = TrainingSession.Encounter;
+        DeckManager.Instance.SetPlayerDeck(TrainingSession.Deck);
+        if (CooperationManager.Instance != null)
+            foreach (string charID in TrainingSession.Companions)
+                CooperationManager.Instance.JoinForTraining(charID);
+
+        BattleType battleType = encounter.encounterType switch
+        {
+            EnemyEncounterType.Elite => BattleType.Elite,
+            EnemyEncounterType.Boss  => BattleType.Boss,
+            _                        => BattleType.Normal,
+        };
+
+        // 보스는 실전과 같이 등장 배너 → 스토리 대사 뒤에 첫 턴
+        if (battleType == BattleType.Boss && BossBattleDirector.Instance != null)
+        {
+            StartBattleInternal(encounter.enemies, battleType, encounter.name, startFirstTurn: false);
+            BossBattleDirector.Instance.PlayIntro(encounter, () => BattleManager.Instance.PlayerTurnStart(false));
+            return;
+        }
+
+        StartBattleInternal(encounter.enemies, battleType, encounter.name);
     }
 
     // 보스 격파 후 보상 화면을 닫으면 호출된다.
@@ -270,6 +306,25 @@ public class GameManager : MonoBehaviour
         foreach (var card in cards)
             if (card != null && !pool.Contains(card))
                 pool.Add(card);
+    }
+
+    // 런 시작 기본 보상 풀(플레이어 몫)에 있는 카드인지 — 동료 귀환 때 플레이어 몫은 풀·덱에서 빼지 않는다
+    public bool IsBasePoolCard(CardData card)
+    {
+        if (playerRewardPool == null || card == null) return false;
+        string key = PlayerRecord.KeyOf(card);
+        foreach (var list in new[] { playerRewardPool.commonCards, playerRewardPool.rareCards, playerRewardPool.uniqueCards })
+            if (list != null && list.Exists(c => c != null && PlayerRecord.KeyOf(c) == key)) return true;
+        return false;
+    }
+
+    // 동료 귀환: 그 동료가 넣어 둔 카드를 모든 등급 풀에서 뺀다.
+    public void RemoveCardsFromRewardPool(IEnumerable<CardData> cards)
+    {
+        if (cards == null) return;
+        var set = new HashSet<CardData>(cards);
+        foreach (var pool in cardPools.Values)
+            pool.RemoveAll(set.Contains);
     }
 
     public void TakeDamage(int amount)

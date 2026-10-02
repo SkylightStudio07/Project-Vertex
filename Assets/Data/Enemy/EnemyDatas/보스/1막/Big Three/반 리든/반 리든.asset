@@ -15,14 +15,27 @@ MonoBehaviour:
   enemyName: "\uBC18 \uB9AC\uB4E0"
   health: 65
   enemyImage: {fileID: 0}
+  rank: 2
+  materialJson: {fileID: 0}
   spriteScale: 1
   intentOffsetY: 0
+  useScreenRect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  intentAnchor: {x: 0.5, y: 1}
+  hpBarAnchor: {x: 0.5, y: 0}
+  noLunge: 0
   idleFrames: []
   idleFrameRate: 12
   attackFrames: []
   attackFrameRate: 16
   idleSheetPadding: 0.1
   attackSheetPadding: 0.3
+  startingStatuses: []
   activityPatternType: 0
   openingActions: []
   activityPatterns:

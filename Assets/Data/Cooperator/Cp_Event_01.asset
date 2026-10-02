@@ -38,6 +38,11 @@ MonoBehaviour:
   sanctuaryHoverFocus: {x: 0.5, y: 0.5}
   sanctuaryFullArt: {fileID: 0}
   isEventCompanion: 1
+  faceFocus: {x: 0.45, y: 0.72}
+  faceZoom: 1.6
+  materialJson: {fileID: 4900000, guid: 22e00c92f567a8c48b1cd40ea1d792cc, type: 3}
+  actNumber: 1
+  trainingRequiredLevel: 0
   battleScale: 0.55
   battleOffset: {x: 220, y: 1000}
   floatAmplitude: 40
@@ -52,5 +57,17 @@ MonoBehaviour:
   rewardPoolCommon: []
   rewardPoolRare: []
   rewardPoolUnique: []
-  maxCoopLevel: 0
-  rankEventDatas: []
+  maxCoopLevel: 5
+  rankEventDatas:
+  - targetLevel: 1
+    requiredPoint: 2
+    dialogueJson: {fileID: 0}
+  - targetLevel: 2
+    requiredPoint: 2
+    dialogueJson: {fileID: 0}
+  - targetLevel: 3
+    requiredPoint: 2
+    dialogueJson: {fileID: 0}
+  - targetLevel: 4
+    requiredPoint: 2
+    dialogueJson: {fileID: 0}

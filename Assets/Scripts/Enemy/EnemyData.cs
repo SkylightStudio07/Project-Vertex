@@ -14,6 +14,12 @@ public class EnemyData : ScriptableObject
     public int health;
     public Sprite enemyImage;
 
+    [Header("마테리얼")]
+    [Tooltip("적 등급 — 마테리얼이 몇 번 격퇴마다 열리는지 정한다 (일반 3 · 엘리트 2 · 보스 1). 훈련장 해금도 첫 기록 기준")]
+    public EnemyEncounterType rank = EnemyEncounterType.Normal;
+    [Tooltip("마테리얼 글 JSON (형식: Docs/기획/마테리얼.md)")]
+    public TextAsset materialJson;
+
     [Header("스프라이트 연출")]
     [Tooltip("스프라이트 크기 배율 (기본값 1.0f). 적마다 0.9, 1.2 등으로 조절 가능합니다.")]
     public float spriteScale = 1.0f;

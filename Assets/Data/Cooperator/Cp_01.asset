@@ -36,6 +36,14 @@ MonoBehaviour:
   sanctuarySelectionFocus: {x: 0.5, y: 0.5}
   sanctuaryHoverFocus: {x: 0.5, y: 0.5}
   sanctuaryFullArt: {fileID: 0}
+  isEventCompanion: 0
+  materialJson: {fileID: 4900000, guid: 64759934bcbd7d74eb9a9837e979d1bc, type: 3}
+  actNumber: 1
+  trainingRequiredLevel: 2
+  battleScale: 1
+  battleOffset: {x: 0, y: 0}
+  floatAmplitude: 0
+  floatPeriod: 2.4
   unlockCardCoopLevel:
   - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
   - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
@@ -74,7 +82,7 @@ MonoBehaviour:
   rewardPoolCommon: []
   rewardPoolRare: []
   rewardPoolUnique: []
-  maxCoopLevel: 3
+  maxCoopLevel: 5
   rankEventDatas:
   - targetLevel: 1
     requiredPoint: 2
@@ -82,3 +90,9 @@ MonoBehaviour:
   - targetLevel: 2
     requiredPoint: 2
     dialogueJson: {fileID: 4900000, guid: 3f9c1005ea3ff484597d5520a7b881a3, type: 3}
+  - targetLevel: 3
+    requiredPoint: 2
+    dialogueJson: {fileID: 0}
+  - targetLevel: 4
+    requiredPoint: 2
+    dialogueJson: {fileID: 0}

@@ -44,6 +44,7 @@ public class RewardsView : MonoBehaviour
 
     private void Open(BattleReward reward)
     {
+        if (TrainingSession.IsActive) return; // 훈련장은 보상 없음 — 결과는 RunClearView
         this.reward = reward;
 
         // DOTween 타이머는 오브젝트 활성 여부와 무관하게 돌아가서, 루트가 꺼져 있어도 지연이 정상 동작한다.

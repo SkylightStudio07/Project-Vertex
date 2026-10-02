@@ -158,6 +158,7 @@ public class BattleManager : MonoBehaviour
             var enemy = new EnemyInstance(data, _rnd);
             enemy.OnDied += CheckVictory;
             enemy.OnDied += () => EnemyDefeated?.Invoke(enemy); // 의뢰(처치 조건) 등 전투 밖 시스템용
+            if (!TrainingSession.IsActive) enemy.OnDied += () => PlayerRecord.AddDefeat(enemy.Data); // 실전 격퇴 기록 (훈련장 해금)
             _state.Enemies.Add(enemy);
         }
     }

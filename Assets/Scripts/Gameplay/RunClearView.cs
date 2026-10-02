@@ -7,6 +7,7 @@ using UnityEngine.UI;
 // 런 종료 화면. 두 경우에 뜬다.
 //   - 런 클리어: 마지막 막(ActData.isFinalAct) 보스를 격파하고 보상을 닫으면 (GameManager.CompleteAct → Open)
 //   - 패배: 플레이어가 쓰러지면 "작전 실패" 배너(BattleOperationFx)가 끝난 뒤 (OpenDefeat)
+//   - 훈련장: 이기든 지든 (HandleVictory / HandleDefeat — 훈련 중이면 보상 화면 대신 여기)
 // 버튼은 "기지로 귀환" — 씬 전환 막(귀환 문구)을 거쳐 로비 씬으로 돌아간다. 로비 씬이 빌드에 없으면 예전처럼 현재 씬을 다시 연다.
 // 평소엔 켜 둔 채 투명·입력 차단 없음으로 두고, 열 때만 페이드 인한다(비활성 오브젝트는 Awake가 안 돌아 Instance가 비기 때문).
 [RequireComponent(typeof(CanvasGroup))]
@@ -43,12 +44,20 @@ public class RunClearView : MonoBehaviour
     private void Start()
     {
         _battle = BattleManager.Instance;
-        if (_battle != null) _battle.OnBattleDefeat += HandleDefeat;
+        if (_battle != null)
+        {
+            _battle.OnBattleDefeat += HandleDefeat;
+            _battle.OnBattleVictory += HandleVictory;
+        }
     }
 
     private void OnDestroy()
     {
-        if (_battle != null) _battle.OnBattleDefeat -= HandleDefeat;
+        if (_battle != null)
+        {
+            _battle.OnBattleDefeat -= HandleDefeat;
+            _battle.OnBattleVictory -= HandleVictory;
+        }
         if (Instance == this) Instance = null;
     }
 
@@ -61,8 +70,31 @@ public class RunClearView : MonoBehaviour
                  : "버텍스 돌파");
     }
 
+    // 실전 승리는 보상 화면(RewardsView)이 받는다. 훈련장만 여기서 결과를 띄운다.
+    private void HandleVictory(BattleReward reward)
+    {
+        if (!TrainingSession.IsActive) return;
+        DOVirtual.DelayedCall(defeatDelay, () => Show("훈련 완료", $"{TrainingTargetName()} 격파"), ignoreTimeScale: true)
+                 .SetLink(gameObject);
+    }
+
+    private static string TrainingTargetName()
+    {
+        var encounter = TrainingSession.Encounter;
+        if (encounter == null) return "훈련 상대";
+        if (!string.IsNullOrWhiteSpace(encounter.bossTitle)) return encounter.bossTitle;
+        var first = encounter.enemies != null && encounter.enemies.Count > 0 ? encounter.enemies[0] : null;
+        return first != null ? first.enemyName : encounter.name;
+    }
+
     private void HandleDefeat()
     {
+        if (TrainingSession.IsActive)
+        {
+            DOVirtual.DelayedCall(defeatDelay, () => Show("훈련 종료", $"{TrainingTargetName()}에게 패배했습니다"), ignoreTimeScale: true)
+                     .SetLink(gameObject);
+            return;
+        }
         QuestManager.Instance.SettleRun(); // 패배도 런 종료 — 이미 정산했으면 무시된다
         int floor = RunData.Instance != null ? RunData.Instance.currentFloor + 1 : 0;
         int chapter = GameManager.Instance != null ? GameManager.Instance.Chapter : 1;
@@ -92,6 +124,7 @@ public class RunClearView : MonoBehaviour
     private void ReturnToLobby()
     {
         if (restartButton != null) restartButton.interactable = false;
+        TrainingSession.End(); // 훈련장 출격 정보는 귀환과 함께 비운다
         if (!string.IsNullOrWhiteSpace(lobbySceneName) && Application.CanStreamedLevelBeLoaded(lobbySceneName))
         {
             SceneTransition.Load(lobbySceneName, "귀환", "기지로 복귀합니다", "RETURN  //  BASE");

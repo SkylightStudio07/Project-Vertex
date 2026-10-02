@@ -65,13 +65,46 @@ public class DeckManager : MonoBehaviour
         PlayerDeck.Add(Instantiate(blockCard_Debug));
     }
 
-    // 플레이어 덱에 획득 카드를 추가하는 메소드
-    public void AddCardToPlayerDeck(CardData card)
+    // 플레이어 덱에 획득 카드를 추가하는 메소드. 덱에 들어간 복사본을 돌려준다 (동료 합류 카드 추적용).
+    public CardData AddCardToPlayerDeck(CardData card)
     {
-        if (card == null) return;
+        if (card == null) return null;
 
-        PlayerDeck.Add(Instantiate(card));
+        var instance = Instantiate(card);
+        PlayerDeck.Add(instance);
+        if (!TrainingSession.IsActive) PlayerRecord.AddObtainedCard(card); // 한 번이라도 얻은 카드 (훈련장 덱 구성)
         Debug.Log("플레이어 덱에 카드 추가완료.");
+        return instance;
+    }
+
+    // 시작 덱 구성 카드인지 (동료 귀환 때 플레이어 기본 카드는 빼지 않기 위해)
+    public bool IsStartingCard(CardData card)
+    {
+        string key = PlayerRecord.KeyOf(card);
+        foreach (var c in new[] { strikeCard, blockCard, reloadCard, strikeCard_Debug, blockCard_Debug })
+            if (c != null && PlayerRecord.KeyOf(c) == key) return true;
+        return false;
+    }
+
+    // 조건에 맞는 카드를 덱에서 모두 뺀다 (동료 귀환 — 그 동료 몫의 카드). 뺀 장수를 돌려준다.
+    public int RemoveCardsWhere(System.Predicate<CardData> match)
+    {
+        var removed = PlayerDeck.FindAll(c => c != null && match(c));
+        foreach (var card in removed)
+        {
+            PlayerDeck.Remove(card);
+            Destroy(card);
+        }
+        return removed.Count;
+    }
+
+    // 훈련장: 고른 카드 목록으로 덱을 통째로 바꾼다. 획득 기록은 남기지 않는다.
+    public void SetPlayerDeck(IEnumerable<CardData> cards)
+    {
+        PlayerDeck = new List<CardData>();
+        if (cards == null) return;
+        foreach (var card in cards)
+            if (card != null) PlayerDeck.Add(Instantiate(card));
     }
     // 플레이어 덱에서 카드를 제거하는 메소드
     public bool RemoveCardFromPlayerDeck(CardData card)

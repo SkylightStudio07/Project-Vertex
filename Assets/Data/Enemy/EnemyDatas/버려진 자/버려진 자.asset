@@ -15,8 +15,20 @@ MonoBehaviour:
   enemyName: "\uBC84\uB824\uC9C4 \uC790"
   health: 54
   enemyImage: {fileID: -7682697631107969116, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  rank: 0
+  materialJson: {fileID: 0}
   spriteScale: 1.4
   intentOffsetY: 0
+  useScreenRect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  intentAnchor: {x: 0.5, y: 1}
+  hpBarAnchor: {x: 0.5, y: 0}
+  noLunge: 0
   idleFrames:
   - {fileID: -7682697631107969116, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
   - {fileID: -8759293182252054996, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
@@ -54,6 +66,7 @@ MonoBehaviour:
   attackFrameRate: 16
   idleSheetPadding: 0.3
   attackSheetPadding: 0.3
+  startingStatuses: []
   activityPatternType: 0
   openingActions:
   - {fileID: 11400000, guid: de6a8bc8f5825d44a2c4ab2d8bbe45d9, type: 2}
