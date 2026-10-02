@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left origin; x right, y down; rectangles [x,y,width,height]",
+  "import_settings": {
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "pixels_per_unit": 200,
+    "mesh_type": "FullRect",
+    "filter_mode": "Bilinear",
+    "mipmaps": false,
+    "compression": "None",
+    "max_texture_size": 4096,
+    "canvas_reference_pixels_per_unit": 100
+  },
+  "assets": [
+    {
+      "id": "Band",
+      "file": "Band.png",
+      "scale": 2,
+      "png_size_px": [
+        3840,
+        440
+      ],
+      "screen_rect": [
+        0,
+        500,
+        1920.0,
+        220.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 192,
+        "bottom": 0,
+        "right": 192,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Line_Top",
+      "file": "Line_Top.png",
+      "scale": 2,
+      "png_size_px": [
+        3524,
+        2
+      ],
+      "screen_rect": [
+        96,
+        504,
+        1762.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Line_Bottom",
+      "file": "Line_Bottom.png",
+      "scale": 2,
+      "png_size_px": [
+        1392,
+        2
+      ],
+      "screen_rect": [
+        44,
+        714,
+        696.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Slash",
+      "file": "Slash.png",
+      "scale": 2,
+      "png_size_px": [
+        428,
+        568
+      ],
+      "screen_rect": [
+        814,
+        480,
+        214.0,
+        284.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "Slash_Edge",
+      "file": "Slash_Edge.png",
+      "scale": 2,
+      "png_size_px": [
+        164,
+        220
+      ],
+      "screen_rect": [
+        12,
+        502,
+        82.0,
+        110.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "Slash_Short",
+      "file": "Slash_Short.png",
+      "scale": 2,
+      "png_size_px": [
+        84,
+        112
+      ],
+      "screen_rect": [
+        1840,
+        502,
+        42.0,
+        56.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "Tag",
+      "file": "Tag.png",
+      "scale": 2,
+      "png_size_px": [
+        784,
+        56
+      ],
+      "screen_rect": [
+        760,
+        688,
+        392.0,
+        28.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 48,
+        "bottom": 0,
+        "right": 48,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Diamond",
+      "file": "Diamond.png",
+      "scale": 2,
+      "png_size_px": [
+        36,
+        36
+      ],
+      "screen_rect": [
+        1154,
+        694,
+        18.0,
+        18.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "Label_Line",
+      "file": "Label_Line.png",
+      "scale": 2,
+      "png_size_px": [
+        536,
+        2
+      ],
+      "screen_rect": [
+        350,
+        548,
+        268.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Title_Line",
+      "file": "Title_Line.png",
+      "scale": 2,
+      "png_size_px": [
+        412,
+        2
+      ],
+      "screen_rect": [
+        412,
+        630,
+        206.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Flash",
+      "file": "Flash.png",
+      "scale": 2,
+      "png_size_px": [
+        3840,
+        440
+      ],
+      "screen_rect": [
+        0,
+        500,
+        1920.0,
+        220.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "gradient"
+    }
+  ],
+  "instances": [
+    {
+      "id": "bottom_right",
+      "asset": "Line_Bottom",
+      "screen_position": [
+        1194,
+        714
+      ],
+      "screen_size": [
+        656,
+        1
+      ]
+    },
+    {
+      "id": "slash_right",
+      "asset": "Slash_Edge",
+      "screen_position": [
+        1838,
+        608
+      ]
+    },
+    {
+      "id": "slash_short_left",
+      "asset": "Slash_Short",
+      "screen_position": [
+        32,
+        676
+      ]
+    },
+    {
+      "id": "label_line_right",
+      "asset": "Label_Line",
+      "screen_position": [
+        1300,
+        548
+      ]
+    },
+    {
+      "id": "title_line_right",
+      "asset": "Title_Line",
+      "screen_position": [
+        1300,
+        630
+      ]
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "english_label",
+      "screen_rect": [
+        652,
+        532,
+        600,
+        32
+      ],
+      "align": "center"
+    },
+    {
+      "id": "title",
+      "screen_rect": [
+        670,
+        568,
+        590,
+        106
+      ],
+      "align": "center"
+    },
+    {
+      "id": "tag_label",
+      "screen_rect": [
+        782,
+        690,
+        340,
+        22
+      ],
+      "align": "center"
+    }
+  ]
+}

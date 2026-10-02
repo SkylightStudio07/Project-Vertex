@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         chapter = 1;
         maxHPModifier = 0;
+        RunStats.Reset(); // 결과 화면 기록 칸 (격퇴·획득 카드·진행 턴)
         PlayerHP = MaxPlayerHP;
         // RunData는 씬을 넘어 유지되므로 런 단위 값은 여기서 되돌린다 (맵·조우 큐는 InitializeMap에서)
         if (RunData.Instance != null) RunData.Instance.cardRemoveCount = 0;

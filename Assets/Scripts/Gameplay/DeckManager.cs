@@ -73,6 +73,7 @@ public class DeckManager : MonoBehaviour
         var instance = Instantiate(card);
         PlayerDeck.Add(instance);
         if (!TrainingSession.IsActive) PlayerRecord.AddObtainedCard(card); // 한 번이라도 얻은 카드 (훈련장 덱 구성)
+        RunStats.AddCard(); // 결과 화면 '획득 카드'
         Debug.Log("플레이어 덱에 카드 추가완료.");
         return instance;
     }

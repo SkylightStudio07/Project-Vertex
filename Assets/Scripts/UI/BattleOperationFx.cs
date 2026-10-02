@@ -1,22 +1,25 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 // 전투 화면의 명일방주식 띠 연출. 입력은 막지 않는다 (전부 raycastTarget off).
-//   - 전투 개시: 검은 사선 띠 + "작전 개시 / OPERATION START" + 적 수·전투 종류 태그 (보스전은 BossBattleDirector가 따로 연출)
-//   - 카드 컷인: 파워 카드·유니크 카드를 쓰면 왼쪽에서 카드 아트 띠가 미끄러져 들어온다
-//   - 적 처치: 왼쪽 위에 "▸ 이름  무력화" 기록이 쌓였다 사라진다
-//   - 승리/패배: 화면 가운데 흰 띠 "작전 종료" / 검은 띠 "작전 실패" (승리는 짧은 슬로모션 포함)
-// UI 요소는 Awake에서 코드로 만든다. 이 오브젝트는 Canvas 아래 화면 전체를 덮는 RectTransform이어야 한다.
+//   - 전투 개시: 먹색 사선 띠 + "작전 개시 / OPERATION START" + 전투 종류·적 수 태그 (보스전은 BossBattleDirector가 따로 연출)
+//   - 카드 컷인: 파워 카드·유니크 카드를 쓰면 왼쪽에서 카드 아트 띠가 미끄러져 들어온다 (유니크는 이중 테두리·눈금)
+//   - 적 처치: 왼쪽 위에 "TARGET DOWN 이름 무력화" 기록이 쌓였다 사라진다 (보스는 BOSS 칩)
+//   - 승리/패배: 화면 가운데 종이 띠 "작전 종료" / 먹색 띠 "작전 실패" (승리는 흰 섬광 + 짧은 슬로모션, 패배는 화면이 어두워짐)
+// 그림 조각: Resources/BattleFx/<연출>/ (원본 ArtDirection/BattleFxMockup/Extracted — 2배 해상도, PPU 200).
+// 좌표는 그 layout.json의 1920×1080 좌상단 기준 값을 그대로 쓴다. UI 요소는 Awake에서 코드로 만든다.
 public class BattleOperationFx : MonoBehaviour
 {
     [SerializeField] private TMP_FontAsset font;               // 비우면 TMP 기본 폰트
     [SerializeField] private int sortingOrder = 90;             // 컷인·처치 기록: 덱 목록(99) 아래, 손패 위
     [SerializeField] private int bannerSortingOrder = 210;      // 작전 개시·종료·실패 배너: 적 툴팁(200) 위
     [SerializeField] private Color accent = new(0.05f, 0.72f, 0.95f, 1f);
-    [SerializeField] private Color ink = new(0.04f, 0.05f, 0.06f, 1f); // 반투명 어둠은 Linear 색 공간에서 뜨므로 불투명
-    [SerializeField] private Color paper = new(0.96f, 0.96f, 0.95f, 0.97f);
+    [SerializeField] private Color ink = new(0.086f, 0.094f, 0.106f, 1f);
+    [SerializeField] private Color paper = new(0.945f, 0.949f, 0.957f, 1f);
+    [SerializeField] private Color muted = new(0.62f, 0.64f, 0.67f, 1f);
 
     [Header("카드 컷인")]
     [SerializeField] private bool cutInPowerCards = true;
@@ -26,10 +29,15 @@ public class BattleOperationFx : MonoBehaviour
     [SerializeField, Range(0.05f, 1f)] private float victorySlowScale = 0.3f;
     [SerializeField] private float victorySlowSeconds = 0.35f; // 실제 시간
 
+    [Header("패배 화면 어둡게")]
+    [SerializeField, Range(0f, 1f)] private float defeatDimAlpha = 0.6f;
+
+    private const float RowStep = 58f; // 처치 기록 줄 간격 (layout.json row_repeat_step_screen_px)
+
     private BattleManager _battle;
     private RectTransform _root;
     private Banner _start, _victory, _defeat;
-    private CutIn _cutIn;
+    private CutIn _cutInPower, _cutInUnique;
     private RectTransform _feed;
 
     private void Awake()
@@ -41,15 +49,12 @@ public class BattleOperationFx : MonoBehaviour
         canvas.sortingOrder = sortingOrder;
         if (font == null) font = TMP_Settings.defaultFontAsset;
 
-        _start = BuildBanner("Start", 140f, 150f, ink, Color.white, accent, 40f);
-        _victory = BuildBanner("Victory", 30f, 190f, paper, ink, accent, -48f);
-        _defeat = BuildBanner("Defeat", 30f, 190f, ink, new Color(0.72f, 0.74f, 0.76f, 1f), new Color(0.45f, 0.47f, 0.5f, 1f), -48f);
-        _cutIn = BuildCutIn();
-        _feed = NewRect("KillFeed", _root);
-        _feed.anchorMin = _feed.anchorMax = new Vector2(0f, 1f);
-        _feed.pivot = new Vector2(0f, 1f);
-        _feed.anchoredPosition = new Vector2(34f, -250f);
-        _feed.sizeDelta = new Vector2(420f, 300f);
+        _start = BuildStart();
+        _victory = BuildResultBanner("Victory", victory: true);
+        _defeat = BuildResultBanner("Defeat", victory: false);
+        _cutInPower = BuildCutIn(unique: false);
+        _cutInUnique = BuildCutIn(unique: true);
+        _feed = Group("KillFeed", _root);
     }
 
     private void Start()
@@ -85,8 +90,9 @@ public class BattleOperationFx : MonoBehaviour
 
         int count = 0;
         foreach (var e in _battle.Enemies) if (e != null && !e.IsDead) count++;
-        string kind = type == BattleType.Elite ? "<color=#0DB8F2>ELITE</color> · 정예 조우" : "HOSTILE · 일반 조우";
-        _start.Play("OPERATION START", "작전 개시", $"{kind}   적 {count:00}", 0.15f, 0.75f);
+        bool elite = type == BattleType.Elite;
+        _start.SetElite(elite);
+        _start.Play("OPERATION START", "작전 개시", $"{(elite ? "정예 조우" : "일반 조우")}  ·  적 {count:00}", 0.15f, 0.75f);
     }
 
     private void HandleCardPlayed(CardData card)
@@ -100,19 +106,21 @@ public class BattleOperationFx : MonoBehaviour
             CardData.CardType.Attack => "ATTACK",
             _ => "SKILL ACTIVATED",
         };
-        _cutIn.Play(card.CardImage, label, card.CardName, card.Rarity == CardData.CardRarity.Unique);
+        bool unique = card.Rarity == CardData.CardRarity.Unique;
+        (unique ? _cutInPower : _cutInUnique).Hide();
+        (unique ? _cutInUnique : _cutInPower).Play(card.CardImage, label, card.CardName, unique ? "UNIQUE" : "POWER");
     }
 
     private void HandleEnemyDefeated(EnemyInstance enemy)
     {
         if (enemy == null || enemy.Data == null) return;
-        AddFeed(enemy.Data.enemyName);
+        AddFeed(enemy.Data.enemyName, enemy.Data.rank == EnemyEncounterType.Boss);
     }
 
     private void HandleVictory(BattleReward _)
     {
-        _cutIn.Hide();
-        _victory.Play("MISSION ACCOMPLISHED", "작전 종료", "ALL HOSTILES NEUTRALIZED", 0.1f, 0.9f, flash: true);
+        _cutInPower.Hide(); _cutInUnique.Hide();
+        _victory.Play("MISSION ACCOMPLISHED", "작전 종료", "ALL HOSTILES NEUTRALIZED", 0.1f, 0.9f);
         if (victorySlowScale < 0.99f)
         {
             Time.timeScale = victorySlowScale;
@@ -122,34 +130,279 @@ public class BattleOperationFx : MonoBehaviour
 
     private void HandleDefeat()
     {
-        _cutIn.Hide();
+        _cutInPower.Hide(); _cutInUnique.Hide();
         _defeat.Play("MISSION FAILED", "작전 실패", "OPERATOR DOWN", 0.2f, 1.6f);
+    }
+
+    // ───────── 작전 개시 · 종료 · 실패 띠 ─────────
+
+    private class Banner
+    {
+        public RectTransform Root;
+        public CanvasGroup Group;
+        public RectTransform Band;
+        public readonly List<RectTransform> Lines = new();   // 왼쪽부터 그어지는 헤어라인
+        public readonly List<Graphic> Decor = new();          // 사선·마름모 등 — 띠가 펼쳐진 뒤 나타남
+        public RectTransform Tag;
+        public TextMeshProUGUI Eng, Main, Sub;
+        public Image Flash, Dim;
+        public GameObject EliteMark;
+        public TextMeshProUGUI EliteLabel;
+        public Vector2 SubFullPos, SubFullSize, SubElitePos, SubEliteSize;
+        public float DimAlpha;
+        private Sequence _seq;
+
+        public void SetElite(bool elite)
+        {
+            if (EliteMark == null) return;
+            EliteMark.SetActive(elite);
+            EliteLabel.gameObject.SetActive(elite);
+            Sub.rectTransform.anchoredPosition = elite ? SubElitePos : SubFullPos;
+            Sub.rectTransform.sizeDelta = elite ? SubEliteSize : SubFullSize;
+        }
+
+        public void Hide()
+        {
+            _seq?.Kill();
+            Root.gameObject.SetActive(false);
+        }
+
+        public void Play(string eng, string main, string sub, float delay, float hold)
+        {
+            _seq?.Kill();
+            Root.gameObject.SetActive(true);
+            Eng.text = eng; Main.text = main; Sub.text = sub;
+            Group.alpha = 1f;
+            Band.localScale = new Vector3(0f, 1f, 1f);
+            foreach (var l in Lines) l.localScale = new Vector3(0f, 1f, 1f);
+            foreach (var d in Decor) { var c = d.color; c.a = 0f; d.color = c; }
+            Main.alpha = 0f; Eng.alpha = 0f;
+            Main.characterSpacing = 60f;
+            var mainPos = Main.rectTransform.anchoredPosition;
+            Main.rectTransform.anchoredPosition = new Vector2(mainPos.x - 40f, mainPos.y);
+            Tag.localScale = new Vector3(1f, 0f, 1f);
+            if (Flash != null) Flash.color = new Color(1f, 1f, 1f, 0f);
+            if (Dim != null) Dim.color = new Color(Dim.color.r, Dim.color.g, Dim.color.b, 0f);
+
+            _seq = DOTween.Sequence().SetLink(Root.gameObject).SetUpdate(true).AppendInterval(delay);
+            if (Dim != null) _seq.Insert(delay, Dim.DOFade(DimAlpha, 0.5f));
+            for (int i = 0; i < Lines.Count; i++)
+                _seq.Insert(delay + i * 0.03f, Lines[i].DOScaleX(1f, 0.24f).SetEase(Ease.OutCubic));
+            _seq.Insert(delay + 0.06f, Band.DOScaleX(1f, 0.28f).SetEase(Ease.OutCubic));
+            foreach (var d in Decor) _seq.Insert(delay + 0.22f, d.DOFade(1f, 0.2f));
+            _seq.Insert(delay + 0.2f, Main.DOFade(1f, 0.2f))
+                .Insert(delay + 0.2f, DOTween.To(() => Main.characterSpacing, v => Main.characterSpacing = v, 14f, 0.45f).SetEase(Ease.OutCubic))
+                .Insert(delay + 0.2f, Main.rectTransform.DOAnchorPosX(mainPos.x, 0.45f).SetEase(Ease.OutCubic))
+                .Insert(delay + 0.28f, Eng.DOFade(1f, 0.2f))
+                .Insert(delay + 0.34f, Tag.DOScaleY(1f, 0.18f).SetEase(Ease.OutBack));
+            if (Flash != null)
+                _seq.Insert(delay + 0.02f, Flash.DOFade(1f, 0.06f))
+                    .Insert(delay + 0.08f, Flash.DOFade(0f, 0.4f));
+            _seq.AppendInterval(hold)
+                .Append(Group.DOFade(0f, 0.3f))
+                .Join(Main.rectTransform.DOAnchorPosX(mainPos.x + 60f, 0.3f).SetEase(Ease.InCubic))
+                .OnComplete(() =>
+                {
+                    Main.rectTransform.anchoredPosition = mainPos;
+                    Root.gameObject.SetActive(false);
+                });
+        }
+    }
+
+    private Banner BuildStart()
+    {
+        const string k = "Start/";
+        var b = new Banner();
+        b.Root = BannerRoot("StartBanner");
+        b.Group = b.Root.GetComponent<CanvasGroup>();
+        b.Lines.Add(Pic(b.Root, "Line_Top", k + "Line_Top", 96, 154, 1764, 1, true).rectTransform);
+        b.Band = Pic(b.Root, "Band", k + "Band", 2, 174, 1880, 194, true).rectTransform;
+        b.Lines.Add(Pic(b.Root, "Line_Bottom", k + "Line_Bottom", 66, 368, 1668, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Label_Line_L", k + "Label_Line", 558, 210, 170, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Label_Line_R", k + "Label_Line", 1192, 210, 170, 1, true).rectTransform);
+        b.Decor.Add(Pic(b.Root, "Slash_Accent", k + "Slash_Accent", 1680, 250, 106, 100));
+        b.Decor.Add(Pic(b.Root, "Title_Slash", k + "Title_Slash", 1228, 228, 82, 118));
+
+        b.Tag = Group("Tag", b.Root);
+        Pic(b.Tag, "Tag", k + "Tag", 718, 356, 488, 46, true);
+        b.EliteMark = Pic(b.Tag, "Tag_EliteMark", k + "Tag_EliteMark", 742, 360, 126, 38, true).gameObject;
+        Pic(b.Tag, "Tick", k + "Tick", 1134, 374, 14, 14);
+        b.EliteLabel = Text(b.Tag, "EliteLabel", 768, 366, 80, 28, 17f, accent, TextAlignmentOptions.Center, 4f);
+        b.EliteLabel.text = "ELITE";
+        b.EliteLabel.fontStyle = FontStyles.Bold;
+        b.Sub = Text(b.Tag, "Encounter", 916, 365, 205, 29, 18f, paper, TextAlignmentOptions.Center, 2f);
+        b.SubElitePos = b.Sub.rectTransform.anchoredPosition; b.SubEliteSize = b.Sub.rectTransform.sizeDelta;
+        b.SubFullPos = ScreenPos(742, 365); b.SubFullSize = new Vector2(380f, 29f);
+
+        b.Eng = Text(b.Root, "Eng", 754, 194, 430, 28, 19f, accent, TextAlignmentOptions.Center, 26f);
+        b.Main = Text(b.Root, "Main", 706, 224, 518, 122, 82f, paper, TextAlignmentOptions.Center);
+        b.Main.fontStyle = FontStyles.Bold;
+        b.Root.gameObject.SetActive(false);
+        return b;
+    }
+
+    // 작전 종료(종이 띠) / 작전 실패(먹색 띠) — 같은 배치, 다른 조각
+    private Banner BuildResultBanner(string folder, bool victory)
+    {
+        string k = folder + "/";
+        var b = new Banner();
+        b.Root = BannerRoot(folder + "Banner");
+        b.Group = b.Root.GetComponent<CanvasGroup>();
+        if (!victory)
+        {
+            b.Dim = Img(b.Root, "Dim", null, ink);
+            Stretch(b.Dim.rectTransform);
+            b.DimAlpha = defeatDimAlpha;
+        }
+        b.Band = Pic(b.Root, "Band", k + "Band", 0, 500, 1920, 220, true).rectTransform;
+        if (victory) b.Flash = Pic(b.Root, "Flash", k + "Flash", 0, 500, 1920, 220);
+        b.Lines.Add(Pic(b.Root, "Line_Top", k + "Line_Top", 96, 504, 1762, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Line_Bottom_L", k + "Line_Bottom", 44, 714, 696, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Line_Bottom_R", k + "Line_Bottom", 1194, 714, 656, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Label_Line_L", k + "Label_Line", 350, 548, 268, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Label_Line_R", k + "Label_Line", 1300, 548, 268, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Title_Line_L", k + "Title_Line", 412, 630, 206, 1, true).rectTransform);
+        b.Lines.Add(Pic(b.Root, "Title_Line_R", k + "Title_Line", 1300, 630, 206, 1, true).rectTransform);
+        b.Decor.Add(Pic(b.Root, "Slash", k + "Slash", 814, 480, 214, 284));
+        b.Decor.Add(Pic(b.Root, "Slash_Edge_L", k + "Slash_Edge", 12, 502, 82, 110));
+        b.Decor.Add(Pic(b.Root, "Slash_Edge_R", k + "Slash_Edge", 1838, 608, 82, 110));
+        b.Decor.Add(Pic(b.Root, "Slash_Short_R", k + "Slash_Short", 1840, 502, 42, 56));
+        b.Decor.Add(Pic(b.Root, "Slash_Short_L", k + "Slash_Short", 32, 676, 42, 56));
+
+        b.Tag = Group("Tag", b.Root);
+        Pic(b.Tag, "Tag", k + "Tag", 760, 688, 392, 28, true);
+        Pic(b.Tag, "Diamond", k + "Diamond", 1154, 694, 18, 18);
+        b.Sub = Text(b.Tag, "TagLabel", 782, 690, 340, 22, 14f, victory ? paper : muted, TextAlignmentOptions.Center, 10f);
+        b.Sub.fontStyle = FontStyles.Bold;
+
+        b.Eng = Text(b.Root, "Eng", 652, 532, 600, 32, 20f, victory ? ink : muted, TextAlignmentOptions.Center, 34f);
+        b.Main = Text(b.Root, "Main", 670, 568, 590, 106, 80f, victory ? ink : paper, TextAlignmentOptions.Center);
+        b.Main.fontStyle = FontStyles.Bold;
+        b.Root.gameObject.SetActive(false);
+        return b;
+    }
+
+    // ───────── 카드 컷인 ─────────
+
+    private class CutIn
+    {
+        public RectTransform Root, Content, ArtBox;
+        public CanvasGroup Group;
+        public UICroppedArt Art;
+        public TextMeshProUGUI Label, Name, Chip;
+        private Sequence _seq;
+
+        public void Hide()
+        {
+            _seq?.Kill();
+            Root.gameObject.SetActive(false);
+        }
+
+        public void Play(Sprite art, string label, string name, string chip)
+        {
+            _seq?.Kill();
+            Root.gameObject.SetActive(true);
+            ArtBox.gameObject.SetActive(art != null);
+            if (art != null) Art.SetSprite(art, new Vector2(0.5f, 0.55f));
+            Label.text = label;
+            Name.text = name;
+            Chip.text = chip;
+
+            Group.alpha = 0f;
+            Content.anchoredPosition = new Vector2(-260f, 0f);
+            ArtBox.anchoredPosition = new Vector2(-80f, 0f);
+            Name.characterSpacing = 30f;
+            _seq = DOTween.Sequence().SetLink(Root.gameObject)
+                .Append(Content.DOAnchorPosX(0f, 0.24f).SetEase(Ease.OutCubic))
+                .Join(Group.DOFade(1f, 0.12f))
+                .Join(ArtBox.DOAnchorPosX(0f, 0.5f).SetEase(Ease.OutCubic))
+                .Join(DOTween.To(() => Name.characterSpacing, v => Name.characterSpacing = v, 2f, 0.4f).SetEase(Ease.OutCubic))
+                .Append(ArtBox.DOAnchorPosX(18f, 0.8f).SetEase(Ease.Linear))
+                .Append(Content.DOAnchorPosX(-120f, 0.22f).SetEase(Ease.InCubic))
+                .Join(Group.DOFade(0f, 0.22f))
+                .OnComplete(() => Root.gameObject.SetActive(false));
+        }
+    }
+
+    // 목업에서 파워는 y 102, 유니크는 y 310에 그렸다. 둘 다 파워 자리(y 102)에 띄운다.
+    private CutIn BuildCutIn(bool unique)
+    {
+        const string k = "CutIn/";
+        string v = unique ? "Unique" : "Power";
+        float dy = unique ? 310f - 102f : 0f; // 유니크 좌표를 파워 자리로 옮기는 양
+        var c = new CutIn();
+        c.Root = Group("CardCutIn_" + v, _root);
+        c.Group = c.Root.gameObject.AddComponent<CanvasGroup>();
+        c.Group.blocksRaycasts = false;
+        c.Content = Group("Content", c.Root);
+
+        // 카드 아트: 프레임 뒤, 사선 다각형 창 모양으로 마스킹 (layout.json art_window.polygon_screen)
+        float right = unique ? 658f : 614f, bottomRight = unique ? 566f : 504f;
+        var maskRt = Group("ArtMask", c.Content);
+        maskRt.anchorMin = maskRt.anchorMax = new Vector2(0.5f, 1f);
+        maskRt.pivot = new Vector2(0f, 1f);
+        maskRt.anchoredPosition = ScreenPos(8f, 110f);
+        maskRt.sizeDelta = new Vector2(right - 8f, 178f);
+        maskRt.gameObject.AddComponent<CanvasRenderer>();
+        var slice = maskRt.gameObject.AddComponent<SanctuarySliceGraphic>();
+        slice.Configure(new Vector4(0f, (bottomRight - 8f) / (right - 8f), 0f, 1f), false, false, false);
+        maskRt.gameObject.AddComponent<Mask>().showMaskGraphic = false;
+        c.ArtBox = Group("ArtBox", maskRt);
+        c.ArtBox.offsetMin = new Vector2(-40f, 0f);
+        c.ArtBox.offsetMax = new Vector2(40f, 0f);
+        c.ArtBox.gameObject.AddComponent<CanvasRenderer>();
+        var raw = c.ArtBox.gameObject.AddComponent<RawImage>();
+        raw.raycastTarget = false;
+        c.Art = c.ArtBox.gameObject.AddComponent<UICroppedArt>();
+
+        Pic(c.Content, "Frame", k + "Frame_" + v, 0, 102, 1140, 200);
+        Pic(c.Content, "Label_Plate", k + "Label_Plate_" + v, unique ? 686 : 630, 336 - (unique ? dy : 208), 424, 32);
+        Pic(c.Content, "Line", k + "Line", unique ? 686 : 630, unique ? 366 - dy : 158, unique ? 318 : 414, 1, true);
+        Pic(c.Content, "Diamond", k + "Diamond", unique ? 998 : 1040, unique ? 359 - dy : 151, 14, 14);
+        Pic(c.Content, "Chip", k + "Chip_" + v, 694, 250, 136, 24);
+        if (unique) Pic(c.Content, "Ticks", k + "Ticks_Unique", 712, 496 - dy, 250, 8);
+
+        c.Label = Text(c.Content, "Label", 648, 124, 392, 28, 17f, accent, TextAlignmentOptions.Left, 22f);
+        c.Label.fontStyle = FontStyles.Bold;
+        c.Name = Text(c.Content, "Name", 646, 168, 392, 74, 52f, paper, TextAlignmentOptions.Left);
+        c.Name.fontStyle = FontStyles.Bold;
+        c.Name.enableAutoSizing = true; c.Name.fontSizeMin = 30f; c.Name.fontSizeMax = 52f;
+        c.Chip = Text(c.Content, "ChipLabel", 714, 250, 100, 24, 13f, unique ? ink : accent, TextAlignmentOptions.Center, 8f);
+        c.Chip.fontStyle = FontStyles.Bold;
+        c.Root.gameObject.SetActive(false);
+        return c;
     }
 
     // ───────── 적 처치 기록 ─────────
 
-    private void AddFeed(string enemyName)
+    // 한 줄: 먹색 줄 + 왼쪽 청록 띠 + "TARGET DOWN" + 구분 사선 + "이름  무력화" (+ 보스는 BOSS 칩)
+    private void AddFeed(string enemyName, bool boss)
     {
-        var row = NewRect("Feed", _feed);
-        row.anchorMin = row.anchorMax = row.pivot = new Vector2(0f, 1f);
-        row.sizeDelta = new Vector2(360f, 40f);
+        const string k = "KillFeed/";
+        var row = Group("Feed", _feed);
         // 기존 기록은 아래로 민다
         for (int i = 0; i < _feed.childCount - 1; i++)
         {
             var old = (RectTransform)_feed.GetChild(i);
-            old.DOAnchorPosY(old.anchoredPosition.y - 46f, 0.2f).SetEase(Ease.OutCubic).SetLink(old.gameObject);
+            old.DOAnchorPosY(old.anchoredPosition.y - RowStep, 0.2f).SetEase(Ease.OutCubic).SetLink(old.gameObject);
         }
         var cg = row.gameObject.AddComponent<CanvasGroup>();
-        var bg = NewSkew("Bg", row, ink, 14f);
-        Stretch(bg.rectTransform);
-        var bar = NewImage("Bar", row, accent);
-        bar.rectTransform.anchorMin = new Vector2(0f, 0f); bar.rectTransform.anchorMax = new Vector2(0f, 1f);
-        bar.rectTransform.pivot = new Vector2(0f, 0.5f);
-        bar.rectTransform.sizeDelta = new Vector2(5f, -10f);
-        bar.rectTransform.anchoredPosition = new Vector2(8f, 0f);
-        var text = NewText("Text", row, 22f, Color.white, TextAlignmentOptions.MidlineLeft);
-        Stretch(text.rectTransform, 24f, 12f);
-        text.text = $"<color=#0DB8F2><size=70%>TARGET DOWN</size></color>   {enemyName}  <color=#9AA0A6>무력화</color>";
+        Pic(row, "Row", k + "Row", 64, 258, 590, 50, true);
+        Pic(row, "Accent", k + "Row_Accent", 88, 266, 22, 34);
+        Pic(row, "Separator", k + "Separator", 268, 266, 18, 34);
+        var eng = Text(row, "Eng", 120, 270, 142, 26, 12f, accent, TextAlignmentOptions.Left, 6f);
+        eng.text = "TARGET DOWN";
+        eng.fontStyle = FontStyles.Bold;
+        var name = Text(row, "Name", 310, 268, boss ? 244 : 300, 32, 20f, paper, TextAlignmentOptions.Left);
+        name.text = $"{enemyName}  <color=#9AA0A6><size=80%>무력화</size></color>";
+        name.overflowMode = TextOverflowModes.Ellipsis;
+        if (boss)
+        {
+            Pic(row, "BossChip", k + "BossChip", 562, 274, 60, 22, true);
+            var chip = Text(row, "BossLabel", 566, 274, 52, 22, 12f, ink, TextAlignmentOptions.Center, 4f);
+            chip.text = "BOSS";
+            chip.fontStyle = FontStyles.Bold;
+        }
 
         row.anchoredPosition = new Vector2(-60f, 0f);
         cg.alpha = 0f;
@@ -161,285 +414,87 @@ public class BattleOperationFx : MonoBehaviour
             .OnComplete(() => Destroy(row.gameObject));
     }
 
-    // ───────── 가운데 띠 배너 ─────────
-
-    private class Banner
-    {
-        public RectTransform Root;
-        public CanvasGroup Group;
-        public RectTransform Band, Line, Slash;
-        public TextMeshProUGUI Eng, Main, Sub;
-        public RectTransform SubTag;
-        public Image Flash;
-        public float BandWidth;
-        private Sequence _seq;
-
-        public void Hide()
-        {
-            _seq?.Kill();
-            Root.gameObject.SetActive(false);
-        }
-
-        public void Play(string eng, string main, string sub, float delay, float hold, bool flash = false)
-        {
-            _seq?.Kill();
-            Root.gameObject.SetActive(true);
-            Eng.text = eng; Main.text = main; Sub.text = sub;
-            Group.alpha = 1f;
-            Band.localScale = new Vector3(0f, 1f, 1f);
-            Line.localScale = new Vector3(0f, 1f, 1f);
-            Slash.anchoredPosition = new Vector2(-BandWidth * 0.5f - 200f, 0f);
-            Main.alpha = 0f; Eng.alpha = 0f;
-            Main.characterSpacing = 60f;
-            Main.rectTransform.anchoredPosition = new Vector2(-40f, Main.rectTransform.anchoredPosition.y);
-            SubTag.localScale = new Vector3(1f, 0f, 1f);
-            if (Flash != null) Flash.color = new Color(1f, 1f, 1f, 0f);
-
-            _seq = DOTween.Sequence().SetLink(Root.gameObject).SetUpdate(true)
-                .AppendInterval(delay)
-                .Append(Line.DOScaleX(1f, 0.22f).SetEase(Ease.OutCubic))
-                .Insert(delay + 0.06f, Band.DOScaleX(1f, 0.26f).SetEase(Ease.OutCubic))
-                .Insert(delay + 0.18f, Slash.DOAnchorPosX(BandWidth * 0.5f + 200f, 0.45f).SetEase(Ease.InOutSine))
-                .Insert(delay + 0.2f, Main.DOFade(1f, 0.2f))
-                .Insert(delay + 0.2f, DOTween.To(() => Main.characterSpacing, v => Main.characterSpacing = v, 14f, 0.45f).SetEase(Ease.OutCubic))
-                .Insert(delay + 0.2f, Main.rectTransform.DOAnchorPosX(0f, 0.45f).SetEase(Ease.OutCubic))
-                .Insert(delay + 0.28f, Eng.DOFade(1f, 0.2f))
-                .Insert(delay + 0.34f, SubTag.DOScaleY(1f, 0.18f).SetEase(Ease.OutBack));
-            if (Flash != null)
-                _seq.Insert(delay + 0.02f, Flash.DOFade(0.45f, 0.06f))
-                    .Insert(delay + 0.08f, Flash.DOFade(0f, 0.4f));
-            _seq.AppendInterval(hold)
-                .Append(Group.DOFade(0f, 0.3f))
-                .Join(Main.rectTransform.DOAnchorPosX(60f, 0.3f).SetEase(Ease.InCubic))
-                .OnComplete(() => Root.gameObject.SetActive(false));
-        }
-    }
-
-    private Banner BuildBanner(string name, float y, float height, Color bandColor, Color textColor, Color lineColor, float skew)
-    {
-        var b = new Banner { BandWidth = 2300f };
-        b.Root = NewRect(name + "Banner", _root);
-        Stretch(b.Root);
-        b.Group = b.Root.gameObject.AddComponent<CanvasGroup>();
-        b.Group.blocksRaycasts = false;
-        // 가운데 배너는 적 인텐트/상태 툴팁(정렬 200)보다 위 — 전투 시작 때 마우스가 적 위에 있어도 가리지 않게
-        var bannerCanvas = b.Root.gameObject.AddComponent<Canvas>();
-        bannerCanvas.overrideSorting = true;
-        bannerCanvas.sortingOrder = bannerSortingOrder;
-
-        if (name == "Victory")
-        {
-            b.Flash = NewImage("Flash", b.Root, new Color(1f, 1f, 1f, 0f));
-            Stretch(b.Flash.rectTransform);
-        }
-
-        var band = NewSkew("Band", b.Root, bandColor, skew);
-        b.Band = band.rectTransform;
-        b.Band.anchorMin = b.Band.anchorMax = new Vector2(0.5f, 0.5f);
-        b.Band.pivot = new Vector2(0f, 0.5f);
-        b.Band.sizeDelta = new Vector2(b.BandWidth, height);
-        b.Band.anchoredPosition = new Vector2(-b.BandWidth * 0.5f, y);
-
-        // 띠 안을 한 번 훑고 지나가는 흰 사선
-        var slashHolder = NewRect("SlashMask", b.Root);
-        slashHolder.gameObject.AddComponent<RectMask2D>();
-        slashHolder.anchorMin = slashHolder.anchorMax = new Vector2(0.5f, 0.5f);
-        slashHolder.sizeDelta = new Vector2(b.BandWidth, height);
-        slashHolder.anchoredPosition = new Vector2(0f, y);
-        var slash = NewSkew("Slash", slashHolder, new Color(1f, 1f, 1f, bandColor.grayscale > 0.5f ? 0.9f : 0.18f), skew * 3f);
-        if (bandColor.grayscale > 0.5f) slash.color = new Color(lineColor.r, lineColor.g, lineColor.b, 0.35f);
-        b.Slash = slash.rectTransform;
-        b.Slash.sizeDelta = new Vector2(90f, height);
-
-        var line = NewImage("Line", b.Root, lineColor);
-        b.Line = line.rectTransform;
-        b.Line.anchorMin = b.Line.anchorMax = new Vector2(0.5f, 0.5f);
-        b.Line.pivot = new Vector2(0f, 0.5f);
-        b.Line.sizeDelta = new Vector2(b.BandWidth, 4f);
-        b.Line.anchoredPosition = new Vector2(-b.BandWidth * 0.5f, y - height * 0.5f - 6f);
-
-        b.Eng = NewText("Eng", b.Root, 22f, lineColor, TextAlignmentOptions.Center);
-        b.Eng.characterSpacing = 38f;
-        b.Eng.rectTransform.sizeDelta = new Vector2(1400f, 34f);
-        b.Eng.rectTransform.anchoredPosition = new Vector2(0f, y + height * 0.5f - 30f);
-
-        b.Main = NewText("Main", b.Root, height * 0.5f, textColor, TextAlignmentOptions.Center);
-        b.Main.rectTransform.sizeDelta = new Vector2(1400f, height * 0.6f);
-        b.Main.rectTransform.anchoredPosition = new Vector2(0f, y - 10f);
-
-        // 띠 아래 작은 검은 태그
-        b.SubTag = NewRect("SubTag", b.Root);
-        b.SubTag.anchorMin = b.SubTag.anchorMax = new Vector2(0.5f, 0.5f);
-        b.SubTag.pivot = new Vector2(0.5f, 1f);
-        b.SubTag.sizeDelta = new Vector2(460f, 38f);
-        b.SubTag.anchoredPosition = new Vector2(0f, y - height * 0.5f - 14f);
-        var tagBg = NewSkew("Bg", b.SubTag, bandColor.grayscale > 0.5f ? ink : new Color(0.96f, 0.96f, 0.95f, 0.95f), 16f);
-        Stretch(tagBg.rectTransform);
-        b.Sub = NewText("Text", b.SubTag, 19f, bandColor.grayscale > 0.5f ? Color.white : ink, TextAlignmentOptions.Center);
-        b.Sub.characterSpacing = 6f;
-        Stretch(b.Sub.rectTransform);
-
-        b.Root.gameObject.SetActive(false);
-        return b;
-    }
-
-    // ───────── 카드 컷인 ─────────
-
-    private class CutIn
-    {
-        public RectTransform Root;
-        public CanvasGroup Group;
-        public RectTransform Band, ArtBox;
-        public UICroppedArt Art;
-        public TextMeshProUGUI Label, Name;
-        public Image Line;
-        public Color Accent, Gold;
-        private Sequence _seq;
-
-        public void Hide()
-        {
-            _seq?.Kill();
-            Root.gameObject.SetActive(false);
-        }
-
-        public void Play(Sprite art, string label, string name, bool unique)
-        {
-            _seq?.Kill();
-            Root.gameObject.SetActive(true);
-            ArtBox.gameObject.SetActive(art != null);
-            if (art != null) Art.SetSprite(art, new Vector2(0.5f, 0.55f));
-            Label.text = label;
-            Name.text = name;
-            Line.color = unique ? Gold : Accent;
-            Label.color = Line.color;
-
-            Group.alpha = 0f;
-            Root.anchoredPosition = new Vector2(-260f, Root.anchoredPosition.y);
-            ArtBox.anchoredPosition = new Vector2(-80f, 0f);
-            Name.characterSpacing = 30f;
-            _seq = DOTween.Sequence().SetLink(Root.gameObject)
-                .Append(Root.DOAnchorPosX(0f, 0.24f).SetEase(Ease.OutCubic))
-                .Join(Group.DOFade(1f, 0.12f))
-                .Join(ArtBox.DOAnchorPosX(0f, 0.5f).SetEase(Ease.OutCubic))
-                .Join(DOTween.To(() => Name.characterSpacing, v => Name.characterSpacing = v, 2f, 0.4f).SetEase(Ease.OutCubic))
-                .Append(ArtBox.DOAnchorPosX(18f, 0.8f).SetEase(Ease.Linear))
-                .Append(Root.DOAnchorPosX(-120f, 0.22f).SetEase(Ease.InCubic))
-                .Join(Group.DOFade(0f, 0.22f))
-                .OnComplete(() => Root.gameObject.SetActive(false));
-        }
-    }
-
-    private CutIn BuildCutIn()
-    {
-        var c = new CutIn { Accent = accent, Gold = new Color(0.98f, 0.82f, 0.35f, 1f) };
-        c.Root = NewRect("CardCutIn", _root);
-        c.Root.anchorMin = c.Root.anchorMax = c.Root.pivot = new Vector2(0f, 0.5f);
-        c.Root.sizeDelta = new Vector2(720f, 128f);
-        c.Root.anchoredPosition = new Vector2(0f, 170f);
-        c.Group = c.Root.gameObject.AddComponent<CanvasGroup>();
-        c.Group.blocksRaycasts = false;
-
-        var band = NewSkew("Band", c.Root, ink, 44f);
-        c.Band = band.rectTransform;
-        Stretch(c.Band, -40f, 0f);
-
-        // 아트: 띠 오른쪽 절반, 사각 마스크로 자른다
-        var artMask = NewRect("ArtMask", c.Root);
-        artMask.gameObject.AddComponent<RectMask2D>();
-        artMask.anchorMin = new Vector2(0.4f, 0f); artMask.anchorMax = new Vector2(1f, 1f);
-        artMask.offsetMin = new Vector2(0f, 6f); artMask.offsetMax = new Vector2(-30f, -6f);
-        c.ArtBox = NewRect("ArtBox", artMask);
-        Stretch(c.ArtBox, -30f, 0f);
-        c.ArtBox.gameObject.AddComponent<CanvasRenderer>();
-        var raw = c.ArtBox.gameObject.AddComponent<RawImage>();
-        raw.raycastTarget = false;
-        c.Art = c.ArtBox.gameObject.AddComponent<UICroppedArt>();
-        // 아트 왼쪽을 띠 색으로 점점 흐리게 덮어 긴 카드 이름이 아트 위로 넘어가도 읽히게 (띠 4장 계단 그라데이션)
-        for (int i = 0; i < 4; i++)
-        {
-            var fade = NewImage("Fade" + i, artMask, new Color(ink.r, ink.g, ink.b, 0.9f - i * 0.2f));
-            fade.rectTransform.anchorMin = new Vector2(0f, 0f); fade.rectTransform.anchorMax = new Vector2(0f, 1f);
-            fade.rectTransform.pivot = new Vector2(0f, 0.5f);
-            fade.rectTransform.sizeDelta = new Vector2(40f, 0f);
-            fade.rectTransform.anchoredPosition = new Vector2(i * 40f, 0f);
-        }
-
-        c.Line = NewImage("Line", c.Root, accent);
-        c.Line.rectTransform.anchorMin = new Vector2(0f, 0f); c.Line.rectTransform.anchorMax = new Vector2(1f, 0f);
-        c.Line.rectTransform.pivot = new Vector2(0.5f, 1f);
-        c.Line.rectTransform.sizeDelta = new Vector2(-20f, 4f);
-        c.Line.rectTransform.anchoredPosition = new Vector2(-10f, -4f);
-
-        c.Label = NewText("Label", c.Root, 18f, accent, TextAlignmentOptions.MidlineLeft);
-        c.Label.characterSpacing = 24f;
-        c.Label.rectTransform.anchorMin = c.Label.rectTransform.anchorMax = c.Label.rectTransform.pivot = new Vector2(0f, 0.5f);
-        c.Label.rectTransform.sizeDelta = new Vector2(360f, 28f);
-        c.Label.rectTransform.anchoredPosition = new Vector2(40f, 28f);
-
-        c.Name = NewText("Name", c.Root, 44f, Color.white, TextAlignmentOptions.MidlineLeft);
-        c.Name.rectTransform.anchorMin = c.Name.rectTransform.anchorMax = c.Name.rectTransform.pivot = new Vector2(0f, 0.5f);
-        c.Name.rectTransform.sizeDelta = new Vector2(480f, 60f);
-        c.Name.enableAutoSizing = true;
-        c.Name.fontSizeMin = 28f;
-        c.Name.fontSizeMax = 44f;
-        c.Name.rectTransform.anchoredPosition = new Vector2(38f, -14f);
-
-        c.Root.gameObject.SetActive(false);
-        return c;
-    }
-
     // ───────── 생성 도우미 ─────────
 
-    private static RectTransform NewRect(string name, Transform parent)
+    // 1920×1080 좌상단 좌표 → 화면 위·가운데 기준 anchoredPosition (넓은 화면에서도 가운데 정렬)
+    private static Vector2 ScreenPos(float x, float y) => new(x - 960f, -y);
+
+    private RectTransform BannerRoot(string name)
+    {
+        var root = Group(name, _root);
+        var group = root.gameObject.AddComponent<CanvasGroup>();
+        group.blocksRaycasts = false;
+        // 가운데 배너는 적 인텐트/상태 툴팁(정렬 200)보다 위 — 전투 시작 때 마우스가 적 위에 있어도 가리지 않게
+        var bannerCanvas = root.gameObject.AddComponent<Canvas>();
+        bannerCanvas.overrideSorting = true;
+        bannerCanvas.sortingOrder = bannerSortingOrder;
+        return root;
+    }
+
+    private static RectTransform Group(string name, Transform parent)
     {
         var go = new GameObject(name, typeof(RectTransform));
         go.layer = parent.gameObject.layer;
         var rt = (RectTransform)go.transform;
         rt.SetParent(parent, false);
+        Stretch(rt);
         return rt;
     }
 
-    // 코드로 붙이는 Graphic은 CanvasRenderer가 자동으로 따라오지 않을 수 있어 먼저 붙인다
-    private static GameObject NewGraphicRect(string name, Transform parent)
-    {
-        var go = NewRect(name, parent).gameObject;
-        go.AddComponent<CanvasRenderer>();
-        return go;
-    }
-
-    private static void Stretch(RectTransform rt, float padX = 0f, float padY = 0f)
+    private static void Stretch(RectTransform rt)
     {
         rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
-        rt.offsetMin = new Vector2(padX, padY); rt.offsetMax = new Vector2(-padX, -padY);
+        rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
     }
 
-    private static Image NewImage(string name, Transform parent, Color color)
+    // 코드로 붙이는 Graphic은 CanvasRenderer가 자동으로 따라오지 않을 수 있어 먼저 붙인다
+    private static Image Img(Transform parent, string name, Sprite sprite, Color color)
     {
-        var img = NewGraphicRect(name, parent).AddComponent<Image>();
+        var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
+        go.layer = parent.gameObject.layer;
+        go.transform.SetParent(parent, false);
+        var img = go.AddComponent<Image>();
+        img.sprite = sprite;
         img.color = color;
         img.raycastTarget = false;
         return img;
     }
 
-    private static UISkewQuad NewSkew(string name, Transform parent, Color color, float skew)
+    // 조각 하나를 layout.json 좌표(1920×1080 좌상단, 화면 크기)에 놓는다. 피벗은 왼쪽 위 — 가로로 그어지는 연출은 왼쪽부터 자란다
+    private static Image Pic(Transform parent, string name, string sprite, float x, float y, float w, float h, bool sliced = false)
     {
-        var q = NewGraphicRect(name, parent).AddComponent<UISkewQuad>();
-        q.color = color;
-        q.Skew = skew;
-        q.raycastTarget = false;
-        return q;
+        var s = Resources.Load<Sprite>("BattleFx/" + sprite);
+        if (s == null) Debug.LogWarning($"[BattleOperationFx] 조각 없음: Resources/BattleFx/{sprite}");
+        var img = Img(parent, name, s, Color.white);
+        img.type = sliced ? Image.Type.Sliced : Image.Type.Simple;
+        var rt = img.rectTransform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+        rt.pivot = new Vector2(0f, 1f);
+        rt.anchoredPosition = ScreenPos(x, y);
+        rt.sizeDelta = new Vector2(w, Mathf.Max(h, 1f));
+        return img;
     }
 
-    private TextMeshProUGUI NewText(string name, Transform parent, float size, Color color, TextAlignmentOptions align)
+    private TextMeshProUGUI Text(Transform parent, string name, float x, float y, float w, float h, float size, Color color,
+        TextAlignmentOptions align, float spacing = 0f)
     {
-        var t = NewGraphicRect(name, parent).AddComponent<TextMeshProUGUI>();
+        var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
+        go.layer = parent.gameObject.layer;
+        go.transform.SetParent(parent, false);
+        var t = go.AddComponent<TextMeshProUGUI>();
         if (font != null) t.font = font;
         t.fontSize = size;
         t.color = color;
         t.alignment = align;
+        t.characterSpacing = spacing;
         t.raycastTarget = false;
         t.textWrappingMode = TextWrappingModes.NoWrap;
         t.overflowMode = TextOverflowModes.Overflow;
+        var rt = t.rectTransform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+        rt.pivot = new Vector2(0f, 1f);
+        rt.anchoredPosition = ScreenPos(x, y);
+        rt.sizeDelta = new Vector2(w, h);
         return t;
     }
 }

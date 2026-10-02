@@ -1,0 +1,663 @@
+fileFormatVersion: 2
+guid: c81cf2e8b2600b54cbfdbf467d089711
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 160201685384627345
+    second: Ticks_Unique_0
+  - first:
+      213: 1395335182848709798
+    second: Ticks_Unique_1
+  - first:
+      213: -2156347321081787475
+    second: Ticks_Unique_2
+  - first:
+      213: 362484500085996579
+    second: Ticks_Unique_3
+  - first:
+      213: 982384102566456204
+    second: Ticks_Unique_4
+  - first:
+      213: -6505639960135143417
+    second: Ticks_Unique_5
+  - first:
+      213: 8500621307467230824
+    second: Ticks_Unique_6
+  - first:
+      213: -24358884933249857
+    second: Ticks_Unique_7
+  - first:
+      213: -1214263191478156539
+    second: Ticks_Unique_8
+  - first:
+      213: 425376285555907908
+    second: Ticks_Unique_9
+  - first:
+      213: 3013399861321109027
+    second: Ticks_Unique_10
+  - first:
+      213: -8912591939338541932
+    second: Ticks_Unique_11
+  - first:
+      213: 7806917148491089755
+    second: Ticks_Unique_12
+  - first:
+      213: -3659189846495292191
+    second: Ticks_Unique_13
+  - first:
+      213: 6944324880806038578
+    second: Ticks_Unique_14
+  - first:
+      213: -7163243585827126129
+    second: Ticks_Unique_15
+  - first:
+      213: 3602342952874804298
+    second: Ticks_Unique_16
+  - first:
+      213: 2389262869884747161
+    second: Ticks_Unique_17
+  - first:
+      213: -5903661052115167584
+    second: Ticks_Unique_18
+  - first:
+      213: 3673086079738821467
+    second: Ticks_Unique_19
+  - first:
+      213: 5369637013806608626
+    second: Ticks_Unique_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ticks_Unique_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19405c58596293200800000000000000
+      internalID: 160201685384627345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a45d4cb4f93d5310800000000000000
+      internalID: 1395335182848709798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_2
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dab0e8a498d1312e0800000000000000
+      internalID: -2156347321081787475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_3
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32cf5387bbdc70500800000000000000
+      internalID: 362484500085996579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_4
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8be67ae22122ad00800000000000000
+      internalID: 982384102566456204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_5
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700fe83bce257b5a0800000000000000
+      internalID: -6505639960135143417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_6
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86e63b97a0648f570800000000000000
+      internalID: 8500621307467230824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_7
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb4dd6429b579aff0800000000000000
+      internalID: -24358884933249857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_8
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 503cc109f02162fe0800000000000000
+      internalID: -1214263191478156539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d5f6c5a7d37e500800000000000000
+      internalID: 425376285555907908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_10
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32e814c453fb1d920800000000000000
+      internalID: 3013399861321109027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_11
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49467b32adc105480800000000000000
+      internalID: -8912591939338541932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_12
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5787b2a8cdb75c60800000000000000
+      internalID: 7806917148491089755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_13
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e49ee9c832f73dc0800000000000000
+      internalID: -3659189846495292191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_14
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23cc95dbfa23f5060800000000000000
+      internalID: 6944324880806038578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_15
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f84cd2349eb079c90800000000000000
+      internalID: -7163243585827126129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_16
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a440c3164d71ef130800000000000000
+      internalID: 3602342952874804298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_17
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99db28adbed582120800000000000000
+      internalID: 2389262869884747161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_18
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a6dd525d8bf11ea0800000000000000
+      internalID: -5903661052115167584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_19
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5bb344245c69f230800000000000000
+      internalID: 3673086079738821467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ticks_Unique_20
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 0
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f07bbc1a68c48a40800000000000000
+      internalID: 5369637013806608626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Ticks_Unique_0: 160201685384627345
+      Ticks_Unique_1: 1395335182848709798
+      Ticks_Unique_10: 3013399861321109027
+      Ticks_Unique_11: -8912591939338541932
+      Ticks_Unique_12: 7806917148491089755
+      Ticks_Unique_13: -3659189846495292191
+      Ticks_Unique_14: 6944324880806038578
+      Ticks_Unique_15: -7163243585827126129
+      Ticks_Unique_16: 3602342952874804298
+      Ticks_Unique_17: 2389262869884747161
+      Ticks_Unique_18: -5903661052115167584
+      Ticks_Unique_19: 3673086079738821467
+      Ticks_Unique_2: -2156347321081787475
+      Ticks_Unique_20: 5369637013806608626
+      Ticks_Unique_3: 362484500085996579
+      Ticks_Unique_4: 982384102566456204
+      Ticks_Unique_5: -6505639960135143417
+      Ticks_Unique_6: 8500621307467230824
+      Ticks_Unique_7: -24358884933249857
+      Ticks_Unique_8: -1214263191478156539
+      Ticks_Unique_9: 425376285555907908
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

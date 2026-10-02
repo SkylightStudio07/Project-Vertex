@@ -158,6 +158,7 @@ public class BattleManager : MonoBehaviour
             var enemy = new EnemyInstance(data, _rnd);
             enemy.OnDied += CheckVictory;
             enemy.OnDied += () => EnemyDefeated?.Invoke(enemy); // 의뢰(처치 조건) 등 전투 밖 시스템용
+            enemy.OnDied += RunStats.AddDefeat; // 결과 화면 '격퇴'
             if (!TrainingSession.IsActive) enemy.OnDied += () => PlayerRecord.AddDefeat(enemy.Data); // 실전 격퇴 기록 (훈련장 해금)
             _state.Enemies.Add(enemy);
         }
@@ -195,6 +196,7 @@ public class BattleManager : MonoBehaviour
     private IEnumerator PlayerTurnStartSequence(bool showBanner)
     {
         _state.TurnNumber++; // 플레이어 턴이 올 때마다 1부터 센다 (상단 작전 바 TURN 표시)
+        RunStats.AddTurn();   // 결과 화면 '진행 턴' (런 전체 합)
 
         if (showBanner && _playerTurnBanner != null)
             yield return _playerTurnBanner.ShowAndWait();
