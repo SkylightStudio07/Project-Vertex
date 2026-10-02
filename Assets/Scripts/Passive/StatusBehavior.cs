@@ -6,6 +6,9 @@ using UnityEngine;
 [Serializable]
 public abstract class StatusBehavior
 {
+    public virtual void OnReload(StatusInstance status, CardContext context) { }
+    public virtual void OnAmmoSpent(StatusInstance status, CardContext context, int spent, bool first, bool firstConsumption, bool preview) { }
+    public virtual int CardDamageBonus(StatusInstance status, CardContext context) => 0;
     public virtual void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner) { }

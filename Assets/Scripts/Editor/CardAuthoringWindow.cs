@@ -305,6 +305,30 @@ public sealed partial class CardAuthoringWindow : EditorWindow
         if (property.isArray && property.propertyType != SerializedPropertyType.String && declaredType != null && declaredType.IsGenericType)
         {
             var elementType = declaredType.GetGenericArguments()[0];
+            if (elementType == typeof(ConditionalDamageBonus))
+            {
+                Title("조건부 피해 증가");
+                for (int i = 0; i < property.arraySize; i++)
+                {
+                    var bonus = property.GetArrayElementAtIndex(i);
+                    using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+                    {
+                        DrawNode(bonus.FindPropertyRelative("condition"), typeof(CardCondition), "조건", depth + 1);
+                        EditorGUILayout.PropertyField(bonus.FindPropertyRelative("amount"), new GUIContent("피해 증가량"));
+                        if (GUILayout.Button("삭제")) { property.DeleteArrayElementAtIndex(i); CommitAndExit(); }
+                    }
+                }
+                if (GUILayout.Button("+ 조건부 피해 증가 추가"))
+                {
+                    property.arraySize++;
+                    var added = property.GetArrayElementAtIndex(property.arraySize - 1);
+                    added.FindPropertyRelative("condition").managedReferenceValue = null;
+                    added.FindPropertyRelative("amount").intValue = 0;
+                    CommitAndExit();
+                }
+                EditorGUILayout.LabelField("만족한 증가량은 모두 합산됩니다. 별도 타격을 만들지 않습니다.", EditorStyles.miniLabel);
+                return;
+            }
             Title(label);
             for (int i = 0; i < property.arraySize; i++)
             {
@@ -452,6 +476,7 @@ public sealed partial class CardAuthoringWindow : EditorWindow
         "targets" => "효과 대상", "target" => "대상", "scaling" => "동적 수치 보정 (고급)",
         "piercing" => "방어도 관통", "environmentalDamage" => "환경 피해", "hitInterval" => "타격 간격 (초)",
         "condition" => "발동 조건", "effectsWhenMet" => "조건 충족 시 효과", "effects" => "효과 목록",
+        "effectsWhenEmpty" => "빈 탄창 재장전 시 효과", "onKillEffects" => "이 피해로 처치 시 효과",
         "weapon" => "변경할 무기", "status" => "상태 에셋", "source" => "수치 원천",
         "multiplier" => "배수", "flatBonus" => "고정 보너스", _ => ObjectNames.NicifyVariableName(field)
     };

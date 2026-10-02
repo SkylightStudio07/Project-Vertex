@@ -204,6 +204,7 @@ public class BattleManager : MonoBehaviour
         // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
         // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
         _state.PlayerLostHpThisTurn = false;
+        _state.Player.ResetBlockGainHistory();
         _state.Player.ResetBlock();
 
         BeginHandChangeBatch();
@@ -440,7 +441,7 @@ public class BattleManager : MonoBehaviour
         BeginHandChangeBatch();
         try
         {
-            PayCardPlayCost(cost);
+            PayCardPlayCost(cost, ctx);
 
             _state.Hand.Remove(card);
             // 파워 카드는 isExhaust 설정과 무관하게 항상 소멸 — 패시브가 영구 등록되므로
@@ -474,10 +475,10 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
-    private void PayCardPlayCost(CardPlayCost cost)
+    private void PayCardPlayCost(CardPlayCost cost, CardContext context)
     {
         _state.Energy -= cost.Energy;
-        _state.Ammo -= cost.Ammo;
+        _state.ConsumeAmmo(cost.Ammo, context);
 
         if (cost.Hp > 0)
             _state.Player.TakeDamage(new DamageInfo(cost.Hp, null, true));

@@ -16,9 +16,9 @@ public class AmmoConsumeAllDamageEffect : CardEffect
         int ammo = ctx.State.Ammo;
         if (ammo <= 0) return;
 
-        ctx.State.Ammo = 0;
+        ctx.State.ConsumeAmmo(ammo, ctx);
 
-        int damage = separateHits ? damagePerAmmo : damagePerAmmo * ammo;
+        int damage = (separateHits ? damagePerAmmo : damagePerAmmo * ammo) + AmmoStatusEvents.DamageBonus(ctx);
         int hits = separateHits ? ammo : 1;
         foreach (var target in targets.Resolve(ctx))
             for (int i = 0; i < hits && !target.IsDead; i++)
