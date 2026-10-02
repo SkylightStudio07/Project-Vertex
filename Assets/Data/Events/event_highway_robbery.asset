@@ -16,7 +16,8 @@ MonoBehaviour:
   choiceEffects:
   - effects:
     - rid: 3673691916408717396
-    conditions: []
+    conditions:
+    - rid: 646457894737543359
   - effects:
     - rid: 3673691916408717397
     conditions: []
@@ -29,6 +30,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 646457894737543359
+      type: {class: GoldIsEnoughCondition, ns: , asm: Assembly-CSharp}
+      data:
+        requiredGold: 75
     - rid: 3673691916408717396
       type: {class: GainGoldEffect, ns: , asm: Assembly-CSharp}
       data:
