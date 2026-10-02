@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left origin; x right, y down; rectangles [x,y,width,height]",
+  "import_settings": {
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "pixels_per_unit": 200,
+    "mesh_type": "FullRect",
+    "filter_mode": "Bilinear",
+    "mipmaps": false,
+    "compression": "None",
+    "max_texture_size": 4096,
+    "canvas_reference_pixels_per_unit": 100
+  },
+  "assets": [
+    {
+      "id": "Band",
+      "file": "Band.png",
+      "scale": 2,
+      "png_size_px": [
+        3760,
+        388
+      ],
+      "screen_rect": [
+        2,
+        174,
+        1880.0,
+        194.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 308,
+        "bottom": 0,
+        "right": 308,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Line_Top",
+      "file": "Line_Top.png",
+      "scale": 2,
+      "png_size_px": [
+        3528,
+        2
+      ],
+      "screen_rect": [
+        96,
+        154,
+        1764.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Line_Bottom",
+      "file": "Line_Bottom.png",
+      "scale": 2,
+      "png_size_px": [
+        3336,
+        2
+      ],
+      "screen_rect": [
+        66,
+        368,
+        1668.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Slash_Accent",
+      "file": "Slash_Accent.png",
+      "scale": 2,
+      "png_size_px": [
+        212,
+        200
+      ],
+      "screen_rect": [
+        1680,
+        250,
+        106.0,
+        100.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "Tag",
+      "file": "Tag.png",
+      "scale": 2,
+      "png_size_px": [
+        976,
+        92
+      ],
+      "screen_rect": [
+        718,
+        356,
+        488.0,
+        46.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 68,
+        "bottom": 0,
+        "right": 68,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Tag_EliteMark",
+      "file": "Tag_EliteMark.png",
+      "scale": 2,
+      "png_size_px": [
+        252,
+        76
+      ],
+      "screen_rect": [
+        742,
+        360,
+        126.0,
+        38.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 52,
+        "bottom": 0,
+        "right": 52,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Tick",
+      "file": "Tick.png",
+      "scale": 2,
+      "png_size_px": [
+        28,
+        28
+      ],
+      "screen_rect": [
+        1134,
+        374,
+        14.0,
+        14.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "Label_Line",
+      "file": "Label_Line.png",
+      "scale": 2,
+      "png_size_px": [
+        340,
+        2
+      ],
+      "screen_rect": [
+        558,
+        210,
+        170.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Title_Slash",
+      "file": "Title_Slash.png",
+      "scale": 2,
+      "png_size_px": [
+        164,
+        236
+      ],
+      "screen_rect": [
+        1228,
+        228,
+        82.0,
+        118.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    }
+  ],
+  "instances": [
+    {
+      "id": "label_line_right",
+      "asset": "Label_Line",
+      "screen_position": [
+        1192,
+        210
+      ]
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "english_label",
+      "screen_rect": [
+        754,
+        194,
+        430,
+        28
+      ],
+      "align": "center"
+    },
+    {
+      "id": "title",
+      "screen_rect": [
+        706,
+        224,
+        518,
+        122
+      ],
+      "align": "center"
+    },
+    {
+      "id": "elite_label",
+      "screen_rect": [
+        768,
+        366,
+        80,
+        28
+      ],
+      "align": "center"
+    },
+    {
+      "id": "encounter",
+      "screen_rect": [
+        916,
+        365,
+        205,
+        29
+      ],
+      "align": "center"
+    }
+  ]
+}

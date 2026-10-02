@@ -10,15 +10,16 @@ public class MapManager : MonoBehaviour
     [Header("설정")]
     [SerializeField] private MapConfig mapConfig;
 
+    // 전투(런) 씬 전용. 맵은 런마다 GameManager.InitializeRun → InitializeMap으로 새로 만들고 RunData에 둔다.
+    // DontDestroyOnLoad를 쓰지 않는다 (GameManager 주석 참고).
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 
     // 런 시작 시 GameManager에서 호출.
@@ -37,6 +38,8 @@ public class MapManager : MonoBehaviour
     }
 
     // 지정한 노드로 이동. 이동 가능 여부는 호출 전에 확인할 것.
+    public static event System.Action<MapNode> NodeEntered; // 노드에 들어설 때 (의뢰 등)
+
     public void MoveToNode(MapNode node)
     {
         node.isVisited = true;
@@ -44,6 +47,7 @@ public class MapManager : MonoBehaviour
         RunData.Instance.currentFloor     = node.floorIndex;
         RunData.Instance.currentNodeIndex = node.nodeIndex;
         RunData.Instance.CurrentNodeType  = node.nodeType;
+        NodeEntered?.Invoke(node);
     }
 
     // 현재 노드에서 이동 가능한 다음 노드 목록 반환.

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a641abbb5d7f845499b380d7a3f6486c, type: 3}
+  m_Name: Quest_Blackbox
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: blackbox
+  title: "\uBE14\uB799\uBC15\uC2A4 \uD68C\uC218"
+  client: "R&C \uCEF4\uD37C\uB2C8"
+  description: "\uCD94\uB77D\uD55C \uC815\uCC30 \uB4DC\uB860\uC758 \uBE14\uB799\uBC15\uC2A4\uB97C
+    \uD68C\uC218\uD558\uB77C. \uBC84\uD14D\uC2A4 \uC2EC\uCE35\uC758 \uAE30\uB85D\uC774
+    \uB0A8\uC544 \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB978\uB2E4."
+  tag: 1
+  cardArt: {fileID: 21300000, guid: 8810c6da5aebe2149878eb3c48e9030c, type: 3}
+  clientEmblem: {fileID: 21300000, guid: a5cc31323f6ca88429cb1037e71ab5b0, type: 3}
+  lockedHint: 
+  questItem: {fileID: 11400000, guid: ac9301db21cca544b9ae93fb7b629827, type: 2}
+  itemTrigger: 2
+  triggerChapter: 1
+  triggerFloor: 0
+  triggerEnemy: {fileID: 11400000, guid: 555372da00d45c7eb3a6fbd7a8a0feb4, type: 2}
+  goal: 0
+  deliverNodeType: 2
+  goalEnemy: {fileID: 0}
+  goalCount: 1
+  rewardExp: 30
+  rewardFlags:
+  - quest_blackbox_done
+  rescueCharId: 
+  requiredFlags: []

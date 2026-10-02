@@ -21,6 +21,8 @@ public class NpcDialogueOverlay : MonoBehaviour
     [SerializeField] private Button answerButton;
     [SerializeField] private TextMeshProUGUI answerText;
     [SerializeField] private float typewriterCharsPerSecond = 40f;
+    [Tooltip("대화창 v1: 이름 + 소속 + 고유색 선 + 초상 + 넘기기 표시 (비우면 이름 글자만)")]
+    [SerializeField] private DialogueNameplate nameplate;
     [Tooltip("이 오버레이 Canvas의 정렬 순서. 상점(Nodes 40)·MAP/DECK(55) 위, 스토리 대화(60)·덱 목록(99) 아래")]
     [SerializeField] private int sortingOrder = 58;
 
@@ -30,6 +32,9 @@ public class NpcDialogueOverlay : MonoBehaviour
     private Action _onComplete;
     private TypewriterPrinter _typewriter;
     private bool _waitingAnswer;
+    private Sprite _portrait;
+    private string _affiliation;
+    private Color? _accent;
 
     public bool IsPlaying => gameObject.activeSelf;
 
@@ -49,8 +54,13 @@ public class NpcDialogueOverlay : MonoBehaviour
         if (!TryGetComponent<GraphicRaycaster>(out _)) gameObject.AddComponent<GraphicRaycaster>();
     }
 
-    public void Play(BlessingDialogueSequence sequence, string defaultSpeaker, Action onComplete)
+    // portrait·affiliation·accent: 대화창 v1 초상 칸 / 소속 글자 / 이름 아래 선 색 (비우면 기본)
+    public void Play(BlessingDialogueSequence sequence, string defaultSpeaker, Action onComplete,
+                     Sprite portrait = null, string affiliation = null, Color? accent = null)
     {
+        _portrait = portrait;
+        _affiliation = affiliation;
+        _accent = accent;
         if (sequence == null || sequence.steps == null || sequence.steps.Count == 0)
         {
             onComplete?.Invoke();
@@ -70,13 +80,16 @@ public class NpcDialogueOverlay : MonoBehaviour
     private void ShowStep()
     {
         var step = _sequence.steps[_index];
-        if (nameText != null) nameText.text = string.IsNullOrEmpty(step.speakerName) ? _defaultSpeaker : step.speakerName;
+        string speaker = string.IsNullOrEmpty(step.speakerName) ? _defaultSpeaker : step.speakerName;
+        if (nameplate != null) nameplate.Set(speaker, _affiliation, _accent, _portrait);
+        else if (nameText != null) nameText.text = speaker;
         _typewriter.Play(lineText, step.npcDialogue, typewriterCharsPerSecond);
 
         _waitingAnswer = !string.IsNullOrWhiteSpace(step.playerAnswerText);
         if (answerText != null) answerText.text = step.playerAnswerText;
         if (answerButton != null) answerButton.gameObject.SetActive(false); // 타이핑이 끝나면 Update에서 켠다
         if (nextIndicator != null) nextIndicator.SetActive(false);
+        if (nameplate != null) nameplate.SetAdvanceVisible(false);
     }
 
     private void Update()
@@ -86,6 +99,7 @@ public class NpcDialogueOverlay : MonoBehaviour
         {
             if (_waitingAnswer && answerButton != null && !answerButton.gameObject.activeSelf)
                 answerButton.gameObject.SetActive(true);
+            else if (!_waitingAnswer && nameplate != null) nameplate.SetAdvanceVisible(true);
             else if (!_waitingAnswer && nextIndicator != null && !nextIndicator.activeSelf)
                 nextIndicator.SetActive(true);
         }

@@ -1,0 +1,355 @@
+Built-in imagegen. v3 hierarchy/spacing mockups: PlayerTurn, EnemyTurn, TurnBanner. Independently generated concept examples; small icon/content/position differences are not final runtime specifications. For extraction choose one approved master and build variants from it. Original game character/background/card assets remain implementation sources. No Unity modifications.
+
+STATE PlayerTurn
+Use case ui-mockup, precise HUD redesign on attached ORIGINAL battle screenshot. Output one1920x1080 full gameplay screen. Preserve original marble sky/background, two anime allied characters, mech enemy, card hand illustrations, red intent icon and outer branding exactly as composition reference. Restore sky under oversized original black topbar. New v3 visual HIERARCHY: most UI is lightweight frameless typography. ONE heavy panel only END TURN. No repeated stacked black rectangular boxes at lower right. No large MAP/DECK word buttons.
+
+Opaque charcoal#16181B for top strip, END TURN and narrow text backing only. White main numerals/icons; gray small captions; cyan<5% ONLY fine lines, tiny diamonds, top floor04. No cyan fill/glow, no white paper panels, no translucent or blurred shadows. No repetitive /// hatch decorations except extreme ends of top strip. Static HUD horizontal except energy numeral's narrow slash backing and END TURN's rear plate.
+
+TOP: x280,y0,w1300,h72 slender charcoal strip with small FLOOR cyan04 /16 and TURN white03, central BATTLE FIELD and "1막 · 만발한 백피안화의 정원"; three separated56px dark item squares spaced88 on right, no tray enclosure. Preserve item images, one thin cyan quest border. MAP and DECK are TWO adjacent64x64 ICON-ONLY squares at1760,20 and1840,20, white folded-map / stacked-cards. NO MAP DECK lettering, no tall wide buttons.
+
+LOWER RIGHT: weapon at1631,790 is tiny14pt "WEAPON 권총" and a short white line, no enclosing frame. Energy near1700,830 is WHITE large64pt digit3, small gray24pt /3 and white28px lightning to left, placed on close-fitting narrow opaque dark diagonal stripe around glyphs ONLY, NOT rectangular row. Ammo near1700,890 is white40pt digit6 and bullet symbol with hairline underline, much lighter than energy, no rectangular frame. Leave airy24px separation between groups where possible. White frameless labels over bright scene may use snug narrow charcoal text backing, never entire264px boxes.
+END TURN at1615,941 size280x70: heaviest charcoal FRONT panel with white label and right-facing arrow, behind it a separate slightly offset plate tilted8degrees, fine1px cyan inset line peeking out. No glow. Keep clear of cards.
+Player HP at70,946 size360x39: slim charcoal frame, pale gray fill65/80, cyan3px cap at actual fill endpoint, small56x68 shield1. Existing statuses above at70,889 icons only with tiny white underlines; NO status boxes. Enemy HP under mech240x26 pale gray29/40, shield40x48 showing2, enemy name white on snug narrow charcoal text stripe, not a big ornamental plate.
+
+Keep all original card and scene colors. No new HUD covering center x360..1560 y150..620 in STATIC states. Typography Pretendard-like. Full game mockup, not contact sheet, no captions outside screen. Brief below includes future extracted assets; do not display those separately.
+STATIC PLAYER TURN: energy3/3 white large numeral, ammo6, END TURN active. NO large turn banner or flying shards.
+Full v3 brief:
+# 전투 화면 HUD · 조각 요청서 (v3 — 위계 · 여백 · 순간의 사선)
+
+전투 화면에서 캐릭터·카드 위에 얹는 UI(HUD)를 다시 그린다.
+- 배경, 캐릭터·적 스탠딩, 카드, 적 인텐트 아이콘, 가장자리 장식 글자는 **그대로 둔다**.
+- **v2(먹색) 색 체계는 유지한다.** v3에서는 요소별 **무게를 다르게** 하고 서로 **떼어 놓는다**.
+- 조립 기준 화면은 `Reference_Current.png`다.
+
+## 0. v1 · v2에서 배운 것
+
+| 버전 | 결과 | 문제 |
+|---|---|---|
+| v1 (`BattleHUD_Mockup_v1.png`) | 흰 종이 패널 | 흰 배경에 녹고, 청록을 면으로 칠해 청록이 주인공이 됨 |
+| v2 (`BattleHUD_Mockup_v2_PlayerTurn.png`, `_EnemyTurn.png`) | 먹색 판 | 색은 맞음. 대신 **모든 요소가 같은 두께의 검은 상자**라 위계가 없고, 검은 면이 화면 네 귀퉁이를 둘러싸 장면이 액자에 갇힘. 빗금(///)이 모든 판에 반복돼 소음이 됨. 숫자가 작음 |
+
+v3 원칙 — **명일방주식 정적 HUD + 페르소나식 순간 연출**
+1. **두꺼운 판은 하나만:** END TURN(주 동작). 상단 바는 얇은 띠로 둔다. 나머지는 틀 없이 **글자·선·기호**로만 선다.
+2. **숫자가 주인공:** 에너지·탄약은 큰 숫자, 라벨은 아주 작게.
+3. **여백:** 요소끼리 붙이지 않는다. 묶음 사이 최소 24px.
+4. **사선은 움직이는 순간에만:** 기울어진 판과 베어 들어오는 도형(페르소나식)은 **연출용 조각**으로 따로 받는다. 정적 HUD에는 END TURN 뒤 기울어진 판 하나와 에너지 숫자 뒤 사선 띠 하나만 허용한다.
+
+## 1. 색 체계 (v2와 같음)
+
+| 역할 | 색 | 쓰는 곳 |
+|---|---|---|
+| 판 바탕 | 먹색 **#16181B**, 불투명 | 상단 바, END TURN, HP 틀, 연출 판 |
+| 판 안쪽 선 | #3A3E44, 1px | 판 윤곽. 바깥 굵은 외곽선 금지 |
+| 틀 없는 요소의 선 | 흰색 #F2F3F4, 1~2px | 에너지·탄약 밑줄, 구분선 |
+| 주 글자·기호 | 흰색 #F2F3F4 | |
+| 보조 글자 | #8A9099 | 라벨, "/ 16" |
+| 청록 #0DB8F2 | **선과 점, 강조 숫자 하나** | HUD 전체 픽셀의 5% 이하. 면 채움·글로우·그라데이션 금지 |
+| 비활성 | 판 #202328, 글자 #5A6069 | |
+
+**틀 없는 흰 글자의 가독성 처리:** 밝은 배경 위라 흰 글자 뒤에 **불투명 먹색 사선 띠**를 깐다(글자 높이의 1.3배, 양 끝 사선). 전체 판 대신 글자 뒤에만 두는 좁은 띠다.
+반투명·흐린 그림자는 금지다 (Linear 색공간이라 회색으로 뜬다).
+
+## 2. 요소별 무게
+
+| 요소 | 위치 · 크기 (1920×1080, 왼쪽 위 원점) | v3 형태 | 무게 |
+|---|---|---|---|
+| **END TURN** | (1615, 941) 280×70 | 먹색 판 + 뒤에 **8° 기울어진 두 번째 판**(청록 안쪽 선 1px)이 살짝 비어져 나옴. 오른쪽 끝 흰 화살표 | ★★★ 가장 무거움 |
+| **에너지** | 기준점 (1700, 830) | **큰 숫자 "3"**(64pt 흰색, 청록 아님) + 작은 "/ 3"(24pt 회색) + 왼쪽 번개 기호 28px + 숫자 뒤 좁은 먹색 사선 띠. 틀 없음 | ★★ |
+| **탄약** | 기준점 (1700, 890) | 에너지보다 한 단계 작게: 숫자 40pt + 탄환 기호 + 밑줄 1px. 틀 없음 | ★ |
+| **무기** | (1631, 790) 폭 264 | 한 줄 라벨 "WEAPON  권총"(14pt) + 짧은 흰 구분선. 틀 없음 | ☆ |
+| **상단 작전 바** | (280, 0) 1300×**72** | v2보다 낮게. 먹색 띠, 빗금은 **양 끝에만**. 층 "04" 청록 | ★ |
+| **아이템 트레이** | 상단 바 오른쪽 안쪽, 칸 56×56 ×3, 간격 88 | 칸만 먹색. 트레이 홈 없이 칸끼리 떨어져 있음 | ☆ |
+| **MAP · DECK** | 오른쪽 위 모서리 (1760, 20) · (1840, 20) 각 64×64 | **기호만 있는 작은 정사각 두 개.** 글자는 호버 때 아래에 작게 뜸(게임에서 처리) | ☆ |
+| **플레이어 HP** | (70, 946) 360×39 | v2 유지(먹색 틀 + 연회색 채움 + 청록 끝선). 방패 배지는 **56×68**로 축소 | ★★ |
+| **상태 칸** | (70, 889)부터 44×44 | 틀 없이 아이콘만. 칸 아래 1px 흰 밑줄 | ☆ |
+| **적 HP** | 적 발밑 240×26 | v2 유지. 방패 배지 40×48 | ★ |
+| **적 이름** | HP 아래 | 판 없이 흰 글자 + 좁은 먹색 사선 띠 | ☆ |
+
+## 3. 정적 조각 목록
+
+| 조각 | 크기 | 비고 |
+|---|---|---|
+| `TopBar` | 1300 × 72 | 양 끝 사선 컷, 끝에만 빗금 |
+| `ItemSlot_Empty` / `_Hover` / `_Quest` | 56 × 56 | 먹색 칸 / 청록 테두리 1px / 청록 테두리 + 왼쪽 아래 유형 배지 |
+| `Button_Map` · `Button_Deck` | 64 × 64 | Normal / Hover(청록 테두리) / Pressed. 기호 흰 선화 |
+| `Button_EndTurn` | 280 × 70 | Normal / Hover / Pressed / Disabled. **앞판과 뒤 기울어진 판을 별도 레이어로** (`EndTurn_Front`, `EndTurn_BackSlant`) — 호버 때 뒤판만 움직인다 |
+| `TextBand` | 9-slice용 120 × 40 | 틀 없는 글자 뒤에 까는 먹색 사선 띠. 가운데를 늘려 쓸 수 있게 양 끝 사선 20px 고정 |
+| `Underline` | 200 × 2 | 흰 1px + 끝에 작은 마름모 |
+| `Icon_Energy` · `Icon_Ammo` · `Icon_Weapon_Pistol` · `Icon_Map` · `Icon_Deck` | 32 × 32 | 흰 선화, 투명 배경, **틀과 분리** |
+| `HP_Frame` · `HP_Fill` · `HP_Track` | 360×39 · 340×27 · 340×27 | v2와 같음 |
+| `Block_Badge` | 56 × 68 | 먹색 방패 윤곽 |
+| `EnemyHP_Frame` · `_Fill` · `_Track` · `EnemyBlock_Badge` | 240×26 · 227×18 · 227×18 · 40×48 | |
+
+## 4. 연출 조각 (페르소나식 — 움직일 때만 화면에 나옴)
+
+정적 HUD에는 없고, 순간에만 베어 들어왔다 빠지는 도형들이다. 움직임은 게임에서 처리한다.
+
+| 조각 | 크기 | 쓰는 순간 |
+|---|---|---|
+| `Slash_Wide` | 1400 × 220 | 먹색 큰 사선 판(-12°), 가장자리에 청록 선 1줄. **턴 시작 배너**("PLAYER TURN / 적 턴") 뒤판 |
+| `Slash_Accent` | 900 × 36 | 흰색 가는 사선 띠. 큰 판과 어긋나게 겹쳐 속도감을 줌 |
+| `Shard_Set` | 각 80~200 | 먹색·흰색 삼각·사다리꼴 조각 5~6개 (한 장에 나열). 적 처치, 작전 종료 때 흩어짐 |
+| `Cut_Frame` | 720 × 128 | 기울어진 액자틀. 카드 컷인(파워·유니크 카드) 때 카드 아트를 끼움 |
+| `EndTurn_Burst` | 420 × 140 | END TURN을 누르는 순간 뒤로 터지는 사선 판 두 장 |
+
+- 연출 조각도 색 체계는 같다. 먹색, 흰색, 청록 선만 쓴다. 페르소나의 빨강은 쓰지 않는다.
+- 기울기는 -8° ~ -15° 범위에서 통일한다 (오른쪽 위로 올라가는 방향).
+
+## 5. 결과물
+
+- 정적 조각·연출 조각 PNG (투명 배경, 판은 알파 255). 버튼은 상태별 파일.
+- 조립 예시 3장 (`Reference_Current.png` 위에):
+  - `Example_PlayerTurn`: 평상시
+  - `Example_EnemyTurn`: END TURN 비활성, 에너지 0
+  - `Example_TurnBanner`: 턴 시작 순간 (`Slash_Wide` + `Slash_Accent` + 배너 글자), 연출 조각이 어떻게 겹치는지 보여 주는 한 장면
+- 좌표가 든 `layout.json`.
+
+## 6. 하지 말 것
+
+- 모든 요소를 같은 두께의 상자로 만드는 것 (v2)
+- 빗금(///)을 판마다 반복하는 것
+- 흰 종이 패널, 굵은 검은 외곽선 (v1)
+- 청록 면 채움·글로우·그라데이션
+- 정적 HUD 전체를 기울이는 것 (사선은 END TURN 뒤판, 에너지 띠, 연출 조각에만)
+- 반투명 판, 흐린 그림자
+- 별·꽃잎 등 축복 모티프
+- 캐릭터·적 영역(x 360~1560, y 150~620)과 손패 영역(x 330~1560, y 820~1080)을 가리는 것
+- 가장자리 장식("THE WHITE VERTEX" 등)을 새로 그리는 것
+
+
+
+STATE EnemyTurn
+Use case ui-mockup, precise HUD redesign on attached ORIGINAL battle screenshot. Output one1920x1080 full gameplay screen. Preserve original marble sky/background, two anime allied characters, mech enemy, card hand illustrations, red intent icon and outer branding exactly as composition reference. Restore sky under oversized original black topbar. New v3 visual HIERARCHY: most UI is lightweight frameless typography. ONE heavy panel only END TURN. No repeated stacked black rectangular boxes at lower right. No large MAP/DECK word buttons.
+
+Opaque charcoal#16181B for top strip, END TURN and narrow text backing only. White main numerals/icons; gray small captions; cyan<5% ONLY fine lines, tiny diamonds, top floor04. No cyan fill/glow, no white paper panels, no translucent or blurred shadows. No repetitive /// hatch decorations except extreme ends of top strip. Static HUD horizontal except energy numeral's narrow slash backing and END TURN's rear plate.
+
+TOP: x280,y0,w1300,h72 slender charcoal strip with small FLOOR cyan04 /16 and TURN white03, central BATTLE FIELD and "1막 · 만발한 백피안화의 정원"; three separated56px dark item squares spaced88 on right, no tray enclosure. Preserve item images, one thin cyan quest border. MAP and DECK are TWO adjacent64x64 ICON-ONLY squares at1760,20 and1840,20, white folded-map / stacked-cards. NO MAP DECK lettering, no tall wide buttons.
+
+LOWER RIGHT: weapon at1631,790 is tiny14pt "WEAPON 권총" and a short white line, no enclosing frame. Energy near1700,830 is WHITE large64pt digit3, small gray24pt /3 and white28px lightning to left, placed on close-fitting narrow opaque dark diagonal stripe around glyphs ONLY, NOT rectangular row. Ammo near1700,890 is white40pt digit6 and bullet symbol with hairline underline, much lighter than energy, no rectangular frame. Leave airy24px separation between groups where possible. White frameless labels over bright scene may use snug narrow charcoal text backing, never entire264px boxes.
+END TURN at1615,941 size280x70: heaviest charcoal FRONT panel with white label and right-facing arrow, behind it a separate slightly offset plate tilted8degrees, fine1px cyan inset line peeking out. No glow. Keep clear of cards.
+Player HP at70,946 size360x39: slim charcoal frame, pale gray fill65/80, cyan3px cap at actual fill endpoint, small56x68 shield1. Existing statuses above at70,889 icons only with tiny white underlines; NO status boxes. Enemy HP under mech240x26 pale gray29/40, shield40x48 showing2, enemy name white on snug narrow charcoal text stripe, not a big ornamental plate.
+
+Keep all original card and scene colors. No new HUD covering center x360..1560 y150..620 in STATIC states. Typography Pretendard-like. Full game mockup, not contact sheet, no captions outside screen. Brief below includes future extracted assets; do not display those separately.
+STATIC ENEMY TURN: same layout, energy large0 with /3 all muted gray, END TURN disabled#202328 with dim gray label/arrow, ammo6. NO large banner or flying shards.
+Full v3 brief:
+# 전투 화면 HUD · 조각 요청서 (v3 — 위계 · 여백 · 순간의 사선)
+
+전투 화면에서 캐릭터·카드 위에 얹는 UI(HUD)를 다시 그린다.
+- 배경, 캐릭터·적 스탠딩, 카드, 적 인텐트 아이콘, 가장자리 장식 글자는 **그대로 둔다**.
+- **v2(먹색) 색 체계는 유지한다.** v3에서는 요소별 **무게를 다르게** 하고 서로 **떼어 놓는다**.
+- 조립 기준 화면은 `Reference_Current.png`다.
+
+## 0. v1 · v2에서 배운 것
+
+| 버전 | 결과 | 문제 |
+|---|---|---|
+| v1 (`BattleHUD_Mockup_v1.png`) | 흰 종이 패널 | 흰 배경에 녹고, 청록을 면으로 칠해 청록이 주인공이 됨 |
+| v2 (`BattleHUD_Mockup_v2_PlayerTurn.png`, `_EnemyTurn.png`) | 먹색 판 | 색은 맞음. 대신 **모든 요소가 같은 두께의 검은 상자**라 위계가 없고, 검은 면이 화면 네 귀퉁이를 둘러싸 장면이 액자에 갇힘. 빗금(///)이 모든 판에 반복돼 소음이 됨. 숫자가 작음 |
+
+v3 원칙 — **명일방주식 정적 HUD + 페르소나식 순간 연출**
+1. **두꺼운 판은 하나만:** END TURN(주 동작). 상단 바는 얇은 띠로 둔다. 나머지는 틀 없이 **글자·선·기호**로만 선다.
+2. **숫자가 주인공:** 에너지·탄약은 큰 숫자, 라벨은 아주 작게.
+3. **여백:** 요소끼리 붙이지 않는다. 묶음 사이 최소 24px.
+4. **사선은 움직이는 순간에만:** 기울어진 판과 베어 들어오는 도형(페르소나식)은 **연출용 조각**으로 따로 받는다. 정적 HUD에는 END TURN 뒤 기울어진 판 하나와 에너지 숫자 뒤 사선 띠 하나만 허용한다.
+
+## 1. 색 체계 (v2와 같음)
+
+| 역할 | 색 | 쓰는 곳 |
+|---|---|---|
+| 판 바탕 | 먹색 **#16181B**, 불투명 | 상단 바, END TURN, HP 틀, 연출 판 |
+| 판 안쪽 선 | #3A3E44, 1px | 판 윤곽. 바깥 굵은 외곽선 금지 |
+| 틀 없는 요소의 선 | 흰색 #F2F3F4, 1~2px | 에너지·탄약 밑줄, 구분선 |
+| 주 글자·기호 | 흰색 #F2F3F4 | |
+| 보조 글자 | #8A9099 | 라벨, "/ 16" |
+| 청록 #0DB8F2 | **선과 점, 강조 숫자 하나** | HUD 전체 픽셀의 5% 이하. 면 채움·글로우·그라데이션 금지 |
+| 비활성 | 판 #202328, 글자 #5A6069 | |
+
+**틀 없는 흰 글자의 가독성 처리:** 밝은 배경 위라 흰 글자 뒤에 **불투명 먹색 사선 띠**를 깐다(글자 높이의 1.3배, 양 끝 사선). 전체 판 대신 글자 뒤에만 두는 좁은 띠다.
+반투명·흐린 그림자는 금지다 (Linear 색공간이라 회색으로 뜬다).
+
+## 2. 요소별 무게
+
+| 요소 | 위치 · 크기 (1920×1080, 왼쪽 위 원점) | v3 형태 | 무게 |
+|---|---|---|---|
+| **END TURN** | (1615, 941) 280×70 | 먹색 판 + 뒤에 **8° 기울어진 두 번째 판**(청록 안쪽 선 1px)이 살짝 비어져 나옴. 오른쪽 끝 흰 화살표 | ★★★ 가장 무거움 |
+| **에너지** | 기준점 (1700, 830) | **큰 숫자 "3"**(64pt 흰색, 청록 아님) + 작은 "/ 3"(24pt 회색) + 왼쪽 번개 기호 28px + 숫자 뒤 좁은 먹색 사선 띠. 틀 없음 | ★★ |
+| **탄약** | 기준점 (1700, 890) | 에너지보다 한 단계 작게: 숫자 40pt + 탄환 기호 + 밑줄 1px. 틀 없음 | ★ |
+| **무기** | (1631, 790) 폭 264 | 한 줄 라벨 "WEAPON  권총"(14pt) + 짧은 흰 구분선. 틀 없음 | ☆ |
+| **상단 작전 바** | (280, 0) 1300×**72** | v2보다 낮게. 먹색 띠, 빗금은 **양 끝에만**. 층 "04" 청록 | ★ |
+| **아이템 트레이** | 상단 바 오른쪽 안쪽, 칸 56×56 ×3, 간격 88 | 칸만 먹색. 트레이 홈 없이 칸끼리 떨어져 있음 | ☆ |
+| **MAP · DECK** | 오른쪽 위 모서리 (1760, 20) · (1840, 20) 각 64×64 | **기호만 있는 작은 정사각 두 개.** 글자는 호버 때 아래에 작게 뜸(게임에서 처리) | ☆ |
+| **플레이어 HP** | (70, 946) 360×39 | v2 유지(먹색 틀 + 연회색 채움 + 청록 끝선). 방패 배지는 **56×68**로 축소 | ★★ |
+| **상태 칸** | (70, 889)부터 44×44 | 틀 없이 아이콘만. 칸 아래 1px 흰 밑줄 | ☆ |
+| **적 HP** | 적 발밑 240×26 | v2 유지. 방패 배지 40×48 | ★ |
+| **적 이름** | HP 아래 | 판 없이 흰 글자 + 좁은 먹색 사선 띠 | ☆ |
+
+## 3. 정적 조각 목록
+
+| 조각 | 크기 | 비고 |
+|---|---|---|
+| `TopBar` | 1300 × 72 | 양 끝 사선 컷, 끝에만 빗금 |
+| `ItemSlot_Empty` / `_Hover` / `_Quest` | 56 × 56 | 먹색 칸 / 청록 테두리 1px / 청록 테두리 + 왼쪽 아래 유형 배지 |
+| `Button_Map` · `Button_Deck` | 64 × 64 | Normal / Hover(청록 테두리) / Pressed. 기호 흰 선화 |
+| `Button_EndTurn` | 280 × 70 | Normal / Hover / Pressed / Disabled. **앞판과 뒤 기울어진 판을 별도 레이어로** (`EndTurn_Front`, `EndTurn_BackSlant`) — 호버 때 뒤판만 움직인다 |
+| `TextBand` | 9-slice용 120 × 40 | 틀 없는 글자 뒤에 까는 먹색 사선 띠. 가운데를 늘려 쓸 수 있게 양 끝 사선 20px 고정 |
+| `Underline` | 200 × 2 | 흰 1px + 끝에 작은 마름모 |
+| `Icon_Energy` · `Icon_Ammo` · `Icon_Weapon_Pistol` · `Icon_Map` · `Icon_Deck` | 32 × 32 | 흰 선화, 투명 배경, **틀과 분리** |
+| `HP_Frame` · `HP_Fill` · `HP_Track` | 360×39 · 340×27 · 340×27 | v2와 같음 |
+| `Block_Badge` | 56 × 68 | 먹색 방패 윤곽 |
+| `EnemyHP_Frame` · `_Fill` · `_Track` · `EnemyBlock_Badge` | 240×26 · 227×18 · 227×18 · 40×48 | |
+
+## 4. 연출 조각 (페르소나식 — 움직일 때만 화면에 나옴)
+
+정적 HUD에는 없고, 순간에만 베어 들어왔다 빠지는 도형들이다. 움직임은 게임에서 처리한다.
+
+| 조각 | 크기 | 쓰는 순간 |
+|---|---|---|
+| `Slash_Wide` | 1400 × 220 | 먹색 큰 사선 판(-12°), 가장자리에 청록 선 1줄. **턴 시작 배너**("PLAYER TURN / 적 턴") 뒤판 |
+| `Slash_Accent` | 900 × 36 | 흰색 가는 사선 띠. 큰 판과 어긋나게 겹쳐 속도감을 줌 |
+| `Shard_Set` | 각 80~200 | 먹색·흰색 삼각·사다리꼴 조각 5~6개 (한 장에 나열). 적 처치, 작전 종료 때 흩어짐 |
+| `Cut_Frame` | 720 × 128 | 기울어진 액자틀. 카드 컷인(파워·유니크 카드) 때 카드 아트를 끼움 |
+| `EndTurn_Burst` | 420 × 140 | END TURN을 누르는 순간 뒤로 터지는 사선 판 두 장 |
+
+- 연출 조각도 색 체계는 같다. 먹색, 흰색, 청록 선만 쓴다. 페르소나의 빨강은 쓰지 않는다.
+- 기울기는 -8° ~ -15° 범위에서 통일한다 (오른쪽 위로 올라가는 방향).
+
+## 5. 결과물
+
+- 정적 조각·연출 조각 PNG (투명 배경, 판은 알파 255). 버튼은 상태별 파일.
+- 조립 예시 3장 (`Reference_Current.png` 위에):
+  - `Example_PlayerTurn`: 평상시
+  - `Example_EnemyTurn`: END TURN 비활성, 에너지 0
+  - `Example_TurnBanner`: 턴 시작 순간 (`Slash_Wide` + `Slash_Accent` + 배너 글자), 연출 조각이 어떻게 겹치는지 보여 주는 한 장면
+- 좌표가 든 `layout.json`.
+
+## 6. 하지 말 것
+
+- 모든 요소를 같은 두께의 상자로 만드는 것 (v2)
+- 빗금(///)을 판마다 반복하는 것
+- 흰 종이 패널, 굵은 검은 외곽선 (v1)
+- 청록 면 채움·글로우·그라데이션
+- 정적 HUD 전체를 기울이는 것 (사선은 END TURN 뒤판, 에너지 띠, 연출 조각에만)
+- 반투명 판, 흐린 그림자
+- 별·꽃잎 등 축복 모티프
+- 캐릭터·적 영역(x 360~1560, y 150~620)과 손패 영역(x 330~1560, y 820~1080)을 가리는 것
+- 가장자리 장식("THE WHITE VERTEX" 등)을 새로 그리는 것
+
+
+
+STATE TurnBanner
+Use case ui-mockup, precise HUD redesign on attached ORIGINAL battle screenshot. Output one1920x1080 full gameplay screen. Preserve original marble sky/background, two anime allied characters, mech enemy, card hand illustrations, red intent icon and outer branding exactly as composition reference. Restore sky under oversized original black topbar. New v3 visual HIERARCHY: most UI is lightweight frameless typography. ONE heavy panel only END TURN. No repeated stacked black rectangular boxes at lower right. No large MAP/DECK word buttons.
+
+Opaque charcoal#16181B for top strip, END TURN and narrow text backing only. White main numerals/icons; gray small captions; cyan<5% ONLY fine lines, tiny diamonds, top floor04. No cyan fill/glow, no white paper panels, no translucent or blurred shadows. No repetitive /// hatch decorations except extreme ends of top strip. Static HUD horizontal except energy numeral's narrow slash backing and END TURN's rear plate.
+
+TOP: x280,y0,w1300,h72 slender charcoal strip with small FLOOR cyan04 /16 and TURN white03, central BATTLE FIELD and "1막 · 만발한 백피안화의 정원"; three separated56px dark item squares spaced88 on right, no tray enclosure. Preserve item images, one thin cyan quest border. MAP and DECK are TWO adjacent64x64 ICON-ONLY squares at1760,20 and1840,20, white folded-map / stacked-cards. NO MAP DECK lettering, no tall wide buttons.
+
+LOWER RIGHT: weapon at1631,790 is tiny14pt "WEAPON 권총" and a short white line, no enclosing frame. Energy near1700,830 is WHITE large64pt digit3, small gray24pt /3 and white28px lightning to left, placed on close-fitting narrow opaque dark diagonal stripe around glyphs ONLY, NOT rectangular row. Ammo near1700,890 is white40pt digit6 and bullet symbol with hairline underline, much lighter than energy, no rectangular frame. Leave airy24px separation between groups where possible. White frameless labels over bright scene may use snug narrow charcoal text backing, never entire264px boxes.
+END TURN at1615,941 size280x70: heaviest charcoal FRONT panel with white label and right-facing arrow, behind it a separate slightly offset plate tilted8degrees, fine1px cyan inset line peeking out. No glow. Keep clear of cards.
+Player HP at70,946 size360x39: slim charcoal frame, pale gray fill65/80, cyan3px cap at actual fill endpoint, small56x68 shield1. Existing statuses above at70,889 icons only with tiny white underlines; NO status boxes. Enemy HP under mech240x26 pale gray29/40, shield40x48 showing2, enemy name white on snug narrow charcoal text stripe, not a big ornamental plate.
+
+Keep all original card and scene colors. No new HUD covering center x360..1560 y150..620 in STATIC states. Typography Pretendard-like. Full game mockup, not contact sheet, no captions outside screen. Brief below includes future extracted assets; do not display those separately.
+TURN START MOMENT: same PLAYER static HUD beneath. Add transient huge charcoal slash1400x220 tilted-12degrees across upper-middle screen, rightward rising. Hairline cyan along one edge, offset narrow white speed slash900x36 behind, 3 small charcoal/white angular shards near ends. Big WHITE 'PLAYER TURN' and smaller '플레이어 턴' on slash. This transient animation alone may cross center character area. Keep cards visible. No red and no cyan filled banner.
+Full v3 brief:
+# 전투 화면 HUD · 조각 요청서 (v3 — 위계 · 여백 · 순간의 사선)
+
+전투 화면에서 캐릭터·카드 위에 얹는 UI(HUD)를 다시 그린다.
+- 배경, 캐릭터·적 스탠딩, 카드, 적 인텐트 아이콘, 가장자리 장식 글자는 **그대로 둔다**.
+- **v2(먹색) 색 체계는 유지한다.** v3에서는 요소별 **무게를 다르게** 하고 서로 **떼어 놓는다**.
+- 조립 기준 화면은 `Reference_Current.png`다.
+
+## 0. v1 · v2에서 배운 것
+
+| 버전 | 결과 | 문제 |
+|---|---|---|
+| v1 (`BattleHUD_Mockup_v1.png`) | 흰 종이 패널 | 흰 배경에 녹고, 청록을 면으로 칠해 청록이 주인공이 됨 |
+| v2 (`BattleHUD_Mockup_v2_PlayerTurn.png`, `_EnemyTurn.png`) | 먹색 판 | 색은 맞음. 대신 **모든 요소가 같은 두께의 검은 상자**라 위계가 없고, 검은 면이 화면 네 귀퉁이를 둘러싸 장면이 액자에 갇힘. 빗금(///)이 모든 판에 반복돼 소음이 됨. 숫자가 작음 |
+
+v3 원칙 — **명일방주식 정적 HUD + 페르소나식 순간 연출**
+1. **두꺼운 판은 하나만:** END TURN(주 동작). 상단 바는 얇은 띠로 둔다. 나머지는 틀 없이 **글자·선·기호**로만 선다.
+2. **숫자가 주인공:** 에너지·탄약은 큰 숫자, 라벨은 아주 작게.
+3. **여백:** 요소끼리 붙이지 않는다. 묶음 사이 최소 24px.
+4. **사선은 움직이는 순간에만:** 기울어진 판과 베어 들어오는 도형(페르소나식)은 **연출용 조각**으로 따로 받는다. 정적 HUD에는 END TURN 뒤 기울어진 판 하나와 에너지 숫자 뒤 사선 띠 하나만 허용한다.
+
+## 1. 색 체계 (v2와 같음)
+
+| 역할 | 색 | 쓰는 곳 |
+|---|---|---|
+| 판 바탕 | 먹색 **#16181B**, 불투명 | 상단 바, END TURN, HP 틀, 연출 판 |
+| 판 안쪽 선 | #3A3E44, 1px | 판 윤곽. 바깥 굵은 외곽선 금지 |
+| 틀 없는 요소의 선 | 흰색 #F2F3F4, 1~2px | 에너지·탄약 밑줄, 구분선 |
+| 주 글자·기호 | 흰색 #F2F3F4 | |
+| 보조 글자 | #8A9099 | 라벨, "/ 16" |
+| 청록 #0DB8F2 | **선과 점, 강조 숫자 하나** | HUD 전체 픽셀의 5% 이하. 면 채움·글로우·그라데이션 금지 |
+| 비활성 | 판 #202328, 글자 #5A6069 | |
+
+**틀 없는 흰 글자의 가독성 처리:** 밝은 배경 위라 흰 글자 뒤에 **불투명 먹색 사선 띠**를 깐다(글자 높이의 1.3배, 양 끝 사선). 전체 판 대신 글자 뒤에만 두는 좁은 띠다.
+반투명·흐린 그림자는 금지다 (Linear 색공간이라 회색으로 뜬다).
+
+## 2. 요소별 무게
+
+| 요소 | 위치 · 크기 (1920×1080, 왼쪽 위 원점) | v3 형태 | 무게 |
+|---|---|---|---|
+| **END TURN** | (1615, 941) 280×70 | 먹색 판 + 뒤에 **8° 기울어진 두 번째 판**(청록 안쪽 선 1px)이 살짝 비어져 나옴. 오른쪽 끝 흰 화살표 | ★★★ 가장 무거움 |
+| **에너지** | 기준점 (1700, 830) | **큰 숫자 "3"**(64pt 흰색, 청록 아님) + 작은 "/ 3"(24pt 회색) + 왼쪽 번개 기호 28px + 숫자 뒤 좁은 먹색 사선 띠. 틀 없음 | ★★ |
+| **탄약** | 기준점 (1700, 890) | 에너지보다 한 단계 작게: 숫자 40pt + 탄환 기호 + 밑줄 1px. 틀 없음 | ★ |
+| **무기** | (1631, 790) 폭 264 | 한 줄 라벨 "WEAPON  권총"(14pt) + 짧은 흰 구분선. 틀 없음 | ☆ |
+| **상단 작전 바** | (280, 0) 1300×**72** | v2보다 낮게. 먹색 띠, 빗금은 **양 끝에만**. 층 "04" 청록 | ★ |
+| **아이템 트레이** | 상단 바 오른쪽 안쪽, 칸 56×56 ×3, 간격 88 | 칸만 먹색. 트레이 홈 없이 칸끼리 떨어져 있음 | ☆ |
+| **MAP · DECK** | 오른쪽 위 모서리 (1760, 20) · (1840, 20) 각 64×64 | **기호만 있는 작은 정사각 두 개.** 글자는 호버 때 아래에 작게 뜸(게임에서 처리) | ☆ |
+| **플레이어 HP** | (70, 946) 360×39 | v2 유지(먹색 틀 + 연회색 채움 + 청록 끝선). 방패 배지는 **56×68**로 축소 | ★★ |
+| **상태 칸** | (70, 889)부터 44×44 | 틀 없이 아이콘만. 칸 아래 1px 흰 밑줄 | ☆ |
+| **적 HP** | 적 발밑 240×26 | v2 유지. 방패 배지 40×48 | ★ |
+| **적 이름** | HP 아래 | 판 없이 흰 글자 + 좁은 먹색 사선 띠 | ☆ |
+
+## 3. 정적 조각 목록
+
+| 조각 | 크기 | 비고 |
+|---|---|---|
+| `TopBar` | 1300 × 72 | 양 끝 사선 컷, 끝에만 빗금 |
+| `ItemSlot_Empty` / `_Hover` / `_Quest` | 56 × 56 | 먹색 칸 / 청록 테두리 1px / 청록 테두리 + 왼쪽 아래 유형 배지 |
+| `Button_Map` · `Button_Deck` | 64 × 64 | Normal / Hover(청록 테두리) / Pressed. 기호 흰 선화 |
+| `Button_EndTurn` | 280 × 70 | Normal / Hover / Pressed / Disabled. **앞판과 뒤 기울어진 판을 별도 레이어로** (`EndTurn_Front`, `EndTurn_BackSlant`) — 호버 때 뒤판만 움직인다 |
+| `TextBand` | 9-slice용 120 × 40 | 틀 없는 글자 뒤에 까는 먹색 사선 띠. 가운데를 늘려 쓸 수 있게 양 끝 사선 20px 고정 |
+| `Underline` | 200 × 2 | 흰 1px + 끝에 작은 마름모 |
+| `Icon_Energy` · `Icon_Ammo` · `Icon_Weapon_Pistol` · `Icon_Map` · `Icon_Deck` | 32 × 32 | 흰 선화, 투명 배경, **틀과 분리** |
+| `HP_Frame` · `HP_Fill` · `HP_Track` | 360×39 · 340×27 · 340×27 | v2와 같음 |
+| `Block_Badge` | 56 × 68 | 먹색 방패 윤곽 |
+| `EnemyHP_Frame` · `_Fill` · `_Track` · `EnemyBlock_Badge` | 240×26 · 227×18 · 227×18 · 40×48 | |
+
+## 4. 연출 조각 (페르소나식 — 움직일 때만 화면에 나옴)
+
+정적 HUD에는 없고, 순간에만 베어 들어왔다 빠지는 도형들이다. 움직임은 게임에서 처리한다.
+
+| 조각 | 크기 | 쓰는 순간 |
+|---|---|---|
+| `Slash_Wide` | 1400 × 220 | 먹색 큰 사선 판(-12°), 가장자리에 청록 선 1줄. **턴 시작 배너**("PLAYER TURN / 적 턴") 뒤판 |
+| `Slash_Accent` | 900 × 36 | 흰색 가는 사선 띠. 큰 판과 어긋나게 겹쳐 속도감을 줌 |
+| `Shard_Set` | 각 80~200 | 먹색·흰색 삼각·사다리꼴 조각 5~6개 (한 장에 나열). 적 처치, 작전 종료 때 흩어짐 |
+| `Cut_Frame` | 720 × 128 | 기울어진 액자틀. 카드 컷인(파워·유니크 카드) 때 카드 아트를 끼움 |
+| `EndTurn_Burst` | 420 × 140 | END TURN을 누르는 순간 뒤로 터지는 사선 판 두 장 |
+
+- 연출 조각도 색 체계는 같다. 먹색, 흰색, 청록 선만 쓴다. 페르소나의 빨강은 쓰지 않는다.
+- 기울기는 -8° ~ -15° 범위에서 통일한다 (오른쪽 위로 올라가는 방향).
+
+## 5. 결과물
+
+- 정적 조각·연출 조각 PNG (투명 배경, 판은 알파 255). 버튼은 상태별 파일.
+- 조립 예시 3장 (`Reference_Current.png` 위에):
+  - `Example_PlayerTurn`: 평상시
+  - `Example_EnemyTurn`: END TURN 비활성, 에너지 0
+  - `Example_TurnBanner`: 턴 시작 순간 (`Slash_Wide` + `Slash_Accent` + 배너 글자), 연출 조각이 어떻게 겹치는지 보여 주는 한 장면
+- 좌표가 든 `layout.json`.
+
+## 6. 하지 말 것
+
+- 모든 요소를 같은 두께의 상자로 만드는 것 (v2)
+- 빗금(///)을 판마다 반복하는 것
+- 흰 종이 패널, 굵은 검은 외곽선 (v1)
+- 청록 면 채움·글로우·그라데이션
+- 정적 HUD 전체를 기울이는 것 (사선은 END TURN 뒤판, 에너지 띠, 연출 조각에만)
+- 반투명 판, 흐린 그림자
+- 별·꽃잎 등 축복 모티프
+- 캐릭터·적 영역(x 360~1560, y 150~620)과 손패 영역(x 330~1560, y 820~1080)을 가리는 것
+- 가장자리 장식("THE WHITE VERTEX" 등)을 새로 그리는 것
+
+

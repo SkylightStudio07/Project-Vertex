@@ -36,7 +36,7 @@ public class ShopStock
 {
     // == 가격/구성 상수 변수 ==
     private const int CardSlotCount = 6;
-    private const int ItemSlotCount = 5;
+    private const int ItemSlotCount = 4; // 진열대 폭에 맞춰 4칸
 
     private const int CommonCardPrice = 50;
     private const int RareCardPrice = 75;

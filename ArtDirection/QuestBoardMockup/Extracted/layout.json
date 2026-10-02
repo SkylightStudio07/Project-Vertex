@@ -1,0 +1,986 @@
+{
+  "canvas": [
+    1672,
+    941
+  ],
+  "origin": "top-left",
+  "source": "QuestBoard_Posted_Mockup_v1.png",
+  "assets": [
+    {
+      "name": "Header_Composite",
+      "file": "Header_Composite.png",
+      "x": 85,
+      "y": 0,
+      "width": 1531,
+      "height": 168,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Filter_Composite",
+      "file": "Filter_Composite.png",
+      "x": 85,
+      "y": 168,
+      "width": 263,
+      "height": 739,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "List_Composite",
+      "file": "List_Composite.png",
+      "x": 348,
+      "y": 168,
+      "width": 785,
+      "height": 739,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Detail_Composite",
+      "file": "Detail_Composite.png",
+      "x": 1147,
+      "y": 168,
+      "width": 452,
+      "height": 739,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Back_Normal",
+      "file": "Back_Normal.png",
+      "x": 1429,
+      "y": 27,
+      "width": 185,
+      "height": 49,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Back_Normal_Hover",
+      "file": "Back_Normal_Hover.png",
+      "x": 1429,
+      "y": 27,
+      "width": 185,
+      "height": 49,
+      "kind": "hover",
+      "normal": "Back_Normal"
+    },
+    {
+      "name": "Tab_Posted_Selected",
+      "file": "Tab_Posted_Selected.png",
+      "x": 103,
+      "y": 121,
+      "width": 226,
+      "height": 38,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Tab_Posted_Selected_Hover",
+      "file": "Tab_Posted_Selected_Hover.png",
+      "x": 103,
+      "y": 121,
+      "width": 226,
+      "height": 38,
+      "kind": "hover",
+      "normal": "Tab_Posted_Selected"
+    },
+    {
+      "name": "Tab_Active_Normal",
+      "file": "Tab_Active_Normal.png",
+      "x": 307,
+      "y": 121,
+      "width": 229,
+      "height": 38,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Tab_Active_Normal_Hover",
+      "file": "Tab_Active_Normal_Hover.png",
+      "x": 307,
+      "y": 121,
+      "width": 229,
+      "height": 38,
+      "kind": "hover",
+      "normal": "Tab_Active_Normal"
+    },
+    {
+      "name": "Tab_History_Normal",
+      "file": "Tab_History_Normal.png",
+      "x": 516,
+      "y": 121,
+      "width": 220,
+      "height": 38,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Tab_History_Normal_Hover",
+      "file": "Tab_History_Normal_Hover.png",
+      "x": 516,
+      "y": 121,
+      "width": 220,
+      "height": 38,
+      "kind": "hover",
+      "normal": "Tab_History_Normal"
+    },
+    {
+      "name": "Accept_Normal",
+      "file": "Accept_Normal.png",
+      "x": 1156,
+      "y": 824,
+      "width": 431,
+      "height": 74,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Accept_Normal_Hover",
+      "file": "Accept_Normal_Hover.png",
+      "x": 1156,
+      "y": 824,
+      "width": 431,
+      "height": 74,
+      "kind": "hover",
+      "normal": "Accept_Normal"
+    },
+    {
+      "name": "Card_Selected",
+      "file": "Card_Selected.png",
+      "x": 357,
+      "y": 238,
+      "width": 375,
+      "height": 292,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Card_Selected_Hover",
+      "file": "Card_Selected_Hover.png",
+      "x": 357,
+      "y": 238,
+      "width": 375,
+      "height": 292,
+      "kind": "hover",
+      "normal": "Card_Selected"
+    },
+    {
+      "name": "Card_Accepted",
+      "file": "Card_Accepted.png",
+      "x": 739,
+      "y": 240,
+      "width": 367,
+      "height": 289,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Card_Accepted_Hover",
+      "file": "Card_Accepted_Hover.png",
+      "x": 739,
+      "y": 240,
+      "width": 367,
+      "height": 289,
+      "kind": "hover",
+      "normal": "Card_Accepted"
+    },
+    {
+      "name": "Card_Normal",
+      "file": "Card_Normal.png",
+      "x": 359,
+      "y": 539,
+      "width": 373,
+      "height": 287,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Card_Normal_Hover",
+      "file": "Card_Normal_Hover.png",
+      "x": 359,
+      "y": 539,
+      "width": 373,
+      "height": 287,
+      "kind": "hover",
+      "normal": "Card_Normal"
+    },
+    {
+      "name": "Card_Locked",
+      "file": "Card_Locked.png",
+      "x": 739,
+      "y": 539,
+      "width": 367,
+      "height": 287,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Filter_Checked",
+      "file": "Filter_Checked.png",
+      "x": 110,
+      "y": 261,
+      "width": 221,
+      "height": 36,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Filter_Checked_Hover",
+      "file": "Filter_Checked_Hover.png",
+      "x": 110,
+      "y": 261,
+      "width": 221,
+      "height": 36,
+      "kind": "hover",
+      "normal": "Filter_Checked"
+    },
+    {
+      "name": "Filter_Unchecked",
+      "file": "Filter_Unchecked.png",
+      "x": 110,
+      "y": 305,
+      "width": 221,
+      "height": 36,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Filter_Unchecked_Hover",
+      "file": "Filter_Unchecked_Hover.png",
+      "x": 110,
+      "y": 305,
+      "width": 221,
+      "height": 36,
+      "kind": "hover",
+      "normal": "Filter_Unchecked"
+    },
+    {
+      "name": "Checkbox_Checked",
+      "file": "Checkbox_Checked.png",
+      "x": 112,
+      "y": 264,
+      "width": 31,
+      "height": 32,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Checkbox_Unchecked",
+      "file": "Checkbox_Unchecked.png",
+      "x": 112,
+      "y": 308,
+      "width": 31,
+      "height": 32,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Gauge_ActiveFill",
+      "file": "Gauge_ActiveFill.png",
+      "x": 113,
+      "y": 882,
+      "width": 85,
+      "height": 12,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Gauge_ExperienceFill",
+      "file": "Gauge_ExperienceFill.png",
+      "x": 1138,
+      "y": 70,
+      "width": 122,
+      "height": 12,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "ScrollThumb",
+      "file": "ScrollThumb.png",
+      "x": 1116,
+      "y": 239,
+      "width": 12,
+      "height": 101,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "ScrollTrack_Composite",
+      "file": "ScrollTrack_Composite.png",
+      "x": 1116,
+      "y": 239,
+      "width": 12,
+      "height": 643,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Badge_Story_Blank",
+      "file": "Badge_Story_Blank.png",
+      "x": 620,
+      "y": 257,
+      "width": 92,
+      "height": 26,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Badge_Rescue_Blank",
+      "file": "Badge_Rescue_Blank.png",
+      "x": 1003,
+      "y": 556,
+      "width": 87,
+      "height": 29,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Icon_Recovery",
+      "file": "Icon_Recovery.png",
+      "x": 382,
+      "y": 256,
+      "width": 36,
+      "height": 34,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_Delivery",
+      "file": "Icon_Delivery.png",
+      "x": 763,
+      "y": 258,
+      "width": 35,
+      "height": 29,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_Elimination",
+      "file": "Icon_Elimination.png",
+      "x": 382,
+      "y": 557,
+      "width": 35,
+      "height": 34,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_Rescue",
+      "file": "Icon_Rescue.png",
+      "x": 763,
+      "y": 556,
+      "width": 36,
+      "height": 35,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_Back",
+      "file": "Icon_Back.png",
+      "x": 1483,
+      "y": 40,
+      "width": 28,
+      "height": 26,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Item_Blackbox_Crop",
+      "file": "Item_Blackbox_Crop.png",
+      "x": 379,
+      "y": 394,
+      "width": 88,
+      "height": 72,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Item_Blackbox_Detail_Crop",
+      "file": "Item_Blackbox_Detail_Crop.png",
+      "x": 1168,
+      "y": 721,
+      "width": 79,
+      "height": 57,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Emblem_Drone_Composite",
+      "file": "Emblem_Drone_Composite.png",
+      "x": 1158,
+      "y": 234,
+      "width": 429,
+      "height": 191,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Art_Recovery_Crop",
+      "file": "Art_Recovery_Crop.png",
+      "x": 546,
+      "y": 288,
+      "width": 177,
+      "height": 177,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Art_Delivery_Crop",
+      "file": "Art_Delivery_Crop.png",
+      "x": 905,
+      "y": 311,
+      "width": 191,
+      "height": 166,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Art_Elimination_Crop",
+      "file": "Art_Elimination_Crop.png",
+      "x": 523,
+      "y": 586,
+      "width": 200,
+      "height": 175,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Art_RescueLocked_Crop",
+      "file": "Art_RescueLocked_Crop.png",
+      "x": 868,
+      "y": 593,
+      "width": 228,
+      "height": 121,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Divider_Columns",
+      "file": "Divider_Columns.png",
+      "x": 1128,
+      "y": 168,
+      "width": 8,
+      "height": 739,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "CollectionPanel",
+      "file": "CollectionPanel.png",
+      "x": 85,
+      "y": 838,
+      "width": 245,
+      "height": 65,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Source_Header",
+      "file": "Source_Header.png",
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 168,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_Body",
+      "file": "Source_Body.png",
+      "x": 0,
+      "y": 168,
+      "width": 1672,
+      "height": 739,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_Footer",
+      "file": "Source_Footer.png",
+      "x": 0,
+      "y": 907,
+      "width": 1672,
+      "height": 34,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Accept_Disabled",
+      "file": "Accept_Disabled.png",
+      "x": 1156,
+      "y": 824,
+      "width": 431,
+      "height": 74,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Cancel_Normal",
+      "file": "Cancel_Normal.png",
+      "x": 1156,
+      "y": 824,
+      "width": 431,
+      "height": 74,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Cancel_Normal_Hover",
+      "file": "Cancel_Normal_Hover.png",
+      "x": 1156,
+      "y": 824,
+      "width": 431,
+      "height": 74,
+      "kind": "hover",
+      "normal": "Cancel_Normal"
+    },
+    {
+      "name": "Backing_FullCanvas_Restored",
+      "file": "Backing_FullCanvas_Restored.png",
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 941,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Backing_Detail_Restored",
+      "file": "Backing_Detail_Restored.png",
+      "x": 1147,
+      "y": 168,
+      "width": 452,
+      "height": 739,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Backing_Card_Normal_Restored",
+      "file": "Backing_Card_Normal_Restored.png",
+      "x": 359,
+      "y": 539,
+      "width": 373,
+      "height": 287,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Backing_Card_Normal_Restored_Hover",
+      "file": "Backing_Card_Normal_Restored_Hover.png",
+      "x": 359,
+      "y": 539,
+      "width": 373,
+      "height": 287,
+      "kind": "hover",
+      "normal": "Backing_Card_Normal_Restored"
+    },
+    {
+      "name": "Backing_Card_Selected_Restored",
+      "file": "Backing_Card_Selected_Restored.png",
+      "x": 357,
+      "y": 238,
+      "width": 375,
+      "height": 292,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Backing_Card_Locked_Restored",
+      "file": "Backing_Card_Locked_Restored.png",
+      "x": 739,
+      "y": 539,
+      "width": 367,
+      "height": 287,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Stamp_Accepted_KO",
+      "file": "Stamp_Accepted_KO.png",
+      "x": 975,
+      "y": 240,
+      "width": 126,
+      "height": 82,
+      "kind": "cyan-isolated-alpha-stamp"
+    },
+    {
+      "name": "Stamp_Completed_KO",
+      "file": "Stamp_Completed_KO.png",
+      "x": 975,
+      "y": 240,
+      "width": 126,
+      "height": 82,
+      "kind": "cyan-isolated-alpha-stamp"
+    },
+    {
+      "name": "Stamp_Frame_Textless",
+      "file": "Stamp_Frame_Textless.png",
+      "x": 975,
+      "y": 240,
+      "width": 126,
+      "height": 82,
+      "kind": "cyan-isolated-alpha-stamp"
+    },
+    {
+      "name": "Tab_Posted_Normal_Hover",
+      "file": "Tab_Posted_Normal_Hover.png",
+      "x": 103,
+      "y": 121,
+      "width": 226,
+      "height": 38,
+      "kind": "hover",
+      "normal": "Tab_Posted_Normal"
+    },
+    {
+      "name": "Tab_Posted_Normal",
+      "file": "Tab_Posted_Normal.png",
+      "x": 103,
+      "y": 121,
+      "width": 226,
+      "height": 38,
+      "kind": "same-silhouette-tab-state"
+    },
+    {
+      "name": "Tab_Active_Selected",
+      "file": "Tab_Active_Selected.png",
+      "x": 307,
+      "y": 121,
+      "width": 229,
+      "height": 38,
+      "kind": "same-silhouette-tab-state"
+    },
+    {
+      "name": "Tab_History_Selected",
+      "file": "Tab_History_Selected.png",
+      "x": 516,
+      "y": 121,
+      "width": 220,
+      "height": 38,
+      "kind": "same-silhouette-tab-state"
+    }
+  ],
+  "controlLayers": [
+    "Back_Normal",
+    "Tab_Posted_Selected",
+    "Tab_Active_Normal",
+    "Tab_History_Normal",
+    "Accept_Normal",
+    "Card_Selected",
+    "Card_Accepted",
+    "Card_Normal",
+    "Card_Locked"
+  ],
+  "erasures": [
+    [
+      150,
+      39,
+      40,
+      32
+    ],
+    [
+      231,
+      17,
+      301,
+      80
+    ],
+    [
+      1135,
+      31,
+      207,
+      34
+    ],
+    [
+      1520,
+      39,
+      49,
+      26
+    ],
+    [
+      162,
+      127,
+      110,
+      29
+    ],
+    [
+      368,
+      127,
+      117,
+      29
+    ],
+    [
+      590,
+      128,
+      84,
+      28
+    ],
+    [
+      108,
+      188,
+      77,
+      38
+    ],
+    [
+      154,
+      266,
+      173,
+      30
+    ],
+    [
+      154,
+      310,
+      173,
+      30
+    ],
+    [
+      154,
+      354,
+      173,
+      30
+    ],
+    [
+      154,
+      399,
+      173,
+      30
+    ],
+    [
+      108,
+      469,
+      66,
+      29
+    ],
+    [
+      155,
+      511,
+      50,
+      31
+    ],
+    [
+      155,
+      556,
+      50,
+      31
+    ],
+    [
+      155,
+      600,
+      50,
+      31
+    ],
+    [
+      109,
+      850,
+      145,
+      30
+    ],
+    [
+      377,
+      187,
+      157,
+      42
+    ],
+    [
+      1035,
+      194,
+      68,
+      30
+    ],
+    [
+      1165,
+      185,
+      145,
+      43
+    ],
+    [
+      427,
+      258,
+      40,
+      30
+    ],
+    [
+      644,
+      260,
+      58,
+      19
+    ],
+    [
+      379,
+      307,
+      185,
+      37
+    ],
+    [
+      379,
+      347,
+      105,
+      27
+    ],
+    [
+      478,
+      412,
+      127,
+      30
+    ],
+    [
+      374,
+      482,
+      129,
+      30
+    ],
+    [
+      598,
+      470,
+      112,
+      45
+    ],
+    [
+      808,
+      258,
+      42,
+      29
+    ],
+    [
+      758,
+      307,
+      141,
+      38
+    ],
+    [
+      758,
+      347,
+      122,
+      27
+    ],
+    [
+      758,
+      482,
+      129,
+      29
+    ],
+    [
+      1011,
+      488,
+      74,
+      25
+    ],
+    [
+      428,
+      559,
+      42,
+      28
+    ],
+    [
+      378,
+      611,
+      110,
+      36
+    ],
+    [
+      378,
+      652,
+      137,
+      26
+    ],
+    [
+      375,
+      778,
+      128,
+      30
+    ],
+    [
+      626,
+      768,
+      84,
+      42
+    ],
+    [
+      810,
+      559,
+      43,
+      29
+    ],
+    [
+      1030,
+      559,
+      38,
+      24
+    ],
+    [
+      758,
+      612,
+      112,
+      37
+    ],
+    [
+      758,
+      652,
+      116,
+      27
+    ],
+    [
+      830,
+      724,
+      185,
+      29
+    ],
+    [
+      758,
+      778,
+      95,
+      32
+    ],
+    [
+      933,
+      781,
+      151,
+      29
+    ],
+    [
+      1165,
+      433,
+      207,
+      38
+    ],
+    [
+      1165,
+      475,
+      160,
+      26
+    ],
+    [
+      1520,
+      439,
+      54,
+      17
+    ],
+    [
+      1163,
+      517,
+      375,
+      53
+    ],
+    [
+      1165,
+      594,
+      43,
+      24
+    ],
+    [
+      1200,
+      621,
+      180,
+      25
+    ],
+    [
+      1200,
+      650,
+      120,
+      25
+    ],
+    [
+      1165,
+      692,
+      84,
+      27
+    ],
+    [
+      1261,
+      722,
+      189,
+      49
+    ],
+    [
+      1164,
+      790,
+      156,
+      28
+    ],
+    [
+      1464,
+      791,
+      110,
+      27
+    ],
+    [
+      1188,
+      839,
+      134,
+      41
+    ],
+    [
+      1456,
+      342,
+      110,
+      76
+    ]
+  ],
+  "reassemblyDifferentPixels": 0,
+  "actionStates": {
+    "disabled": "Accept_Disabled",
+    "cancelHover": "Cancel_Normal_Hover",
+    "normal": "Accept_Normal",
+    "hover": "Accept_Normal_Hover",
+    "cancel": "Cancel_Normal",
+    "rect": [
+      1156,
+      824,
+      431,
+      74
+    ]
+  }
+}

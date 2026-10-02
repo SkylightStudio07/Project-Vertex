@@ -1,0 +1,130 @@
+Built-in imagegen. Battle HUD review mockup only; no runtime wiring or extracted button states. End-turn right edge aligned to resource panels; generated scene imagery is reference, original game assets must be retained when implementing.
+
+Use case: precise-object-edit / ui-mockup. Create ONE full-screen 1920x1080 battle HUD redesign mockup, not asset sheet. Image1 CURRENT BATTLE SCREEN is edit target. Image2 original slim topbar shows intended slim silhouette. Image3 questboard is style reference ONLY. Preserve image1 existing battle backdrop, marble pillars, two anime allied characters, green mech enemy, hand cards and their illustrations, existing red enemy intent and existing buff icons. Preserve edge decorations and their lettering. Only replace HUD shapes listed below. Restore scenic sky beneath area vacated by oversized old black top panel. Do not redesign characters/cards or replace scene.
+New HUD: OFF-WHITE PAPER, graphite outlines1-2px with solid light-gray small offset edging for separation from pale backdrop, cyan #0DB8F2 limited accents. No new red/yellow HUD elements. Clean Pretendard-like type. No translucent black panels. No blessing stars/petals on new buttons. All typography placed on flat areas for future separation. User asks review MOCKUP now; runtime buttons will be textless in later extraction.
+
+Exact target composition at1920x1080:
+Topbar x280 y0 w1300 h88 ONLY. Slim white clipped-end strip. Left FLOOR04/16 and TURN03; center small cyan BATTLE FIELD and Korean "1막 · 만발한 백피안화의 정원"; right x1250 y6 w310h76 tray three64x64 item slots spaced100. Keep existing two item icons from screenshot in tray, third empty small plus. Add cyan quest-item corner badge frame to one occupied slot. Do not cover sky below y88.
+MAP at1611,22 size275x72; DECK1612,100 size275x70. Rectangular clipped paper buttons, left small line-art map or stacked cards, graphite labels MAP / DECK. No old hexagon/star motif.
+Right resource stack same264x51 frames at1631,768 /1631,824 /1631,880. White paper, left cyan square with white respective pictogram: pistol, lightning, bullet. Labels "권총", "3 / 3", "6". End Turn below as one coherent stack, right edge aligned with resource stack at1895, size280x70 at1615,941 (resolve brief coordinate mismatch in favor of right-edge alignment and no hand overlap); graphite END TURN text and small right-facing chevron, thin cyan edge. It must be clear of central hand.
+Player HP x70,946 w360h39, white/graphite frame, pale fill ending in cyan indicator, example65/80 graphite text. Shield-outline badge72x87 at34,922 with example "1", no giant shield. Status slots44x44 along y889 fromx70, existing status icons preserved. EnemyHP240x26 at enemy feet matching original screenshot position normalized, example29/40; slim pale fill/cyan end, shield badge48x58 with "2"; nameplate360x44 below, paper thin ribbon "스카웃 유닛" as hovered example. Avoid merging icons into characters.
+All HP resource new UI labels dark enough to read. Retain hand and intent accuracy. Final flat game screenshot only, no moodboard caption or external labels. No added center HUD, no enormous panels. Favor legible size but preserve positions.
+Full source brief for details (states PNG list is for later extraction, do NOT show state variants on this mockup):
+# 전투 화면 HUD · 조각 요청서
+
+전투 화면에서 캐릭터·카드 위에 얹는 UI(HUD)를 **로비 키트와 같은 계열**로 다시 그린다.
+- 배경, 캐릭터·적 스탠딩, 카드, 적 인텐트 아이콘은 **그대로 둔다**. 이번 범위가 아니다.
+- 배치는 지금 위치를 기준으로 하고, 겉모습만 바꾼다.
+
+참고 이미지 (이 폴더):
+- `Reference_Current.png`: 현재 전투 화면. 바꿀 대상이다.
+- `Reference_TopBar_Original.png`: 처음 기획한 상단 바. 여기에 아이템 칸을 붙였던 것이 지금의 검은 패널이다.
+- 스타일 기준: `../LobbyKit_v2/Extracted/Lobby_Full_Reference.png`, `../QuestBoardMockup`, `../SceneTransition`.
+
+## 0. 공통
+
+- 기준 화면은 **1920×1080**이다. 좌표는 모두 왼쪽 위 원점, 픽셀 단위다.
+- 스타일 방향:
+  - **흰 종이 패널**(로비 키트 질감) + **흑연 선** + **청록 #0DB8F2**.
+  - 청록은 테두리, 수치, 활성 상태에만 쓴다.
+  - 빨강·노랑은 쓰지 않는다. 체력이 줄어드는 표시는 게임에서 따로 처리한다.
+- 전투 배경이 밝은 흰 대리석이라, 종이 패널이 배경에 묻히지 않도록 해야 한다.
+  - 패널 가장자리에 흑연 테두리 1~2px과 아주 옅은 그림자(불투명 회색 띠)를 둔다.
+  - **반투명 검정은 금지다.** 프로젝트가 Linear 색공간이라 알파를 낮춘 검정이 회색으로 뜬다.
+- **글자는 전부 게임에서 TMP(Pretendard)로 얹는다.** END TURN, MAP, DECK 같은 버튼 글자도 그림에 넣지 않는다. 목업 글자는 참고용이니 지울 수 있게 단색 면 위에 둔다.
+- 결과물:
+  - 각 조각의 PNG(투명 배경). 버튼은 Normal / Hover / Pressed / Disabled.
+  - 조립 예시 1장: `Reference_Current.png` 위에 새 HUD를 얹은 것.
+  - 좌표가 든 `layout.json`.
+
+## 1. 상단 작전 바 (지금의 검은 상단 패널 대체)
+
+`Reference_TopBar_Original.png`의 얇은 작전 바로 돌아가고, 오른쪽 끝에 아이템 칸을 넣는다.
+지금처럼 검은 면이 화면 위쪽을 크게 덮지 않게 한다.
+
+```
+x=280                                                                               x=1580
+┌──────────────────────────────────────────────────────────────────────────────────────────┐ y=0
+│ FLOOR 04 / 16      ─────  BATTLE FIELD  ─────                         ITEMS              │
+│ TURN  03              1막 · 만발한 백피안화의 정원                     [□] [□] [□]          │
+└──────────────────────────────────────────────────────────────────────────────────────────┘ y=88
+  ↑ 왼쪽 정보 (x 300~560)       ↑ 가운데 제목 (x 640~1180)          ↑ 아이템 트레이 (x 1250~1560)
+```
+
+| 조각 | 크기 | 위치 | 설명 |
+|---|---|---|---|
+| `TopBar` | 1300 × 88 | (280, 0) | 흰 종이 띠. 양 끝은 사선 컷(원본 바처럼), 아래 가장자리에 흑연 선 + 가운데 작은 마름모 |
+| `TopBar_ItemTray` | 310 × 76 | (1250, 6) | 아이템 칸 3개가 들어가는 오목한 홈. 칸 간격 100(현재 게임 배치와 같음) |
+| `ItemSlot_Empty` | 64 × 64 | 트레이 안 | 빈 칸. 옅은 흑연 테두리 + 가운데 작은 "+" |
+| `ItemSlot_Hover` | 64 × 64 | — | 청록 테두리 |
+
+- 글자(게임에서 넣음):
+  - 왼쪽 두 줄: 층·턴, 12~14pt, 흑연
+  - 가운데: "BATTLE FIELD" 11pt 청록, 막 이름 22pt
+  - "ITEMS" 라벨: 10pt
+- 의뢰 물품 칸 테두리(`../QuestRunUI`의 `ItemSlot_Normal`)가 이 칸 위에 겹친다. 크기를 70 → 64로 맞춰도 되니, 조립 예시에 한 칸 겹쳐 보여 줄 것.
+
+## 2. MAP · DECK 버튼 (오른쪽 위)
+
+| 조각 | 크기 | 위치 |
+|---|---|---|
+| `Button_Map` | 275 × 72 | (1611, 22) |
+| `Button_Deck` | 275 × 70 | (1612, 100) |
+
+- 지금의 육각 판과 별 문양은 버린다. 별은 축복·성소의 신비 쪽 기호라 작전 단말기 톤과 맞지 않는다.
+- 로비 하단 시설 버튼과 같은 문법으로 한다: 종이 판, 왼쪽에 작은 기호 칸(지도·카드 묶음 선화), 글자 영역.
+- Hover는 청록 테두리, Pressed는 1px 눌림.
+- 상단 작전 바 오른쪽 끝(x=1580)과 겹치지 않게 한다.
+
+## 3. 오른쪽 아래 자원 칸 (위에서부터 무기 · 에너지 · 탄약)
+
+| 조각 | 크기 | 위치 | 내용 (게임에서 넣음) |
+|---|---|---|---|
+| `Res_Weapon` | 264 × 51 | (1631, 768) | 무기 아이콘 40×40 + 무기 이름(권총 / 기관단총 / 저격총) |
+| `Res_Energy` | 264 × 51 | (1631, 824) | 번개 기호 + "3 / 3" |
+| `Res_Ammo` | 264 × 51 | (1631, 880) | 탄환 기호 + "6" |
+
+- 세 칸은 같은 틀에 기호 칸만 다르게 한다. 기호는 흰 선화이고, 청록 사각 칸 안에 들어간다.
+- 무기 칸이 지금 비어 보이는 것은 무기 표시가 빠져 있어서다. 이번에 무기 이름이 들어갈 자리를 확보한다.
+- **변형 필요:**
+  - `Res_Energy_Empty`: 에너지 0일 때 기호 칸을 흑연 회색으로.
+  - `Res_Ammo_Empty`: 탄약 0일 때 같은 방식.
+
+## 4. END TURN 버튼
+
+| 조각 | 크기 | 위치 |
+|---|---|---|
+| `Button_EndTurn` | 280 × 70 | (1575, 941) |
+
+- Normal / Hover / Pressed / **Disabled**(적 턴 중: 흑연 회색, 글자 흐리게) 네 가지가 필요하다.
+- 오른쪽 끝에 진행 방향 기호(▶ 또는 사선 화살표)를 둔다. 글자 "END TURN / 턴 종료"는 TMP로 넣는다.
+- 자원 칸과 한 세트로 보이게 폭과 오른쪽 끝선을 맞춘다.
+
+## 5. 플레이어 HP (왼쪽 아래)
+
+| 조각 | 크기 | 위치 | 설명 |
+|---|---|---|---|
+| `HP_Frame` | 360 × 39 | (70, 946) | 체력 바 틀. 안쪽 채움 영역 340×27 (틀 기준 8, 6) |
+| `HP_Fill` | 340 × 27 | — | 채움. 흰 면 + 청록 끝선. 게임에서 가로로 잘라 쓴다 |
+| `Block_Badge` | 72 × 87 | (34, 922) | 방어도 배지(방패 윤곽 + 숫자 자리). 바 왼쪽 끝에 겹친다 |
+| `StatusSlot` | 44 × 44 | 바 위 (70, 889)부터 가로로 | 상태 아이콘 칸 틀. 아이콘은 기존 것을 쓴다 |
+
+## 6. 적 HP (적 발밑)
+
+| 조각 | 크기 | 설명 |
+|---|---|---|
+| `EnemyHP_Frame` | 240 × 26 | 적 체력 바 틀. 채움 영역 227×18 (틀 기준 5, 4) |
+| `EnemyHP_Fill` | 227 × 18 | 채움 |
+| `EnemyBlock_Badge` | 48 × 58 | 적 방어도 배지 (바 왼쪽 끝) |
+| `EnemyName_Plate` | 360 × 44 | 바 아래 이름판 (호버 시 표시). 지금은 부드러운 검은 타원인데, 종이 띠로 바꿔도 된다 |
+
+- 플레이어 HP와 같은 계열로 하되 더 얇게 한다. 적이 2~3마리 나란히 서도 복잡해 보이지 않아야 한다.
+
+## 하지 말 것
+
+- 가장자리 장식("THE WHITE VERTEX", "OBSERVE. ANALYZE. PROCEED.", 왼쪽 세로 장식)은 이미 로비와 맞으니 **새로 그리지 않는다**. 겹치지만 않게 한다.
+- 화면 가운데(x 360~1560, y 150~620)는 캐릭터와 적이 서는 자리다. 어떤 HUD도 이 영역에 들어오지 않게 한다.
+- 손패 영역(가운데 아래 x 330~1560, y 820~1080)을 가리지 않는다. END TURN과 자원 칸은 오른쪽으로, HP는 왼쪽으로 붙인다.
+- 별·꽃잎 같은 축복 모티프를 쓰지 않는다. 기호는 작전 단말기 계열(격자, 눈금, 마름모, 사선)만 쓴다.
+
+

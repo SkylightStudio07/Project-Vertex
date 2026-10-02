@@ -100,7 +100,7 @@ public class ItemInventoryManager : MonoBehaviour
     // 적 지정형은 대상이 없으므로 전투 밖에서는 사용할 수 없다.
     public bool UseOutsideBattle(ItemData item)
     {
-        if (item == null) return false;
+        if (item == null || item.IsQuestItem) return false;
         if (!item.UsableOutsideBattle) return false;
         if (item.UseMode == ItemData.ItemUseMode.SelectTarget) return false;
         if (BattleManager.Instance != null && BattleManager.Instance.IsInBattle) return false;
@@ -144,6 +144,7 @@ public class ItemInventoryManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (Instance == this) Instance = null;
         if (!_battleSubscribed || BattleManager.Instance == null) return;
         BattleManager.Instance.OnBattleStarted -= ApplyLingeringOnBattleStart;
         BattleManager.Instance.OnBattleVictory -= TickLingeringOnVictory;

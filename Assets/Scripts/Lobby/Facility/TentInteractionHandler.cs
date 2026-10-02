@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TentInteractionHandler : FacilityInteractionHandler
@@ -10,7 +9,8 @@ public class TentInteractionHandler : FacilityInteractionHandler
     [SerializeField] private Transform cardSummaryParent;
     [SerializeField] private StartingDeckSummaryItem cardSummaryPrefab;
     [SerializeField] private List<CardData> startingDeckCards = new();
-    [SerializeField] private string runSceneName = "SampleScene";
+    [Tooltip("출정 버튼을 누르면 넘어갈 런(전투) 씬 이름. Build Settings에 들어 있어야 한다")]
+    [SerializeField] private string runSceneName = "DevelopScene - Phase 3";
     [SerializeField] private UnityEvent onRunStarted;
 
     public IReadOnlyList<CardData> StartingDeckCards => startingDeckCards;
@@ -50,7 +50,7 @@ public class TentInteractionHandler : FacilityInteractionHandler
             return;
         }
 
-        SceneManager.LoadScene(runSceneName);
+        SceneTransition.Load(runSceneName); // 막이 닫히고 → 비동기 로드 → 전투 씬에서 막이 열리는 전환 연출
     }
 
     public void SetStartingDeckCards()

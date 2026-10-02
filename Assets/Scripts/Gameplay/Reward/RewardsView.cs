@@ -44,6 +44,7 @@ public class RewardsView : MonoBehaviour
 
     private void Open(BattleReward reward)
     {
+        if (TrainingSession.IsActive) return; // 훈련장은 보상 없음 — 결과는 RunClearView
         this.reward = reward;
 
         // DOTween 타이머는 오브젝트 활성 여부와 무관하게 돌아가서, 루트가 꺼져 있어도 지연이 정상 동작한다.
@@ -154,6 +155,12 @@ public class RewardsView : MonoBehaviour
     {
         _openSequence?.Kill();
         gameObject.SetActive(false);
+        // 보스 보상을 닫으면 막 클리어(다음 막 또는 런 클리어)로 넘어간다
+        if (BattleManager.Instance != null && BattleManager.Instance.CurrentBattleType == BattleType.Boss && GameManager.Instance != null)
+        {
+            GameManager.Instance.CompleteAct();
+            return;
+        }
         mapUIController.OpenMap();
     }
 

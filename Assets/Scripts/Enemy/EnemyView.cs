@@ -52,6 +52,16 @@ public class EnemyView : MonoBehaviour
     [Header("버프/디버프")]
     [SerializeField] private StatusListView statusList;
 
+    [Header("행동 이름 (적 턴)")]
+    [Tooltip("적이 행동할 때 인텐트 자리에 잠깐 띄우는 행동 이름 (슬더스 방식)")]
+    [SerializeField] private TextMeshProUGUI actionNameText;
+    [SerializeField, Min(0f)] private float actionNameHold = 1.0f;
+
+    [Header("페이즈 전환")]
+    [Tooltip("페이즈 전환 대사를 띄울 텍스트 (인텐트 아이콘 위에 잠깐 떴다 사라진다)")]
+    [SerializeField] private TextMeshProUGUI phaseLineText;
+    [SerializeField, Min(0f)] private float phaseLineHold = 2.2f;
+
     [Header("피격 이펙트")]
     [SerializeField] private GameObject hitEffectPrefab;
 
@@ -169,6 +179,7 @@ public class EnemyView : MonoBehaviour
         instance.OnActionStarted += PlayLungeMotion;
         instance.OnBlockGained   += HandleBlockGained;
         instance.OnBlockChanged  += RefreshBlock;
+        instance.OnPhaseChanged  += HandlePhaseChanged;
 
         if (statusList != null) statusList.Bind(instance.Statuses);
 
@@ -240,6 +251,67 @@ public class EnemyView : MonoBehaviour
         LayoutLookaheadIcons();
     }
 
+    // 화면 고정 배치(EnemyData.useScreenRect) — 화면 끝에 붙는 거대 보스용.
+    // EnemyZoneView가 슬롯 위치를 잡은 뒤(등장 연출 전) 호출한다. 그림을 화면 좌표에 놓고,
+    // INTENT·HP 바를 그림 안 기준점(intentAnchor, hpBarAnchor)으로 옮긴다.
+    public void ApplyScreenLayout()
+    {
+        EnemyData data = Instance?.Data;
+        if (data == null || !data.useScreenRect || enemyImage == null) return;
+        Canvas canvas = GetComponentInParent<Canvas>();
+        if (canvas == null) return;
+        var root = canvas.rootCanvas.transform as RectTransform;
+        Rect cr = root.rect;
+
+        // 1920×1080 좌상단 원점 → 루트 캔버스 로컬 (비율 유지라 오른쪽 끝은 항상 화면 끝)
+        Rect s = data.screenRect;
+        Vector2 Design(float x, float y) => new(cr.xMin + x / 1920f * cr.width, cr.yMax - y / 1080f * cr.height);
+        Vector3 center = root.TransformPoint(Design(s.x + s.width * 0.5f, s.y + s.height * 0.5f));
+        Vector2 size = new(s.width / 1920f * cr.width, s.height / 1080f * cr.height);
+
+        RectTransform img = enemyImage.rectTransform;
+        img.localScale = _enemyImageBaseScale;
+        float toLocal = root.lossyScale.x / Mathf.Max(1e-6f, img.lossyScale.x);
+        img.sizeDelta = size * toLocal;
+        img.position = center;
+
+        // 그림 안 기준점(0~1, 좌하단 원점) → 월드
+        Vector3 SpritePoint(Vector2 n)
+        {
+            Rect r = img.rect;
+            return img.TransformPoint(new Vector3(r.xMin + n.x * r.width, r.yMin + n.y * r.height, 0f));
+        }
+
+        // HP 바 — 상태 아이콘 줄은 HP 바와의 간격을 그대로 따라간다
+        RectTransform hpBar = hpFill != null ? hpFill.transform.parent as RectTransform : null;
+        if (hpBar != null)
+        {
+            RectTransform status = statusList != null ? statusList.transform as RectTransform : null;
+            Vector2 statusOffset = status != null ? status.anchoredPosition - hpBar.anchoredPosition : Vector2.zero;
+            hpBar.position = SpritePoint(data.hpBarAnchor);
+            if (status != null) status.anchoredPosition = hpBar.anchoredPosition + statusOffset;
+        }
+
+        // INTENT — 아이콘 아래 끝이 기준점 + intentGap에 오도록. 수치·blob은 아이콘과의 처음 간격 유지
+        if (_intentIconRect != null && _intentIconRect.parent is RectTransform parent)
+        {
+            Vector2 local = parent.InverseTransformPoint(SpritePoint(data.intentAnchor));
+            Vector2 anchorRef = Vector2.Lerp(_intentIconRect.anchorMin, _intentIconRect.anchorMax, 0.5f);
+            local -= new Vector2(parent.rect.xMin + parent.rect.width * anchorRef.x, parent.rect.yMin + parent.rect.height * anchorRef.y);
+            float halfBelow = _intentIconRect.rect.height * _intentIconRect.pivot.y * _intentIconRect.localScale.y;
+            Vector2 iconPos = local + new Vector2(0f, intentGap + halfBelow);
+
+            Vector2 shift = iconPos - _initialIntentIconPos;
+            _intentIconBasePos = iconPos;
+            _intentValueBasePos = _initialIntentValuePos + shift;
+            if (_intentFieldRect != null) _intentFieldBasePos = _initialIntentFieldPos + shift;
+            _intentIconRect.anchoredPosition = _intentIconBasePos;
+            if (_intentValueRect != null) _intentValueRect.anchoredPosition = _intentValueBasePos;
+            if (_intentFieldRect != null) _intentFieldRect.anchoredPosition = _intentFieldBasePos;
+            LayoutLookaheadIcons();
+        }
+    }
+
     // 적 그림(현재 스프라이트)의 불투명 영역 위 끝을, 인텐트 아이콘과 같은 좌표계(이 뷰의 로컬)에서 구한다.
     // Image는 preserveAspect로 rect 안에 맞춰 그리므로 그 배치까지 반영한다.
     private bool TryGetVisibleTopLocal(out float top)
@@ -275,6 +347,65 @@ public class EnemyView : MonoBehaviour
     }
 
     private void OnDestroy() => Unbind();
+
+    // 적 턴에 행동을 시작하면 인텐트를 잠깐 가리고 그 자리에 행동 이름을 띄운다.
+    private void ShowActionName()
+    {
+        var action = Instance?.GetCurrentAction();
+        if (actionNameText == null || action == null || string.IsNullOrWhiteSpace(action.DisplayName)) return;
+
+        actionNameText.text = action.DisplayName;
+        if (_intentIconRect != null) actionNameText.rectTransform.position = _intentIconRect.position;
+
+        SetIntentAlpha(0f);
+        actionNameText.DOKill();
+        actionNameText.gameObject.SetActive(true);
+        actionNameText.alpha = 0f;
+        DOTween.Sequence().SetLink(actionNameText.gameObject).SetTarget(actionNameText)
+            .Append(actionNameText.DOFade(1f, 0.12f))
+            .AppendInterval(actionNameHold)
+            .Append(actionNameText.DOFade(0f, 0.25f))
+            .OnComplete(() =>
+            {
+                actionNameText.gameObject.SetActive(false);
+                SetIntentAlpha(1f); // 그 사이 다음 행동으로 갱신된 인텐트를 다시 보인다
+            });
+    }
+
+    private void SetIntentAlpha(float alpha)
+    {
+        if (intentIcon != null) { var c = intentIcon.color; c.a = alpha; intentIcon.color = c; }
+        if (intentValueText != null) intentValueText.alpha = alpha;
+    }
+
+    // 페이즈 전환: 적이 움찔 커졌다 돌아오며 붉게 번쩍이고, 전환 대사가 인텐트 위에 잠깐 떠오른다.
+    private void HandlePhaseChanged(EnemyPhase phase)
+    {
+        if (enemyImage != null)
+        {
+            var rect = enemyImage.rectTransform;
+            rect.DOComplete();
+            rect.DOPunchScale(Vector3.one * 0.12f, 0.45f, 6, 0.6f).SetLink(gameObject);
+            HitFlash.Play(enemyImage);
+        }
+
+        if (phaseLineText == null || phase == null || string.IsNullOrWhiteSpace(phase.transitionLine)) return;
+        phaseLineText.text = phase.transitionLine;
+        var lineRect = phaseLineText.rectTransform;
+        if (_intentIconRect != null)
+        {
+            lineRect.position = _intentIconRect.position;
+            lineRect.anchoredPosition += new Vector2(0f, 13f); // 루트가 3배라 화면상 약 40px 위
+        }
+        phaseLineText.DOKill();
+        phaseLineText.gameObject.SetActive(true);
+        phaseLineText.alpha = 0f;
+        DOTween.Sequence().SetLink(phaseLineText.gameObject).SetTarget(phaseLineText)
+            .Append(phaseLineText.DOFade(1f, 0.25f))
+            .AppendInterval(phaseLineHold)
+            .Append(phaseLineText.DOFade(0f, 0.5f))
+            .OnComplete(() => phaseLineText.gameObject.SetActive(false));
+    }
 
     private void Unbind()
     {
@@ -314,6 +445,7 @@ public class EnemyView : MonoBehaviour
         Instance.OnActionStarted -= PlayLungeMotion;
         Instance.OnBlockGained   -= HandleBlockGained;
         Instance.OnBlockChanged  -= RefreshBlock;
+        Instance.OnPhaseChanged  -= HandlePhaseChanged;
     }
 
     private void HandleDamaged(int amount)
@@ -370,7 +502,31 @@ public class EnemyView : MonoBehaviour
     // 아직 자리를 재배치하기 전이라 캐싱한 값이 실제 위치와 달라지는 문제가 있었음.
     private void PlayLungeMotion()
     {
+        ShowActionName();
         if (_rect == null) return;
+
+        // 공격 스프라이트 애니메이션이 등록되어 있으면 재생 (대기 애니메이션 자동 일시정지 및 복귀)
+        if (Instance != null && Instance.AttackFrames != null && Instance.AttackFrames.Length > 0 && enemyImage != null)
+        {
+            var seqPlayer = enemyImage.GetComponent<PoseSequencePlayer>();
+            if (seqPlayer == null) seqPlayer = enemyImage.gameObject.AddComponent<PoseSequencePlayer>();
+            var swingOverlay = enemyImage.GetComponent<BatSwingOverlay>();
+            if (swingOverlay != null) swingOverlay.EnsurePlayerBinding();
+            seqPlayer.Play(Instance.AttackFrames, Instance.AttackFrameRate,
+                           Instance.Data != null ? Instance.Data.AttackScaleMultiplier : 1f); // 시트 여백 차이 보정
+        }
+
+        // 화면 끝에 붙은 보스는 앞으로 나오지 않고 제자리에서 움찔한다
+        if (Instance?.Data != null && Instance.Data.noLunge)
+        {
+            if (enemyImage != null)
+            {
+                var img = enemyImage.rectTransform;
+                img.DOComplete();
+                img.DOPunchScale(Vector3.one * 0.05f, lungeOutDuration + lungeBackDuration, 5, 0.5f).SetLink(gameObject);
+            }
+            return;
+        }
 
         Vector2 originalPos = _rect.anchoredPosition;
         Vector2 forward = originalPos + new Vector2(-lungeDistance, 0f);
@@ -405,7 +561,12 @@ public class EnemyView : MonoBehaviour
 
         float ratio = Instance.MaxHP > 0 ? (float)Instance.HP / Instance.MaxHP : 0f;
         if (hpFill != null) hpFill.fillAmount = ratio;
-        if (hpText != null) hpText.text = $"{Instance.HP} / {Instance.MaxHP}";
+        if (hpText != null)
+        {
+            hpText.text = $"{Instance.HP} / {Instance.MaxHP}";
+            // 숫자는 바 가운데: 연회색 채움이 가운데를 덮으면 먹색, 절반 아래로 내려가 어두운 트랙 위면 흰색 (전투 HUD v3)
+            hpText.color = ratio >= 0.55f ? new Color(0.086f, 0.094f, 0.106f, 1f) : new Color(0.95f, 0.95f, 0.96f, 1f);
+        }
         if (_previewLoss > 0) ApplyDamagePreview(); // 미리보기 중에 HP가 바뀌면 다시 그린다
     }
 

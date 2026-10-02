@@ -1,0 +1,995 @@
+{
+  "version": 2,
+  "source": "Shop_Mockup_v2_Canonical.png",
+  "source_canvas": [
+    1672,
+    941
+  ],
+  "design_canvas": [
+    1920,
+    1080
+  ],
+  "coordinates": "source_crop_xywh: original pixels. placement_1920_xy: top-left origin. output_size: design pixels.",
+  "geometry_note": "Panels follow canonical screenshot footprint, not superseded layout brief dimensions. Shared PriceTag 150x28; ItemCell130x130.",
+  "assets": [
+    {
+      "name": "Panel_Cards",
+      "file": "Panel_Cards.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        665,
+        117,
+        637,
+        653
+      ],
+      "output_size": [
+        732,
+        750
+      ],
+      "placement_1920_xy": [
+        764,
+        134
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Panel_Supply",
+      "file": "Panel_Supply.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1311,
+        211,
+        347,
+        568
+      ],
+      "output_size": [
+        398,
+        652
+      ],
+      "placement_1920_xy": [
+        1506,
+        242
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Panel_Service_Normal",
+      "file": "Panel_Service_Normal.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        664,
+        784,
+        637,
+        141
+      ],
+      "output_size": [
+        732,
+        162
+      ],
+      "placement_1920_xy": [
+        762,
+        900
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Panel_Service_Hover",
+      "file": "Panel_Service_Hover.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        664,
+        784,
+        637,
+        141
+      ],
+      "output_size": [
+        732,
+        162
+      ],
+      "placement_1920_xy": [
+        762,
+        900
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Panel_Service_Disabled",
+      "file": "Panel_Service_Disabled.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        664,
+        784,
+        637,
+        141
+      ],
+      "output_size": [
+        732,
+        162
+      ],
+      "placement_1920_xy": [
+        762,
+        900
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Disabled",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Panel_Credits",
+      "file": "Panel_Credits.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1303,
+        92,
+        355,
+        99
+      ],
+      "output_size": [
+        408,
+        114
+      ],
+      "placement_1920_xy": [
+        1496,
+        106
+      ],
+      "nine_slice_lbrt": [
+        33,
+        35,
+        35,
+        33
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Panel_Shopkeeper",
+      "file": "Panel_Shopkeeper.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        28,
+        207,
+        482,
+        178
+      ],
+      "output_size": [
+        554,
+        204
+      ],
+      "placement_1920_xy": [
+        32,
+        238
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": null
+    },
+    {
+      "name": "Button_Leave_Normal",
+      "file": "Button_Leave_Normal.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1339,
+        814,
+        315,
+        115
+      ],
+      "output_size": [
+        362,
+        132
+      ],
+      "placement_1920_xy": [
+        1538,
+        934
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Button_Leave_Hover",
+      "file": "Button_Leave_Hover.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1339,
+        814,
+        315,
+        115
+      ],
+      "output_size": [
+        362,
+        132
+      ],
+      "placement_1920_xy": [
+        1538,
+        934
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Button_Leave_Pressed",
+      "file": "Button_Leave_Pressed.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1339,
+        814,
+        315,
+        115
+      ],
+      "output_size": [
+        362,
+        132
+      ],
+      "placement_1920_xy": [
+        1538,
+        934
+      ],
+      "nine_slice_lbrt": [
+        38,
+        40,
+        40,
+        38
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Pressed",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        691,
+        333,
+        14,
+        87
+      ]
+    },
+    {
+      "name": "Button_Close_Normal",
+      "file": "Button_Close_Normal.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1606,
+        113,
+        40,
+        44
+      ],
+      "output_size": [
+        40,
+        40
+      ],
+      "placement_1920_xy": [
+        1844,
+        130
+      ],
+      "nine_slice_lbrt": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal"
+    },
+    {
+      "name": "Button_Close_Hover",
+      "file": "Button_Close_Hover.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1606,
+        113,
+        40,
+        44
+      ],
+      "output_size": [
+        40,
+        40
+      ],
+      "placement_1920_xy": [
+        1844,
+        130
+      ],
+      "nine_slice_lbrt": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Close_Pressed",
+      "file": "Button_Close_Pressed.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1606,
+        113,
+        40,
+        44
+      ],
+      "output_size": [
+        40,
+        40
+      ],
+      "placement_1920_xy": [
+        1844,
+        130
+      ],
+      "nine_slice_lbrt": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Pressed"
+    },
+    {
+      "name": "PriceTag_Normal",
+      "file": "PriceTag_Normal.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        721,
+        441,
+        152,
+        35
+      ],
+      "output_size": [
+        150,
+        28
+      ],
+      "placement_1920_xy": [
+        828,
+        506
+      ],
+      "nine_slice_lbrt": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal"
+    },
+    {
+      "name": "ItemCell_Normal",
+      "file": "ItemCell_Normal.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1341,
+        362,
+        139,
+        125
+      ],
+      "output_size": [
+        130,
+        130
+      ],
+      "placement_1920_xy": [
+        1540,
+        416
+      ],
+      "nine_slice_lbrt": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Normal"
+    },
+    {
+      "name": "PriceTag_Hover",
+      "file": "PriceTag_Hover.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        721,
+        441,
+        152,
+        35
+      ],
+      "output_size": [
+        150,
+        28
+      ],
+      "placement_1920_xy": [
+        828,
+        506
+      ],
+      "nine_slice_lbrt": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Hover"
+    },
+    {
+      "name": "ItemCell_Hover",
+      "file": "ItemCell_Hover.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1341,
+        362,
+        139,
+        125
+      ],
+      "output_size": [
+        130,
+        130
+      ],
+      "placement_1920_xy": [
+        1540,
+        416
+      ],
+      "nine_slice_lbrt": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "method": "source-guided contour restoration with clean source paper texture",
+      "state": "Hover"
+    },
+    {
+      "name": "Watermark_Cards",
+      "file": "Watermark_Cards.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1106,
+        138,
+        148,
+        87
+      ],
+      "output_size": [
+        170,
+        100
+      ],
+      "placement_1920_xy": [
+        1270,
+        158
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 0.08
+    },
+    {
+      "name": "Watermark_Supply",
+      "file": "Watermark_Supply.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1507,
+        235,
+        125,
+        115
+      ],
+      "output_size": [
+        144,
+        132
+      ],
+      "placement_1920_xy": [
+        1730,
+        270
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 0.08
+    },
+    {
+      "name": "Watermark_Service",
+      "file": "Watermark_Service.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        942,
+        803,
+        77,
+        92
+      ],
+      "output_size": [
+        88,
+        106
+      ],
+      "placement_1920_xy": [
+        1082,
+        922
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 0.08
+    },
+    {
+      "name": "Icon_Credit",
+      "file": "Icon_Credit.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        733,
+        448,
+        19,
+        23
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        842,
+        514
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 1
+    },
+    {
+      "name": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        850,
+        448,
+        16,
+        23
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        976,
+        514
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 1
+    },
+    {
+      "name": "Icon_Close",
+      "file": "Icon_Close.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1611,
+        122,
+        26,
+        24
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        1850,
+        140
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 1
+    },
+    {
+      "name": "Icon_Leave",
+      "file": "Icon_Leave.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1367,
+        831,
+        51,
+        64
+      ],
+      "output_size": [
+        40,
+        48
+      ],
+      "placement_1920_xy": [
+        1570,
+        954
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 1
+    },
+    {
+      "name": "Icon_Scissors",
+      "file": "Icon_Scissors.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        1029,
+        843,
+        35,
+        49
+      ],
+      "output_size": [
+        32,
+        40
+      ],
+      "placement_1920_xy": [
+        1182,
+        968
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "local paper luminance removed from canonical crop; aspect-preserving ink extraction",
+      "recommended_runtime_alpha": 1
+    },
+    {
+      "name": "Icon_RemoveCard",
+      "file": "Icon_RemoveCard.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        942,
+        803,
+        77,
+        92
+      ],
+      "output_size": [
+        40,
+        40
+      ],
+      "placement_1920_xy": [
+        1082,
+        922
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided outline restored at 40px to preserve fine strokes"
+    },
+    {
+      "name": "NumberUnderline",
+      "file": "NumberUnderline.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        705,
+        164,
+        16,
+        2
+      ],
+      "output_size": [
+        18,
+        2
+      ],
+      "placement_1920_xy": [
+        810,
+        188
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "restored graphite hairline"
+    },
+    {
+      "name": "SoldOut_Stamp",
+      "file": "SoldOut_Stamp.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        913,
+        495,
+        157,
+        206
+      ],
+      "output_size": [
+        150,
+        230
+      ],
+      "placement_1920_xy": [
+        1048,
+        568
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "restored diagonal hatch and empty angled ink band; SOLD OUT omitted"
+    },
+    {
+      "name": "SoldOut_Hatching",
+      "file": "SoldOut_Hatching.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        913,
+        495,
+        157,
+        206
+      ],
+      "output_size": [
+        150,
+        230
+      ],
+      "placement_1920_xy": [
+        1048,
+        568
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "separate optional hatch overlay"
+    },
+    {
+      "name": "SoldOut_Band",
+      "file": "SoldOut_Band.png",
+      "source": "Shop_Mockup_v2_Canonical.png",
+      "source_crop_xywh": [
+        913,
+        495,
+        157,
+        206
+      ],
+      "output_size": [
+        150,
+        230
+      ],
+      "placement_1920_xy": [
+        1048,
+        568
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "separate optional empty angled stamp band"
+    }
+  ],
+  "shopkeeper_label": "SHOPKEEPER",
+  "shopkeeper_label_excludes_number": true,
+  "price_tag_shared_for": [
+    "cards",
+    "items"
+  ],
+  "price_tag_widths": [
+    150,
+    130
+  ],
+  "source_art_preserved": "No source files, card illustrations, item art, counter, characters or Unity importers modified.",
+  "runtime_watermark_alpha": 0.08,
+  "card_price_tag_instances_1920": [
+    [
+      828,
+      506
+    ],
+    [
+      1052,
+      506
+    ],
+    [
+      1276,
+      506
+    ],
+    [
+      828,
+      808
+    ],
+    [
+      1052,
+      808
+    ],
+    [
+      1276,
+      808
+    ]
+  ],
+  "item_price_tag_instances_1920": [
+    [
+      1540,
+      562
+    ],
+    [
+      1712,
+      562
+    ],
+    [
+      1540,
+      764
+    ],
+    [
+      1712,
+      764
+    ]
+  ],
+  "item_cell_instances_1920": [
+    [
+      1540,
+      416
+    ],
+    [
+      1712,
+      416
+    ],
+    [
+      1540,
+      620
+    ],
+    [
+      1712,
+      620
+    ]
+  ],
+  "state_notes": {
+    "Disabled": "Panel_Service uses muted border; disable interaction and gray runtime labels/icons.",
+    "Hover": "Cyan 1px outline; runtime may raise the panel 2px.",
+    "Pressed": "Inset graphite lower rule; runtime may translate content 2px."
+  }
+}

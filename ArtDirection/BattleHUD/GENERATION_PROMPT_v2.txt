@@ -1,0 +1,158 @@
+Built-in imagegen. Updated charcoal HUD brief. Review mockups only, runtime wiring and extracted assets pending. Model-derived scene imagery must not replace actual game characters/cards/background assets.
+
+PLAYER TURN
++Use case precise-object-edit, finished game HUD MOCKUP. Image1 is v1 BattleHUD mockup: preserve EXACT layout/composition and character positions. Completely replace HUD color system per below. Image2 original battle screen: preserve existing character/card/environment/intent designs. Output full screen same landscape aspect, target1920x1080. This is v2 CHARCOAL HUD. Every newly designed HUD panel MUST be fully OPAQUE #16181B, tiny inset outline #3A3E44, faint #1B1E22 grid. NO white paper panel, NO heavy black outer border, NO glow, NO transparent panel, NO cyan filled square or cyan HP. White #F2F3F4 text and WHITE LINE icons on graphite #202328 cells. Cyan #0DB8F2 LESS THAN5% of HUD area, allowed only tiny BATTLE FIELD text, energy current numeral3, tiny corner tick/diamond, selected1px border,3px HP end cap. All HP fills LIGHT GRAY #C9CED4 with dark readable numbers; unfilled track#202328.
+
+Keep v1 slim topbar and gameplay composition. Preserve scene, hand illustrations, anime characters, mech, existing red enemy intent, edge branding. HUD topbar1300x88 at280,0; sections for floor04/16 turn03, BATTLE FIELD and "1막 · 만발한 백피안화의 정원", dark item tray3 slots, existing item images, one dark quest slot with1px cyan border and tiny lower-left badge. Right MAP and DECK dark buttons at1611,22 and1612,100, white map/cards line icons, white labels, no old stars. Right resources264x51 at1631,768 /824 /880, DARK GRAY ICON CELLS, white pistol/bolt/bullets; "권총", current cyan"3" and gray"/3", white"6". END TURN280x70 at1615,941, dark NORMAL panel, WHITE chevron and white label, NO cyan outline/glow in normal state. Player HP360x39 at70,946, pale gray fill65/80 with ONLY3px cyan right edge; dark shield1 at34,922 and dark status slots with existing icons. EnemyHP240x26 pale gray fill29/40 and dark shield2 below mech, dark hovered name ribbon "스카웃 유닛". Keep screen center unobstructed. Fonts Pretendard-like. Existing card/intent colors retained, new HUD only charcoal/white/minimal cyan.
+
+PLAYER TURN state: energy3/3, END TURN enabled. All text is mockup reference to be separate TMP later, on flat uncluttered surfaces. Do not render an asset sheet. Absolutely eliminate v1 cyan fills from HP and resource icon squares.
+Full controlling brief:
+# 전투 화면 HUD · 조각 요청서 (v2 — 먹색 HUD)
+
+전투 화면에서 캐릭터·카드 위에 얹는 UI(HUD)를 다시 그린다.
+- 배경, 캐릭터·적 스탠딩, 카드, 적 인텐트 아이콘, 가장자리 장식 글자는 **그대로 둔다**.
+- **v1(`BattleHUD_Mockup_v1.png`)의 배치와 구성은 유지하고, 색 체계를 처음부터 다시 잡는다.**
+
+## 0. v1이 안 된 이유 (반복하지 말 것)
+
+`BattleHUD_Mockup_v1.png`:
+- **흰 패널이 흰 배경에 녹았다.** 전투 배경이 하늘색 도는 흰 대리석이라, 흰 종이 패널이 배경과 명도가 같다. 굵은 검은 외곽선으로 억지로 떼어 놓아 스티커처럼 보인다.
+- **청록을 면으로 칠했다.** 기호 칸, HP 채움, END TURN 테두리 글로우, 선택 칸 글로우가 전부 청록이다. 청록이 포인트가 아니라 주인공이 됐다.
+- **하늘색 배경 위의 진한 청록**은 같은 색 계열끼리 부딪쳐 탁해 보인다.
+
+→ v2는 **밝은 배경 위에 어두운 판**을 얹는다. 원래 상단 바 기획(`Reference_TopBar_Original.png`)과 씬 전환 막(`../SceneTransition`)이 이미 이 방향이고, 둘 다 통과했다.
+
+## 1. 색 체계 (이 표를 최우선으로 따른다)
+
+| 역할 | 색 | 쓰는 곳 |
+|---|---|---|
+| 판 바탕 | **먹색 #16181B**, 불투명 | 모든 HUD 판 |
+| 판 안쪽 선 | #3A3E44 (1px, 가장자리에서 3px 안쪽) | 판 윤곽. **바깥 굵은 외곽선 금지** |
+| 판 질감 | #1B1E22 정도의 아주 옅은 격자·사선 | 씬 전환 막과 같은 질감을 더 약하게 |
+| 주 글자 | 흰색 #F2F3F4 | 이름, 버튼 글자, 수치 |
+| 보조 글자 | 회색 #8A9099 | FLOOR/TURN 라벨, "/ 16" 같은 보조 수치, ITEMS 라벨 |
+| 기호(선화) | 흰색 선 | 무기·번개·탄환·지도·카드 기호 |
+| **청록 #0DB8F2** | **선과 점으로만** | 아래 목록뿐 |
+| 비활성 | 판 #202328 + 글자 #5A6069 | END TURN 비활성, 에너지·탄약 0 |
+
+**청록을 쓰는 곳 (이것 외에는 쓰지 않는다)**
+- "BATTLE FIELD" 작은 영문 라벨
+- 현재 수치의 강조 숫자 하나 (에너지 "3", 층 "04" 등 주 숫자만)
+- HP 바 채움의 **오른쪽 끝선 3px**
+- 호버·선택 상태의 **테두리 1px** (글로우 없음)
+- 판 모서리의 작은 눈금·마름모 장식 몇 개
+
+**청록 면적은 HUD 전체 픽셀의 5% 이하**로 한다. 청록으로 채운 사각형, 청록 글로우, 청록 그라데이션은 전부 금지다.
+
+**기타 규칙**
+- 반투명 금지. 모든 판은 알파 255. (프로젝트가 Linear 색공간이라 반투명 어둠은 회색으로 뜬다.)
+- 판 밑 그림자가 필요하면 불투명 #0B0C0E 띠를 오른쪽 아래로 3px 어긋나게 둔다. 흐린 그림자 금지.
+- 빨강·노랑 금지. 적 인텐트 아이콘(붉은 공격 표시)은 기존 그림이라 예외.
+- 글자는 전부 게임에서 TMP(Pretendard)로 얹는다. 버튼 글자(END TURN, MAP, DECK)도 그림에 넣지 않는다.
+
+## 2. 배치 (1920×1080, 왼쪽 위 원점)
+
+v1 목업과 같다. 표의 위치를 따른다.
+
+```
+┌─────────── 상단 작전 바 (280,0) 1300×88 ────────────┐   ┌ MAP  (1611,22)  275×72 ┐
+│ FLOOR 04/16 │ BATTLE FIELD / 막 이름 │ ITEMS [□][□][□] │   └ DECK (1612,100) 275×70 ┘
+└──────────────────────────────────────────────────────┘
+
+        (캐릭터·적 영역 — HUD 금지 x 360~1560, y 150~620)
+
+  적 발밑: HP 240×26 · 방어도 48×58 · 이름판 360×44
+
+ 방어도 배지 (34,922)                                         무기   (1631,768) 264×51
+ 상태 칸 (70,889)부터                                         에너지 (1631,824) 264×51
+ HP (70,946) 360×39          (손패 x 330~1560)                탄약   (1631,880) 264×51
+                                                              END TURN (1615,941) 280×70
+```
+
+END TURN은 x=1615다. 오른쪽 끝(1895)을 자원 칸 오른쪽 끝에 맞춘 v1의 조정을 그대로 쓴다.
+
+## 3. 조각 목록
+
+### 3.1 상단 작전 바
+
+| 조각 | 크기 | 설명 |
+|---|---|---|
+| `TopBar` | 1300 × 88 | 먹색 띠. 양 끝 사선 컷. 아래 가장자리 안쪽 선 + 가운데 작은 청록 마름모 하나. 왼쪽 정보·제목·아이템 구역 사이에 짧은 세로 구분선(#3A3E44) |
+| `TopBar_ItemTray` | 310 × 76 | 아이템 칸 3개 홈. 바탕보다 한 단계 어두운 #111316, 칸 간격 100 |
+| `ItemSlot_Empty` | 64 × 64 | #202328 칸 + 안쪽 선 + 가운데 작은 회색 "+" |
+| `ItemSlot_Hover` | 64 × 64 | 같은 칸 + 청록 테두리 1px |
+
+- 층 "04"와 턴 "03"은 흰색 굵게, "/ 16"과 라벨은 회색.
+- 의뢰 물품 칸 테두리(`../QuestRunUI`)는 흰 종이 톤이라 먹색 칸 위에서 튄다. 이 목업에서 먹색 계열로 다시 그린 **`ItemSlot_Quest`**(64×64, 청록 테두리 1px + 왼쪽 아래 작은 유형 배지)를 같이 요청한다.
+
+### 3.2 MAP · DECK
+
+| 조각 | 크기 |
+|---|---|
+| `Button_Map` · `Button_Deck` | 275×72 · 275×70 |
+
+- 먹색 판. 왼쪽 64px 기호 칸(흰 선화: 접힌 지도 / 카드 묶음), 세로 구분선, 오른쪽 글자 영역.
+- 상태: Normal / Hover(청록 테두리 1px) / Pressed(판 #202328).
+
+### 3.3 무기 · 에너지 · 탄약
+
+| 조각 | 크기 | 설명 |
+|---|---|---|
+| `Res_Frame` | 264 × 51 | 세 칸 공용 틀. 왼쪽 51×51 기호 칸(#202328) + 구분선 + 글자 영역 |
+| `Icon_Weapon_Pistol` · `Icon_Energy` · `Icon_Ammo` | 32 × 32 | 흰 선화 기호. 투명 배경 |
+| `Res_Frame_Empty` | 264 × 51 | 수치 0일 때: 판 #202328, 선 더 어둡게 |
+
+- 무기 이름은 흰색, 에너지는 "**3** / 3"(앞 숫자만 청록), 탄약 "6"(흰색).
+- **기호 칸을 청록으로 채우지 않는다.** v1에서 가장 크게 튀던 부분이다.
+
+### 3.4 END TURN
+
+| 조각 | 크기 | 상태 |
+|---|---|---|
+| `Button_EndTurn` | 280 × 70 | Normal / Hover / Pressed / Disabled |
+
+- Normal: 먹색 판, 오른쪽 끝 흰 화살표(▶). 글자는 게임에서 흰색으로.
+- Hover: 청록 테두리 1px + 화살표만 청록. **글로우 없음.**
+- Disabled(적 턴): 판 #202328, 화살표 #5A6069.
+
+### 3.5 플레이어 HP · 상태
+
+| 조각 | 크기 | 설명 |
+|---|---|---|
+| `HP_Frame` | 360 × 39 | 먹색 틀. 채움 영역 340×27 (틀 기준 8, 6) |
+| `HP_Fill` | 340 × 27 | **연회색 #C9CED4 면 + 오른쪽 끝 청록 3px**. 게임에서 가로로 잘라 쓴다 |
+| `HP_Track` | 340 × 27 | 채움 뒤 빈 부분. #202328 |
+| `Block_Badge` | 72 × 87 | 먹색 방패 윤곽 + 흰 안쪽 선. 숫자는 게임에서 |
+| `StatusSlot` | 44 × 44 | 먹색 작은 칸. 기존 상태 아이콘이 위에 얹힌다 |
+
+- HP 숫자 "65 / 80"은 채움 위에 오므로, 채움이 연회색이면 글자는 먹색으로 넣는다(게임에서 처리). 조립 예시에서 읽히는지 확인할 것.
+
+### 3.6 적 HP
+
+| 조각 | 크기 | 설명 |
+|---|---|---|
+| `EnemyHP_Frame` · `EnemyHP_Fill` · `EnemyHP_Track` | 240×26 · 227×18 · 227×18 | 플레이어 HP의 축소판 |
+| `EnemyBlock_Badge` | 48 × 58 | 플레이어 배지 축소판 |
+| `EnemyName_Plate` | 360 × 44 | 먹색 얇은 띠(높이 30 정도 + 양 끝 사선), 호버 때만 표시 |
+
+## 4. 결과물
+
+- 조각 PNG (투명 배경, 판은 알파 255). 버튼 상태별 파일.
+- 조립 예시 2장, 둘 다 `Reference_Current.png` 위에 얹는다:
+  - `Example_PlayerTurn`: 플레이어 턴 (에너지 3/3, END TURN 활성)
+  - `Example_EnemyTurn`: 적 턴 (END TURN 비활성, 에너지 0 빈 칸 상태)
+- 좌표가 든 `layout.json`.
+
+## 5. 하지 말 것
+
+- 흰 종이 패널, 굵은 검은 외곽선 (v1 방식)
+- 청록 면 채움·글로우·그라데이션
+- 반투명 판, 흐린 그림자
+- 별·꽃잎 등 축복 모티프 (기호는 격자·눈금·마름모·사선 계열만)
+- 캐릭터·적 영역(x 360~1560, y 150~620)과 손패 영역(x 330~1560, y 820~1080)을 가리는 것
+- 가장자리 장식("THE WHITE VERTEX" 등)을 새로 그리는 것
+
+
+
+ENEMY TURN
+Precise-object-edit of attached charcoal HUD mockup. Create ENEMY TURN state. Change ONLY right lower energy row from cyan 3 / 3 to muted gray 0 / 3; energy icon and cell should be disabled dark gray#202328, icon#5A6069. Change END TURN button to disabled#202328 panel with dim gray#5A6069 label and arrow. NO cyan on disabled row/button. All other HUD and battlefield artwork, positions, typography, card hand, environment, characters and enemy remain identical. Same exact dimensions. No other redesign. This is the enemy-turn companion example.

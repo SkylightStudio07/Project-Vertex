@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a641abbb5d7f845499b380d7a3f6486c, type: 3}
+  m_Name: Quest_SealedPapers
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: sealed_papers
+  title: "\uBD09\uC778\uB41C \uC11C\uB958"
+  client: "\uC775\uBA85\uC758 \uC758\uB8B0\uC778"
+  description: "4\uCE35 \uC774\uD6C4\uC5D0 \uB9E1\uACA8\uC9C8 \uC11C\uB958\uB97C
+    \uC0C1\uC810 \uC8FC\uC778 \uD1A0\uB0D0\uC5D0\uAC8C \uC804\uD558\uB77C."
+  tag: 0
+  cardArt: {fileID: 21300000, guid: 4826bfbf057e7694da83243047fac631, type: 3}
+  clientEmblem: {fileID: 0}
+  lockedHint: 
+  questItem: {fileID: 11400000, guid: bd3c3a6a971a22b44aceb61298358396, type: 2}
+  itemTrigger: 1
+  triggerChapter: 1
+  triggerFloor: 3
+  triggerEnemy: {fileID: 0}
+  goal: 1
+  deliverNodeType: 2
+  goalEnemy: {fileID: 0}
+  goalCount: 1
+  rewardExp: 20
+  rewardFlags: []
+  rescueCharId: 
+  requiredFlags: []

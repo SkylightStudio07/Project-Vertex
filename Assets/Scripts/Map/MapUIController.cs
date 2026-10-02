@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 // 맵 패널 열기/닫기, 노드 및 연결선 생성, 상태 갱신을 담당
@@ -41,6 +42,12 @@ public class MapUIController : MonoBehaviour
     [Header("열기 연출")]
     // mapPanel에 붙은 UIPanelTransition(오른쪽 슬라이드). 비워두면 연출 없이 즉시 켜고 끈다.
     [SerializeField] private UIPanelTransition mapTransition;
+    [SerializeField] private ActTitleBanner actTitleBanner; // 새 막 맵을 처음 열 때 막 이름 표시
+    // 맵 콘텐츠 전체를 덮는 배경. 원본 비율을 지키도록 높이에 맞추고, 콘텐츠가 더 길면 가로로 거울 반복한다
+    // (텍스처 Wrap Mode U = Mirror 필요. 이음새가 대칭이라 끊겨 보이지 않는다).
+    [SerializeField] private UnityEngine.UI.RawImage mapPanorama;
+    [SerializeField, Min(0f)] private float mapPanDelay = 0.35f; // 맵 패널이 들어온 뒤 패닝 시작까지
+    private Tween _panTween;
     [SerializeField, Min(0f)] private float nodeRevealDelay = 0.12f;   // 패널이 어느 정도 들어온 뒤 노드 시작
     [SerializeField, Min(0f)] private float nodeRevealPerFloor = 0.035f; // 층(왼→오)마다 늘어나는 지연
     [SerializeField, Min(0f)] private float nodeRevealDuration = 0.22f;
@@ -63,10 +70,37 @@ public class MapUIController : MonoBehaviour
         if (mapTransition != null) mapTransition.Show();
         else mapPanel.SetActive(true);
 
-        if (builtMapData != RunData.Instance.mapData) BuildMap();
+        bool isNewMap = builtMapData != RunData.Instance.mapData;
+        if (isNewMap) BuildMap();
         else RefreshNodeStates();
 
         PlayNodeReveal();
+        if (isNewMap) PlayActIntro();
+    }
+
+    // 새 막 맵: 보스 쪽 끝에서 시작점까지 천천히 당겨 오며 막 이름 배너를 띄운다.
+    // 당기는 도중 사용자가 드래그·휠을 쓰면 그 자리에서 멈추고 조작을 넘긴다.
+    private void PlayActIntro()
+    {
+        var act = GameManager.Instance != null ? GameManager.Instance.CurrentAct : null;
+        if (actTitleBanner != null) actTitleBanner.Play(act);
+
+        _panTween?.Kill();
+        float duration = act != null ? act.mapPanDuration : 0f;
+        if (duration <= 0f || scrollRect == null) return;
+
+        scrollRect.velocity = Vector2.zero;
+        scrollRect.horizontalNormalizedPosition = 1f;
+        _panTween = DOTween.To(() => scrollRect.horizontalNormalizedPosition,
+                               v => scrollRect.horizontalNormalizedPosition = v, 0f, duration)
+            .SetDelay(mapPanDelay).SetEase(Ease.InOutSine).SetLink(gameObject);
+
+        if (scrollRect is HorizontalMapScrollRect mapScroll)
+        {
+            void StopPan() { mapScroll.UserScrolled -= StopPan; _panTween?.Kill(); }
+            mapScroll.UserScrolled += StopPan;
+            _panTween.OnKill(() => mapScroll.UserScrolled -= StopPan);
+        }
     }
 
     public void CloseMap()
@@ -122,6 +156,9 @@ public class MapUIController : MonoBehaviour
 
         MapData mapData = RunData.Instance.mapData;
         builtMapData = mapData;
+        // 막 전용 지형 바탕 (ActData.mapTerrain). 없으면 씬에 넣어 둔 기존 바탕 유지
+        var act = GameManager.Instance != null ? GameManager.Instance.CurrentAct : null;
+        if (mapPanorama != null && act != null && act.mapTerrain != null) mapPanorama.texture = act.mapTerrain;
         if (mapData == null)
         {
             Debug.LogWarning("[MapUIController] mapData가 null입니다. MapManager.InitializeMap()이 호출됐는지 확인하세요.");
@@ -140,6 +177,7 @@ public class MapUIController : MonoBehaviour
         mapContent.anchorMax = new Vector2(0f, 1f);
         mapContent.pivot = new Vector2(0f, 0.5f);
         mapContent.sizeDelta = new Vector2(Mathf.Max(totalWidth, viewportWidth), 0f);
+        FitPanoramaAspect();
         scrollRect.horizontal = true;
         scrollRect.vertical = false;
 
@@ -171,6 +209,20 @@ public class MapUIController : MonoBehaviour
         scrollRect.horizontalNormalizedPosition = 0f;
     }
 
+    private void FitPanoramaAspect()
+    {
+        if (mapPanorama == null || mapPanorama.texture == null) return;
+        Canvas.ForceUpdateCanvases();
+        Rect area = mapPanorama.rectTransform.rect;
+        float textureAspect = (float)mapPanorama.texture.width / mapPanorama.texture.height;
+        if (area.height <= 0f || textureAspect <= 0f) return;
+        float repeat = area.width / (area.height * textureAspect);
+        repeat = Mathf.Max(0.01f, repeat);
+        // 맵이 짧아 한 장보다 좁으면 양쪽을 똑같이 잘라 가운데를 보인다
+        float offset = repeat < 1f ? (1f - repeat) * 0.5f : 0f;
+        mapPanorama.uvRect = new Rect(offset, 0f, repeat, 1f);
+    }
+
     private Vector2 GetNodePosition(MapNode node, float yOffset)
     {
         return new Vector2(node.floorIndex * floorSpacing + horizontalPadding,
@@ -195,6 +247,7 @@ public class MapUIController : MonoBehaviour
 
                     MapConnectionLine line = Instantiate(linePrefab, mapContent);
                     line.Setup(from, to, node.floorIndex);
+                    line.SetNodes(node, nextNode);
                     lineViews.Add(line);
                 }
             }
@@ -213,7 +266,7 @@ public class MapUIController : MonoBehaviour
 
             if (view.Data == currentNode)
                 state = MapNodeState.Current;
-            else if (view.Data.isVisited)
+            else if (view.Data.isVisited || view.Data.floorIndex == 0)
                 state = MapNodeState.Visited;
             else if (canAdvance && accessible.Contains(view.Data))
                 state = MapNodeState.Accessible;
@@ -222,7 +275,28 @@ public class MapUIController : MonoBehaviour
 
             view.SetState(state);
         }
+
+        // 연결선: 지나온 길(방문한 두 노드 사이) / 지금 갈 수 있는 길 / 나머지
+        foreach (var line in lineViews)
+        {
+            if (line == null || line.From == null || line.To == null) continue;
+            // 시작 층(축복)은 방문 표시가 없지만 지나온 것으로 본다
+            bool fromDone = line.From.isVisited || line.From == currentNode || line.From.floorIndex == 0;
+            bool toDone = line.To.isVisited || line.To == currentNode;
+            var style = fromDone && toDone ? MapConnectionLine.Style.Traveled
+                      : line.From == currentNode && canAdvance && accessible.Contains(line.To) ? MapConnectionLine.Style.Accessible
+                      : MapConnectionLine.Style.Other;
+            line.SetStyle(style);
+        }
+        MapRefreshed?.Invoke();
     }
+
+    // 맵이 새로 그려지거나 노드 상태가 바뀐 뒤 (작전 지도 판의 층 눈금·남은 층 갱신용)
+    public event System.Action MapRefreshed;
+    public RectTransform MapContent => mapContent;
+    public UnityEngine.UI.ScrollRect ScrollRect => scrollRect;
+    public float FloorSpacing => floorSpacing;
+    public float HorizontalPadding => horizontalPadding;
 
     private void OnNodeClicked(MapNode node)
     {
@@ -325,6 +399,11 @@ public class MapUIController : MonoBehaviour
 
         int chapter = GameManager.Instance != null ? GameManager.Instance.Chapter : 1;
         EventRosterSO chapterRoster = eventRosters?.Find(r => r != null && r.chapter == chapter);
+        // 그 막 로스터가 아직 없으면 가장 가까운 이전 막 로스터로 대체
+        if (chapterRoster == null && eventRosters != null)
+            foreach (var r in eventRosters)
+                if (r != null && r.chapter < chapter && (chapterRoster == null || r.chapter > chapterRoster.chapter))
+                    chapterRoster = r;
         if (chapterRoster == null && (commonEventRosters == null || commonEventRosters.Count == 0))
         {
             Debug.LogWarning($"[Map] 챕터 {chapter}에 해당하는 EventRosterSO가 없고, commonEventRosters도 비어있음.");
@@ -420,5 +499,11 @@ public class MapUIController : MonoBehaviour
         var shopRng = RunRng.For(RngStream.Shop, node.floorIndex, node.nodeIndex);
         ShopStock stock = new ShopStock(GameManager.Instance.cardPools, GameManager.Instance.ItemPool, shopRng);
         shopView.Open(stock);
+    }
+
+    // 씬을 다시 불러와도(재출정) 파괴된 이전 씬의 뷰가 Instance로 남지 않게 (비활성으로 시작하면 Awake가 늦게 돈다)
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 }

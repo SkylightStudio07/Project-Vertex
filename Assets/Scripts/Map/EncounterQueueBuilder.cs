@@ -54,12 +54,16 @@ public static class EncounterQueueBuilder
         return DrawWeighted(bossPool, rng);
     }
 
+    // 해당 막의 조우만 고른다. 그 막 조우가 하나도 없으면(아직 콘텐츠 없는 막) 가장 가까운 이전 막 조우로 대체한다.
     private static List<EnemyEncounter> FilterByChapter(List<EnemyEncounter> pool, int chapter)
     {
-        return pool?
-            .Where(encounter => encounter != null && encounter.chapter == chapter)
-            .ToList()
-            ?? new List<EnemyEncounter>();
+        if (pool == null) return new List<EnemyEncounter>();
+        var exact = pool.Where(encounter => encounter != null && encounter.chapter == chapter).ToList();
+        if (exact.Count > 0) return exact;
+
+        int fallbackChapter = pool.Where(e => e != null && e.chapter < chapter)
+                                  .Select(e => e.chapter).DefaultIfEmpty(-1).Max();
+        return pool.Where(e => e != null && e.chapter == fallbackChapter).ToList();
     }
 
     // 직전 조우(previous)와 같은 조우가 뽑히면 다시 뽑는다.

@@ -74,8 +74,10 @@ public class BattleManager : MonoBehaviour
     public event Action<BattleReward> OnBattleVictory;
     public event Action         OnBattleDefeat;
     public event Action         OnBattleEscaped;
+    public static event Action<EnemyInstance> EnemyDefeated; // 적 하나가 쓰러질 때마다
 
     private BattleType   _currentBattleType;
+    public BattleType CurrentBattleType => _currentBattleType;
     private System.Random _rnd = new();
     private WaitForSeconds _lungeOutWait; // 적 전진 타이밍 대기에 재사용할 객체.
     private WaitForSeconds _lungeBackAndPostActionWait; // 적 후퇴와 후처리 대기에 재사용할 객체.
@@ -155,6 +157,9 @@ public class BattleManager : MonoBehaviour
             }
             var enemy = new EnemyInstance(data, _rnd);
             enemy.OnDied += CheckVictory;
+            enemy.OnDied += () => EnemyDefeated?.Invoke(enemy); // 의뢰(처치 조건) 등 전투 밖 시스템용
+            enemy.OnDied += RunStats.AddDefeat; // 결과 화면 '격퇴'
+            if (!TrainingSession.IsActive) enemy.OnDied += () => PlayerRecord.AddDefeat(enemy.Data); // 실전 격퇴 기록 (훈련장 해금)
             _state.Enemies.Add(enemy);
         }
     }
@@ -190,6 +195,9 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator PlayerTurnStartSequence(bool showBanner)
     {
+        _state.TurnNumber++; // 플레이어 턴이 올 때마다 1부터 센다 (상단 작전 바 TURN 표시)
+        RunStats.AddTurn();   // 결과 화면 '진행 턴' (런 전체 합)
+
         if (showBanner && _playerTurnBanner != null)
             yield return _playerTurnBanner.ShowAndWait();
 
@@ -342,6 +350,8 @@ public class BattleManager : MonoBehaviour
         {
             if (enemy == null || enemy.IsDead) continue;
 
+            // 적 방어도도 플레이어와 같은 규칙 — 쌓은 방어도는 플레이어 턴 동안 남아 있다가 자기 행동이 시작될 때 초기화된다.
+            enemy.ResetBlock();
             enemy.StartTurnPassives(_state);
             if (!_isInBattle || _state.Player.IsDead) yield break;
             if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음
@@ -493,7 +503,7 @@ public class BattleManager : MonoBehaviour
 
     public bool CanUseItem(ItemData item)
     {
-        if (item == null || !CanUseItemNow) return false;
+        if (item == null || !CanUseItemNow || item.IsQuestItem) return false; // 의뢰 물품은 사용 불가
         if (_currentBattleType == BattleType.Boss &&
             item.ItemEffects.Any(effect => effect is EscapeBattleEffect))
             return false;
@@ -783,6 +793,13 @@ public class BattleManager : MonoBehaviour
 
     private void CheckVictory()
     {
+        // 살아남은 적에게 쓰러진 동료 수를 알린다 (3인 보스의 동료 사망 페이즈 등)
+        int dead = 0;
+        foreach (var e in _state.Enemies)
+            if (e.IsDead) dead++;
+        foreach (var e in _state.Enemies)
+            if (!e.IsDead) e.NotifyAlliesDefeated(dead);
+
         foreach (var e in _state.Enemies)
             if (!e.IsDead) return;
         Victory();

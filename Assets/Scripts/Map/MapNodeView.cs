@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // 노드가 현재 어떤 상태인지 열거형
@@ -15,7 +16,7 @@ public enum MapNodeState
 }
 
 // 노드 하나하나 시각적 처리 클래스. MapUIController가 프리팹을 Instantiate한 뒤 Setup()으로 초기화하고, 맵 이동 시마다 SetState()로 상태 갱신.
-public class MapNodeView : MonoBehaviour
+public class MapNodeView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // NodeType별 스프라이트 매핑 - 어차피 9개니까 선형으로 무식하게 해도 문제없음.
     [Serializable]
@@ -32,6 +33,36 @@ public class MapNodeView : MonoBehaviour
     [SerializeField] private Image nodeBackdrop;
     [SerializeField] private Button button; 
     [SerializeField] private GameObject currentMarker;    // 현재 위치 마커
+
+    // ── 맵 v1 (작전 지도): iconImage가 칸(틀)이 되고, 기호는 glyphImage에 그린다. glyphImage를 비우면 예전 방식 ──
+    [Serializable]
+    public struct GlyphSprite
+    {
+        public NodeType nodeType;
+        public Sprite dark;   // 종이 칸 위
+        public Sprite light;  // 먹색 칸(엘리트·보스) 위
+    }
+
+    [Header("맵 v1 (작전 지도)")]
+    [SerializeField] private Image glyphImage;
+    [SerializeField] private List<GlyphSprite> glyphSprites = new();
+    [Tooltip("일반 칸: Locked / Accessible / Visited / Current")]
+    [SerializeField] private Sprite[] frameNormal = new Sprite[4];
+    [Tooltip("휴식 칸: Locked / Accessible / Visited")]
+    [SerializeField] private Sprite[] frameRest = new Sprite[3];
+    [Tooltip("엘리트 칸: Locked / Accessible / Visited")]
+    [SerializeField] private Sprite[] frameElite = new Sprite[3];
+    [Tooltip("보스 칸(아래 이름표 띠 포함): Locked / Accessible")]
+    [SerializeField] private Sprite[] frameBoss = new Sprite[2];
+    [SerializeField] private Sprite frameBlessing;
+    [SerializeField] private GameObject visitedCheck;
+    [SerializeField] private Image accessibleRing;
+    [Tooltip("보스 칸 아래 이름표 띠의 글자 (보스만 켠다)")]
+    [SerializeField] private GameObject bossLabel;
+
+    private enum FrameKind { Normal, Rest, Elite, Boss, Blessing }
+    private FrameKind _kind;
+    private bool V1 => glyphImage != null;
 
     // 각 상태별 색상 (iconImage에 tinting으로 적용) - 클로드야 고마워
     private static readonly Color ColorLocked     = new(0.35f, 0.35f, 0.35f, 1f);
@@ -81,6 +112,7 @@ public class MapNodeView : MonoBehaviour
 
     private void StopStateMotion()
     {
+        if (accessibleRing != null) { accessibleRing.DOKill(); accessibleRing.color = Color.white; }
         if (!_hasBase) return;
         iconImage.rectTransform.DOKill();
         iconImage.rectTransform.anchoredPosition = _iconBasePos;
@@ -104,6 +136,8 @@ public class MapNodeView : MonoBehaviour
         }
         else if (state == MapNodeState.Accessible)
         {
+            if (accessibleRing != null)
+                accessibleRing.DOFade(0.25f, PulsePeriod * 0.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
             iconImage.rectTransform.DOAnchorPos(_iconBasePos + new Vector2(0f, FloatHeight), FloatPeriod * 0.5f)
                      .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
         }
@@ -119,10 +153,75 @@ public class MapNodeView : MonoBehaviour
         iconImage.sprite = presentation.sprite;
         hasIntegratedFrame = presentation.hasIntegratedFrame;
         if (nodeBackdrop != null) nodeBackdrop.enabled = !hasIntegratedFrame;
+        if (V1) SetupV1(data.nodeType);
 
         // 중복 등록 방지 후 클릭 리스너 등록
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => onClick?.Invoke(Data));
+    }
+
+    private void SetupV1(NodeType type)
+    {
+        if (nodeBackdrop != null) nodeBackdrop.enabled = false;
+        button.transition = Selectable.Transition.None; // 상태 색은 칸 스프라이트가 맡는다
+        _kind = type switch
+        {
+            NodeType.Rest => FrameKind.Rest,
+            NodeType.Elite => FrameKind.Elite,
+            NodeType.Boss => FrameKind.Boss,
+            NodeType.Blessing => FrameKind.Blessing,
+            _ => FrameKind.Normal,
+        };
+        var size = _kind switch
+        {
+            FrameKind.Elite => new Vector2(84f, 84f),
+            FrameKind.Boss => new Vector2(128f, 152f),
+            _ => new Vector2(76f, 76f),
+        };
+        iconImage.rectTransform.sizeDelta = size;
+        iconImage.type = Image.Type.Simple;
+        iconImage.preserveAspect = false;
+
+        bool dark = _kind == FrameKind.Elite || _kind == FrameKind.Boss;
+        Sprite glyph = null;
+        foreach (var g in glyphSprites)
+            if (g.nodeType == type) { glyph = dark && g.light != null ? g.light : g.dark; break; }
+        glyphImage.sprite = glyph;
+        glyphImage.enabled = glyph != null;
+        var gr = glyphImage.rectTransform;
+        gr.anchorMin = gr.anchorMax = new Vector2(0.5f, 0.5f);
+        float glyphSize = _kind == FrameKind.Boss ? 92f : _kind == FrameKind.Elite ? 60f : 54f;
+        gr.sizeDelta = new Vector2(glyphSize, glyphSize);
+        gr.anchoredPosition = _kind == FrameKind.Boss ? new Vector2(0f, 12f) : Vector2.zero; // 보스는 아래 이름표 띠만큼 위로
+
+        if (currentMarker != null)
+            ((RectTransform)currentMarker.transform).anchoredPosition = new Vector2(0f, size.y * 0.5f + 26f);
+        if (bossLabel != null) bossLabel.SetActive(_kind == FrameKind.Boss);
+        if (accessibleRing != null)
+            accessibleRing.rectTransform.sizeDelta = new Vector2(size.x + 16f, size.x + 16f);
+    }
+
+    private void ApplyStateV1(MapNodeState state)
+    {
+        iconImage.color = Color.white;
+        Sprite Pick(Sprite[] arr, int i) => arr != null && arr.Length > 0 ? arr[Mathf.Clamp(i, 0, arr.Length - 1)] : null;
+        int idx = state switch { MapNodeState.Locked => 0, MapNodeState.Accessible => 1, MapNodeState.Visited => 2, _ => 3 };
+        Sprite frame = _kind switch
+        {
+            FrameKind.Normal => Pick(frameNormal, idx),
+            // 휴식·엘리트는 현재 위치 칸이 따로 없어 이동 가능(테두리) 칸을 쓴다
+            FrameKind.Rest => Pick(frameRest, state == MapNodeState.Current ? 1 : idx),
+            FrameKind.Elite => Pick(frameElite, state == MapNodeState.Current ? 1 : idx),
+            FrameKind.Boss => Pick(frameBoss, state == MapNodeState.Locked ? 0 : 1),
+            _ => frameBlessing,
+        };
+        if (frame != null) iconImage.sprite = frame;
+        if (_kind == FrameKind.Blessing && frameBlessing != null) iconImage.sprite = frameBlessing;
+
+        float glyphAlpha = state switch { MapNodeState.Locked => 0.55f, MapNodeState.Visited => 0.45f, _ => 1f };
+        glyphImage.color = new Color(1f, 1f, 1f, glyphAlpha);
+        if (visitedCheck != null) visitedCheck.SetActive(state == MapNodeState.Visited && _kind != FrameKind.Blessing);
+        if (accessibleRing != null) accessibleRing.gameObject.SetActive(state == MapNodeState.Accessible);
     }
 
     // 노드의 시각 상태를 변경. MapUIController가 맵 이동 시마다 전체 노드에 호출함.
@@ -138,6 +237,8 @@ public class MapNodeView : MonoBehaviour
             _                       => Color.white  // 예외 케이스 (발생하지 않음)
         };
 
+        if (V1) ApplyStateV1(state);
+
         // Accessible 상태일 때만 버튼 클릭 가능
         button.interactable = state == MapNodeState.Accessible;
 
@@ -147,6 +248,68 @@ public class MapNodeView : MonoBehaviour
 
         _state = state;
         PlayStateMotion(state);
+        RefreshQuestTag();
+    }
+
+    // ── 의뢰 표식: 진행 중 의뢰와 관련된 노드(물품 획득 층·배달 목적지)의 오른쪽 위 모서리에 청록 태그 ──
+    // 이동 가능한 노드면 강조(글로우) 태그, 노드에 마우스를 올리면 위에 한 줄 말풍선.
+
+    private Image _questTag;
+    private RectTransform _questTip;
+    private TMPro.TextMeshProUGUI _questTipText;
+
+    private void RefreshQuestTag()
+    {
+        var skin = QuestRunSkin.Instance;
+        string line = null;
+        var quest = skin != null && Application.isPlaying ? QuestManager.Instance.NodeQuest(Data, out line) : null;
+        if (quest == null)
+        {
+            if (_questTag != null) _questTag.gameObject.SetActive(false);
+            if (_questTip != null) _questTip.gameObject.SetActive(false);
+            return;
+        }
+
+        if (_questTag == null)
+        {
+            // 노드 루트 영역은 아이콘보다 넓어서 아이콘 모서리에 붙인다 (이동 가능 노드의 둥실 모션도 같이 탄다)
+            _questTag = QuestRunSkin.Image("QuestTag", iconImage.transform, null, 0f, 0f, 28f, 28f);
+            var t = _questTag.rectTransform;
+            t.anchorMin = t.anchorMax = new Vector2(1f, 1f);
+            t.pivot = new Vector2(0.5f, 0.5f);
+            t.anchoredPosition = new Vector2(-4f, -4f); // 모서리에 걸친다
+
+            _questTip = QuestRunSkin.Rect("QuestTip", transform, 0f, 0f, 220f, 40f);
+            _questTip.anchorMin = _questTip.anchorMax = new Vector2(0.5f, 1f);
+            _questTip.pivot = new Vector2(0.5f, 0f);
+            _questTip.anchoredPosition = new Vector2(0f, 10f);
+            var bg = QuestRunSkin.Image("Bg", _questTip, skin.mapTooltip, 0f, 0f, 220f, 40f);
+            bg.preserveAspect = false;
+            _questTipText = skin.Text("Text", _questTip, 10f, 3f, 200f, 26f, 14f, QuestRunSkin.Graphite,
+                                      TMPro.TextAlignmentOptions.Center);
+            _questTipText.fontStyle = TMPro.FontStyles.Bold;
+            var cv = _questTip.gameObject.AddComponent<Canvas>(); // 이웃 노드 위로
+            cv.overrideSorting = true;
+            cv.sortingOrder = 60;
+        }
+
+        bool highlight = _state == MapNodeState.Accessible;
+        _questTag.sprite = skin.Tag(quest.IconKind, highlight);
+        _questTag.rectTransform.sizeDelta = highlight ? new Vector2(40f, 40f) : new Vector2(28f, 28f);
+        _questTag.gameObject.SetActive(_state != MapNodeState.Visited);
+        _questTag.transform.SetAsLastSibling();
+        _questTipText.text = line;
+        _questTip.gameObject.SetActive(false);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_questTip != null && _questTag != null && _questTag.gameObject.activeSelf) _questTip.gameObject.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_questTip != null) _questTip.gameObject.SetActive(false);
     }
 
     // nodeType에 맞는 스프라이트 반환. 일반 선형 탐색.

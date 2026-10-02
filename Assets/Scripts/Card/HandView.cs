@@ -46,6 +46,12 @@ public class HandView : MonoBehaviour
     [FormerlySerializedAs("exhaustDuration")]
     [SerializeField] private float _exhaustDuration = 0.5f; // 소멸 연출 시간.
 
+    [Header("Hover Spread")]
+    // 카드를 호버하면 양옆 카드가 가로로 비켜나 커진 카드에 가려지지 않게 한다 (STS 방식).
+    [SerializeField] private float _hoverSpreadNear = 80f; // 바로 옆 카드가 비켜나는 거리.
+    [SerializeField] private float _hoverSpreadFar = 40f; // 그보다 먼 카드가 비켜나는 거리.
+    [SerializeField] private float _hoverSpreadDuration = 0.15f;
+
     private readonly HashSet<CardData> _currentHandCards = new(); // 현재 BattleManager.Hand에 들어 있는 카드 참조 집합.
     private readonly List<CardView> _cardViews = new(); // 현재 화면에서 생존 중인 카드 UI 목록.
     private readonly List<CardInteractionView> _layoutInteractionViews = new(); // 현재 손패 배치에 사용할 카드 상호작용 뷰 목록.
@@ -75,7 +81,45 @@ public class HandView : MonoBehaviour
         BattleManager.Instance.OnHandExitAnimationRequested += PlayHandExitAnimation;
         // 손패 선택 모드 진입/종료 시 대상 아닌 카드의 흐림 표시를 갱신한다
         HandCardSelector.OnSelectionModeChanged += Refresh;
+        CardInteractionView.HoverChanged += ApplyHoverSpread;
+        BattleManager.Instance.OnBattleStarted += WatchPlayerStatuses;
+        WatchPlayerStatuses();
         Refresh();
+    }
+
+    // 힘·죄와 벌·민첩 등 플레이어 상태가 바뀌면 손패 설명의 보정 수치(색 표시 포함)를 다시 그린다.
+    private StatusContainer _watchedStatuses;
+
+    private void WatchPlayerStatuses()
+    {
+        if (_watchedStatuses != null) _watchedStatuses.OnChanged -= RefreshHandDescriptions;
+        _watchedStatuses = BattleManager.Instance?.State?.Player?.Statuses;
+        if (_watchedStatuses != null) _watchedStatuses.OnChanged += RefreshHandDescriptions;
+    }
+
+    private void RefreshHandDescriptions()
+    {
+        foreach (var view in _cardViews)
+            if (view != null) view.RefreshDescription();
+    }
+
+    // 호버된 카드를 기준으로 좌우 카드를 바깥쪽으로 밀고, 호버가 풀리면(null) 모두 제자리로 돌린다.
+    private void ApplyHoverSpread(CardInteractionView hovered)
+    {
+        int hoveredIndex = hovered != null ? _layoutInteractionViews.IndexOf(hovered) : -1;
+        for (int i = 0; i < _layoutInteractionViews.Count; i++)
+        {
+            var view = _layoutInteractionViews[i];
+            if (view == null) continue;
+
+            float dx = 0f;
+            if (hoveredIndex >= 0 && i != hoveredIndex)
+            {
+                float distance = Mathf.Abs(i - hoveredIndex) == 1 ? _hoverSpreadNear : _hoverSpreadFar;
+                dx = Mathf.Sign(view.RestingPosition.x - hovered.RestingPosition.x) * distance;
+            }
+            view.SetHoverShift(dx, _hoverSpreadDuration);
+        }
     }
 
     private void OnDestroy()
@@ -86,6 +130,9 @@ public class HandView : MonoBehaviour
             BattleManager.Instance.OnHandExitAnimationRequested -= PlayHandExitAnimation;
         }
         HandCardSelector.OnSelectionModeChanged -= Refresh;
+        CardInteractionView.HoverChanged -= ApplyHoverSpread;
+        if (BattleManager.Instance != null) BattleManager.Instance.OnBattleStarted -= WatchPlayerStatuses;
+        if (_watchedStatuses != null) _watchedStatuses.OnChanged -= RefreshHandDescriptions;
 
         if (_drawInRoutine != null)
             StopCoroutine(_drawInRoutine);

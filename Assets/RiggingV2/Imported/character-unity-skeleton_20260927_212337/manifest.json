@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "status": "needs_review",
+  "canvas": {
+    "width": 1024,
+    "height": 1024,
+    "origin": "top-left"
+  },
+  "parts": [
+    {
+      "id": "back_hair",
+      "runtimeName": "back hair",
+      "sourceLayerName": "back hair",
+      "file": "layers/back_hair.png",
+      "left": 352,
+      "top": 101,
+      "width": 441,
+      "height": 364,
+      "depthMedian": 0.8828125
+    },
+    {
+      "id": "neck",
+      "runtimeName": "neck",
+      "sourceLayerName": "neck",
+      "file": "layers/neck.png",
+      "left": 531,
+      "top": 409,
+      "width": 78,
+      "height": 98,
+      "depthMedian": 0.7734375
+    },
+    {
+      "id": "handwear_1",
+      "runtimeName": "handwear_1",
+      "sourceLayerName": "handwear-r",
+      "file": "layers/handwear_1.png",
+      "left": 244,
+      "top": 381,
+      "width": 228,
+      "height": 393,
+      "depthMedian": 0.7694323062896729
+    },
+    {
+      "id": "handwear_2",
+      "runtimeName": "handwear_2",
+      "sourceLayerName": "handwear-l",
+      "file": "layers/handwear_2.png",
+      "left": 556,
+      "top": 505,
+      "width": 236,
+      "height": 407,
+      "depthMedian": 0.7398033142089844
+    },
+    {
+      "id": "topwear",
+      "runtimeName": "topwear",
+      "sourceLayerName": "topwear",
+      "file": "layers/topwear.png",
+      "left": 392,
+      "top": 423,
+      "width": 343,
+      "height": 349,
+      "depthMedian": 0.73046875
+    },
+    {
+      "id": "face",
+      "runtimeName": "face",
+      "sourceLayerName": "face",
+      "file": "layers/face.png",
+      "left": 456,
+      "top": 190,
+      "width": 227,
+      "height": 265,
+      "depthMedian": 0.6054613590240479
+    },
+    {
+      "id": "nose",
+      "runtimeName": "nose",
+      "sourceLayerName": "nose",
+      "file": "layers/nose.png",
+      "left": 562,
+      "top": 372,
+      "width": 8,
+      "height": 10,
+      "depthMedian": 0.6044613590240479
+    },
+    {
+      "id": "eyebrow_2",
+      "runtimeName": "eyebrow_2",
+      "sourceLayerName": "eyebrow-l",
+      "file": "layers/eyebrow_2.png",
+      "left": 591,
+      "top": 287,
+      "width": 69,
+      "height": 15,
+      "depthMedian": 0.46739983558654785
+    },
+    {
+      "id": "eyebrow_1",
+      "runtimeName": "eyebrow_1",
+      "sourceLayerName": "eyebrow-r",
+      "file": "layers/eyebrow_1.png",
+      "left": 465,
+      "top": 287,
+      "width": 67,
+      "height": 17,
+      "depthMedian": 0.4168555736541748
+    },
+    {
+      "id": "irides_2",
+      "runtimeName": "irides_2",
+      "sourceLayerName": "irides-l",
+      "file": "layers/irides_2.png",
+      "left": 601,
+      "top": 335,
+      "width": 47,
+      "height": 23,
+      "depthMedian": 0.28355538845062256
+    },
+    {
+      "id": "eyelash_2",
+      "runtimeName": "eyelash_2",
+      "sourceLayerName": "eyelash-l",
+      "file": "layers/eyelash_2.png",
+      "left": 591,
+      "top": 327,
+      "width": 80,
+      "height": 32,
+      "depthMedian": 0.26943421363830566
+    },
+    {
+      "id": "irides_1",
+      "runtimeName": "irides_1",
+      "sourceLayerName": "irides-r",
+      "file": "layers/irides_1.png",
+      "left": 491,
+      "top": 333,
+      "width": 46,
+      "height": 21,
+      "depthMedian": 0.2661324143409729
+    },
+    {
+      "id": "eyelash_1",
+      "runtimeName": "eyelash_1",
+      "sourceLayerName": "eyelash-r",
+      "file": "layers/eyelash_1.png",
+      "left": 463,
+      "top": 326,
+      "width": 80,
+      "height": 31,
+      "depthMedian": 0.25418007373809814
+    },
+    {
+      "id": "front_hair",
+      "runtimeName": "front hair",
+      "sourceLayerName": "front hair",
+      "file": "layers/front_hair.png",
+      "left": 432,
+      "top": 125,
+      "width": 276,
+      "height": 303,
+      "depthMedian": 0.09433877468109131
+    },
+    {
+      "id": "source_headwear_hood",
+      "runtimeName": "headwear",
+      "sourceLayerName": "원본 복원 · 후드",
+      "file": "layers/source_headwear_hood.png",
+      "left": 403,
+      "top": 283,
+      "width": 338,
+      "height": 133,
+      "depthMedian": null,
+      "recoveryType": "hood",
+      "sourceRecovered": true
+    }
+  ],
+  "expressions": [
+    {
+      "id": "eye_open_original",
+      "file": "expressions/eye_open_original.png",
+      "left": 465,
+      "top": 326,
+      "width": 208,
+      "height": 36,
+      "side": null,
+      "fade": "eyeOpen"
+    },
+    {
+      "id": "eye_close",
+      "file": "expressions/eye_close.png",
+      "left": 471,
+      "top": 341,
+      "width": 196,
+      "height": 12,
+      "side": null,
+      "fade": "eyeClose"
+    },
+    {
+      "id": "mouth_close",
+      "file": "expressions/mouth_close.png",
+      "left": 562,
+      "top": 409,
+      "width": 13,
+      "height": 11,
+      "side": null,
+      "fade": "mouthClose"
+    },
+    {
+      "id": "mouth_open",
+      "file": "expressions/mouth_open.png",
+      "left": 565,
+      "top": 411,
+      "width": 7,
+      "height": 7,
+      "side": null,
+      "fade": "mouthOpen"
+    }
+  ],
+  "anchors": {
+    "face": {
+      "cx": 568.6262827628683,
+      "cy": 310.9879001185012,
+      "x0": 456,
+      "x1": 682,
+      "y0": 190,
+      "y1": 454
+    },
+    "mouth": {
+      "x0": 566,
+      "x1": 571,
+      "y0": 411,
+      "y1": 417,
+      "cx": 568.4728162124388,
+      "cy": 414.532215234102
+    },
+    "neckPivot": {
+      "cx": 571.0143193593971,
+      "cy": 491.45
+    },
+    "neckTop": 409,
+    "neckBottom": 506,
+    "bodyPivot": {
+      "cx": 571.0143193593971,
+      "cy": 1024
+    },
+    "faceScale": 0.6786786786786787,
+    "hairRootY": 250
+  },
+  "warnings": [
+    "눈 앵커가 불완전합니다. eyewhite/irides 레이어를 확인하세요."
+  ],
+  "synthetic": {
+    "eye": false,
+    "mouth": false
+  },
+  "expressionSource": "user_mask_derived",
+  "originalEyePreserved": true,
+  "originalEyebrowsPreserved": false,
+  "sourceMouthState": "closed",
+  "originalMouthPreserved": true,
+  "sourceReference": "source-original.png",
+  "layerOrder": [
+    "part:back_hair",
+    "part:neck",
+    "part:handwear_1",
+    "part:topwear",
+    "part:handwear_2",
+    "part:face",
+    "part:nose",
+    "part:eyebrow_2",
+    "part:eyebrow_1",
+    "part:irides_2",
+    "part:eyelash_2",
+    "part:irides_1",
+    "part:eyelash_1",
+    "expression:eye_open_original",
+    "expression:eye_close",
+    "expression:mouth_close",
+    "expression:mouth_open",
+    "part:front_hair",
+    "part:source_headwear_hood"
+  ],
+  "editRevision": 4,
+  "editedParts": [
+    "handwear_2",
+    "source_headwear_hood"
+  ]
+}

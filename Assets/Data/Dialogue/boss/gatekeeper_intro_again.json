@@ -1,0 +1,17 @@
+{
+  "characters": [
+    { "id": "gatekeeper", "name": "관문 수호자", "slot": 0 },
+    { "id": "player", "name": "방랑자", "slot": 3 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "gatekeeper", "emotion": "idle", "text": "……또, 너인가." },
+        { "type": "line", "speaker": "gatekeeper", "emotion": "idle", "text": "몇 번을 넘어도 같다. 버텍스는 기억하지 않는다. 너만이, 기억할 뿐." },
+        { "type": "line", "speaker": "player", "emotion": "annoyed", "text": "그럼 이번에도 똑같이 지나가 주지." }
+      ]
+    }
+  ]
+}

@@ -14,9 +14,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uB178\uC0C1\uAC15\uB3C4"
   health: 44
-  enemyImage: {fileID: 21300000, guid: cfbf7b3572327ff40bf54e495731037f, type: 3}
-  spriteScale: 1
+  enemyImage: {fileID: 3402010860072447783, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  rank: 0
+  materialJson: {fileID: 0}
+  spriteScale: 1.28
   intentOffsetY: 0
+  useScreenRect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  intentAnchor: {x: 0.5, y: 1}
+  hpBarAnchor: {x: 0.5, y: 0}
+  noLunge: 0
+  idleFrames:
+  - {fileID: 3402010860072447783, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: -454529154069949826, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 1873976827358520450, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 5946561668336149721, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 5599503114952365658, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: -7177574212061901168, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: -261931436575240394, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 1734356152666596414, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: -1492501295394083121, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: -569902206736538751, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 6786877123634668355, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: -4757349547041607083, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 7836990197049176103, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 1208444570467407819, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 2347975906121956472, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  - {fileID: 1189791111506103590, guid: 37dc7e240cb0df148bd65a9ee39cfe83, type: 3}
+  idleFrameRate: 12
+  attackFrames:
+  - {fileID: 7044165433238738391, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -4130033325532495223, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -6781116567745068696, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: 4896073099811470842, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -5782551549618930609, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -5938854652135675482, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: 6054602632248286810, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: 6772393009146824693, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: 6527641774959279247, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -3705672894678224582, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -3426069015213660815, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -3644283939665058686, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  - {fileID: -3160701806919043033, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
+  attackFrameRate: 14
+  idleSheetPadding: 0.14
+  attackSheetPadding: 0.21
+  startingStatuses: []
   activityPatternType: 0
   openingActions: []
   activityPatterns:
@@ -24,3 +72,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3b03f4ce74355b8b54765f6d5e9b8bb, type: 2}
   - {fileID: 11400000, guid: e270fa63f2b25ff4bfb14e8d59682687, type: 2}
   - {fileID: 11400000, guid: ea7ce1be04115c89bd5925d7ec808bf0, type: 2}
+  phases: []

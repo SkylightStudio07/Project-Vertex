@@ -1,53 +1,74 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
 
 // 협력자 캐릭터 선택을 관리하는 통합 UI
+// 후보 선택(사선 띠 3장, 빈 자리는 잠긴 후보) → 후보 확인 → 상세(분리 화면) → 합류
 public class SelectCoopCharUI : MonoBehaviour
 {
-    [SerializeField] private RectTransform selectedUI;
-    [SerializeField] private List<SelectCoopCharBtn> selectCoopCharBtns;
     [SerializeField] private FadeController fadeController;
     [SerializeField] private DialogueView dialogueView;
-    [Header("Sanctuary visuals (character art remains data-driven)")]
-    [SerializeField] private Sprite sanctuaryBackground;
-    [SerializeField] private Sprite candidateFrameSprite;
-    [SerializeField] private Sprite candidateActionButtonSprite;
-    [SerializeField] private SelectCoopCharBtn candidateFramePrefab;
-    [Tooltip("화면 높이 대비 대각선의 가로 이동량")]
-    [SerializeField, Range(0f, 0.7f)] private float diagonalSlope = 0.5f;
-    [Header("Sanctuary detail")]
+
+    [Header("후보 선택")]
+    [SerializeField] private RectTransform selectView;
+    [Tooltip("띠는 항상 이 개수만큼 보인다. 후보가 모자라면 잠긴 후보로 채운다")]
+    [SerializeField] private List<SelectCoopCharBtn> strips = new();
+    [SerializeField] private Button detailButton;
+    [SerializeField] private TextMeshProUGUI detailButtonLabel;
+    [SerializeField] private Image detailButtonArrow;
+    [Tooltip("잠긴 후보 띠 아래 해금 조건 문구")]
+    [SerializeField] private string lockedHint = "구출 의뢰 · 구조 신호";
+    [SerializeField] private TextMeshProUGUI guideText;
+    [Tooltip("동행 인원(CooperationManager.MaxCompanionsInRun)이 가득 찼을 때")]
+    [SerializeField] private string partyFullHint = "동행 인원 가득 참";
+    [SerializeField, TextArea] private string partyFullGuide = "동행 인원이 가득 찼습니다. 휴식 지점에서 동료를 거점으로 돌려보내면 합류할 수 있습니다.";
+
+    [Header("후보 상세")]
     [SerializeField] private RectTransform detailPanel;
     [SerializeField] private Image detailFullArt;
-    [SerializeField] private TextMeshProUGUI detailArtPlaceholder;
+    [SerializeField] private RectTransform detailArtArea;
+    [SerializeField] private TextMeshProUGUI detailNumber;
     [SerializeField] private TextMeshProUGUI detailName;
+    [SerializeField] private TextMeshProUGUI detailAffiliation;
+    [SerializeField] private Image detailAccent;
     [SerializeField] private TextMeshProUGUI detailDescription;
-    [SerializeField] private RectTransform joinCardPanel;
+    [SerializeField] private TextMeshProUGUI affinityLevelText;
+    [SerializeField] private List<Image> affinityCells = new();
+    [SerializeField] private Sprite affinityEmpty;
+    [SerializeField] private Sprite affinityFilled;
     [SerializeField] private Image joinCardArt;
     [SerializeField] private TextMeshProUGUI joinCardName;
     [SerializeField] private TextMeshProUGUI joinCardDescription;
     [SerializeField] private TextMeshProUGUI joinCardCost;
+    [SerializeField] private TextMeshProUGUI rewardSummary;
     [SerializeField] private Button backButton;
     [SerializeField] private Button proceedButton;
 
+    [Header("글자 색")]
+    [SerializeField] private Color inkColor = new(0.086f, 0.094f, 0.106f, 1f);
+    [SerializeField] private Color disabledColor = new(0.62f, 0.64f, 0.67f, 1f);
+
+    private SelectCoopCharBtn selectedStrip;
     private string pendingCharID;
     private bool isConfirming;
-    private int activeCandidateCount;
-    private Vector2 lastChoiceSize;
+    private bool partyFull;
+    private string defaultGuide;
+    private string defaultDetailLabel;
 
     public DialogueView DialogueView => dialogueView;
 
-    // 협력자 선택 이벤트 활성화 시 UI를 초기화하는 메소드
-
     private void Awake()
     {
-        selectCoopCharBtns = new List<SelectCoopCharBtn>(GetComponentsInChildren<SelectCoopCharBtn>(true));
+        if (guideText != null) defaultGuide = guideText.text;
+        if (detailButtonLabel != null) defaultDetailLabel = detailButtonLabel.text;
+        if (detailButton != null) detailButton.onClick.AddListener(OpenSelectedDetails);
         if (backButton != null) backButton.onClick.AddListener(BackToCandidates);
         if (proceedButton != null) proceedButton.onClick.AddListener(ConfirmSelection);
     }
 
+    // 협력자 선택 이벤트 활성화 시 UI를 초기화하는 메소드
     public void Init()
     {
         List<string> candidates = CollectCandidates();
@@ -65,78 +86,135 @@ public class SelectCoopCharUI : MonoBehaviour
 
         pendingCharID = null;
         isConfirming = false;
-        if (detailPanel != null) detailPanel.gameObject.SetActive(false);
+        selectedStrip = null;
         if (proceedButton != null) proceedButton.interactable = true;
         if (backButton != null) backButton.interactable = true;
-        if (selectCoopCharBtns.Count > 0)
-            selectCoopCharBtns[0].transform.parent.gameObject.SetActive(true);
+        ShowSelect();
 
-        EnsureButtonCapacity(candidates.Count);
-        activeCandidateCount = candidates.Count;
-        ApplySanctuaryLayout(candidates.Count);
+        // 동행 인원이 가득 차면 후보는 보여 주되 고를 수 없고, 버튼은 "돌아가기"가 된다
+        partyFull = CooperationManager.Instance != null && CooperationManager.Instance.IsPartyFull;
+        if (guideText != null) guideText.text = partyFull ? partyFullGuide : defaultGuide;
 
-        // 후보 수와 버튼 수가 다를 수 있으므로 남는 버튼은 끈다.
-        for (int i = 0; i < selectCoopCharBtns.Count; i++)
+        List<CoopCharData> lockedSources = CollectLockedSilhouettes(candidates);
+        for (int i = 0; i < strips.Count; i++)
         {
-            bool hasCandidate = i < candidates.Count;
-            selectCoopCharBtns[i].gameObject.SetActive(hasCandidate);
-            if (hasCandidate) selectCoopCharBtns[i].SetBtn(candidates[i]);
+            if (i < candidates.Count) strips[i].SetCandidate(candidates[i], i, partyFull ? partyFullHint : null);
+            else
+            {
+                int lockedIndex = i - candidates.Count;
+                CoopCharData source = lockedIndex < lockedSources.Count ? lockedSources[lockedIndex] : null;
+                strips[i].SetLocked(source, i, lockedHint);
+            }
         }
+
+        // 후보가 한 명이면 미리 골라 둔다 (바로 후보 확인 가능)
+        if (candidates.Count == 1 && !partyFull) SelectCandidate(strips[0]);
+        else RefreshDetailButton();
     }
 
-    private void LateUpdate()
+    public void SelectCandidate(SelectCoopCharBtn strip)
     {
-        if (activeCandidateCount == 0 || selectCoopCharBtns.Count == 0) return;
-        RectTransform choices = selectCoopCharBtns[0].transform.parent as RectTransform;
-        if (choices != null && choices.gameObject.activeInHierarchy && choices.rect.size != lastChoiceSize)
-            ApplySanctuaryLayout(activeCandidateCount);
+        if (strip == null || strip.IsLocked) return;
+        selectedStrip = strip;
+        foreach (SelectCoopCharBtn s in strips) s.SetSelected(s == strip);
+        RefreshDetailButton();
+    }
+
+    private void RefreshDetailButton()
+    {
+        bool ready = selectedStrip != null || partyFull;
+        if (detailButton != null) detailButton.interactable = ready;
+        if (detailButtonLabel != null) detailButtonLabel.text = partyFull ? "돌아가기" : defaultDetailLabel;
+        if (detailButtonLabel != null) detailButtonLabel.color = ready ? inkColor : disabledColor;
+        if (detailButtonArrow != null) detailButtonArrow.color = ready ? inkColor : disabledColor;
+    }
+
+    private void OpenSelectedDetails()
+    {
+        if (partyFull) { CloseUI(); return; }
+        if (selectedStrip != null) OpenDetails(selectedStrip.CharID);
     }
 
     public void OpenDetails(string charID)
     {
-        if (detailPanel == null || CooperationManager.Instance == null) return;
+        if (detailPanel == null || CooperationManager.Instance == null || string.IsNullOrEmpty(charID)) return;
         CoopCharData data = CooperationManager.Instance.GetCoopCharData(charID);
         if (data == null) return;
 
         pendingCharID = charID;
+        int index = Mathf.Max(0, strips.FindIndex(s => s.CharID == charID));
+        detailNumber.text = $"{index + 1:00}";
         detailName.text = string.IsNullOrWhiteSpace(data.charName) ? charID : data.charName;
+        detailAffiliation.text = data.affiliation;
+        detailAccent.color = data.themeColor;
+
         detailDescription.text = string.IsNullOrWhiteSpace(data.charDescription)
             ? "설명이 아직 등록되지 않았습니다."
             : data.charDescription;
 
-        // This is a dedicated full-screen art slot. Deprecated selection portraits are not reused here.
-        detailFullArt.sprite = data.sanctuaryFullArt;
-        detailFullArt.enabled = data.sanctuaryFullArt != null;
-        if (detailArtPlaceholder != null)
-            detailArtPlaceholder.gameObject.SetActive(data.sanctuaryFullArt == null);
-        if (data.sanctuaryFullArt != null)
-        {
-            RectTransform artRect = detailFullArt.rectTransform;
-            RectTransform screenRect = detailPanel;
-            float screenHeight = screenRect.rect.height;
-            float ratio = data.sanctuaryFullArt.rect.width / data.sanctuaryFullArt.rect.height;
-            artRect.sizeDelta = new Vector2(screenHeight * ratio, screenHeight);
-            artRect.anchoredPosition = new Vector2(screenRect.rect.width * 0.23f, 0f);
-        }
+        int level = CooperationManager.Instance.GetCoopLevel(charID);
+        affinityLevelText.text = $"<size=62%>Lv.</size>{level}";
+        for (int i = 0; i < affinityCells.Count; i++)
+            affinityCells[i].sprite = i < level ? affinityFilled : affinityEmpty;
 
         CardData card = data.joinRewardCard;
-        joinCardPanel.gameObject.SetActive(true);
         joinCardArt.sprite = card != null ? card.CardImage : null;
-        joinCardArt.enabled = card != null && card.CardImage != null;
-        joinCardName.text = card != null ? card.CardName : "합류 카드 미지정";
-        joinCardDescription.text = card != null ? card.CardDescription : "현재 캐릭터 데이터에 합류 카드가 없습니다.";
+        joinCardArt.enabled = joinCardArt.sprite != null;
+        joinCardName.text = card != null ? card.CardName : "합류 카드 없음";
+        joinCardDescription.text = card != null ? card.CardDescription : "";
         joinCardCost.text = card != null ? $"에너지 {card.EnergyCost}  ·  탄약 {card.AmmoCost}" : "";
 
-        selectCoopCharBtns[0].transform.parent.gameObject.SetActive(false);
+        rewardSummary.text = BuildRewardSummary(data);
+        ApplyFullArt(data);
+
+        if (selectView != null) selectView.gameObject.SetActive(false);
         detailPanel.gameObject.SetActive(true);
+
+        // 소속은 이름 바로 옆에 붙인다 (패널이 켜진 뒤에 재야 폭이 나온다)
+        float nameWidth = detailName.GetPreferredValues(detailName.text).x;
+        RectTransform affRect = detailAffiliation.rectTransform;
+        affRect.anchoredPosition = new Vector2(detailName.rectTransform.anchoredPosition.x + nameWidth + 34f, affRect.anchoredPosition.y);
+    }
+
+    private static string BuildRewardSummary(CoopCharData data)
+    {
+        var parts = new List<string>();
+        if (data.rewardPoolCommon.Count > 0) parts.Add($"공용 {data.rewardPoolCommon.Count}");
+        if (data.rewardPoolRare.Count > 0) parts.Add($"레어 {data.rewardPoolRare.Count}");
+        if (data.rewardPoolUnique.Count > 0) parts.Add($"유니크 {data.rewardPoolUnique.Count}");
+        return parts.Count > 0 ? string.Join("  ·  ", parts) : "등록된 보상 카드 없음";
+    }
+
+    // 성소 전신 아트 → 스탠딩 → 초상화 순. 영역 높이에 맞추고 너비가 넘치면 너비에 맞춘다.
+    private void ApplyFullArt(CoopCharData data)
+    {
+        Sprite art = data.sanctuaryFullArt != null ? data.sanctuaryFullArt
+            : data.standingSprite != null ? data.standingSprite
+            : data.charImage;
+        detailFullArt.sprite = art;
+        detailFullArt.enabled = art != null;
+        if (art == null || detailArtArea == null) return;
+
+        Vector2 area = detailArtArea.rect.size;
+        float scale = Mathf.Min(area.y / art.rect.height, area.x / art.rect.width);
+        RectTransform rt = detailFullArt.rectTransform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
+        rt.pivot = new Vector2(0.5f, 0f);
+        rt.anchoredPosition = Vector2.zero;
+        rt.sizeDelta = art.rect.size * scale;
     }
 
     private void BackToCandidates()
     {
         if (isConfirming) return;
         pendingCharID = null;
-        detailPanel.gameObject.SetActive(false);
-        selectCoopCharBtns[0].transform.parent.gameObject.SetActive(true);
+        ShowSelect();
+    }
+
+    private void ShowSelect()
+    {
+        if (detailPanel != null) detailPanel.gameObject.SetActive(false);
+        if (selectView != null) selectView.gameObject.SetActive(true);
     }
 
     private void ConfirmSelection()
@@ -159,92 +237,7 @@ public class SelectCoopCharUI : MonoBehaviour
         CloseUI();
     }
 
-    private void EnsureButtonCapacity(int count)
-    {
-        if (selectCoopCharBtns.Count == 0) return;
-
-        while (selectCoopCharBtns.Count < count)
-        {
-            SelectCoopCharBtn source = candidateFramePrefab != null ? candidateFramePrefab : selectCoopCharBtns[0];
-            SelectCoopCharBtn button = Instantiate(source, selectCoopCharBtns[0].transform.parent);
-            button.name = $"Character Choice {selectCoopCharBtns.Count + 1}";
-            Button unityButton = button.GetComponent<Button>();
-            unityButton.onClick = new Button.ButtonClickedEvent();
-            unityButton.onClick.AddListener(button.OnClickBtn);
-            selectCoopCharBtns.Add(button);
-        }
-    }
-
-    private void ApplySanctuaryLayout(int count)
-    {
-        if (count == 0 || selectCoopCharBtns.Count == 0) return;
-
-        RectTransform panel = transform.Find("Panel") as RectTransform;
-        if (panel == null) return;
-
-        panel.anchorMin = Vector2.zero;
-        panel.anchorMax = Vector2.one;
-        panel.offsetMin = Vector2.zero;
-        panel.offsetMax = Vector2.zero;
-        Image panelImage = panel.GetComponent<Image>();
-        if (panelImage != null && sanctuaryBackground != null)
-        {
-            panelImage.sprite = sanctuaryBackground;
-            panelImage.color = Color.white;
-            panelImage.type = Image.Type.Simple;
-        }
-
-        RectTransform choiceLayer = selectCoopCharBtns[0].transform.parent as RectTransform;
-        bool useEditorialFrame = candidateFrameSprite != null;
-        choiceLayer.anchorMin = Vector2.zero;
-        choiceLayer.anchorMax = Vector2.one;
-        choiceLayer.offsetMin = useEditorialFrame ? new Vector2(18f, 28f) : Vector2.zero;
-        choiceLayer.offsetMax = useEditorialFrame ? new Vector2(-18f, -155f) : Vector2.zero;
-        choiceLayer.localScale = Vector3.one;
-        if (choiceLayer.GetComponent<UnityEngine.UI.RectMask2D>() == null)
-            choiceLayer.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
-        Image legacyBackdrop = choiceLayer.GetComponent<Image>();
-        if (legacyBackdrop != null) legacyBackdrop.enabled = false;
-        if (selectedUI != null) selectedUI.gameObject.SetActive(false);
-
-        choiceLayer.ForceUpdateRectTransforms();
-        float width = choiceLayer.rect.width;
-        float height = choiceLayer.rect.height;
-        if (width <= 0f || height <= 0f) return;
-        lastChoiceSize = choiceLayer.rect.size;
-        float cellWidth = width / count;
-        float skew = !useEditorialFrame && count > 1 ? Mathf.Min(height * diagonalSlope, cellWidth * 0.85f) : 0f;
-        TMP_FontAsset uiFont = detailName != null && detailName.font != null
-            ? detailName.font
-            : TMP_Settings.defaultFontAsset;
-
-        for (int i = 0; i < selectCoopCharBtns.Count; i++)
-        {
-            SelectCoopCharBtn choice = selectCoopCharBtns[i];
-            if (i >= count) continue;
-            RectTransform rect = choice.transform as RectTransform;
-            // Shared boundaries tile the entire screen. Outer edges remain flush with the viewport.
-            float bottomLeft = useEditorialFrame ? i * cellWidth : i == 0 ? 0f : i * cellWidth - skew * 0.5f;
-            float topLeft = useEditorialFrame ? i * cellWidth : i == 0 ? 0f : i * cellWidth + skew * 0.5f;
-            float bottomRight = useEditorialFrame ? (i + 1) * cellWidth : i == count - 1 ? width : (i + 1) * cellWidth - skew * 0.5f;
-            float topRight = useEditorialFrame ? (i + 1) * cellWidth : i == count - 1 ? width : (i + 1) * cellWidth + skew * 0.5f;
-            float boundsWidth = topRight - bottomLeft;
-
-            rect.anchorMin = Vector2.zero;
-            rect.anchorMax = new Vector2(0f, 1f);
-            rect.pivot = new Vector2(0f, 0.5f);
-            rect.sizeDelta = new Vector2(boundsWidth, 0f);
-            rect.anchoredPosition = new Vector2(bottomLeft, 0f);
-            rect.localScale = Vector3.one;
-            rect.localRotation = Quaternion.identity;
-            choice.ConfigureDiagonalStrip(new Vector4(
-                0f, (bottomRight - bottomLeft) / boundsWidth,
-                (topLeft - bottomLeft) / boundsWidth, 1f), i == 0, i == count - 1, i, uiFont,
-                candidateFrameSprite, candidateActionButtonSprite);
-        }
-    }
-
-    // 이번 층의 성소 후보 중 아직 합류하지 않은 캐릭터만 추린다.
+    // 이번 층의 성소 후보 중 아직 합류하지 않은 캐릭터만 추린다. (띠 개수까지만)
     // 주의: GetSeletableChar()는 HolyPlaceData(SO) 내부 리스트의 참조를 그대로 반환하므로
     //       반환된 리스트를 직접 수정하면 에셋이 영구 변경된다. 반드시 새 리스트에 담는다.
     private List<string> CollectCandidates()
@@ -262,6 +255,7 @@ public class SelectCoopCharUI : MonoBehaviour
 
         foreach (string charID in selectable)
         {
+            if (candidates.Count >= strips.Count) break;
             if (CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charID)) continue;
             candidates.Add(charID);
         }
@@ -269,11 +263,18 @@ public class SelectCoopCharUI : MonoBehaviour
         return candidates;
     }
 
-    // 선택된 캐릭터 창의 위치에 선택 표시 UI를 이동시키는 메소드
-    public void Selected(Transform transform)
+    // 잠긴 자리에 깔 실루엣: 이번 후보도 아니고 이번 런에 합류하지도 않은 협력자
+    private static List<CoopCharData> CollectLockedSilhouettes(List<string> candidates)
     {
-        selectedUI.position = transform.position;
-
+        var list = new List<CoopCharData>();
+        if (CooperationManager.Instance == null) return list;
+        foreach (CoopCharData data in CooperationManager.Instance.AllCharData())
+        {
+            if (candidates.Contains(data.charID) || CooperationManager.Instance.IsJoinedInRun(data.charID)) continue;
+            if (data.standingSprite == null || data.isEventCompanion) continue;
+            list.Add(data);
+        }
+        return list;
     }
 
     public void CloseUI()

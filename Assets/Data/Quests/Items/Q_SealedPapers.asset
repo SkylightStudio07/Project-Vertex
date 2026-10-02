@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e961ef58c92348810475ddf3db54c, type: 3}
+  m_Name: Q_SealedPapers
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "\uBD09\uC778\uB41C \uC11C\uB958"
+  itemIcon: {fileID: 21300000, guid: 2091e79eafdde124c8785eedb472a68a, type: 3}
+  itemRarity: 0
+  usableOutsideBattle: 0
+  itemGetTypes: 0
+  itemDescription: "\uBC00\uB78D\uC73C\uB85C \uBD09\uC778\uB41C \uC11C\uB958 \uBD09\uD22C.
+    \uD1A0\uB0D0\uC5D0\uAC8C \uC804\uD574 \uB2EC\uB77C\uB294 \uBD80\uD0C1\uC744 \uBC1B\uC558\uB2E4.\n<color=#0DB8F2>\uC758\uB8B0
+    \uBB3C\uD488 \xB7 \uC0AC\uC6A9 \uBD88\uAC00</color>"
+  itemEffects: []
+  useMode: 0
+  lingeringBattleCount: 0
+  lingeringEffects: []
+  isQuestItem: 1
+  references:
+    version: 2
+    RefIds: []

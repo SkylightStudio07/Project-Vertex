@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "status": "ready",
+  "canvas": {
+    "width": 1024,
+    "height": 1024,
+    "origin": "top-left"
+  },
+  "parts": [
+    {
+      "id": "back_hair",
+      "runtimeName": "back hair",
+      "sourceLayerName": "back hair",
+      "file": "layers/back_hair.png",
+      "left": 462,
+      "top": 40,
+      "width": 130,
+      "height": 183,
+      "depthMedian": 0.875
+    },
+    {
+      "id": "headwear",
+      "runtimeName": "headwear",
+      "sourceLayerName": "headwear",
+      "file": "layers/headwear.png",
+      "left": 427,
+      "top": 5,
+      "width": 204,
+      "height": 192,
+      "depthMedian": 0.850921630859375
+    },
+    {
+      "id": "handwear_2",
+      "runtimeName": "handwear_2",
+      "sourceLayerName": "handwear-l",
+      "file": "layers/handwear_2.png",
+      "left": 613,
+      "top": 202,
+      "width": 96,
+      "height": 339,
+      "depthMedian": 0.8337548971176147
+    },
+    {
+      "id": "topwear",
+      "runtimeName": "topwear",
+      "sourceLayerName": "topwear",
+      "file": "layers/topwear.png",
+      "left": 235,
+      "top": 114,
+      "width": 557,
+      "height": 776,
+      "depthMedian": 0.8014402389526367
+    },
+    {
+      "id": "legwear",
+      "runtimeName": "legwear",
+      "sourceLayerName": "legwear",
+      "file": "layers/legwear.png",
+      "left": 415,
+      "top": 429,
+      "width": 189,
+      "height": 582,
+      "depthMedian": 0.7274520397186279
+    },
+    {
+      "id": "bottomwear",
+      "runtimeName": "bottomwear",
+      "sourceLayerName": "bottomwear",
+      "file": "layers/bottomwear.png",
+      "left": 426,
+      "top": 359,
+      "width": 175,
+      "height": 112,
+      "depthMedian": 0.6748656034469604
+    },
+    {
+      "id": "handwear_1",
+      "runtimeName": "handwear_1",
+      "sourceLayerName": "handwear-r",
+      "file": "layers/handwear_1.png",
+      "left": 331,
+      "top": 189,
+      "width": 138,
+      "height": 220,
+      "depthMedian": 0.6484375
+    },
+    {
+      "id": "neck",
+      "runtimeName": "neck",
+      "sourceLayerName": "neck",
+      "file": "layers/neck.png",
+      "left": 512,
+      "top": 104,
+      "width": 49,
+      "height": 81,
+      "depthMedian": 0.628966212272644
+    },
+    {
+      "id": "ears_2",
+      "runtimeName": "ears_2",
+      "sourceLayerName": "ears-l",
+      "file": "layers/ears_2.png",
+      "left": 560,
+      "top": 98,
+      "width": 13,
+      "height": 26,
+      "depthMedian": 0.5357301235198975
+    },
+    {
+      "id": "ears_1",
+      "runtimeName": "ears_1",
+      "sourceLayerName": "ears-r",
+      "file": "layers/ears_1.png",
+      "left": 479,
+      "top": 114,
+      "width": 22,
+      "height": 27,
+      "depthMedian": 0.5167049169540405
+    },
+    {
+      "id": "eyebrow_1",
+      "runtimeName": "eyebrow_1",
+      "sourceLayerName": "eyebrow-r",
+      "file": "layers/eyebrow_1.png",
+      "left": 483,
+      "top": 104,
+      "width": 24,
+      "height": 4,
+      "depthMedian": 0.4551478624343872
+    },
+    {
+      "id": "eyebrow_2",
+      "runtimeName": "eyebrow_2",
+      "sourceLayerName": "eyebrow-l",
+      "file": "layers/eyebrow_2.png",
+      "left": 528,
+      "top": 94,
+      "width": 29,
+      "height": 9,
+      "depthMedian": 0.45343053340911865
+    },
+    {
+      "id": "face",
+      "runtimeName": "face",
+      "sourceLayerName": "face",
+      "file": "layers/face.png",
+      "left": 474,
+      "top": 51,
+      "width": 91,
+      "height": 114,
+      "depthMedian": 0.4392002820968628
+    },
+    {
+      "id": "nose",
+      "runtimeName": "nose",
+      "sourceLayerName": "nose",
+      "file": "layers/nose.png",
+      "left": 521,
+      "top": 126,
+      "width": 9,
+      "height": 14,
+      "depthMedian": 0.4382002820968628
+    },
+    {
+      "id": "eyelash_1",
+      "runtimeName": "eyelash_1",
+      "sourceLayerName": "eyelash-r",
+      "file": "layers/eyelash_1.png",
+      "left": 479,
+      "top": 114,
+      "width": 36,
+      "height": 13,
+      "depthMedian": 0.36070287227630615
+    },
+    {
+      "id": "eyelash_2",
+      "runtimeName": "eyelash_2",
+      "sourceLayerName": "eyelash-l",
+      "file": "layers/eyelash_2.png",
+      "left": 532,
+      "top": 102,
+      "width": 35,
+      "height": 15,
+      "depthMedian": 0.2645457983016968
+    },
+    {
+      "id": "eyewhite_1",
+      "runtimeName": "eyewhite_1",
+      "sourceLayerName": "eyewhite-r",
+      "file": "layers/eyewhite_1.png",
+      "left": 490,
+      "top": 116,
+      "width": 25,
+      "height": 9,
+      "depthMedian": 0.25994014739990234
+    },
+    {
+      "id": "eyewhite_2",
+      "runtimeName": "eyewhite_2",
+      "sourceLayerName": "eyewhite-l",
+      "file": "layers/eyewhite_2.png",
+      "left": 535,
+      "top": 105,
+      "width": 25,
+      "height": 11,
+      "depthMedian": 0.25994014739990234
+    },
+    {
+      "id": "irides_1",
+      "runtimeName": "irides_1",
+      "sourceLayerName": "irides-r",
+      "file": "layers/irides_1.png",
+      "left": 497,
+      "top": 116,
+      "width": 16,
+      "height": 9,
+      "depthMedian": 0.21014976501464844
+    },
+    {
+      "id": "irides_2",
+      "runtimeName": "irides_2",
+      "sourceLayerName": "irides-l",
+      "file": "layers/irides_2.png",
+      "left": 539,
+      "top": 106,
+      "width": 15,
+      "height": 10,
+      "depthMedian": 0.21014976501464844
+    },
+    {
+      "id": "front_hair",
+      "runtimeName": "front hair",
+      "sourceLayerName": "front hair",
+      "file": "layers/front_hair.png",
+      "left": 469,
+      "top": 41,
+      "width": 103,
+      "height": 144,
+      "depthMedian": 0.10645419359207153
+    }
+  ],
+  "expressions": [
+    {
+      "id": "eye_open_original",
+      "file": "expressions/eye_open_original.png",
+      "left": 483,
+      "top": 100,
+      "width": 86,
+      "height": 29,
+      "side": null,
+      "fade": "eyeOpen"
+    },
+    {
+      "id": "eye_close",
+      "file": "expressions/eye_close.png",
+      "left": 486,
+      "top": 105,
+      "width": 80,
+      "height": 22,
+      "side": null,
+      "fade": "eyeClose"
+    },
+    {
+      "id": "mouth_open",
+      "file": "expressions/mouth_open.png",
+      "left": 519,
+      "top": 138,
+      "width": 26,
+      "height": 14,
+      "side": null,
+      "fade": "mouthOpen"
+    },
+    {
+      "id": "mouth_close",
+      "file": "expressions/mouth_close.png",
+      "left": 522,
+      "top": 144,
+      "width": 20,
+      "height": 2,
+      "side": null,
+      "fade": "mouthClose"
+    }
+  ],
+  "anchors": {
+    "face": {
+      "cx": 520.7056181127722,
+      "cy": 103.6341422154942,
+      "x0": 474,
+      "x1": 564,
+      "y0": 51,
+      "y1": 164
+    },
+    "eyeL": {
+      "x0": 490,
+      "x1": 514,
+      "y0": 116,
+      "y1": 124,
+      "icx": 503.6982467093283,
+      "icy": 119.54508090109776,
+      "closeY": 122.17381327979349
+    },
+    "eyeR": {
+      "x0": 535,
+      "x1": 559,
+      "y0": 105,
+      "y1": 115,
+      "icx": 546.2489113314185,
+      "icy": 110.21314741035856,
+      "closeY": 111.37097135183528
+    },
+    "mouth": {
+      "x0": 520,
+      "x1": 543,
+      "y0": 139,
+      "y1": 150,
+      "cx": 531.9871514420055,
+      "cy": 144.9355057705363
+    },
+    "neckPivot": {
+      "cx": 535.1483358577315,
+      "cy": 172
+    },
+    "neckTop": 104,
+    "neckBottom": 184,
+    "bodyPivot": {
+      "cx": 535.1483358577315,
+      "cy": 1024
+    },
+    "faceScale": 0.2702702702702703,
+    "hairRootY": 111
+  },
+  "warnings": [],
+  "synthetic": {
+    "eye": false,
+    "mouth": false
+  },
+  "expressionSource": "user_mask_derived",
+  "originalEyePreserved": true,
+  "originalEyebrowsPreserved": false,
+  "sourceMouthState": "slightly-open",
+  "originalMouthPreserved": true,
+  "sourceReference": "source-original.png",
+  "layerOrder": [
+    "part:headwear",
+    "part:handwear_2",
+    "part:topwear",
+    "part:legwear",
+    "part:back_hair",
+    "part:bottomwear",
+    "part:handwear_1",
+    "part:neck",
+    "part:ears_2",
+    "part:ears_1",
+    "part:eyebrow_1",
+    "part:eyebrow_2",
+    "part:face",
+    "part:nose",
+    "part:eyelash_1",
+    "part:eyelash_2",
+    "part:eyewhite_1",
+    "part:eyewhite_2",
+    "part:irides_1",
+    "part:irides_2",
+    "expression:eye_open_original",
+    "expression:eye_close",
+    "expression:mouth_open",
+    "expression:mouth_close",
+    "part:front_hair"
+  ],
+  "editedParts": [
+    "back_hair",
+    "front_hair",
+    "handwear_1",
+    "headwear",
+    "source_headwear_hood"
+  ],
+  "editRevision": 6
+}

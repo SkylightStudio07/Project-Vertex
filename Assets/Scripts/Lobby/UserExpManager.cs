@@ -11,17 +11,22 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
 
     public event Action<int> OnExperienceChanged;
 
+    private const string PrefsKey = "VERTEX_USER_EXP";
+
     protected override void Init()
     {
         m_IsDestroyOnLoad = true;
         base.Init();
 
-        SetDefaultExperience();
+        // 로비 경험치는 로비 씬을 나갔다 들어와도(런 귀환) 이어져야 하므로 PlayerPrefs에 둔다. 저장값이 없으면 기본값.
+        if (PlayerPrefs.HasKey(PrefsKey)) Experience = Mathf.Clamp(PlayerPrefs.GetInt(PrefsKey), 0, MaxExperience);
+        else SetDefaultExperience();
     }
 
     public void SetDefaultExperience()
     {
         Experience = Mathf.Clamp(defaultExperience, 0, MaxExperience);
+        Save();
         OnExperienceChanged?.Invoke(Experience);
     }
 
@@ -55,7 +60,14 @@ public class UserExpManager : SingletonBehaviour<UserExpManager>
             return;
 
         Experience = clampedExperience;
+        Save();
         OnExperienceChanged?.Invoke(Experience);
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetInt(PrefsKey, Experience);
+        PlayerPrefs.Save();
     }
 
     // 디버깅용 버튼 함수들.

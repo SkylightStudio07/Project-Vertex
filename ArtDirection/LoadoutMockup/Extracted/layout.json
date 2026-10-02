@@ -1,0 +1,1111 @@
+{
+  "canvas": [
+    1672,
+    941
+  ],
+  "origin": "top-left",
+  "textEraseRectangles": [
+    [
+      150,
+      39,
+      40,
+      33,
+      175,
+      76
+    ],
+    [
+      226,
+      15,
+      254,
+      89,
+      483,
+      16
+    ],
+    [
+      1515,
+      37,
+      67,
+      29,
+      1559,
+      29
+    ],
+    [
+      166,
+      148,
+      71,
+      29,
+      143,
+      159
+    ],
+    [
+      119,
+      408,
+      173,
+      81,
+      284,
+      430
+    ],
+    [
+      122,
+      497,
+      183,
+      35,
+      310,
+      505
+    ],
+    [
+      120,
+      577,
+      52,
+      70,
+      180,
+      579
+    ],
+    [
+      279,
+      576,
+      62,
+      71,
+      343,
+      579
+    ],
+    [
+      431,
+      575,
+      111,
+      72,
+      570,
+      560
+    ],
+    [
+      126,
+      679,
+      142,
+      27,
+      303,
+      680
+    ],
+    [
+      1094,
+      130,
+      184,
+      36,
+      1281,
+      143
+    ],
+    [
+      1094,
+      166,
+      203,
+      23,
+      1308,
+      163
+    ],
+    [
+      1201,
+      217,
+      174,
+      65,
+      1363,
+      214
+    ],
+    [
+      1490,
+      234,
+      53,
+      39,
+      1450,
+      226
+    ],
+    [
+      1200,
+      313,
+      175,
+      62,
+      1363,
+      313
+    ],
+    [
+      1491,
+      331,
+      55,
+      41,
+      1450,
+      327
+    ],
+    [
+      1202,
+      408,
+      107,
+      66,
+      1363,
+      409
+    ],
+    [
+      1490,
+      427,
+      54,
+      39,
+      1450,
+      425
+    ],
+    [
+      1458,
+      496,
+      109,
+      25,
+      1340,
+      496
+    ],
+    [
+      1094,
+      562,
+      163,
+      37,
+      1280,
+      565
+    ],
+    [
+      1293,
+      653,
+      154,
+      36,
+      1458,
+      636
+    ],
+    [
+      199,
+      844,
+      54,
+      25,
+      284,
+      841
+    ],
+    [
+      415,
+      843,
+      59,
+      26,
+      485,
+      842
+    ],
+    [
+      640,
+      842,
+      42,
+      27,
+      585,
+      841
+    ],
+    [
+      691,
+      845,
+      60,
+      22,
+      585,
+      841
+    ],
+    [
+      811,
+      842,
+      70,
+      26,
+      798,
+      842
+    ],
+    [
+      883,
+      845,
+      65,
+      23,
+      932,
+      820
+    ],
+    [
+      1123,
+      777,
+      108,
+      26,
+      1233,
+      782
+    ],
+    [
+      1120,
+      803,
+      100,
+      55,
+      1300,
+      815
+    ]
+  ],
+  "assets": [
+    {
+      "name": "Header_Composite",
+      "file": "Header_Composite.png",
+      "x": 85,
+      "y": 0,
+      "width": 1531,
+      "height": 115,
+      "position": [
+        85,
+        0
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "WeaponPanel_Composite",
+      "file": "WeaponPanel_Composite.png",
+      "x": 79,
+      "y": 114,
+      "width": 971,
+      "height": 791,
+      "position": [
+        79,
+        -114
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "DeckPanel_Composite",
+      "file": "DeckPanel_Composite.png",
+      "x": 1049,
+      "y": 114,
+      "width": 566,
+      "height": 791,
+      "position": [
+        1049,
+        -114
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "WeaponShowcase_Composite",
+      "file": "WeaponShowcase_Composite.png",
+      "x": 123,
+      "y": 116,
+      "width": 878,
+      "height": 570,
+      "position": [
+        123,
+        -116
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "WeaponStats",
+      "file": "WeaponStats.png",
+      "x": 123,
+      "y": 552,
+      "width": 444,
+      "height": 117,
+      "position": [
+        123,
+        -552
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "DeckList_Composite",
+      "file": "DeckList_Composite.png",
+      "x": 1098,
+      "y": 202,
+      "width": 472,
+      "height": 287,
+      "position": [
+        1098,
+        -202
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "DeckRow_Attack",
+      "file": "DeckRow_Attack.png",
+      "x": 1098,
+      "y": 202,
+      "width": 472,
+      "height": 96,
+      "position": [
+        1098,
+        -202
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "DeckRow_Defense",
+      "file": "DeckRow_Defense.png",
+      "x": 1098,
+      "y": 297,
+      "width": 472,
+      "height": 97,
+      "position": [
+        1098,
+        -297
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "DeckRow_Reload",
+      "file": "DeckRow_Reload.png",
+      "x": 1098,
+      "y": 393,
+      "width": 472,
+      "height": 96,
+      "position": [
+        1098,
+        -393
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "PerkSection_Composite",
+      "file": "PerkSection_Composite.png",
+      "x": 1098,
+      "y": 545,
+      "width": 474,
+      "height": 182,
+      "position": [
+        1098,
+        -545
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Back_Normal",
+      "file": "Back_Normal.png",
+      "x": 1429,
+      "y": 27,
+      "width": 185,
+      "height": 49,
+      "position": [
+        1429,
+        -27
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Back_Normal_Hover",
+      "file": "Back_Normal_Hover.png",
+      "x": 1429,
+      "y": 27,
+      "width": 185,
+      "height": 49,
+      "position": [
+        1429,
+        -27
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "Back_Normal"
+    },
+    {
+      "name": "SelectedTag",
+      "file": "SelectedTag.png",
+      "x": 124,
+      "y": 146,
+      "width": 157,
+      "height": 34,
+      "position": [
+        124,
+        -146
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "ArmoryLink_Normal",
+      "file": "ArmoryLink_Normal.png",
+      "x": 125,
+      "y": 677,
+      "width": 166,
+      "height": 36,
+      "position": [
+        125,
+        -677
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "ArmoryLink_Normal_Hover",
+      "file": "ArmoryLink_Normal_Hover.png",
+      "x": 125,
+      "y": 677,
+      "width": 166,
+      "height": 36,
+      "position": [
+        125,
+        -677
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "ArmoryLink_Normal"
+    },
+    {
+      "name": "Weapon_Pistol_Normal",
+      "file": "Weapon_Pistol_Normal.png",
+      "x": 123,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        123,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Weapon_Pistol_Normal_Hover",
+      "file": "Weapon_Pistol_Normal_Hover.png",
+      "x": 123,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        123,
+        -742
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "Weapon_Pistol_Normal"
+    },
+    {
+      "name": "Weapon_SMG_Normal",
+      "file": "Weapon_SMG_Normal.png",
+      "x": 338,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        338,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Weapon_SMG_Normal_Hover",
+      "file": "Weapon_SMG_Normal_Hover.png",
+      "x": 338,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        338,
+        -742
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "Weapon_SMG_Normal"
+    },
+    {
+      "name": "Weapon_AR_Locked",
+      "file": "Weapon_AR_Locked.png",
+      "x": 553,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        553,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Weapon_Shotgun_Locked",
+      "file": "Weapon_Shotgun_Locked.png",
+      "x": 768,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        768,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Carousel_Previous_Normal",
+      "file": "Carousel_Previous_Normal.png",
+      "x": 68,
+      "y": 783,
+      "width": 37,
+      "height": 52,
+      "position": [
+        68,
+        -783
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Carousel_Previous_Normal_Hover",
+      "file": "Carousel_Previous_Normal_Hover.png",
+      "x": 68,
+      "y": 783,
+      "width": 37,
+      "height": 52,
+      "position": [
+        68,
+        -783
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "Carousel_Previous_Normal"
+    },
+    {
+      "name": "Carousel_Next_Normal",
+      "file": "Carousel_Next_Normal.png",
+      "x": 997,
+      "y": 783,
+      "width": 37,
+      "height": 52,
+      "position": [
+        997,
+        -783
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Carousel_Next_Normal_Hover",
+      "file": "Carousel_Next_Normal_Hover.png",
+      "x": 997,
+      "y": 783,
+      "width": 37,
+      "height": 52,
+      "position": [
+        997,
+        -783
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "Carousel_Next_Normal"
+    },
+    {
+      "name": "PerkSlot_Locked",
+      "file": "PerkSlot_Locked.png",
+      "x": 1100,
+      "y": 613,
+      "width": 472,
+      "height": 114,
+      "position": [
+        1100,
+        -613
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Deploy_Normal",
+      "file": "Deploy_Normal.png",
+      "x": 1076,
+      "y": 755,
+      "width": 515,
+      "height": 129,
+      "position": [
+        1076,
+        -755
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Deploy_Normal_Hover",
+      "file": "Deploy_Normal_Hover.png",
+      "x": 1076,
+      "y": 755,
+      "width": 515,
+      "height": 129,
+      "position": [
+        1076,
+        -755
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "Deploy_Normal"
+    },
+    {
+      "name": "Icon_Attack",
+      "file": "Icon_Attack.png",
+      "x": 1114,
+      "y": 222,
+      "width": 59,
+      "height": 59,
+      "position": [
+        1114,
+        -222
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Icon_Defense",
+      "file": "Icon_Defense.png",
+      "x": 1120,
+      "y": 317,
+      "width": 51,
+      "height": 58,
+      "position": [
+        1120,
+        -317
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Icon_Reload",
+      "file": "Icon_Reload.png",
+      "x": 1120,
+      "y": 415,
+      "width": 52,
+      "height": 51,
+      "position": [
+        1120,
+        -415
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Icon_Lock",
+      "file": "Icon_Lock.png",
+      "x": 1237,
+      "y": 646,
+      "width": 36,
+      "height": 44,
+      "position": [
+        1237,
+        -646
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Icon_BackArrow",
+      "file": "Icon_BackArrow.png",
+      "x": 1482,
+      "y": 40,
+      "width": 27,
+      "height": 25,
+      "position": [
+        1482,
+        -40
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Icon_Previous",
+      "file": "Icon_Previous.png",
+      "x": 78,
+      "y": 792,
+      "width": 17,
+      "height": 36,
+      "position": [
+        78,
+        -792
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Icon_Next",
+      "file": "Icon_Next.png",
+      "x": 1005,
+      "y": 792,
+      "width": 18,
+      "height": 36,
+      "position": [
+        1005,
+        -792
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "DeployArrow_Crop",
+      "file": "DeployArrow_Crop.png",
+      "x": 1235,
+      "y": 809,
+      "width": 52,
+      "height": 43,
+      "position": [
+        1235,
+        -809
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Pistol_Thumbnail_Crop",
+      "file": "Pistol_Thumbnail_Crop.png",
+      "x": 175,
+      "y": 753,
+      "width": 98,
+      "height": 81,
+      "position": [
+        175,
+        -753
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "SMG_Thumbnail_Crop",
+      "file": "SMG_Thumbnail_Crop.png",
+      "x": 370,
+      "y": 750,
+      "width": 148,
+      "height": 77,
+      "position": [
+        370,
+        -750
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "AR_Locked_Thumbnail_Crop",
+      "file": "AR_Locked_Thumbnail_Crop.png",
+      "x": 575,
+      "y": 757,
+      "width": 173,
+      "height": 78,
+      "position": [
+        575,
+        -757
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Shotgun_Locked_Thumbnail_Crop",
+      "file": "Shotgun_Locked_Thumbnail_Crop.png",
+      "x": 787,
+      "y": 757,
+      "width": 170,
+      "height": 78,
+      "position": [
+        787,
+        -757
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "WeaponArt_Pistol",
+      "file": "WeaponArt_Pistol.png",
+      "x": 294,
+      "y": 177,
+      "width": 602,
+      "height": 489,
+      "position": [
+        294,
+        -177
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Decoration_TopLeft",
+      "file": "Decoration_TopLeft.png",
+      "x": 22,
+      "y": 18,
+      "width": 36,
+      "height": 44,
+      "position": [
+        22,
+        -18
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Decoration_TopRight",
+      "file": "Decoration_TopRight.png",
+      "x": 1621,
+      "y": 22,
+      "width": 34,
+      "height": 43,
+      "position": [
+        1621,
+        -22
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Decoration_BottomLeft",
+      "file": "Decoration_BottomLeft.png",
+      "x": 20,
+      "y": 890,
+      "width": 37,
+      "height": 35,
+      "position": [
+        20,
+        -890
+      ],
+      "kind": "luminance alpha icon"
+    },
+    {
+      "name": "Divider_Deck",
+      "file": "Divider_Deck.png",
+      "x": 1097,
+      "y": 541,
+      "width": 480,
+      "height": 8,
+      "position": [
+        1097,
+        -541
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Divider_Columns",
+      "file": "Divider_Columns.png",
+      "x": 1045,
+      "y": 112,
+      "width": 9,
+      "height": 793,
+      "position": [
+        1045,
+        -112
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Paper_Texture",
+      "file": "Paper_Texture.png",
+      "x": 925,
+      "y": 400,
+      "width": 64,
+      "height": 64,
+      "position": [
+        925,
+        -400
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Source_Header",
+      "file": "Source_Header.png",
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 114,
+      "position": [
+        0,
+        0
+      ],
+      "kind": "source with text"
+    },
+    {
+      "name": "Source_LeftMargin",
+      "file": "Source_LeftMargin.png",
+      "x": 0,
+      "y": 114,
+      "width": 79,
+      "height": 791,
+      "position": [
+        0,
+        -114
+      ],
+      "kind": "source with text"
+    },
+    {
+      "name": "Source_Weapon",
+      "file": "Source_Weapon.png",
+      "x": 79,
+      "y": 114,
+      "width": 970,
+      "height": 791,
+      "position": [
+        79,
+        -114
+      ],
+      "kind": "source with text"
+    },
+    {
+      "name": "Source_Deck",
+      "file": "Source_Deck.png",
+      "x": 1049,
+      "y": 114,
+      "width": 566,
+      "height": 791,
+      "position": [
+        1049,
+        -114
+      ],
+      "kind": "source with text"
+    },
+    {
+      "name": "Source_RightMargin",
+      "file": "Source_RightMargin.png",
+      "x": 1615,
+      "y": 114,
+      "width": 57,
+      "height": 791,
+      "position": [
+        1615,
+        -114
+      ],
+      "kind": "source with text"
+    },
+    {
+      "name": "Source_Footer",
+      "file": "Source_Footer.png",
+      "x": 0,
+      "y": 905,
+      "width": 1672,
+      "height": 36,
+      "position": [
+        0,
+        -905
+      ],
+      "kind": "source with text"
+    },
+    {
+      "name": "Backing_Header_Restored",
+      "file": "Backing_Header_Restored.png",
+      "x": 85,
+      "y": 0,
+      "width": 1531,
+      "height": 114,
+      "position": [
+        85,
+        0
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_Weapon_Restored",
+      "file": "Backing_Weapon_Restored.png",
+      "x": 79,
+      "y": 114,
+      "width": 970,
+      "height": 791,
+      "position": [
+        79,
+        -114
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_Deck_Restored",
+      "file": "Backing_Deck_Restored.png",
+      "x": 1049,
+      "y": 114,
+      "width": 566,
+      "height": 791,
+      "position": [
+        1049,
+        -114
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_WeaponShowcase_Restored",
+      "file": "Backing_WeaponShowcase_Restored.png",
+      "x": 123,
+      "y": 181,
+      "width": 878,
+      "height": 502,
+      "position": [
+        123,
+        -181
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_DeckRow_Restored",
+      "file": "Backing_DeckRow_Restored.png",
+      "x": 1098,
+      "y": 202,
+      "width": 472,
+      "height": 96,
+      "position": [
+        1098,
+        -202
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_PistolTile_Restored",
+      "file": "Backing_PistolTile_Restored.png",
+      "x": 123,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        123,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_SMGTile_Restored",
+      "file": "Backing_SMGTile_Restored.png",
+      "x": 338,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        338,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_ARTile_Restored",
+      "file": "Backing_ARTile_Restored.png",
+      "x": 553,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        553,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_ShotgunTile_Restored",
+      "file": "Backing_ShotgunTile_Restored.png",
+      "x": 768,
+      "y": 742,
+      "width": 210,
+      "height": 134,
+      "position": [
+        768,
+        -742
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_PerkSlot_Restored",
+      "file": "Backing_PerkSlot_Restored.png",
+      "x": 1100,
+      "y": 613,
+      "width": 472,
+      "height": 114,
+      "position": [
+        1100,
+        -613
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_Deploy_Restored",
+      "file": "Backing_Deploy_Restored.png",
+      "x": 1076,
+      "y": 755,
+      "width": 515,
+      "height": 129,
+      "position": [
+        1076,
+        -755
+      ],
+      "kind": "textless crop"
+    },
+    {
+      "name": "Backing_Deploy_Restored_Hover",
+      "file": "Backing_Deploy_Restored_Hover.png",
+      "x": 1076,
+      "y": 755,
+      "width": 515,
+      "height": 129,
+      "position": [
+        1076,
+        -755
+      ],
+      "kind": "cyan hover, exact normal geometry",
+      "normal": "Backing_Deploy_Restored"
+    }
+  ],
+  "sourceReassemblyDifferentPixels": 0,
+  "textlessReassemblyDifferentPixels": 0,
+  "controlLayers": [
+    "Back_Normal",
+    "SelectedTag",
+    "ArmoryLink_Normal",
+    "Weapon_Pistol_Normal",
+    "Weapon_SMG_Normal",
+    "Weapon_AR_Locked",
+    "Weapon_Shotgun_Locked",
+    "Carousel_Previous_Normal",
+    "Carousel_Next_Normal",
+    "PerkSlot_Locked",
+    "Deploy_Normal"
+  ]
+}

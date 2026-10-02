@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public sealed class StatusInstance : IPassiveLogic
 {
     private readonly HashSet<StatusBehavior> _usedThisTurn = new();
+    private bool _firstTickSkipped; // TickDown(skipFirstTick)으로 첫 감소를 이미 건너뛰었는지
 
     public StatusDefinition Definition { get; }
     public int Stacks { get; private set; }
@@ -67,10 +68,16 @@ public sealed class StatusInstance : IPassiveLogic
     public void MultiplyMagnitude(int multiplier) => Stacks = multiplier < 0 ? Stacks : Clamp(Stacks * multiplier);
     public void RemoveAll() => Stacks = 0;
 
-    public void TickDown(StatusDurationPolicy timing)
+    // skipFirstTick: 이 인스턴스의 첫 감소 한 번만 건너뛴다 (적이 플레이어에게 건 상태 — StatusContainer.TickDurations 참고)
+    public void TickDown(StatusDurationPolicy timing, bool skipFirstTick = false)
     {
         if (timing != StatusDurationPolicy.DecreaseOnTurnStart && timing != StatusDurationPolicy.DecreaseOnTurnEnd) return;
         if (Definition == null || Definition.DurationPolicy != timing) return;
+        if (skipFirstTick && !_firstTickSkipped)
+        {
+            _firstTickSkipped = true;
+            return;
+        }
         ReduceMagnitude(1);
     }
 

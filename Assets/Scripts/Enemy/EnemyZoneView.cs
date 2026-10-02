@@ -115,6 +115,7 @@ public class EnemyZoneView : MonoBehaviour
             {
                 rt.anchoredPosition = positions[i];
             }
+            view.ApplyScreenLayout(); // 화면 고정 배치 보스면 슬롯 위치가 잡힌 뒤 그림을 화면 좌표로 옮긴다
 
             spawnedViews.Add(view);
         }
