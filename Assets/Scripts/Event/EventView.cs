@@ -23,6 +23,11 @@ public class EventView : MonoBehaviour
     [Header("일러스트 (dialogueJson 없는 이벤트용 — 없으면 표시 안 함)")]
     [SerializeField] private Image illustrationImage;
 
+    [Header("이벤트 이미지")]
+    [SerializeField] private Image eventImage;
+    [SerializeField] private RectTransform imageFrame;
+    [SerializeField] private AspectRatioFitter imageFitter;
+
     [Header("텍스트")]
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI descriptionText;
@@ -127,6 +132,36 @@ public class EventView : MonoBehaviour
         {
             ShowDescriptionAndChoices();
         }
+
+        if(eventImage != null)
+        {
+            eventImage.sprite = data.eventImage;
+            eventImage.enabled = data.eventImage != null;
+            if(data.eventImage != null)
+            { 
+                FitEventImage(data);
+            }
+        }
+    }
+
+    private void FitEventImage(EventData data)
+    {
+        if(imageFitter == null || imageFrame == null) return;
+
+        var sprite = data.eventImage;
+        imageFitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+        imageFitter.aspectRatio = sprite.rect.width / sprite.rect.height;
+        imageFitter.SetLayoutHorizontal();
+        imageFitter.SetLayoutVertical();
+
+        var rt = eventImage.rectTransform;
+        rt.localScale = Vector3.one * data.eventImageZoom;
+
+        Vector2 size = rt.rect.size * data.eventImageZoom;
+        Vector2 maxOffset = (size - imageFrame.rect.size) * 0.5f;
+        maxOffset = new Vector2(Mathf.Abs(maxOffset.x), Mathf.Abs(maxOffset.y));
+        Vector2 offset = (new Vector2(0.5f, 0.5f) - data.eventImageFocus) * size;
+        rt.anchoredPosition = new Vector2(Mathf.Clamp(offset.x, -maxOffset.x, maxOffset.x), Mathf.Clamp(offset.y, -maxOffset.y, maxOffset.y));
     }
 
     private void ShowDescriptionAndChoices()

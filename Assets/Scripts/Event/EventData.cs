@@ -18,6 +18,13 @@ public class EventData : ScriptableObject
     // 이벤트별 고유 배경. 없으면 EventView의 defaultBackground 사용.
     public Sprite backgroundImage;
 
+    [Tooltip("이벤트 이미지")]
+    // 이벤트 이미지. 왼쪽 칸에 들어가는.
+    public Sprite eventImage;
+    // 이벤트 이미지의 포커스 위치. (0,0) = 좌하단, (1,1) = 우상단, (0.5,0.5) = 중앙.
+    public Vector2 eventImageFocus = new Vector2(0.5f, 0.5f);
+    [Range(0.5f, 3f)] public float eventImageZoom = 1f;
+
     // dialogueJson 없이 description만 보여주는 이벤트용 일러스트(캐릭터/오브젝트 등).
     // dialogueJson이 있으면 그쪽 DialogueView의 캐릭터 슬롯을 쓰므로 이 필드는 선택 사항 —
     // 비워두면 그냥 표시 안 됨(배경만 남음), 기존 이벤트엔 영향 없음.

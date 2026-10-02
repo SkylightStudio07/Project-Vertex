@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour
         if (CooperationManager.Instance != null)
             CooperationManager.Instance.ResetOnRunStart();
 
+        // 이벤트 중복 방지 기록도 런 단위 상태 — 비우지 않으면 이전 런에서 본 이벤트가 계속 제외된다.
+        if (RunData.Instance != null)
+            RunData.Instance.seenEvents.Clear();
+
         MapManager.Instance.InitializeMap(chapter);
 
         // 훈련장 출격: 축복·맵·의뢰 없이 고른 덱·동료로 고른 적과 바로 싸운다

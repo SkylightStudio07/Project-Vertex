@@ -193,7 +193,10 @@ public class CooperationManager : MonoBehaviour
         }
 
         CoopCharData coopCharData = GetCoopCharData(charID);
-        if (coopCharData == null) return; // 씬의 coopCharList에 등록되지 않은 협력자
+        // 널 검사는 반드시 역참조보다 먼저. (예전엔 아래 Mathf.Min에서 먼저 터져서
+        //  coopCharList에 등록 안 된 협력자를 합류시키면 NullReferenceException이 났다)
+        if (coopCharData == null) return;
+
         int currentCoopLevel = Mathf.Min(GetCoopLevel(charID), coopCharData.unlockCardCoopLevel.Count);
 
         if (coopCharData.joinRewardCard != null)
@@ -213,7 +216,12 @@ public class CooperationManager : MonoBehaviour
 
         Debug.Log($"{charID} 성소 보상 적용 완료");
 
-        CoopCharState charState = coopCharDict[charID];
+        // 사전에 없는 ID면 인덱서는 KeyNotFoundException을 던진다 — 경고만 남기고 넘어간다.
+        if (!coopCharDict.TryGetValue(charID, out var charState))
+        {
+            Debug.LogWarning($"{charID} 상태가 없어 합류 처리(isJoinedInRun)를 건너뜀 — CooperationManager의 coopCharList 등록 확인 필요.");
+            return;
+        }
         charState.isJoinedInRun = true;
         // 처음 합류하면 인연이 생긴다 (호감도 Lv.0 → Lv.1). Lv.0에서는 포인트도 랭크업도 받지 않으므로 이게 시작점이다.
         if (charState.currentCoopLevel == 0)

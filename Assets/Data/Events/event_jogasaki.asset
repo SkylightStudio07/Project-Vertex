@@ -15,17 +15,31 @@ MonoBehaviour:
   eventJson: {fileID: 4900000, guid: d5c4d30844c3471884a4adef7891fff6, type: 3}
   choiceEffects:
   - effects:
+    - rid: 3673692213479735493
     - rid: -2
+    conditions: []
+  - effects:
+    - rid: 3673692213479735494
+    conditions: []
   - effects:
     - rid: -2
-    - rid: -2
-  - effects:
-    - rid: -2
+    conditions: []
   dialogueJson: {fileID: 0}
   backgroundImage: {fileID: 0}
+  eventImage: {fileID: 0}
+  eventImageFocus: {x: 0.5, y: 0.5}
+  eventImageZoom: 1
   illustration: {fileID: 0}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 3673692213479735493
+      type: {class: GainGoldEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 62
+    - rid: 3673692213479735494
+      type: {class: GainItemEffect, ns: , asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: 7d0352a21f1a97144b6a8ef55417eb8c, type: 2}
