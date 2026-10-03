@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "asset_count": 16,
+  "checks": [
+    {
+      "file": "Panel.png",
+      "size": [
+        2000,
+        1656
+      ],
+      "sha256": "9827311890c6ca405936bb669ec840fbc02b0680a2589b693b299190f3f2dbdd"
+    },
+    {
+      "file": "Panel_Watermark.png",
+      "size": [
+        384,
+        384
+      ],
+      "sha256": "f6e4dc875318d1bbd42def0ccc4f20015ca2589cd722ea39d38699f30cd27610"
+    },
+    {
+      "file": "Rule.png",
+      "size": [
+        1816,
+        2
+      ],
+      "sha256": "44aa4cc6714096e3169b6f2b37a72922178a938bbb565f7b38e26fe368f7f227"
+    },
+    {
+      "file": "Header_NoTick.png",
+      "size": [
+        64,
+        2
+      ],
+      "sha256": "a86ddcdf602d9456e9194e693e14995c1f070d2e4155e8f58cba4b1f00ea973b"
+    },
+    {
+      "file": "Row_Normal.png",
+      "size": [
+        1816,
+        288
+      ],
+      "sha256": "5d3c476eb533af1d41f8cff3e66342f43820e8ba91d8f34312fbf8a2bb2660e5"
+    },
+    {
+      "file": "Row_Hover.png",
+      "size": [
+        1816,
+        288
+      ],
+      "sha256": "5d5c43a0185ca264547663c1b92264504a562f4f1be0af6ec97fe14f6ae52149"
+    },
+    {
+      "file": "Row_NumTick.png",
+      "size": [
+        60,
+        2
+      ],
+      "sha256": "8addb9453becff2b77bba04d76355097fde78b75f251cd6e5e83dcc4230c9df1"
+    },
+    {
+      "file": "Icon_Slot.png",
+      "size": [
+        220,
+        220
+      ],
+      "sha256": "dcc2c2f3d71bd61c7bbe6eb54b4a32f8add381764a0b73027bb1ebe22106335f"
+    },
+    {
+      "file": "Icon_Gold.png",
+      "size": [
+        160,
+        160
+      ],
+      "sha256": "e3028fa9609c934d1900e4e05c7387d70450f82cc6a19ef556a03f7f3d989448"
+    },
+    {
+      "file": "Icon_Card.png",
+      "size": [
+        160,
+        160
+      ],
+      "sha256": "36dca60efe4ee3cdd7a040713986df9334c33d0a4cfa76d452ffb69df65c1313"
+    },
+    {
+      "file": "Icon_Arrow.png",
+      "size": [
+        80,
+        60
+      ],
+      "sha256": "34b503909879734b5a89e7b6db65d5de66916331d0df24fd4c613f6ce4f3c33a"
+    },
+    {
+      "file": "Button_Primary.png",
+      "size": [
+        556,
+        140
+      ],
+      "sha256": "b74f9f61f6524b2aeb92e4fd6bba5130e2679d1ea306ccee9307638c538b1dbe"
+    },
+    {
+      "file": "Button_Primary_Hover.png",
+      "size": [
+        556,
+        140
+      ],
+      "sha256": "774ed2ada431c4d908f28291d5e922c5a83ae83afa0dcb833c8c3db7b0ea0477"
+    },
+    {
+      "file": "Button_Secondary.png",
+      "size": [
+        492,
+        136
+      ],
+      "sha256": "809e80d105557ef37c8c261744d9a91345a4a5739590dc83818b8fc542738e05"
+    },
+    {
+      "file": "Button_Secondary_Hover.png",
+      "size": [
+        492,
+        136
+      ],
+      "sha256": "6f29d650cd206d5fa757b2a995be8343864d08eef57d1278e99dfddd4fa107a1"
+    },
+    {
+      "file": "Card_Plinth.png",
+      "size": [
+        328,
+        8
+      ],
+      "sha256": "61920b61ffe5da38624985e4f18d875cfdc894bdcacdb5406858b0f7a5e93369"
+    }
+  ],
+  "panel_corners_preserved_in_both_sizes": true,
+  "alpha_binary": true,
+  "source_files": [
+    {
+      "file": "Reward_Mockup.png",
+      "sha256": "792397c70d2ebe14c3fda378b37e05044a8b23d8dc156afdadcf5595c20a0188"
+    },
+    {
+      "file": "Reward_Card_Mockup.png",
+      "sha256": "75191661d00d2868946eea51bc4815fba0ab64e5e05d5ee5265e2557989b808a"
+    }
+  ]
+}

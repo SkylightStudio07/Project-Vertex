@@ -1,0 +1,149 @@
+{
+  "status": "passed",
+  "asset_count": 14,
+  "checks": [
+    {
+      "file": "CurtainU_Lead.png",
+      "size": [
+        1840,
+        1096
+      ],
+      "sha256": "32f67dc56d1738a0f318ae4b5afe0b28c7cd520042322644646bab5008d6f222"
+    },
+    {
+      "file": "CurtainU_Body.png",
+      "size": [
+        2240,
+        1096
+      ],
+      "sha256": "1195e727ae2679f6500237ded3c1898e837120a72dcd576c2ed6c7e9d8be67ec"
+    },
+    {
+      "file": "CurtainU_Tail.png",
+      "size": [
+        1200,
+        1096
+      ],
+      "sha256": "fb40cb9f2e2f6511733d7de5b0ddad11cf8ecf867c557c91ff6b25dd2a4b7518"
+    },
+    {
+      "file": "CurtainL_Tail.png",
+      "size": [
+        1200,
+        1096
+      ],
+      "sha256": "1740c6cef96e2c54721efa2d13f72862b2035da8dbedf5b5c392bbf3442c2698"
+    },
+    {
+      "file": "CurtainL_Body.png",
+      "size": [
+        2240,
+        1096
+      ],
+      "sha256": "8536346459d97c41f23babaf85e5b70223fb6577dd74292cddbca89e244f0cff"
+    },
+    {
+      "file": "CurtainL_Lead.png",
+      "size": [
+        1840,
+        1096
+      ],
+      "sha256": "52d217aca4e5578fd549328d0ab0e11c13282597a09127dfd51fc7ea2e597359"
+    },
+    {
+      "file": "Seam_Base.png",
+      "size": [
+        3840,
+        48
+      ],
+      "sha256": "f3d6bc8ac6a5cc4440313b8cadd9f9239b20b235e84bbdaca679b97ca1719161"
+    },
+    {
+      "file": "Seam_Fill.png",
+      "size": [
+        3840,
+        12
+      ],
+      "sha256": "633648e7f4b5f83710728c50e9c1d81ad0e86957c9cf3bbed94b2830737fc832"
+    },
+    {
+      "file": "Seam_Head.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8f38ebd79d12a1fea90df0ffd8d801dd3fc2db71e641dbb9229875196af53c34"
+    },
+    {
+      "file": "TitleFrame.png",
+      "size": [
+        1968,
+        728
+      ],
+      "sha256": "5d623fde4e0b924d307b6a6c5868cafe8f12c7aec436ac3e3a095754c8ceccb9"
+    },
+    {
+      "file": "Emblem.png",
+      "size": [
+        360,
+        360
+      ],
+      "sha256": "cedca82bd872469f6e84cd33755ff35059bc694a25545974e713d610d9fc0870"
+    },
+    {
+      "file": "Tag_Sim.png",
+      "size": [
+        300,
+        68
+      ],
+      "sha256": "2e493d876e79d8589bde6e80e461814909ab36ad1b43f62b494f8e4ac267a871"
+    },
+    {
+      "file": "LoadingChip.png",
+      "size": [
+        728,
+        96
+      ],
+      "sha256": "03727ee290e36b9b3afc495aabe1061db5f6a65ff68e2e20b896be985e449510"
+    },
+    {
+      "file": "Chip_Dot.png",
+      "size": [
+        16,
+        16
+      ],
+      "sha256": "6a19f6166cf075d4c5ea6820191d4054d992d1b9c1094f6dd946d25d6553ae92"
+    }
+  ],
+  "curtain_joins": [
+    {
+      "curtain": "U",
+      "reassembled_equals_full_canvas": true
+    },
+    {
+      "curtain": "L",
+      "reassembled_equals_full_canvas": true
+    }
+  ],
+  "closed_curtains_fully_opaque": true,
+  "emblem_fourfold_pixel_symmetry": true,
+  "note": "No Unity importer or runtime changes; geometry validation only.",
+  "mockup_sources": [
+    {
+      "file": "SceneTransition_v2_Closed.png",
+      "sha256": "9ba2375977ac07b4ecc6a6711c2d15d5d86086a1b7935a518e48f96ed07c1e8a"
+    },
+    {
+      "file": "SceneTransition_v2_Loading.png",
+      "sha256": "ed23d68ef010da91e13ce7301a3746e289ddf330f1999703ffc21fa5b98d1d12"
+    },
+    {
+      "file": "SceneTransition_v2_Moving.png",
+      "sha256": "86ca94c25a2d7cb3e00188046eac4723c921b75ad2318939f495a82783bc70fe"
+    },
+    {
+      "file": "SceneTransition_v2_Opening.png",
+      "sha256": "31a53c8b1789c197e814b297ae8ae0da953bf2a41efc1fa97761da4d41cf4f4f"
+    }
+  ]
+}

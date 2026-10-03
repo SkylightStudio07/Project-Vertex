@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "file": "SceneTransition_v2_Closed.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen; bicubic delivery-size normalization only; not native 4K or 2x sprite art"
+    },
+    {
+      "file": "SceneTransition_v2_Loading.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen; bicubic delivery-size normalization only; not native 4K or 2x sprite art"
+    },
+    {
+      "file": "SceneTransition_v2_Moving.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen; bicubic delivery-size normalization only; not native 4K or 2x sprite art"
+    },
+    {
+      "file": "SceneTransition_v2_Opening.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen; bicubic delivery-size normalization only; not native 4K or 2x sprite art"
+    }
+  ],
+  "status": "Concept mockups for review; not sliced runtime assets",
+  "notes": [
+    "Paper/ink/cyan design follows lobby and result references.",
+    "Closed: departure 0%; Loading: return about60%; Moving: training closing over lobby; Opening: battle reveal.",
+    "Generated typography, reference-background details and geometry may differ from source; exact coordinates and untouched game backdrop must be enforced during implementation.",
+    "Native output is1672x941, retained in Generated_Originals.1920x1080 deliveries are normalized copies, not native high-resolution redraws.",
+    "Future split must redraw geometry at2x/PPU200 from approved design rather than upscale these mockups."
+  ]
+}
