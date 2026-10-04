@@ -11,6 +11,8 @@ public class RewardsView : MonoBehaviour
     [SerializeField] private Transform rewardButtonContainer;
     [SerializeField] private CardRewardView cardRewardView;
     [SerializeField] private MapUIController mapUIController;
+    [SerializeField] private TMPro.TextMeshProUGUI remainingText; // 바닥 "남은 보상 N"
+    [SerializeField] private TMPro.TextMeshProUGUI[] headerNoTexts; // 머리 오른쪽 "ELITE · FLOOR 03" (보상 목록·카드 선택 판 각각)
 
     [Header("등장 연출")]
     // 막타 카드를 쓰자마자 결과창이 덮이면 적이 쓰러지는 연출을 못 보고 끝나버린다.
@@ -63,6 +65,7 @@ public class RewardsView : MonoBehaviour
 
         buttons = new List<RewardItemButton>();
         Refresh();
+        RefreshHeader();
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
 
@@ -174,6 +177,7 @@ public class RewardsView : MonoBehaviour
             buttons.Remove(destroyedButton);
             PlayCollectEffect(destroyedButton);
             Destroy(destroyedButton.gameObject);
+            RefreshRemaining();
         }
         // 보상 다 소진해도 자동 닫힘 없음 — 진행 버튼으로 처리
     }
@@ -219,7 +223,7 @@ public class RewardsView : MonoBehaviour
             {
                 label = CloneForEffect(button.Label.gameObject);
                 var text = label.GetComponent<TMPro.TextMeshProUGUI>();
-                text.text = $"+{item.Data} Gold";
+                text.text = $"+{item.Data} 골드";
                 seq.Join(label.transform.DOMove(label.transform.position + rise, collectDuration).SetEase(Ease.OutCubic));
                 seq.Join(text.DOFade(0f, collectDuration).SetEase(Ease.InQuad));
             }
@@ -256,14 +260,37 @@ public class RewardsView : MonoBehaviour
         if (reward == null) return;
 
         // 버튼마다 RewardItem 구조체를 바인딩
+        int index = 0;
         foreach (RewardItem item in reward.GetRewardList())
         {
             var button = Instantiate(rewardButtonPrefab, rewardButtonContainer);
             buttons.Add(button);
-            button.Bind(item);
+            button.Bind(item, index++);
             button.OnCardReward += cardRewardView.Open;
             button.OnDestroyed += DestroyButton;
         }
+        RefreshRemaining();
+    }
+
+    private void RefreshRemaining()
+    {
+        if (remainingText == null) return;
+        int count = buttons != null ? buttons.Count : 0;
+        remainingText.text = count > 0 ? $"남은 보상 {count}" : "모든 보상을 획득했습니다";
+    }
+
+    private void RefreshHeader()
+    {
+        if (headerNoTexts == null || headerNoTexts.Length == 0) return;
+        string kind = BattleManager.Instance == null ? "HOSTILE" : BattleManager.Instance.CurrentBattleType switch
+        {
+            BattleType.Elite => "ELITE",
+            BattleType.Boss  => "BOSS",
+            _                => "HOSTILE"
+        };
+        int floor = RunData.Instance != null ? RunData.Instance.currentFloor + 1 : 0;
+        foreach (var t in headerNoTexts)
+            if (t != null) t.text = $"{kind}  ·  FLOOR {floor:00}";
     }
 
     private void OnDestroy()

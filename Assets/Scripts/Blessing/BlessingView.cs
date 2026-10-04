@@ -30,6 +30,8 @@ public class BlessingView : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Image characterImage;
     [SerializeField] private PetalFloatingEffect petalEffect;
+    [SerializeField] private BlessingIntroCinematic introCinematic; // 진입 연출 (비우면 자동 추가)
+    [SerializeField] private BlessingAmbienceFx ambienceFx;         // 배경 빛 연출 (씬에서 설정)
 
     [Header("축복 데이터")]
     [SerializeField] private BlessingData defaultBlessingData;
@@ -78,6 +80,12 @@ public class BlessingView : MonoBehaviour
 
         if (petalEffect == null)
             petalEffect = GetComponent<PetalFloatingEffect>();
+
+        if (introCinematic == null)
+        {
+            introCinematic = GetComponent<BlessingIntroCinematic>();
+            if (introCinematic == null) introCinematic = gameObject.AddComponent<BlessingIntroCinematic>();
+        }
 
         if (backgroundImage == null)
         {
@@ -181,6 +189,9 @@ public class BlessingView : MonoBehaviour
         {
             Setup(targetData);
         }
+
+        // 암전 → 배경 훑기 → 얼굴 클로즈업 → 원래 구도 + UI 등장 (누르면 건너뜀)
+        if (introCinematic != null) introCinematic.Play();
     }
 
     /// <summary>
@@ -441,6 +452,13 @@ public class BlessingView : MonoBehaviour
     public void ExecuteChoice(BlessingChoice choice)
     {
         if (choice == null) return;
+
+        // 은총은 꽃밭에서 빛 고리가 퍼지고, 교감은 달빛이 밝아지며 빛 입자가 모인다
+        if (ambienceFx != null)
+        {
+            if (choice.effectType == BlessingEffectType.AffinityTalk) ambienceFx.PlayAffinityGlow();
+            else ambienceFx.PlayBlessingBurst();
+        }
 
         switch (choice.effectType)
         {

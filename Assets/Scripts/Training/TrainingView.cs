@@ -490,6 +490,6 @@ public class TrainingView : MonoBehaviour
         }
         sortieButton.interactable = false;
         TrainingSession.Begin(_encounter, _deck, _companions);
-        SceneTransition.Load(runSceneName, "훈련", "모의 전투를 시작합니다", "TRAINING  //  SIMULATION");
+        SceneTransition.Load(runSceneName, "훈련", "모의 전투를 시작합니다", "TRAINING  //  SIMULATION", "SIM");
     }
 }
