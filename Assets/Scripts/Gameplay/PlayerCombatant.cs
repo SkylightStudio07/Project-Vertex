@@ -17,6 +17,8 @@ public class PlayerCombatant : ICombatant
     public int HP     => GameManager.Instance.PlayerHP;
     public int MaxHP  => GameManager.Instance.MaxPlayerHP;
     public int Block  => _block;
+    public bool GainedBlockThisTurn { get; private set; }
+    public void ResetBlockGainHistory() => GainedBlockThisTurn = false;
     public bool IsDead => HP <= 0;
     public List<IPassiveLogic> Passives => _passives;
     public StatusContainer Statuses => _statuses;
@@ -56,7 +58,12 @@ public class PlayerCombatant : ICombatant
         int before = _block;
         _block = Math.Max(0, _block + PreviewBlockGain(amount));
         int gained = _block - before;
-        if (gained > 0) OnBlockGained?.Invoke(gained);
+
+        if (gained > 0)
+        {
+            GainedBlockThisTurn = true;
+            OnBlockGained?.Invoke(gained);
+        }
     }
 
     public void Heal(int amount)

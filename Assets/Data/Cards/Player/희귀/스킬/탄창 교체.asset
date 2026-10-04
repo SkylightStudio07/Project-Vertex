@@ -19,7 +19,8 @@ MonoBehaviour:
   cardOwner: 0
   isWeaponShootingCard: 0
   cardDescription: "\uCE74\uB4DC\uB97C {0.count}\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4.
-    \uD328\uC5D0\uC11C \uCE74\uB4DC\uB97C {1.count}\uC7A5 \uBC84\uB9BD\uB2C8\uB2E4."
+    \uC190\uC5D0\uC11C \uCE74\uB4DC\uB97C {1.count}\uC7A5 \uBC84\uB9BD\uB2C8\uB2E4.
+    \uC7AC\uC7A5\uC804 \uD569\uB2C8\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -29,6 +30,7 @@ MonoBehaviour:
     effects:
     - rid: 3673691594477535302
     - rid: 3673691594477535301
+    - rid: 7338472044098486514
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -40,6 +42,7 @@ MonoBehaviour:
     effects:
     - rid: 3673691594477535304
     - rid: 3673691594477535303
+    - rid: 7338472044098486515
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -65,3 +68,11 @@ MonoBehaviour:
       type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
       data:
         count: 3
+    - rid: 7338472044098486514
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effectsWhenEmpty: []
+    - rid: 7338472044098486515
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effectsWhenEmpty: []

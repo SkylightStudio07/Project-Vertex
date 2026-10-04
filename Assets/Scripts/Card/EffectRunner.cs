@@ -38,7 +38,7 @@ public static class EffectRunner
     public static EffectPreview Preview(IReadOnlyList<CardEffect> effects, CardContext context)
     {
         var preview = new EffectPreview();
-        CollectPreview(effects, context, preview, 0);
+        CollectPreview(effects, context?.CreateAmmoPreview(), preview, 0);
         return preview;
     }
 
@@ -53,6 +53,27 @@ public static class EffectRunner
         {
             switch (effect)
             {
+                case ReloadAmmoEffect:
+                    context.State?.ReloadAmmo();
+                    break;
+                case ChangeWeaponEffect change:
+                    context.State?.PreviewWeaponReload(change.weapon);
+                    break;
+                case AddAmmoEffect gain when context.State != null:
+                    context.State.Ammo += gain.amount + gain.scaling.Evaluate(context);
+                    break;
+                case AmmoConsumeAllDamageEffect consume when context.State != null:
+                    int spent = context.State.ConsumeAmmo(context.State.Ammo, context);
+                    if (spent > 0)
+                    {
+                        int amount = (consume.separateHits ? consume.damagePerAmmo : consume.damagePerAmmo * spent)
+                                     + AmmoStatusEvents.DamageBonus(context);
+                        int hits = consume.separateHits ? spent : 1;
+                        foreach (var target in consume.targets.Resolve(context))
+                            CollectDamagePreview(new DamageInfo(amount, context.Source, false, true),
+                                target, hits, context, preview);
+                    }
+                    break;
                 case DamageEffect damage:
                     foreach (var target in damage.targets.Resolve(context))
                     {
@@ -61,16 +82,7 @@ public static class EffectRunner
                             damage.environmentalDamage ? null : context.Source,
                             damage.piercing,
                             context.Card != null && context.Card.AmmoCost > 0);
-                        if (info.Source != null)
-                            foreach (var passive in info.Source.Passives)
-                                info = passive.PreviewOutgoingDamage(info, context.State);
-                        foreach (var passive in target.Passives)
-                            info = passive.PreviewIncomingDamage(info, context.State);
-                        int dealt = System.Math.Max(0, info.Amount) * damage.hitCount;
-                        preview.TotalDamage += dealt;
-                        preview.AddTargetDamage(target, dealt, info.IsPiercing);
-                        preview.HitCount += damage.hitCount;
-                        preview.HasDamage = true;
+                        CollectDamagePreview(info, target, damage.hitCount, context, preview);
                     }
                     break;
                 case ApplyStatusEffect status when status.status != null:
@@ -86,6 +98,21 @@ public static class EffectRunner
                     break;
             }
         }
+    }
+
+    private static void CollectDamagePreview(DamageInfo info, ICombatant target, int hits,
+        CardContext context, EffectPreview preview)
+    {
+        if (info.Source != null)
+            foreach (var passive in info.Source.Passives)
+                info = passive.PreviewOutgoingDamage(info, context.State);
+        foreach (var passive in target.Passives)
+            info = passive.PreviewIncomingDamage(info, context.State);
+        int dealt = System.Math.Max(0, info.Amount) * hits;
+        preview.TotalDamage += dealt;
+        preview.AddTargetDamage(target, dealt, info.IsPiercing);
+        preview.HitCount += hits;
+        preview.HasDamage = true;
     }
 }
 
