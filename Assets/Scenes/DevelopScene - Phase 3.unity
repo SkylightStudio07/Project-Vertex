@@ -61364,6 +61364,7 @@ GameObject:
   - component: {fileID: 2142279664}
   - component: {fileID: 2142279665}
   - component: {fileID: 2142279666}
+  - component: {fileID: 2142279667}
   m_Layer: 5
   m_Name: BlessingView
   m_TagString: Untagged
@@ -61410,6 +61411,7 @@ MonoBehaviour:
   characterImage: {fileID: 1809285712}
   petalEffect: {fileID: 2142279662}
   introCinematic: {fileID: 0}
+  ambienceFx: {fileID: 2142279667}
   defaultBlessingData: {fileID: 11400000, guid: 6bb4069c9b5983a49bfafbf19dd90a13, type: 2}
   nameplatePanel: {fileID: 1701817721}
   entityNameText: {fileID: 997796726}
@@ -61536,6 +61538,54 @@ MonoBehaviour:
   rightClickToggles: 1
   fadeDuration: 0.25
   sortingOrderWhileHidden: 200
+--- !u!114 &2142279667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142279659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2980857b544bfb84898e6e58ed077ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlessingAmbienceFx
+  moonHalo: 1
+  moonRays: 1
+  waterShimmer: 1
+  fieldWave: 1
+  lightMotes: 1
+  foregroundPetals: 1
+  characterRim: 1
+  depthMotion: 1
+  additiveMaterial: {fileID: 2100000, guid: 4a1e7934d17453847a5b86b747beff22, type: 2}
+  silhouetteMaterial: {fileID: 2100000, guid: 4089eb6f11724ce4688ae65f09cb4efd, type: 2}
+  softCircle: {fileID: 21300000, guid: e1f19bc3f0054ae48b3e0979a84a6116, type: 3}
+  beam: {fileID: 21300000, guid: 714ab34e0dd70ce48909b71cb30ff806, type: 3}
+  band: {fileID: 21300000, guid: 4ad86805fb1cb654c8180004b274feb8, type: 3}
+  mote: {fileID: 21300000, guid: a6ddf698c271ac142a1899a05808a970, type: 3}
+  ring: {fileID: 21300000, guid: e146e2bb24f6dac4a9dddd791a5e5833, type: 3}
+  petalSprites:
+  - {fileID: -7003695537268062503, guid: 074e62b62ff67ea49a618a54404ccbda, type: 3}
+  - {fileID: 5739423286437482758, guid: 074e62b62ff67ea49a618a54404ccbda, type: 3}
+  - {fileID: -640834488454377786, guid: 074e62b62ff67ea49a618a54404ccbda, type: 3}
+  - {fileID: -4658393613759294605, guid: 074e62b62ff67ea49a618a54404ccbda, type: 3}
+  moonCenter: {x: 0.51, y: 0.786}
+  moonDiameter: 660
+  reflection: {x: 0.51, y: 0.47}
+  horizonY: 0.505
+  fieldRangeY: {x: 0.03, y: 0.42}
+  moonLight: {r: 0.72, g: 0.88, b: 1, a: 1}
+  moteColor: {r: 0.55, g: 0.9, b: 1, a: 1}
+  rimColor: {r: 0.8, g: 0.93, b: 1, a: 0.55}
+  haloAlpha: 0.4
+  rayAlpha: 0.4
+  moteCount: 50
+  rimOffset: {x: 5, y: 4}
+  kenBurnsZoom: 0.025
+  parallaxBackground: {x: 14, y: 8}
+  parallaxCharacter: {x: 26, y: 12}
+  parallaxForeground: {x: 60, y: 24}
 --- !u!1 &2142726439
 GameObject:
   m_ObjectHideFlags: 0

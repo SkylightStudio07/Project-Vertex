@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left; +x right,+y down; rect [x,y,width,height]",
+  "assets": [
+    {
+      "id": "Frame_TopLeft",
+      "file": "Frame_TopLeft.png",
+      "screen_rect": [
+        0,
+        0,
+        400,
+        180
+      ],
+      "scale": 2,
+      "png_size_px": [
+        800,
+        360
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Frame_TopBar",
+      "file": "Frame_TopBar.png",
+      "screen_rect": [
+        1180,
+        0,
+        740,
+        100
+      ],
+      "scale": 2,
+      "png_size_px": [
+        1480,
+        200
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Frame_BottomLeft",
+      "file": "Frame_BottomLeft.png",
+      "screen_rect": [
+        0,
+        920,
+        320,
+        160
+      ],
+      "scale": 2,
+      "png_size_px": [
+        640,
+        320
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Frame_BottomCenter",
+      "file": "Frame_BottomCenter.png",
+      "screen_rect": [
+        740,
+        840,
+        260,
+        240
+      ],
+      "scale": 2,
+      "png_size_px": [
+        520,
+        480
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Frame_BottomRight",
+      "file": "Frame_BottomRight.png",
+      "screen_rect": [
+        1780,
+        930,
+        140,
+        150
+      ],
+      "scale": 2,
+      "png_size_px": [
+        280,
+        300
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    }
+  ],
+  "background": {
+    "file": "Background_RightDim.png",
+    "png_size_px": [
+      1672,
+      941
+    ],
+    "screen_rect": [
+      0,
+      0,
+      1920,
+      1080
+    ],
+    "resolution_mode": "native source size; exempt from2x frame rule",
+    "screen_to_source_scale": [
+      1.1483253588516746,
+      1.1477151965993624
+    ],
+    "source": {
+      "file": "Reference_Background_Current.png",
+      "sha256": "0925abc8bebef85f54e6294cbf64740e0d84f908bf0439e553091505f9e18192"
+    },
+    "correction": {
+      "color_space": "sRGB values",
+      "gradient_start_x": 640,
+      "gradient_end_x": 1300,
+      "gradient": "smoothstep t*t*(3-2*t)",
+      "brightness_factor": 0.78,
+      "saturation_factor": 0.78,
+      "blue_gray_tint_rgb": [
+        47,
+        64,
+        79
+      ],
+      "tint_mix": 0.1,
+      "gaussian_blur_radius_px": 1.15,
+      "operations": [
+        "Gaussian blur original",
+        "Rec709 grayscale blend, saturation .78",
+        "multiply brightness .78",
+        "mix10% blue-gray",
+        "blend with original by horizontal smoothstep",
+        "round nearest uint8"
+      ]
+    }
+  },
+  "draw_order": [
+    "Background_RightDim",
+    "Frame_TopLeft",
+    "Frame_TopBar",
+    "Frame_BottomLeft",
+    "Frame_BottomCenter",
+    "Frame_BottomRight",
+    "existing perspective menu",
+    "existing character and text"
+  ],
+  "menu_reserved_rect": [
+    960,
+    100,
+    920,
+    910
+  ],
+  "exception": {
+    "asset": "Frame_BottomCenter",
+    "max_x": 1000,
+    "overlap_allowed": true
+  },
+  "text_slots": [
+    {
+      "id": "VERTEX",
+      "screen_rect": [
+        136,
+        30,
+        190,
+        28
+      ],
+      "font_size_screen_px": 23,
+      "color_hex": "#16181B",
+      "align": "left"
+    },
+    {
+      "id": "EXPEDITION_3_LINES",
+      "screen_rect": [
+        72,
+        82,
+        160,
+        43
+      ],
+      "font_size_screen_px": 9,
+      "color_hex": "#949A9F",
+      "align": "left"
+    },
+    {
+      "id": "SHELTER_3_LINES",
+      "screen_rect": [
+        72,
+        992,
+        196,
+        46
+      ],
+      "font_size_screen_px": 10,
+      "color_hex": "#949A9F",
+      "align": "left"
+    },
+    {
+      "id": "OBSERVE_3_LINES",
+      "screen_rect": [
+        1766,
+        26,
+        108,
+        51
+      ],
+      "font_size_screen_px": 11,
+      "color_hex": "#62686F",
+      "align": "left"
+    },
+    {
+      "id": "progress_value",
+      "screen_rect": [
+        1570,
+        38,
+        102,
+        28
+      ],
+      "font_size_screen_px": 17,
+      "color_hex": "#62686F",
+      "align": "left"
+    },
+    {
+      "id": "SOMEWHERE_3_LINES",
+      "screen_rect": [
+        1850,
+        1052,
+        62,
+        24
+      ],
+      "font_size_screen_px": 7,
+      "color_hex": "#EEF0F2",
+      "align": "left"
+    }
+  ],
+  "runtime_element_slots": {
+    "progress_bar": [
+      1320,
+      42,
+      226,
+      14
+    ],
+    "settings_gear": [
+      1680,
+      34,
+      34,
+      34
+    ]
+  },
+  "import_settings": {
+    "frame_ppu": 200,
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "mesh_type": "FullRect",
+    "mipmaps": false,
+    "compression": "None",
+    "filter_mode": "Bilinear",
+    "wrap_mode": "Clamp",
+    "canvas_reference_pixels_per_unit": 100
+  },
+  "excluded": [
+    "menu artwork",
+    "menu shadows",
+    "hover effects",
+    "character",
+    "speech bubble",
+    "all text",
+    "progress bar",
+    "settings gear"
+  ]
+}

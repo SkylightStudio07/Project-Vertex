@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 // ============================================================
@@ -14,7 +15,7 @@ public class BlessingUIHide : MonoBehaviour
 {
     [SerializeField] private CanvasGroup uiGroup;        // ChoiceOverlay (비우면 이름으로 찾음)
     [SerializeField] private Button toggleButton;        // 눈 버튼 — 숨기면 같이 사라진다
-    [SerializeField] private KeyCode toggleKey = KeyCode.Space;
+    [SerializeField] private Key toggleKey = Key.Space;
     [SerializeField] private bool rightClickToggles = true;
     [SerializeField, Min(0f)] private float fadeDuration = 0.25f;
     [SerializeField] private int sortingOrderWhileHidden = 200; // 맵 HUD 위로
@@ -54,7 +55,9 @@ public class BlessingUIHide : MonoBehaviour
     private void Update()
     {
         if (_intro != null && _intro.IsPlaying) return;
-        if (Input.GetKeyDown(toggleKey) || (rightClickToggles && Input.GetMouseButtonDown(1)))
+        bool key = Keyboard.current != null && Keyboard.current[toggleKey].wasPressedThisFrame;
+        bool rightClick = rightClickToggles && Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame;
+        if (key || rightClick)
         {
             if (IsHidden) Show(false);
             else if (!IsCardSelectorOpen()) Hide();
@@ -62,7 +65,7 @@ public class BlessingUIHide : MonoBehaviour
     }
 
     // 카드 선택 창(강화·정화) 같은 다른 오버레이가 떠 있으면 숨기지 않는다
-    private bool IsCardSelectorOpen() => CardListView.Instance != null && CardListView.Instance.gameObject.activeInHierarchy;
+    private bool IsCardSelectorOpen() => CardListView.Instance != null && CardListView.Instance.IsOpen;
 
     public void Hide()
     {

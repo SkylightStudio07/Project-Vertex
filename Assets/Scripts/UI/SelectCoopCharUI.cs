@@ -59,8 +59,12 @@ public class SelectCoopCharUI : MonoBehaviour
 
     public DialogueView DialogueView => dialogueView;
 
+    private SanctuaryTransitionFx fx; // 화면 전환 연출 (없으면 자동 추가)
+
     private void Awake()
     {
+        fx = GetComponent<SanctuaryTransitionFx>();
+        if (fx == null) fx = gameObject.AddComponent<SanctuaryTransitionFx>();
         if (guideText != null) defaultGuide = guideText.text;
         if (detailButtonLabel != null) defaultDetailLabel = detailButtonLabel.text;
         if (detailButton != null) detailButton.onClick.AddListener(OpenSelectedDetails);
@@ -141,6 +145,7 @@ public class SelectCoopCharUI : MonoBehaviour
         CoopCharData data = CooperationManager.Instance.GetCoopCharData(charID);
         if (data == null) return;
 
+        if (fx != null) fx.Stop(); // 진행 중인 연출을 제자리로 되돌린 뒤 배치를 바꾼다
         pendingCharID = charID;
         int index = Mathf.Max(0, strips.FindIndex(s => s.CharID == charID));
         detailNumber.text = $"{index + 1:00}";
@@ -174,6 +179,9 @@ public class SelectCoopCharUI : MonoBehaviour
         float nameWidth = detailName.GetPreferredValues(detailName.text).x;
         RectTransform affRect = detailAffiliation.rectTransform;
         affRect.anchoredPosition = new Vector2(detailName.rectTransform.anchoredPosition.x + nameWidth + 34f, affRect.anchoredPosition.y);
+
+        // 소속 위치를 잰 뒤에 재생해야 한다 (연출이 이름 자간을 잠시 넓힌다)
+        if (fx != null) fx.PlayDetailIn();
     }
 
     private static string BuildRewardSummary(CoopCharData data)
@@ -213,8 +221,10 @@ public class SelectCoopCharUI : MonoBehaviour
 
     private void ShowSelect()
     {
+        if (fx != null) fx.Stop();
         if (detailPanel != null) detailPanel.gameObject.SetActive(false);
         if (selectView != null) selectView.gameObject.SetActive(true);
+        if (fx != null) fx.PlaySelectIn();
     }
 
     private void ConfirmSelection()
@@ -223,6 +233,7 @@ public class SelectCoopCharUI : MonoBehaviour
         isConfirming = true;
         proceedButton.interactable = false;
         backButton.interactable = false;
+        if (fx != null) fx.PlayConfirm();
 
         CoopCharData data = CooperationManager.Instance.GetCoopCharData(pendingCharID);
         if (data != null && data.joinDialogueJson != null && dialogueView != null)

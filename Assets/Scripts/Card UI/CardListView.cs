@@ -11,6 +11,9 @@ public class CardListView : MonoBehaviour
 {
     public static CardListView Instance { get; private set; }
 
+    // 목록 창이 떠 있는지. 이 오브젝트 자체는 늘 켜져 있고 panel만 켜고 끈다.
+    public bool IsOpen => panel != null && panel.activeSelf;
+
     [SerializeField] private GameObject panel;
     [SerializeField] private CardListEntry cardPrefab;
     [SerializeField] private Transform cardContainer; 
