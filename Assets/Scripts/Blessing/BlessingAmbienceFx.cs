@@ -78,6 +78,14 @@ public class BlessingAmbienceFx : MonoBehaviour
         _bg = transform.Find("Background") as RectTransform;
         _character = transform.Find("BlessingCharacter") as RectTransform;
         _intro = GetComponent<BlessingIntroCinematic>();
+        // 원래 구도는 진입 연출이 카메라를 움직이기 전(처음 켜질 때) 한 번만 잡는다.
+        // 나중에 잡으면 연출이 확대해 둔 값을 원래 구도로 착각해 화면이 확대된 채 고정된다.
+        if (_bg != null)
+        {
+            _bgPos = _bg.localPosition; _bgScale = _bg.localScale;
+            if (_character != null) { _chPos = _character.localPosition; _chScale = _character.localScale; }
+            _hasBase = true;
+        }
         Build();
     }
 
@@ -292,15 +300,8 @@ public class BlessingAmbienceFx : MonoBehaviour
     private void UpdateMotion()
     {
         if (!depthMotion || _bg == null) return;
-        bool introPlaying = _intro != null && _intro.IsPlaying;
-        if (!_hasBase)
-        {
-            if (introPlaying) return;
-            _bgPos = _bg.localPosition; _bgScale = _bg.localScale;
-            if (_character != null) { _chPos = _character.localPosition; _chScale = _character.localScale; }
-            _hasBase = true;
-        }
-        if (introPlaying) { _motionWeight = 0f; return; }
+        if (!_hasBase) return;
+        if (_intro != null && _intro.IsPlaying) { _motionWeight = 0f; return; }
 
         float dt = Time.unscaledDeltaTime, t = Time.unscaledTime;
         _motionWeight = Mathf.MoveTowards(_motionWeight, 1f, dt / 1.5f);

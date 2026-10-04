@@ -40,7 +40,7 @@ public class BlessingIntroCinematic : MonoBehaviour
         new Shot { fromCenter = new Vector2(-60f, 150f), toCenter = new Vector2(0f, 200f), fromZoom = 1.7f, toZoom = 1.6f, duration = 2.2f },      // 보름달 (위로 천천히)
     };
     [Tooltip("마지막 얼굴 클로즈업 컷. x는 캐릭터(BlessingCharacter) 위치 기준이라 캐릭터를 옮겨도 따라간다")]
-    [SerializeField] private Shot faceShot = new() { fromCenter = new Vector2(20f, 250f), toCenter = new Vector2(20f, 262f), fromZoom = 1.9f, toZoom = 2.05f, duration = 2f };
+    [SerializeField] private Shot faceShot = new() { fromCenter = new Vector2(20f, 360f), toCenter = new Vector2(20f, 372f), fromZoom = 1.9f, toZoom = 2.05f, duration = 2f };
 
     [Header("시간")]
     [SerializeField] private float openingBlack = 0.6f; // 암전 유지
