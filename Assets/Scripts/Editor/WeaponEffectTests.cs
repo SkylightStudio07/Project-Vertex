@@ -141,6 +141,40 @@ public class WeaponEffectTests
         Assert.That(shot.CardName, Is.EqualTo("Original"));
     }
 
+    [Test]
+    public void ArmoryUpgradeRaisesMaxAmmoOrShotDamageByWeaponType()
+    {
+        var card = Card("Shot", false, 1);
+        var magazine = Weapon(card); // 연사형: 최대 탄약 강화
+        SetField(magazine, "maxAmmo", 3);
+        SetField(magazine, "upgradeType", WeaponUpgradeType.MaxAmmo);
+        SetField(magazine, "upgradeValues", new[] { 1, 2 });
+        var heavy = Weapon(card);    // 한방형: 사격 피해 강화
+        SetField(heavy, "maxAmmo", 1);
+        SetField(heavy, "upgradeType", WeaponUpgradeType.ShotDamage);
+        SetField(heavy, "upgradeValues", new[] { 3, 6 });
+
+        _state.WeaponUpgradeLevel = _ => 2;
+        _state.ChangePlayerWeapon(magazine);
+        Assert.That(_state.MaxAmmo, Is.EqualTo(5));
+        Assert.That(_state.Ammo, Is.EqualTo(5)); // 장착(재장전) 탄약도 강화된 최대치
+        Assert.That(_state.ShotDamageBonus, Is.Zero);
+
+        _state.ChangePlayerWeapon(heavy);
+        Assert.That(_state.MaxAmmo, Is.EqualTo(1)); // 한방형은 탄창이 늘지 않는다
+        Assert.That(_state.ShotDamageBonus, Is.EqualTo(6));
+        var effect = new DamageEffect { amount = 9 };
+        var used = new CardContext { State = _state, Card = card };
+        Assert.That(effect.GetRawAmount(used, null), Is.EqualTo(9)); // 탄약을 쓰기 전에는 보너스 없음
+        _state.ConsumeAmmo(1, used);
+        Assert.That(effect.GetRawAmount(used, null), Is.EqualTo(15));
+
+        _state.WeaponUpgradeLevel = _ => 9; // 최대 단계를 넘는 값은 마지막 단계로
+        Assert.That(_state.ShotDamageBonus, Is.EqualTo(6));
+        _state.WeaponUpgradeLevel = null;   // 연결이 없으면 강화 없음
+        Assert.That(_state.ShotDamageBonus, Is.Zero);
+    }
+
     private CardContext AmmoCard(int cost, int capacity = 3)
     {
         var card = Card("Ammo", false, cost);

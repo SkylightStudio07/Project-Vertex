@@ -124,6 +124,7 @@ public class BattleManager : MonoBehaviour
         };
 
         SetupEnemies(enemyDataList);
+        _state.WeaponUpgradeLevel = PlayerRecord.GetWeaponUpgrade; // 무기고 강화는 장착(재장전) 전에 연결해야 시작 탄약에 반영된다
         _state.ChangePlayerWeapon(_defaultWeapon);
         SetupBattleDeck(masterDeck);
         _state.Player.Statuses.NotifyBattleStart(_state, _state.Player);
