@@ -49,8 +49,10 @@ public class BattleState
                        context.TriggeringPassive == null && Player != null && context.Source == Player;
         if (cardUse)
         {
-            bool first = spent > 0 && FirstAmmoUseAvailable;
-            bool last = spent > 0 && Ammo == 0 && LastAmmoUseAvailable;
+            // 초탄·막탄은 그 판정을 쓰는 무기(WeaponData.UsesAmmoBoundary)에서만 성립한다
+            bool boundary = CurrentWeapon != null && CurrentWeapon.UsesAmmoBoundary;
+            bool first = boundary && spent > 0 && FirstAmmoUseAvailable;
+            bool last = boundary && spent > 0 && Ammo == 0 && LastAmmoUseAvailable;
             bool firstConsumption = context.AmmoSpent == 0;
             context.RecordAmmoUse(spent, first, last);
             if (first) FirstAmmoUseAvailable = false;
@@ -60,6 +62,16 @@ public class BattleState
             if (!_ammoPreview) Player.RemoveExpiredPassives();
         }
         return spent;
+    }
+
+    // 일반 탄약 획득. 총기를 들고 있으면 최대 탄약을 넘지 않는다(하드캡, 넘친 만큼은 버린다).
+    // 총기가 없으면 상한이 없으므로 그대로 더한다. 이미 상한을 넘어 있으면 줄이지 않고 더하지도 않는다.
+    public int GainAmmo(int amount)
+    {
+        if (amount <= 0) return 0;
+        int before = Ammo;
+        Ammo = CurrentWeapon == null ? Ammo + amount : System.Math.Max(Ammo, System.Math.Min(Ammo + amount, MaxAmmo));
+        return Ammo - before;
     }
 
     // 일반 탄약 획득과 구분되는 재장전 진입점. 총기가 없으면 탄약을 변경하지 않는다.
@@ -91,16 +103,14 @@ public class BattleState
         if (Player == null || weapon == null || weapon.ShootingCard == null)
             return false;
 
-        bool changed = CurrentWeapon != weapon;
-        if (changed)
-        {
-            CurrentWeapon = weapon;
-            ReplaceShootingCards(Hand);
-            ReplaceShootingCards(DrawPile);
-            ReplaceShootingCards(DiscardPile);
-            ReplaceShootingCards(ExhaustPile);
-        }
-        // 동일 총기는 카드 사본을 교체하지 않고 재장전만 한다.
+        // 이미 든 총기로의 전환은 아무 일도 하지 않는다(재장전 없음). 재장전은 재장전 효과로만 한다.
+        if (CurrentWeapon == weapon) return false;
+
+        CurrentWeapon = weapon;
+        ReplaceShootingCards(Hand);
+        ReplaceShootingCards(DrawPile);
+        ReplaceShootingCards(DiscardPile);
+        ReplaceShootingCards(ExhaustPile);
         return ReloadAmmo();
     }
 

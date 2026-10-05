@@ -14,7 +14,12 @@ public class WeaponData : ScriptableObject
     [FormerlySerializedAs("ammoOnEquip")]
     [SerializeField, Min(0)] private int maxAmmo = 3;
 
+    [Header("초탄 · 막탄")]
+    [Tooltip("켜면 재장전 후 처음 탄약을 쓰는 카드(초탄)와 탄창을 비우는 카드(막탄) 판정이 이 무기에 적용됩니다.")]
+    [SerializeField] private bool usesAmmoBoundary;
+
     public string WeaponName => weaponName;
     public CardData ShootingCard => shootingCard;
     public int MaxAmmo => Mathf.Max(0, maxAmmo);
+    public bool UsesAmmoBoundary => usesAmmoBoundary;
 }

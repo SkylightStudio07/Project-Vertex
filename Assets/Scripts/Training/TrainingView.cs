@@ -109,6 +109,8 @@ public class TrainingView : MonoBehaviour
 
     private void Awake()
     {
+        // 비율 유지 그림은 칸보다 좁으면 피벗 쪽으로 붙는다. 적 그림이 원판 가운데 서도록 피벗만 가운데로 옮긴다(칸 위치는 그대로)
+        CenterPivot(previewArt.rectTransform);
         targetRowTemplate.gameObject.SetActive(false);
         companionTemplate.gameObject.SetActive(false);
         deckRowTemplate.gameObject.SetActive(false);
@@ -271,6 +273,13 @@ public class TrainingView : MonoBehaviour
         deckCountText.text = $"{_deck.Count}장";
 
         sortieButton.interactable = _encounter != null && _deck.Count > 0;
+    }
+
+    private static void CenterPivot(RectTransform rt)
+    {
+        Vector2 delta = new Vector2(0.5f, 0.5f) - rt.pivot;
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition += Vector2.Scale(delta, rt.rect.size);
     }
 
     private void RefreshPreview()

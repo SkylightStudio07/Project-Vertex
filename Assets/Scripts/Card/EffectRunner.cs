@@ -60,7 +60,7 @@ public static class EffectRunner
                     context.State?.PreviewWeaponReload(change.weapon);
                     break;
                 case AddAmmoEffect gain when context.State != null:
-                    context.State.Ammo += gain.amount + gain.scaling.Evaluate(context);
+                    context.State.GainAmmo(gain.amount + gain.scaling.Evaluate(context));
                     break;
                 case AmmoConsumeAllDamageEffect consume when context.State != null:
                     int spent = context.State.ConsumeAmmo(context.State.Ammo, context);

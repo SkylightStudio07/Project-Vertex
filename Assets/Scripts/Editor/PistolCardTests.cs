@@ -102,9 +102,10 @@ public class PistolCardTests
     [Test]
     public void MasteryAddsEightWhenBothAndPreparedDamageAppliesToEntireNextCard()
     {
-        Play(5); _state.ChangePlayerWeapon(Weapon("스나이퍼"));
+        // 재장전 직후 마지막 한 발: 초탄이면서 막탄
+        Play(5); _state.ReloadAmmo(); _state.Ammo = 1;
         var target = new Target(); Play(0, target); Assert.That(target.Hits, Is.EqualTo(new[] { 19 }));
-        _state.Player.Passives.Clear(); _state.ChangePlayerWeapon(Weapon("권총"));
+        _state.Player.Passives.Clear(); _state.ReloadAmmo();
         Play(14); _state.Ammo = 2; target.Hits.Clear(); Play(4, target);
         Assert.That(target.Hits, Is.EqualTo(new[] { 11, 11, 11 }));
         _state.ReloadAmmo(); target.Hits.Clear(); Play(0, target); Assert.That(target.Hits, Is.EqualTo(new[] { 11 }));
@@ -121,16 +122,20 @@ public class PistolCardTests
         _state.Player.ResetBlockGainHistory(); Assert.That(new PlayerGainedBlockCondition().IsMet(new CardContext { State = _state }), Is.False);
     }
     [Test]
-    public void ReloadAndFirstAmmoPowersTriggerOnSameWeaponAndPreviewIsReadOnly()
+    public void ReloadAndFirstAmmoPowersTriggerAndPreviewIsReadOnly()
     {
         Play(11); Play(17);
-        _state.ChangePlayerWeapon(Weapon("권총")); Assert.That(_state.Player.Block, Is.EqualTo(4));
+        Assert.That(_state.ChangePlayerWeapon(Weapon("권총")), Is.False); Assert.That(_state.Player.Block, Is.Zero); // 같은 무기: 재장전 없음
+        _state.ReloadAmmo(); Assert.That(_state.Player.Block, Is.EqualTo(4));
         var card = Card(0); var target = new Target();
         EffectRunner.Preview(card.ActiveEffects, new CardContext { State = _state, Card = card, PrimaryTargetOverride = target });
         Assert.That(_state.Player.Block, Is.EqualTo(4));
         Play(0, target); Assert.That(_state.Player.Block, Is.EqualTo(9));
         Play(0, target); Assert.That(_state.Player.Block, Is.EqualTo(9));
-        _state.ChangePlayerWeapon(Weapon("스나이퍼")); Play(0, target); Assert.That(_state.Player.Block, Is.EqualTo(18));
+        // 스나이퍼는 초탄·막탄을 쓰지 않는 총기: 전환 재장전(+4)만 받고 초탄 방어도는 없다
+        _state.ChangePlayerWeapon(Weapon("스나이퍼")); Assert.That(_state.Player.Block, Is.EqualTo(13));
+        var sniperShot = Play(0, target); Assert.That(sniperShot.IsFirstAmmoUse || sniperShot.IsLastAmmoUse, Is.False);
+        Assert.That(_state.Player.Block, Is.EqualTo(13));
     }
     [Test]
     public void DrawReloadAndMagazineExpansionUseRuntimeWeaponState()

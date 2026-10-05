@@ -78,7 +78,7 @@ public class WeaponEffectTests
         Assert.That(_state.Hand[0].CardName, Is.EqualTo("Second"));
         Assert.That(_state.CreateCard(original).CardName, Is.EqualTo("Second"));
         var currentCard = _state.Hand[0];
-        Assert.That(_state.ChangePlayerWeapon(second), Is.True);
+        Assert.That(_state.ChangePlayerWeapon(second), Is.False); // 같은 무기는 변화 없음
         Assert.That(_state.Hand[0], Is.SameAs(currentCard));
         Assert.That(_state.ChangePlayerWeapon(Weapon(null)), Is.False);
         Assert.That(_state.CurrentWeapon, Is.SameAs(second));
@@ -99,8 +99,9 @@ public class WeaponEffectTests
         Assert.That(_state.Ammo, Is.EqualTo(7));
         new ChangeWeaponEffect { weapon = weapon }.Execute(context);
         Assert.That(_state.Ammo, Is.EqualTo(7));
+        _state.Ammo = 4; // 탄창(7)이 가득 차 있으면 획득이 상한에 막히므로 비운 뒤 확인
         effect.Execute(context);
-        Assert.That(_state.Ammo, Is.EqualTo(9));
+        Assert.That(_state.Ammo, Is.EqualTo(6));
         Assert.That(_state.Player.Passives, Is.Empty);
         Assert.That(condition.IsMet(new CardContext()), Is.False);
         Assert.That(condition.IsMet(null), Is.False);
@@ -341,7 +342,7 @@ public class WeaponEffectTests
     [TestCase(1)]
     [TestCase(3)]
     [TestCase(9)]
-    public void ReloadAndSameWeaponSwitchSetMaximumWithoutReplacingCards(int ammo)
+    public void ReloadSetsMaximumAndSameWeaponSwitchKeepsAmmoAndCards(int ammo)
     {
         var weapon = Weapon(Card("Shot", true, 1));
         SetField(weapon, "maxAmmo", 3);
@@ -353,13 +354,13 @@ public class WeaponEffectTests
         Assert.That(_state.Ammo, Is.EqualTo(3));
         Assert.That(_state.MaxAmmo, Is.EqualTo(3));
         _state.Ammo = ammo;
-        Assert.That(_state.ChangePlayerWeapon(weapon), Is.True);
-        Assert.That(_state.Ammo, Is.EqualTo(3));
+        Assert.That(_state.ChangePlayerWeapon(weapon), Is.False);
+        Assert.That(_state.Ammo, Is.EqualTo(ammo)); // 같은 무기로 전환해도 재장전하지 않는다
         Assert.That(_state.Hand[0], Is.SameAs(shot));
     }
 
     [Test]
-    public void ReloadWithoutWeaponDoesNotEraseAmmoAndGainIsStillAdditive()
+    public void ReloadWithoutWeaponDoesNotEraseAmmoAndGainIsCappedByMagazine()
     {
         var effect = new ReloadAmmoEffect();
         Assert.DoesNotThrow(() => effect.Execute(null));
@@ -369,8 +370,12 @@ public class WeaponEffectTests
         var weapon = Weapon(Card("Shot", false, 1));
         SetField(weapon, "maxAmmo", 3);
         _state.ChangePlayerWeapon(weapon);
-        new AddAmmoEffect { amount = 2 }.Execute(new CardContext { State = _state });
-        Assert.That(_state.Ammo, Is.EqualTo(5));
+        // 총기를 들면 탄약 획득은 최대 탄약에서 멈춘다 (넘친 만큼은 버림)
+        _state.Ammo = 1;
+        new AddAmmoEffect { amount = 1 }.Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(2));
+        new AddAmmoEffect { amount = 5 }.Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(3));
         effect.Execute(new CardContext { State = _state });
         Assert.That(_state.Ammo, Is.EqualTo(3));
     }
@@ -407,6 +412,7 @@ public class WeaponEffectTests
         _assets.Add(weapon);
         SetField(weapon, "shootingCard", shot);
         SetField(weapon, "maxAmmo", 7);
+        SetField(weapon, "usesAmmoBoundary", true);
         return weapon;
     }
 
@@ -425,9 +431,9 @@ public class WeaponEffectTests
         card.isUpgraded = upgraded;
         var target = new TestTarget();
         var context = new CardContext { State = _state, Card = card, PrimaryTargetOverride = target };
-        // 같은 권총으로 다시 전환해도 이전 탄약 수에 관계없이 세 발을 쏜다.
+        // 다른 무기에서 권총으로 전환하면 이전 탄약 수에 관계없이 세 발을 쏜다.
         var weapon = ((ChangeWeaponEffect)card.ActiveEffects[0]).weapon;
-        _state.ChangePlayerWeapon(weapon);
+        _state.ChangePlayerWeapon(Weapon(Card("Other", false, 1)));
         _state.Ammo = ammo;
         target.OnHit = () => Assert.That(_state.Ammo, Is.Zero);
         RunSequence(EffectRunner.ExecuteSequence(card.ActiveEffects, context));

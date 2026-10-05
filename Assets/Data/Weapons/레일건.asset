@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: "\uB808\uC77C\uAC74"
   shootingCard: {fileID: 11400000, guid: 15f1e36653fbecf48bfad141be462b89, type: 2}
-  setAmmoOnEquip: 0
-  ammoOnEquip: 1
+  maxAmmo: 1
+  usesAmmoBoundary: 0
