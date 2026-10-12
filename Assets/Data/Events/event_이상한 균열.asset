@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61e595b875def948a5ed08c5927f167, type: 3}
+  m_Name: "event_\uC774\uC0C1\uD55C \uADE0\uC5F4"
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventJson: {fileID: 4900000, guid: 30780271ac656ec4892fbe8716882b3d, type: 3}
+  choiceEffects:
+  - effects:
+    - rid: 646458146125512821
+    conditions:
+    - rid: 646458146125512822
+  - effects:
+    - rid: 646458146125512835
+    conditions:
+    - rid: 646458146125512836
+  dialogueJson: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  eventImage: {fileID: 5226312615441349864, guid: 29e6edda6c701e94ebe96ae98208ca08, type: 3}
+  eventImageFocus: {x: 0.5, y: 0.5}
+  eventImageZoom: 1
+  illustration: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 646458146125512821
+      type: {class: TransmogrifyCardEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 1
+    - rid: 646458146125512822
+      type: {class: HasTransmogrifiableCardCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 646458146125512835
+      type: {class: UpgradeCardEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 1
+    - rid: 646458146125512836
+      type: {class: HasUpgradableCardCondition, ns: , asm: Assembly-CSharp}
+      data: 
