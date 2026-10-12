@@ -1,0 +1,11 @@
+Create Training_Deck_Mockup.png ONE1672x941 game UI. Image1 is exact Reference_CardCatalog: reuse its existing card artwork/prefab designs and paper visual shell. Image2 is training main: match header06, background, panel edge contour, typography and button language. This is separate DECK EDIT screen; NO monster, companion portraits, target selection or card-detail panel.
+Opaque#EEF0F2 paper, graphite hairlines, cut corners, restrained#0DB8F2 accents. Same subtle city outside frame, faint target/grid watermark only, no decorative stars/petals/compass, glow or translucency. Preserve existing colored card illustrations, no newly drawn pictures.
+Header same location as main:06 | '훈련장 · 덱 편집', small'TRAINING GROUND / DECK EDIT'. Back top-right(1430,27)185x49 '← 돌아가기'.
+LEFT filter(70,120)240x760: '필터', section'종류' with square checkboxes '공격','스킬','파워'; '코스트' small cells'0','1','2','3+'; '소속' checkboxes'전체','주인공','치하라 쇼','무색'. First whole/all state selected cyan small tick, no huge cyan panels.
+CENTER library(330,120)790x760: header'해금 카드 / LIBRARY', small'17종 · 미획득34'. Four columns of existing catalog cards,2 full rows plus optional partial next row and narrow scroll bar. Reuse exact source card art and frames: 사격 handgun, 방어 blue shield, 연사 machine gun, 저격 rifle; second row 재장전 loading hand, two locked??? cards, 핫 리로드 magazine. Do not paint new illustrations. Card thumbnails readable and fit center, no right card-detail view.
+Cards included in current deck have small cyan quantity badge at upper right: 사격×5, 방어×5, 재장전×1, 연사×2. Counts belong on card corners, not separate controls. Unacquired gray cards show '???', padlock, '런에서 획득'. Library clicking adds card, no maximum-size text.
+RIGHT current deck(1150,120)450x640: header'현재 덱 / DECK', total'15장'; exactly five rows with icon/name and small minus box,count,plus box:
+사격 − ×5 + ; 방어 − ×5 + ; 재장전 − ×1 + ; 레일건 사격 − ×2 + ; 연사 − ×2 +.
+Counts sum15. Make plus and minus distinct square thin-line controls aligned into columns. No card cap15/30;15 is current count only. Small note'장수 제한 없음 · 최소1장'.
+Done button(1150,780)450x100 clipped INK BLACK, white bold'완료 →', thin cyan bottom rule. No upgrade, rewards, EXP or gold.
+Preserve exact source art wherever supplied. Final polished screenshot only, no annotations.

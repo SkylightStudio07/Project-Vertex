@@ -1,407 +1,217 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using TMPro;
 
-public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICanvasRaycastFilter
+// 성소 후보 띠 하나.
+// Fill·Mask·NameBand·Frame 조각은 모두 같은 816×680 캔버스·같은 꼭짓점이라 겹쳐 놓기만 하면 맞는다.
+// 캐릭터 그림은 Strip_Mask(Mask) 아래에서 크롭되고, 잠긴 후보는 같은 그림을 실루엣 머티리얼로 칠한다.
+public class SelectCoopCharBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ICanvasRaycastFilter
 {
-    [SerializeField] private RectTransform rectTransform;
-    [SerializeField] private UnityEngine.UI.Image charImage;
-    private SelectCoopCharUI selectCoopCharUI;
+    // 띠 모양 꼭짓점 (816×680 캔버스, 좌상단 원점) — layout.json strip_geometry
+    private const float CanvasW = 816f, CanvasH = 680f;
+    private const float TopLeftX = 366f, TopRightX = 815f, BottomRightX = 460f, BottomLeftX = 0f;
+
+    [Header("띠 조각")]
+    [SerializeField] private Image fill;
+    [SerializeField] private Image charImage;
+    [SerializeField] private Image nameBand;
+    [SerializeField] private Image frame;
+    [SerializeField] private Image lockIcon;
+    [SerializeField] private Image accentLine;
+    [SerializeField] private Image numberUnderline;
+    [SerializeField] private TextMeshProUGUI numberText;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI subText;
+
+    [Header("상태 스프라이트")]
+    [SerializeField] private Sprite fillNormal;
+    [SerializeField] private Sprite fillLocked;
+    [SerializeField] private Sprite bandNormal;
+    [SerializeField] private Sprite bandLocked;
+    [SerializeField] private Sprite frameNormal;
+    [SerializeField] private Sprite frameHover;
+    [SerializeField] private Sprite frameSelected;
+    [SerializeField] private Sprite frameLocked;
+
+    [Header("캐릭터 크롭")]
+    [Tooltip("띠 높이 대비 캐릭터 그림 높이 (클수록 확대)")]
+    [SerializeField] private float artHeightRatio = 1.55f;
+    [Tooltip("그림 윗변이 띠 윗변에서 내려오는 거리(px). 음수면 위로 잘린다")]
+    [SerializeField] private float artTopOffset = 8f;
+    [SerializeField] private float hoverArtScale = 1.03f;
+
+    [Header("잠긴 후보")]
+    [SerializeField] private Material silhouetteMaterial;
+    [SerializeField] private Color silhouetteColor = new(0.63f, 0.65f, 0.68f, 1f);
+    [SerializeField] private string lockedName = "잠긴 후보";
+    [Tooltip("동행 인원이 가득 차 고를 수 없는 후보의 그림 색 (실루엣이 아니라 어둡게)")]
+    [SerializeField] private Color unavailableTint = new(0.55f, 0.56f, 0.58f, 1f);
+
+    [Header("글자 색")]
+    [SerializeField] private Color numberColor = new(0.086f, 0.094f, 0.106f, 1f);
+    [SerializeField] private Color numberSelectedColor = new(0.05f, 0.72f, 0.95f, 1f);
+    [SerializeField] private Color lockedNumberColor = new(0.42f, 0.44f, 0.47f, 1f);
+    [SerializeField] private Color affiliationColor = new(0.05f, 0.72f, 0.95f, 1f);
+    [SerializeField] private Color lockedSubColor = new(0.66f, 0.68f, 0.71f, 1f);
+
+    private SelectCoopCharUI owner;
     private string charID;
-    private Sprite normalPortrait;
-    private Sprite hoverPortrait;
-    private Vector2 normalFocus = new Vector2(0.5f, 0.5f);
-    private Vector2 hoverFocus = new Vector2(0.5f, 0.5f);
-    private SanctuarySliceGraphic sliceMask;
-    private SanctuarySliceGraphic sliceOutline;
-    private UnityEngine.UI.Image panelBackground;
-    [SerializeField] private UnityEngine.UI.Image editorialFrame;
-    private UnityEngine.UI.Image selectAction;
-    private TextMeshProUGUI candidateLabel;
-    private TextMeshProUGUI characterName;
-    private TextMeshProUGUI characterSummary;
-    private TextMeshProUGUI selectLabel;
-    private TextMeshProUGUI coordinateLabel;
-    private Vector4 sliceEdges = new Vector4(0f, 1f, 0f, 1f);
-    private int candidateIndex;
-    private TMP_FontAsset uiFont;
-    private string displayName;
-    private string displaySummary;
+    private bool isLocked;
+    private bool isUnavailable; // 실제 후보지만 동행 인원이 가득 차 고를 수 없음
+    private bool isSelected;
     private bool isHovered;
+    private Sprite portrait;
+    private Vector2 focus = new(0.5f, 0.5f);
 
-    // Property
     public string CharID => charID;
+    public bool IsLocked => isLocked;
 
-    private void Start()
+    private void Awake()
     {
-        if (GetComponentInParent<SelectCoopCharUI>() != null)
-        {
-            selectCoopCharUI = GetComponentInParent<SelectCoopCharUI>();
-        }
+        owner = GetComponentInParent<SelectCoopCharUI>(true);
     }
 
-    public void SetBtn(string charID)
+    // 선택 가능한 후보. unavailableHint가 있으면 이름·그림은 보이되 잠긴 띠로 고를 수 없다 (동행 인원 가득 참)
+    public void SetCandidate(string id, int index, string unavailableHint = null)
     {
-        this.charID = charID;
+        charID = id;
+        isUnavailable = unavailableHint != null;
+        isLocked = isUnavailable;
+        CoopCharData data = CooperationManager.Instance != null ? CooperationManager.Instance.GetCoopCharData(id) : null;
+        portrait = PickPortrait(data);
+        focus = data != null ? data.sanctuarySelectionFocus : new Vector2(0.5f, 0.5f);
 
-        if (CooperationManager.Instance == null)
-        {
-            Debug.LogWarning("[SelectCoopCharBtn] CooperationManager.Instance가 없음. 씬(또는 부트 씬)에 CooperationManager가 있는지 확인 필요.");
-            return;
-        }
-
-        CoopCharData data = CooperationManager.Instance.GetCoopCharData(charID);
-        normalPortrait = data != null
-            ? (data.sanctuarySelectionArt != null ? data.sanctuarySelectionArt : data.charImage)
-            : null;
-        hoverPortrait = data != null ? data.sanctuaryHoverArt : null;
-        normalFocus = data != null ? data.sanctuarySelectionFocus : new Vector2(0.5f, 0.5f);
-        hoverFocus = data != null ? data.sanctuaryHoverFocus : normalFocus;
-        displayName = data != null && !string.IsNullOrWhiteSpace(data.charName) ? data.charName : charID;
-        displaySummary = data != null && !string.IsNullOrWhiteSpace(data.charDescription)
-            ? data.charDescription
-            : "동행자 관측 기록이 아직 등록되지 않았습니다.";
-        ApplyCopy();
-        ResetHover();
-        if (normalPortrait == null)
-        {
-            Debug.Log($"{charID}에 해당하는 캐릭터 이미지 없음");
-            return;
-        }
+        numberText.text = $"{index + 1:00}";
+        nameText.text = data != null && !string.IsNullOrWhiteSpace(data.charName) ? data.charName : id;
+        subText.text = isUnavailable ? unavailableHint : data != null ? data.affiliation : "";
+        subText.color = isUnavailable ? lockedSubColor : affiliationColor;
+        accentLine.enabled = !isUnavailable;
+        accentLine.color = data != null ? data.themeColor : affiliationColor;
+        lockIcon.enabled = isUnavailable;
+        ResetState();
     }
 
-    public void ConfigureDiagonalStrip(Vector4 edges, bool first, bool last, int index, TMP_FontAsset font,
-        Sprite frameSprite = null, Sprite actionSprite = null)
+    // 잠긴 자리. silhouetteSource의 전투 스탠딩(배경 투명 보장)이 있으면 실루엣으로 깐다.
+    // 초상화(charImage)는 배경이 칠해진 그림일 수 있어 실루엣이 사각형이 되므로 쓰지 않는다.
+    public void SetLocked(CoopCharData silhouetteSource, int index, string unlockHint)
     {
-        sliceEdges = edges;
-        candidateIndex = index;
-        uiFont = font;
-        if (rectTransform == null) rectTransform = transform as RectTransform;
-        if (sliceMask == null)
-        {
-            Transform existing = transform.Find("Diagonal Portrait");
-            if (existing != null) sliceMask = existing.GetComponent<SanctuarySliceGraphic>();
-            if (sliceMask == null)
-            {
-                GameObject maskObject = new GameObject("Diagonal Portrait", typeof(RectTransform),
-                    typeof(SanctuarySliceGraphic), typeof(UnityEngine.UI.Mask));
-                maskObject.transform.SetParent(transform, false);
-                sliceMask = maskObject.GetComponent<SanctuarySliceGraphic>();
-            }
-            Stretch(sliceMask.rectTransform);
-            sliceMask.color = Color.white;
-            sliceMask.GetComponent<UnityEngine.UI.Mask>().showMaskGraphic = false;
+        charID = null;
+        isLocked = true;
+        isUnavailable = false;
+        portrait = silhouetteSource != null ? silhouetteSource.standingSprite : null;
+        focus = silhouetteSource != null ? silhouetteSource.sanctuarySelectionFocus : new Vector2(0.5f, 0.5f);
 
-            // The trapezoid is the UI panel only. Character art stays outside the mask so that
-            // arbitrary full-body splash ratios remain visible instead of being cropped to it.
-            if (charImage == null)
-            {
-                GameObject artObject = new GameObject("Character Art", typeof(RectTransform), typeof(UnityEngine.UI.Image));
-                charImage = artObject.GetComponent<UnityEngine.UI.Image>();
-            }
-            charImage.transform.SetParent(transform, false);
-            charImage.raycastTarget = false;
-            Transform legacyMask = transform.Find("Portrait Mask");
-            if (legacyMask != null) legacyMask.gameObject.SetActive(false);
-            Transform legacyFrame = transform.Find("Sanctuary Frame");
-            if (legacyFrame != null) legacyFrame.gameObject.SetActive(false);
-        }
-
-        if (charImage.transform.parent != transform) charImage.transform.SetParent(transform, false);
-        EnsurePanelVisuals(frameSprite, actionSprite);
-
-        if (sliceOutline == null)
-        {
-            Transform existing = transform.Find("Diagonal Divider");
-            if (existing != null) sliceOutline = existing.GetComponent<SanctuarySliceGraphic>();
-            if (sliceOutline == null)
-            {
-                GameObject outline = new GameObject("Diagonal Divider", typeof(RectTransform), typeof(SanctuarySliceGraphic));
-                outline.transform.SetParent(transform, false);
-                sliceOutline = outline.GetComponent<SanctuarySliceGraphic>();
-            }
-            Stretch(sliceOutline.rectTransform);
-        }
-
-        sliceMask.Configure(edges, false, false, false);
-        sliceOutline.Configure(edges, true, frameSprite == null && !first, frameSprite == null && !last);
-        LayoutPanelVisuals();
-        charImage.transform.SetAsLastSibling();
-        if (editorialFrame != null && editorialFrame.gameObject.activeSelf)
-            editorialFrame.transform.SetAsLastSibling();
-        sliceOutline.transform.SetAsLastSibling();
-        if (transform.Find("Info Header") != null) transform.Find("Info Header").SetAsLastSibling();
-        if (transform.Find("Info Footer") != null) transform.Find("Info Footer").SetAsLastSibling();
-        UnityEngine.UI.Image hitArea = GetComponent<UnityEngine.UI.Image>();
-        hitArea.sprite = null;
-        hitArea.color = Color.clear;
-        hitArea.raycastTarget = true;
-        GetComponent<UnityEngine.UI.Button>().transition = UnityEngine.UI.Selectable.Transition.None;
-        ApplyCopy();
-        ApplyPortrait();
+        numberText.text = $"{index + 1:00}";
+        nameText.text = lockedName;
+        subText.text = unlockHint;
+        subText.color = lockedSubColor;
+        accentLine.enabled = false;
+        lockIcon.enabled = true;
+        ResetState();
     }
 
-    private void ApplyPortrait()
+    public void SetSelected(bool selected)
     {
-        if (charImage == null) return;
-        bool useHoverArt = isHovered && hoverPortrait != null;
-        Sprite art = useHoverArt ? hoverPortrait : normalPortrait;
-        Vector2 focus = useHoverArt ? hoverFocus : normalFocus;
-        charImage.sprite = art;
-        charImage.enabled = art != null;
-        charImage.color = Color.white;
-        if (sliceOutline != null)
-            sliceOutline.color = isHovered
-                ? new Color(0.25f, 0.8f, 0.94f, 1f)
-                : new Color(0.045f, 0.065f, 0.08f, 1f);
-        if (panelBackground != null)
-            panelBackground.color = isHovered
-                ? new Color(0.84f, 0.97f, 0.98f, 1f)
-                : candidateIndex % 2 == 0
-                    ? new Color(0.93f, 0.91f, 0.86f, 1f)
-                    : new Color(0.86f, 0.88f, 0.86f, 1f);
-        if (selectAction != null)
-            selectAction.color = selectAction.sprite != null
-                ? (isHovered ? new Color(0.86f, 0.98f, 1f, 1f) : Color.white)
-                : isHovered
-                    ? new Color(0.25f, 0.8f, 0.94f, 0.96f)
-                    : new Color(0.035f, 0.055f, 0.065f, 0.94f);
-        if (selectLabel != null)
-            selectLabel.color = isHovered
-                ? new Color(0.02f, 0.08f, 0.1f, 1f)
-                : new Color(0.94f, 0.93f, 0.88f, 1f);
-        if (sliceMask == null || art == null) return;
-
-        // Fit the entire splash into a stable character area. The diagonal panel is a background,
-        // not an image crop frame; this supports tall, wide, and differently sized source art.
-        Vector2 viewport = sliceMask.rectTransform.rect.size;
-        if (viewport.x <= 0f || viewport.y <= 0f) return;
-        bool useEditorialFrame = editorialFrame != null && editorialFrame.sprite != null;
-        float panelWidth = Mathf.Min(sliceEdges.y - sliceEdges.x, sliceEdges.w - sliceEdges.z) * viewport.x;
-        Vector2 artArea = new Vector2(panelWidth * (useEditorialFrame ? 0.56f : 0.92f), viewport.y * 0.76f);
-        float scale = Mathf.Min(artArea.x / art.rect.width, artArea.y / art.rect.height);
-        Vector2 size = art.rect.size * scale * (isHovered ? 1.035f : 1f);
-        RectTransform artRect = charImage.rectTransform;
-        artRect.anchorMin = artRect.anchorMax = artRect.pivot = new Vector2(0.5f, 0.5f);
-        artRect.localScale = Vector3.one;
-        artRect.sizeDelta = size;
-        float artCenterY = 0.52f;
-        float left = Mathf.Lerp(sliceEdges.x, sliceEdges.z, artCenterY);
-        float right = Mathf.Lerp(sliceEdges.y, sliceEdges.w, artCenterY);
-        float centerX = useEditorialFrame
-            ? Mathf.Lerp(0.47f, 0.92f, Mathf.Clamp01(focus.x))
-            : Mathf.Lerp(left, right, Mathf.Clamp01(focus.x));
-        float remainingY = Mathf.Max(0f, artArea.y - size.y);
-        artRect.anchoredPosition = new Vector2(
-            (centerX - 0.5f) * viewport.x,
-            (artCenterY - 0.5f) * viewport.y + remainingY * (Mathf.Clamp01(focus.y) - 0.5f));
-        charImage.preserveAspect = false;
+        isSelected = selected && !isLocked;
+        Refresh();
     }
 
-    private void EnsurePanelVisuals(Sprite frameSprite, Sprite actionSprite)
+    private static Sprite PickPortrait(CoopCharData data)
     {
-        Transform background = sliceMask.transform.Find("Panel Background");
-        if (background == null)
-        {
-            GameObject go = new GameObject("Panel Background", typeof(RectTransform), typeof(UnityEngine.UI.Image));
-            go.transform.SetParent(sliceMask.transform, false);
-            background = go.transform;
-        }
-        panelBackground = background.GetComponent<UnityEngine.UI.Image>();
-        Stretch(panelBackground.rectTransform);
-        panelBackground.sprite = null;
-        panelBackground.raycastTarget = false;
-        panelBackground.transform.SetAsFirstSibling();
-
-        Transform frame = transform.Find("Editorial Frame");
-        if (frame == null)
-        {
-            GameObject go = new GameObject("Editorial Frame", typeof(RectTransform), typeof(UnityEngine.UI.Image));
-            go.transform.SetParent(transform, false);
-            frame = go.transform;
-        }
-        editorialFrame = frame.GetComponent<UnityEngine.UI.Image>();
-        Stretch(editorialFrame.rectTransform);
-        editorialFrame.sprite = frameSprite;
-        editorialFrame.color = Color.white;
-        editorialFrame.preserveAspect = false;
-        editorialFrame.raycastTarget = false;
-        editorialFrame.gameObject.SetActive(frameSprite != null);
-        panelBackground.gameObject.SetActive(frameSprite == null);
-
-        RectTransform header = GetOrCreateRect("Info Header");
-        candidateLabel = GetOrCreateText(header, "Candidate Label");
-        characterName = GetOrCreateText(header, "Character Name");
-        characterSummary = GetOrCreateText(header, "Character Summary");
-
-        RectTransform footer = GetOrCreateRect("Info Footer");
-        coordinateLabel = GetOrCreateText(footer, "Coordinate Label");
-        Transform action = footer.Find("Select Action");
-        if (action == null)
-        {
-            GameObject go = new GameObject("Select Action", typeof(RectTransform), typeof(UnityEngine.UI.Image));
-            go.transform.SetParent(footer, false);
-            action = go.transform;
-        }
-        selectAction = action.GetComponent<UnityEngine.UI.Image>();
-        selectAction.sprite = actionSprite;
-        selectAction.type = UnityEngine.UI.Image.Type.Simple;
-        selectAction.preserveAspect = false;
-        selectAction.raycastTarget = false;
-        selectLabel = GetOrCreateText((RectTransform)action, "Select Label");
+        if (data == null) return null;
+        if (data.sanctuarySelectionArt != null) return data.sanctuarySelectionArt;
+        if (data.charImage != null) return data.charImage;
+        return data.standingSprite;
     }
 
-    private void LayoutPanelVisuals()
+    private void ResetState()
     {
-        if (sliceMask == null) return;
-        Vector2 viewport = sliceMask.rectTransform.rect.size;
-        if (viewport.x <= 0f || viewport.y <= 0f) return;
-        float panelWidth = Mathf.Min(sliceEdges.y - sliceEdges.x, sliceEdges.w - sliceEdges.z) * viewport.x;
-        bool useEditorialFrame = editorialFrame != null && editorialFrame.sprite != null;
-        float safeWidth = Mathf.Max(150f, panelWidth * (useEditorialFrame ? 0.32f : 0.78f));
-
-        RectTransform header = transform.Find("Info Header") as RectTransform;
-        RectTransform footer = transform.Find("Info Footer") as RectTransform;
-        if (useEditorialFrame)
-        {
-            PlaceEditorialBand(header, 0.22f, 0.72f, safeWidth, Mathf.Min(360f, viewport.y * 0.42f));
-            PlaceEditorialBand(footer, 0.20f, 0.11f, safeWidth, Mathf.Min(112f, viewport.y * 0.14f));
-        }
-        else
-        {
-            PlaceBand(header, 0.84f, safeWidth, Mathf.Min(170f, viewport.y * 0.2f));
-            PlaceBand(footer, 0.12f, safeWidth, Mathf.Min(112f, viewport.y * 0.14f));
-        }
-
-        float titleSize = Mathf.Clamp(panelWidth * 0.072f, 25f, 46f);
-        SetTextRect(candidateLabel, new Vector2(0f, 0.76f), new Vector2(1f, 1f), 11f, FontStyles.Normal, TextAlignmentOptions.TopLeft);
-        SetTextRect(characterName, new Vector2(0f, 0.38f), new Vector2(1f, 0.78f), titleSize, FontStyles.Bold, TextAlignmentOptions.Left);
-        SetTextRect(characterSummary, new Vector2(0f, 0f), new Vector2(0.78f, 0.38f), 13f, FontStyles.Normal, TextAlignmentOptions.TopLeft);
-        characterSummary.overflowMode = TextOverflowModes.Ellipsis;
-
-        SetTextRect(coordinateLabel, new Vector2(0f, 0.68f), new Vector2(1f, 1f), 11f, FontStyles.Normal, TextAlignmentOptions.TopLeft);
-        RectTransform actionRect = selectAction.rectTransform;
-        actionRect.anchorMin = new Vector2(0f, 0.06f);
-        actionRect.anchorMax = new Vector2(useEditorialFrame ? 1f : 0.74f, 0.62f);
-        actionRect.offsetMin = actionRect.offsetMax = Vector2.zero;
-        SetTextRect(selectLabel, Vector2.zero, Vector2.one, 13f, FontStyles.Bold, TextAlignmentOptions.Center);
-    }
-
-    private void PlaceBand(RectTransform band, float y, float width, float height)
-    {
-        if (band == null) return;
-        Vector2 viewport = sliceMask.rectTransform.rect.size;
-        float left = Mathf.Lerp(sliceEdges.x, sliceEdges.z, y);
-        float right = Mathf.Lerp(sliceEdges.y, sliceEdges.w, y);
-        band.anchorMin = band.anchorMax = band.pivot = new Vector2(0.5f, 0.5f);
-        band.sizeDelta = new Vector2(width, height);
-        band.anchoredPosition = new Vector2(((left + right) * 0.5f - 0.5f) * viewport.x, (y - 0.5f) * viewport.y);
-    }
-
-    private void PlaceEditorialBand(RectTransform band, float x, float y, float width, float height)
-    {
-        if (band == null) return;
-        Vector2 viewport = sliceMask.rectTransform.rect.size;
-        band.anchorMin = band.anchorMax = band.pivot = new Vector2(0.5f, 0.5f);
-        band.sizeDelta = new Vector2(width, height);
-        band.anchoredPosition = new Vector2((x - 0.5f) * viewport.x, (y - 0.5f) * viewport.y);
-    }
-
-    private void ApplyCopy()
-    {
-        if (candidateLabel != null) candidateLabel.text = $"VERTEX // COMPANION CANDIDATE {candidateIndex + 1:00}";
-        if (characterName != null) characterName.text = string.IsNullOrWhiteSpace(displayName) ? "UNREGISTERED" : displayName;
-        if (characterSummary != null) characterSummary.text = displaySummary;
-        if (coordinateLabel != null) coordinateLabel.text = $"OBS-{candidateIndex + 1:00}  ◇  LINK READY";
-        if (selectLabel != null) selectLabel.text = "DETAIL  /  후보 확인";
-    }
-
-    private RectTransform GetOrCreateRect(string objectName)
-    {
-        Transform existing = transform.Find(objectName);
-        if (existing != null) return existing as RectTransform;
-        GameObject go = new GameObject(objectName, typeof(RectTransform));
-        go.transform.SetParent(transform, false);
-        return (RectTransform)go.transform;
-    }
-
-    private TextMeshProUGUI GetOrCreateText(RectTransform parent, string objectName)
-    {
-        Transform existing = parent.Find(objectName);
-        TextMeshProUGUI text;
-        if (existing != null) text = existing.GetComponent<TextMeshProUGUI>();
-        else
-        {
-            GameObject go = new GameObject(objectName, typeof(RectTransform), typeof(TextMeshProUGUI));
-            go.transform.SetParent(parent, false);
-            text = go.GetComponent<TextMeshProUGUI>();
-        }
-        text.font = uiFont != null ? uiFont : TMP_Settings.defaultFontAsset;
-        text.color = new Color(0.035f, 0.055f, 0.065f, 1f);
-        text.raycastTarget = false;
-        text.enableWordWrapping = true;
-        return text;
-    }
-
-    private static void SetTextRect(TextMeshProUGUI text, Vector2 min, Vector2 max, float size,
-        FontStyles style, TextAlignmentOptions alignment)
-    {
-        if (text == null) return;
-        RectTransform rect = text.rectTransform;
-        rect.anchorMin = min;
-        rect.anchorMax = max;
-        rect.offsetMin = rect.offsetMax = Vector2.zero;
-        text.fontSize = size;
-        text.fontStyle = style;
-        text.alignment = alignment;
-    }
-
-    public bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera)
-    {
-        return sliceMask == null || sliceMask.ContainsScreenPoint(screenPoint, eventCamera);
-    }
-
-    private void OnRectTransformDimensionsChange()
-    {
-        ApplyPortrait();
-    }
-
-    private void OnDisable()
-    {
-        ResetHover();
-    }
-
-    private void ResetHover()
-    {
+        isSelected = false;
         isHovered = false;
-        ApplyPortrait();
+        Refresh();
     }
 
-    private static void Stretch(RectTransform rect)
+    private void Refresh()
     {
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
+        fill.sprite = isLocked ? fillLocked : fillNormal;
+        nameBand.sprite = isLocked ? bandLocked : bandNormal;
+        frame.sprite = isLocked ? frameLocked : isSelected ? frameSelected : isHovered ? frameHover : frameNormal;
+        numberText.color = isLocked ? lockedNumberColor : isSelected ? numberSelectedColor : numberColor;
+        if (numberUnderline != null) numberUnderline.color = numberText.color;
+
+        charImage.sprite = portrait;
+        charImage.enabled = portrait != null;
+        charImage.material = isLocked && !isUnavailable ? silhouetteMaterial : null;
+        charImage.color = isUnavailable ? unavailableTint : isLocked ? silhouetteColor : Color.white;
+        LayoutPortrait();
     }
 
-    // 마우스가 캐릭터 창 위에 위치했을 때 선택되었다는 표시가 나타나도록 함
+    // 그림 높이를 띠 높이 × artHeightRatio로 맞추고, 가로는 focus.x로 띠 안에서 정렬한다.
+    private void LayoutPortrait()
+    {
+        if (portrait == null) return;
+        RectTransform rt = charImage.rectTransform;
+        RectTransform self = (RectTransform)transform;
+        float sx = self.rect.width / CanvasW;
+        float sy = self.rect.height / CanvasH;
+
+        float height = CanvasH * artHeightRatio;
+        float width = height * portrait.rect.width / portrait.rect.height;
+        float scale = !isLocked && (isHovered || isSelected) ? hoverArtScale : 1f;
+
+        // 띠 가운데 높이에서의 왼쪽·오른쪽 변 사이로 정렬
+        float midLeft = Mathf.Lerp(TopLeftX, BottomLeftX, 0.5f);
+        float midRight = Mathf.Lerp(TopRightX, BottomRightX, 0.5f);
+        float centerX = Mathf.Lerp(midLeft, midRight, Mathf.Clamp01(focus.x));
+
+        rt.anchorMin = rt.anchorMax = new Vector2(0f, 1f);
+        rt.pivot = new Vector2(0.5f, 1f);
+        rt.sizeDelta = new Vector2(width * sx, height * sy) * scale;
+        rt.anchoredPosition = new Vector2(centerX * sx, -artTopOffset * sy);
+        rt.localScale = Vector3.one;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (isLocked) return;
         isHovered = true;
-        ApplyPortrait();
+        Refresh();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ResetHover();
+        if (!isHovered) return;
+        isHovered = false;
+        Refresh();
     }
 
-    // 첫 클릭은 합류를 확정하지 않고 상세 확인 화면을 연다.
-    public void OnClickBtn()
+    // 한 번 누르면 선택, 선택된 띠를 다시 누르면(또는 더블클릭) 상세로.
+    public void OnPointerClick(PointerEventData eventData)
     {
-        ResetHover();
-        if (selectCoopCharUI == null) selectCoopCharUI = GetComponentInParent<SelectCoopCharUI>();
-        if (selectCoopCharUI != null) selectCoopCharUI.OpenDetails(charID);
+        if (isLocked || eventData.button != PointerEventData.InputButton.Left) return;
+        if (owner == null) owner = GetComponentInParent<SelectCoopCharUI>(true);
+        if (owner == null) return;
+        if (isSelected || eventData.clickCount >= 2) owner.OpenDetails(charID);
+        else owner.SelectCandidate(this);
+    }
+
+    private void OnDisable()
+    {
+        isHovered = false;
+    }
+
+    // 사각 영역이 옆 띠와 겹치므로 사선 띠 안쪽만 클릭을 받는다.
+    public bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera)
+    {
+        RectTransform self = (RectTransform)transform;
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(self, screenPoint, eventCamera, out Vector2 local))
+            return false;
+        Rect r = self.rect;
+        float x = (local.x - r.xMin) / r.width * CanvasW;
+        float y = (r.yMax - local.y) / r.height * CanvasH;
+        if (y < 0f || y > CanvasH) return false;
+        float t = y / (CanvasH - 1f);
+        return x >= Mathf.Lerp(TopLeftX, BottomLeftX, t) && x <= Mathf.Lerp(TopRightX, BottomRightX, t);
     }
 }

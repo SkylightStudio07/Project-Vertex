@@ -32,6 +32,11 @@ public class ItemData : ScriptableObject
     [SerializeReference, SubclassPicker] public List<CardEffect> lingeringEffects = new();
 
     // --- Public Accessors ---
+    [Header("의뢰")]
+    [Tooltip("의뢰 물품. 효과가 없고 사용할 수 없으며, 일반 아이템 칸을 차지한다 (Docs/의뢰.md)")]
+    [SerializeField] private bool isQuestItem;
+    public bool IsQuestItem => isQuestItem;
+
     public string ItemName => itemName;
     public Sprite ItemIcon => itemIcon;
     public bool UsableOutsideBattle => usableOutsideBattle;

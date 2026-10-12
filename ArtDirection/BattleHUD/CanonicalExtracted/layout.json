@@ -1,0 +1,949 @@
+{
+  "canonical": "BattleHUD_Mockup_v3_Canonical.png",
+  "canonicalCanvas": [
+    1672,
+    941
+  ],
+  "referenceCanvas": [
+    1920,
+    1080
+  ],
+  "assets": [
+    {
+      "name": "TopBar",
+      "file": "TopBar.png",
+      "size": [
+        1300,
+        72
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        270,
+        0,
+        1115,
+        64
+      ],
+      "placement1920": [
+        310.0,
+        0.0
+      ],
+      "displaySize1920": [
+        1280.0,
+        73.0
+      ]
+    },
+    {
+      "name": "ItemSlot_Empty",
+      "file": "ItemSlot_Empty.png",
+      "size": [
+        56,
+        56
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        1249,
+        11,
+        63,
+        62
+      ],
+      "placement1920": [
+        1434.0,
+        13.0
+      ],
+      "displaySize1920": [
+        72.0,
+        71.0
+      ]
+    },
+    {
+      "name": "ItemSlot_Hover",
+      "file": "ItemSlot_Hover.png",
+      "size": [
+        56,
+        56
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1249,
+        11,
+        63,
+        62
+      ],
+      "placement1920": [
+        1434.0,
+        13.0
+      ],
+      "displaySize1920": [
+        72.0,
+        71.0
+      ],
+      "normal": "ItemSlot_Empty",
+      "state": "Hover"
+    },
+    {
+      "name": "ItemSlot_Quest",
+      "file": "ItemSlot_Quest.png",
+      "size": [
+        56,
+        56
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1249,
+        11,
+        63,
+        62
+      ],
+      "placement1920": [
+        1434.0,
+        13.0
+      ],
+      "displaySize1920": [
+        72.0,
+        71.0
+      ],
+      "normal": "ItemSlot_Empty",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Map_Normal",
+      "file": "Button_Map_Normal.png",
+      "size": [
+        64,
+        64
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        1482,
+        19,
+        73,
+        74
+      ],
+      "placement1920": [
+        1702.0,
+        22.0
+      ],
+      "displaySize1920": [
+        84.0,
+        85.0
+      ]
+    },
+    {
+      "name": "Button_Deck_Normal",
+      "file": "Button_Deck_Normal.png",
+      "size": [
+        64,
+        64
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        1574,
+        20,
+        74,
+        73
+      ],
+      "placement1920": [
+        1807.0,
+        23.0
+      ],
+      "displaySize1920": [
+        85.0,
+        84.0
+      ]
+    },
+    {
+      "name": "Button_Map_Hover",
+      "file": "Button_Map_Hover.png",
+      "size": [
+        64,
+        64
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1482,
+        19,
+        73,
+        74
+      ],
+      "placement1920": [
+        1702.0,
+        22.0
+      ],
+      "displaySize1920": [
+        84.0,
+        85.0
+      ],
+      "normal": "Button_Map_Normal",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Map_Pressed",
+      "file": "Button_Map_Pressed.png",
+      "size": [
+        64,
+        64
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1482,
+        19,
+        73,
+        74
+      ],
+      "placement1920": [
+        1702.0,
+        22.0
+      ],
+      "displaySize1920": [
+        84.0,
+        85.0
+      ],
+      "normal": "Button_Map_Normal",
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_Deck_Hover",
+      "file": "Button_Deck_Hover.png",
+      "size": [
+        64,
+        64
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1574,
+        20,
+        74,
+        73
+      ],
+      "placement1920": [
+        1807.0,
+        23.0
+      ],
+      "displaySize1920": [
+        85.0,
+        84.0
+      ],
+      "normal": "Button_Deck_Normal",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Deck_Pressed",
+      "file": "Button_Deck_Pressed.png",
+      "size": [
+        64,
+        64
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1574,
+        20,
+        74,
+        73
+      ],
+      "placement1920": [
+        1807.0,
+        23.0
+      ],
+      "displaySize1920": [
+        85.0,
+        84.0
+      ],
+      "normal": "Button_Deck_Normal",
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_EndTurn_Normal",
+      "file": "Button_EndTurn_Normal.png",
+      "size": [
+        280,
+        70
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "placement1920": [
+        1566.0,
+        938.0
+      ],
+      "displaySize1920": [
+        326.0,
+        72.0
+      ]
+    },
+    {
+      "name": "Button_EndTurn_Hover",
+      "file": "Button_EndTurn_Hover.png",
+      "size": [
+        280,
+        70
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "placement1920": [
+        1566.0,
+        938.0
+      ],
+      "displaySize1920": [
+        326.0,
+        72.0
+      ],
+      "normal": "Button_EndTurn_Normal",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_EndTurn_Pressed",
+      "file": "Button_EndTurn_Pressed.png",
+      "size": [
+        280,
+        70
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "placement1920": [
+        1566.0,
+        938.0
+      ],
+      "displaySize1920": [
+        326.0,
+        72.0
+      ],
+      "normal": "Button_EndTurn_Normal",
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_EndTurn_Disabled",
+      "file": "Button_EndTurn_Disabled.png",
+      "size": [
+        280,
+        70
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "placement1920": [
+        1566.0,
+        938.0
+      ],
+      "displaySize1920": [
+        326.0,
+        72.0
+      ],
+      "normal": "Button_EndTurn_Normal",
+      "state": "Disabled"
+    },
+    {
+      "name": "Res_Panel",
+      "file": "Res_Panel.png",
+      "size": [
+        264,
+        225
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        1435,
+        614,
+        225,
+        192
+      ],
+      "placement1920": [
+        1648.0,
+        705.0
+      ],
+      "displaySize1920": [
+        258.0,
+        220.0
+      ]
+    },
+    {
+      "name": "Res_Panel_EnemyTurn",
+      "file": "Res_Panel_EnemyTurn.png",
+      "size": [
+        264,
+        225
+      ],
+      "kind": "state-variant",
+      "canonicalRect": [
+        1435,
+        614,
+        225,
+        192
+      ],
+      "placement1920": [
+        1648.0,
+        705.0
+      ],
+      "displaySize1920": [
+        258.0,
+        220.0
+      ],
+      "normal": "Res_Panel",
+      "state": "Disabled"
+    },
+    {
+      "name": "TextBand",
+      "file": "TextBand.png",
+      "size": [
+        120,
+        40
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        1109,
+        665,
+        133,
+        22
+      ],
+      "placement1920": [
+        1273.0,
+        763.0
+      ],
+      "displaySize1920": [
+        153.0,
+        25.0
+      ]
+    },
+    {
+      "name": "EnemyName_Plate",
+      "file": "EnemyName_Plate.png",
+      "size": [
+        240,
+        32
+      ],
+      "kind": "model-restored-canonical-panel",
+      "canonicalRect": [
+        1109,
+        665,
+        133,
+        22
+      ],
+      "placement1920": [
+        1273.0,
+        763.0
+      ],
+      "displaySize1920": [
+        153.0,
+        25.0
+      ]
+    },
+    {
+      "name": "Res_Divider",
+      "file": "Res_Divider.png",
+      "size": [
+        244,
+        2
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Res_Slash",
+      "file": "Res_Slash.png",
+      "size": [
+        40,
+        80
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Hairline_Slash_White",
+      "file": "Hairline_Slash_White.png",
+      "size": [
+        40,
+        80
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Hairline_Slash_Dark",
+      "file": "Hairline_Slash_Dark.png",
+      "size": [
+        40,
+        80
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Hairline_Dash",
+      "file": "Hairline_Dash.png",
+      "size": [
+        120,
+        2
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Underline",
+      "file": "Underline.png",
+      "size": [
+        200,
+        2
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Line_Sweep",
+      "file": "Line_Sweep.png",
+      "size": [
+        1920,
+        2
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Slash_Long",
+      "file": "Slash_Long.png",
+      "size": [
+        360,
+        620
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "EndTurn_CornerSlash",
+      "file": "EndTurn_CornerSlash.png",
+      "size": [
+        48,
+        70
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    },
+    {
+      "name": "Bracket_Frame",
+      "file": "Bracket_Frame.png",
+      "size": [
+        720,
+        128
+      ],
+      "kind": "raster-corner-brackets",
+      "canonicalRect": null
+    },
+    {
+      "name": "Icon_Map",
+      "file": "Icon_Map.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "source-icon-luminance-alpha",
+      "canonicalRect": [
+        1493,
+        31,
+        51,
+        52
+      ],
+      "placement1920": [
+        1714.0,
+        36.0
+      ],
+      "displaySize1920": [
+        59.0,
+        60.0
+      ]
+    },
+    {
+      "name": "Icon_Deck",
+      "file": "Icon_Deck.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "source-icon-luminance-alpha",
+      "canonicalRect": [
+        1588,
+        38,
+        46,
+        39
+      ],
+      "placement1920": [
+        1824.0,
+        44.0
+      ],
+      "displaySize1920": [
+        53.0,
+        45.0
+      ]
+    },
+    {
+      "name": "Icon_Energy",
+      "file": "Icon_Energy.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "source-icon-luminance-alpha",
+      "canonicalRect": [
+        1450,
+        680,
+        29,
+        47
+      ],
+      "placement1920": [
+        1665.0,
+        780.0
+      ],
+      "displaySize1920": [
+        33.0,
+        54.0
+      ]
+    },
+    {
+      "name": "Icon_Ammo",
+      "file": "Icon_Ammo.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "source-icon-luminance-alpha",
+      "canonicalRect": [
+        1451,
+        768,
+        24,
+        34
+      ],
+      "placement1920": [
+        1666.0,
+        881.0
+      ],
+      "displaySize1920": [
+        28.0,
+        39.0
+      ]
+    },
+    {
+      "name": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "source-icon-luminance-alpha",
+      "canonicalRect": [
+        1598,
+        838,
+        33,
+        21
+      ],
+      "placement1920": [
+        1835.0,
+        962.0
+      ],
+      "displaySize1920": [
+        38.0,
+        24.0
+      ]
+    },
+    {
+      "name": "Icon_Arrow_Disabled",
+      "file": "Icon_Arrow_Disabled.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "disabled-icon",
+      "canonicalRect": null
+    },
+    {
+      "name": "Icon_Energy_Disabled",
+      "file": "Icon_Energy_Disabled.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "disabled-icon",
+      "canonicalRect": null
+    },
+    {
+      "name": "Icon_Weapon_Pistol",
+      "file": "Icon_Weapon_Pistol.png",
+      "size": [
+        32,
+        32
+      ],
+      "kind": "source-icon-luminance-alpha",
+      "canonicalRect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "placement1920": [
+        0.0,
+        0.0
+      ],
+      "displaySize1920": [
+        1440.0,
+        1439.0
+      ]
+    },
+    {
+      "name": "Icon_QuestRecovery",
+      "file": "Icon_QuestRecovery.png",
+      "size": [
+        16,
+        16
+      ],
+      "kind": "small-box-line-symbol",
+      "canonicalRect": null
+    },
+    {
+      "name": "Icon_SlotPlus",
+      "file": "Icon_SlotPlus.png",
+      "size": [
+        16,
+        16
+      ],
+      "kind": "empty-slot-symbol",
+      "canonicalRect": null
+    },
+    {
+      "name": "HP_Frame",
+      "file": "HP_Frame.png",
+      "size": [
+        360,
+        39
+      ],
+      "kind": "canonical-health-frame",
+      "canonicalRect": [
+        89,
+        826,
+        335,
+        42
+      ],
+      "placement1920": [
+        102.0,
+        948.0
+      ],
+      "displaySize1920": [
+        385.0,
+        48.0
+      ],
+      "fillOffset": [
+        8,
+        6
+      ]
+    },
+    {
+      "name": "HP_Fill",
+      "file": "HP_Fill.png",
+      "size": [
+        340,
+        27
+      ],
+      "kind": "flat-health-surface",
+      "canonicalRect": null
+    },
+    {
+      "name": "HP_Track",
+      "file": "HP_Track.png",
+      "size": [
+        340,
+        27
+      ],
+      "kind": "flat-health-surface",
+      "canonicalRect": null
+    },
+    {
+      "name": "EnemyHP_Frame",
+      "file": "EnemyHP_Frame.png",
+      "size": [
+        240,
+        26
+      ],
+      "kind": "canonical-health-frame",
+      "canonicalRect": [
+        1108,
+        637,
+        266,
+        24
+      ],
+      "placement1920": [
+        1272.0,
+        731.0
+      ],
+      "displaySize1920": [
+        305.0,
+        28.0
+      ],
+      "fillOffset": [
+        5,
+        4
+      ]
+    },
+    {
+      "name": "EnemyHP_Fill",
+      "file": "EnemyHP_Fill.png",
+      "size": [
+        227,
+        18
+      ],
+      "kind": "flat-health-surface",
+      "canonicalRect": null
+    },
+    {
+      "name": "EnemyHP_Track",
+      "file": "EnemyHP_Track.png",
+      "size": [
+        227,
+        18
+      ],
+      "kind": "flat-health-surface",
+      "canonicalRect": null
+    },
+    {
+      "name": "Block_Badge",
+      "file": "Block_Badge.png",
+      "size": [
+        56,
+        68
+      ],
+      "kind": "canonical-shield-outline-no-number",
+      "canonicalRect": [
+        38,
+        823,
+        54,
+        61
+      ],
+      "placement1920": [
+        44.0,
+        945.0
+      ],
+      "displaySize1920": [
+        62.0,
+        70.0
+      ]
+    },
+    {
+      "name": "EnemyBlock_Badge",
+      "file": "EnemyBlock_Badge.png",
+      "size": [
+        40,
+        48
+      ],
+      "kind": "canonical-shield-outline-no-number",
+      "canonicalRect": [
+        1110,
+        599,
+        25,
+        33
+      ],
+      "placement1920": [
+        1275.0,
+        687.0
+      ],
+      "displaySize1920": [
+        29.0,
+        38.0
+      ]
+    },
+    {
+      "name": "Status_Underline",
+      "file": "Status_Underline.png",
+      "size": [
+        44,
+        2
+      ],
+      "kind": "raster-hairline-to-spec",
+      "canonicalRect": null
+    }
+  ],
+  "resourceLayers": [
+    {
+      "name": "Res_Panel",
+      "rect": [
+        1435,
+        614,
+        225,
+        192
+      ]
+    },
+    {
+      "name": "Res_Divider",
+      "rect": [
+        1445,
+        649,
+        206,
+        2
+      ]
+    },
+    {
+      "name": "Res_Divider",
+      "rect": [
+        1445,
+        743,
+        206,
+        2
+      ]
+    },
+    {
+      "name": "Res_Slash",
+      "rect": [
+        1553,
+        663,
+        31,
+        70
+      ]
+    }
+  ],
+  "buttonIcons": {
+    "Button_Map": "Icon_Map",
+    "Button_EndTurn": "Icon_Arrow",
+    "Button_Deck": "Icon_Deck"
+  },
+  "buttonStates": {
+    "map": [
+      "Normal",
+      "Hover",
+      "Pressed"
+    ],
+    "endTurn": [
+      "Normal",
+      "Hover",
+      "Pressed",
+      "Disabled"
+    ],
+    "deck": [
+      "Normal",
+      "Hover",
+      "Pressed"
+    ]
+  },
+  "disabledIcons": {
+    "energy": "Icon_Energy_Disabled",
+    "arrow": "Icon_Arrow_Disabled"
+  },
+  "textBandBorders": [
+    8,
+    4,
+    8,
+    4
+  ],
+  "smallCyanEnergyDashRemoved": true,
+  "mapSource": "BattleHUD_Mockup_v3_Oratio_TurnBanner.png",
+  "previewBase": "canonical screenshot; gameplay artwork retained"
+}

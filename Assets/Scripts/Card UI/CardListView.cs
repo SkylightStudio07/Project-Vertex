@@ -11,6 +11,9 @@ public class CardListView : MonoBehaviour
 {
     public static CardListView Instance { get; private set; }
 
+    // 목록 창이 떠 있는지. 이 오브젝트 자체는 늘 켜져 있고 panel만 켜고 끈다.
+    public bool IsOpen => panel != null && panel.activeSelf;
+
     [SerializeField] private GameObject panel;
     [SerializeField] private CardListEntry cardPrefab;
     [SerializeField] private Transform cardContainer; 
@@ -123,5 +126,11 @@ public class CardListView : MonoBehaviour
         onCardSelected = null;
         selectableFilter = null;
         if(panel != null) panel.SetActive(false);
+    }
+
+    // 씬을 다시 불러와도(재출정) 파괴된 이전 씬의 뷰가 Instance로 남지 않게 (비활성으로 시작하면 Awake가 늦게 돈다)
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 }

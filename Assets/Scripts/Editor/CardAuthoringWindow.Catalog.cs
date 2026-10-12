@@ -19,6 +19,7 @@ public sealed partial class CardAuthoringWindow
     private bool catalogDirty = true;
     private List<string> playerFolders = new();
     private List<CardData> catalogCards = new();
+    private GUIStyle catalogDescriptionStyle;
 
     private void InitializeCatalog()
     {
@@ -271,6 +272,7 @@ public sealed partial class CardAuthoringWindow
     private void DrawCatalog()
     {
         RefreshCatalogIfNeeded();
+        catalogDescriptionStyle ??= new GUIStyle(EditorStyles.wordWrappedLabel) { richText = true };
         DrawPoolSelector();
         EditorGUILayout.LabelField(CardAuthoringCatalog.PlayerRoot + " · 하위 폴더 전체", EditorStyles.miniLabel);
         using (new EditorGUILayout.HorizontalScope())
@@ -312,7 +314,7 @@ public sealed partial class CardAuthoringWindow
                 {
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        EditorGUILayout.LabelField(name, EditorStyles.boldLabel, GUILayout.MinWidth(140));
+                        EditorGUILayout.LabelField(new GUIContent(name, path), EditorStyles.boldLabel, GUILayout.MinWidth(140));
                         GUILayout.Label(CardAuthoringCatalog.RarityFolder(entry.Rarity) ?? entry.Rarity.ToString(), GUILayout.Width(40));
                         GUILayout.Label(rewardPool == null ? "풀 미지정" : member.Label, GUILayout.MinWidth(155));
                         if (GUILayout.Button("열기", GUILayout.Width(48)))
@@ -322,7 +324,12 @@ public sealed partial class CardAuthoringWindow
                         }
                         DrawPoolAction(entry);
                     }
-                    EditorGUILayout.LabelField(CardAuthoringCatalog.LocationLabel(path), EditorStyles.miniLabel);
+                    // Match the base card name above without changing the asset's upgrade state.
+                    string description = entry.isUpgraded
+                        ? CardAuthoringUtility.Preview(entry, false)
+                        : entry.GetFullDescription();
+                    GUILayout.Label(string.IsNullOrWhiteSpace(description) ? "효과 설명이 없습니다." : description,
+                        catalogDescriptionStyle, GUILayout.ExpandWidth(true));
                 }
             }
             if (visible == 0) EditorGUILayout.HelpBox("조건에 맞는 카드가 없습니다.", MessageType.None);

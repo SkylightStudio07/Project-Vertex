@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left origin; x right, y down; rectangles [x,y,width,height]",
+  "import_settings": {
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "pixels_per_unit": 200,
+    "mesh_type": "FullRect",
+    "filter_mode": "Bilinear",
+    "mipmaps": false,
+    "compression": "None",
+    "max_texture_size": 4096,
+    "canvas_reference_pixels_per_unit": 100
+  },
+  "assets": [
+    {
+      "id": "Row",
+      "file": "Row.png",
+      "scale": 2,
+      "png_size_px": [
+        1180,
+        100
+      ],
+      "screen_rect": [
+        64,
+        258,
+        590.0,
+        50.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 68,
+        "bottom": 0,
+        "right": 68,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Row_Accent",
+      "file": "Row_Accent.png",
+      "scale": 2,
+      "png_size_px": [
+        44,
+        68
+      ],
+      "screen_rect": [
+        88,
+        266,
+        22.0,
+        34.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "BossChip",
+      "file": "BossChip.png",
+      "scale": 2,
+      "png_size_px": [
+        120,
+        44
+      ],
+      "screen_rect": [
+        562,
+        274,
+        60.0,
+        22.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 12,
+        "bottom": 0,
+        "right": 12,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Separator",
+      "file": "Separator.png",
+      "scale": 2,
+      "png_size_px": [
+        36,
+        68
+      ],
+      "screen_rect": [
+        268,
+        266,
+        18.0,
+        34.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    }
+  ],
+  "instances": [
+    {
+      "id": "row_0_Row",
+      "asset": "Row",
+      "screen_position": [
+        64,
+        258
+      ]
+    },
+    {
+      "id": "row_0_Row_Accent",
+      "asset": "Row_Accent",
+      "screen_position": [
+        88,
+        266
+      ]
+    },
+    {
+      "id": "row_0_Separator",
+      "asset": "Separator",
+      "screen_position": [
+        268,
+        266
+      ]
+    },
+    {
+      "id": "row_1_Row",
+      "asset": "Row",
+      "screen_position": [
+        64,
+        316
+      ]
+    },
+    {
+      "id": "row_1_Row_Accent",
+      "asset": "Row_Accent",
+      "screen_position": [
+        88,
+        324
+      ]
+    },
+    {
+      "id": "row_1_Separator",
+      "asset": "Separator",
+      "screen_position": [
+        268,
+        324
+      ]
+    },
+    {
+      "id": "row_2_Row",
+      "asset": "Row",
+      "screen_position": [
+        64,
+        374
+      ]
+    },
+    {
+      "id": "row_2_Row_Accent",
+      "asset": "Row_Accent",
+      "screen_position": [
+        88,
+        382
+      ]
+    },
+    {
+      "id": "row_2_Separator",
+      "asset": "Separator",
+      "screen_position": [
+        268,
+        382
+      ]
+    },
+    {
+      "id": "boss_chip",
+      "asset": "BossChip",
+      "screen_position": [
+        562,
+        390
+      ]
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "english_label",
+      "screen_rect": [
+        120,
+        270,
+        142,
+        26
+      ],
+      "repeat_y": 58
+    },
+    {
+      "id": "enemy_and_status",
+      "screen_rect": [
+        310,
+        268,
+        244,
+        32
+      ],
+      "repeat_y": 58
+    },
+    {
+      "id": "boss_label",
+      "screen_rect": [
+        566,
+        390,
+        52,
+        22
+      ]
+    }
+  ],
+  "row_repeat_step_screen_px": 58,
+  "row_repeat_step_png_px": 116,
+  "row_height_screen_px": 50,
+  "row_gap_screen_px": 8
+}

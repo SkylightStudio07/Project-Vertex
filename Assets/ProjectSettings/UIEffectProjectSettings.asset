@@ -19,6 +19,11 @@ ShaderVariantCollection:
         passType: 0
       - keywords: TRANSITION_SHINY
         passType: 0
+  - first: {fileID: 4800000, guid: 935b7be1c88464d2eb87204fdfab5a38, type: 3}
+    second:
+      variants:
+      - keywords: TRANSITION_DISSOLVE
+        passType: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,5 +48,6 @@ MonoBehaviour:
     m_Asset: {fileID: -8787555309615387321}
     m_RegisteredShaders:
     - {fileID: 4800000, guid: 96246b1ead49a4c5a996fd477bc5a117, type: 3}
+    - {fileID: 4800000, guid: 935b7be1c88464d2eb87204fdfab5a38, type: 3}
     m_ErrorOnUnregisteredVariant: 0
     m_UnregisteredVariants: []

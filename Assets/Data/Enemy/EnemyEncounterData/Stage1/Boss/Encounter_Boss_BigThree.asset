@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a126ea16a77b874e8f610fca5f4f683, type: 3}
+  m_Name: Encounter_Boss_BigThree
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEncounter
+  chapter: 1
+  encounterType: 2
+  enemies:
+  - {fileID: 11400000, guid: 0c1bb41d3a098624ea18ea7e0ebdd72b, type: 2}
+  - {fileID: 11400000, guid: d5989274ba2deed4e95cfe17798b8500, type: 2}
+  - {fileID: 11400000, guid: 2f5cf33ad5231844d8cda24aa220695f, type: 2}
+  weight: 1
+  bossLabel: "1\uB9C9 \uBCF4\uC2A4"
+  bossTitle: "\uBE45 \uC4F0\uB9AC (The Big Three)"
+  introDialogues: []

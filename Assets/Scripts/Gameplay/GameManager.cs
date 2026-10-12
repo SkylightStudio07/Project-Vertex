@@ -15,17 +15,17 @@ public class GameManager : MonoBehaviour
 
     public void SetPhase(GamePhase phase) => Phase = phase;
 
+    // 전투(런) 씬 전용 매니저. 씬을 다시 불러오면(재출정·로비 귀환 후 출정) 새 씬의 인스턴스가 Start에서 새 런을 연다.
+    // DontDestroyOnLoad를 쓰지 않는다 — 같은 오브젝트(GameplayManager)의 BattleManager·MapUIController 등은
+    // 그 씬의 UI를 참조하므로, 이전 런의 매니저가 살아남으면 사라진 UI를 가리키게 된다.
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 
     public List<EnemyData> currentEnemies; // 현재 전투에 참여하는 적들의 데이터 리스트
@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int chapter = 1;
     [SerializeField] private int floor   = 1;
     public int Chapter => chapter;
+    [Tooltip("막별 데이터(이름·맵 도입 연출). actNumber로 현재 막을 찾는다")]
+    [SerializeField] private List<ActData> acts = new();
+    public ActData CurrentAct => acts.Find(a => a != null && a.actNumber == chapter);
 
 
     void Start()
@@ -81,7 +84,10 @@ public class GameManager : MonoBehaviour
     {
         chapter = 1;
         maxHPModifier = 0;
+        RunStats.Reset(); // 결과 화면 기록 칸 (격퇴·획득 카드·진행 턴)
         PlayerHP = MaxPlayerHP;
+        // RunData는 씬을 넘어 유지되므로 런 단위 값은 여기서 되돌린다 (맵·조우 큐는 InitializeMap에서)
+        if (RunData.Instance != null) RunData.Instance.cardRemoveCount = 0;
 
         // 카드 풀 초기화 — SO 원본이 아닌 복사본으로 시작해야 런 간 데이터 누적을 막는다.
         cardPools[CardData.CardRarity.Common] = playerRewardPool != null ? new List<CardData>(playerRewardPool.commonCards) : new List<CardData>();
@@ -106,8 +112,20 @@ public class GameManager : MonoBehaviour
 
         MapManager.Instance.InitializeMap(chapter);
 
+        // 훈련장 출격: 축복·맵·의뢰 없이 고른 덱·동료로 고른 적과 바로 싸운다
+        if (TrainingSession.IsActive)
+        {
+            StartTrainingBattle();
+            return;
+        }
+
+        QuestManager.Instance.BeginRun(); // 수주한 의뢰의 진행을 이번 런 기준으로 시작
+
         // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행
-        var blessingView = BlessingView.Instance ?? FindObjectOfType<BlessingView>(true);
+        // ?? 는 Unity의 파괴된 오브젝트를 null로 보지 않는다. 두 번째 런에서는 BlessingView가 비활성이라 Awake 전이고,
+        // Instance에 이전 런(파괴된 씬)의 뷰가 남아 있어서 == null 비교로 걸러야 한다.
+        var blessingView = BlessingView.Instance;
+        if (blessingView == null) blessingView = FindFirstObjectByType<BlessingView>(FindObjectsInactive.Include);
         if (blessingView != null)
         {
             blessingView.Open();
@@ -145,7 +163,63 @@ public class GameManager : MonoBehaviour
             : currentEnemies;
         string encounterName = pulled != null ? pulled.name : "기본 폴백(currentEnemies)";
 
+        // 보스전: 등장 배너 → 스토리 대사가 끝난 뒤 첫 턴을 연다
+        if (battleType == BattleType.Boss && BossBattleDirector.Instance != null)
+        {
+            StartBattleInternal(enemies, battleType, encounterName, startFirstTurn: false);
+            BossBattleDirector.Instance.PlayIntro(pulled, () => BattleManager.Instance.PlayerTurnStart(false));
+            return;
+        }
+
         StartBattleInternal(enemies, battleType, encounterName);
+    }
+
+    // 훈련장 전투. 덱은 고른 카드로 통째로 바꾸고, 동료는 합류 카드·보상 풀 없이 자리만 차지한다.
+    // 결과는 RunClearView가 받는다(보상 화면 없음). 기획: Docs/기획/훈련장.md
+    private void StartTrainingBattle()
+    {
+        EnemyEncounter encounter = TrainingSession.Encounter;
+        DeckManager.Instance.SetPlayerDeck(TrainingSession.Deck);
+        if (CooperationManager.Instance != null)
+            foreach (string charID in TrainingSession.Companions)
+                CooperationManager.Instance.JoinForTraining(charID);
+
+        BattleType battleType = encounter.encounterType switch
+        {
+            EnemyEncounterType.Elite => BattleType.Elite,
+            EnemyEncounterType.Boss  => BattleType.Boss,
+            _                        => BattleType.Normal,
+        };
+
+        // 보스는 실전과 같이 등장 배너 → 스토리 대사 뒤에 첫 턴
+        if (battleType == BattleType.Boss && BossBattleDirector.Instance != null)
+        {
+            StartBattleInternal(encounter.enemies, battleType, encounter.name, startFirstTurn: false);
+            BossBattleDirector.Instance.PlayIntro(encounter, () => BattleManager.Instance.PlayerTurnStart(false));
+            return;
+        }
+
+        StartBattleInternal(encounter.enemies, battleType, encounter.name);
+    }
+
+    // 보스 격파 후 보상 화면을 닫으면 호출된다.
+    // 마지막 막(ActData.isFinalAct)이면 런 클리어 화면, 아니면 막 번호를 올려 새 맵을 만들고 다음 막을 연다.
+    // 다음 막 콘텐츠(조우·이벤트)가 아직 없으면 가장 가까운 이전 막 데이터로 대체된다(EncounterQueueBuilder 등).
+    public void CompleteAct()
+    {
+        var act = CurrentAct;
+        Debug.Log($"<color=#FACC15>[GameManager] {chapter}막 클리어!</color>");
+        // 스토리 진행도용 영구 플래그 (보스 대사 조건 등에서 사용: act1_cleared …)
+        BlessingAffinityManager.Instance.SetFlag($"act{chapter}_cleared", true);
+        if (act != null && act.isFinalAct && RunClearView.Instance != null)
+        {
+            RunClearView.Instance.Open(act);
+            return;
+        }
+
+        chapter++;
+        MapManager.Instance.InitializeMap(chapter);
+        if (MapUIController.Instance != null) MapUIController.Instance.OpenMap(); // 새 맵이라 막 도입 연출이 재생된다
     }
 
     // 조우를 직접 지정해 전투를 시작한다(이벤트 선택지 등).
@@ -195,7 +269,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 전투 시작 공통부 — 로그, RNG 시드, BattleManager 호출.
-    private void StartBattleInternal(List<EnemyData> enemies, BattleType battleType, string encounterName)
+    private void StartBattleInternal(List<EnemyData> enemies, BattleType battleType, string encounterName, bool startFirstTurn = true)
     {
         string enemyNames = enemies != null && enemies.Count > 0
             ? string.Join(", ", enemies.Where(e => e != null).Select(e => $"'{e.enemyName}'(HP:{e.health})"))
@@ -208,7 +282,8 @@ public class GameManager : MonoBehaviour
                                         RunData.Instance.currentFloor,
                                         RunData.Instance.currentNodeIndex);
         BattleManager.Instance.StartBattle(enemies, DeckManager.Instance.PlayerDeck, battleSeed, battleType);
-        BattleManager.Instance.PlayerTurnStart(false); // 전투 첫 진입이라 턴 배너는 건너뜀
+        if (startFirstTurn)
+            BattleManager.Instance.PlayerTurnStart(false); // 전투 첫 진입이라 턴 배너는 건너뜀
     }
 
     // 단일 카드를 카드 자체의 Rarity에 맞는 풀에 추가. unlockCardCoopLevel 등 단건 추가용.
@@ -236,6 +311,25 @@ public class GameManager : MonoBehaviour
         foreach (var card in cards)
             if (card != null && !pool.Contains(card))
                 pool.Add(card);
+    }
+
+    // 런 시작 기본 보상 풀(플레이어 몫)에 있는 카드인지 — 동료 귀환 때 플레이어 몫은 풀·덱에서 빼지 않는다
+    public bool IsBasePoolCard(CardData card)
+    {
+        if (playerRewardPool == null || card == null) return false;
+        string key = PlayerRecord.KeyOf(card);
+        foreach (var list in new[] { playerRewardPool.commonCards, playerRewardPool.rareCards, playerRewardPool.uniqueCards })
+            if (list != null && list.Exists(c => c != null && PlayerRecord.KeyOf(c) == key)) return true;
+        return false;
+    }
+
+    // 동료 귀환: 그 동료가 넣어 둔 카드를 모든 등급 풀에서 뺀다.
+    public void RemoveCardsFromRewardPool(IEnumerable<CardData> cards)
+    {
+        if (cards == null) return;
+        var set = new HashSet<CardData>(cards);
+        foreach (var pool in cardPools.Values)
+            pool.RemoveAll(set.Contains);
     }
 
     public void TakeDamage(int amount)

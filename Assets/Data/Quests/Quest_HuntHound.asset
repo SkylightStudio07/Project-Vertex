@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a641abbb5d7f845499b380d7a3f6486c, type: 3}
+  m_Name: Quest_HuntHound
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: hunt_hound
+  title: "\uB4E4\uAC1C \uD1A0\uBC8C"
+  client: "\uB3C5\uC77C \uD559\uC220\uD2B9\uBB34\uAD6D"
+  description: "\uD1B5\uC81C\uB97C \uBC97\uC5B4\uB09C \uAC8C\uD68C\uC5B8\uD130 \uD6C8\uD2B8\uB97C
+    \uCC98\uB9AC\uD558\uB77C."
+  tag: 0
+  cardArt: {fileID: 21300000, guid: 81d20076e7445364b8d48c7c71621cb1, type: 3}
+  clientEmblem: {fileID: 0}
+  lockedHint: 
+  questItem: {fileID: 0}
+  itemTrigger: 0
+  triggerChapter: 1
+  triggerFloor: 0
+  triggerEnemy: {fileID: 0}
+  goal: 2
+  deliverNodeType: 2
+  goalEnemy: {fileID: 11400000, guid: b5cf33283ca45ba3894f1a50360734fd, type: 2}
+  goalCount: 3
+  rewardExp: 25
+  rewardFlags: []
+  rescueCharId: 
+  requiredFlags: []

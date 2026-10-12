@@ -1,0 +1,1218 @@
+{
+  "version": 1,
+  "source_canvas": [
+    1920,
+    1080
+  ],
+  "design_canvas": [
+    1920,
+    1080
+  ],
+  "assets": [
+    {
+      "name": "Sanctuary_Background",
+      "file": "Sanctuary_Background.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "output_size": [
+        1920,
+        1080
+      ],
+      "placement_1920_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "texture_sample_xywh": [
+        732,
+        44,
+        160,
+        48
+      ],
+      "note": "Top106px paper only; reconstructed clean grid, no UI/typography."
+    },
+    {
+      "name": "Detail_ArtBackdrop",
+      "file": "Detail_ArtBackdrop.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        886,
+        152,
+        820,
+        768
+      ],
+      "output_size": [
+        820,
+        820
+      ],
+      "placement_1920_xy": [
+        886,
+        152
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "recommended_runtime_alpha": 0.22
+    },
+    {
+      "name": "Strip_Frame_Normal",
+      "file": "Strip_Frame_Normal.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Normal",
+      "note": "Border only; use common mask beneath."
+    },
+    {
+      "name": "Strip_Frame_Hover",
+      "file": "Strip_Frame_Hover.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Hover",
+      "note": "Border only; use common mask beneath."
+    },
+    {
+      "name": "Strip_Frame_Selected",
+      "file": "Strip_Frame_Selected.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Selected",
+      "note": "Border only; use common mask beneath."
+    },
+    {
+      "name": "Strip_Frame_Locked",
+      "file": "Strip_Frame_Locked.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Locked",
+      "note": "Border only; use common mask beneath."
+    },
+    {
+      "name": "Strip_Fill_Normal",
+      "file": "Strip_Fill_Normal.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Normal"
+    },
+    {
+      "name": "Strip_Fill_Locked",
+      "file": "Strip_Fill_Locked.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Locked"
+    },
+    {
+      "name": "Strip_Mask",
+      "file": "Strip_Mask.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed"
+    },
+    {
+      "name": "Strip_NameBand_Normal",
+      "file": "Strip_NameBand_Normal.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Normal",
+      "note": "Full strip canvas; name band begins local y530."
+    },
+    {
+      "name": "Strip_NameBand_Locked",
+      "file": "Strip_NameBand_Locked.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        628,
+        260,
+        816,
+        680
+      ],
+      "output_size": [
+        816,
+        680
+      ],
+      "placement_1920_xy": [
+        628,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Locked",
+      "note": "Full strip canvas; name band begins local y530."
+    },
+    {
+      "name": "Strip_NumberUnderline",
+      "file": "Strip_NumberUnderline.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        1004,
+        298,
+        18,
+        2
+      ],
+      "output_size": [
+        18,
+        2
+      ],
+      "placement_1920_xy": [
+        1004,
+        298
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed"
+    },
+    {
+      "name": "Icon_Lock",
+      "file": "Icon_Lock.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        1022,
+        538,
+        56,
+        80
+      ],
+      "output_size": [
+        40,
+        52
+      ],
+      "placement_1920_xy": [
+        1022,
+        538
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed"
+    },
+    {
+      "name": "Button_Detail_Normal",
+      "file": "Button_Detail_Normal.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        1474,
+        924,
+        416,
+        114
+      ],
+      "output_size": [
+        416,
+        114
+      ],
+      "placement_1920_xy": [
+        1474,
+        924
+      ],
+      "nine_slice_lbrt": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Detail_Hover",
+      "file": "Button_Detail_Hover.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        1474,
+        924,
+        416,
+        114
+      ],
+      "output_size": [
+        416,
+        114
+      ],
+      "placement_1920_xy": [
+        1474,
+        924
+      ],
+      "nine_slice_lbrt": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Detail_Pressed",
+      "file": "Button_Detail_Pressed.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        1474,
+        924,
+        416,
+        114
+      ],
+      "output_size": [
+        416,
+        114
+      ],
+      "placement_1920_xy": [
+        1474,
+        924
+      ],
+      "nine_slice_lbrt": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Pressed",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Detail_Disabled",
+      "file": "Button_Detail_Disabled.png",
+      "source": "Sanctuary_Select_Mockup.png",
+      "source_crop_xywh": [
+        1474,
+        924,
+        416,
+        114
+      ],
+      "output_size": [
+        416,
+        114
+      ],
+      "placement_1920_xy": [
+        1474,
+        924
+      ],
+      "nine_slice_lbrt": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Disabled",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Detail_InfoPanel",
+      "file": "Detail_InfoPanel.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        90,
+        318,
+        806,
+        604
+      ],
+      "output_size": [
+        806,
+        604
+      ],
+      "placement_1920_xy": [
+        90,
+        318
+      ],
+      "nine_slice_lbrt": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Detail_SectionRule",
+      "file": "Detail_SectionRule.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        144,
+        362,
+        708,
+        4
+      ],
+      "output_size": [
+        710,
+        2
+      ],
+      "placement_1920_xy": [
+        144,
+        362
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "label_gap": [
+        20,
+        145
+      ]
+    },
+    {
+      "name": "Detail_CardSlot",
+      "file": "Detail_CardSlot.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        124,
+        648,
+        732,
+        156
+      ],
+      "output_size": [
+        732,
+        156
+      ],
+      "placement_1920_xy": [
+        124,
+        648
+      ],
+      "nine_slice_lbrt": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "art_window_xywh": [
+        20,
+        18,
+        206,
+        112
+      ],
+      "note": "Fixed size recommended: internal transparent art opening must keep its shape."
+    },
+    {
+      "name": "Detail_AffinityCell_Empty",
+      "file": "Detail_AffinityCell_Empty.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        290,
+        516,
+        42,
+        36
+      ],
+      "output_size": [
+        42,
+        36
+      ],
+      "placement_1920_xy": [
+        290,
+        516
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed"
+    },
+    {
+      "name": "Detail_AffinityCell_Filled",
+      "file": "Detail_AffinityCell_Filled.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        290,
+        516,
+        42,
+        36
+      ],
+      "output_size": [
+        42,
+        36
+      ],
+      "placement_1920_xy": [
+        290,
+        516
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed"
+    },
+    {
+      "name": "Button_Back_Normal",
+      "file": "Button_Back_Normal.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        50,
+        940,
+        326,
+        94
+      ],
+      "output_size": [
+        326,
+        94
+      ],
+      "placement_1920_xy": [
+        50,
+        940
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Back_Hover",
+      "file": "Button_Back_Hover.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        50,
+        940,
+        326,
+        94
+      ],
+      "output_size": [
+        326,
+        94
+      ],
+      "placement_1920_xy": [
+        50,
+        940
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Back_Pressed",
+      "file": "Button_Back_Pressed.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        50,
+        940,
+        326,
+        94
+      ],
+      "output_size": [
+        326,
+        94
+      ],
+      "placement_1920_xy": [
+        50,
+        940
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Pressed",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Join_Normal",
+      "file": "Button_Join_Normal.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        1542,
+        938,
+        332,
+        100
+      ],
+      "output_size": [
+        332,
+        100
+      ],
+      "placement_1920_xy": [
+        1542,
+        938
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Join_Hover",
+      "file": "Button_Join_Hover.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        1542,
+        938,
+        332,
+        100
+      ],
+      "output_size": [
+        332,
+        100
+      ],
+      "placement_1920_xy": [
+        1542,
+        938
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Join_Pressed",
+      "file": "Button_Join_Pressed.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        1542,
+        938,
+        332,
+        100
+      ],
+      "output_size": [
+        332,
+        100
+      ],
+      "placement_1920_xy": [
+        1542,
+        938
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Pressed",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Button_Join_Disabled",
+      "file": "Button_Join_Disabled.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        1542,
+        938,
+        332,
+        100
+      ],
+      "output_size": [
+        332,
+        100
+      ],
+      "placement_1920_xy": [
+        1542,
+        938
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "state": "Disabled",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Name_AccentLine",
+      "file": "Name_AccentLine.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        120,
+        286,
+        168,
+        6
+      ],
+      "output_size": [
+        120,
+        3
+      ],
+      "placement_1920_xy": [
+        120,
+        286
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed"
+    },
+    {
+      "name": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        1750,
+        968,
+        38,
+        30
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        1750,
+        968
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "note": "Tint light on ink button."
+    },
+    {
+      "name": "Icon_ArrowBack",
+      "file": "Icon_ArrowBack.png",
+      "source": "Sanctuary_Detail_Mockup.png",
+      "source_crop_xywh": [
+        110,
+        974,
+        40,
+        28
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        110,
+        974
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and paper restoration; text and artwork removed",
+      "note": "Tint light on ink button."
+    }
+  ],
+  "strip_instances": [
+    {
+      "index": 1,
+      "position_xy": [
+        142,
+        260
+      ],
+      "size": [
+        816,
+        680
+      ],
+      "state": "Hover",
+      "text_local": {
+        "number": [
+          376,
+          16
+        ],
+        "name": [
+          94,
+          554
+        ],
+        "affiliation_or_unlock": [
+          94,
+          620
+        ],
+        "name_accent": [
+          94,
+          605
+        ]
+      },
+      "text_screen": {
+        "number": [
+          518,
+          276
+        ],
+        "name": [
+          236,
+          814
+        ],
+        "affiliation_or_unlock": [
+          236,
+          880
+        ]
+      },
+      "lock_local": [
+        398,
+        278
+      ]
+    },
+    {
+      "index": 2,
+      "position_xy": [
+        626,
+        260
+      ],
+      "size": [
+        816,
+        680
+      ],
+      "state": "Locked",
+      "text_local": {
+        "number": [
+          376,
+          16
+        ],
+        "name": [
+          94,
+          554
+        ],
+        "affiliation_or_unlock": [
+          94,
+          620
+        ],
+        "name_accent": [
+          94,
+          605
+        ]
+      },
+      "text_screen": {
+        "number": [
+          1002,
+          276
+        ],
+        "name": [
+          720,
+          814
+        ],
+        "affiliation_or_unlock": [
+          720,
+          880
+        ]
+      },
+      "lock_local": [
+        398,
+        278
+      ]
+    },
+    {
+      "index": 3,
+      "position_xy": [
+        1106,
+        260
+      ],
+      "size": [
+        816,
+        680
+      ],
+      "state": "Locked",
+      "text_local": {
+        "number": [
+          376,
+          16
+        ],
+        "name": [
+          94,
+          554
+        ],
+        "affiliation_or_unlock": [
+          94,
+          620
+        ],
+        "name_accent": [
+          94,
+          605
+        ]
+      },
+      "text_screen": {
+        "number": [
+          1482,
+          276
+        ],
+        "name": [
+          1200,
+          814
+        ],
+        "affiliation_or_unlock": [
+          1200,
+          880
+        ]
+      },
+      "lock_local": [
+        398,
+        278
+      ]
+    }
+  ],
+  "coordinate_convention": "Top-left origin; source_crop_xywh in canonical screenshot pixels; output_size is native PNG size.",
+  "strip_geometry": {
+    "vertices": [
+      [
+        366,
+        0
+      ],
+      [
+        815,
+        0
+      ],
+      [
+        460,
+        679
+      ],
+      [
+        0,
+        679
+      ]
+    ],
+    "reference": "Second canonical strip; common normalized shape replaces inconsistent first/third shapes.",
+    "original_strip_reference_xywh": [
+      [
+        64,
+        260,
+        894,
+        680
+      ],
+      [
+        628,
+        260,
+        816,
+        680
+      ],
+      [
+        1112,
+        260,
+        780,
+        680
+      ]
+    ]
+  },
+  "detail_text_anchors": {
+    "number": [
+      126,
+      168
+    ],
+    "name": [
+      118,
+      206
+    ],
+    "affiliation": [
+      440,
+      246
+    ],
+    "profile_label": [
+      176,
+      356
+    ],
+    "profile_body": [
+      142,
+      396
+    ],
+    "affinity_label": [
+      176,
+      478
+    ],
+    "affinity_level": [
+      158,
+      518
+    ],
+    "card_label": [
+      176,
+      608
+    ],
+    "card_name": [
+      382,
+      668
+    ],
+    "card_cost": [
+      382,
+      716
+    ],
+    "card_description": [
+      382,
+      752
+    ],
+    "reward_label": [
+      176,
+      818
+    ],
+    "reward_summary": [
+      144,
+      866
+    ]
+  },
+  "detail_affinity_instances": [
+    [
+      290,
+      516
+    ],
+    [
+      344,
+      516
+    ],
+    [
+      398,
+      516
+    ],
+    [
+      452,
+      516
+    ],
+    [
+      506,
+      516
+    ]
+  ],
+  "excluded": [
+    "all typography",
+    "characters",
+    "locked silhouettes",
+    "card art"
+  ],
+  "layering": [
+    "background",
+    "strip fill",
+    "game character masked by Strip_Mask",
+    "strip name band",
+    "strip frame",
+    "lock and runtime text"
+  ]
+}

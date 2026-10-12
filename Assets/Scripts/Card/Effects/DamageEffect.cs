@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -6,11 +7,14 @@ public class DamageEffect : CardEffect
 {
     public int amount;
     public EffectValue scaling;
+    [Tooltip("조건을 만족하는 증가량을 기본 피해에 더한 뒤 한 타격으로 처리합니다.")]
+    public List<ConditionalDamageBonus> conditionalBonuses = new();
     public int hitCount = 1;
     public EffectTargetSelector targets = EffectTargetSelector.PrimaryTarget;
     public bool piercing;
     public bool environmentalDamage;
     public float hitInterval = 0.08f;
+    [SerializeReference, SubclassPicker] public List<CardEffect> onKillEffects = new();
 
     public override void Execute(CardContext context)
     {
@@ -44,18 +48,14 @@ public class DamageEffect : CardEffect
     {
         if (fieldName != nameof(amount) || state?.Player == null) return rawValue;
 
-        int baseValue = rawValue;
-        if (scaling.source != EffectValueSource.None)
-        {
-            var previewContext = new CardContext
+        var previewContext = new CardContext
             {
                 State = state,
                 Card = card,
                 Target = target,
                 AllEnemies = state.Enemies,
-            };
-            baseValue += scaling.Evaluate(previewContext, target);
-        }
+            }.CreateAmmoPreview();
+        int baseValue = GetRawAmount(previewContext, target);
 
         bool isAmmoAttack = card != null && card.AmmoCost > 0;
         var info = new DamageInfo(baseValue, state.Player, piercing, isAmmoAttack);
@@ -70,17 +70,31 @@ public class DamageEffect : CardEffect
     }
 
     public int GetRawAmount(CardContext context, ICombatant target)
-        => amount + scaling.Evaluate(context, target);
+    {
+        int result = amount + scaling.Evaluate(context, target) + AmmoStatusEvents.DamageBonus(context);
+        if (conditionalBonuses != null)
+            foreach (var bonus in conditionalBonuses)
+                if (bonus?.condition != null && bonus.condition.IsMet(context)) result += bonus.amount;
+        return result;
+    }
 
     private void DealDamage(CardContext context, ICombatant target)
     {
         int resolvedAmount = GetRawAmount(context, target);
         if (resolvedAmount <= 0) return;
         bool isAmmoAttack = context.Card != null && context.Card.AmmoCost > 0;
-        DamageCalculator.Resolve(
+        bool killed = DamageCalculator.Resolve(
             new DamageInfo(resolvedAmount, environmentalDamage ? null : context.Source, piercing, isAmmoAttack),
             target,
             context.State,
             context);
+        if (killed) EffectRunner.ExecuteImmediate(onKillEffects, context);
     }
+}
+
+[System.Serializable]
+public class ConditionalDamageBonus
+{
+    [SerializeReference, SubclassPicker] public CardCondition condition;
+    public int amount;
 }

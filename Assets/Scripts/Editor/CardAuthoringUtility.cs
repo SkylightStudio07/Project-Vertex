@@ -101,9 +101,11 @@ internal static class CardAuthoringUtility
         {
             "DamageEffect" => "피해", "BlockEffect" => "방어도", "HealEffect" => "회복",
             "DrawEffect" => "카드 뽑기", "DiscardEffect" => "손패 선택 버리기",
-            "AddAmmoEffect" => "탄약 획득", "AmmoConsumeAllDamageEffect" => "탄약 전량 소비 공격",
+            "AddAmmoEffect" => "탄약 획득", "ReloadAmmoEffect" => "재장전", "AmmoConsumeAllDamageEffect" => "탄약 전량 소비 공격",
             "ApplyStatusEffect" => "상태 적용·변경", "ApplyStatusAtEndTurnInHandEffect" => "손패 턴 종료 상태",
             "ConditionalEffect" => "조건부 효과", "RepeatEffect" => "효과 반복",
+            "FirstAmmoUseCondition" => "초탄", "LastAmmoUseCondition" => "막탄",
+            "PlayerGainedBlockCondition" => "이번 턴 방어도 획득", "IncreaseMagazineEffect" => "최대 탄약 증가",
             "ChangeWeaponEffect" => "무기 변경", "AddCardToPileEffect" => "카드 생성",
             "LoseHPEffect" => "HP 손실", "GainGoldEffect" => "골드 획득",
             "IncreaseCardDrawEffect" => "드로우 수 증가", "AddCoopPointEffect" => "동료 포인트",

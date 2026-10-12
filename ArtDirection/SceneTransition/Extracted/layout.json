@@ -1,0 +1,242 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "source": "SceneTransition_ComponentStoryboard_v2.png",
+  "sourceCanvas": [
+    1448,
+    1086
+  ],
+  "assets": [
+    {
+      "name": "Curtain_Upper",
+      "file": "Curtain_Upper.png",
+      "sourceRect": [
+        56,
+        148,
+        741,
+        125
+      ],
+      "size": [
+        2320,
+        548
+      ],
+      "mode": "upper"
+    },
+    {
+      "name": "Curtain_Lower",
+      "file": "Curtain_Lower.png",
+      "sourceRect": [
+        56,
+        339,
+        741,
+        125
+      ],
+      "size": [
+        2320,
+        548
+      ],
+      "mode": "lower"
+    },
+    {
+      "name": "Seam_Base",
+      "file": "Seam_Base.png",
+      "sourceRect": [
+        839,
+        157,
+        552,
+        13
+      ],
+      "size": [
+        2320,
+        24
+      ],
+      "mode": "opaque"
+    },
+    {
+      "name": "Seam_Fill",
+      "file": "Seam_Fill.png",
+      "sourceRect": [
+        839,
+        236,
+        355,
+        7
+      ],
+      "size": [
+        2320,
+        6
+      ],
+      "mode": "opaque"
+    },
+    {
+      "name": "Seam_Head",
+      "file": "Seam_Head.png",
+      "sourceRect": [
+        1267,
+        236,
+        52,
+        36
+      ],
+      "size": [
+        48,
+        24
+      ],
+      "mode": "ink"
+    },
+    {
+      "name": "TitleFrame",
+      "file": "TitleFrame.png",
+      "sourceRect": [
+        851,
+        337,
+        375,
+        103
+      ],
+      "size": [
+        1200,
+        300
+      ],
+      "mode": "frame"
+    },
+    {
+      "name": "Emblem",
+      "file": "Emblem.png",
+      "sourceRect": [
+        1260,
+        337,
+        113,
+        105
+      ],
+      "size": [
+        160,
+        160
+      ],
+      "mode": "ink"
+    },
+    {
+      "name": "LoadingChip",
+      "file": "LoadingChip.png",
+      "sourceRect": [
+        1071,
+        499,
+        226,
+        32
+      ],
+      "size": [
+        280,
+        44
+      ],
+      "mode": "chip"
+    },
+    {
+      "name": "Reference_Closed",
+      "file": "Reference_Closed.png",
+      "sourceRect": [
+        56,
+        601,
+        652,
+        195
+      ],
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "reference"
+    },
+    {
+      "name": "Reference_Loading",
+      "file": "Reference_Loading.png",
+      "sourceRect": [
+        742,
+        601,
+        652,
+        195
+      ],
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "reference"
+    },
+    {
+      "name": "Reference_Opening",
+      "file": "Reference_Opening.png",
+      "sourceRect": [
+        56,
+        827,
+        652,
+        195
+      ],
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "reference"
+    },
+    {
+      "name": "Reference_Return",
+      "file": "Reference_Return.png",
+      "sourceRect": [
+        742,
+        827,
+        652,
+        195
+      ],
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "reference"
+    }
+  ],
+  "placements": {
+    "Seam_Fill": [
+      -200,
+      537
+    ],
+    "Curtain_Upper": [
+      -200,
+      0
+    ],
+    "LoadingChip": [
+      1600,
+      1000
+    ],
+    "Curtain_Lower": [
+      -200,
+      532
+    ],
+    "Seam_Base": [
+      -200,
+      528
+    ],
+    "Emblem": [
+      480,
+      370
+    ],
+    "TitleFrame": [
+      360,
+      390
+    ]
+  },
+  "loadingFill": 0.6,
+  "openingOffsets": {
+    "upperX": -1000,
+    "lowerX": 1000
+  },
+  "opaqueCurtainInterior": true,
+  "runtimeLabels": {
+    "return": [
+      "RETURN // BASE",
+      "귀환",
+      "기지로 복귀합니다"
+    ],
+    "deploy": [
+      "OPERATION // DEPLOY",
+      "출정",
+      "작전 지역으로 이동합니다"
+    ]
+  }
+}

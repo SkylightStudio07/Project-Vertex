@@ -21,6 +21,13 @@ public class ShopkeeperData : ScriptableObject
     [Tooltip("대사창 이름표에 표시될 이름")]
     public string entityName = "토냐";
 
+    [Header("대화창 표시")]
+    [Tooltip("하단 대사창 초상 칸에 들어갈 얼굴")]
+    public Sprite portrait;
+    public string affiliation = "VERTEX / 상점 주인";
+    [Tooltip("대화창 이름 아래 가는 선 색")]
+    public Color themeColor = new(0.78f, 0.62f, 0.32f, 1f);
+
     [Tooltip("등장 막 (1: 1막, 2: 2막, 3: 3막)")]
     public int chapter = 1;
 
@@ -41,6 +48,26 @@ public class ShopkeeperData : ScriptableObject
     [Tooltip("상품을 사거나 카드를 제거했을 때")]
     [TextArea(1, 3)] public List<string> purchaseLines = new();
     [Min(1f)] public float idleInterval = 12f;
+
+    [Header("작별 인사 (나가기를 눌렀을 때)")]
+    [Tooltip("호감도 등급(0~4, BlessingAffinityManager.GetAffinityTier)별 작별 한마디. 현재 등급 이하 중 minTier가 가장 높은 묶음에서 무작위")]
+    public List<TieredLines> farewellLines = new();
+
+    [Serializable]
+    public class TieredLines
+    {
+        [Range(0, 4)] public int minTier;
+        [TextArea(1, 3)] public List<string> lines = new();
+    }
+
+    public string PickFarewellLine(int tier)
+    {
+        TieredLines best = null;
+        foreach (var t in farewellLines)
+            if (t != null && t.lines != null && t.lines.Count > 0 && t.minTier <= tier && (best == null || t.minTier > best.minTier))
+                best = t;
+        return best != null ? PickLine(best.lines, null) : null;
+    }
 
     // 직전 문구와 다른 것을 무작위로 고른다(2개 이상일 때). 목록이 비면 null.
     public static string PickLine(List<string> lines, string current)

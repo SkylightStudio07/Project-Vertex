@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: Thrash
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: status.thrash
+  displayName: "\uBAB8\uBD80\uB9BC"
+  description: "3\uD134\uB9C8\uB2E4 \uD798\uC744 2 \uC5BB\uC2B5\uB2C8\uB2E4. \uC22B\uC790\uB294
+    \uBC1C\uB3D9\uAE4C\uC9C0 \uB0A8\uC740 \uD134\uC785\uB2C8\uB2E4."
+  icon: {fileID: -8307069055350043731, guid: e8c9834bdb39550438872b224deaa05a, type: 3}
+  disposition: 1
+  stackPolicy: 0
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 0
+  behaviors:
+  - rid: 8755282476958482753
+  references:
+    version: 2
+    RefIds:
+    - rid: 8755282476958482753
+      type: {class: CountdownEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 8755282476958482754
+        interval: 3
+    - rid: 8755282476958482754
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000005, type: 2}
+        operation: 0
+        amount: 2
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0

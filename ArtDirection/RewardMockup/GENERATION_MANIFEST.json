@@ -1,0 +1,35 @@
+{
+  "artifacts": [
+    {
+      "file": "Reward_Mockup.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen, followed by bicubic size normalization. Not native 2x art."
+    },
+    {
+      "file": "Reward_Card_Mockup.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen, followed by bicubic size normalization. Not native 2x art."
+    }
+  ],
+  "status": "Review mockups; slicing deferred until approval",
+  "notes": [
+    "Paper/ink/cyan style; reward row2 hovered; card selection uses empty slots.",
+    "Generated background and item are reference-based renderings, not guaranteed pixel-identical composites.",
+    "Exact layout coordinates, uniform dimmer opacity and flat text surfaces must be enforced in future slicing/implementation.",
+    "Native images retained under Generated_Originals; all prompts retained in GENERATION_PROMPTS.json."
+  ]
+}

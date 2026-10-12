@@ -75,7 +75,9 @@ public class PoseSequencePlayer : MonoBehaviour
     /// 스프라이트 시트 프레임 배열을 순서대로 지정한 FPS 속도로 1회 재생합니다.
     /// 재생 중에는 UISpriteSheetAnimator(대기 모션)가 일시정지되며, 완료 시 자동으로 대기 모션으로 복귀합니다.
     /// </summary>
-    public void Play(Sprite[] frames, float fps)
+    // scaleMultiplier: 이 시트의 여백이 대기 시트와 달라 캐릭터가 작게/크게 보일 때 재생 중에만 곱하는 배율
+    // (EnemyData.AttackScaleMultiplier). 그림 가운데를 기준으로 키운다.
+    public void Play(Sprite[] frames, float fps, float scaleMultiplier = 1f)
     {
         if (frames == null || frames.Length == 0) return;
 
@@ -97,7 +99,7 @@ public class PoseSequencePlayer : MonoBehaviour
             animator.enabled = false;
         }
 
-        playing = StartCoroutine(PlaySpriteFrames(frames, fps));
+        playing = StartCoroutine(PlaySpriteFrames(frames, fps, scaleMultiplier));
     }
 
     private void RestoreResting()
@@ -186,7 +188,7 @@ public class PoseSequencePlayer : MonoBehaviour
         playing = null;
     }
 
-    private IEnumerator PlaySpriteFrames(Sprite[] frames, float fps)
+    private IEnumerator PlaySpriteFrames(Sprite[] frames, float fps, float scaleMultiplier)
     {
         // 대기 포즈 기록 — 시퀀스 끝나면 여기로 복귀.
         restingSprite = image.sprite;
@@ -195,6 +197,15 @@ public class PoseSequencePlayer : MonoBehaviour
         restingRotation = rt.localEulerAngles.z;
         restingSizeDelta = rt.sizeDelta;
         hasResting = true;
+
+        if (!Mathf.Approximately(scaleMultiplier, 1f) && scaleMultiplier > 0f)
+        {
+            // localScale은 피벗 기준으로 커지므로, 그림 가운데(rect.center)가 제자리에 남도록 위치를 보정한다
+            Vector2 c = rt.rect.center;
+            rt.localScale = restingScale * scaleMultiplier;
+            rt.anchoredPosition = restingAnchoredPosition
+                                  + new Vector2(c.x * restingScale.x, c.y * restingScale.y) * (1f - scaleMultiplier);
+        }
 
         float delay = 1f / Mathf.Max(1f, fps);
 

@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -25,6 +26,9 @@ public class CardInteractionView : MonoBehaviour
     [FormerlySerializedAs("hoverScale")]
     [SerializeField] private Vector3 _hoverScale = new Vector3(0.45f, 0.45f, 1f); // 호버 상태에서 적용할 카드 확대 비율.
     [SerializeField] private float _hoverScreenMargin = 12f; // 호버로 커진 카드가 화면 아래 끝에서 띄울 여백(px). 이만큼 위로 들어 올린다.
+    [SerializeField] private Image _hoverGlow; // 카드를 잡고 있을 때(드래그·겨냥) 켜지는 테두리 모양 발광. 비주얼보다 앞 형제로 두면 카드 뒤에 그려진다. 위치·크기는 비주얼을 따라간다.
+    [SerializeField] private Color _hoverGlowColor = new Color(0.45f, 0.85f, 1f, 1f); // 발광 색.
+    [SerializeField, Range(0f, 1f)] private float _hoverGlowPulseMin = 0.55f; // 맥동할 때 가장 옅은 알파.
 
     [Header("Dragging")]
     [FormerlySerializedAs("dragSortingOrder")]
@@ -73,6 +77,24 @@ public class CardInteractionView : MonoBehaviour
     private float _layoutEndRotationZ; // 손패 재배치 애니메이션의 최종 회전값.
     private bool _isHandAnimationLocked; // 전체 드로우 순서가 끝날 때까지 입력을 막는 상태값.
     private bool _isDestroying; // 오브젝트가 파괴 중인지 나타내는 상태값.
+    private Tween _glowTween; // 발광 페이드/맥동 트윈.
+    private Tween _shiftTween; // 옆 카드가 호버될 때 비켜나는 트윈.
+
+    // 손패에서 지금 호버 중인 카드(없으면 null). HandView가 이웃 카드를 비켜나게 하는 데 쓴다.
+    public static CardInteractionView Hovered { get; private set; }
+    public static event Action<CardInteractionView> HoverChanged;
+
+    private static void SetHovered(CardInteractionView view)
+    {
+        if (Hovered == view) return;
+        Hovered = view;
+        HoverChanged?.Invoke(view);
+    }
+
+    private void ClearHovered()
+    {
+        if (Hovered == this) SetHovered(null);
+    }
 
     // HandFanLayout이 지정한 "쉴 때" 자세. 부채꼴 미적용(레이아웃 미연결) 시 회전 0으로 그대로 둔다.
     private Vector2 _restingAnchoredPosition; // 손패에서 쉬고 있을 때의 기준 위치.
@@ -80,6 +102,19 @@ public class CardInteractionView : MonoBehaviour
 
     // 드로우 진입 애니메이션 중이면 카드 입력을 막기 위해 true를 반환한다.
     public bool IsDrawInPlaying => _isDrawInPlaying;
+
+    public Vector2 RestingPosition => _restingAnchoredPosition;
+
+    // 옆 카드가 호버될 때 쉬는 자리에서 가로로 dx만큼 비켜난다(0이면 제자리로). 이동 연출 중이면 건드리지 않는다.
+    public void SetHoverShift(float dx, float duration)
+    {
+        if (_rootRect == null || IsInteractionLocked || _movementCoroutine != null) return;
+        _shiftTween?.Kill();
+        _shiftTween = _rootRect.DOAnchorPos(_restingAnchoredPosition + new Vector2(dx, 0f), duration)
+            .SetEase(Ease.OutCubic).SetLink(gameObject);
+    }
+
+    private void KillHoverShift() => _shiftTween?.Kill();
 
     // 카드 이동 애니메이션 중이면 카드 입력을 막기 위해 true를 반환한다.
     public bool IsInteractionLocked =>
@@ -104,6 +139,43 @@ public class CardInteractionView : MonoBehaviour
         {
             _originalScale = Vector3.one;
             _originalLocalPosition = Vector3.zero;
+        }
+
+        if (_hoverGlow != null)
+        {
+            _hoverGlow.raycastTarget = false;
+            _hoverGlow.color = new Color(_hoverGlowColor.r, _hoverGlowColor.g, _hoverGlowColor.b, 0f);
+            _hoverGlow.gameObject.SetActive(false);
+        }
+    }
+
+    // 발광은 비주얼의 형제라 비주얼의 확대·들어올림을 매 프레임 따라가게 한다.
+    private void LateUpdate()
+    {
+        if (_hoverGlow == null || _visual == null || !_hoverGlow.gameObject.activeSelf) return;
+        var glow = _hoverGlow.rectTransform;
+        glow.localPosition = _visual.localPosition;
+        glow.localScale = _visual.localScale;
+        glow.localRotation = _visual.localRotation;
+    }
+
+    private void SetGlow(bool on)
+    {
+        if (_hoverGlow == null) return;
+        if (!on && !_hoverGlow.gameObject.activeSelf) return;
+        _glowTween?.Kill();
+
+        if (on)
+        {
+            _hoverGlow.gameObject.SetActive(true);
+            _glowTween = _hoverGlow.DOFade(1f, 0.12f).SetLink(gameObject).OnComplete(() =>
+                _glowTween = _hoverGlow.DOFade(_hoverGlowPulseMin, 0.7f)
+                    .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject));
+        }
+        else
+        {
+            _glowTween = _hoverGlow.DOFade(0f, 0.12f).SetLink(gameObject)
+                .OnComplete(() => _hoverGlow.gameObject.SetActive(false));
         }
     }
 
@@ -143,6 +215,7 @@ public class CardInteractionView : MonoBehaviour
     {
         _restingAnchoredPosition = anchoredPosition;
         _restingRotationZ = rotationZ;
+        KillHoverShift();
         if (_rootRect == null) return;
 
         // 부채꼴 좌표/회전은 "카드 중심이 피벗"이라고 가정한 계산이다.
@@ -159,12 +232,15 @@ public class CardInteractionView : MonoBehaviour
 
     public void EnterIdle()
     {
+        ClearHovered();
         StopMovement();
+        SetGlow(false);
         HideDebugTargetArrow();
         if (_visual != null)
         {
             _visual.localScale = _originalScale;
             _visual.localPosition = _originalLocalPosition;
+            _visual.localRotation = Quaternion.identity;
         }
         _cardCanvas.sortingOrder = _originalSortingOrder;
         // 부채꼴 각도로 복귀. 레이아웃 미연결 카드는 restingRotationZ가 0이라 무영향.
@@ -174,10 +250,19 @@ public class CardInteractionView : MonoBehaviour
     public void EnterHover()
     {
         StopMovement();
+        SetHovered(this);
+        SetGlow(false); // 발광은 카드를 잡았을 때(드래그·겨냥)만
         if (_visual != null) _visual.localScale = _hoverScale;
         BringCardToFront();
         // 부채꼴 각도를 펴서 카드 내용을 똑바로 보여준다 (STS 호버 연출).
-        if (_rootRect != null) _rootRect.localRotation = Quaternion.identity;
+        // 루트(마우스 판정 영역 포함)는 손패 자세 그대로 두고 그림만 반대로 돌린다 —
+        // 루트를 돌리면 판정 영역도 돌아가 양끝 카드 모서리에서 호버가 켜졌다 꺼졌다를 반복한다.
+        if (_visual != null && _rootRect != null)
+        {
+            var unrotate = Quaternion.Euler(0f, 0f, -_rootRect.localEulerAngles.z);
+            _visual.localRotation = unrotate;
+            _visual.localPosition = unrotate * _originalLocalPosition;
+        }
         LiftVisualIntoScreen();
     }
 
@@ -206,18 +291,24 @@ public class CardInteractionView : MonoBehaviour
 
     public void EnterDragging()
     {
+        ClearHovered();
+        KillHoverShift();
         StopMovement();
+        SetGlow(true);
         HideDebugTargetArrow();
-        if (_visual != null) _visual.localScale = _originalScale;
+        if (_visual != null) { _visual.localScale = _originalScale; _visual.localRotation = Quaternion.identity; }
         BringCardToFront();
         if (_rootRect != null) _rootRect.localRotation = Quaternion.identity;
     }
 
     public void EnterTargeting(Vector2 pointerPosition)
     {
+        ClearHovered();
+        KillHoverShift();
         StopMovement();
+        SetGlow(true);
         _targetingPointerPosition = pointerPosition;
-        if (_visual != null) _visual.localScale = _originalScale;
+        if (_visual != null) { _visual.localScale = _originalScale; _visual.localRotation = Quaternion.identity; }
         BringCardToFront();
         if (_rootRect != null) _rootRect.localRotation = Quaternion.identity;
         EnsureDebugTargetArrow();
@@ -239,20 +330,27 @@ public class CardInteractionView : MonoBehaviour
 
     public void EnterReturning(Action onComplete)
     {
+        ClearHovered();
+        KillHoverShift();
         StopMovement();
+        SetGlow(false);
         HideDebugTargetArrow();
         _movementCoroutine = StartCoroutine(ReturnCoroutine(onComplete));
     }
 
     public void EnterPlaying()
     {
+        ClearHovered();
+        KillHoverShift();
         StopMovement();
+        SetGlow(false);
         HideDebugTargetArrow();
     }
 
     // 드로우 대기 카드를 시작 위치에 모아두고 임시 렌더링 순서를 적용한다.
     public void PrepareDrawIn(Vector2 startAnchoredPosition, int temporarySortingOrder)
     {
+        KillHoverShift();
         StopMovement();
         if (_rootRect == null) return;
 
@@ -276,6 +374,7 @@ public class CardInteractionView : MonoBehaviour
     // 현재 자세에서 새로운 손패 위치와 각도까지 재배치 애니메이션을 시작한다.
     public void PlayLayoutTransition(Vector2 targetPosition, float targetRotationZ, float duration)
     {
+        KillHoverShift();
         StopMovement();
         if (_rootRect == null) return;
 
@@ -296,6 +395,7 @@ public class CardInteractionView : MonoBehaviour
         int temporarySortingOrder,
         Action<CardInteractionView> onComplete)
     {
+        KillHoverShift();
         StopMovement();
         if (_rootRect == null) return;
 
@@ -303,6 +403,7 @@ public class CardInteractionView : MonoBehaviour
         {
             _visual.localScale = _originalScale;
             _visual.localPosition = _originalLocalPosition;
+            _visual.localRotation = Quaternion.identity;
         }
         _rootRect.localRotation = Quaternion.Euler(0f, 0f, _restingRotationZ);
 
@@ -326,9 +427,12 @@ public class CardInteractionView : MonoBehaviour
         _visual.anchoredPosition += localPoint - visualCenterLocal;
     }
 
+    private void OnDisable() => ClearHovered();
+
     private void OnDestroy()
     {
         _isDestroying = true;
+        ClearHovered();
         if (_movementCoroutine != null)
             StopCoroutine(_movementCoroutine);
         _movementCoroutine = null;

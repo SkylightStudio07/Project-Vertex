@@ -13,9 +13,9 @@ public struct RewardItem
     public object Data;
     public string ItemDescription => Type switch
     {
-        RewardType.Gold => $"{Data} Gold",
+        RewardType.Gold => $"{Data} 골드",
         RewardType.Item => ((ItemData)Data).ItemName,
-        RewardType.Card => $"Cards",
+        RewardType.Card => "카드 보상",
         _ => "Unknown Reward"
     };
     public RewardItem(RewardType type, object data)

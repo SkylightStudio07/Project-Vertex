@@ -1,0 +1,19 @@
+{
+  "characters": [
+    { "id": "gatekeeper", "name": "관문 수호자", "slot": 0 },
+    { "id": "player", "name": "방랑자", "slot": 3 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(백피안화가 끝나는 자리. 부서진 결정 기둥 사이로, 거대한 무언가가 천천히 몸을 일으킨다.)" },
+        { "type": "line", "speaker": "gatekeeper", "emotion": "idle", "text": "……이 너머는, 너희의 세계가 아니다." },
+        { "type": "line", "speaker": "gatekeeper", "emotion": "idle", "text": "돌아가라. 아직 너는, 너 자신을 기억하고 있을 때." },
+        { "type": "line", "speaker": "player", "emotion": "confident", "text": "돌아갈 길이 있었으면 여기까지 오지도 않았어." },
+        { "type": "line", "speaker": "gatekeeper", "emotion": "idle", "text": "……그렇다면. 관문은, 시험한다." }
+      ]
+    }
+  ]
+}

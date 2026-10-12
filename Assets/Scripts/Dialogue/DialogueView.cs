@@ -25,6 +25,8 @@ public class DialogueView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lineText;
     [SerializeField] private Button advanceButton;
     [SerializeField] private float typewriterCharsPerSecond = 40f; // 0 이하면 즉시 전체 표시(연출 끄기)
+    [Tooltip("대화창 v1: 이름 + 소속 + 고유색 선 + 넘기기 표시 (비우면 이름 글자만)")]
+    [SerializeField] private DialogueNameplate nameplate;
 
     [Header("선택지 UI")]
     [SerializeField] private Transform choiceContainer;
@@ -151,6 +153,13 @@ public class DialogueView : MonoBehaviour
         advanceButton.gameObject.SetActive(true);
         bool narration = string.IsNullOrEmpty(line.speaker);
         speakerNameText.text = narration ? string.Empty : GetCharacterName(line.speaker);
+        if (nameplate != null)
+        {
+            CoopCharData coop = null;
+            bool isCoop = !narration && CooperationManager.Instance != null && CooperationManager.Instance.TryGetCoopCharData(line.speaker, out coop);
+            nameplate.Set(narration ? null : GetCharacterName(line.speaker), isCoop ? coop.affiliation : null, isCoop ? coop.themeColor : (Color?)null);
+            nameplate.SetAdvanceVisible(false);
+        }
         if (speakerNameplate != null) speakerNameplate.SetActive(!narration);
         typewriter.Play(lineText, line.text, typewriterCharsPerSecond);
         UpdateSpeakerHighlight(line.speaker, line.emotion);
@@ -214,10 +223,16 @@ public class DialogueView : MonoBehaviour
             return;
         }
 
+        if (nameplate != null) nameplate.SetAdvanceVisible(false);
+        int index = 0;
         foreach (var option in line.options)
         {
             var btn = Instantiate(choiceButtonPrefab, choiceContainer);
-            btn.GetComponentInChildren<TextMeshProUGUI>().text = option.text;
+            // 대화창 v1 선택지 판: "Label" + "Number"(01, 02 …). 예전 버튼은 첫 글자 칸에 대사만
+            var label = btn.transform.Find("Label");
+            (label != null ? label.GetComponent<TextMeshProUGUI>() : btn.GetComponentInChildren<TextMeshProUGUI>()).text = option.text;
+            var number = btn.transform.Find("Number");
+            if (number != null) number.GetComponent<TextMeshProUGUI>().text = (++index).ToString("00");
             var capturedOption = option;
             btn.onClick.AddListener(() => OnChoiceSelected(capturedOption));
             _choiceButtons.Add(btn);
@@ -260,6 +275,7 @@ public class DialogueView : MonoBehaviour
     // GameObject가 비활성(대화 안 하는 중)일 때는 Update 자체가 호출되지 않으므로 따로 체크 안 해도 됨.
     private void Update()
     {
+        if (nameplate != null) nameplate.SetAdvanceVisible(advanceButton.gameObject.activeSelf && !typewriter.IsTyping);
         // interactable도 같이 체크 — 향후 타이프라이터 효과 등으로 버튼을 잠가도
         // 키보드 입력이 그걸 우회해서 넘어가버리는 비일관성을 막기 위함.
         if (!advanceButton.gameObject.activeSelf || !advanceButton.interactable) return;

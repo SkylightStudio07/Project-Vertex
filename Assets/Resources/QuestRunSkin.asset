@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f776b77bbb9fb4dbb1011fca444aa2, type: 3}
+  m_Name: QuestRunSkin
+  m_EditorClassIdentifier: Assembly-CSharp::QuestRunSkin
+  font: {fileID: 11400000, guid: 41d41edc777433f46bd79202e7b819e1, type: 2}
+  iconRecovery: {fileID: 21300000, guid: 2a3d669d12458254e82f33390d056a7e, type: 3}
+  iconDelivery: {fileID: 21300000, guid: b22c89aadeaa16146aabae4ddb10a439, type: 3}
+  iconElimination: {fileID: 21300000, guid: 374ff3b69dc5ff54390d3a1aa7e5e4d7, type: 3}
+  iconRescue: {fileID: 21300000, guid: 7edd3d10a737dec40b5682409b32cc4d, type: 3}
+  toastAcquired: {fileID: 21300000, guid: 525a56f9f5cbe3844a6dfc1072d45c3b, type: 3}
+  toastProgress: {fileID: 21300000, guid: 17a69ae507bd9d64b9ad8c9d2c6e89d3, type: 3}
+  toastCompleted: {fileID: 21300000, guid: 696fdaf00b5d4094aac50eee65f9eb32, type: 3}
+  toastDeferred: {fileID: 21300000, guid: 445cb0250d56a2f47a1ea2dfc029325b, type: 3}
+  badgeStory: {fileID: 21300000, guid: e689c6629c554b74c8dd83559ac3726d, type: 3}
+  badgeRescue: {fileID: 21300000, guid: 76b4dcfbb0e4da540891592cfd8d800f, type: 3}
+  stampCompleted: {fileID: 21300000, guid: c45ff95478d76d54fbd5aec68387cfe6, type: 3}
+  summaryHeader: {fileID: 21300000, guid: d6e6fb46a164586468552a77f90f1f06, type: 3}
+  summaryEmpty: {fileID: 21300000, guid: 1a18470c379dc374c90889947a7b7a30, type: 3}
+  chip: {fileID: 21300000, guid: aabe7812122f51b4b97d50cb982320ea, type: 3}
+  chipHover: {fileID: 21300000, guid: 36a68df2029671c408132acdabaf7335, type: 3}
+  dot: {fileID: 21300000, guid: c4e3904e56e9f4343a0d357c0e90c419, type: 3}
+  tooltip: {fileID: 21300000, guid: 88abecdf26167b84abce3a70cacf58e9, type: 3}
+  tagRecovery: {fileID: 21300000, guid: fec35522629ec3c478e159a0c14ad65d, type: 3}
+  tagDelivery: {fileID: 21300000, guid: a1e1f336461bbe34c9587305088ca3a5, type: 3}
+  tagElimination: {fileID: 21300000, guid: 1045840ea800b6a4e9705d1240cba3f3, type: 3}
+  tagRescue: {fileID: 21300000, guid: f82bc4704007639488f580f119b8038a, type: 3}
+  tagRecoveryHighlight: {fileID: 21300000, guid: 80691310d8dae554c863e2893c1b5686, type: 3}
+  tagDeliveryHighlight: {fileID: 21300000, guid: 6c8d8e4c8c135744f949d9ea77b6aff6, type: 3}
+  tagEliminationHighlight: {fileID: 21300000, guid: 988cc44082e15d848a70de7c9f1d3ad7, type: 3}
+  tagRescueHighlight: {fileID: 21300000, guid: 7ee6049b99ba6c3458bc49d12098e9d7, type: 3}
+  mapTooltip: {fileID: 21300000, guid: 07b8e0f6637b72c4d9f232acfdb58224, type: 3}
+  itemSlot: {fileID: 21300000, guid: c08a78d6e635c0f4f8cfbc7a380ea270, type: 3}
+  itemSlotHover: {fileID: 21300000, guid: e8c6d766668392b418fadfa9a454b38b, type: 3}

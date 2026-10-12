@@ -1,0 +1,1079 @@
+{
+  "version": 1,
+  "source_canvas": [
+    1920,
+    1080
+  ],
+  "design_canvas": [
+    1920,
+    1080
+  ],
+  "assets": [
+    {
+      "name": "Map_Panel",
+      "file": "Map_Panel.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        32,
+        154,
+        1860,
+        900
+      ],
+      "output_size": [
+        1848,
+        860
+      ],
+      "placement_1920_xy": [
+        36,
+        120
+      ],
+      "nine_slice_lbrt": [
+        48,
+        132,
+        48,
+        116
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "texture_sample_xywh": [
+        700,
+        182,
+        140,
+        42
+      ],
+      "normalized_layout": {
+        "header_height": 100,
+        "scroll_top": 128,
+        "scroll_height": 600,
+        "legend_top": 748
+      }
+    },
+    {
+      "name": "Map_FloorTick_Past",
+      "file": "Map_FloorTick_Past.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        82,
+        260,
+        134,
+        42
+      ],
+      "output_size": [
+        200,
+        28
+      ],
+      "placement_1920_xy": [
+        82,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Past"
+    },
+    {
+      "name": "Map_FloorTick_Current",
+      "file": "Map_FloorTick_Current.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        732,
+        260,
+        134,
+        42
+      ],
+      "output_size": [
+        200,
+        28
+      ],
+      "placement_1920_xy": [
+        732,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Current"
+    },
+    {
+      "name": "Map_FloorTick_Future",
+      "file": "Map_FloorTick_Future.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        82,
+        260,
+        134,
+        42
+      ],
+      "output_size": [
+        200,
+        28
+      ],
+      "placement_1920_xy": [
+        82,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Future"
+    },
+    {
+      "name": "Map_FloorTick_Boss",
+      "file": "Map_FloorTick_Boss.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        82,
+        260,
+        134,
+        42
+      ],
+      "output_size": [
+        200,
+        28
+      ],
+      "placement_1920_xy": [
+        82,
+        260
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Boss"
+    },
+    {
+      "name": "Map_FloorRuler",
+      "file": "Map_FloorRuler.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        84,
+        298,
+        200,
+        2
+      ],
+      "output_size": [
+        200,
+        2
+      ],
+      "placement_1920_xy": [
+        84,
+        298
+      ],
+      "nine_slice_lbrt": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Map_LegendBar",
+      "file": "Map_LegendBar.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        80,
+        936,
+        1766,
+        56
+      ],
+      "output_size": [
+        1760,
+        54
+      ],
+      "placement_1920_xy": [
+        80,
+        936
+      ],
+      "nine_slice_lbrt": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "note": "8 equal legend sections; stretching also moves internal separators."
+    },
+    {
+      "name": "Map_ScrollBar_Track",
+      "file": "Map_ScrollBar_Track.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        798,
+        1018,
+        250,
+        6
+      ],
+      "output_size": [
+        250,
+        6
+      ],
+      "placement_1920_xy": [
+        798,
+        1018
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Map_ScrollBar_Handle",
+      "file": "Map_ScrollBar_Handle.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        900,
+        1018,
+        52,
+        6
+      ],
+      "output_size": [
+        52,
+        6
+      ],
+      "placement_1920_xy": [
+        900,
+        1018
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Node_Frame_Normal_Locked",
+      "file": "Node_Frame_Normal_Locked.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        342,
+        494,
+        80,
+        78
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        342,
+        494
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Locked",
+      "node_frame_size": [
+        76,
+        76
+      ],
+      "label_band_height": 0,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Normal_Accessible",
+      "file": "Node_Frame_Normal_Accessible.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        342,
+        494,
+        80,
+        78
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        342,
+        494
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Accessible",
+      "node_frame_size": [
+        76,
+        76
+      ],
+      "label_band_height": 0,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Normal_Visited",
+      "file": "Node_Frame_Normal_Visited.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        342,
+        494,
+        80,
+        78
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        342,
+        494
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Visited",
+      "node_frame_size": [
+        76,
+        76
+      ],
+      "label_band_height": 0,
+      "visited_note": "Add separate Node_VisitedCheck at lower-right."
+    },
+    {
+      "name": "Node_Frame_Normal_Current",
+      "file": "Node_Frame_Normal_Current.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        342,
+        494,
+        80,
+        78
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        342,
+        494
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Current",
+      "node_frame_size": [
+        76,
+        76
+      ],
+      "label_band_height": 0,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Rest_Locked",
+      "file": "Node_Frame_Rest_Locked.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1552,
+        376,
+        84,
+        82
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        1552,
+        376
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Locked",
+      "node_frame_size": [
+        76,
+        76
+      ],
+      "label_band_height": 0,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Rest_Accessible",
+      "file": "Node_Frame_Rest_Accessible.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1552,
+        376,
+        84,
+        82
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        1552,
+        376
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Accessible",
+      "node_frame_size": [
+        76,
+        76
+      ],
+      "label_band_height": 0,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Rest_Visited",
+      "file": "Node_Frame_Rest_Visited.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1552,
+        376,
+        84,
+        82
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        1552,
+        376
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Visited",
+      "node_frame_size": [
+        76,
+        76
+      ],
+      "label_band_height": 0,
+      "visited_note": "Add separate Node_VisitedCheck at lower-right."
+    },
+    {
+      "name": "Node_Frame_Elite_Locked",
+      "file": "Node_Frame_Elite_Locked.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1550,
+        810,
+        86,
+        86
+      ],
+      "output_size": [
+        84,
+        84
+      ],
+      "placement_1920_xy": [
+        1550,
+        810
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Locked",
+      "node_frame_size": [
+        84,
+        84
+      ],
+      "label_band_height": 0,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Elite_Accessible",
+      "file": "Node_Frame_Elite_Accessible.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1550,
+        810,
+        86,
+        86
+      ],
+      "output_size": [
+        84,
+        84
+      ],
+      "placement_1920_xy": [
+        1550,
+        810
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Accessible",
+      "node_frame_size": [
+        84,
+        84
+      ],
+      "label_band_height": 0,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Elite_Visited",
+      "file": "Node_Frame_Elite_Visited.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1550,
+        810,
+        86,
+        86
+      ],
+      "output_size": [
+        84,
+        84
+      ],
+      "placement_1920_xy": [
+        1550,
+        810
+      ],
+      "nine_slice_lbrt": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Visited",
+      "node_frame_size": [
+        84,
+        84
+      ],
+      "label_band_height": 0,
+      "visited_note": "Add separate Node_VisitedCheck at lower-right."
+    },
+    {
+      "name": "Node_Frame_Boss_Locked",
+      "file": "Node_Frame_Boss_Locked.png",
+      "source": "Map_Mockup_v1_Boss.png",
+      "source_crop_xywh": [
+        1580,
+        528,
+        132,
+        166
+      ],
+      "output_size": [
+        128,
+        152
+      ],
+      "placement_1920_xy": [
+        1580,
+        528
+      ],
+      "nine_slice_lbrt": [
+        10,
+        28,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Locked",
+      "node_frame_size": [
+        128,
+        128
+      ],
+      "label_band_height": 24,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Boss_Accessible",
+      "file": "Node_Frame_Boss_Accessible.png",
+      "source": "Map_Mockup_v1_Boss.png",
+      "source_crop_xywh": [
+        1580,
+        528,
+        132,
+        166
+      ],
+      "output_size": [
+        128,
+        152
+      ],
+      "placement_1920_xy": [
+        1580,
+        528
+      ],
+      "nine_slice_lbrt": [
+        10,
+        28,
+        10,
+        10
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Accessible",
+      "node_frame_size": [
+        128,
+        128
+      ],
+      "label_band_height": 24,
+      "visited_note": null
+    },
+    {
+      "name": "Node_Frame_Blessing",
+      "file": "Node_Frame_Blessing.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        124,
+        592,
+        94,
+        94
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "placement_1920_xy": [
+        124,
+        592
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "node_frame_size": [
+        76,
+        76
+      ]
+    },
+    {
+      "name": "Node_HereMarker",
+      "file": "Node_HereMarker.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        788,
+        330,
+        22,
+        24
+      ],
+      "output_size": [
+        24,
+        24
+      ],
+      "placement_1920_xy": [
+        788,
+        330
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Node_VisitedCheck",
+      "file": "Node_VisitedCheck.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        404,
+        554,
+        24,
+        24
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1920_xy": [
+        404,
+        554
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Node_QuestTag",
+      "file": "Node_QuestTag.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1006,
+        492,
+        50,
+        20
+      ],
+      "output_size": [
+        48,
+        20
+      ],
+      "placement_1920_xy": [
+        1006,
+        492
+      ],
+      "nine_slice_lbrt": [
+        6,
+        5,
+        6,
+        5
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Node_AccessibleRing",
+      "file": "Node_AccessibleRing.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        954,
+        370,
+        98,
+        96
+      ],
+      "output_size": [
+        92,
+        92
+      ],
+      "placement_1920_xy": [
+        954,
+        370
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "optional detached open arc from accessible node; resize per node frame"
+    },
+    {
+      "name": "Line_Solid",
+      "file": "Line_Solid.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        800,
+        416,
+        64,
+        4
+      ],
+      "output_size": [
+        64,
+        4
+      ],
+      "placement_1920_xy": [
+        800,
+        416
+      ],
+      "nine_slice_lbrt": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "note": "Tint cyan at runtime. Dashed: tile; do not stretch dash spacing."
+    },
+    {
+      "name": "Line_Dashed",
+      "file": "Line_Dashed.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        800,
+        416,
+        64,
+        4
+      ],
+      "output_size": [
+        64,
+        4
+      ],
+      "placement_1920_xy": [
+        800,
+        416
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "note": "Tint cyan at runtime. Dashed: tile; do not stretch dash spacing."
+    },
+    {
+      "name": "Button_Close_Normal",
+      "file": "Button_Close_Normal.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1820,
+        162,
+        54,
+        54
+      ],
+      "output_size": [
+        40,
+        40
+      ],
+      "placement_1920_xy": [
+        1820,
+        162
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Normal"
+    },
+    {
+      "name": "Button_Close_Hover",
+      "file": "Button_Close_Hover.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1820,
+        162,
+        54,
+        54
+      ],
+      "output_size": [
+        40,
+        40
+      ],
+      "placement_1920_xy": [
+        1820,
+        162
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Close_Pressed",
+      "file": "Button_Close_Pressed.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1820,
+        162,
+        54,
+        54
+      ],
+      "output_size": [
+        40,
+        40
+      ],
+      "placement_1920_xy": [
+        1820,
+        162
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed",
+      "state": "Pressed"
+    },
+    {
+      "name": "Icon_Close",
+      "file": "Icon_Close.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1836,
+        176,
+        24,
+        24
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        1836,
+        176
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Icon_Triangle",
+      "file": "Icon_Triangle.png",
+      "source": "Map_Mockup_v1.png",
+      "source_crop_xywh": [
+        1782,
+        216,
+        12,
+        18
+      ],
+      "output_size": [
+        12,
+        16
+      ],
+      "placement_1920_xy": [
+        1782,
+        216
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; typography, icons and terrain removed"
+    },
+    {
+      "name": "Terrain_Act1",
+      "file": "Terrain_Act1.png",
+      "source": "C:\\Users\\SKYLIGHT\\.codex\\generated_images\\01a0f18c-4ca7-7b52-aa4a-7f5c739283c4\\exec-075634a7-093d-403e-a314-617c08ac13ea.png",
+      "source_crop_xywh": null,
+      "output_size": [
+        3320,
+        600
+      ],
+      "placement_1920_xy": [
+        36,
+        236
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "new image_gen terrain; panoramic body and aspect-preserved boss landmark composed; palette/contrast normalized",
+      "placement_1920_xy_override": [
+        36,
+        236
+      ],
+      "terrain_size": [
+        3320,
+        600
+      ],
+      "background": "#EEF0F2",
+      "start_blank_x": [
+        0,
+        160
+      ],
+      "boss_zone_x": [
+        3060,
+        3320
+      ]
+    }
+  ],
+  "coordinate_convention": "Top-left origin; source_crop_xywh are screenshot reference rectangles; output sizes normalized to layout spec.",
+  "map_panel_placement": [
+    36,
+    120
+  ],
+  "scroll_viewport": [
+    36,
+    236,
+    1848,
+    600
+  ],
+  "terrain_scroll_size": [
+    3320,
+    600
+  ],
+  "terrain_background": "#EEF0F2 opaque",
+  "floor_spacing": 200,
+  "node_sizes": {
+    "Normal": [
+      76,
+      76
+    ],
+    "Rest": [
+      76,
+      76
+    ],
+    "Elite": [
+      84,
+      84
+    ],
+    "Boss": [
+      128,
+      128
+    ],
+    "Boss_with_label": [
+      128,
+      152
+    ],
+    "Blessing": [
+      76,
+      76
+    ]
+  },
+  "excluded": [
+    "all typography/numbers",
+    "all node pictograms",
+    "HUD",
+    "source terrain from UI sprites"
+  ],
+  "layering": [
+    "Map_Panel",
+    "Terrain_Act1 clipped to scroll viewport",
+    "connections",
+    "node frames",
+    "existing game icons",
+    "state markers",
+    "runtime labels",
+    "legend",
+    "close"
+  ]
+}

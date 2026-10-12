@@ -126,7 +126,7 @@ public sealed class StatusContainer
             if (!_entries.Contains(passive)) continue;
             passive.OnTurnStart(CardContext.CreatePassiveContext(state, owner, null, passive), owner);
         }
-        TickDurations(snapshot, StatusDurationPolicy.DecreaseOnTurnStart);
+        TickDurations(snapshot, StatusDurationPolicy.DecreaseOnTurnStart, owner);
     }
 
     public void NotifyTurnEnd(BattleState state, ICombatant owner)
@@ -139,14 +139,17 @@ public sealed class StatusContainer
             if (!_entries.Contains(passive)) continue;
             passive.OnTurnEnd(CardContext.CreatePassiveContext(state, owner, null, passive), owner);
         }
-        TickDurations(snapshot, StatusDurationPolicy.DecreaseOnTurnEnd);
+        TickDurations(snapshot, StatusDurationPolicy.DecreaseOnTurnEnd, owner);
     }
 
-    private void TickDurations(List<IPassiveLogic> snapshot, StatusDurationPolicy timing)
+    private void TickDurations(List<IPassiveLogic> snapshot, StatusDurationPolicy timing, ICombatant owner)
     {
         // 이번 이벤트에서 새로 등록된 인스턴스는 즉시 감소시키지 않는다. 기존 인스턴스에 병합된 수치는 감소 대상이다.
+        // 적이 적 턴에 플레이어에게 건 상태(취약 1 등)는 플레이어 턴을 지나며 바로 감소하면 적이 행동하기 전에 풀린다.
+        // 그래서 적이 건 상태는 플레이어 쪽 첫 감소를 한 번 건너뛴다 (슬더스 justApplied와 같은 규칙).
         foreach (var passive in snapshot)
-            if (passive is StatusInstance status && _entries.Contains(passive)) status.TickDown(timing);
+            if (passive is StatusInstance status && _entries.Contains(passive))
+                status.TickDown(timing, skipFirstTick: owner is PlayerCombatant && status.Source is EnemyInstance);
         RemoveExpired();
         OnChanged?.Invoke();
     }

@@ -8,6 +8,8 @@ public class FacilityButtonPresenter : MonoBehaviour
     [SerializeField] private FacilityType facilityType;
     [SerializeField] private Button interactionButton;
     [SerializeField] private TMP_Text upgradeStateText;
+    [Tooltip("시설이 아직 등록되지 않아도 버튼을 잠그지 않는다(호버 연출은 보이고, 클릭은 시설이 없으니 무시된다)")]
+    [SerializeField] private bool keepHoverWhenUnavailable;
 
     private LobbyManager lobbyManager;
     private FacilityManager facilityManager;
@@ -52,7 +54,7 @@ public class FacilityButtonPresenter : MonoBehaviour
     private void Apply(FacilityState facilityState)
     {
         if (interactionButton != null)
-            interactionButton.interactable = facilityState.IsRegistered;
+            interactionButton.interactable = facilityState.IsRegistered || keepHoverWhenUnavailable;
 
         if (upgradeStateText != null)
             upgradeStateText.text = facilityState.IsUpgraded ? "Lv.2" : "Lv.1";

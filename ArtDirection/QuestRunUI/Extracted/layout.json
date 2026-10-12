@@ -1,0 +1,602 @@
+{
+  "source": "QuestRunUI_ComponentSheet_v1.png",
+  "sourceCanvas": [
+    1672,
+    941
+  ],
+  "assets": [
+    {
+      "name": "Toast_Acquired_Normal",
+      "file": "Toast_Acquired_Normal.png",
+      "sourceRect": [
+        76,
+        92,
+        704,
+        94
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Example_Toast_Acquired",
+      "file": "Example_Toast_Acquired.png",
+      "sourceRect": [
+        76,
+        92,
+        704,
+        94
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": true
+    },
+    {
+      "name": "Toast_Progress_Normal",
+      "file": "Toast_Progress_Normal.png",
+      "sourceRect": [
+        76,
+        198,
+        704,
+        94
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Example_Toast_Progress",
+      "file": "Example_Toast_Progress.png",
+      "sourceRect": [
+        76,
+        198,
+        704,
+        94
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": true
+    },
+    {
+      "name": "Toast_Completed_Normal",
+      "file": "Toast_Completed_Normal.png",
+      "sourceRect": [
+        75,
+        304,
+        707,
+        98
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Example_Toast_Completed",
+      "file": "Example_Toast_Completed.png",
+      "sourceRect": [
+        75,
+        304,
+        707,
+        98
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": true
+    },
+    {
+      "name": "Toast_Deferred_Normal",
+      "file": "Toast_Deferred_Normal.png",
+      "sourceRect": [
+        76,
+        421,
+        704,
+        94
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Example_Toast_Deferred",
+      "file": "Example_Toast_Deferred.png",
+      "sourceRect": [
+        76,
+        421,
+        704,
+        94
+      ],
+      "size": [
+        420,
+        76
+      ],
+      "kind": "paper",
+      "reference": true
+    },
+    {
+      "name": "Summary_Header",
+      "file": "Summary_Header.png",
+      "sourceRect": [
+        880,
+        97,
+        499,
+        56
+      ],
+      "size": [
+        310,
+        24
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Chip_Recovery_Normal",
+      "file": "Chip_Recovery_Normal.png",
+      "sourceRect": [
+        880,
+        161,
+        239,
+        58
+      ],
+      "size": [
+        150,
+        30
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Chip_Delivery_Normal",
+      "file": "Chip_Delivery_Normal.png",
+      "sourceRect": [
+        1140,
+        161,
+        240,
+        58
+      ],
+      "size": [
+        150,
+        30
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Chip_Normal",
+      "file": "Chip_Normal.png",
+      "sourceRect": [
+        880,
+        280,
+        214,
+        54
+      ],
+      "size": [
+        150,
+        30
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Chip_Normal_Hover",
+      "file": "Chip_Normal_Hover.png",
+      "sourceRect": [
+        1140,
+        280,
+        214,
+        54
+      ],
+      "size": [
+        150,
+        30
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Summary_Empty",
+      "file": "Summary_Empty.png",
+      "sourceRect": [
+        1397,
+        281,
+        229,
+        53
+      ],
+      "size": [
+        310,
+        30
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Tooltip_Normal",
+      "file": "Tooltip_Normal.png",
+      "sourceRect": [
+        880,
+        390,
+        573,
+        157
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Example_Tooltip",
+      "file": "Example_Tooltip.png",
+      "sourceRect": [
+        880,
+        390,
+        573,
+        157
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "kind": "paper",
+      "reference": true
+    },
+    {
+      "name": "Example_Summary_Header",
+      "file": "Example_Summary_Header.png",
+      "sourceRect": [
+        880,
+        97,
+        499,
+        56
+      ],
+      "size": [
+        310,
+        24
+      ],
+      "kind": "reference",
+      "reference": true
+    },
+    {
+      "name": "Example_Summary_RecoveryChip",
+      "file": "Example_Summary_RecoveryChip.png",
+      "sourceRect": [
+        880,
+        161,
+        239,
+        58
+      ],
+      "size": [
+        150,
+        30
+      ],
+      "kind": "reference",
+      "reference": true
+    },
+    {
+      "name": "Example_Summary_DeliveryChip",
+      "file": "Example_Summary_DeliveryChip.png",
+      "sourceRect": [
+        1140,
+        161,
+        240,
+        58
+      ],
+      "size": [
+        150,
+        30
+      ],
+      "kind": "reference",
+      "reference": true
+    },
+    {
+      "name": "MapTooltip_Normal",
+      "file": "MapTooltip_Normal.png",
+      "sourceRect": [
+        507,
+        680,
+        283,
+        74
+      ],
+      "size": [
+        220,
+        40
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "Example_MapTooltip",
+      "file": "Example_MapTooltip.png",
+      "sourceRect": [
+        507,
+        680,
+        283,
+        74
+      ],
+      "size": [
+        220,
+        40
+      ],
+      "kind": "paper",
+      "reference": true
+    },
+    {
+      "name": "MapTag_Recovery_Normal",
+      "file": "MapTag_Recovery_Normal.png",
+      "sourceRect": [
+        72,
+        691,
+        67,
+        67
+      ],
+      "size": [
+        28,
+        28
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "MapTag_Recovery_Highlight",
+      "file": "MapTag_Recovery_Highlight.png",
+      "sourceRect": [
+        58,
+        796,
+        95,
+        98
+      ],
+      "size": [
+        40,
+        40
+      ],
+      "kind": "glow",
+      "reference": false
+    },
+    {
+      "name": "MapTag_Delivery_Normal",
+      "file": "MapTag_Delivery_Normal.png",
+      "sourceRect": [
+        165,
+        691,
+        67,
+        67
+      ],
+      "size": [
+        28,
+        28
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "MapTag_Delivery_Highlight",
+      "file": "MapTag_Delivery_Highlight.png",
+      "sourceRect": [
+        151,
+        796,
+        95,
+        98
+      ],
+      "size": [
+        40,
+        40
+      ],
+      "kind": "glow",
+      "reference": false
+    },
+    {
+      "name": "MapTag_Elimination_Normal",
+      "file": "MapTag_Elimination_Normal.png",
+      "sourceRect": [
+        258,
+        691,
+        67,
+        67
+      ],
+      "size": [
+        28,
+        28
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "MapTag_Elimination_Highlight",
+      "file": "MapTag_Elimination_Highlight.png",
+      "sourceRect": [
+        244,
+        796,
+        95,
+        98
+      ],
+      "size": [
+        40,
+        40
+      ],
+      "kind": "glow",
+      "reference": false
+    },
+    {
+      "name": "MapTag_Rescue_Normal",
+      "file": "MapTag_Rescue_Normal.png",
+      "sourceRect": [
+        351,
+        691,
+        67,
+        67
+      ],
+      "size": [
+        28,
+        28
+      ],
+      "kind": "paper",
+      "reference": false
+    },
+    {
+      "name": "MapTag_Rescue_Highlight",
+      "file": "MapTag_Rescue_Highlight.png",
+      "sourceRect": [
+        337,
+        796,
+        95,
+        98
+      ],
+      "size": [
+        40,
+        40
+      ],
+      "kind": "glow",
+      "reference": false
+    },
+    {
+      "name": "ItemSlot_Normal",
+      "file": "ItemSlot_Normal.png",
+      "sourceRect": [
+        905,
+        701,
+        148,
+        145
+      ],
+      "size": [
+        70,
+        70
+      ],
+      "kind": "slot",
+      "reference": false
+    },
+    {
+      "name": "ItemSlot_Normal_Hover",
+      "file": "ItemSlot_Normal_Hover.png",
+      "sourceRect": [
+        1135,
+        701,
+        149,
+        145
+      ],
+      "size": [
+        70,
+        70
+      ],
+      "kind": "slot",
+      "reference": false
+    },
+    {
+      "name": "Example_MapNode",
+      "file": "Example_MapNode.png",
+      "sourceRect": [
+        608,
+        767,
+        122,
+        121
+      ],
+      "size": [
+        110,
+        80
+      ],
+      "kind": "reference",
+      "reference": true
+    },
+    {
+      "name": "Example_ItemSlot",
+      "file": "Example_ItemSlot.png",
+      "sourceRect": [
+        1417,
+        700,
+        148,
+        145
+      ],
+      "size": [
+        70,
+        70
+      ],
+      "kind": "reference",
+      "reference": true
+    }
+  ],
+  "placements": {
+    "itemSlot": {
+      "anchor": "slot center",
+      "size": [
+        70,
+        70
+      ],
+      "transparentCenter": true
+    },
+    "mapTag": {
+      "anchor": "node top-right",
+      "normalSize": [
+        28,
+        28
+      ],
+      "highlightSize": [
+        40,
+        40
+      ],
+      "highlightOffset": [
+        -6,
+        -6
+      ]
+    },
+    "summary": {
+      "chipPositions": [
+        [
+          0,
+          26
+        ],
+        [
+          160,
+          26
+        ]
+      ],
+      "size": [
+        310,
+        56
+      ],
+      "position": [
+        1100,
+        26
+      ],
+      "canvas": [
+        1672,
+        941
+      ]
+    },
+    "toast": {
+      "stackGap": 8,
+      "maxCount": 3,
+      "size": [
+        420,
+        76
+      ],
+      "position": [
+        1470,
+        130
+      ],
+      "canvas": [
+        1920,
+        1080
+      ]
+    }
+  }
+}

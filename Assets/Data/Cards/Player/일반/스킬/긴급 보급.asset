@@ -18,8 +18,7 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uC18C\uBA78. {0.amount}\uAC1C \uB9CC\uD07C \uD0C4\uC57D\uC744
-    \uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
+  cardDescription: "소멸. 현재 총기의 최대 탄약으로 재장전합니다."
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -48,22 +47,8 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 4680130923130519621
-      type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 3
-        scaling:
-          source: 0
-          target: 0
-          status: {fileID: 0}
-          multiplier: 0
-          flatBonus: 0
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
+      data: {}
     - rid: 4680130923130519622
-      type: {class: AddAmmoEffect, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 2
-        scaling:
-          source: 0
-          target: 0
-          status: {fileID: 0}
-          multiplier: 0
-          flatBonus: 0
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
+      data: {}

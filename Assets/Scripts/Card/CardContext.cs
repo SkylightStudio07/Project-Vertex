@@ -27,6 +27,41 @@ public class CardContext
     public ICombatant SourceOverride;
     public ICombatant PrimaryTargetOverride;
     public int ExecutionDepth;
+    public int AmmoSpent { get; private set; }
+    public int NextAmmoDamageBonus;
+    public bool IsFirstAmmoUse { get; private set; }
+    public bool IsLastAmmoUse { get; private set; }
+    public bool HasAmmoUsage { get; private set; }
+    // Preview-only history; never writes to the shared PlayerCombatant or emits events.
+    private bool _previewGainedBlock;
+    public bool PlayerGainedBlockThisTurn => _previewGainedBlock || State?.Player?.GainedBlockThisTurn == true;
+
+    internal void PreviewPlayerBlockGain(int amount)
+    {
+        if (State?.Player != null && State.Player.PreviewBlockGain(amount) > 0)
+            _previewGainedBlock = true;
+    }
+
+    internal void RecordAmmoUse(int spent, bool first, bool last)
+    {
+        HasAmmoUsage = true;
+        AmmoSpent += spent;
+        IsFirstAmmoUse |= first;
+        IsLastAmmoUse |= last;
+    }
+
+    // 원본 Context와 전투 탄약 이력을 변경하지 않고 사용 직후 상태를 예측한다.
+    public CardContext CreateAmmoPreview()
+    {
+        var copy = (CardContext)MemberwiseClone();
+        copy.State = State?.CopyForAmmoPreview();
+        if (copy.State?.Player == null || Card == null || HasAmmoUsage ||
+            TriggeringPassive != null || Source != State.Player) return copy;
+        var cost = State.Player.Statuses.ModifyCardPlayCost(
+            new CardPlayCost(Card.EnergyCost, Card.AmmoCost), this);
+        if (cost.Ammo <= State.Ammo) copy.State.ConsumeAmmo(cost.Ammo, copy);
+        return copy;
+    }
 
     // 패시브가 CardEffect를 발사할 때 채워지는 이벤트 정보.
     // 일반 카드/아이템/적 행동에서는 null/0이다.
@@ -72,6 +107,11 @@ public class CardContext
             TriggeringPassive = passive,
             ActualDamage = actualDamage,
             ExecutionDepth = parent?.ExecutionDepth ?? 0,
+            AmmoSpent = parent?.AmmoSpent ?? 0,
+            IsFirstAmmoUse = parent?.IsFirstAmmoUse ?? false,
+            IsLastAmmoUse = parent?.IsLastAmmoUse ?? false,
+            HasAmmoUsage = parent?.HasAmmoUsage ?? false,
+            _previewGainedBlock = parent?._previewGainedBlock ?? false,
         };
     }
 }

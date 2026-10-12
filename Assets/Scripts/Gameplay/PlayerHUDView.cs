@@ -30,6 +30,9 @@ public class PlayerHUDView : MonoBehaviour
     // 비워두면 예전처럼 blockText만 켜고 끈다.
     [SerializeField] private GameObject blockBadge;
     [SerializeField] private TextMeshProUGUI energyText;
+    // 연결하면 energyText에는 현재 값만, 여기에 최대값만 쓴다 (전투 HUD v3: 큰 숫자 + 헤어라인 사선 + 작은 최대값).
+    // 비워두면 예전처럼 energyText에 "3 / 3".
+    [SerializeField] private TextMeshProUGUI maxEnergyText;
     [SerializeField] private TextMeshProUGUI ammoText;
 
     [Header("버프/디버프")]
@@ -90,9 +93,21 @@ public class PlayerHUDView : MonoBehaviour
             {
                 _lastHp = hp;
                 _lastMaxHp = maxHp;
-                hpText.text = $"{hp} / {maxHp}";
+                hpText.text = $"{hp} <size=70%>/ {maxHp}</size>";
                 if (hpFill != null)
-                    hpFill.fillAmount = maxHp > 0 ? (float)hp / maxHp : 0f;
+                {
+                    float ratio = maxHp > 0 ? Mathf.Clamp01((float)hp / maxHp) : 0f;
+                    if (hpFill.type == Image.Type.Filled) hpFill.fillAmount = ratio;
+                    else
+                    {
+                        // Sliced 채움(전투 HUD v3): 끝의 청록 선이 잘리지 않게 오른쪽 앵커를 줄여 폭으로 표시한다
+                        var rt = hpFill.rectTransform;
+                        rt.anchorMax = new Vector2(ratio, rt.anchorMax.y);
+                        hpFill.enabled = ratio > 0f;
+                        // 숫자는 바 가운데에 있다: 연회색 채움이 가운데를 덮으면 먹색, 체력이 절반 아래로 내려가 어두운 트랙 위면 흰색
+                        hpText.color = ratio >= 0.55f ? new Color(0.086f, 0.094f, 0.106f, 1f) : new Color(0.95f, 0.95f, 0.96f, 1f);
+                    }
+                }
             }
         }
 
@@ -118,7 +133,12 @@ public class PlayerHUDView : MonoBehaviour
             {
                 _lastEnergy = energy;
                 _lastMaxEnergy = maxEnergy;
-                energyText.text = $"{energy} / {maxEnergy}";
+                if (maxEnergyText != null)
+                {
+                    energyText.text = energy.ToString();
+                    maxEnergyText.text = maxEnergy.ToString();
+                }
+                else energyText.text = $"{energy} / {maxEnergy}";
             }
         }
 

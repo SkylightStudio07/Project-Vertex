@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: FirstAmmoBlock
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: FirstAmmoBlock
+  displayName: "\uC0AC\uACA9 \uD6C4 \uC774\uB3D9"
+  description: "\uC7AC\uC7A5\uC804 \uD6C4 \uCC98\uC74C \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uB294
+    \uCE74\uB4DC \uC0AC\uC6A9 \uC2DC \uBC29\uC5B4\uB3C4\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
+  icon: {fileID: 0}
+  disposition: 1
+  stackPolicy: 0
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 7338472044098486360
+  references:
+    version: 2
+    RefIds:
+    - rid: 7338472044098486360
+      type: {class: AmmoSpentBlockStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        firstOnly: 1
+        perAmmo: 0
+        expiresAtTurnEnd: 0

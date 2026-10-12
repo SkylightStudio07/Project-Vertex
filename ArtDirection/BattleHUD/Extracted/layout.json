@@ -1,0 +1,1339 @@
+{
+  "version": 1,
+  "reference_canvas": [
+    1920,
+    1080
+  ],
+  "source_canvas": [
+    1672,
+    941
+  ],
+  "coordinate_convention": "top-left origin; xywh in original PNG pixels; output pixels at 1920x1080 design resolution",
+  "placement_note": "Native output sizes are normative. reference_display_size records mockup footprint, which differs from requested sizes.",
+  "palette": {
+    "panel": "#16181B",
+    "inner_line": "#3A3E44",
+    "icon": "#F2F3F4",
+    "accent": "#0DB8F2",
+    "disabled_panel": "#202328",
+    "disabled_icon": "#5A6069"
+  },
+  "assets": [
+    {
+      "name": "TopBar",
+      "file": "TopBar.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        270,
+        0,
+        1115,
+        64
+      ],
+      "output_size": [
+        1300,
+        72
+      ],
+      "placement_1920_xy": [
+        310,
+        0
+      ],
+      "reference_display_size_1920": [
+        1280,
+        73
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        52,
+        0,
+        52,
+        0
+      ]
+    },
+    {
+      "name": "ItemSlot_Empty",
+      "file": "ItemSlot_Empty.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1249,
+        11,
+        63,
+        62
+      ],
+      "output_size": [
+        56,
+        56
+      ],
+      "placement_1920_xy": [
+        1434,
+        13
+      ],
+      "reference_display_size_1920": [
+        72,
+        71
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Empty"
+    },
+    {
+      "name": "ItemSlot_Hover",
+      "file": "ItemSlot_Hover.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1249,
+        11,
+        63,
+        62
+      ],
+      "output_size": [
+        56,
+        56
+      ],
+      "placement_1920_xy": [
+        1434,
+        13
+      ],
+      "reference_display_size_1920": [
+        72,
+        71
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Hover"
+    },
+    {
+      "name": "ItemSlot_Quest",
+      "file": "ItemSlot_Quest.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1249,
+        11,
+        63,
+        62
+      ],
+      "output_size": [
+        56,
+        56
+      ],
+      "placement_1920_xy": [
+        1434,
+        13
+      ],
+      "reference_display_size_1920": [
+        72,
+        71
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        18,
+        18,
+        3,
+        3
+      ],
+      "state": "Quest"
+    },
+    {
+      "name": "Button_Map_Normal",
+      "file": "Button_Map_Normal.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1482,
+        19,
+        73,
+        74
+      ],
+      "output_size": [
+        64,
+        64
+      ],
+      "placement_1920_xy": [
+        1702,
+        22
+      ],
+      "reference_display_size_1920": [
+        84,
+        85
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Normal"
+    },
+    {
+      "name": "Button_Map_Hover",
+      "file": "Button_Map_Hover.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1482,
+        19,
+        73,
+        74
+      ],
+      "output_size": [
+        64,
+        64
+      ],
+      "placement_1920_xy": [
+        1702,
+        22
+      ],
+      "reference_display_size_1920": [
+        84,
+        85
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Map_Pressed",
+      "file": "Button_Map_Pressed.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1482,
+        19,
+        73,
+        74
+      ],
+      "output_size": [
+        64,
+        64
+      ],
+      "placement_1920_xy": [
+        1702,
+        22
+      ],
+      "reference_display_size_1920": [
+        84,
+        85
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_Deck_Normal",
+      "file": "Button_Deck_Normal.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1574,
+        20,
+        74,
+        73
+      ],
+      "output_size": [
+        64,
+        64
+      ],
+      "placement_1920_xy": [
+        1807,
+        23
+      ],
+      "reference_display_size_1920": [
+        85,
+        84
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Normal"
+    },
+    {
+      "name": "Button_Deck_Hover",
+      "file": "Button_Deck_Hover.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1574,
+        20,
+        74,
+        73
+      ],
+      "output_size": [
+        64,
+        64
+      ],
+      "placement_1920_xy": [
+        1807,
+        23
+      ],
+      "reference_display_size_1920": [
+        85,
+        84
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Deck_Pressed",
+      "file": "Button_Deck_Pressed.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1574,
+        20,
+        74,
+        73
+      ],
+      "output_size": [
+        64,
+        64
+      ],
+      "placement_1920_xy": [
+        1807,
+        23
+      ],
+      "reference_display_size_1920": [
+        85,
+        84
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_EndTurn_Normal",
+      "file": "Button_EndTurn_Normal.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "output_size": [
+        280,
+        70
+      ],
+      "placement_1920_xy": [
+        1566,
+        938
+      ],
+      "reference_display_size_1920": [
+        326,
+        72
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Normal"
+    },
+    {
+      "name": "Button_EndTurn_Hover",
+      "file": "Button_EndTurn_Hover.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "output_size": [
+        280,
+        70
+      ],
+      "placement_1920_xy": [
+        1566,
+        938
+      ],
+      "reference_display_size_1920": [
+        326,
+        72
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Hover"
+    },
+    {
+      "name": "Button_EndTurn_Pressed",
+      "file": "Button_EndTurn_Pressed.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "output_size": [
+        280,
+        70
+      ],
+      "placement_1920_xy": [
+        1566,
+        938
+      ],
+      "reference_display_size_1920": [
+        326,
+        72
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_EndTurn_Disabled",
+      "file": "Button_EndTurn_Disabled.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1364,
+        817,
+        284,
+        63
+      ],
+      "output_size": [
+        280,
+        70
+      ],
+      "placement_1920_xy": [
+        1566,
+        938
+      ],
+      "reference_display_size_1920": [
+        326,
+        72
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "state": "Disabled"
+    },
+    {
+      "name": "Res_Panel_Normal",
+      "file": "Res_Panel_Normal.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1435,
+        614,
+        225,
+        192
+      ],
+      "output_size": [
+        264,
+        225
+      ],
+      "placement_1920_xy": [
+        1648,
+        705
+      ],
+      "reference_display_size_1920": [
+        258,
+        220
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "state": "Normal",
+      "note": "Empty keeps the canonical opaque plate. Render energy 0 and dim its icon/text at runtime.",
+      "state_reference": "BattleHUD_Mockup_v3_Canonical.png"
+    },
+    {
+      "name": "Res_Panel_Empty",
+      "file": "Res_Panel_Empty.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1435,
+        614,
+        225,
+        192
+      ],
+      "output_size": [
+        264,
+        225
+      ],
+      "placement_1920_xy": [
+        1648,
+        705
+      ],
+      "reference_display_size_1920": [
+        258,
+        220
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "state": "Empty",
+      "note": "Empty keeps the canonical opaque plate. Render energy 0 and dim its icon/text at runtime.",
+      "state_reference": "BattleHUD_Mockup_v3_Oratio_EnemyTurn.png"
+    },
+    {
+      "name": "Res_Divider",
+      "file": "Res_Divider.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1435,
+        743,
+        225,
+        2
+      ],
+      "output_size": [
+        264,
+        2
+      ],
+      "placement_1920_xy": [
+        1648,
+        853
+      ],
+      "reference_display_size_1920": [
+        258,
+        2
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Res_Slash",
+      "file": "Res_Slash.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1553,
+        663,
+        31,
+        70
+      ],
+      "output_size": [
+        40,
+        80
+      ],
+      "placement_1920_xy": [
+        1783,
+        761
+      ],
+      "reference_display_size_1920": [
+        36,
+        80
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "EndTurn_CornerSlash",
+      "file": "EndTurn_CornerSlash.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1364,
+        817,
+        47,
+        63
+      ],
+      "output_size": [
+        48,
+        70
+      ],
+      "placement_1920_xy": [
+        1566,
+        938
+      ],
+      "reference_display_size_1920": [
+        54,
+        72
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "StatusSlot_Underline",
+      "file": "StatusSlot_Underline.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        44,
+        808,
+        39,
+        2
+      ],
+      "output_size": [
+        44,
+        2
+      ],
+      "placement_1920_xy": [
+        51,
+        927
+      ],
+      "reference_display_size_1920": [
+        45,
+        2
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Map",
+      "file": "Icon_Map.png",
+      "source": "BattleHUD_Mockup_v3_Oratio_TurnBanner.png",
+      "source_crop_xywh": [
+        1493,
+        31,
+        51,
+        52
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1714,
+        36
+      ],
+      "reference_display_size_1920": [
+        59,
+        60
+      ],
+      "method": "source luminance mask; binary alpha; aspect preserved; centered in 32px",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Deck",
+      "file": "Icon_Deck.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1588,
+        38,
+        46,
+        39
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1824,
+        44
+      ],
+      "reference_display_size_1920": [
+        53,
+        45
+      ],
+      "method": "source luminance mask; binary alpha; aspect preserved; centered in 32px",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Energy",
+      "file": "Icon_Energy.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1450,
+        680,
+        29,
+        47
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1665,
+        780
+      ],
+      "reference_display_size_1920": [
+        33,
+        54
+      ],
+      "method": "source luminance mask; binary alpha; aspect preserved; centered in 32px",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Ammo",
+      "file": "Icon_Ammo.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1451,
+        768,
+        24,
+        34
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1666,
+        881
+      ],
+      "reference_display_size_1920": [
+        28,
+        39
+      ],
+      "method": "source luminance mask; binary alpha; aspect preserved; centered in 32px",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1598,
+        838,
+        33,
+        21
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1835,
+        962
+      ],
+      "reference_display_size_1920": [
+        38,
+        24
+      ],
+      "method": "source luminance mask; binary alpha; aspect preserved; centered in 32px",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Weapon_Pistol",
+      "file": "Icon_Weapon_Pistol.png",
+      "source": "Canonical_PistolIcon_Model.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1660,
+        715
+      ],
+      "reference_display_size_1920": [
+        32,
+        32
+      ],
+      "method": "isolated model foreground mask; stroke dilation before downsampling; binary alpha; aspect preserved",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Energy_Disabled",
+      "file": "Icon_Energy_Disabled.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1450,
+        680,
+        29,
+        47
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1665,
+        780
+      ],
+      "reference_display_size_1920": [
+        33,
+        54
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state_reference": "BattleHUD_Mockup_v3_Oratio_EnemyTurn.png"
+    },
+    {
+      "name": "Icon_Arrow_Disabled",
+      "file": "Icon_Arrow_Disabled.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1598,
+        838,
+        33,
+        21
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "placement_1920_xy": [
+        1835,
+        962
+      ],
+      "reference_display_size_1920": [
+        38,
+        24
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state_reference": "BattleHUD_Mockup_v3_Oratio_EnemyTurn.png"
+    },
+    {
+      "name": "HP_Frame",
+      "file": "HP_Frame.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        89,
+        826,
+        335,
+        42
+      ],
+      "output_size": [
+        360,
+        39
+      ],
+      "placement_1920_xy": [
+        102,
+        948
+      ],
+      "reference_display_size_1920": [
+        385,
+        48
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        10,
+        6,
+        10,
+        6
+      ],
+      "fill_offset": [
+        10,
+        6
+      ]
+    },
+    {
+      "name": "HP_Fill",
+      "file": "HP_Fill.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        98,
+        832,
+        316,
+        29
+      ],
+      "output_size": [
+        340,
+        27
+      ],
+      "placement_1920_xy": [
+        113,
+        955
+      ],
+      "reference_display_size_1920": [
+        363,
+        33
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "note": "Full-width fill; apply gameplay HP ratio at runtime; no numbers."
+    },
+    {
+      "name": "HP_Track",
+      "file": "HP_Track.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        98,
+        832,
+        316,
+        29
+      ],
+      "output_size": [
+        340,
+        27
+      ],
+      "placement_1920_xy": [
+        113,
+        955
+      ],
+      "reference_display_size_1920": [
+        363,
+        33
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "note": "Full-width fill; apply gameplay HP ratio at runtime; no numbers."
+    },
+    {
+      "name": "EnemyHP_Frame",
+      "file": "EnemyHP_Frame.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1108,
+        637,
+        266,
+        24
+      ],
+      "output_size": [
+        240,
+        26
+      ],
+      "placement_1920_xy": [
+        1272,
+        731
+      ],
+      "reference_display_size_1920": [
+        305,
+        28
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        6,
+        4,
+        7,
+        4
+      ],
+      "fill_offset": [
+        6,
+        4
+      ]
+    },
+    {
+      "name": "EnemyHP_Fill",
+      "file": "EnemyHP_Fill.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1115,
+        641,
+        252,
+        17
+      ],
+      "output_size": [
+        227,
+        18
+      ],
+      "placement_1920_xy": [
+        1280,
+        736
+      ],
+      "reference_display_size_1920": [
+        289,
+        20
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "note": "Full-width fill; apply gameplay HP ratio at runtime; no numbers."
+    },
+    {
+      "name": "EnemyHP_Track",
+      "file": "EnemyHP_Track.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1115,
+        641,
+        252,
+        17
+      ],
+      "output_size": [
+        227,
+        18
+      ],
+      "placement_1920_xy": [
+        1280,
+        736
+      ],
+      "reference_display_size_1920": [
+        289,
+        20
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "note": "Full-width fill; apply gameplay HP ratio at runtime; no numbers."
+    },
+    {
+      "name": "Block_Badge",
+      "file": "Block_Badge.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        38,
+        823,
+        54,
+        61
+      ],
+      "output_size": [
+        56,
+        68
+      ],
+      "placement_1920_xy": [
+        44,
+        945
+      ],
+      "reference_display_size_1920": [
+        62,
+        70
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "note": "Shield symbol silhouette only; number is a separate runtime label."
+    },
+    {
+      "name": "EnemyBlock_Badge",
+      "file": "EnemyBlock_Badge.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1110,
+        599,
+        25,
+        33
+      ],
+      "output_size": [
+        40,
+        48
+      ],
+      "placement_1920_xy": [
+        1275,
+        687
+      ],
+      "reference_display_size_1920": [
+        29,
+        38
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "note": "Shield symbol silhouette only; number is a separate runtime label."
+    },
+    {
+      "name": "EnemyName_Band",
+      "file": "EnemyName_Band.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1109,
+        665,
+        133,
+        22
+      ],
+      "output_size": [
+        154,
+        26
+      ],
+      "placement_1920_xy": [
+        1273,
+        763
+      ],
+      "reference_display_size_1920": [
+        153,
+        25
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "TextBand",
+      "file": "TextBand.png",
+      "source": "BattleHUD_Mockup_v3_Canonical.png",
+      "source_crop_xywh": [
+        1109,
+        665,
+        133,
+        22
+      ],
+      "output_size": [
+        120,
+        40
+      ],
+      "placement_1920_xy": [
+        1273,
+        763
+      ],
+      "reference_display_size_1920": [
+        153,
+        25
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Banner_Slash",
+      "file": "Banner_Slash.png",
+      "source": "BattleHUD_Mockup_v3_Oratio_TurnBanner.png",
+      "source_crop_xywh": [
+        758,
+        190,
+        120,
+        179
+      ],
+      "output_size": [
+        138,
+        206
+      ],
+      "placement_1920_xy": [
+        870,
+        218
+      ],
+      "reference_display_size_1920": [
+        138,
+        205
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Banner_Line",
+      "file": "Banner_Line.png",
+      "source": "BattleHUD_Mockup_v3_Oratio_TurnBanner.png",
+      "source_crop_xywh": [
+        815,
+        309,
+        204,
+        2
+      ],
+      "output_size": [
+        234,
+        2
+      ],
+      "placement_1920_xy": [
+        936,
+        355
+      ],
+      "reference_display_size_1920": [
+        234,
+        2
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Banner_Diamond",
+      "file": "Banner_Diamond.png",
+      "source": "BattleHUD_Mockup_v3_Oratio_TurnBanner.png",
+      "source_crop_xywh": [
+        1023,
+        302,
+        12,
+        12
+      ],
+      "output_size": [
+        14,
+        14
+      ],
+      "placement_1920_xy": [
+        1175,
+        347
+      ],
+      "reference_display_size_1920": [
+        14,
+        14
+      ],
+      "method": "geometry restored from source; text removed; exact palette",
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "resource_divider_instances_1920": [
+    [
+      1648,
+      745
+    ],
+    [
+      1648,
+      853
+    ]
+  ],
+  "item_slot_instances_1920": [
+    [
+      1240,
+      11
+    ],
+    [
+      1338,
+      13
+    ],
+    [
+      1434,
+      13
+    ]
+  ],
+  "runtime_states": {
+    "Normal": {
+      "resource": "Res_Panel_Normal",
+      "end_turn": "Button_EndTurn_Normal",
+      "energy_text": "3"
+    },
+    "EnemyTurn": {
+      "resource": "Res_Panel_Empty",
+      "end_turn": "Button_EndTurn_Disabled",
+      "energy_text": "0",
+      "energy_icon": "Icon_Energy_Disabled",
+      "arrow_icon": "Icon_Arrow_Disabled"
+    }
+  },
+  "removed": [
+    "all typography and numbers",
+    "canonical star MAP symbol",
+    "short cyan line above small energy 3"
+  ],
+  "button_icon_layers": {
+    "Button_Map": "Icon_Map",
+    "Button_Deck": "Icon_Deck",
+    "Button_EndTurn": [
+      "EndTurn_CornerSlash",
+      "Icon_Arrow"
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 // 전투 화면에 플레이어 스프라이트와 합류한 협력자들을 보여준다.
 // 기본은 정적 스프라이트, 플레이어가 공격 카드를 내면 PoseSequencePlayer로 키프레임 홀드 연출 재생
@@ -315,6 +316,30 @@ public class PartyView : MonoBehaviour
             image.enabled = image.sprite != null;
             if (image.sprite == null)
                 Debug.LogWarning($"[PartyView] '{joined[i].charData.name}'의 standingSprite가 비어있음.");
+
+            ApplyStandingPose(instance.transform, image.rectTransform, joined[i].charData);
         }
+    }
+
+    // 동료별 크기·위치 보정과, 애니메이션이 없는 동료의 위아래 떠다니기.
+    // 그림자는 크기를 따라가고, 떠오를 때 살짝 작아졌다가 내려올 때 커진다.
+    private static void ApplyStandingPose(Transform root, RectTransform sprite, CoopCharData data)
+    {
+        float scale = data.battleScale > 0f ? data.battleScale : 1f;
+        sprite.localScale = Vector3.one * scale;
+        sprite.anchoredPosition += data.battleOffset;
+
+        Transform shadow = root.Find("Shadow");
+        if (shadow != null) shadow.localScale = Vector3.one * Mathf.Lerp(1f, scale, 0.7f);
+
+        if (data.floatAmplitude <= 0f) return;
+        float half = Mathf.Max(0.2f, data.floatPeriod * 0.5f);
+        // 동료마다 박자가 겹치지 않게 시작 위상을 조금 흩뜨린다
+        float phase = Random.Range(0f, half);
+        sprite.DOAnchorPosY(sprite.anchoredPosition.y + data.floatAmplitude, half)
+            .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(sprite.gameObject).Goto(phase, true);
+        if (shadow != null)
+            shadow.DOScale(shadow.localScale * 0.85f, half)
+                .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(shadow.gameObject).Goto(phase, true);
     }
 }

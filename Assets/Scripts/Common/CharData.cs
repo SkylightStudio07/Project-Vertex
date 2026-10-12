@@ -7,6 +7,12 @@ public class CharData : ScriptableObject
     public string charName;
     public string charDescription;
 
+    [Header("대화창 표시")]
+    [Tooltip("대화창 이름 옆 작은 소속 글자 (청록)")]
+    public string affiliation = "VERTEX / 협력자";
+    [Tooltip("대화창 이름 아래 가는 선 색 (캐릭터 고유색)")]
+    public Color themeColor = new(0.05f, 0.72f, 0.95f, 1f);
+
     [Header("캐릭터 이미지(임시 상태. 나중에 Addressable.Load로 불러오도록 변경)")]
     public Sprite charImage;   // 초상화. 성소 선택 버튼, 휴식 화면 등 아이콘/UI용
     public Sprite charIcon;

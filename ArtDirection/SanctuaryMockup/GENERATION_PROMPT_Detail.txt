@@ -1,0 +1,13 @@
+Game UI mockup,1920x1080. Project Vertex lobby grammar: opaque cool paper#EEF0F2, graphite1px rules, chamfered edges, tiny underlined numbers, large Korean and small widely spaced English, cyan#0DB8F2 only fine accents. New clean operations archive drafting-paper background with very faint grid/ruler ticks and technical linework. No landscape, no stars/petals/compass sparkle, no glow or translucent panels. TOP y0..106 must be entirely empty paper reserved for runtime HUD: do NOT draw old HUD or MAP/DECK buttons. Existing character art must be preserved exactly, no new outfit/pose/face.
+Create Sanctuary_Detail_Mockup, a SEPARATE candidate detail screen, NOT selection strips.
+Image1 exact character source. Image2 just generated selection screen supplies shared background and UI style ONLY; remove all3 diagonal strips, locked silhouettes and select heading. Image3 old detail screen supplies exact profile/card content ONLY: do NOT copy old black panel, landscape, stars, HUD or missing-art text.
+Name row at(72,130): tiny underlined02, bold large '치하라 쇼', small cyan 'VERTEX / 협력자' beside it, short burgundy120x3 line below name.
+Left information panel(72,230)620x640: opaque cool paper with top-left clipped corner, graphite thin outline,4px solid light gray offset shadow. Divide into four compact logical sections using small dash-led labels and hairlines:
+PROFILE: '피를 매개로 상대를 베어버리는 캐릭터'
+호감도: 'Lv.2', five small outlined stage blocks, two graphite filled, three empty. No large cyan fill.
+합류 카드: inset PAPER card slot with small crop of exact blue handgun card picture visible in image3, '재장전', '에너지 1 · 탄약 0', description '3개 만큼 탄약을 재장전한다.' Preserve blue source artwork rather than inventing card art.
+보상 풀: concise '공용 3 · 레어 2' as mockup sample summary.
+Right art zone(760,130)1100x790: NO rectangular panel. Place exact fullbody image1 character, head-to-shoes fully visible, tall and prominent occupying this zone. Preserve pale flowing long hair, red eyes, burgundy blouse and tie, cropped black jacket, gray trousers, sneakers, left hand on hip and red magic raised right hand. No new pose/outfit/face. Behind her only very pale circular technical ruler ticks and fine diagonal drafting lines, NO star/compass or flowers. Do not clip feet or raised hand.
+Back button(72,938)280x72 clipped white paper '← 뒤로' small BACK.
+Main JOIN button(1566,938)326x72 clipped INK BLACK, white '합류 →', tiny JOIN. Only this main button should be black; profile remains bright paper.
+Clean blank top106px HUD reservation. Same faint graph paper operations archive backdrop as image2. No old HUD, hexagon buttons, no unassigned-art placeholder, no selection strips, no extra characters, no UI annotations. Single finished1920x1080 screen.

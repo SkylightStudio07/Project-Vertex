@@ -1,0 +1,327 @@
+fileFormatVersion: 2
+guid: e0371ada25db8784f8c802742cfea8ec
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7196097290509207113
+    second: BatSwing_Sheet_0
+  - first:
+      213: -8387639880536298250
+    second: BatSwing_Sheet_1
+  - first:
+      213: 3631077153205448557
+    second: BatSwing_Sheet_2
+  - first:
+      213: 1848494772047711415
+    second: BatSwing_Sheet_3
+  - first:
+      213: 6365471525125515346
+    second: BatSwing_Sheet_4
+  - first:
+      213: 3544555588683049932
+    second: BatSwing_Sheet_5
+  - first:
+      213: 6827265369073847236
+    second: BatSwing_Sheet_6
+  - first:
+      213: -7020811567921714485
+    second: BatSwing_Sheet_7
+  - first:
+      213: -7363890491321702560
+    second: BatSwing_Sheet_8
+  - first:
+      213: -3132521477159429289
+    second: BatSwing_Sheet_9
+  - first:
+      213: -538108880752337543
+    second: BatSwing_Sheet_10
+  - first:
+      213: 2704209899266292136
+    second: BatSwing_Sheet_11
+  - first:
+      213: 24434200940801053
+    second: BatSwing_Sheet_12
+  - first:
+      213: 1703723764490119144
+    second: BatSwing_Sheet_13
+  - first:
+      213: -3382376076898662025
+    second: BatSwing_Sheet_14
+  - first:
+      213: 8211280708197145128
+    second: BatSwing_Sheet_15
+  - first:
+      213: 6024121961578958085
+    second: BatSwing_Sheet_16
+  - first:
+      213: 3352085131080610703
+    second: BatSwing_Sheet_17
+  - first:
+      213: -5835054677263666603
+    second: BatSwing_Sheet_18
+  - first:
+      213: -1372266008829783742
+    second: BatSwing_Sheet_19
+  - first:
+      213: 1510681144522291413
+    second: BatSwing_Sheet_20
+  - first:
+      213: 1907221736448645916
+    second: BatSwing_Sheet_21
+  - first:
+      213: 6035234002988916564
+    second: BatSwing_Sheet_22
+  - first:
+      213: 4480126407847930599
+    second: BatSwing_Sheet_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BatSwing_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 980
+        height: 1020
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 946c3f1fb5cadd360800000000000000
+      internalID: 7196097290509207113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BatSwing_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 0
+        width: 980
+        height: 1020
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fcebb0e7fd199b80800000000000000
+      internalID: -8387639880536298250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BatSwing_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1960
+        y: 0
+        width: 980
+        height: 1020
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6fe8dcbe6d246230800000000000000
+      internalID: 3631077153205448557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BatSwing_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 2940
+        y: 0
+        width: 980
+        height: 1020
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc0211933c27a910800000000000000
+      internalID: 1848494772047711415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BatSwing_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 3920
+        y: 0
+        width: 980
+        height: 1020
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25868fa50a2b65850800000000000000
+      internalID: 6365471525125515346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BatSwing_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 4900
+        y: 0
+        width: 980
+        height: 1020
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccb241e278ac03130800000000000000
+      internalID: 3544555588683049932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fdb30587f32d73a4ea541ec9d91308a0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BatSwing_Sheet_0: 7196097290509207113
+      BatSwing_Sheet_1: -8387639880536298250
+      BatSwing_Sheet_2: 3631077153205448557
+      BatSwing_Sheet_3: 1848494772047711415
+      BatSwing_Sheet_4: 6365471525125515346
+      BatSwing_Sheet_5: 3544555588683049932
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

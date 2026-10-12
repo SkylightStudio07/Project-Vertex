@@ -1,0 +1,36 @@
+{
+  "artifacts": [
+    {
+      "file": "LobbyTilt_Mockup.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen, followed by bicubic size normalization. Not native 2x art."
+    },
+    {
+      "file": "LobbyTilt_Mockup_Hover.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen, followed by bicubic size normalization. Not native 2x art."
+    }
+  ],
+  "status": "Generated composition studies, not pixel-identical production composites",
+  "notes": [
+    "Six floating menu cards; scene visible in gaps; separate corner framing; opaque ink thickness plus right-side scene dimming.",
+    "Hover proposes about103% training tile scale with longer shadow. Exact perspective angles are not measured in these raster mockups.",
+    "Generative edits changed some character/button/background details. Original artwork must be reused for production.",
+    "Native outputs are retained.2x frame/shadow pieces and Background_RightDim production texture are deferred to separate slicing work."
+  ],
+  "prompt_file": "GENERATION_PROMPTS.json"
+}

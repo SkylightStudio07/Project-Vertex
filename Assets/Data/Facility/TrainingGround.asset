@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f054c2d02f411bb02185270ae2410d, type: 3}
   m_Name: TrainingGround
   m_EditorClassIdentifier: Assembly-CSharp::Facility
-  facilityId: TrainingGround
   facilityType: 5
+  facilityId: TrainingGround
   displayName: "\uD6C8\uB828\uC7A5"
   description: "\uCE74\uB4DC\uB97C \uD14C\uC2A4\uD2B8\uD574\uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  defaultActive: 0
+  defaultActive: 1
   requiredRunCount: 5
   isUpgradedFacility: 0
   upgradeFacility: {fileID: 0}

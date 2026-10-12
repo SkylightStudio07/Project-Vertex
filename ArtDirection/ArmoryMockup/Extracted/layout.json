@@ -1,0 +1,953 @@
+{
+  "canvas": [
+    1672,
+    941
+  ],
+  "origin": "top-left",
+  "source": "Armory_Equipment_Mockup_v2_Sniper.png",
+  "textEraseRectangles": [
+    [
+      151,
+      39,
+      35,
+      28
+    ],
+    [
+      228,
+      19,
+      243,
+      80
+    ],
+    [
+      1135,
+      32,
+      205,
+      34
+    ],
+    [
+      1513,
+      37,
+      52,
+      28
+    ],
+    [
+      173,
+      126,
+      97,
+      29
+    ],
+    [
+      389,
+      125,
+      105,
+      30
+    ],
+    [
+      113,
+      188,
+      139,
+      40
+    ],
+    [
+      128,
+      328,
+      53,
+      32
+    ],
+    [
+      126,
+      464,
+      62,
+      28
+    ],
+    [
+      125,
+      600,
+      157,
+      29
+    ],
+    [
+      126,
+      742,
+      158,
+      29
+    ],
+    [
+      168,
+      817,
+      185,
+      60
+    ],
+    [
+      430,
+      184,
+      126,
+      64
+    ],
+    [
+      436,
+      258,
+      91,
+      35
+    ],
+    [
+      464,
+      303,
+      75,
+      28
+    ],
+    [
+      436,
+      554,
+      49,
+      69
+    ],
+    [
+      594,
+      553,
+      114,
+      70
+    ],
+    [
+      785,
+      553,
+      99,
+      70
+    ],
+    [
+      446,
+      644,
+      210,
+      28
+    ],
+    [
+      431,
+      702,
+      172,
+      32
+    ],
+    [
+      516,
+      755,
+      194,
+      31
+    ],
+    [
+      516,
+      816,
+      194,
+      32
+    ],
+    [
+      882,
+      760,
+      109,
+      28
+    ],
+    [
+      882,
+      821,
+      109,
+      28
+    ],
+    [
+      833,
+      870,
+      208,
+      27
+    ],
+    [
+      1114,
+      188,
+      150,
+      39
+    ],
+    [
+      1319,
+      198,
+      258,
+      27
+    ],
+    [
+      1318,
+      273,
+      105,
+      64
+    ],
+    [
+      1318,
+      388,
+      129,
+      66
+    ],
+    [
+      1316,
+      519,
+      151,
+      65
+    ],
+    [
+      1116,
+      641,
+      89,
+      28
+    ],
+    [
+      1120,
+      670,
+      152,
+      49
+    ],
+    [
+      1380,
+      640,
+      107,
+      29
+    ],
+    [
+      1380,
+      669,
+      78,
+      51
+    ],
+    [
+      1380,
+      726,
+      146,
+      27
+    ],
+    [
+      1130,
+      805,
+      104,
+      60
+    ]
+  ],
+  "assets": [
+    {
+      "name": "Header_Composite",
+      "file": "Header_Composite.png",
+      "x": 85,
+      "y": 0,
+      "width": 1531,
+      "height": 169,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "WeaponList_Composite",
+      "file": "WeaponList_Composite.png",
+      "x": 85,
+      "y": 169,
+      "width": 312,
+      "height": 737,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "WeaponDetail_Composite",
+      "file": "WeaponDetail_Composite.png",
+      "x": 397,
+      "y": 169,
+      "width": 676,
+      "height": 737,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradePanel_Composite",
+      "file": "UpgradePanel_Composite.png",
+      "x": 1086,
+      "y": 169,
+      "width": 514,
+      "height": 737,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Back_Normal",
+      "file": "Back_Normal.png",
+      "x": 1429,
+      "y": 27,
+      "width": 185,
+      "height": 49,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Back_Normal_Hover",
+      "file": "Back_Normal_Hover.png",
+      "x": 1429,
+      "y": 27,
+      "width": 185,
+      "height": 49,
+      "kind": "hover",
+      "normal": "Back_Normal"
+    },
+    {
+      "name": "Tab_Equipment_Selected",
+      "file": "Tab_Equipment_Selected.png",
+      "x": 114,
+      "y": 122,
+      "width": 213,
+      "height": 37,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Tab_Equipment_Selected_Hover",
+      "file": "Tab_Equipment_Selected_Hover.png",
+      "x": 114,
+      "y": 122,
+      "width": 213,
+      "height": 37,
+      "kind": "hover",
+      "normal": "Tab_Equipment_Selected"
+    },
+    {
+      "name": "Tab_Catalog_Normal",
+      "file": "Tab_Catalog_Normal.png",
+      "x": 308,
+      "y": 123,
+      "width": 241,
+      "height": 36,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Tab_Catalog_Normal_Hover",
+      "file": "Tab_Catalog_Normal_Hover.png",
+      "x": 308,
+      "y": 123,
+      "width": 241,
+      "height": 36,
+      "kind": "hover",
+      "normal": "Tab_Catalog_Normal"
+    },
+    {
+      "name": "Weapon_Pistol_Selected",
+      "file": "Weapon_Pistol_Selected.png",
+      "x": 114,
+      "y": 247,
+      "width": 265,
+      "height": 123,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Weapon_Pistol_Selected_Hover",
+      "file": "Weapon_Pistol_Selected_Hover.png",
+      "x": 114,
+      "y": 247,
+      "width": 265,
+      "height": 123,
+      "kind": "hover",
+      "normal": "Weapon_Pistol_Selected"
+    },
+    {
+      "name": "Weapon_SMG_Normal",
+      "file": "Weapon_SMG_Normal.png",
+      "x": 114,
+      "y": 380,
+      "width": 265,
+      "height": 121,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Weapon_SMG_Normal_Hover",
+      "file": "Weapon_SMG_Normal_Hover.png",
+      "x": 114,
+      "y": 380,
+      "width": 265,
+      "height": 121,
+      "kind": "hover",
+      "normal": "Weapon_SMG_Normal"
+    },
+    {
+      "name": "Weapon_Sniper_Locked",
+      "file": "Weapon_Sniper_Locked.png",
+      "x": 114,
+      "y": 510,
+      "width": 265,
+      "height": 129,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Weapon_Shotgun_Locked",
+      "file": "Weapon_Shotgun_Locked.png",
+      "x": 114,
+      "y": 649,
+      "width": 265,
+      "height": 130,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Unlock_Disabled",
+      "file": "Unlock_Disabled.png",
+      "x": 87,
+      "y": 804,
+      "width": 293,
+      "height": 85,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "CardAttack_Upgrade_Normal",
+      "file": "CardAttack_Upgrade_Normal.png",
+      "x": 837,
+      "y": 751,
+      "width": 197,
+      "height": 45,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "CardAttack_Upgrade_Normal_Hover",
+      "file": "CardAttack_Upgrade_Normal_Hover.png",
+      "x": 837,
+      "y": 751,
+      "width": 197,
+      "height": 45,
+      "kind": "hover",
+      "normal": "CardAttack_Upgrade_Normal"
+    },
+    {
+      "name": "CardDefense_Upgrade_Normal",
+      "file": "CardDefense_Upgrade_Normal.png",
+      "x": 837,
+      "y": 812,
+      "width": 197,
+      "height": 45,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "CardDefense_Upgrade_Normal_Hover",
+      "file": "CardDefense_Upgrade_Normal_Hover.png",
+      "x": 837,
+      "y": 812,
+      "width": 197,
+      "height": 45,
+      "kind": "hover",
+      "normal": "CardDefense_Upgrade_Normal"
+    },
+    {
+      "name": "Upgrade_Normal",
+      "file": "Upgrade_Normal.png",
+      "x": 1095,
+      "y": 774,
+      "width": 495,
+      "height": 115,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Upgrade_Normal_Hover",
+      "file": "Upgrade_Normal_Hover.png",
+      "x": 1095,
+      "y": 774,
+      "width": 495,
+      "height": 115,
+      "kind": "hover",
+      "normal": "Upgrade_Normal"
+    },
+    {
+      "name": "LevelBadge",
+      "file": "LevelBadge.png",
+      "x": 436,
+      "y": 258,
+      "width": 91,
+      "height": 35,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "WeaponStats_Composite",
+      "file": "WeaponStats_Composite.png",
+      "x": 436,
+      "y": 540,
+      "width": 599,
+      "height": 98,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "NextUpgradeStrip",
+      "file": "NextUpgradeStrip.png",
+      "x": 436,
+      "y": 639,
+      "width": 600,
+      "height": 39,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "BaseCardAttack_Row",
+      "file": "BaseCardAttack_Row.png",
+      "x": 436,
+      "y": 742,
+      "width": 600,
+      "height": 62,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "BaseCardDefense_Row",
+      "file": "BaseCardDefense_Row.png",
+      "x": 436,
+      "y": 804,
+      "width": 600,
+      "height": 62,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradeTree_Composite",
+      "file": "UpgradeTree_Composite.png",
+      "x": 1209,
+      "y": 271,
+      "width": 263,
+      "height": 314,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradeNode_Complete",
+      "file": "UpgradeNode_Complete.png",
+      "x": 1217,
+      "y": 274,
+      "width": 58,
+      "height": 58,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradeNode_Current",
+      "file": "UpgradeNode_Current.png",
+      "x": 1216,
+      "y": 388,
+      "width": 60,
+      "height": 62,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradeNode_Locked",
+      "file": "UpgradeNode_Locked.png",
+      "x": 1213,
+      "y": 511,
+      "width": 67,
+      "height": 66,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradeTree_Connector",
+      "file": "UpgradeTree_Connector.png",
+      "x": 1242,
+      "y": 330,
+      "width": 7,
+      "height": 183,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradeCost_Composite",
+      "file": "UpgradeCost_Composite.png",
+      "x": 1118,
+      "y": 638,
+      "width": 455,
+      "height": 119,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "ExperienceGauge_Track",
+      "file": "ExperienceGauge_Track.png",
+      "x": 1138,
+      "y": 70,
+      "width": 252,
+      "height": 12,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "ExperienceGauge_Fill",
+      "file": "ExperienceGauge_Fill.png",
+      "x": 1138,
+      "y": 70,
+      "width": 122,
+      "height": 12,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Icon_BackArrow",
+      "file": "Icon_BackArrow.png",
+      "x": 1483,
+      "y": 41,
+      "width": 27,
+      "height": 23,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_Attack",
+      "file": "Icon_Attack.png",
+      "x": 452,
+      "y": 748,
+      "width": 47,
+      "height": 51,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_Defense",
+      "file": "Icon_Defense.png",
+      "x": 454,
+      "y": 813,
+      "width": 43,
+      "height": 47,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_Lock",
+      "file": "Icon_Lock.png",
+      "x": 227,
+      "y": 541,
+      "width": 38,
+      "height": 48,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_UnlockNotice",
+      "file": "Icon_UnlockNotice.png",
+      "x": 105,
+      "y": 826,
+      "width": 44,
+      "height": 45,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Icon_SelectedCheck_Crop",
+      "file": "Icon_SelectedCheck_Crop.png",
+      "x": 338,
+      "y": 259,
+      "width": 29,
+      "height": 26,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Icon_UnlockedCheck_Crop",
+      "file": "Icon_UnlockedCheck_Crop.png",
+      "x": 435,
+      "y": 304,
+      "width": 27,
+      "height": 27,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "UpgradeArrow_Crop",
+      "file": "UpgradeArrow_Crop.png",
+      "x": 1239,
+      "y": 809,
+      "width": 52,
+      "height": 52,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Pistol_Thumbnail",
+      "file": "Pistol_Thumbnail.png",
+      "x": 175,
+      "y": 260,
+      "width": 113,
+      "height": 96,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "SMG_Thumbnail",
+      "file": "SMG_Thumbnail.png",
+      "x": 142,
+      "y": 392,
+      "width": 211,
+      "height": 98,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Sniper_LockedThumbnail_Composite",
+      "file": "Sniper_LockedThumbnail_Composite.png",
+      "x": 126,
+      "y": 533,
+      "width": 239,
+      "height": 68,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Shotgun_LockedThumbnail_Composite",
+      "file": "Shotgun_LockedThumbnail_Composite.png",
+      "x": 134,
+      "y": 677,
+      "width": 227,
+      "height": 64,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "WeaponArt_Pistol",
+      "file": "WeaponArt_Pistol.png",
+      "x": 576,
+      "y": 248,
+      "width": 411,
+      "height": 345,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Divider_Columns",
+      "file": "Divider_Columns.png",
+      "x": 1069,
+      "y": 169,
+      "width": 9,
+      "height": 737,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Divider_UpgradeTop",
+      "file": "Divider_UpgradeTop.png",
+      "x": 1118,
+      "y": 239,
+      "width": 455,
+      "height": 4,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Divider_UpgradeCost",
+      "file": "Divider_UpgradeCost.png",
+      "x": 1118,
+      "y": 616,
+      "width": 455,
+      "height": 5,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Divider_Cards",
+      "file": "Divider_Cards.png",
+      "x": 436,
+      "y": 693,
+      "width": 600,
+      "height": 5,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Decoration_TopLeft",
+      "file": "Decoration_TopLeft.png",
+      "x": 19,
+      "y": 17,
+      "width": 42,
+      "height": 46,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "Decoration_TopRight",
+      "file": "Decoration_TopRight.png",
+      "x": 1619,
+      "y": 18,
+      "width": 38,
+      "height": 47,
+      "kind": "luminance-alpha"
+    },
+    {
+      "name": "PaperTexture",
+      "file": "PaperTexture.png",
+      "x": 1000,
+      "y": 410,
+      "width": 48,
+      "height": 64,
+      "kind": "textless-crop"
+    },
+    {
+      "name": "Source_Header",
+      "file": "Source_Header.png",
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 169,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_LeftMargin",
+      "file": "Source_LeftMargin.png",
+      "x": 0,
+      "y": 169,
+      "width": 85,
+      "height": 737,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_List",
+      "file": "Source_List.png",
+      "x": 85,
+      "y": 169,
+      "width": 312,
+      "height": 737,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_Detail",
+      "file": "Source_Detail.png",
+      "x": 397,
+      "y": 169,
+      "width": 676,
+      "height": 737,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_Upgrade",
+      "file": "Source_Upgrade.png",
+      "x": 1073,
+      "y": 169,
+      "width": 527,
+      "height": 737,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_RightMargin",
+      "file": "Source_RightMargin.png",
+      "x": 1600,
+      "y": 169,
+      "width": 72,
+      "height": 737,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Source_Footer",
+      "file": "Source_Footer.png",
+      "x": 0,
+      "y": 906,
+      "width": 1672,
+      "height": 35,
+      "kind": "source-reference"
+    },
+    {
+      "name": "Backing_FullCanvas_Restored",
+      "file": "Backing_FullCanvas_Restored.png",
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 941,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_Header_Restored",
+      "file": "Backing_Header_Restored.png",
+      "x": 85,
+      "y": 0,
+      "width": 1531,
+      "height": 169,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_List_Restored",
+      "file": "Backing_List_Restored.png",
+      "x": 85,
+      "y": 169,
+      "width": 312,
+      "height": 737,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_Detail_Restored",
+      "file": "Backing_Detail_Restored.png",
+      "x": 397,
+      "y": 169,
+      "width": 676,
+      "height": 737,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_UpgradePanel_Restored",
+      "file": "Backing_UpgradePanel_Restored.png",
+      "x": 1086,
+      "y": 169,
+      "width": 514,
+      "height": 737,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_PistolTile_Restored",
+      "file": "Backing_PistolTile_Restored.png",
+      "x": 114,
+      "y": 247,
+      "width": 265,
+      "height": 123,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_SMGTile_Restored",
+      "file": "Backing_SMGTile_Restored.png",
+      "x": 114,
+      "y": 380,
+      "width": 265,
+      "height": 121,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_SniperTile_Restored",
+      "file": "Backing_SniperTile_Restored.png",
+      "x": 114,
+      "y": 510,
+      "width": 265,
+      "height": 129,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_ShotgunTile_Restored",
+      "file": "Backing_ShotgunTile_Restored.png",
+      "x": 114,
+      "y": 649,
+      "width": 265,
+      "height": 130,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_LevelBadge_Restored",
+      "file": "Backing_LevelBadge_Restored.png",
+      "x": 436,
+      "y": 258,
+      "width": 91,
+      "height": 35,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_ExperienceTrack_Restored",
+      "file": "Backing_ExperienceTrack_Restored.png",
+      "x": 1138,
+      "y": 70,
+      "width": 252,
+      "height": 12,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_UpgradeButton_Restored",
+      "file": "Backing_UpgradeButton_Restored.png",
+      "x": 1095,
+      "y": 774,
+      "width": 495,
+      "height": 115,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_UpgradeButton_Restored_Hover",
+      "file": "Backing_UpgradeButton_Restored_Hover.png",
+      "x": 1095,
+      "y": 774,
+      "width": 495,
+      "height": 115,
+      "kind": "model-restored-backing",
+      "normal": "Backing_UpgradeButton_Restored"
+    },
+    {
+      "name": "Backing_CardAttackRow_Restored",
+      "file": "Backing_CardAttackRow_Restored.png",
+      "x": 436,
+      "y": 742,
+      "width": 600,
+      "height": 62,
+      "kind": "model-restored-backing"
+    },
+    {
+      "name": "Backing_CardDefenseRow_Restored",
+      "file": "Backing_CardDefenseRow_Restored.png",
+      "x": 436,
+      "y": 804,
+      "width": 600,
+      "height": 62,
+      "kind": "model-restored-backing"
+    }
+  ],
+  "controlLayers": [
+    "Back_Normal",
+    "Tab_Equipment_Selected",
+    "Tab_Catalog_Normal",
+    "Weapon_Pistol_Selected",
+    "Weapon_SMG_Normal",
+    "Weapon_Sniper_Locked",
+    "Weapon_Shotgun_Locked",
+    "Unlock_Disabled",
+    "CardAttack_Upgrade_Normal",
+    "CardDefense_Upgrade_Normal",
+    "Upgrade_Normal"
+  ],
+  "textlessReassemblyDifferentPixels": 0
+}

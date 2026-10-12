@@ -1,0 +1,1073 @@
+{
+  "version": 1,
+  "canvas": [
+    1672,
+    941
+  ],
+  "assets": [
+    {
+      "name": "Base_Material",
+      "file": "Base_Material.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "output_size": [
+        1672,
+        941
+      ],
+      "placement_1672_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "texture_sample_xywh": [
+        618,
+        33,
+        104,
+        38
+      ],
+      "note": "SubjectHeader, entry tabs and document all removed; original exterior lobby retained."
+    },
+    {
+      "name": "CategoryTab_Normal",
+      "file": "CategoryTab_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      }
+    },
+    {
+      "name": "CategoryTab_Hover",
+      "file": "CategoryTab_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Hover",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      }
+    },
+    {
+      "name": "CategoryTab_Selected",
+      "file": "CategoryTab_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Selected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      }
+    },
+    {
+      "name": "SubjectCell_Normal",
+      "file": "SubjectCell_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    {
+      "name": "SubjectCell_Hover",
+      "file": "SubjectCell_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Hover",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    {
+      "name": "SubjectCell_Selected",
+      "file": "SubjectCell_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Selected",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    {
+      "name": "SubjectCell_Unknown",
+      "file": "SubjectCell_Unknown.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Unknown",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    {
+      "name": "SubjectHeader",
+      "file": "SubjectHeader.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        125,
+        655,
+        249
+      ],
+      "output_size": [
+        655,
+        249
+      ],
+      "placement_1672_xy": [
+        947,
+        125
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": [
+        24,
+        23,
+        190,
+        208
+      ],
+      "text_slots_local": {
+        "name": [
+          246,
+          26
+        ],
+        "badge": [
+          246,
+          91
+        ],
+        "progress_text": [
+          246,
+          151
+        ],
+        "progress_cells": [
+          246,
+          186
+        ]
+      }
+    },
+    {
+      "name": "Badge_Affiliation",
+      "file": "Badge_Affiliation.png",
+      "source": "Material_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1191,
+        218,
+        199,
+        35
+      ],
+      "output_size": [
+        198,
+        35
+      ],
+      "placement_1672_xy": [
+        1191,
+        218
+      ],
+      "nine_slice_lbrt": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "text_slots_local": {
+        "label": [
+          13,
+          8
+        ]
+      }
+    },
+    {
+      "name": "ProgressCell_Filled",
+      "file": "ProgressCell_Filled.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1193,
+        314,
+        49,
+        31
+      ],
+      "output_size": [
+        50,
+        32
+      ],
+      "placement_1672_xy": [
+        1193,
+        314
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    {
+      "name": "ProgressCell_Empty",
+      "file": "ProgressCell_Empty.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1193,
+        314,
+        49,
+        31
+      ],
+      "output_size": [
+        50,
+        32
+      ],
+      "placement_1672_xy": [
+        1193,
+        314
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    {
+      "name": "EntryTab_Normal",
+      "file": "EntryTab_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    {
+      "name": "EntryTab_Hover",
+      "file": "EntryTab_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Hover",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    {
+      "name": "EntryTab_Selected",
+      "file": "EntryTab_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Selected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    {
+      "name": "EntryTab_Locked",
+      "file": "EntryTab_Locked.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Locked",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    {
+      "name": "EntryTab_LockedSelected",
+      "file": "EntryTab_LockedSelected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "LockedSelected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    {
+      "name": "Icon_LockTab",
+      "file": "Icon_LockTab.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1237,
+        403,
+        19,
+        24
+      ],
+      "output_size": [
+        18,
+        24
+      ],
+      "placement_1672_xy": [
+        1237,
+        403
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    {
+      "name": "Icon_LockLarge",
+      "file": "Icon_LockLarge.png",
+      "source": "Material_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1235,
+        627,
+        63,
+        80
+      ],
+      "output_size": [
+        62,
+        80
+      ],
+      "placement_1672_xy": [
+        1235,
+        627
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    {
+      "name": "Document_Paper",
+      "file": "Document_Paper.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        457,
+        655,
+        470
+      ],
+      "output_size": [
+        655,
+        470
+      ],
+      "placement_1672_xy": [
+        947,
+        457
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "document_regions_local": {
+        "document_number": [
+          44,
+          23,
+          560,
+          20
+        ],
+        "title": [
+          44,
+          50,
+          560,
+          35
+        ],
+        "title_rule": [
+          44,
+          96,
+          564,
+          2
+        ],
+        "body_scroll": [
+          44,
+          121,
+          561,
+          297
+        ],
+        "scrollbar": [
+          636,
+          82,
+          5,
+          316
+        ],
+        "source_footer": [
+          355,
+          431,
+          254,
+          18
+        ],
+        "locked_icon": [
+          296,
+          172,
+          62,
+          80
+        ],
+        "locked_message": [
+          60,
+          274,
+          535,
+          28
+        ],
+        "locked_current_level": [
+          60,
+          310,
+          535,
+          22
+        ]
+      }
+    },
+    {
+      "name": "Document_Clip",
+      "file": "Document_Clip.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1536,
+        450,
+        40,
+        58
+      ],
+      "output_size": [
+        40,
+        58
+      ],
+      "placement_1672_xy": [
+        1536,
+        450
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    {
+      "name": "Document_Rule",
+      "file": "Document_Rule.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        993,
+        552,
+        564,
+        2
+      ],
+      "output_size": [
+        566,
+        2
+      ],
+      "placement_1672_xy": [
+        993,
+        552
+      ],
+      "nine_slice_lbrt": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    }
+  ],
+  "reuse": {
+    "back": [
+      "../../LoadoutMockup/Extracted/Back_Normal.png",
+      "../../LoadoutMockup/Extracted/Back_Normal_Hover.png",
+      "../../LoadoutMockup/Extracted/Icon_BackArrow.png"
+    ],
+    "checkbox": [
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Unchecked.png",
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Selected.png",
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Unchecked_Hover.png",
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Selected_Hover.png"
+    ],
+    "type_badges": [
+      "../../TrainingMockup/Extracted/TypeBadge_Normal.png",
+      "../../TrainingMockup/Extracted/TypeBadge_Elite.png",
+      "../../TrainingMockup/Extracted/TypeBadge_Boss.png"
+    ],
+    "record_dots": [
+      "../../TrainingMockup/Extracted/DefeatPip_Filled.png",
+      "../../TrainingMockup/Extracted/DefeatPip_Empty.png"
+    ],
+    "scroll": [
+      "../../TrainingMockup/Extracted/Scrollbar_Track.png",
+      "../../TrainingMockup/Extracted/Scrollbar_Handle.png"
+    ],
+    "small_lock": [
+      "../../TrainingMockup/Extracted/Icon_Lock.png"
+    ]
+  },
+  "coordinates": "Top-left native1672x941. source_crop_xywh are reference areas; text/windows local to sprite unless screen is specified.",
+  "repeats": {
+    "subject_grid": {
+      "origin": [
+        350,
+        193
+      ],
+      "cell_size": [
+        139,
+        192
+      ],
+      "columns": 4,
+      "column_step": 145,
+      "row_step": 195,
+      "count": 14
+    },
+    "entry_tabs": {
+      "origin": [
+        947,
+        389
+      ],
+      "step": [
+        131,
+        0
+      ],
+      "count": 5
+    },
+    "progress_cells": {
+      "origin": [
+        1193,
+        314
+      ],
+      "step": [
+        57,
+        0
+      ],
+      "count": 5
+    },
+    "record_dots": {
+      "local_origin": [
+        22,
+        172
+      ],
+      "step": [
+        23,
+        0
+      ],
+      "count": 5
+    },
+    "category_tabs": {
+      "origin": [
+        99,
+        148
+      ],
+      "step": [
+        0,
+        112
+      ],
+      "count": 2
+    }
+  },
+  "text_screen": {
+    "title": [
+      233,
+      28
+    ],
+    "subtitle": [
+      233,
+      82
+    ],
+    "grid_title": [
+      350,
+      150
+    ],
+    "grid_count": [
+      737,
+      153
+    ],
+    "filter_heading": [
+      120,
+      410
+    ],
+    "filter_1": [
+      172,
+      460
+    ],
+    "filter_2": [
+      172,
+      514
+    ],
+    "filter_3": [
+      172,
+      565
+    ],
+    "filter_event": [
+      172,
+      617
+    ],
+    "unlock_rules": [
+      110,
+      791
+    ],
+    "rule_footer": [
+      110,
+      854
+    ],
+    "subject_name": [
+      1193,
+      160
+    ],
+    "subject_badge": [
+      1193,
+      220
+    ],
+    "subject_progress": [
+      1193,
+      279
+    ]
+  },
+  "document_regions_screen": {
+    "document_number": [
+      991,
+      480,
+      560,
+      20
+    ],
+    "title": [
+      991,
+      507,
+      560,
+      35
+    ],
+    "title_rule": [
+      991,
+      553,
+      564,
+      2
+    ],
+    "body_scroll": [
+      991,
+      578,
+      561,
+      297
+    ],
+    "scrollbar": [
+      1583,
+      539,
+      5,
+      316
+    ],
+    "source_footer": [
+      1302,
+      888,
+      254,
+      18
+    ],
+    "locked_icon": [
+      1243,
+      629,
+      62,
+      80
+    ],
+    "locked_message": [
+      1007,
+      731,
+      535,
+      28
+    ],
+    "locked_current_level": [
+      1007,
+      767,
+      535,
+      22
+    ]
+  },
+  "locked_state": {
+    "selected_tab": "EntryTab_LockedSelected",
+    "lock_tab": "Icon_LockTab",
+    "body_lock": "Icon_LockLarge",
+    "runtime_message": "호감도 Lv.3에 열립니다",
+    "runtime_subtext": "(현재 Lv.2)"
+  },
+  "decisions": {
+    "SubjectHeader": "Separate bordered plate in both mockups, exported with transparent art window.",
+    "Icon_LockTab": "Smaller glyph than reused grid lock; exported18x24.",
+    "Icon_LockLarge": "Distinct large body lock62x80, exported separately."
+  },
+  "source_differences": "Enemy screenshot has bottom grid framing irregularities; shared four-column/14-cell layout follows companion regular grid.",
+  "layering": [
+    "Base_Material",
+    "category tabs",
+    "subject cells",
+    "existing game art clipped to windows",
+    "record dots",
+    "SubjectHeader",
+    "EntryTab states",
+    "Document_Paper",
+    "Document_Rule",
+    "Document_Clip",
+    "runtime text/locks"
+  ]
+}

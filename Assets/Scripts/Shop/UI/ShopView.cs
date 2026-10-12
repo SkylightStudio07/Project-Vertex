@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +31,11 @@ public class ShopView : MonoBehaviour
     [Tooltip("상점 주인 말풍선 — 입장·구매·클릭·가만히 있을 때 잠깐 떴다 사라진다 (ShopkeeperData의 말풍선 대사)")]
     [SerializeField] private SpeechBubble shopkeeperBubble;
     [SerializeField] private Button shopkeeperBubbleButton;
+    [Tooltip("상점 주인 이름판의 이름 (상점 v2). 막별 ShopkeeperData.entityName")]
+    [SerializeField] private TextMeshProUGUI shopkeeperNameText;
+    [Tooltip("상점이 열려 있는 동안 숨길 전투 장면 오브젝트 (플레이어·협력자 스탠딩 등). 상점 주인 뒤로 비쳐 보이지 않게")]
+    [SerializeField] private List<GameObject> hideWhileOpen = new();
+    private readonly List<GameObject> _hidden = new();
 
     private float _idleTimer;     // 마지막 말풍선이 사라진 뒤 흐른 시간
     private bool _bubbleReady;    // 입장 대사가 끝나기 전에는 말풍선을 띄우지 않는다
@@ -76,8 +82,28 @@ public class ShopView : MonoBehaviour
         goodsPanel.SetActive(true);
 
         SetUp();
+        HideScene(true);
+        var keeper = ResolveShopkeeper();
+        if (shopkeeperNameText != null && keeper != null) shopkeeperNameText.text = keeper.entityName;
         PlayShopkeeperGreeting();
     }
+
+    private void HideScene(bool hide)
+    {
+        if (hide)
+        {
+            _hidden.Clear();
+            foreach (var go in hideWhileOpen)
+                if (go != null && go.activeSelf) { go.SetActive(false); _hidden.Add(go); }
+        }
+        else
+        {
+            foreach (var go in _hidden) if (go != null) go.SetActive(true);
+            _hidden.Clear();
+        }
+    }
+
+    private void OnDisable() { HideScene(false); _leaveTween?.Kill(); _leaveTween = null; _leaving = false; }
 
     // 방문마다 호감도를 올린 뒤, 조건에 맞는 대사(첫 만남 > 등급업 이벤트 > 일반 인사)를 하나 재생한다.
     // 대사 오버레이가 화면 전체 입력을 막으므로, 대사가 끝나야 상품을 고를 수 있다.
@@ -98,7 +124,7 @@ public class ShopView : MonoBehaviour
             affinity.GetAffinity(keeper.entityId),
             charId => CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charId),
             affinity.GetAllFlags());
-        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, OnGreetingDialogueDone);
+        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, OnGreetingDialogueDone, keeper.portrait, keeper.affiliation, keeper.themeColor);
         else OnGreetingDialogueDone();
     }
 
@@ -158,7 +184,7 @@ public class ShopView : MonoBehaviour
     private void SetUp()
     {
         Transform cardEntryContainer = ConfigureCardGrid();
-        ApplyShopFont();
+        // 폰트는 씬·프리팹에서 굵기별(Pretendard Medium/Bold)로 지정한다. 예전엔 여기서 카드 폰트로 통일했지만 상점 v2의 굵기 구분이 사라져 뺐다.
 
         // 카드 제거 버튼 활성화 여부는 상점 방문마다 초기화 —
         // RefreshRemovePrice()가 이 값을 읽으므로 반드시 먼저 리셋한다.
@@ -184,7 +210,6 @@ public class ShopView : MonoBehaviour
     private void SpawnEntry(ShopStockEntry entry, Transform container, ShopGoods goods)
     {
         var newEntry = Instantiate(entry, container);
-        newEntry.ApplyFont(ResolveShopFont());
         if (goods.Type == ShopGoodsType.Card)
         {
             newEntry.transform.localScale = new Vector3(cardEntryScale, cardEntryScale, 1f);
@@ -403,9 +428,32 @@ public class ShopView : MonoBehaviour
     }
 
 
+    [Header("작별 인사")]
+    [Tooltip("나가기를 누른 뒤 작별 한마디를 보여 주고 맵으로 넘어가기까지의 시간. 그 사이 한 번 더 누르면 바로 나간다")]
+    [SerializeField, Min(0f)] private float farewellHold = 1.6f;
+    private bool _leaving;
+    private Tween _leaveTween;
+
     private void Proceed()
     {
         if (dialogueOverlay != null && dialogueOverlay.IsPlaying) return;
+        if (_leaving) { Leave(); return; } // 작별 인사 중 한 번 더 누르면 바로
+
+        var keeper = ResolveShopkeeper();
+        string line = keeper != null ? keeper.PickFarewellLine(BlessingAffinityManager.Instance.GetAffinityTier(keeper.entityId)) : null;
+        if (string.IsNullOrEmpty(line) || shopkeeperBubble == null || farewellHold <= 0f) { Leave(); return; }
+
+        _leaving = true;
+        _bubbleReady = true; // 입장 대사를 건너뛰고 바로 나가는 경우에도 말하게
+        Say(line);
+        _leaveTween = DOVirtual.DelayedCall(farewellHold, Leave).SetLink(gameObject);
+    }
+
+    private void Leave()
+    {
+        _leaveTween?.Kill();
+        _leaveTween = null;
+        _leaving = false;
         gameObject.SetActive(false);
         mapUIController?.OpenMap();
     }

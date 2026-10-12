@@ -7,13 +7,16 @@ public abstract class CardCondition
 
     public virtual bool IsMet(BattleState state, CardData card, EnemyInstance target = null)
     {
-        return IsMet(new CardContext
+        var context = new CardContext
         {
             State = state,
             Card = card,
             Target = target,
             AllEnemies = state?.Enemies,
-        });
+        }.CreateAmmoPreview();
+        // 기존 자원 조건의 사용 전 조회 의미는 유지하고 초탄/막탄 예측만 공유한다.
+        context.State = state;
+        return IsMet(context);
     }
 
     protected static bool Compare(int left, IntComparison comparison, int right)
@@ -37,6 +40,24 @@ public enum IntComparison
     Equal,
     GreaterOrEqual,
     GreaterThan,
+}
+
+[Serializable]
+public class FirstAmmoUseCondition : CardCondition
+{
+    public override bool IsMet(CardContext context) => context?.IsFirstAmmoUse == true;
+}
+
+[Serializable]
+public class LastAmmoUseCondition : CardCondition
+{
+    public override bool IsMet(CardContext context) => context?.IsLastAmmoUse == true;
+}
+
+[Serializable]
+public class PlayerGainedBlockCondition : CardCondition
+{
+    public override bool IsMet(CardContext context) => context?.PlayerGainedBlockThisTurn == true;
 }
 
 [System.Serializable]

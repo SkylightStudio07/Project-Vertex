@@ -1,0 +1,1920 @@
+{
+  "version": 1,
+  "canvas": [
+    1672,
+    941
+  ],
+  "assets": [
+    {
+      "name": "Base_Main",
+      "file": "Base_Main.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "output_size": [
+        1672,
+        941
+      ],
+      "placement_1672_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "texture_sample_xywh": [
+        613,
+        31,
+        111,
+        35
+      ],
+      "note": "Original outer lobby pixels retained; interior restored with no list rows/buttons/art."
+    },
+    {
+      "name": "Base_Deck",
+      "file": "Base_Deck.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "output_size": [
+        1672,
+        941
+      ],
+      "placement_1672_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "texture_sample_xywh": [
+        613,
+        31,
+        111,
+        35
+      ],
+      "note": "Original outer lobby pixels retained; interior restored with no list rows/buttons/art."
+    },
+    {
+      "name": "Target_Backdrop",
+      "file": "Target_Backdrop.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        594,
+        77,
+        493,
+        451
+      ],
+      "output_size": [
+        500,
+        500
+      ],
+      "placement_1672_xy": [
+        594,
+        77
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "recommended_runtime_alpha": 0.18
+    },
+    {
+      "name": "TargetRow_Normal",
+      "file": "TargetRow_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        104,
+        310,
+        428,
+        115
+      ],
+      "output_size": [
+        428,
+        115
+      ],
+      "placement_1672_xy": [
+        104,
+        310
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "name": [
+          174,
+          14
+        ],
+        "type_badge": [
+          174,
+          51
+        ],
+        "defeat_pips": [
+          251,
+          65
+        ],
+        "right_progress": [
+          336,
+          90
+        ]
+      },
+      "repeat_step": [
+        0,
+        117
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "TargetRow_Hover",
+      "file": "TargetRow_Hover.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        104,
+        310,
+        428,
+        115
+      ],
+      "output_size": [
+        428,
+        115
+      ],
+      "placement_1672_xy": [
+        104,
+        310
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "name": [
+          174,
+          14
+        ],
+        "type_badge": [
+          174,
+          51
+        ],
+        "defeat_pips": [
+          251,
+          65
+        ],
+        "right_progress": [
+          336,
+          90
+        ]
+      },
+      "repeat_step": [
+        0,
+        117
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "TargetRow_Selected",
+      "file": "TargetRow_Selected.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        104,
+        310,
+        428,
+        115
+      ],
+      "output_size": [
+        428,
+        115
+      ],
+      "placement_1672_xy": [
+        104,
+        310
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Selected",
+      "text_slots_local": {
+        "name": [
+          174,
+          14
+        ],
+        "type_badge": [
+          174,
+          51
+        ],
+        "defeat_pips": [
+          251,
+          65
+        ],
+        "right_progress": [
+          336,
+          90
+        ]
+      },
+      "repeat_step": [
+        0,
+        117
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "TargetRow_Locked",
+      "file": "TargetRow_Locked.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        104,
+        310,
+        428,
+        115
+      ],
+      "output_size": [
+        428,
+        115
+      ],
+      "placement_1672_xy": [
+        104,
+        310
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Locked",
+      "text_slots_local": {
+        "name": [
+          174,
+          14
+        ],
+        "type_badge": [
+          174,
+          51
+        ],
+        "defeat_pips": [
+          251,
+          65
+        ],
+        "right_progress": [
+          336,
+          90
+        ]
+      },
+      "repeat_step": [
+        0,
+        117
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "TypeBadge_Normal",
+      "file": "TypeBadge_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      }
+    },
+    {
+      "name": "TypeBadge_Elite",
+      "file": "TypeBadge_Elite.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      }
+    },
+    {
+      "name": "TypeBadge_Boss",
+      "file": "TypeBadge_Boss.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      }
+    },
+    {
+      "name": "DefeatPip_Filled",
+      "file": "DefeatPip_Filled.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        352,
+        256,
+        16,
+        16
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1672_xy": [
+        352,
+        256
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "repeat_step": [
+        24,
+        0
+      ]
+    },
+    {
+      "name": "DefeatPip_Empty",
+      "file": "DefeatPip_Empty.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        352,
+        256,
+        16,
+        16
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1672_xy": [
+        352,
+        256
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "repeat_step": [
+        24,
+        0
+      ]
+    },
+    {
+      "name": "Icon_Lock",
+      "file": "Icon_Lock.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        824,
+        751,
+        26,
+        37
+      ],
+      "output_size": [
+        28,
+        34
+      ],
+      "placement_1672_xy": [
+        824,
+        751
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "note": "Tint light on dark silhouette."
+    },
+    {
+      "name": "Scrollbar_Track",
+      "file": "Scrollbar_Track.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        543,
+        213,
+        5,
+        673
+      ],
+      "output_size": [
+        4,
+        674
+      ],
+      "placement_1672_xy": [
+        543,
+        213
+      ],
+      "nine_slice_lbrt": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed"
+    },
+    {
+      "name": "Scrollbar_Handle",
+      "file": "Scrollbar_Handle.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        543,
+        213,
+        5,
+        89
+      ],
+      "output_size": [
+        4,
+        88
+      ],
+      "placement_1672_xy": [
+        543,
+        213
+      ],
+      "nine_slice_lbrt": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed"
+    },
+    {
+      "name": "CompanionCard_Normal",
+      "file": "CompanionCard_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        589,
+        662,
+        162,
+        221
+      ],
+      "output_size": [
+        162,
+        221
+      ],
+      "placement_1672_xy": [
+        589,
+        662
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "name": [
+          81,
+          175
+        ],
+        "level": [
+          81,
+          198
+        ],
+        "lock_condition": [
+          81,
+          181
+        ]
+      },
+      "repeat_step": [
+        171,
+        0
+      ],
+      "portrait_window": [
+        6,
+        5,
+        150,
+        150
+      ]
+    },
+    {
+      "name": "CompanionCard_Hover",
+      "file": "CompanionCard_Hover.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        589,
+        662,
+        162,
+        221
+      ],
+      "output_size": [
+        162,
+        221
+      ],
+      "placement_1672_xy": [
+        589,
+        662
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "name": [
+          81,
+          175
+        ],
+        "level": [
+          81,
+          198
+        ],
+        "lock_condition": [
+          81,
+          181
+        ]
+      },
+      "repeat_step": [
+        171,
+        0
+      ],
+      "portrait_window": [
+        6,
+        5,
+        150,
+        150
+      ]
+    },
+    {
+      "name": "CompanionCard_Selected",
+      "file": "CompanionCard_Selected.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        589,
+        662,
+        162,
+        221
+      ],
+      "output_size": [
+        162,
+        221
+      ],
+      "placement_1672_xy": [
+        589,
+        662
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Selected",
+      "text_slots_local": {
+        "name": [
+          81,
+          175
+        ],
+        "level": [
+          81,
+          198
+        ],
+        "lock_condition": [
+          81,
+          181
+        ]
+      },
+      "repeat_step": [
+        171,
+        0
+      ],
+      "portrait_window": [
+        6,
+        5,
+        150,
+        150
+      ]
+    },
+    {
+      "name": "CompanionCard_Locked",
+      "file": "CompanionCard_Locked.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        589,
+        662,
+        162,
+        221
+      ],
+      "output_size": [
+        162,
+        221
+      ],
+      "placement_1672_xy": [
+        589,
+        662
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Locked",
+      "text_slots_local": {
+        "name": [
+          81,
+          175
+        ],
+        "level": [
+          81,
+          198
+        ],
+        "lock_condition": [
+          81,
+          181
+        ]
+      },
+      "repeat_step": [
+        171,
+        0
+      ],
+      "portrait_window": [
+        6,
+        5,
+        150,
+        150
+      ]
+    },
+    {
+      "name": "CompanionTag",
+      "file": "CompanionTag.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        592,
+        802,
+        59,
+        24
+      ],
+      "output_size": [
+        62,
+        22
+      ],
+      "placement_1672_xy": [
+        592,
+        802
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "label": [
+          8,
+          3
+        ]
+      }
+    },
+    {
+      "name": "DeckRow_Normal",
+      "file": "DeckRow_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1150,
+        202,
+        413,
+        85
+      ],
+      "output_size": [
+        413,
+        85
+      ],
+      "placement_1672_xy": [
+        1150,
+        202
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "name": [
+          126,
+          30
+        ],
+        "count": [
+          358,
+          30
+        ]
+      },
+      "repeat_step": [
+        0,
+        85
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "DeckRow_Hover",
+      "file": "DeckRow_Hover.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1150,
+        202,
+        413,
+        85
+      ],
+      "output_size": [
+        413,
+        85
+      ],
+      "placement_1672_xy": [
+        1150,
+        202
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "name": [
+          126,
+          30
+        ],
+        "count": [
+          358,
+          30
+        ]
+      },
+      "repeat_step": [
+        0,
+        85
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "Button_DeckEdit_Normal",
+      "file": "Button_DeckEdit_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1148,
+        640,
+        415,
+        75
+      ],
+      "output_size": [
+        415,
+        75
+      ],
+      "placement_1672_xy": [
+        1148,
+        640
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "label": [
+          144,
+          23
+        ],
+        "arrow": [
+          278,
+          29
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_DeckEdit_Hover",
+      "file": "Button_DeckEdit_Hover.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1148,
+        640,
+        415,
+        75
+      ],
+      "output_size": [
+        415,
+        75
+      ],
+      "placement_1672_xy": [
+        1148,
+        640
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "label": [
+          144,
+          23
+        ],
+        "arrow": [
+          278,
+          29
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_DeckEdit_Pressed",
+      "file": "Button_DeckEdit_Pressed.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1148,
+        640,
+        415,
+        75
+      ],
+      "output_size": [
+        415,
+        75
+      ],
+      "placement_1672_xy": [
+        1148,
+        640
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Pressed",
+      "text_slots_local": {
+        "label": [
+          144,
+          23
+        ],
+        "arrow": [
+          278,
+          29
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_Sortie_Normal",
+      "file": "Button_Sortie_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1129,
+        758,
+        458,
+        127
+      ],
+      "output_size": [
+        458,
+        127
+      ],
+      "placement_1672_xy": [
+        1129,
+        758
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "small_label": [
+          47,
+          24
+        ],
+        "label": [
+          47,
+          54
+        ],
+        "arrow": [
+          157,
+          67
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_Sortie_Hover",
+      "file": "Button_Sortie_Hover.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1129,
+        758,
+        458,
+        127
+      ],
+      "output_size": [
+        458,
+        127
+      ],
+      "placement_1672_xy": [
+        1129,
+        758
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "small_label": [
+          47,
+          24
+        ],
+        "label": [
+          47,
+          54
+        ],
+        "arrow": [
+          157,
+          67
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_Sortie_Pressed",
+      "file": "Button_Sortie_Pressed.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1129,
+        758,
+        458,
+        127
+      ],
+      "output_size": [
+        458,
+        127
+      ],
+      "placement_1672_xy": [
+        1129,
+        758
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Pressed",
+      "text_slots_local": {
+        "small_label": [
+          47,
+          24
+        ],
+        "label": [
+          47,
+          54
+        ],
+        "arrow": [
+          157,
+          67
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_Sortie_Disabled",
+      "file": "Button_Sortie_Disabled.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1129,
+        758,
+        458,
+        127
+      ],
+      "output_size": [
+        458,
+        127
+      ],
+      "placement_1672_xy": [
+        1129,
+        758
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Disabled",
+      "text_slots_local": {
+        "small_label": [
+          47,
+          24
+        ],
+        "label": [
+          47,
+          54
+        ],
+        "arrow": [
+          157,
+          67
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        1287,
+        817,
+        42,
+        28
+      ],
+      "output_size": [
+        24,
+        24
+      ],
+      "placement_1672_xy": [
+        1287,
+        817
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed"
+    },
+    {
+      "name": "CostChip_Normal",
+      "file": "CostChip_Normal.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        115,
+        512,
+        42,
+        45
+      ],
+      "output_size": [
+        42,
+        45
+      ],
+      "placement_1672_xy": [
+        115,
+        512
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "value": [
+          12,
+          10
+        ]
+      },
+      "repeat_step": [
+        51,
+        0
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "CostChip_Hover",
+      "file": "CostChip_Hover.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        115,
+        512,
+        42,
+        45
+      ],
+      "output_size": [
+        42,
+        45
+      ],
+      "placement_1672_xy": [
+        115,
+        512
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "value": [
+          12,
+          10
+        ]
+      },
+      "repeat_step": [
+        51,
+        0
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "CostChip_Selected",
+      "file": "CostChip_Selected.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        115,
+        512,
+        42,
+        45
+      ],
+      "output_size": [
+        42,
+        45
+      ],
+      "placement_1672_xy": [
+        115,
+        512
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Selected",
+      "text_slots_local": {
+        "value": [
+          12,
+          10
+        ]
+      },
+      "repeat_step": [
+        51,
+        0
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "CountBadge",
+      "file": "CountBadge.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        481,
+        249,
+        57,
+        38
+      ],
+      "output_size": [
+        57,
+        38
+      ],
+      "placement_1672_xy": [
+        481,
+        249
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "quantity": [
+          12,
+          9
+        ]
+      }
+    },
+    {
+      "name": "EditRow_Normal",
+      "file": "EditRow_Normal.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1167,
+        242,
+        409,
+        87
+      ],
+      "output_size": [
+        409,
+        87
+      ],
+      "placement_1672_xy": [
+        1167,
+        242
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "name": [
+          100,
+          30
+        ],
+        "count": [
+          327,
+          31
+        ],
+        "minus_position": [
+          254,
+          23
+        ],
+        "plus_position": [
+          362,
+          23
+        ]
+      },
+      "repeat_step": [
+        0,
+        92
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "EditRow_Hover",
+      "file": "EditRow_Hover.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1167,
+        242,
+        409,
+        87
+      ],
+      "output_size": [
+        409,
+        87
+      ],
+      "placement_1672_xy": [
+        1167,
+        242
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "name": [
+          100,
+          30
+        ],
+        "count": [
+          327,
+          31
+        ],
+        "minus_position": [
+          254,
+          23
+        ],
+        "plus_position": [
+          362,
+          23
+        ]
+      },
+      "repeat_step": [
+        0,
+        92
+      ],
+      "portrait_window": null
+    },
+    {
+      "name": "Button_Minus_Normal",
+      "file": "Button_Minus_Normal.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1423,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1423,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal"
+    },
+    {
+      "name": "Button_Minus_Hover",
+      "file": "Button_Minus_Hover.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1423,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1423,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Minus_Pressed",
+      "file": "Button_Minus_Pressed.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1423,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1423,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_Minus_Disabled",
+      "file": "Button_Minus_Disabled.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1423,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1423,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Disabled"
+    },
+    {
+      "name": "Button_Plus_Normal",
+      "file": "Button_Plus_Normal.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1531,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1531,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal"
+    },
+    {
+      "name": "Button_Plus_Hover",
+      "file": "Button_Plus_Hover.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1531,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1531,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Plus_Pressed",
+      "file": "Button_Plus_Pressed.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1531,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1531,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Pressed"
+    },
+    {
+      "name": "Button_Plus_Disabled",
+      "file": "Button_Plus_Disabled.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1531,
+        263,
+        42,
+        44
+      ],
+      "output_size": [
+        42,
+        42
+      ],
+      "placement_1672_xy": [
+        1531,
+        263
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Disabled"
+    },
+    {
+      "name": "Button_Done_Normal",
+      "file": "Button_Done_Normal.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1155,
+        767,
+        434,
+        122
+      ],
+      "output_size": [
+        434,
+        122
+      ],
+      "placement_1672_xy": [
+        1155,
+        767
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "label": [
+          35,
+          36
+        ],
+        "arrow": [
+          150,
+          49
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_Done_Hover",
+      "file": "Button_Done_Hover.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1155,
+        767,
+        434,
+        122
+      ],
+      "output_size": [
+        434,
+        122
+      ],
+      "placement_1672_xy": [
+        1155,
+        767
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "label": [
+          35,
+          36
+        ],
+        "arrow": [
+          150,
+          49
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    },
+    {
+      "name": "Button_Done_Pressed",
+      "file": "Button_Done_Pressed.png",
+      "source": "Training_Deck_Mockup.png",
+      "source_crop_xywh": [
+        1155,
+        767,
+        434,
+        122
+      ],
+      "output_size": [
+        434,
+        122
+      ],
+      "placement_1672_xy": [
+        1155,
+        767
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "state": "Pressed",
+      "text_slots_local": {
+        "label": [
+          35,
+          36
+        ],
+        "arrow": [
+          150,
+          49
+        ]
+      },
+      "repeat_step": null,
+      "portrait_window": null
+    }
+  ],
+  "reuse": {
+    "Back": [
+      "../LoadoutMockup/Extracted/Back_Normal.png",
+      "../LoadoutMockup/Extracted/Back_Normal_Hover.png",
+      "../LoadoutMockup/Extracted/Icon_BackArrow.png"
+    ],
+    "Checkbox": [
+      "../ArmoryMockup/CardCatalogExtracted/Checkbox_Unchecked.png",
+      "../ArmoryMockup/CardCatalogExtracted/Checkbox_Selected.png",
+      "../ArmoryMockup/CardCatalogExtracted/Checkbox_Unchecked_Hover.png",
+      "../ArmoryMockup/CardCatalogExtracted/Checkbox_Selected_Hover.png"
+    ],
+    "Cards": [
+      "../ArmoryMockup/CardCatalogExtracted/Card_Attack_NoArt.png",
+      "../ArmoryMockup/CardCatalogExtracted/Card_RewardLocked.png",
+      "../ArmoryMockup/CardCatalogExtracted/Lock_Crop.png",
+      "../ArmoryMockup/CardCatalogExtracted/Energy_Cyan.png",
+      "../ArmoryMockup/CardCatalogExtracted/Energy_Gray.png"
+    ]
+  },
+  "coordinate_convention": "Top-left, native1672x941; local text slots relative to sprite top-left.",
+  "sections_main": {
+    "title": [
+      233,
+      31
+    ],
+    "subtitle": [
+      233,
+      87
+    ],
+    "target_title": [
+      111,
+      164
+    ],
+    "target_count": [
+      477,
+      164
+    ],
+    "target_name": [
+      590,
+      509
+    ],
+    "analysis_text": [
+      693,
+      566
+    ],
+    "companion_title": [
+      592,
+      627
+    ],
+    "companion_count": [
+      1031,
+      627
+    ],
+    "deck_title": [
+      1150,
+      164
+    ],
+    "deck_count": [
+      1517,
+      164
+    ]
+  },
+  "sections_deck": {
+    "title": [
+      235,
+      30
+    ],
+    "filter": [
+      117,
+      197
+    ],
+    "library": [
+      367,
+      197
+    ],
+    "library_count": [
+      939,
+      200
+    ],
+    "deck": [
+      1169,
+      197
+    ],
+    "deck_count": [
+      1519,
+      200
+    ]
+  },
+  "repeats": {
+    "target_rows": {
+      "origin": [
+        104,
+        200
+      ],
+      "step": [
+        0,
+        117
+      ],
+      "count": 6
+    },
+    "companions": {
+      "origin": [
+        589,
+        662
+      ],
+      "step": [
+        171,
+        0
+      ],
+      "count": 3
+    },
+    "deck_summary": {
+      "origin": [
+        1150,
+        202
+      ],
+      "step": [
+        0,
+        85
+      ],
+      "count": 5
+    },
+    "deck_edit": {
+      "origin": [
+        1167,
+        242
+      ],
+      "step": [
+        0,
+        92
+      ],
+      "count": 5
+    },
+    "library_grid": {
+      "origin": [
+        367,
+        244
+      ],
+      "cell_size": [
+        176,
+        300
+      ],
+      "column_step": 186,
+      "row_step": 310,
+      "columns": 4
+    },
+    "cost_chips": {
+      "origin": [
+        115,
+        512
+      ],
+      "step": [
+        51,
+        0
+      ],
+      "count": 4
+    }
+  },
+  "analysis_badge": "omitted: analysis completed/defeats is text only; boss badge uses TypeBadge_Boss",
+  "excluded": [
+    "all text/numbers",
+    "enemies",
+    "companions",
+    "silhouettes",
+    "card artwork",
+    "deck row pictograms"
+  ],
+  "text_alignment": "Companion name/level anchors are centered; other local slots are top-left. Name/count text is runtime only."
+}

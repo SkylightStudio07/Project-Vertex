@@ -78,7 +78,7 @@ public class WeaponEffectTests
         Assert.That(_state.Hand[0].CardName, Is.EqualTo("Second"));
         Assert.That(_state.CreateCard(original).CardName, Is.EqualTo("Second"));
         var currentCard = _state.Hand[0];
-        Assert.That(_state.ChangePlayerWeapon(second), Is.False);
+        Assert.That(_state.ChangePlayerWeapon(second), Is.True);
         Assert.That(_state.Hand[0], Is.SameAs(currentCard));
         Assert.That(_state.ChangePlayerWeapon(Weapon(null)), Is.False);
         Assert.That(_state.CurrentWeapon, Is.SameAs(second));
@@ -140,6 +140,184 @@ public class WeaponEffectTests
         Assert.That(shot.CardName, Is.EqualTo("Original"));
     }
 
+    private CardContext AmmoCard(int cost, int capacity = 3)
+    {
+        var card = Card("Ammo", false, cost);
+        var weapon = Weapon(card);
+        SetField(weapon, "maxAmmo", capacity);
+        _state.ChangePlayerWeapon(weapon);
+        return new CardContext { State = _state, Card = card };
+    }
+
+    [Test]
+    public void FirstAndLastAreOncePerReloadAndIndependentOfOrdinaryAmmoGain()
+    {
+        var first = AmmoCard(1);
+        _state.ConsumeAmmo(1, first);
+        Assert.That(first.IsFirstAmmoUse, Is.True);
+        Assert.That(first.IsLastAmmoUse, Is.False);
+        new AddAmmoEffect { amount = 1 }.Execute(first);
+        var last = new CardContext { State = _state, Card = first.Card };
+        _state.ConsumeAmmo(3, last);
+        Assert.That(last.IsFirstAmmoUse, Is.False);
+        Assert.That(last.IsLastAmmoUse, Is.True);
+        new AddAmmoEffect { amount = 3 }.Execute(first);
+        var extra = new CardContext { State = _state, Card = first.Card };
+        _state.ConsumeAmmo(3, extra);
+        Assert.That(extra.IsFirstAmmoUse || extra.IsLastAmmoUse, Is.False);
+        _state.ReloadAmmo();
+        var both = new CardContext { State = _state, Card = first.Card };
+        _state.ConsumeAmmo(3, both);
+        Assert.That(both.IsFirstAmmoUse && both.IsLastAmmoUse, Is.True);
+        Assert.That(first.IsFirstAmmoUse && last.IsLastAmmoUse, Is.True);
+    }
+
+    [Test]
+    public void ZeroConsumptionDoesNotClaimFirstAndSingleRoundGetsBoth()
+    {
+        var context = AmmoCard(1, 1);
+        _state.ConsumeAmmo(0, context);
+        Assert.That(context.IsFirstAmmoUse || context.IsLastAmmoUse, Is.False);
+        Assert.That(_state.FirstAmmoUseAvailable && _state.LastAmmoUseAvailable, Is.True);
+        _state.ConsumeAmmo(1, context);
+        Assert.That(context.IsFirstAmmoUse && context.IsLastAmmoUse, Is.True);
+        _state.ReloadAmmo();
+        Assert.That(context.IsFirstAmmoUse && context.IsLastAmmoUse, Is.True);
+        Assert.That(_state.FirstAmmoUseAvailable && _state.LastAmmoUseAvailable, Is.True);
+    }
+
+    private DamageEffect BonusDamage(bool includeLast = false)
+    {
+        var effect = new DamageEffect { amount = 3 };
+        effect.conditionalBonuses.Add(new ConditionalDamageBonus { condition = new FirstAmmoUseCondition(), amount = 4 });
+        if (includeLast)
+            effect.conditionalBonuses.Add(new ConditionalDamageBonus { condition = new LastAmmoUseCondition(), amount = 4 });
+        return effect;
+    }
+
+    [TestCase(false, 7)]
+    [TestCase(true, 11)]
+    public void ConditionalBonusesProduceOneHitAndMatchPreview(bool includeLast, int expected)
+    {
+        var context = AmmoCard(1, 1);
+        var target = new TestTarget();
+        context.PrimaryTargetOverride = target;
+        var damage = BonusDamage(includeLast);
+        var effects = new CardEffect[] { damage };
+        var preview = EffectRunner.Preview(effects, context);
+        Assert.That(preview.TotalDamage, Is.EqualTo(expected));
+        Assert.That(preview.HitCount, Is.EqualTo(1));
+        Assert.That(damage.GetDisplayValue("amount", 3, _state, context.Card), Is.EqualTo(expected));
+        Assert.That(_state.Ammo, Is.EqualTo(1));
+        Assert.That(_state.FirstAmmoUseAvailable && _state.LastAmmoUseAvailable, Is.True);
+        Assert.That(context.HasAmmoUsage, Is.False);
+        _state.ConsumeAmmo(1, context);
+        RunSequence(EffectRunner.ExecuteSequence(effects, context));
+        Assert.That(target.Hits, Is.EqualTo(new[] { expected }));
+        var copy = Object.Instantiate(context.Card);
+        _assets.Add(copy);
+        Assert.That(new FirstAmmoUseCondition().IsMet(context), Is.True);
+    }
+
+    [Test]
+    public void SeparateConditionalEffectStillProducesTwoHitsAndRepeatProducesThree()
+    {
+        var context = AmmoCard(1);
+        var target = new TestTarget();
+        context.PrimaryTargetOverride = target;
+        var effects = new CardEffect[]
+        {
+            new DamageEffect { amount = 3 },
+            new ConditionalEffect { condition = new FirstAmmoUseCondition(), effectsWhenMet = new List<CardEffect> { new DamageEffect { amount = 4 } } },
+        };
+        var preview = EffectRunner.Preview(effects, context);
+        Assert.That(preview.TotalDamage, Is.EqualTo(7));
+        Assert.That(preview.HitCount, Is.EqualTo(2));
+        _state.ConsumeAmmo(1, context);
+        EffectRunner.ExecuteImmediate(effects, context);
+        Assert.That(target.Hits, Is.EqualTo(new[] { 3, 4 }));
+        target.Hits.Clear();
+        new RepeatEffect { count = 3, effects = new List<CardEffect> { BonusDamage() } }.Execute(context);
+        Assert.That(target.Hits, Is.EqualTo(new[] { 7, 7, 7 }));
+    }
+
+    [Test]
+    public void ConsumeAllRecordsUsageBeforeDamageAndPreviewDoesNotConsumeRealAmmo()
+    {
+        var context = AmmoCard(0);
+        var target = new TestTarget();
+        context.PrimaryTargetOverride = target;
+        var effects = new CardEffect[] { new AmmoConsumeAllDamageEffect { damagePerAmmo = 2 }, BonusDamage(true) };
+        var preview = EffectRunner.Preview(effects, context);
+        Assert.That(preview.TotalDamage, Is.EqualTo(17));
+        Assert.That(_state.Ammo, Is.EqualTo(3));
+        target.OnHit = () => Assert.That(context.IsFirstAmmoUse && context.IsLastAmmoUse, Is.True);
+        EffectRunner.ExecuteImmediate(effects, context);
+        Assert.That(context.AmmoSpent, Is.EqualTo(3));
+        Assert.That(target.Hits, Is.EqualTo(new[] { 6, 11 }));
+    }
+
+    [Test]
+    public void ConvertedAmmoCostPreviewAndPaymentDoNotConsumeFirstOrLast()
+    {
+        var context = AmmoCard(1, 1);
+        var definition = ScriptableObject.CreateInstance<StatusDefinition>();
+        _assets.Add(definition);
+        SetField(definition, "behaviors", new List<StatusBehavior> { new CardBloodCostStatusBehavior() });
+        _state.Player.AddPassive(definition.CreateInstance(1));
+        var preview = context.CreateAmmoPreview();
+        Assert.That(preview.AmmoSpent, Is.Zero);
+        Assert.That(preview.IsFirstAmmoUse || preview.IsLastAmmoUse, Is.False);
+        Assert.That(BonusDamage().GetDisplayValue("amount", 3, _state, context.Card), Is.EqualTo(3));
+        var go = new GameObject("Ammo payment test");
+        _assets.Add(go);
+        var battle = go.AddComponent<BattleManager>();
+        SetField(battle, "_state", _state);
+        // 비용 보정은 별도로 검증했고, 실제 지불 경로에서 0 탄약이 판정을 소모하지 않는지 확인한다.
+        typeof(BattleManager).GetMethod("PayCardPlayCost", BindingFlags.NonPublic | BindingFlags.Instance)
+            .Invoke(battle, new object[] { new CardPlayCost(0, 0), context });
+        Assert.That(context.IsFirstAmmoUse || context.IsLastAmmoUse, Is.False);
+        Assert.That(_state.FirstAmmoUseAvailable && _state.LastAmmoUseAvailable, Is.True);
+        typeof(BattleManager).GetMethod("PayCardPlayCost", BindingFlags.NonPublic | BindingFlags.Instance)
+            .Invoke(battle, new object[] { new CardPlayCost(0, 1), context });
+        Assert.That(context.IsFirstAmmoUse && context.IsLastAmmoUse, Is.True);
+    }
+
+    [Test]
+    public void BonusConditionsSerializeAndCloneWithoutSharingUpgradeData()
+    {
+        var card = Card("Bonus", false, 1);
+        card.CardEffect.Clear();
+        card.CardEffect.Add(BonusDamage(true));
+        CardAuthoringUtility.CopyNormalToUpgrade(card);
+        var upgraded = (DamageEffect)card.UpgradedEffects[0];
+        Assert.That(upgraded.conditionalBonuses[0].condition, Is.TypeOf<FirstAmmoUseCondition>());
+        Assert.That(upgraded.conditionalBonuses[1].condition, Is.TypeOf<LastAmmoUseCondition>());
+        upgraded.conditionalBonuses[0].amount = 99;
+        Assert.That(((DamageEffect)card.CardEffect[0]).conditionalBonuses[0].amount, Is.EqualTo(4));
+        using var serialized = new UnityEditor.SerializedObject(card);
+        Assert.That(serialized.FindProperty("normalState.effects").GetArrayElementAtIndex(0)
+            .FindPropertyRelative("conditionalBonuses").GetArrayElementAtIndex(0)
+            .FindPropertyRelative("condition").managedReferenceValue, Is.TypeOf<FirstAmmoUseCondition>());
+    }
+
+    [Test]
+    public void CompositeConditionsAndPassiveContextReuseRecordedFlags()
+    {
+        var context = AmmoCard(1, 1);
+        var both = new AllConditions { conditions = new List<CardCondition> { new FirstAmmoUseCondition(), new LastAmmoUseCondition() } };
+        Assert.That(both.IsMet(_state, context.Card), Is.True);
+        Assert.That(_state.Ammo, Is.EqualTo(1));
+        _state.ConsumeAmmo(1, context);
+        var passive = ScriptableObject.CreateInstance<StatusDefinition>();
+        _assets.Add(passive);
+        var inherited = CardContext.CreatePassiveContext(_state, _state.Player, null, passive.CreateInstance(1), parent: context);
+        Assert.That(both.IsMet(inherited), Is.True);
+        Assert.That(inherited.AmmoSpent, Is.EqualTo(1));
+        _state.ReloadAmmo();
+        Assert.That(both.IsMet(context), Is.True);
+    }
+
     private CardData Card(string name, bool isShot, int value)
     {
         var card = ScriptableObject.CreateInstance<CardData>();
@@ -159,11 +337,76 @@ public class WeaponEffectTests
         return card;
     }
 
+    [TestCase(0)]
+    [TestCase(1)]
+    [TestCase(3)]
+    [TestCase(9)]
+    public void ReloadAndSameWeaponSwitchSetMaximumWithoutReplacingCards(int ammo)
+    {
+        var weapon = Weapon(Card("Shot", true, 1));
+        SetField(weapon, "maxAmmo", 3);
+        _state.ChangePlayerWeapon(weapon);
+        var shot = _state.CreateCard(weapon.ShootingCard);
+        _state.Hand.Add(shot);
+        _state.Ammo = ammo;
+        new ReloadAmmoEffect().Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(3));
+        Assert.That(_state.MaxAmmo, Is.EqualTo(3));
+        _state.Ammo = ammo;
+        Assert.That(_state.ChangePlayerWeapon(weapon), Is.True);
+        Assert.That(_state.Ammo, Is.EqualTo(3));
+        Assert.That(_state.Hand[0], Is.SameAs(shot));
+    }
+
+    [Test]
+    public void ReloadWithoutWeaponDoesNotEraseAmmoAndGainIsStillAdditive()
+    {
+        var effect = new ReloadAmmoEffect();
+        Assert.DoesNotThrow(() => effect.Execute(null));
+        Assert.DoesNotThrow(() => effect.Execute(new CardContext()));
+        effect.Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(7));
+        var weapon = Weapon(Card("Shot", false, 1));
+        SetField(weapon, "maxAmmo", 3);
+        _state.ChangePlayerWeapon(weapon);
+        new AddAmmoEffect { amount = 2 }.Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(5));
+        effect.Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(3));
+    }
+
+    [TestCase("권총", 3)]
+    [TestCase("스나이퍼", 1)]
+    public void ReloadCardAssetsUseEquippedWeaponMaximumInBothUpgradeStates(string weaponName, int maximum)
+    {
+        var weapon = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponData>($"Assets/Data/Weapons/{weaponName}.asset");
+        Assert.That(weapon, Is.Not.Null);
+        Assert.That(weapon.MaxAmmo, Is.EqualTo(maximum));
+        _state.ChangePlayerWeapon(weapon);
+        foreach (var path in new[] { "기본/재장전", "일반/스킬/긴급 보급" })
+        {
+            var template = UnityEditor.AssetDatabase.LoadAssetAtPath<CardData>($"Assets/Data/Cards/Player/{path}.asset");
+            Assert.That(template, Is.Not.Null);
+            var card = _state.CreateCard(template);
+            foreach (bool upgraded in new[] { false, true })
+            {
+                card.isUpgraded = upgraded;
+                Assert.That(card.ActiveEffects.Count, Is.EqualTo(1));
+                Assert.That(card.ActiveEffects[0], Is.TypeOf<ReloadAmmoEffect>());
+                _state.Ammo = 9;
+                EffectRunner.ExecuteImmediate(card.ActiveEffects, new CardContext { State = _state, Card = card });
+                Assert.That(_state.Ammo, Is.EqualTo(maximum));
+                Assert.That(card.GetFullDescription(), Does.Not.Contain("{0.amount}"));
+            }
+        }
+    }
+
     private WeaponData Weapon(CardData shot)
     {
         var weapon = ScriptableObject.CreateInstance<WeaponData>();
         _assets.Add(weapon);
         SetField(weapon, "shootingCard", shot);
+        SetField(weapon, "maxAmmo", 7);
         return weapon;
     }
 

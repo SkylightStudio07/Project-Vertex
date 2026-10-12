@@ -1,0 +1,560 @@
+{
+  "status": "passed",
+  "asset_count": 56,
+  "source_images": [
+    {
+      "file": "BattleFx_CutIn_Mockup.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "7e0d18c1788ae1facf4ee621041bd39117da007b042151452b882e7816e651b3"
+    },
+    {
+      "file": "BattleFx_Defeat_Mockup.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "86d08fa541e17d94eb4ee48e74457f7aa2657fc49e6c8e1cd11560e0b22748d3"
+    },
+    {
+      "file": "BattleFx_Start_Mockup.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "cc66b4a7beb800c80f6854d25431831eeed5e3bd10291ab48742d4d218898cc3"
+    },
+    {
+      "file": "BattleFx_Victory_Mockup.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "f7de93810a6f99f78683e532ce560a5879b764c0b8b3c2f11993e9696a176ef7"
+    },
+    {
+      "file": "Result_Clear_Mockup.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "700352fe640f7741e7fede29279ab7d0bb60c174fb03344e294028ea8f8e0c8f"
+    },
+    {
+      "file": "Result_Defeat_Mockup.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "dac2e5f935cc848b6a8fefbb96e6ac8b2b911ddaa6fd513f2d8480f4ab8f5779"
+    }
+  ],
+  "checks": [
+    {
+      "file": "Start/Band.png",
+      "size": [
+        3760,
+        388
+      ],
+      "alpha": "binary",
+      "sha256": "da4796f80d1ead83f946cbb2af5be96f25221338c77e283ccdd076d9d69ccc62"
+    },
+    {
+      "file": "Start/Line_Top.png",
+      "size": [
+        3528,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "95cb475eb797caa9024dea97d656161fcbfc93f1717b9c8a5c853de38d4c6ea8"
+    },
+    {
+      "file": "Start/Line_Bottom.png",
+      "size": [
+        3336,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "7ed353c854c13826b64eaf798c07814d3ef53b44e116bf0bc3d064a58b6e7adf"
+    },
+    {
+      "file": "Start/Slash_Accent.png",
+      "size": [
+        212,
+        200
+      ],
+      "alpha": "binary",
+      "sha256": "be62000bf3701993fa7eeaab0ccc71880f8409008af858d6a7594cd7f953092f"
+    },
+    {
+      "file": "Start/Tag.png",
+      "size": [
+        976,
+        92
+      ],
+      "alpha": "binary",
+      "sha256": "752c00138717abda3ccce04f2c1b1a5c35906ea5f3ac5043cc8489f05a78ac91"
+    },
+    {
+      "file": "Start/Tag_EliteMark.png",
+      "size": [
+        252,
+        76
+      ],
+      "alpha": "binary",
+      "sha256": "1d76c5b4f29087c9904ecae9536b2aef6206bbcccc397cffe03cd5467661f4aa"
+    },
+    {
+      "file": "Start/Tick.png",
+      "size": [
+        28,
+        28
+      ],
+      "alpha": "binary",
+      "sha256": "61782c5902d097f4c814b363d8e12529d28ac4055e48848ed1f76b156b80f4a1"
+    },
+    {
+      "file": "Start/Label_Line.png",
+      "size": [
+        340,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "5c66e050b0802b26d5e0409a201b477763702e32c8c9425485fe00373ec7fc1c"
+    },
+    {
+      "file": "Start/Title_Slash.png",
+      "size": [
+        164,
+        236
+      ],
+      "alpha": "binary",
+      "sha256": "884fb01c8549c1fd3329beaa57a85b24f37eb5370b09cb604d389371744efbad"
+    },
+    {
+      "file": "KillFeed/Row.png",
+      "size": [
+        1180,
+        100
+      ],
+      "alpha": "binary",
+      "sha256": "c30b6788f8fd211731e3a0c08d7508534d28f7aff25c1d43424db322a756da9f"
+    },
+    {
+      "file": "KillFeed/Row_Accent.png",
+      "size": [
+        44,
+        68
+      ],
+      "alpha": "binary",
+      "sha256": "8c05e08212753df9c72980495f5c3dca3effb1dc549a67f2e09a4647dfc6e51e"
+    },
+    {
+      "file": "KillFeed/BossChip.png",
+      "size": [
+        120,
+        44
+      ],
+      "alpha": "binary",
+      "sha256": "4cec113b0a9fdbc96bbe845375df733ce76ae7608e730c6ab9be7f56eeb7026b"
+    },
+    {
+      "file": "KillFeed/Separator.png",
+      "size": [
+        36,
+        68
+      ],
+      "alpha": "binary",
+      "sha256": "04bd231163957cdc13a1275025db90adf664bc2517c24c9a9023ecd8b9fa23b0"
+    },
+    {
+      "file": "CutIn/Frame_Power.png",
+      "size": [
+        2280,
+        400
+      ],
+      "alpha": "binary",
+      "sha256": "20df95d82e91f272629e57426b86e282ccce5bc0232f5b4e83caaaf9c87108f3"
+    },
+    {
+      "file": "CutIn/Label_Plate_Power.png",
+      "size": [
+        848,
+        64
+      ],
+      "alpha": "binary",
+      "sha256": "23821228e1d4fa6ac95ba1809bae87d283237ae46edca72f078f4fe7f0361508"
+    },
+    {
+      "file": "CutIn/Chip_Power.png",
+      "size": [
+        272,
+        48
+      ],
+      "alpha": "binary",
+      "sha256": "23e2115c689866d90238dc7e49e1e86280b642bd4965af17a40b8442dce34465"
+    },
+    {
+      "file": "CutIn/Frame_Unique.png",
+      "size": [
+        2280,
+        400
+      ],
+      "alpha": "binary",
+      "sha256": "fbc300dbd5f1139e76eec0204911cd6cc57313e2e414b89f4c541b60f4f35434"
+    },
+    {
+      "file": "CutIn/Label_Plate_Unique.png",
+      "size": [
+        848,
+        64
+      ],
+      "alpha": "binary",
+      "sha256": "507b27e2fb169e548ee34c81c0e6b806da7c4c38ffb33d0dadd8e460b233525b"
+    },
+    {
+      "file": "CutIn/Chip_Unique.png",
+      "size": [
+        272,
+        48
+      ],
+      "alpha": "binary",
+      "sha256": "9eb88acaa7249fc0b20d6b9466d15b7b170da720fb2ca8403ae6ba34d44870d8"
+    },
+    {
+      "file": "CutIn/Line.png",
+      "size": [
+        828,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "a1f9c2cae04e8b00838b299be7f353195e7bc79cf8c09b2157cbecacb866575e"
+    },
+    {
+      "file": "CutIn/Diamond.png",
+      "size": [
+        28,
+        28
+      ],
+      "alpha": "binary",
+      "sha256": "61782c5902d097f4c814b363d8e12529d28ac4055e48848ed1f76b156b80f4a1"
+    },
+    {
+      "file": "CutIn/Ticks_Unique.png",
+      "size": [
+        500,
+        16
+      ],
+      "alpha": "binary",
+      "sha256": "d604702bedf6f323745ebb598cff2fc0dda919fa1cc9d95fbcd89f2726f223c6"
+    },
+    {
+      "file": "Victory/Band.png",
+      "size": [
+        3840,
+        440
+      ],
+      "alpha": "binary",
+      "sha256": "d3a11e56ec68da30f89c27a6d61f87451d5ae544caab5a906bd898115a8d57aa"
+    },
+    {
+      "file": "Victory/Line_Top.png",
+      "size": [
+        3524,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "316c2c0dfff7084d638a45013aa55d49f8ee6d7d9c6b02d1cadf6f4462b4d90d"
+    },
+    {
+      "file": "Victory/Line_Bottom.png",
+      "size": [
+        1392,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "8dd4eee15174eecd632d60c471884ecc32610a45af85acd1ec9e34672cee0fbf"
+    },
+    {
+      "file": "Victory/Slash.png",
+      "size": [
+        428,
+        568
+      ],
+      "alpha": "binary",
+      "sha256": "cf148f001addadba9a45d8eae91c6853be826ca07fbcf024afb762d8b52d06cb"
+    },
+    {
+      "file": "Victory/Slash_Edge.png",
+      "size": [
+        164,
+        220
+      ],
+      "alpha": "binary",
+      "sha256": "8da6fbd4837fee6340e61090e10d2a5fcc3c4971826d19ee891d69acfe63d3c4"
+    },
+    {
+      "file": "Victory/Slash_Short.png",
+      "size": [
+        84,
+        112
+      ],
+      "alpha": "binary",
+      "sha256": "65d452b226e437b2af89aa62cd3a704a76be71270298ed7a9485cf3985784f95"
+    },
+    {
+      "file": "Victory/Tag.png",
+      "size": [
+        784,
+        56
+      ],
+      "alpha": "binary",
+      "sha256": "c289db00d275bcac2ff5f9fa17580d27919be240b51480e1814fd85427cbfe26"
+    },
+    {
+      "file": "Victory/Diamond.png",
+      "size": [
+        36,
+        36
+      ],
+      "alpha": "binary",
+      "sha256": "daeb9363a54ea28bd8fa92055563d2efdad60dd65b0f68d7b2a461c9d32d07bc"
+    },
+    {
+      "file": "Victory/Label_Line.png",
+      "size": [
+        536,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "d5ee00c37384f1772cfdac853ffb2265ca63573e404815f17cb1a7b29840e7f3"
+    },
+    {
+      "file": "Victory/Title_Line.png",
+      "size": [
+        412,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "fae5479649e5f66455864b544b90f872f951ada96204de2dbcf62e9f21615dd6"
+    },
+    {
+      "file": "Victory/Flash.png",
+      "size": [
+        3840,
+        440
+      ],
+      "alpha": "gradient",
+      "sha256": "b96f3e3302cf1fa37cd586e2c26717763ba92f81bec84a0121cab9c428d7382b"
+    },
+    {
+      "file": "Defeat/Band.png",
+      "size": [
+        3840,
+        440
+      ],
+      "alpha": "binary",
+      "sha256": "11cd9e9b9f1a7f7299ee1fe681d688ba383462e72746f98e4ee1ee0aad231a01"
+    },
+    {
+      "file": "Defeat/Line_Top.png",
+      "size": [
+        3524,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "cbd7252293f803a1ceb2823c087a958b1ffd439fac5c961745be48a7512b7880"
+    },
+    {
+      "file": "Defeat/Line_Bottom.png",
+      "size": [
+        1392,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "223bb945401d49318ef91e2aaec48585587d0f9573f3bd3127fdc38b6f4ac6e9"
+    },
+    {
+      "file": "Defeat/Slash.png",
+      "size": [
+        428,
+        568
+      ],
+      "alpha": "binary",
+      "sha256": "17e43903b8042ccfe136d0747db9615cf3f99e11f4e860b780d078bf76efaf14"
+    },
+    {
+      "file": "Defeat/Slash_Edge.png",
+      "size": [
+        164,
+        220
+      ],
+      "alpha": "binary",
+      "sha256": "98f53233a727c214fcacf4448f8657a393099583ea17ee3c8d02509ee76e2e68"
+    },
+    {
+      "file": "Defeat/Slash_Short.png",
+      "size": [
+        84,
+        112
+      ],
+      "alpha": "binary",
+      "sha256": "9b9f1bd5c0411c8c4a094db91e7316c542e33a5bc6a61b20d1c5e505ceb6a01e"
+    },
+    {
+      "file": "Defeat/Tag.png",
+      "size": [
+        784,
+        56
+      ],
+      "alpha": "binary",
+      "sha256": "6c63d22285016e5ba01c2911f6aa4d35bc98bdb10341f7536dffd6b1df12500d"
+    },
+    {
+      "file": "Defeat/Diamond.png",
+      "size": [
+        36,
+        36
+      ],
+      "alpha": "binary",
+      "sha256": "c584e6613d7880a08fb630cfabed756509542d45e4218dc9d368fc779d6329ef"
+    },
+    {
+      "file": "Defeat/Label_Line.png",
+      "size": [
+        536,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "d5ee00c37384f1772cfdac853ffb2265ca63573e404815f17cb1a7b29840e7f3"
+    },
+    {
+      "file": "Defeat/Title_Line.png",
+      "size": [
+        412,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "fae5479649e5f66455864b544b90f872f951ada96204de2dbcf62e9f21615dd6"
+    },
+    {
+      "file": "Result/Panel.png",
+      "size": [
+        2228,
+        1312
+      ],
+      "alpha": "binary",
+      "sha256": "0d32fa4cb00628d2564bca0617a827e0db0b1cfc529ef6c301faf659a2fd0e7f"
+    },
+    {
+      "file": "Result/Rule_Top.png",
+      "size": [
+        1880,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "32b09848a44a5346507109707ad90067eb7d762e3a67ee987e26ce87ba13811d"
+    },
+    {
+      "file": "Result/Rule_Bottom.png",
+      "size": [
+        1152,
+        2
+      ],
+      "alpha": "binary",
+      "sha256": "e70c5969dd06f3becc1f8374bc632d01eb06bb201e8e8c34cb8713a7db62092d"
+    },
+    {
+      "file": "Result/Stat_Divider.png",
+      "size": [
+        2,
+        252
+      ],
+      "alpha": "binary",
+      "sha256": "24e912396792e181cd5e737e6e4868465c3bd0945090035de48cc3cf94e82be4"
+    },
+    {
+      "file": "Result/Button_Return_Normal.png",
+      "size": [
+        780,
+        172
+      ],
+      "alpha": "binary",
+      "sha256": "e4940e26d1496396c845bce4c04a20052123d65ade11ac8307c526359e04b051"
+    },
+    {
+      "file": "Result/Button_Return_Hover.png",
+      "size": [
+        780,
+        172
+      ],
+      "alpha": "binary",
+      "sha256": "146b89493df12e1d07ee5d49a2c8f12a10f13fd3b3d33621b70f7b88a6a1b367"
+    },
+    {
+      "file": "Result/Button_Return_Pressed.png",
+      "size": [
+        780,
+        172
+      ],
+      "alpha": "binary",
+      "sha256": "dfe362ce904b9176fc7fbaef3e64d227957a1882fcf01028efa7c03eda929288"
+    },
+    {
+      "file": "Result/Accent_Clear.png",
+      "size": [
+        112,
+        8
+      ],
+      "alpha": "binary",
+      "sha256": "6531d2d60021bbc2e794b3242d8b26a478b492084b215d145514a13ac5ada47f"
+    },
+    {
+      "file": "Result/Accent_Stat_Clear.png",
+      "size": [
+        52,
+        4
+      ],
+      "alpha": "binary",
+      "sha256": "d8a8b00c2cc8fc13449ab7a87081339f7cc60f4a18f012df07040973cf0ba487"
+    },
+    {
+      "file": "Result/Accent_Corner_Clear.png",
+      "size": [
+        52,
+        52
+      ],
+      "alpha": "binary",
+      "sha256": "a557f56f895e40516a08a4f2d8a68d257a66ceecd183e5f1a51a4d0c9de97f20"
+    },
+    {
+      "file": "Result/Accent_Defeat.png",
+      "size": [
+        112,
+        8
+      ],
+      "alpha": "binary",
+      "sha256": "e9042539ed05586ba4bd6f18744468dfab3052b7ed35c79eaf14b1538de67cd4"
+    },
+    {
+      "file": "Result/Accent_Stat_Defeat.png",
+      "size": [
+        52,
+        4
+      ],
+      "alpha": "binary",
+      "sha256": "734603800474b1f4dbf376def0aa294571ad1fcccdbf7e90d21e661cb61e0b4e"
+    },
+    {
+      "file": "Result/Accent_Corner_Defeat.png",
+      "size": [
+        52,
+        52
+      ],
+      "alpha": "binary",
+      "sha256": "cf7b0820dc8e52c2157ee75fe1185add8f1a2404c7486c9cdc2c034e7aeaa023"
+    }
+  ]
+}

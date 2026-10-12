@@ -295,4 +295,10 @@ public class EventView : MonoBehaviour
         }
         mapUIController.OpenMap();
     }
+
+    // 씬을 다시 불러와도(재출정) 파괴된 이전 씬의 뷰가 Instance로 남지 않게 (비활성으로 시작하면 Awake가 늦게 돈다)
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
+    }
 }

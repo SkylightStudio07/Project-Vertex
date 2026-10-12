@@ -6,6 +6,9 @@ using UnityEngine;
 [Serializable]
 public abstract class StatusBehavior
 {
+    public virtual void OnReload(StatusInstance status, CardContext context) { }
+    public virtual void OnAmmoSpent(StatusInstance status, CardContext context, int spent, bool first, bool firstConsumption, bool preview) { }
+    public virtual int CardDamageBonus(StatusInstance status, CardContext context) => 0;
     public virtual void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner) { }
@@ -156,6 +159,24 @@ public sealed class OnTurnStartEffectsStatusBehavior : TriggeredEffectsStatusBeh
 {
     public override void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner)
         => Execute(context);
+}
+
+// N턴마다 효과 발동. 스택이 "발동까지 남은 턴"이다 (턴 시작마다 1씩 줄고, 1에서 발동 후 interval로 되돌아감).
+// 상태 정의의 durationPolicy는 Permanent로 둘 것 (스택이 0이 되어 사라지지 않게).
+[Serializable]
+public sealed class CountdownEffectsStatusBehavior : TriggeredEffectsStatusBehavior
+{
+    [Min(1)] public int interval = 3;
+
+    public override void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner)
+    {
+        if (status.Stacks <= 1)
+        {
+            Execute(context);
+            status.SetMagnitude(interval);
+        }
+        else status.ReduceMagnitude(1);
+    }
 }
 
 [Serializable]

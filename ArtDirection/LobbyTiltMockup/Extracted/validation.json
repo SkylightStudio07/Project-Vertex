@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "frame_count": 5,
+  "background_count": 1,
+  "frame_alpha_binary": true,
+  "menu_region_clear_except_allowed_bottom_center": true,
+  "background_left_pixels_unchanged_through_x640": true,
+  "background_opaque": true,
+  "files": [
+    {
+      "file": "Frame_TopLeft.png",
+      "sha256": "78954fd8ccbf0d32f2d546e9012653bf80b1817731fdd97218449e909dcb0afa",
+      "size": [
+        800,
+        360
+      ]
+    },
+    {
+      "file": "Frame_TopBar.png",
+      "sha256": "dd8b402e03e1de57e3f2102ff44637eaaf54aea3634e9d66087e65e815122732",
+      "size": [
+        1480,
+        200
+      ]
+    },
+    {
+      "file": "Frame_BottomLeft.png",
+      "sha256": "7c7036e8d8d4241896e7005c47e78a41e3c14e8262ded16255363ab6d8996432",
+      "size": [
+        640,
+        320
+      ]
+    },
+    {
+      "file": "Frame_BottomCenter.png",
+      "sha256": "1c990d4e507ce5e125bb7edd944fdf795971519975fc5aeae8f3c6aaacb23e6d",
+      "size": [
+        520,
+        480
+      ]
+    },
+    {
+      "file": "Frame_BottomRight.png",
+      "sha256": "bc23788c4308f2c0498addd9f7013677b2a6d39802b7640a0cb1861173cb0b71",
+      "size": [
+        280,
+        300
+      ]
+    }
+  ]
+}

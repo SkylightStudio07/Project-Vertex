@@ -1,0 +1,442 @@
+{
+  "version": 1,
+  "source_canvas": [
+    1920,
+    1080
+  ],
+  "design_canvas": [
+    1920,
+    1080
+  ],
+  "assets": [
+    {
+      "name": "Dialogue_Box",
+      "file": "Dialogue_Box.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        780,
+        1920,
+        300
+      ],
+      "output_size": [
+        1920,
+        300
+      ],
+      "placement_1920_xy": [
+        0,
+        780
+      ],
+      "nine_slice_lbrt": [
+        128,
+        0,
+        160,
+        0
+      ],
+      "method": "paper grain restored from clean source; end ornaments reconstructed; linear alpha ramp",
+      "alpha_ramp": {
+        "rows": [
+          0,
+          119
+        ],
+        "values": [
+          0,
+          255
+        ],
+        "opaque_rows": [
+          120,
+          299
+        ]
+      },
+      "texture_sample_xywh": [
+        910,
+        1000,
+        200,
+        52
+      ],
+      "height_fixed": 300
+    },
+    {
+      "name": "Dialogue_Watermark",
+      "file": "Dialogue_Watermark.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        1676,
+        824,
+        212,
+        188
+      ],
+      "output_size": [
+        160,
+        160
+      ],
+      "placement_1920_xy": [
+        1740,
+        900
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source compass luminance extraction within circular mask; scene and panel corner excluded",
+      "recommended_runtime_alpha": 0.12
+    },
+    {
+      "name": "Name_AccentLine",
+      "file": "Name_AccentLine.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        204,
+        920,
+        176,
+        6
+      ],
+      "output_size": [
+        120,
+        3
+      ],
+      "placement_1920_xy": [
+        204,
+        920
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "neutral white strip for runtime character-color tint"
+    },
+    {
+      "name": "Advance_Diamond",
+      "file": "Advance_Diamond.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        1610,
+        1010,
+        20,
+        22
+      ],
+      "output_size": [
+        14,
+        14
+      ],
+      "placement_1920_xy": [
+        1700,
+        1010
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical contour restoration; text and scene content removed"
+    },
+    {
+      "name": "Advance_Line",
+      "file": "Advance_Line.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        1642,
+        1020,
+        192,
+        2
+      ],
+      "output_size": [
+        48,
+        2
+      ],
+      "placement_1920_xy": [
+        1722,
+        1016
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical contour restoration; text and scene content removed"
+    },
+    {
+      "name": "Portrait_Cell",
+      "file": "Portrait_Cell.png",
+      "source": "Dialogue_Overlay_Mockup.png",
+      "source_crop_xywh": [
+        110,
+        856,
+        204,
+        196
+      ],
+      "output_size": [
+        96,
+        96
+      ],
+      "placement_1920_xy": [
+        120,
+        830
+      ],
+      "nine_slice_lbrt": [
+        19,
+        19,
+        19,
+        19
+      ],
+      "method": "empty clipped portrait border restored; transparent interior; portrait excluded"
+    },
+    {
+      "name": "Choice_Panel_Normal",
+      "file": "Choice_Panel_Normal.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        580,
+        508,
+        792,
+        78
+      ],
+      "output_size": [
+        760,
+        72
+      ],
+      "placement_1920_xy": [
+        580,
+        508
+      ],
+      "nine_slice_lbrt": [
+        22,
+        22,
+        22,
+        22
+      ],
+      "method": "canonical contour restoration; text and scene content removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Choice_Panel_Hover",
+      "file": "Choice_Panel_Hover.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        580,
+        410,
+        792,
+        78
+      ],
+      "output_size": [
+        760,
+        72
+      ],
+      "placement_1920_xy": [
+        580,
+        410
+      ],
+      "nine_slice_lbrt": [
+        22,
+        22,
+        22,
+        22
+      ],
+      "method": "canonical contour restoration; text and scene content removed",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Choice_Panel_Disabled",
+      "file": "Choice_Panel_Disabled.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        580,
+        508,
+        792,
+        78
+      ],
+      "output_size": [
+        760,
+        72
+      ],
+      "placement_1920_xy": [
+        580,
+        508
+      ],
+      "nine_slice_lbrt": [
+        22,
+        22,
+        22,
+        22
+      ],
+      "method": "canonical contour restoration; text and scene content removed",
+      "state": "Disabled",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Answer_Panel_Normal",
+      "file": "Answer_Panel_Normal.png",
+      "source": "Dialogue_Overlay_Mockup.png",
+      "source_crop_xywh": [
+        1172,
+        790,
+        658,
+        76
+      ],
+      "output_size": [
+        640,
+        60
+      ],
+      "placement_1920_xy": [
+        1172,
+        790
+      ],
+      "nine_slice_lbrt": [
+        22,
+        22,
+        22,
+        22
+      ],
+      "method": "canonical contour restoration; text and scene content removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Answer_Panel_Hover",
+      "file": "Answer_Panel_Hover.png",
+      "source": "Dialogue_Overlay_Mockup.png",
+      "source_crop_xywh": [
+        1172,
+        790,
+        658,
+        76
+      ],
+      "output_size": [
+        640,
+        60
+      ],
+      "placement_1920_xy": [
+        1172,
+        790
+      ],
+      "nine_slice_lbrt": [
+        22,
+        22,
+        22,
+        22
+      ],
+      "method": "canonical contour restoration; text and scene content removed",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        1328,
+        534,
+        20,
+        30
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        1328,
+        534
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "shared20px arrow restored from source direction indicator"
+    },
+    {
+      "name": "NumberUnderline",
+      "file": "NumberUnderline.png",
+      "source": "Dialogue_Story_Mockup.png",
+      "source_crop_xywh": [
+        634,
+        558,
+        24,
+        2
+      ],
+      "output_size": [
+        18,
+        2
+      ],
+      "placement_1920_xy": [
+        634,
+        558
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "shared18px underline"
+    }
+  ],
+  "coordinates": "Top-left origin. source_crop_xywh: screenshot reference/texture extraction area; output_size: actual normalized PNG dimensions.",
+  "placements": {
+    "Dialogue_Box": [
+      0,
+      780
+    ],
+    "Choice_1": [
+      580,
+      420
+    ],
+    "Choice_2": [
+      580,
+      504
+    ],
+    "Answer_Panel": [
+      1180,
+      712
+    ],
+    "Advance_Diamond": [
+      1700,
+      1010
+    ],
+    "Advance_Line": [
+      1722,
+      1016
+    ],
+    "Dialogue_Watermark": [
+      1740,
+      900
+    ],
+    "Portrait_Cell": [
+      120,
+      830
+    ]
+  },
+  "dialogue_alpha": "RGBA straight alpha: rows0..119 linearly0..255, rows120..299 fully255; RGB paper remains independent of source background.",
+  "states": "Disabled uses gray paper; gray runtime text/icon separately. Hover uses cyan1px outline.",
+  "excluded": [
+    "all text/numbers",
+    "characters",
+    "portrait art",
+    "scene/shop/background pixels"
+  ],
+  "dialogue_slicing": "Horizontal only, height300 fixed. L128 B0 R160 T0. Do not vertically stretch the120px ramp."
+}

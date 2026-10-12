@@ -1,0 +1,662 @@
+{
+  "version": 1,
+  "source": "Blessing_Mockup_v1_Canonical.png",
+  "source_canvas": [
+    1672,
+    941
+  ],
+  "design_canvas": [
+    1920,
+    1080
+  ],
+  "coordinates": "top-left origin; source_crop_xywh in original PNG pixels; output_size and placement in design pixels",
+  "dimensions_note": "Dialogue and nameplate heights follow canonical footprints; option panels normalized to1158x70; accent normalized to60x2.",
+  "assets": [
+    {
+      "name": "Panel_Dialogue",
+      "file": "Panel_Dialogue.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        489,
+        512,
+        1019,
+        125
+      ],
+      "output_size": [
+        1158,
+        140
+      ],
+      "placement_1920_xy": [
+        562,
+        588
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        26,
+        36
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        843,
+        612,
+        125,
+        14
+      ]
+    },
+    {
+      "name": "Panel_Option_A_Normal",
+      "file": "Panel_Option_A_Normal.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        491,
+        784,
+        1010,
+        63
+      ],
+      "output_size": [
+        1158,
+        70
+      ],
+      "placement_1920_xy": [
+        564,
+        900
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        26,
+        26
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        843,
+        612,
+        125,
+        14
+      ]
+    },
+    {
+      "name": "Panel_Option_A_Hover",
+      "file": "Panel_Option_A_Hover.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        491,
+        784,
+        1010,
+        63
+      ],
+      "output_size": [
+        1158,
+        70
+      ],
+      "placement_1920_xy": [
+        564,
+        900
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        26,
+        26
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        843,
+        612,
+        125,
+        14
+      ]
+    },
+    {
+      "name": "Panel_Option_A_Disabled",
+      "file": "Panel_Option_A_Disabled.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        491,
+        784,
+        1010,
+        63
+      ],
+      "output_size": [
+        1158,
+        70
+      ],
+      "placement_1920_xy": [
+        564,
+        900
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        26,
+        26
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Disabled",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        843,
+        612,
+        125,
+        14
+      ]
+    },
+    {
+      "name": "Panel_Option_B_Normal",
+      "file": "Panel_Option_B_Normal.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        491,
+        854,
+        1010,
+        63
+      ],
+      "output_size": [
+        1158,
+        70
+      ],
+      "placement_1920_xy": [
+        564,
+        980
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        26,
+        26
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        843,
+        612,
+        125,
+        14
+      ]
+    },
+    {
+      "name": "Panel_Option_B_Hover",
+      "file": "Panel_Option_B_Hover.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        491,
+        854,
+        1010,
+        63
+      ],
+      "output_size": [
+        1158,
+        70
+      ],
+      "placement_1920_xy": [
+        564,
+        980
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        26,
+        26
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Hover",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        843,
+        612,
+        125,
+        14
+      ]
+    },
+    {
+      "name": "Panel_Option_B_Disabled",
+      "file": "Panel_Option_B_Disabled.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        491,
+        854,
+        1010,
+        63
+      ],
+      "output_size": [
+        1158,
+        70
+      ],
+      "placement_1920_xy": [
+        564,
+        980
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        26,
+        26
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Disabled",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": [
+        843,
+        612,
+        125,
+        14
+      ]
+    },
+    {
+      "name": "Panel_Nameplate",
+      "file": "Panel_Nameplate.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        42,
+        772,
+        327,
+        139
+      ],
+      "output_size": [
+        376,
+        160
+      ],
+      "placement_1920_xy": [
+        48,
+        886
+      ],
+      "nine_slice_lbrt": [
+        24,
+        26,
+        44,
+        26
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Normal",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "texture_sample_xywh": null
+    },
+    {
+      "name": "Option_IconCell_Normal",
+      "file": "Option_IconCell_Normal.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        566,
+        648,
+        52,
+        54
+      ],
+      "output_size": [
+        56,
+        56
+      ],
+      "placement_1920_xy": [
+        650,
+        744
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Normal"
+    },
+    {
+      "name": "Option_IconCell_Hover",
+      "file": "Option_IconCell_Hover.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        566,
+        648,
+        52,
+        54
+      ],
+      "output_size": [
+        56,
+        56
+      ],
+      "placement_1920_xy": [
+        650,
+        744
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Hover"
+    },
+    {
+      "name": "Option_IconCell_Disabled",
+      "file": "Option_IconCell_Disabled.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        566,
+        648,
+        52,
+        54
+      ],
+      "output_size": [
+        56,
+        56
+      ],
+      "placement_1920_xy": [
+        650,
+        744
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "canonical contour restored with clean source paper grain; text and content removed",
+      "state": "Disabled"
+    },
+    {
+      "name": "Portrait_Cell",
+      "file": "Portrait_Cell.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        519,
+        556,
+        56,
+        61
+      ],
+      "output_size": [
+        48,
+        64
+      ],
+      "placement_1920_xy": [
+        596,
+        638
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "empty portrait border and right divider; portrait omitted"
+    },
+    {
+      "name": "Option_Divider",
+      "file": "Option_Divider.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        777,
+        660,
+        2,
+        35
+      ],
+      "output_size": [
+        2,
+        40
+      ],
+      "placement_1920_xy": [
+        892,
+        758
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided clean line reconstruction"
+    },
+    {
+      "name": "Nameplate_AccentLine",
+      "file": "Nameplate_AccentLine.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        68,
+        856,
+        181,
+        3
+      ],
+      "output_size": [
+        60,
+        2
+      ],
+      "placement_1920_xy": [
+        78,
+        982
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided clean line reconstruction"
+    },
+    {
+      "name": "NumberUnderline",
+      "file": "NumberUnderline.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        516,
+        678,
+        14,
+        2
+      ],
+      "output_size": [
+        18,
+        2
+      ],
+      "placement_1920_xy": [
+        592,
+        778
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided clean line reconstruction"
+    },
+    {
+      "name": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        1449,
+        805,
+        26,
+        21
+      ],
+      "output_size": [
+        20,
+        20
+      ],
+      "placement_1920_xy": [
+        1664,
+        924
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "arrow outline normalized to shared 20px size"
+    },
+    {
+      "name": "Icon_Plus",
+      "file": "Icon_Plus.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        317,
+        782,
+        23,
+        24
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1920_xy": [
+        364,
+        898
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "optional detached registration mark; nameplate already contains its marks"
+    },
+    {
+      "name": "Watermark_Compass",
+      "file": "Watermark_Compass.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        1386,
+        526,
+        108,
+        101
+      ],
+      "output_size": [
+        120,
+        120
+      ],
+      "placement_1920_xy": [
+        1592,
+        604
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical compass luminance mask; paper removed; no replacement star",
+      "recommended_runtime_alpha": 0.18
+    },
+    {
+      "name": "Corner_Marks",
+      "file": "Corner_Marks.png",
+      "source": "Blessing_Mockup_v1_Canonical.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "output_size": [
+        1920,
+        1080
+      ],
+      "placement_1920_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "edge registration lines restored; all microcopy omitted",
+      "source_regions_xywh": [
+        [
+          21,
+          21,
+          44,
+          101
+        ],
+        [
+          1594,
+          866,
+          54,
+          52
+        ]
+      ]
+    }
+  ],
+  "option_instances": [
+    {
+      "index": 1,
+      "panel": "Panel_Option_A_Hover",
+      "position": [
+        564,
+        740
+      ],
+      "icon_cell": "Option_IconCell_Hover"
+    },
+    {
+      "index": 2,
+      "panel": "Panel_Option_B_Disabled",
+      "position": [
+        564,
+        820
+      ],
+      "icon_cell": "Option_IconCell_Disabled"
+    },
+    {
+      "index": 3,
+      "panel": "Panel_Option_A_Normal",
+      "position": [
+        564,
+        900
+      ],
+      "icon_cell": "Option_IconCell_Normal"
+    },
+    {
+      "index": 4,
+      "panel": "Panel_Option_B_Normal",
+      "position": [
+        564,
+        980
+      ],
+      "icon_cell": "Option_IconCell_Normal"
+    }
+  ],
+  "hover_runtime_offset": [
+    -8,
+    0
+  ],
+  "excluded": [
+    "top HUD slots",
+    "MAP/DECK",
+    "all text and numbers",
+    "option artwork",
+    "dialogue portrait"
+  ],
+  "nameplate_plus_note": "Included per explicit asset list. Icon_Plus is supplied separately; avoid double placement.",
+  "states": "Disabled uses gray paper; tint runtime text/icons separately. Hover moves left8px in-game."
+}

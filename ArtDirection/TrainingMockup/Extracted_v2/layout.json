@@ -1,0 +1,930 @@
+{
+  "version": 2,
+  "canvas": [
+    1672,
+    941
+  ],
+  "assets": [
+    {
+      "name": "Base_Companion",
+      "file": "Base_Companion.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "output_size": [
+        1672,
+        941
+      ],
+      "placement_1672_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "texture_sample_xywh": [
+        636,
+        35,
+        101,
+        35
+      ],
+      "note": "Original outer lobby scenery retained; all interior content restored."
+    },
+    {
+      "name": "PortraitCell_Normal",
+      "file": "PortraitCell_Normal.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        345,
+        244,
+        120,
+        213
+      ],
+      "output_size": [
+        120,
+        213
+      ],
+      "placement_1672_xy": [
+        345,
+        244
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Normal",
+      "portrait_window_xywh": [
+        4,
+        4,
+        112,
+        137
+      ],
+      "text_slots_local": {
+        "name": [
+          8,
+          154
+        ],
+        "status": [
+          8,
+          181
+        ]
+      }
+    },
+    {
+      "name": "PortraitCell_Hover",
+      "file": "PortraitCell_Hover.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        345,
+        244,
+        120,
+        213
+      ],
+      "output_size": [
+        120,
+        213
+      ],
+      "placement_1672_xy": [
+        345,
+        244
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Hover",
+      "portrait_window_xywh": [
+        4,
+        4,
+        112,
+        137
+      ],
+      "text_slots_local": {
+        "name": [
+          8,
+          154
+        ],
+        "status": [
+          8,
+          181
+        ]
+      }
+    },
+    {
+      "name": "PortraitCell_Party",
+      "file": "PortraitCell_Party.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        345,
+        244,
+        120,
+        213
+      ],
+      "output_size": [
+        120,
+        213
+      ],
+      "placement_1672_xy": [
+        345,
+        244
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Party",
+      "portrait_window_xywh": [
+        4,
+        4,
+        112,
+        137
+      ],
+      "text_slots_local": {
+        "name": [
+          8,
+          154
+        ],
+        "status": [
+          8,
+          181
+        ]
+      }
+    },
+    {
+      "name": "PortraitCell_Locked",
+      "file": "PortraitCell_Locked.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        345,
+        244,
+        120,
+        213
+      ],
+      "output_size": [
+        120,
+        213
+      ],
+      "placement_1672_xy": [
+        345,
+        244
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Locked",
+      "portrait_window_xywh": [
+        4,
+        4,
+        112,
+        137
+      ],
+      "text_slots_local": {
+        "name": [
+          8,
+          154
+        ],
+        "status": [
+          8,
+          181
+        ]
+      }
+    },
+    {
+      "name": "PartyBadge",
+      "file": "PartyBadge.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        411,
+        246,
+        54,
+        33
+      ],
+      "output_size": [
+        54,
+        34
+      ],
+      "placement_1672_xy": [
+        411,
+        246
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "text_slots_local": {
+        "label": [
+          9,
+          9
+        ]
+      }
+    },
+    {
+      "name": "DetailPortrait_Frame",
+      "file": "DetailPortrait_Frame.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1163,
+        242,
+        218,
+        284
+      ],
+      "output_size": [
+        218,
+        284
+      ],
+      "placement_1672_xy": [
+        1163,
+        242
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "portrait_window_xywh": [
+        1,
+        1,
+        216,
+        282
+      ]
+    },
+    {
+      "name": "DetailCardSlot",
+      "file": "DetailCardSlot.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1393,
+        446,
+        186,
+        80
+      ],
+      "output_size": [
+        186,
+        80
+      ],
+      "placement_1672_xy": [
+        1393,
+        446
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "art_window_xywh": [
+        4,
+        4,
+        66,
+        70
+      ],
+      "text_slots_local": {
+        "card_name": [
+          80,
+          13
+        ],
+        "energy_marker": [
+          84,
+          47
+        ]
+      }
+    },
+    {
+      "name": "PartySlot_Filled",
+      "file": "PartySlot_Filled.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1165,
+        610,
+        132,
+        164
+      ],
+      "output_size": [
+        132,
+        164
+      ],
+      "placement_1672_xy": [
+        1165,
+        610
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Filled",
+      "portrait_window_xywh": [
+        6,
+        6,
+        120,
+        126
+      ],
+      "text_slots_local": {
+        "name": [
+          66,
+          139
+        ],
+        "plus": [
+          66,
+          82
+        ]
+      }
+    },
+    {
+      "name": "PartySlot_Hover",
+      "file": "PartySlot_Hover.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1165,
+        610,
+        132,
+        164
+      ],
+      "output_size": [
+        132,
+        164
+      ],
+      "placement_1672_xy": [
+        1165,
+        610
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Hover",
+      "portrait_window_xywh": [
+        6,
+        6,
+        120,
+        126
+      ],
+      "text_slots_local": {
+        "name": [
+          66,
+          139
+        ],
+        "plus": [
+          66,
+          82
+        ]
+      }
+    },
+    {
+      "name": "PartySlot_Empty",
+      "file": "PartySlot_Empty.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1165,
+        610,
+        132,
+        164
+      ],
+      "output_size": [
+        132,
+        164
+      ],
+      "placement_1672_xy": [
+        1165,
+        610
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Empty",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "name": [
+          66,
+          139
+        ],
+        "plus": [
+          66,
+          82
+        ]
+      }
+    },
+    {
+      "name": "Button_Remove_Normal",
+      "file": "Button_Remove_Normal.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1263,
+        619,
+        28,
+        28
+      ],
+      "output_size": [
+        28,
+        28
+      ],
+      "placement_1672_xy": [
+        1263,
+        619
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Normal"
+    },
+    {
+      "name": "Button_Remove_Hover",
+      "file": "Button_Remove_Hover.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1263,
+        619,
+        28,
+        28
+      ],
+      "output_size": [
+        28,
+        28
+      ],
+      "placement_1672_xy": [
+        1263,
+        619
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Hover"
+    },
+    {
+      "name": "Button_Remove_Pressed",
+      "file": "Button_Remove_Pressed.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1263,
+        619,
+        28,
+        28
+      ],
+      "output_size": [
+        28,
+        28
+      ],
+      "placement_1672_xy": [
+        1263,
+        619
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Pressed"
+    },
+    {
+      "name": "Icon_Plus",
+      "file": "Icon_Plus.png",
+      "source": "Training_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1493,
+        666,
+        42,
+        45
+      ],
+      "output_size": [
+        28,
+        28
+      ],
+      "placement_1672_xy": [
+        1493,
+        666
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed"
+    },
+    {
+      "name": "CompanionSlot_Empty_Normal",
+      "file": "CompanionSlot_Empty_Normal.png",
+      "source": "Training_Main_Mockup_v2.png",
+      "source_crop_xywh": [
+        934,
+        666,
+        153,
+        216
+      ],
+      "output_size": [
+        162,
+        221
+      ],
+      "placement_1672_xy": [
+        934,
+        666
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Normal",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "label": [
+          81,
+          139
+        ],
+        "plus": [
+          81,
+          81
+        ]
+      }
+    },
+    {
+      "name": "CompanionSlot_Empty_Hover",
+      "file": "CompanionSlot_Empty_Hover.png",
+      "source": "Training_Main_Mockup_v2.png",
+      "source_crop_xywh": [
+        934,
+        666,
+        153,
+        216
+      ],
+      "output_size": [
+        162,
+        221
+      ],
+      "placement_1672_xy": [
+        934,
+        666
+      ],
+      "nine_slice_lbrt": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Hover",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "label": [
+          81,
+          139
+        ],
+        "plus": [
+          81,
+          81
+        ]
+      }
+    },
+    {
+      "name": "Button_Formation_Normal",
+      "file": "Button_Formation_Normal.png",
+      "source": "Training_Main_Mockup_v2.png",
+      "source_crop_xywh": [
+        998,
+        619,
+        94,
+        38
+      ],
+      "output_size": [
+        94,
+        38
+      ],
+      "placement_1672_xy": [
+        998,
+        619
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Normal",
+      "text_slots_local": {
+        "label": [
+          16,
+          8
+        ],
+        "arrow": [
+          70,
+          12
+        ]
+      }
+    },
+    {
+      "name": "Button_Formation_Hover",
+      "file": "Button_Formation_Hover.png",
+      "source": "Training_Main_Mockup_v2.png",
+      "source_crop_xywh": [
+        998,
+        619,
+        94,
+        38
+      ],
+      "output_size": [
+        94,
+        38
+      ],
+      "placement_1672_xy": [
+        998,
+        619
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Hover",
+      "text_slots_local": {
+        "label": [
+          16,
+          8
+        ],
+        "arrow": [
+          70,
+          12
+        ]
+      }
+    },
+    {
+      "name": "Button_Formation_Pressed",
+      "file": "Button_Formation_Pressed.png",
+      "source": "Training_Main_Mockup_v2.png",
+      "source_crop_xywh": [
+        998,
+        619,
+        94,
+        38
+      ],
+      "output_size": [
+        94,
+        38
+      ],
+      "placement_1672_xy": [
+        998,
+        619
+      ],
+      "nine_slice_lbrt": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "method": "source-guided geometry and source paper texture restoration; text/art removed",
+      "state": "Pressed",
+      "text_slots_local": {
+        "label": [
+          16,
+          8
+        ],
+        "arrow": [
+          70,
+          12
+        ]
+      }
+    }
+  ],
+  "reuse": {
+    "main_background": [
+      "../Extracted/Base_Main.png"
+    ],
+    "main_companions": [
+      "../Extracted/CompanionCard_Normal.png",
+      "../Extracted/CompanionCard_Hover.png",
+      "../Extracted/CompanionCard_Selected.png",
+      "../Extracted/CompanionCard_Locked.png",
+      "../Extracted/CompanionTag.png"
+    ],
+    "done": [
+      "../Extracted/Button_Done_Normal.png",
+      "../Extracted/Button_Done_Hover.png",
+      "../Extracted/Button_Done_Pressed.png"
+    ],
+    "scroll": [
+      "../Extracted/Scrollbar_Track.png",
+      "../Extracted/Scrollbar_Handle.png"
+    ],
+    "lock": [
+      "../Extracted/Icon_Lock.png"
+    ],
+    "diamond": [
+      "../Extracted/DefeatPip_Filled.png"
+    ],
+    "affinity": [
+      "../../SanctuaryMockup/Extracted/Detail_AffinityCell_Empty.png",
+      "../../SanctuaryMockup/Extracted/Detail_AffinityCell_Filled.png"
+    ],
+    "name_accent": [
+      "../../SanctuaryMockup/Extracted/Name_AccentLine.png"
+    ],
+    "checkbox": [
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Unchecked.png",
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Selected.png",
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Unchecked_Hover.png",
+      "../../ArmoryMockup/CardCatalogExtracted/Checkbox_Selected_Hover.png"
+    ],
+    "back": [
+      "../../LoadoutMockup/Extracted/Back_Normal.png",
+      "../../LoadoutMockup/Extracted/Back_Normal_Hover.png",
+      "../../LoadoutMockup/Extracted/Icon_BackArrow.png"
+    ],
+    "arrow": [
+      "../Extracted/Icon_Arrow.png"
+    ]
+  },
+  "coordinates": "Top-left. Original crop/placement native1672x941. Windows/text slots local to output PNG unless marked screen.",
+  "repeats": {
+    "portrait_grid": {
+      "origin": [
+        345,
+        244
+      ],
+      "cell_size": [
+        120,
+        213
+      ],
+      "columns": 6,
+      "column_step": 127,
+      "row_step": 223,
+      "count": 14
+    },
+    "party_slots": {
+      "origin": [
+        1165,
+        610
+      ],
+      "size": [
+        132,
+        164
+      ],
+      "column_step": 141,
+      "count": 3
+    },
+    "main_party_slots": {
+      "origin": [
+        589,
+        662
+      ],
+      "size": [
+        162,
+        221
+      ],
+      "column_step": 171,
+      "count": 3
+    }
+  },
+  "text_screen_companion": {
+    "title": [
+      233,
+      30
+    ],
+    "filter": [
+      117,
+      193
+    ],
+    "grid_title": [
+      347,
+      193
+    ],
+    "grid_count": [
+      892,
+      197
+    ],
+    "selected_title": [
+      1167,
+      195
+    ],
+    "name": [
+      1393,
+      249
+    ],
+    "affiliation": [
+      1423,
+      291
+    ],
+    "affinity": [
+      1395,
+      350
+    ],
+    "card_label": [
+      1395,
+      427
+    ],
+    "party_title": [
+      1167,
+      570
+    ],
+    "party_count": [
+      1524,
+      572
+    ],
+    "done": [
+      1193,
+      817
+    ]
+  },
+  "text_screen_main": {
+    "party_title": [
+      592,
+      627
+    ],
+    "party_count": [
+      925,
+      629
+    ],
+    "formation": [
+      1017,
+      629
+    ],
+    "empty_label": [
+      974,
+      798
+    ]
+  },
+  "detail_windows_screen": {
+    "portrait": [
+      1163,
+      242,
+      218,
+      284
+    ],
+    "card_art": [
+      1397,
+      450,
+      66,
+      70
+    ]
+  },
+  "affinity_instances": {
+    "origin": [
+      1397,
+      376
+    ],
+    "size": [
+      33,
+      26
+    ],
+    "step": [
+      38,
+      0
+    ],
+    "count": 5
+  },
+  "main_tag_policy": "Use existing CompanionTag at lower-left on both filled cards; grid uses PartyBadge at upper-right only.",
+  "analysis": {
+    "Base_Main_v2": "not emitted: original main column geometry unchanged",
+    "AffinityCell": "reuse rectangular Sanctuary cells, displayed33x26",
+    "DetailPortrait_Frame": "separate visible border, transparent center"
+  }
+}

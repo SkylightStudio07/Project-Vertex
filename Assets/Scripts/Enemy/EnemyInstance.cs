@@ -30,6 +30,15 @@ public class EnemyInstance : ICombatant
     // 적의 현재 인텐트
     private EnemyAction _action;
 
+    // 현재 페이즈. -1이면 기본 패턴(EnemyData의 openingActions/activityPatterns).
+    private int _phaseIndex = -1;
+    private EnemyPhase CurrentPhase => _phaseIndex >= 0 ? Data.phases[_phaseIndex] : null;
+    private List<EnemyAction> CurrentOpenings => CurrentPhase != null ? CurrentPhase.openingActions : Data.openingActions;
+    private List<EnemyAction> CurrentPatterns => CurrentPhase != null ? CurrentPhase.activityPatterns : Data.activityPatterns;
+    private EnemyActivityPatternType CurrentPatternType => CurrentPhase != null ? CurrentPhase.activityPatternType : Data.activityPatternType;
+    public int PhaseIndex => _phaseIndex;
+    private int _alliesDefeated; // 같은 전투에서 쓰러진 다른 적 수 (BattleManager가 알려준다)
+
     public int  HP     => _hp;
     public int  MaxHP  => Data.health;
     public int  Block  => _block;
@@ -40,6 +49,8 @@ public class EnemyInstance : ICombatant
     public Sprite EnemySprite { get; private set; }
     public Sprite[] IdleFrames => Data != null ? Data.idleFrames : null;
     public float IdleFrameRate => (Data != null && Data.idleFrameRate > 0.01f) ? Data.idleFrameRate : 12f;
+    public Sprite[] AttackFrames => Data != null ? Data.attackFrames : null;
+    public float AttackFrameRate => (Data != null && Data.attackFrameRate > 0.01f) ? Data.attackFrameRate : 16f;
     public float SpriteScale => (Data != null && Data.spriteScale > 0.01f) ? Data.spriteScale : 1.0f;
     public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
 
@@ -50,6 +61,7 @@ public class EnemyInstance : ICombatant
     public event Action      OnDied;
     public event Action      OnIntentChanged; // GetCurrentAction()이 가리키는 행동이 바뀜 (TakeTurn 후)
     public event Action      OnActionStarted; // 행동 실행 직전 발화 — EnemyView가 공격 모션 재생에 사용
+    public event Action<EnemyPhase> OnPhaseChanged; // HP 조건으로 새 페이즈에 진입함 (인텐트도 새 패턴으로 바뀐 뒤 발화)
 
     public EnemyInstance(EnemyData data, System.Random rng = null)
     {
@@ -59,6 +71,10 @@ public class EnemyInstance : ICombatant
         _rng = rng ?? new System.Random();
         _statuses = new StatusContainer(_passives);
         _statuses.OnChanged += () => OnIntentChanged?.Invoke();
+        // 고유 패시브 (전투 시작 전에 붙여서 NotifyBattleStart도 받는다)
+        if (data.startingStatuses != null)
+            foreach (var s in data.startingStatuses)
+                if (s?.status != null) AddPassive(s.status.CreateInstance(s.stacks, source: this));
         // 첫 인텐트 결정
         DetermineCurrentAction();
     }
@@ -87,6 +103,7 @@ public class EnemyInstance : ICombatant
         {
             _hp = Math.Max(0, _hp - amount);
             OnDamaged?.Invoke(amount);
+            if (!IsDead) CheckPhaseTransition();
         }
 
         if (IsDead)
@@ -94,6 +111,42 @@ public class EnemyInstance : ICombatant
             Debug.Log($"<color=#F87171>[Battle] 적 처치 완료: '{Data?.enemyName}' 사망!</color>");
             OnDied?.Invoke();
         }
+    }
+
+    // 같은 전투의 다른 적이 쓰러졌을 때 BattleManager가 호출 — 동료 사망 조건 페이즈 검사용.
+    public void NotifyAlliesDefeated(int count)
+    {
+        if (IsDead) return;
+        _alliesDefeated = count;
+        CheckPhaseTransition();
+    }
+
+    // 다음 페이즈 조건을 만족했으면 그 페이즈로 넘어간다. 한 번에 여러 조건을 넘으면 가장 뒤 페이즈로.
+    private void CheckPhaseTransition()
+    {
+        if (Data.phases == null || Data.phases.Count == 0 || MaxHP <= 0) return;
+
+        float ratio = (float)_hp / MaxHP;
+        int next = _phaseIndex;
+        for (int i = _phaseIndex + 1; i < Data.phases.Count; i++)
+        {
+            var phase = Data.phases[i];
+            if (phase == null) continue;
+            bool met = phase.trigger == EnemyPhaseTrigger.AlliesDefeated
+                ? _alliesDefeated >= phase.alliesDefeated
+                : ratio <= phase.hpRatioThreshold;
+            if (met) next = i;
+        }
+        if (next == _phaseIndex) return;
+
+        _phaseIndex = next;
+        _openingIndex = 0;
+        _patternIndex = 0;
+        _queuedRandomActions.Clear();
+        DetermineCurrentAction();
+        Debug.Log($"<color=#F59E0B>[Battle] '{Data.enemyName}' 페이즈 {_phaseIndex + 1} 진입 (HP {_hp}/{MaxHP})</color>");
+        OnPhaseChanged?.Invoke(CurrentPhase);
+        OnIntentChanged?.Invoke();
     }
 
     public void AddBlock(int amount)
@@ -141,7 +194,7 @@ public class EnemyInstance : ICombatant
 
     public EnemyAction GetCurrentAction()
     {
-        if (Data.activityPatterns == null || Data.activityPatterns.Count == 0)
+        if (CurrentPatterns == null || CurrentPatterns.Count == 0)
             return null;
 
         return _action;
@@ -149,32 +202,32 @@ public class EnemyInstance : ICombatant
 
     public void AdvancePattern()
     {
-        if(Data.openingActions != null && _openingIndex < Data.openingActions.Count)
+        if(CurrentOpenings != null && _openingIndex < CurrentOpenings.Count)
         {
             _openingIndex++;
         }
-        else if (Data.activityPatterns != null && Data.activityPatterns.Count > 0 && Data.activityPatternType == EnemyActivityPatternType.Sequential)
-            _patternIndex = (_patternIndex + 1) % Data.activityPatterns.Count;
+        else if (CurrentPatterns != null && CurrentPatterns.Count > 0 && CurrentPatternType == EnemyActivityPatternType.Sequential)
+            _patternIndex = (_patternIndex + 1) % CurrentPatterns.Count;
 
         DetermineCurrentAction();
     }
 
     private void DetermineCurrentAction()
     {
-        if (Data.openingActions != null && _openingIndex < Data.openingActions.Count)
+        if (CurrentOpenings != null && _openingIndex < CurrentOpenings.Count)
         {
-            _action = Data.openingActions[_openingIndex];
+            _action = CurrentOpenings[_openingIndex];
             return;
         }
 
-        var patterns = Data.activityPatterns;
+        var patterns = CurrentPatterns;
         if(patterns == null || patterns.Count == 0)
         {
             _action = null;
             return;
         }
 
-        if (Data.activityPatternType == EnemyActivityPatternType.Random)
+        if (CurrentPatternType == EnemyActivityPatternType.Random)
         {
             if (_queuedRandomActions.Count > 0)
             {
@@ -199,8 +252,8 @@ public class EnemyInstance : ICombatant
         var result = new List<EnemyAction>();
         if (count <= 0 || Data == null) return result;
 
-        var openings = Data.openingActions;
-        var patterns = Data.activityPatterns;
+        var openings = CurrentOpenings;
+        var patterns = CurrentPatterns;
         int openingIndex = _openingIndex;
         int patternIndex = _patternIndex;
         bool inOpening = openings != null && openingIndex < openings.Count;
@@ -245,7 +298,7 @@ public class EnemyInstance : ICombatant
     {
         if (patterns == null || patterns.Count == 0) return null;
 
-        if (Data.activityPatternType == EnemyActivityPatternType.Sequential)
+        if (CurrentPatternType == EnemyActivityPatternType.Sequential)
         {
             if (advanceSequential) patternIndex = (patternIndex + 1) % patterns.Count;
             return patterns[patternIndex % patterns.Count];

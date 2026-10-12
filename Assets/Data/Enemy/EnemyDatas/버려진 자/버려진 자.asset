@@ -10,13 +10,63 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
-  m_Name: 버려진 자
+  m_Name: "\uBC84\uB824\uC9C4 \uC790"
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: "버려진 자"
+  enemyName: "\uBC84\uB824\uC9C4 \uC790"
   health: 54
-  enemyImage: {fileID: -8722211630961929171, guid: 51b3862dc69cd6e4d914a4b1ef9cf795, type: 3}
-  spriteScale: 1.0
+  enemyImage: {fileID: -7682697631107969116, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  rank: 0
+  materialJson: {fileID: 0}
+  spriteScale: 1.4
   intentOffsetY: 0
+  useScreenRect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  intentAnchor: {x: 0.5, y: 1}
+  hpBarAnchor: {x: 0.5, y: 0}
+  noLunge: 0
+  idleFrames:
+  - {fileID: -7682697631107969116, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -8759293182252054996, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: 5190102043517729885, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: 2549287905007818394, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -1369728937089484287, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -363698263926259505, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: 4618191563897731181, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: 8843067946674429619, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -5986203275719868060, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: 5870868942512169020, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: 3618648707761327668, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: 7186042521277291402, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -5416438739407374633, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -6454286230044305200, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -6941429401748568807, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  - {fileID: -2034030867719561560, guid: 5a1d0f003718f9a47a3e20ca3b64c98d, type: 3}
+  idleFrameRate: 12
+  attackFrames:
+  - {fileID: -2462913023774409441, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 1113718520467221407, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 6159791281223031720, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 8862788685623784523, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: -267426168462340034, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 3855197967162342858, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 1357140305607411951, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 7349356640044934029, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 5686849811777750245, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 2266260027902180354, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 4792764479428122781, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: -1556739670859073702, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 8117967310800129830, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: -4908013188931025709, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  - {fileID: 3514662895597368640, guid: 6e919aa187613cd4789e47b6acfa4e65, type: 3}
+  attackFrameRate: 16
+  idleSheetPadding: 0.3
+  attackSheetPadding: 0.3
+  startingStatuses: []
   activityPatternType: 0
   openingActions:
   - {fileID: 11400000, guid: de6a8bc8f5825d44a2c4ab2d8bbe45d9, type: 2}
@@ -24,3 +74,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 364fd43d23cc5e5ca38943ff2aade71e, type: 2}
   - {fileID: 11400000, guid: 35e30b4e35cf507e893bb63b1bd83f73, type: 2}
   - {fileID: 11400000, guid: 364fd43d23cc5e5ca38943ff2aade71e, type: 2}
+  phases: []

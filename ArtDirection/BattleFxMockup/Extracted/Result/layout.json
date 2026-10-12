@@ -1,0 +1,542 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left origin; x right, y down; rectangles [x,y,width,height]",
+  "import_settings": {
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "pixels_per_unit": 200,
+    "mesh_type": "FullRect",
+    "filter_mode": "Bilinear",
+    "mipmaps": false,
+    "compression": "None",
+    "max_texture_size": 4096,
+    "canvas_reference_pixels_per_unit": 100
+  },
+  "assets": [
+    {
+      "id": "Panel",
+      "file": "Panel.png",
+      "scale": 2,
+      "png_size_px": [
+        2228,
+        1312
+      ],
+      "screen_rect": [
+        410,
+        218,
+        1114.0,
+        656.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 168,
+        "bottom": 160,
+        "right": 168,
+        "top": 160
+      },
+      "resize_axes": "both"
+    },
+    {
+      "id": "Rule_Top",
+      "file": "Rule_Top.png",
+      "scale": 2,
+      "png_size_px": [
+        1880,
+        2
+      ],
+      "screen_rect": [
+        494,
+        526,
+        940.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Rule_Bottom",
+      "file": "Rule_Bottom.png",
+      "scale": 2,
+      "png_size_px": [
+        1152,
+        2
+      ],
+      "screen_rect": [
+        484,
+        814,
+        576.0,
+        1.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Stat_Divider",
+      "file": "Stat_Divider.png",
+      "scale": 2,
+      "png_size_px": [
+        2,
+        252
+      ],
+      "screen_rect": [
+        698,
+        566,
+        1.0,
+        126.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary"
+    },
+    {
+      "id": "Button_Return_Normal",
+      "file": "Button_Return_Normal.png",
+      "scale": 2,
+      "png_size_px": [
+        780,
+        172
+      ],
+      "screen_rect": [
+        1078,
+        734,
+        390.0,
+        86.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Normal",
+      "nine_slice_px": {
+        "left": 60,
+        "bottom": 0,
+        "right": 64,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Button_Return_Hover",
+      "file": "Button_Return_Hover.png",
+      "scale": 2,
+      "png_size_px": [
+        780,
+        172
+      ],
+      "screen_rect": [
+        1078,
+        734,
+        390.0,
+        86.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Hover",
+      "nine_slice_px": {
+        "left": 60,
+        "bottom": 0,
+        "right": 64,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Button_Return_Pressed",
+      "file": "Button_Return_Pressed.png",
+      "scale": 2,
+      "png_size_px": [
+        780,
+        172
+      ],
+      "screen_rect": [
+        1078,
+        734,
+        390.0,
+        86.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Pressed",
+      "nine_slice_px": {
+        "left": 60,
+        "bottom": 0,
+        "right": 64,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Accent_Clear",
+      "file": "Accent_Clear.png",
+      "scale": 2,
+      "png_size_px": [
+        112,
+        8
+      ],
+      "screen_rect": [
+        494,
+        498,
+        56.0,
+        4.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Clear"
+    },
+    {
+      "id": "Accent_Stat_Clear",
+      "file": "Accent_Stat_Clear.png",
+      "scale": 2,
+      "png_size_px": [
+        52,
+        4
+      ],
+      "screen_rect": [
+        558,
+        602,
+        26.0,
+        2.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Clear"
+    },
+    {
+      "id": "Accent_Corner_Clear",
+      "file": "Accent_Corner_Clear.png",
+      "scale": 2,
+      "png_size_px": [
+        52,
+        52
+      ],
+      "screen_rect": [
+        1440,
+        792,
+        26.0,
+        26.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Clear"
+    },
+    {
+      "id": "Accent_Defeat",
+      "file": "Accent_Defeat.png",
+      "scale": 2,
+      "png_size_px": [
+        112,
+        8
+      ],
+      "screen_rect": [
+        494,
+        498,
+        56.0,
+        4.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Defeat"
+    },
+    {
+      "id": "Accent_Stat_Defeat",
+      "file": "Accent_Stat_Defeat.png",
+      "scale": 2,
+      "png_size_px": [
+        52,
+        4
+      ],
+      "screen_rect": [
+        558,
+        602,
+        26.0,
+        2.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Defeat"
+    },
+    {
+      "id": "Accent_Corner_Defeat",
+      "file": "Accent_Corner_Defeat.png",
+      "scale": 2,
+      "png_size_px": [
+        52,
+        52
+      ],
+      "screen_rect": [
+        1440,
+        792,
+        26.0,
+        26.0
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "alpha": "binary",
+      "variant": "Defeat"
+    }
+  ],
+  "instances": [
+    {
+      "id": "divider_2",
+      "asset": "Stat_Divider",
+      "screen_position": [
+        960,
+        566
+      ]
+    },
+    {
+      "id": "divider_3",
+      "asset": "Stat_Divider",
+      "screen_position": [
+        1222,
+        566
+      ]
+    },
+    {
+      "id": "stat_accent_Clear_0",
+      "asset": "Accent_Stat_Clear",
+      "screen_position": [
+        816,
+        602
+      ],
+      "variant": "Clear"
+    },
+    {
+      "id": "stat_accent_Clear_1",
+      "asset": "Accent_Stat_Clear",
+      "screen_position": [
+        1080,
+        602
+      ],
+      "variant": "Clear"
+    },
+    {
+      "id": "stat_accent_Clear_2",
+      "asset": "Accent_Stat_Clear",
+      "screen_position": [
+        1340,
+        602
+      ],
+      "variant": "Clear"
+    },
+    {
+      "id": "stat_accent_Defeat_0",
+      "asset": "Accent_Stat_Defeat",
+      "screen_position": [
+        816,
+        602
+      ],
+      "variant": "Defeat"
+    },
+    {
+      "id": "stat_accent_Defeat_1",
+      "asset": "Accent_Stat_Defeat",
+      "screen_position": [
+        1080,
+        602
+      ],
+      "variant": "Defeat"
+    },
+    {
+      "id": "stat_accent_Defeat_2",
+      "asset": "Accent_Stat_Defeat",
+      "screen_position": [
+        1340,
+        602
+      ],
+      "variant": "Defeat"
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "english_label",
+      "screen_rect": [
+        494,
+        306,
+        600,
+        24
+      ]
+    },
+    {
+      "id": "title",
+      "screen_rect": [
+        490,
+        338,
+        880,
+        88
+      ]
+    },
+    {
+      "id": "subtitle",
+      "screen_rect": [
+        494,
+        444,
+        870,
+        40
+      ]
+    },
+    {
+      "id": "stat_1_label",
+      "screen_rect": [
+        494,
+        562,
+        154,
+        30
+      ],
+      "align": "center"
+    },
+    {
+      "id": "stat_1_value",
+      "screen_rect": [
+        494,
+        622,
+        154,
+        68
+      ],
+      "align": "center"
+    },
+    {
+      "id": "stat_2_label",
+      "screen_rect": [
+        752,
+        562,
+        154,
+        30
+      ],
+      "align": "center"
+    },
+    {
+      "id": "stat_2_value",
+      "screen_rect": [
+        752,
+        622,
+        154,
+        68
+      ],
+      "align": "center"
+    },
+    {
+      "id": "stat_3_label",
+      "screen_rect": [
+        1014,
+        562,
+        154,
+        30
+      ],
+      "align": "center"
+    },
+    {
+      "id": "stat_3_value",
+      "screen_rect": [
+        1014,
+        622,
+        154,
+        68
+      ],
+      "align": "center"
+    },
+    {
+      "id": "stat_4_label",
+      "screen_rect": [
+        1276,
+        562,
+        154,
+        30
+      ],
+      "align": "center"
+    },
+    {
+      "id": "stat_4_value",
+      "screen_rect": [
+        1276,
+        622,
+        154,
+        68
+      ],
+      "align": "center"
+    },
+    {
+      "id": "button_label",
+      "screen_rect": [
+        1120,
+        746,
+        284,
+        42
+      ],
+      "align": "center"
+    },
+    {
+      "id": "button_sublabel",
+      "screen_rect": [
+        1152,
+        790,
+        220,
+        14
+      ],
+      "align": "center"
+    },
+    {
+      "id": "report_number",
+      "screen_rect": [
+        470,
+        244,
+        36,
+        20
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: NextAmmoDiscount
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: NextAmmoDiscount
+  displayName: "\uAD8C\uCD1D \uC18D\uC0AC \uC900\uBE44"
+  description: "\uC774\uBC88 \uD134 \uB2E4\uC74C \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uB294
+    \uCE74\uB4DC\uC758 \uC5D0\uB108\uC9C0 \uBE44\uC6A9\uC774 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  icon: {fileID: 0}
+  disposition: 1
+  stackPolicy: 0
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 7338472044098486362
+  references:
+    version: 2
+    RefIds:
+    - rid: 7338472044098486362
+      type: {class: NextAmmoDiscountStatusBehavior, ns: , asm: Assembly-CSharp}
+      data: 

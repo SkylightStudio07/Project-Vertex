@@ -1,0 +1,1010 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left origin; rect [x,y,width,height]; +y down",
+  "assets": [
+    {
+      "id": "Panel",
+      "file": "Panel.png",
+      "scale": 2,
+      "png_size_px": [
+        2000,
+        1656
+      ],
+      "screen_rect": [
+        482,
+        154,
+        1000,
+        828
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 216,
+        "bottom": 104,
+        "right": 216,
+        "top": 216
+      },
+      "resize_axes": "both"
+    },
+    {
+      "id": "Panel_Watermark",
+      "file": "Panel_Watermark.png",
+      "scale": 2,
+      "png_size_px": [
+        384,
+        384
+      ],
+      "screen_rect": [
+        1262,
+        208,
+        192,
+        192
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "opaque_ink_hex": "#E7E9EB"
+    },
+    {
+      "id": "Rule",
+      "file": "Rule.png",
+      "scale": 2,
+      "png_size_px": [
+        1816,
+        2
+      ],
+      "screen_rect": [
+        536,
+        362,
+        908,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Header_NoTick",
+      "file": "Header_NoTick.png",
+      "scale": 2,
+      "png_size_px": [
+        64,
+        2
+      ],
+      "screen_rect": [
+        1198,
+        220,
+        32,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Row_Normal",
+      "file": "Row_Normal.png",
+      "scale": 2,
+      "png_size_px": [
+        1816,
+        288
+      ],
+      "screen_rect": [
+        536,
+        390,
+        908,
+        144
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 56,
+        "bottom": 8,
+        "right": 60,
+        "top": 8
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Row_Hover",
+      "file": "Row_Hover.png",
+      "scale": 2,
+      "png_size_px": [
+        1816,
+        288
+      ],
+      "screen_rect": [
+        536,
+        544,
+        908,
+        144
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 56,
+        "bottom": 8,
+        "right": 60,
+        "top": 8
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Row_NumTick",
+      "file": "Row_NumTick.png",
+      "scale": 2,
+      "png_size_px": [
+        60,
+        2
+      ],
+      "screen_rect": [
+        572,
+        464,
+        30,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Icon_Slot",
+      "file": "Icon_Slot.png",
+      "scale": 2,
+      "png_size_px": [
+        220,
+        220
+      ],
+      "screen_rect": [
+        648,
+        406,
+        110,
+        110
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Icon_Gold",
+      "file": "Icon_Gold.png",
+      "scale": 2,
+      "png_size_px": [
+        160,
+        160
+      ],
+      "screen_rect": [
+        663,
+        421,
+        80,
+        80
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Icon_Card",
+      "file": "Icon_Card.png",
+      "scale": 2,
+      "png_size_px": [
+        160,
+        160
+      ],
+      "screen_rect": [
+        663,
+        575,
+        80,
+        80
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Icon_Arrow",
+      "file": "Icon_Arrow.png",
+      "scale": 2,
+      "png_size_px": [
+        80,
+        60
+      ],
+      "screen_rect": [
+        1362,
+        445,
+        40,
+        30
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Button_Primary",
+      "file": "Button_Primary.png",
+      "scale": 2,
+      "png_size_px": [
+        556,
+        140
+      ],
+      "screen_rect": [
+        1164,
+        886,
+        278,
+        70
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 16,
+        "bottom": 16,
+        "right": 16,
+        "top": 16
+      },
+      "resize_axes": "both"
+    },
+    {
+      "id": "Button_Primary_Hover",
+      "file": "Button_Primary_Hover.png",
+      "scale": 2,
+      "png_size_px": [
+        556,
+        140
+      ],
+      "screen_rect": [
+        1164,
+        886,
+        278,
+        70
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 16,
+        "bottom": 16,
+        "right": 16,
+        "top": 16
+      },
+      "resize_axes": "both"
+    },
+    {
+      "id": "Button_Secondary",
+      "file": "Button_Secondary.png",
+      "scale": 2,
+      "png_size_px": [
+        492,
+        136
+      ],
+      "screen_rect": [
+        1246,
+        856,
+        246,
+        68
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 16,
+        "bottom": 16,
+        "right": 16,
+        "top": 16
+      },
+      "resize_axes": "both"
+    },
+    {
+      "id": "Button_Secondary_Hover",
+      "file": "Button_Secondary_Hover.png",
+      "scale": 2,
+      "png_size_px": [
+        492,
+        136
+      ],
+      "screen_rect": [
+        1246,
+        856,
+        246,
+        68
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 16,
+        "bottom": 16,
+        "right": 16,
+        "top": 16
+      },
+      "resize_axes": "both"
+    },
+    {
+      "id": "Card_Plinth",
+      "file": "Card_Plinth.png",
+      "scale": 2,
+      "png_size_px": [
+        328,
+        8
+      ],
+      "screen_rect": [
+        552,
+        802,
+        164,
+        4
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    }
+  ],
+  "scenes": {
+    "reward": {
+      "panel_rect": [
+        482,
+        154,
+        1000,
+        828
+      ],
+      "watermark": {
+        "screen_rect": [
+          1262,
+          208,
+          192,
+          192
+        ],
+        "anchor": "panel top-right",
+        "offset_from_top_right": [
+          -220,
+          54
+        ]
+      },
+      "header": {
+        "english": {
+          "id": "english",
+          "screen_rect": [
+            562,
+            198,
+            570,
+            24
+          ],
+          "font_size_screen_px": 16,
+          "color_hex": "#16181B",
+          "align": "left"
+        },
+        "title": {
+          "id": "title",
+          "screen_rect": [
+            556,
+            244,
+            570,
+            92
+          ],
+          "font_size_screen_px": 76,
+          "color_hex": "#16181B",
+          "align": "left"
+        },
+        "number": {
+          "id": "number",
+          "screen_rect": [
+            1198,
+            194,
+            244,
+            18
+          ],
+          "font_size_screen_px": 12,
+          "color_hex": "#747B81",
+          "align": "left"
+        },
+        "number_tick_rect": [
+          1198,
+          220,
+          32,
+          1
+        ],
+        "rule_rect": [
+          536,
+          362,
+          908,
+          1
+        ]
+      },
+      "rows": {
+        "first_rect": [
+          536,
+          390,
+          908,
+          144
+        ],
+        "repeat_step_y": 154,
+        "gap_y": 10,
+        "offsets": {
+          "number": [
+            36,
+            34,
+            40,
+            30
+          ],
+          "number_tick": [
+            36,
+            74,
+            30,
+            1
+          ],
+          "icon_slot": [
+            112,
+            16,
+            110,
+            110
+          ],
+          "icon": [
+            127,
+            31,
+            80,
+            80
+          ],
+          "item_art": [
+            120,
+            24,
+            94,
+            94
+          ],
+          "name_with_description": [
+            256,
+            24,
+            530,
+            52
+          ],
+          "name_without_description": [
+            256,
+            43,
+            530,
+            56
+          ],
+          "description": [
+            256,
+            84,
+            530,
+            28
+          ],
+          "arrow": [
+            826,
+            55,
+            40,
+            30
+          ]
+        },
+        "item_art_padding_in_slot": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "name_font_size": 44,
+        "description_font_size": 24,
+        "number_font_size": 24,
+        "name_color_hex": "#16181B",
+        "description_color_hex": "#747B81",
+        "number_color_hex": "#16181B",
+        "align": "left",
+        "examples": [
+          {
+            "index": 1,
+            "state": "Normal",
+            "icon": "Icon_Gold",
+            "has_description": false
+          },
+          {
+            "index": 2,
+            "state": "Hover",
+            "icon": "Icon_Card",
+            "has_description": true
+          },
+          {
+            "index": 3,
+            "state": "Normal",
+            "icon": "runtime item artwork",
+            "has_description": true
+          }
+        ]
+      },
+      "footer": {
+        "rule_rect": [
+          536,
+          868,
+          908,
+          1
+        ],
+        "status": {
+          "id": "remaining",
+          "screen_rect": [
+            568,
+            908,
+            490,
+            30
+          ],
+          "font_size_screen_px": 20,
+          "color_hex": "#747B81",
+          "align": "left"
+        },
+        "button_rect": [
+          1164,
+          886,
+          278,
+          70
+        ],
+        "button_text": {
+          "id": "continue",
+          "screen_rect": [
+            1200,
+            902,
+            204,
+            40
+          ],
+          "font_size_screen_px": 28,
+          "color_hex": "#FFFFFF",
+          "align": "center"
+        }
+      },
+      "instances": [
+        {
+          "asset": "Panel",
+          "screen_rect": [
+            482,
+            154,
+            1000,
+            828
+          ]
+        },
+        {
+          "asset": "Panel_Watermark",
+          "screen_rect": [
+            1262,
+            208,
+            192,
+            192
+          ]
+        },
+        {
+          "asset": "Rule",
+          "screen_rect": [
+            536,
+            362,
+            908,
+            1
+          ]
+        },
+        {
+          "asset": "Header_NoTick",
+          "screen_rect": [
+            1198,
+            220,
+            32,
+            1
+          ]
+        },
+        {
+          "asset": "Rule",
+          "screen_rect": [
+            536,
+            868,
+            908,
+            1
+          ]
+        },
+        {
+          "asset": "Row_Normal",
+          "screen_rect": [
+            536,
+            390,
+            908,
+            144
+          ]
+        },
+        {
+          "asset": "Row_NumTick",
+          "screen_rect": [
+            572,
+            464,
+            30,
+            1
+          ]
+        },
+        {
+          "asset": "Icon_Slot",
+          "screen_rect": [
+            648,
+            406,
+            110,
+            110
+          ]
+        },
+        {
+          "asset": "Icon_Arrow",
+          "screen_rect": [
+            1362,
+            445,
+            40,
+            30
+          ]
+        },
+        {
+          "asset": "Icon_Gold",
+          "screen_rect": [
+            663,
+            421,
+            80,
+            80
+          ]
+        },
+        {
+          "asset": "Row_Hover",
+          "screen_rect": [
+            536,
+            544,
+            908,
+            144
+          ]
+        },
+        {
+          "asset": "Row_NumTick",
+          "screen_rect": [
+            572,
+            618,
+            30,
+            1
+          ]
+        },
+        {
+          "asset": "Icon_Slot",
+          "screen_rect": [
+            648,
+            560,
+            110,
+            110
+          ]
+        },
+        {
+          "asset": "Icon_Arrow",
+          "screen_rect": [
+            1362,
+            599,
+            40,
+            30
+          ]
+        },
+        {
+          "asset": "Icon_Card",
+          "screen_rect": [
+            663,
+            575,
+            80,
+            80
+          ]
+        },
+        {
+          "asset": "Row_Normal",
+          "screen_rect": [
+            536,
+            698,
+            908,
+            144
+          ]
+        },
+        {
+          "asset": "Row_NumTick",
+          "screen_rect": [
+            572,
+            772,
+            30,
+            1
+          ]
+        },
+        {
+          "asset": "Icon_Slot",
+          "screen_rect": [
+            648,
+            714,
+            110,
+            110
+          ]
+        },
+        {
+          "asset": "Icon_Arrow",
+          "screen_rect": [
+            1362,
+            753,
+            40,
+            30
+          ]
+        },
+        {
+          "asset": "Button_Primary",
+          "screen_rect": [
+            1164,
+            886,
+            278,
+            70
+          ]
+        }
+      ]
+    },
+    "card": {
+      "panel_rect": [
+        424,
+        152,
+        1110,
+        800
+      ],
+      "watermark": {
+        "screen_rect": [
+          1300,
+          204,
+          192,
+          192
+        ],
+        "anchor": "panel top-right",
+        "offset_from_top_right": [
+          -234,
+          52
+        ]
+      },
+      "header": {
+        "english": {
+          "id": "english",
+          "screen_rect": [
+            502,
+            196,
+            650,
+            24
+          ],
+          "font_size_screen_px": 16,
+          "color_hex": "#16181B",
+          "align": "left"
+        },
+        "title": {
+          "id": "title",
+          "screen_rect": [
+            496,
+            242,
+            690,
+            88
+          ],
+          "font_size_screen_px": 76,
+          "color_hex": "#16181B",
+          "align": "left"
+        },
+        "number": {
+          "id": "number",
+          "screen_rect": [
+            1228,
+            192,
+            248,
+            18
+          ],
+          "font_size_screen_px": 12,
+          "color_hex": "#747B81",
+          "align": "left"
+        },
+        "number_tick_rect": [
+          1228,
+          218,
+          32,
+          1
+        ],
+        "rule_rect": [
+          470,
+          350,
+          1022,
+          1
+        ]
+      },
+      "cards": [
+        {
+          "card_rect": [
+            486,
+            378,
+            294,
+            400
+          ],
+          "plinth_rect": [
+            551,
+            802,
+            164,
+            4
+          ],
+          "number": {
+            "id": "card_1",
+            "screen_rect": [
+              610,
+              786,
+              46,
+              32
+            ],
+            "font_size_screen_px": 20,
+            "color_hex": "#16181B",
+            "align": "center"
+          }
+        },
+        {
+          "card_rect": [
+            832,
+            378,
+            294,
+            400
+          ],
+          "plinth_rect": [
+            897,
+            802,
+            164,
+            4
+          ],
+          "number": {
+            "id": "card_2",
+            "screen_rect": [
+              956,
+              786,
+              46,
+              32
+            ],
+            "font_size_screen_px": 20,
+            "color_hex": "#16181B",
+            "align": "center"
+          }
+        },
+        {
+          "card_rect": [
+            1180,
+            378,
+            294,
+            400
+          ],
+          "plinth_rect": [
+            1245,
+            802,
+            164,
+            4
+          ],
+          "number": {
+            "id": "card_3",
+            "screen_rect": [
+              1304,
+              786,
+              46,
+              32
+            ],
+            "font_size_screen_px": 20,
+            "color_hex": "#16181B",
+            "align": "center"
+          }
+        }
+      ],
+      "footer": {
+        "rule_rect": [
+          470,
+          836,
+          1022,
+          1
+        ],
+        "status": {
+          "id": "add_one",
+          "screen_rect": [
+            504,
+            874,
+            630,
+            30
+          ],
+          "font_size_screen_px": 20,
+          "color_hex": "#747B81",
+          "align": "left"
+        },
+        "button_rect": [
+          1246,
+          856,
+          246,
+          68
+        ],
+        "button_text": {
+          "id": "skip",
+          "screen_rect": [
+            1270,
+            872,
+            198,
+            36
+          ],
+          "font_size_screen_px": 24,
+          "color_hex": "#16181B",
+          "align": "center"
+        }
+      },
+      "instances": [
+        {
+          "asset": "Panel",
+          "screen_rect": [
+            424,
+            152,
+            1110,
+            800
+          ]
+        },
+        {
+          "asset": "Panel_Watermark",
+          "screen_rect": [
+            1300,
+            204,
+            192,
+            192
+          ]
+        },
+        {
+          "asset": "Rule",
+          "screen_rect": [
+            470,
+            350,
+            1022,
+            1
+          ]
+        },
+        {
+          "asset": "Header_NoTick",
+          "screen_rect": [
+            1228,
+            218,
+            32,
+            1
+          ]
+        },
+        {
+          "asset": "Rule",
+          "screen_rect": [
+            470,
+            836,
+            1022,
+            1
+          ]
+        },
+        {
+          "asset": "Card_Plinth",
+          "screen_rect": [
+            551,
+            802,
+            164,
+            4
+          ]
+        },
+        {
+          "asset": "Card_Plinth",
+          "screen_rect": [
+            897,
+            802,
+            164,
+            4
+          ]
+        },
+        {
+          "asset": "Card_Plinth",
+          "screen_rect": [
+            1245,
+            802,
+            164,
+            4
+          ]
+        },
+        {
+          "asset": "Button_Secondary",
+          "screen_rect": [
+            1246,
+            856,
+            246,
+            68
+          ]
+        }
+      ]
+    }
+  },
+  "import_settings": {
+    "pixels_per_unit": 200,
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "mesh_type": "FullRect",
+    "filter_mode": "Bilinear",
+    "mipmaps": false,
+    "compression": "None",
+    "max_texture_size": 4096,
+    "canvas_reference_pixels_per_unit": 100
+  }
+}

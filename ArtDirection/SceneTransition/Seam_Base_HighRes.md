@@ -1,0 +1,7 @@
+# Seam_Base 고해상도 교체
+
+내장 imagegen으로 단독 생성한 Seam_Base_HighRes_Model.png에서 이음새 띠만 추출하여 2320×24로 출력. Extracted/Seam_Base.png 교체, 원본은 Seam_Base_LowRes_Backup.png 보존. 기존 좌표 및 크기 유지. 기존 조립 미리보기는 이전 이미지이며 Unity 배선 변경 없음. Split-SceneTransition.ps1 재실행 뒤에는 Export-SeamBaseHighRes.ps1도 실행해야 이 교체본이 유지된다.
+
+## 프롬프트
+
+Use case: ui-mockup. Generate a HIGH RESOLUTION raster texture master for only a minimalist game scene-transition horizontal seam strip. Reference image is a low-resolution original seam strip: match its visual direction. Canvas wide landscape 3072x1024. Across entire width exactly THREE perfectly straight parallel HORIZONTAL hairlines concentrated in a narrow band CENTERED vertically: upper crisp thin cool white line, middle slightly thicker muted DARK CYAN #0A3542 line (not bright luminous cyan), lower crisp thin cool white line. About twelve equally spaced VERY SMALL white diamond tick marks along middle line. All outside pixels uniform fully OPAQUE near-black #090A0D, no gradients. Actual seam graphic within central24pixel-high band, keep all lines RAZOR SHARP, NO blur or glow, NO perspective, no texture, no typography, NO LABEL including Seam_Base, no diagrams or measurements. Lines run edge to edge. Diamonds 8pixels wide and4 high, restrained. Center middle stripe about6pixels high, horizontal top and bottom lines1pixel. UI technical divider only, extremely minimal. No other objects. High-resolution single standalone asset, not contact sheet.

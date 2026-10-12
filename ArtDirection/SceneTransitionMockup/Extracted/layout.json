@@ -1,0 +1,730 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left origin; +x right, +y down; rect [x,y,width,height]",
+  "assets": [
+    {
+      "id": "CurtainU_Lead",
+      "file": "CurtainU_Lead.png",
+      "screen_rect": [
+        -520,
+        0,
+        920.0,
+        548.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        1840,
+        1096
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "group": "CurtainU",
+      "whole_canvas_crop_px": [
+        0,
+        0,
+        1840,
+        1096
+      ],
+      "stretch": false,
+      "draw_order": 0
+    },
+    {
+      "id": "CurtainU_Body",
+      "file": "CurtainU_Body.png",
+      "screen_rect": [
+        400,
+        0,
+        1120.0,
+        548.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        2240,
+        1096
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "group": "CurtainU",
+      "whole_canvas_crop_px": [
+        1840,
+        0,
+        2240,
+        1096
+      ],
+      "stretch": false,
+      "draw_order": 0
+    },
+    {
+      "id": "CurtainU_Tail",
+      "file": "CurtainU_Tail.png",
+      "screen_rect": [
+        1520,
+        0,
+        600.0,
+        548.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        1200,
+        1096
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "group": "CurtainU",
+      "whole_canvas_crop_px": [
+        4080,
+        0,
+        1200,
+        1096
+      ],
+      "stretch": false,
+      "draw_order": 0
+    },
+    {
+      "id": "CurtainL_Tail",
+      "file": "CurtainL_Tail.png",
+      "screen_rect": [
+        -200,
+        532,
+        600.0,
+        548.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        1200,
+        1096
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "group": "CurtainL",
+      "whole_canvas_crop_px": [
+        0,
+        0,
+        1200,
+        1096
+      ],
+      "stretch": false,
+      "draw_order": 1
+    },
+    {
+      "id": "CurtainL_Body",
+      "file": "CurtainL_Body.png",
+      "screen_rect": [
+        400,
+        532,
+        1120.0,
+        548.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        2240,
+        1096
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "group": "CurtainL",
+      "whole_canvas_crop_px": [
+        1200,
+        0,
+        2240,
+        1096
+      ],
+      "stretch": false,
+      "draw_order": 1
+    },
+    {
+      "id": "CurtainL_Lead",
+      "file": "CurtainL_Lead.png",
+      "screen_rect": [
+        1520,
+        532,
+        920.0,
+        548.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        1840,
+        1096
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "group": "CurtainL",
+      "whole_canvas_crop_px": [
+        3440,
+        0,
+        1840,
+        1096
+      ],
+      "stretch": false,
+      "draw_order": 1
+    },
+    {
+      "id": "Seam_Base",
+      "file": "Seam_Base.png",
+      "screen_rect": [
+        0,
+        528,
+        1920.0,
+        24.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        3840,
+        48
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 4,
+      "groove_local_screen_rect": [
+        0,
+        9,
+        1920,
+        6
+      ],
+      "groove_local_png_rect": [
+        0,
+        18,
+        3840,
+        12
+      ]
+    },
+    {
+      "id": "Seam_Fill",
+      "file": "Seam_Fill.png",
+      "screen_rect": [
+        0,
+        537,
+        1920.0,
+        6.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        3840,
+        12
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 5,
+      "pivot": [
+        0,
+        0.5
+      ],
+      "scale_x_anchor": "left",
+      "highlight_width_screen": 40
+    },
+    {
+      "id": "Seam_Head",
+      "file": "Seam_Head.png",
+      "screen_rect": [
+        1136,
+        524,
+        32.0,
+        32.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        64,
+        64
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 6,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "default_progress": 0.6
+    },
+    {
+      "id": "TitleFrame",
+      "file": "TitleFrame.png",
+      "screen_rect": [
+        468,
+        306,
+        984.0,
+        364.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        1968,
+        728
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 2,
+      "closed_mockup_rect": [
+        468,
+        344,
+        984,
+        364
+      ],
+      "shift_y_from_mockup": -38
+    },
+    {
+      "id": "Emblem",
+      "file": "Emblem.png",
+      "screen_rect": [
+        604,
+        340,
+        180.0,
+        180.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        360,
+        360
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 3,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "center_png_px": [
+        180,
+        180
+      ],
+      "pixel_center_index": [
+        179.5,
+        179.5
+      ],
+      "closed_mockup_rect": [
+        604,
+        378,
+        180,
+        180
+      ]
+    },
+    {
+      "id": "Tag_Sim",
+      "file": "Tag_Sim.png",
+      "screen_rect": [
+        474,
+        274,
+        150.0,
+        34.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        300,
+        68
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 3,
+      "variant": "Training"
+    },
+    {
+      "id": "LoadingChip",
+      "file": "LoadingChip.png",
+      "screen_rect": [
+        1432,
+        946,
+        364.0,
+        48.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        728,
+        96
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 7
+    },
+    {
+      "id": "Chip_Dot",
+      "file": "Chip_Dot.png",
+      "screen_rect": [
+        1682,
+        966,
+        8.0,
+        8.0
+      ],
+      "scale": 2,
+      "png_size_px": [
+        16,
+        16
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "draw_order": 8,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "english_label",
+      "closed_mockup_rect": [
+        824,
+        366,
+        380,
+        26
+      ],
+      "align": "center",
+      "font_size_screen_px": 20,
+      "color_hex": "#0DB8F2",
+      "game_rect": [
+        824,
+        328,
+        380,
+        26
+      ]
+    },
+    {
+      "id": "title",
+      "closed_mockup_rect": [
+        842,
+        406,
+        306,
+        136
+      ],
+      "align": "center",
+      "font_size_screen_px": 124,
+      "color_hex": "#16181B",
+      "game_rect": [
+        842,
+        368,
+        306,
+        136
+      ]
+    },
+    {
+      "id": "subtitle",
+      "closed_mockup_rect": [
+        768,
+        612,
+        458,
+        42
+      ],
+      "align": "center",
+      "font_size_screen_px": 30,
+      "color_hex": "#72797F",
+      "game_rect": [
+        768,
+        574,
+        458,
+        42
+      ]
+    },
+    {
+      "id": "vertex_transit",
+      "closed_mockup_rect": [
+        96,
+        40,
+        304,
+        24
+      ],
+      "align": "left",
+      "font_size_screen_px": 15,
+      "color_hex": "#16181B",
+      "curtain_parent": "CurtainU_Lead",
+      "local_screen_rect": [
+        616,
+        40,
+        304,
+        24
+      ]
+    },
+    {
+      "id": "document_01",
+      "closed_mockup_rect": [
+        1806,
+        40,
+        34,
+        22
+      ],
+      "align": "center",
+      "font_size_screen_px": 15,
+      "color_hex": "#93999F",
+      "curtain_parent": "CurtainU_Tail",
+      "local_screen_rect": [
+        286,
+        40,
+        34,
+        22
+      ]
+    },
+    {
+      "id": "document_02",
+      "closed_mockup_rect": [
+        1812,
+        884,
+        34,
+        22
+      ],
+      "align": "center",
+      "font_size_screen_px": 15,
+      "color_hex": "#93999F",
+      "curtain_parent": "CurtainL_Lead",
+      "local_screen_rect": [
+        292,
+        352,
+        34,
+        22
+      ]
+    },
+    {
+      "id": "expedition_3_lines",
+      "closed_mockup_rect": [
+        96,
+        82,
+        302,
+        46
+      ],
+      "align": "left",
+      "font_size_screen_px": 10,
+      "color_hex": "#93999F",
+      "line_height": 14,
+      "curtain_parent": "CurtainU_Lead",
+      "local_screen_rect": [
+        616,
+        82,
+        302,
+        46
+      ]
+    },
+    {
+      "id": "shelter_3_lines",
+      "closed_mockup_rect": [
+        96,
+        956,
+        324,
+        40
+      ],
+      "align": "left",
+      "font_size_screen_px": 10,
+      "color_hex": "#93999F",
+      "line_height": 14,
+      "curtain_parent": "CurtainL_Tail",
+      "local_screen_rect": [
+        296,
+        424,
+        324,
+        40
+      ]
+    },
+    {
+      "id": "now_loading",
+      "closed_mockup_rect": [
+        1500,
+        961,
+        170,
+        22
+      ],
+      "align": "center",
+      "font_size_screen_px": 16,
+      "color_hex": "#FFFFFF",
+      "game_rect": [
+        1500,
+        961,
+        170,
+        22
+      ]
+    },
+    {
+      "id": "sim",
+      "closed_mockup_rect": [
+        482,
+        277,
+        116,
+        26
+      ],
+      "align": "center",
+      "font_size_screen_px": 20,
+      "color_hex": "#FFFFFF",
+      "game_rect": [
+        482,
+        277,
+        116,
+        26
+      ],
+      "variant": "Training"
+    }
+  ],
+  "import_settings": {
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "pixels_per_unit": 200,
+    "mesh_type": "FullRect",
+    "mipmaps": false,
+    "compression": "None",
+    "filter_mode": "Bilinear",
+    "wrap_mode": "Clamp",
+    "max_texture_size": 4096,
+    "canvas_reference_pixels_per_unit": 100
+  },
+  "curtains": {
+    "full_screen_size": [
+      2640,
+      548
+    ],
+    "working_canvas_px": [
+      5280,
+      1096
+    ],
+    "overlap_screen_px": 16,
+    "closed_origins": {
+      "upper": [
+        -520,
+        0
+      ],
+      "lower": [
+        -200,
+        532
+      ]
+    },
+    "cuts_upper_screen_x": [
+      0,
+      920,
+      2040,
+      2640
+    ],
+    "cuts_lower_screen_x": [
+      0,
+      600,
+      1720,
+      2640
+    ],
+    "leading_edge": {
+      "priority": "Preview_Moving_Edge.jpg and requested < silhouette",
+      "horizontal_slope_screen": 310,
+      "ink_band_horizontal_width": 80,
+      "total_decorated_extent": 390,
+      "upper_outer_edge_local": [
+        [
+          310,
+          0
+        ],
+        [
+          0,
+          548
+        ]
+      ],
+      "lower_outer_edge_local": [
+        [
+          2330,
+          0
+        ],
+        [
+          2640,
+          548
+        ]
+      ],
+      "upper_band_left_edge_local": [
+        [
+          310,
+          0
+        ],
+        [
+          0,
+          548
+        ]
+      ],
+      "lower_band_left_edge_local": [
+        [
+          2250,
+          0
+        ],
+        [
+          2560,
+          548
+        ]
+      ],
+      "note": "User-confirmed < geometry. Lower band mirrors upper vertically, with cyan on its left edge, while lower paper stays left of band.310px slope plus80px band needs390px, still completely offscreen when closed."
+    },
+    "animation": {
+      "close_upper": "right to center",
+      "close_lower": "left to center",
+      "open_upper": "center to left",
+      "open_lower": "center to right",
+      "lower_delay_seconds": 0.06
+    }
+  },
+  "seam": {
+    "mockup_center_y": 578,
+    "game_center_y": 540,
+    "base_rect": [
+      0,
+      528,
+      1920,
+      24
+    ],
+    "fill_rect": [
+      0,
+      537,
+      1920,
+      6
+    ],
+    "groove_offset_y_screen": 9,
+    "groove_offset_y_png": 18,
+    "layering": [
+      "Seam_Base",
+      "Seam_Fill",
+      "Seam_Head"
+    ],
+    "head_center_formula": "[1920*progress,540]",
+    "fill_width_formula": "1920*progress",
+    "zero_progress": "hide Fill and Head",
+    "highlight_scaled_width_formula": "40*progress"
+  },
+  "title_alignment": {
+    "group_shift_y": -38,
+    "mockup_title_bottom": 542,
+    "mockup_seam_center": 578,
+    "title_bottom_to_seam_center": 36,
+    "title_bottom_to_rail_top": 24,
+    "mockup_subtitle_top": 612,
+    "seam_center_to_subtitle_top": 34,
+    "rail_bottom_to_subtitle_top": 22,
+    "game_title_bottom": 504,
+    "game_subtitle_top": 574
+  },
+  "loading_chip": {
+    "screen_rect": [
+      1432,
+      946,
+      364,
+      48
+    ],
+    "dot_centers_screen": [
+      [
+        1686,
+        970
+      ],
+      [
+        1708,
+        970
+      ],
+      [
+        1730,
+        970
+      ]
+    ]
+  },
+  "assembly_moving": {
+    "upper_root": [
+      600,
+      0
+    ],
+    "lower_root": [
+      -1650,
+      532
+    ],
+    "view_rect": [
+      -40,
+      0,
+      2240,
+      1080
+    ],
+    "description": "Transparent checkerboard replaces game backdrop; leading edges join around x605,y540 into <."
+  }
+}
