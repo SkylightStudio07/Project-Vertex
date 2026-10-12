@@ -8,6 +8,7 @@ using UnityEngine.UI;
 // 휴식 노드 강화, 상점 카드 제거, 축복 노드 정화/연마가 모두 이 연출을 쓴다.
 //   - 제거: 카드를 띄운 뒤 불타 없어진다 (UIEffect Burn)
 //   - 강화: 망치로 두 번 내리친다(튀기 + 흔들림 + 섬광) → 강화된 모습으로 바뀌고 빛이 쓸고 지나간 뒤 DECK으로 날아간다
+//   - 변화: 카드가 떨리며 흰 빛으로 차오르고, 완전히 덮인 순간 같은 카드의 모습이 새 카드로 바뀐 뒤 빛이 걷히며 맺힌다 (이벤트 카드 변화)
 // 연출 중에는 화면 전체 입력을 막는다. 씬에 이 컴포넌트가 없으면 Upgrade()/Remove()는 연출 없이 즉시 처리한다.
 public class CardActionFx : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class CardActionFx : MonoBehaviour
     [SerializeField] private AudioClip hammerClip;
     [SerializeField] private AudioClip upgradeDoneClip;
     [SerializeField] private AudioClip burnClip;
+    [SerializeField] private AudioClip transmogrifyClip;      // 카드 변화 순간 (비우면 강화 완료음 사용)
 
     private RectTransform _stage;
     private CanvasGroup _dimmer;
@@ -57,6 +59,13 @@ public class CardActionFx : MonoBehaviour
     {
         if (Instance == null || card == null) { apply?.Invoke(); onDone?.Invoke(); return; }
         Instance.PlayRemove(card, apply, onDone);
+    }
+
+    // apply: 실제 변화(덱 교체 후 새 카드 반환). 카드가 빛에 완전히 덮인 순간 실행되고, 돌려준 카드로 모습이 바뀐다.
+    public static void Transmogrify(CardData card, Func<CardData> apply, Action onDone = null)
+    {
+        if (Instance == null || card == null) { apply?.Invoke(); onDone?.Invoke(); return; }
+        Instance.PlayTransmogrify(card, apply, onDone);
     }
 
     // ---- 연출 ----
@@ -100,6 +109,76 @@ public class CardActionFx : MonoBehaviour
         seq.AppendCallback(() => Shine(view, 0.55f));
         seq.AppendInterval(0.55f);
         seq.AppendInterval(0.35f);
+        if (deckTarget != null)
+        {
+            seq.Append(rt.DOMove(deckTarget.position, 0.45f).SetEase(Ease.InCubic));
+            seq.Join(rt.DOScale(cardScale * 0.12f, 0.45f).SetEase(Ease.InCubic));
+            seq.AppendCallback(() => deckTarget.DOPunchScale(Vector3.one * 0.15f, 0.25f, 6, 0.6f).SetUpdate(true));
+        }
+        else
+        {
+            seq.Append(rt.DOScale(0f, 0.3f).SetEase(Ease.InBack));
+        }
+        seq.OnComplete(() => End(view, onDone));
+    }
+
+    // 빛 속에서 재구성 — 카드가 떨리며 흰 빛으로 차오르고, 완전히 덮인 순간 같은 카드 오브젝트의 모습을
+    // 새 카드로 바꾼 뒤 빛이 걷히며 새 아트가 디졸브로 맺힌다. 사라졌다 새로 생기는 게 아니라
+    // '같은 카드가 변하는' 느낌을 주려고 뷰는 처음부터 끝까지 하나만 쓴다.
+    // 쓰는 셰이더 변형은 COLOR_FILTER(흰 실루엣)·TRANSITION_DISSOLVE(아트)·TRANSITION_SHINY(빛 스윕)로 모두 등록돼 있다.
+    private void PlayTransmogrify(CardData card, Func<CardData> apply, Action onDone)
+    {
+        const float charge = 0.6f;   // 빛이 차오르는 시간
+        const float reveal = 0.6f;   // 새 모습이 맺히는 시간
+
+        var view = Begin(card);
+        var rt = (RectTransform)view.transform;
+        var frame = view.transform.childCount > 0 ? view.transform.GetChild(0).GetComponent<Graphic>() : null;
+        // 프레임 모양 그대로의 흰 실루엣. 아트·글자가 모두 프레임의 자식이라 이것 하나로 카드 전체가 덮인다.
+        var glow = CreateFlash(view);
+
+        var seq = DOTween.Sequence().SetUpdate(true).SetLink(gameObject);
+        seq.Append(rt.DOScale(cardScale, 0.3f).SetEase(Ease.OutBack));
+
+        // 응축: 빛이 차오르고 세로로 살짝 늘어나며, 떨림이 점점 강해진다
+        float chargeStart = seq.Duration();
+        seq.Append(glow.DOFade(1f, charge).SetEase(Ease.InQuad));
+        seq.Join(rt.DOScale(new Vector3(cardScale * 0.94f, cardScale * 1.05f, cardScale), charge).SetEase(Ease.InQuad));
+        seq.Insert(chargeStart, rt.DOShakeAnchorPos(charge * 0.5f, 4f, 30, 90f, false, true));
+        seq.Insert(chargeStart + charge * 0.5f, rt.DOShakeAnchorPos(charge * 0.5f, 11f, 40, 90f, false, true));
+
+        // 변화의 순간: 완전히 흰 실루엣일 때 데이터만 새 카드로 바꾼다(같은 뷰)
+        seq.AppendCallback(() =>
+        {
+            var newCard = apply?.Invoke();
+            if (newCard != null)
+            {
+                view.SetCard(newCard);
+                DisableInteraction(view);
+                // 실루엣도 새 카드의 프레임 모양으로 바꾼다 — 프레임 모양이 다른 카드로 바뀌면
+                // 옛 모양의 빛이 새 카드 밖으로 삐져나온 채 걷히기 때문(완전히 흰 상태라 바뀌는 순간은 보이지 않는다)
+                if (frame is Image frameImage && frameImage.sprite != null)
+                {
+                    glow.sprite = frameImage.sprite;
+                    glow.preserveAspect = frameImage.preserveAspect;
+                }
+                // 새 아트·글자를 숨겨 두고 빛이 걷히면서 맺히게 한다. 프레임과 빛 자체는 제외.
+                UIDissolve.In(view.gameObject, burnNoise, reveal, UIDissolve.DefaultEdge, new[] { frame, glow })
+                          .SetUpdate(true);
+            }
+            Play(transmogrifyClip != null ? transmogrifyClip : upgradeDoneClip);
+        });
+
+        // 재구성: 원래 비율로 돌아오며 튕기고, 빛이 걷힌다
+        seq.Append(rt.DOScale(cardScale, 0.1f).SetEase(Ease.OutQuad));
+        seq.Append(rt.DOPunchScale(Vector3.one * cardScale * 0.08f, 0.3f, 8, 0.6f));
+        seq.Join(glow.DOFade(0f, reveal).SetEase(Ease.OutQuad));
+        seq.AppendInterval(0.1f);
+
+        // 빛이 한 번 쓸고 지나간 뒤 DECK으로 (강화와 동일)
+        seq.AppendCallback(() => Shine(view, 0.55f));
+        seq.AppendInterval(0.55f);
+        seq.AppendInterval(0.25f);
         if (deckTarget != null)
         {
             seq.Append(rt.DOMove(deckTarget.position, 0.45f).SetEase(Ease.InCubic));

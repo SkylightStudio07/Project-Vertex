@@ -249,10 +249,9 @@ public class EventView : MonoBehaviour
         descriptionText.gameObject.SetActive(false);
 
         bool hasResult = index < _json.choices.Length;
-        if (hasResult)
-            resultText.gameObject.SetActive(true);
 
         // choiceEffects가 Inspector에서 비어있거나 선택지 수와 안 맞을 수 있으니.... 방어적으로 체크
+        var interactive = new List<IInteractiveEventEffect>();
         if (_data.choiceEffects != null && index < _data.choiceEffects.Count)
         {
             var effects = _data.choiceEffects[index].effects;
@@ -262,15 +261,40 @@ public class EventView : MonoBehaviour
                 // 이벤트 창 뒤에서 전투가 돌아가고, 진행 버튼이 전투 위에 맵을 띄워버린다.
                 _pendingBattleEffect = effects.Find(e => e is StartBattleEffect);
 
+                // 카드 선택처럼 플레이어 입력이 필요한 효과는 즉시 실행에서 빼고 아래에서 차례로 진행한다.
+                foreach (var e in effects)
+                    if (e is IInteractiveEventEffect ie) interactive.Add(ie);
+
                 var ctx = new CardContext();
                 EffectRunner.ExecuteImmediate(
-                    _pendingBattleEffect == null ? effects : effects.FindAll(e => !(e is StartBattleEffect)),
+                    effects.FindAll(e => !(e is StartBattleEffect) && !(e is IInteractiveEventEffect)),
                     ctx);
             }
         }
 
+        // 인터랙티브 효과가 전부 끝난 뒤에 결과 텍스트를 띄운다. 동시에 띄우면 카드를 고르는 동안
+        // 결과 텍스트가 스페이스·엔터 입력으로 넘어가 버린다.
+        RunInteractiveEffects(interactive, 0, () => ShowResult(index, hasResult));
+    }
+
+    // 인터랙티브 효과를 하나씩 순서대로 실행한다(앞의 것이 onDone을 불러야 다음으로 넘어감).
+    private void RunInteractiveEffects(List<IInteractiveEventEffect> list, int i, Action onAllDone)
+    {
+        if (i >= list.Count)
+        {
+            onAllDone();
+            return;
+        }
+        list[i].Run(() => RunInteractiveEffects(list, i + 1, onAllDone));
+    }
+
+    private void ShowResult(int index, bool hasResult)
+    {
         if (hasResult)
+        {
+            resultText.gameObject.SetActive(true);
             ShowPages(resultText, _json.choices[index].resultText, () => continueButton.gameObject.SetActive(true));
+        }
         else
             continueButton.gameObject.SetActive(true);
     }
