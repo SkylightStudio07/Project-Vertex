@@ -1,0 +1,921 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_system": "top-left +y down; rect [x,y,width,height]; offsets marked local",
+  "assets": [
+    {
+      "id": "Order_Button",
+      "file": "Order_Button.png",
+      "scale": 2,
+      "png_size_px": [
+        540,
+        88
+      ],
+      "screen_rect": [
+        90,
+        848,
+        270.0,
+        44.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 28,
+        "bottom": 8,
+        "right": 28,
+        "top": 8
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Order_Button_Active",
+      "file": "Order_Button_Active.png",
+      "scale": 2,
+      "png_size_px": [
+        540,
+        88
+      ],
+      "screen_rect": [
+        90,
+        848,
+        270.0,
+        44.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 28,
+        "bottom": 8,
+        "right": 28,
+        "top": 8
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Order_Button_Disabled",
+      "file": "Order_Button_Disabled.png",
+      "scale": 2,
+      "png_size_px": [
+        540,
+        88
+      ],
+      "screen_rect": [
+        90,
+        848,
+        270.0,
+        44.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 28,
+        "bottom": 8,
+        "right": 28,
+        "top": 8
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Order_Diamond",
+      "file": "Order_Diamond.png",
+      "scale": 2,
+      "png_size_px": [
+        44,
+        44
+      ],
+      "screen_rect": [
+        106,
+        859,
+        22.0,
+        22.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Order_Badge",
+      "file": "Order_Badge.png",
+      "scale": 2,
+      "png_size_px": [
+        68,
+        64
+      ],
+      "screen_rect": [
+        316,
+        854,
+        34.0,
+        32.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "List_Panel",
+      "file": "List_Panel.png",
+      "scale": 2,
+      "png_size_px": [
+        780,
+        432
+      ],
+      "screen_rect": [
+        86,
+        628,
+        390.0,
+        216.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 36,
+        "bottom": 16,
+        "right": 16,
+        "top": 36
+      },
+      "resize_axes": "vertical"
+    },
+    {
+      "id": "List_HeaderRule",
+      "file": "List_HeaderRule.png",
+      "scale": 2,
+      "png_size_px": [
+        740,
+        2
+      ],
+      "screen_rect": [
+        96,
+        658,
+        370.0,
+        1.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 2,
+        "bottom": 0,
+        "right": 2,
+        "top": 0
+      }
+    },
+    {
+      "id": "Row_Normal",
+      "file": "Row_Normal.png",
+      "scale": 2,
+      "png_size_px": [
+        740,
+        120
+      ],
+      "screen_rect": [
+        96,
+        660,
+        370.0,
+        60.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 8,
+        "bottom": 4,
+        "right": 8,
+        "top": 4
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Row_Hover",
+      "file": "Row_Hover.png",
+      "scale": 2,
+      "png_size_px": [
+        740,
+        120
+      ],
+      "screen_rect": [
+        96,
+        660,
+        370.0,
+        60.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 8,
+        "bottom": 4,
+        "right": 8,
+        "top": 4
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Row_ReadyBar",
+      "file": "Row_ReadyBar.png",
+      "scale": 2,
+      "png_size_px": [
+        10,
+        120
+      ],
+      "screen_rect": [
+        96,
+        660,
+        5.0,
+        60.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Face_Frame",
+      "file": "Face_Frame.png",
+      "scale": 2,
+      "png_size_px": [
+        120,
+        104
+      ],
+      "screen_rect": [
+        116,
+        664,
+        60.0,
+        52.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Face_Frame_Enhanced",
+      "file": "Face_Frame_Enhanced.png",
+      "scale": 2,
+      "png_size_px": [
+        120,
+        104
+      ],
+      "screen_rect": [
+        116,
+        664,
+        60.0,
+        52.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Face_Mask",
+      "file": "Face_Mask.png",
+      "scale": 2,
+      "png_size_px": [
+        96,
+        80
+      ],
+      "screen_rect": [
+        122,
+        670,
+        48.0,
+        40.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Face_Placeholder",
+      "file": "Face_Placeholder.png",
+      "scale": 2,
+      "png_size_px": [
+        96,
+        80
+      ],
+      "screen_rect": [
+        122,
+        732,
+        48.0,
+        40.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Ready_Tag",
+      "file": "Ready_Tag.png",
+      "scale": 2,
+      "png_size_px": [
+        172,
+        60
+      ],
+      "screen_rect": [
+        372,
+        676,
+        86.0,
+        30.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Charge_Bar_Back",
+      "file": "Charge_Bar_Back.png",
+      "scale": 2,
+      "png_size_px": [
+        36,
+        32
+      ],
+      "screen_rect": [
+        324,
+        744,
+        18.0,
+        16.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Charge_Bar_Fill",
+      "file": "Charge_Bar_Fill.png",
+      "scale": 2,
+      "png_size_px": [
+        28,
+        24
+      ],
+      "screen_rect": [
+        326,
+        746,
+        14.0,
+        12.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Mark_Enhanced",
+      "file": "Mark_Enhanced.png",
+      "scale": 2,
+      "png_size_px": [
+        28,
+        28
+      ],
+      "screen_rect": [
+        244,
+        792,
+        14.0,
+        14.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "Mark_Enhanced_White",
+      "file": "Mark_Enhanced_White.png",
+      "scale": 2,
+      "png_size_px": [
+        28,
+        28
+      ],
+      "screen_rect": [
+        244,
+        792,
+        14.0,
+        14.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "CutIn_Mask",
+      "file": "CutIn_Mask.png",
+      "scale": 2,
+      "png_size_px": [
+        1600,
+        760
+      ],
+      "screen_rect": [
+        0,
+        0,
+        800.0,
+        380.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "CutIn_Edge",
+      "file": "CutIn_Edge.png",
+      "scale": 2,
+      "png_size_px": [
+        1664,
+        824
+      ],
+      "screen_rect": [
+        -16,
+        -16,
+        832.0,
+        412.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "CutIn_Edge_Enhanced",
+      "file": "CutIn_Edge_Enhanced.png",
+      "scale": 2,
+      "png_size_px": [
+        1664,
+        824
+      ],
+      "screen_rect": [
+        -16,
+        -16,
+        832.0,
+        412.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "CutIn_Watermark",
+      "file": "CutIn_Watermark.png",
+      "scale": 2,
+      "png_size_px": [
+        108,
+        108
+      ],
+      "screen_rect": [
+        566,
+        4,
+        54.0,
+        54.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null
+    },
+    {
+      "id": "CutIn_Eye_Cp01",
+      "file": "CutIn_Eye_Cp01.png",
+      "scale": 2,
+      "png_size_px": [
+        1920,
+        912
+      ],
+      "screen_rect": [
+        -80,
+        -38,
+        960.0,
+        456.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "source_native_px": [
+        1820,
+        864
+      ],
+      "method": "New image_gen illustration; normalized to1920x912, not cropped/upscaled from mockup"
+    },
+    {
+      "id": "Tag_Back",
+      "file": "Tag_Back.png",
+      "scale": 2,
+      "png_size_px": [
+        1140,
+        88
+      ],
+      "screen_rect": [
+        120,
+        342,
+        570.0,
+        44.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 52,
+        "bottom": 6,
+        "right": 52,
+        "top": 6
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Tag_Back_Enhanced",
+      "file": "Tag_Back_Enhanced.png",
+      "scale": 2,
+      "png_size_px": [
+        1140,
+        88
+      ],
+      "screen_rect": [
+        120,
+        342,
+        570.0,
+        44.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": {
+        "left": 52,
+        "bottom": 6,
+        "right": 52,
+        "top": 6
+      },
+      "resize_axes": "horizontal"
+    },
+    {
+      "id": "Tag_Divider",
+      "file": "Tag_Divider.png",
+      "scale": 2,
+      "png_size_px": [
+        44,
+        2
+      ],
+      "screen_rect": [
+        120,
+        342,
+        22.0,
+        1.0
+      ],
+      "alpha": "binary",
+      "nine_slice_px": null,
+      "placement": "tag-local rect [154,22,22,1]"
+    }
+  ],
+  "order": {
+    "button_rect": [
+      90,
+      848,
+      270,
+      44
+    ],
+    "diamond_rect": [
+      106,
+      859,
+      22,
+      22
+    ],
+    "diamond_tints": {
+      "ready": "#0DB8F2",
+      "not_ready": "#92999F"
+    },
+    "badge_rect": [
+      316,
+      854,
+      34,
+      32
+    ],
+    "text": [
+      {
+        "id": "label",
+        "rect": [
+          154,
+          856,
+          44,
+          30
+        ],
+        "font_size": 24,
+        "color": "#EEF0F2",
+        "hover_color": "#EEF0F2",
+        "align": "left"
+      },
+      {
+        "id": "english",
+        "rect": [
+          216,
+          864,
+          60,
+          18
+        ],
+        "font_size": 12,
+        "color": "#EEF0F2",
+        "hover_color": "#EEF0F2",
+        "align": "left"
+      },
+      {
+        "id": "badge",
+        "rect": [
+          316,
+          854,
+          34,
+          32
+        ],
+        "font_size": 24,
+        "color": "#16181B",
+        "hover_color": "#EEF0F2",
+        "align": "center"
+      }
+    ]
+  },
+  "list": {
+    "panel_rect": [
+      86,
+      628,
+      390,
+      216
+    ],
+    "gap_above_button": 4,
+    "header_rule_y": 658,
+    "height_formula": "30 + companion_count*62",
+    "panel_top_formula": "848-4-(30+companion_count*62)",
+    "header": [
+      {
+        "id": "ORDER",
+        "rect": [
+          112,
+          634,
+          64,
+          20
+        ],
+        "font_size": 14,
+        "color": "#16181B",
+        "hover_color": "#EEF0F2",
+        "align": "left"
+      },
+      {
+        "id": "companion_orders",
+        "rect": [
+          184,
+          634,
+          176,
+          20
+        ],
+        "font_size": 14,
+        "color": "#16181B",
+        "hover_color": "#EEF0F2",
+        "align": "left"
+      },
+      {
+        "id": "count",
+        "rect": [
+          430,
+          634,
+          28,
+          20
+        ],
+        "font_size": 14,
+        "color": "#16181B",
+        "hover_color": "#EEF0F2",
+        "align": "right"
+      }
+    ],
+    "first_row_rect": [
+      96,
+      660,
+      370,
+      60
+    ],
+    "repeat_step_y": 62,
+    "gap_y": 2,
+    "offsets": {
+      "ready_bar": [
+        0,
+        0,
+        5,
+        60
+      ],
+      "face_frame": [
+        20,
+        4,
+        60,
+        52
+      ],
+      "face_mask": [
+        26,
+        10,
+        48,
+        40
+      ],
+      "enhanced_mark": [
+        148,
+        8,
+        14,
+        14
+      ],
+      "name": {
+        "id": "companion_name",
+        "rect": [
+          104,
+          5,
+          120,
+          21
+        ],
+        "font_size": 12,
+        "color": "#16181B",
+        "hover_color": "#EEF0F2",
+        "align": "left"
+      },
+      "skill": {
+        "id": "skill_name",
+        "rect": [
+          104,
+          26,
+          120,
+          28
+        ],
+        "font_size": 20,
+        "color": "#16181B",
+        "hover_color": "#EEF0F2",
+        "align": "left"
+      },
+      "ready_tag": [
+        276,
+        16,
+        86,
+        30
+      ],
+      "ready_label": {
+        "id": "READY",
+        "rect": [
+          294,
+          21,
+          62,
+          20
+        ],
+        "font_size": 12,
+        "color": "#EEF0F2",
+        "hover_color": "#EEF0F2",
+        "align": "left"
+      },
+      "charge_cells": [
+        [
+          228,
+          22,
+          18,
+          16
+        ],
+        [
+          249,
+          22,
+          18,
+          16
+        ],
+        [
+          270,
+          22,
+          18,
+          16
+        ],
+        [
+          291,
+          22,
+          18,
+          16
+        ]
+      ],
+      "charge_fill_inset": [
+        2,
+        2,
+        14,
+        12
+      ],
+      "remaining": {
+        "id": "remaining",
+        "rect": [
+          322,
+          20,
+          42,
+          22
+        ],
+        "font_size": 14,
+        "color": "#16181B",
+        "hover_color": "#EEF0F2",
+        "align": "center"
+      }
+    },
+    "face_note": "Same48x40 inner mask for both frames. Runtime face art beneath mask/frame; no Sho portrait extracted. Placeholder used in assembly.",
+    "examples": [
+      "hover+ready",
+      "3/4 turn charge",
+      "1/4 battle charge+enhanced"
+    ]
+  },
+  "cutin": {
+    "triangle_screen": [
+      [
+        0,
+        0
+      ],
+      [
+        800,
+        0
+      ],
+      [
+        0,
+        380
+      ]
+    ],
+    "edge_angle_screen_degrees": -25.407718108948472,
+    "unity_z_degrees": 25.407718108948472,
+    "eye_rect": [
+      -80,
+      -38,
+      960,
+      456
+    ],
+    "eye_overscan_each_side_percent": 10,
+    "eye_template": {
+      "png_size": [
+        1920,
+        912
+      ],
+      "target_centers_png": [
+        [
+          557,
+          447
+        ],
+        [
+          1114,
+          264
+        ]
+      ],
+      "target_centers_screen": [
+        [
+          198.5,
+          185.5
+        ],
+        [
+          477,
+          94
+        ]
+      ],
+      "target_eye_width_screen": 154,
+      "description": "Approximate drawing targets, not measured landmark detections; same mask and placement for future companions."
+    },
+    "watermark_rect": [
+      566,
+      4,
+      54,
+      54
+    ],
+    "draw_order": [
+      "masked eye",
+      "edge variant",
+      "watermark if enhanced",
+      "tag"
+    ],
+    "tag": {
+      "anchor_screen": [
+        120,
+        342
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "screen_rotation_degrees": -25.407718108948472,
+      "unity_z_degrees": 25.407718108948472,
+      "base_size": [
+        570,
+        44
+      ],
+      "placement": "top-left anchor; tag extends right/up along edge. Its height extends down/right into battle side.",
+      "text_local": [
+        {
+          "id": "ORDER",
+          "rect": [
+            30,
+            9,
+            52,
+            24
+          ],
+          "font_size": 13,
+          "color": "#EEF0F2",
+          "hover_color": "#EEF0F2",
+          "align": "left"
+        },
+        {
+          "id": "skill",
+          "rect": [
+            88,
+            7,
+            58,
+            28
+          ],
+          "font_size": 20,
+          "color": "#EEF0F2",
+          "hover_color": "#EEF0F2",
+          "align": "left"
+        },
+        {
+          "id": "dialogue",
+          "rect": [
+            190,
+            8,
+            350,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "hover_color": "#EEF0F2",
+          "align": "left"
+        }
+      ],
+      "divider_local": [
+        154,
+        22,
+        22,
+        1
+      ],
+      "examples": {
+        "base": "…쓴 만큼, 채울게.",
+        "enhanced": "…우리 둘 몫이야. 남김없이."
+      }
+    }
+  },
+  "import_settings": {
+    "ppu": 200,
+    "canvas_reference_pixels_per_unit": 100,
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "mesh_type": "FullRect",
+    "mipmaps": false,
+    "compression": "None",
+    "filter_mode": "Bilinear",
+    "wrap_mode": "Clamp",
+    "max_texture_size": 4096
+  }
+}

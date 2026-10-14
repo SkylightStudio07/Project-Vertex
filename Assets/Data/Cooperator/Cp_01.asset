@@ -37,6 +37,8 @@ MonoBehaviour:
   sanctuaryHoverFocus: {x: 0.5, y: 0.5}
   sanctuaryFullArt: {fileID: 0}
   isEventCompanion: 0
+  faceFocus: {x: 0.55, y: 0.97}
+  faceZoom: 3
   materialJson: {fileID: 4900000, guid: 64759934bcbd7d74eb9a9837e979d1bc, type: 3}
   actNumber: 1
   trainingRequiredLevel: 2
@@ -78,6 +80,7 @@ MonoBehaviour:
     - "\uC606\uC5D0 \uC549\uC544. \u2026\uADF8\uB0E5, \uADF8\uB7EC\uACE0 \uC2F6\uC5B4\uC11C."
     - "\uC26C\uB294 \uAC83\uB3C4 \uB098\uC058\uC9C0 \uC54A\uB124. \uB108\uB791\uC774\uBA74."
   joinRewardCard: {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
+  skill: {fileID: 11400000, guid: 7e242856db63cc4489d7be5938fc6ded, type: 2}
   joinDialogueJson: {fileID: 4900000, guid: f40cfa2b9a87d7b43a02d1241cc149fb, type: 3}
   rewardPoolCommon: []
   rewardPoolRare: []

@@ -50,6 +50,7 @@ public class TentInteractionHandler : FacilityInteractionHandler
             return;
         }
 
+        UISfx.Play("ui_deploy");
         SceneTransition.Load(runSceneName); // 막이 닫히고 → 비동기 로드 → 전투 씬에서 막이 열리는 전환 연출
     }
 

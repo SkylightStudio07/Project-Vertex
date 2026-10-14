@@ -72,6 +72,8 @@ public class BattleManager : MonoBehaviour
     // 구독 쪽에서 결과를 기다리지 않고 그냥 재생만 하면 된다.
     public event Action<CardData> OnCardPlayed;
     public event Action<BattleReward> OnBattleVictory;
+    public event Action OnCompanionSkillsChanged;              // 동료 스킬 충전·사용 (지시 버튼 갱신)
+    public event Action<CompanionSkillSlot> OnCompanionSkillUsed; // 동료 스킬 사용 직후, 효과보다 먼저 (컷인)
     public event Action         OnBattleDefeat;
     public event Action         OnBattleEscaped;
     public static event Action<EnemyInstance> EnemyDefeated; // 적 하나가 쓰러질 때마다
@@ -127,6 +129,7 @@ public class BattleManager : MonoBehaviour
         _state.WeaponUpgradeLevel = PlayerRecord.GetWeaponUpgrade; // 무기고 강화는 장착(재장전) 전에 연결해야 시작 탄약에 반영된다
         _state.ChangePlayerWeapon(_defaultWeapon);
         SetupBattleDeck(masterDeck);
+        SetupCompanionSkills();
         _state.Player.Statuses.NotifyBattleStart(_state, _state.Player);
         foreach (var enemy in _state.Enemies)
             enemy.Statuses.NotifyBattleStart(_state, enemy);
@@ -198,6 +201,11 @@ public class BattleManager : MonoBehaviour
     {
         _state.TurnNumber++; // 플레이어 턴이 올 때마다 1부터 센다 (상단 작전 바 TURN 표시)
         RunStats.AddTurn();   // 결과 화면 '진행 턴' (런 전체 합)
+        if (_state.TurnNumber > 1)
+        {
+            foreach (var slot in _state.CompanionSkills) slot.OnPlayerTurnStart();
+            if (_state.CompanionSkills.Count > 0) OnCompanionSkillsChanged?.Invoke();
+        }
 
         if (showBanner && _playerTurnBanner != null)
             yield return _playerTurnBanner.ShowAndWait();
@@ -790,6 +798,54 @@ public class BattleManager : MonoBehaviour
     }
 
     // ─────────────────────────────────────────────
+    // 동료 스킬 (지시). 기획: Docs/기획/동료_스킬.md
+    // ─────────────────────────────────────────────
+
+    private void SetupCompanionSkills()
+    {
+        _state.CompanionSkills.Clear();
+        if (CooperationManager.Instance == null) return;
+        foreach (var charState in CooperationManager.Instance.GetJoinedInRunCharStates())
+        {
+            var skill = charState.charData != null ? charState.charData.skill : null;
+            if (skill == null) continue;
+            _state.CompanionSkills.Add(new CompanionSkillSlot(
+                charState, skill, CooperationManager.IsSkillEnhanced(charState), TrainingSession.IsActive));
+        }
+        OnCompanionSkillsChanged?.Invoke();
+    }
+
+    // 카드를 낼 수 있는 때와 같다 (내 턴, 턴 종료 처리·손패 선택 중이 아님)
+    public bool CanUseCompanionSkill(CompanionSkillSlot slot)
+    {
+        if (slot == null || !slot.IsReady || !CanUseItemNow || !_state.CompanionSkills.Contains(slot)) return false;
+        if (slot.Skill.selectEnemy && !_state.Enemies.Any(e => !e.IsDead)) return false;
+        return true;
+    }
+
+    public bool TryUseCompanionSkill(CompanionSkillSlot slot, EnemyInstance target)
+    {
+        if (!CanUseCompanionSkill(slot)) return false;
+        if (slot.Skill.selectEnemy && (target == null || target.IsDead || !_state.Enemies.Contains(target)))
+            return false;
+
+        var ctx = new CardContext
+        {
+            State      = _state,
+            Battle     = this,
+            Target     = target,
+            AllEnemies = _state.Enemies,
+        };
+
+        slot.Consume();
+        OnCompanionSkillsChanged?.Invoke();
+        OnCompanionSkillUsed?.Invoke(slot);
+        Debug.Log($"[BattleManager] 동료 스킬 '{slot.Skill.skillName}' ({slot.Owner.charID}{(slot.Enhanced ? ", 인연 강화" : "")})");
+        StartCoroutine(ExecuteEffectsSequence(slot.Skill.EffectsOf(slot.Enhanced), ctx));
+        return true;
+    }
+
+    // ─────────────────────────────────────────────
     // 승리 판정
     // ─────────────────────────────────────────────
 
@@ -833,6 +889,7 @@ public class BattleManager : MonoBehaviour
                                    RunData.Instance.currentNodeIndex);
         var reward    = new BattleReward(GameManager.Instance.cardPools, rewardData, rewardRng);
         Debug.Log($"<color=#4ADE80>[BattleManager] 전투 승리! ({_currentBattleType}) 모든 적을 무찔렀습니다.</color>");
+        foreach (var slot in _state.CompanionSkills) slot.OnBattleWon(); // 전투 충전 스킬: 일반·엘리트·보스 모두 1
         OnBattleVictory?.Invoke(reward);
         foreach (var e in _state.Enemies)
             e.OnDied -= CheckVictory;

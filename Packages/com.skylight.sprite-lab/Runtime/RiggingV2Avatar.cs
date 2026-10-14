@@ -24,6 +24,16 @@ namespace SpriteLab.RiggingV2
         [SerializeField] private Transform legLeft;
         [SerializeField] private Transform legRight;
 
+        [Header("Arms (비워 두면 이름으로 자동 연결: shoulder_l/r, arm_l/r, hand_l/r)")]
+        [Tooltip("팔이 숨쉬기·몸통에 맞춰 흔들리는 폭. 0이면 팔은 가만히 있다")]
+        [SerializeField, Range(0f, 6f)] private float armSwayDegrees;
+        [SerializeField] private Transform shoulderLeft;
+        [SerializeField] private Transform shoulderRight;
+        [SerializeField] private Transform armLeft;
+        [SerializeField] private Transform armRight;
+        [SerializeField] private Transform handLeft;
+        [SerializeField] private Transform handRight;
+
         private Quaternion spineRest;
         private Vector3 spinePosition;
         private Quaternion chestRest;
@@ -35,6 +45,7 @@ namespace SpriteLab.RiggingV2
         private Quaternion skirtRightRest;
         private Quaternion legLeftRest;
         private Quaternion legRightRest;
+        private Quaternion shoulderLeftRest, shoulderRightRest, armLeftRest, armRightRest, handLeftRest, handRightRest;
 
         public void Configure(Transform hipsBone, Transform spineBone, Transform chestBone, Transform neckBone, Transform headBone,
             Transform skirtCenterBone = null, Transform skirtLeftBone = null, Transform skirtRightBone = null,
@@ -53,8 +64,9 @@ namespace SpriteLab.RiggingV2
             CachePose();
         }
 
-        public void ApplyIdleSettings(bool enabled, float bodySway, float headFollow, float breathing, float speed, float bob = 0f)
+        public void ApplyIdleSettings(bool enabled, float bodySway, float headFollow, float breathing, float speed, float bob = 0f, float armSway = 0f)
         {
+            armSwayDegrees = Mathf.Max(0f, armSway);
             bodyBob = Mathf.Max(0f, bob);
             automaticIdle = enabled;
             bodySwayDegrees = Mathf.Max(0f, bodySway);
@@ -63,10 +75,37 @@ namespace SpriteLab.RiggingV2
             idleSpeed = Mathf.Max(0.01f, speed);
         }
 
-        private void Awake() => CachePose();
+        private void Awake()
+        {
+            FindArmBones();
+            CachePose();
+        }
+
+        // 임포터가 팔 뼈를 연결하지 않으므로 이름으로 찾는다 (이미 연결돼 있으면 그대로)
+        private void FindArmBones()
+        {
+            Transform Find(string boneName)
+            {
+                foreach (var t in GetComponentsInChildren<Transform>(true))
+                    if (t.name == boneName) return t;
+                return null;
+            }
+            if (!shoulderLeft) shoulderLeft = Find("shoulder_l");
+            if (!shoulderRight) shoulderRight = Find("shoulder_r");
+            if (!armLeft) armLeft = Find("arm_l");
+            if (!armRight) armRight = Find("arm_r");
+            if (!handLeft) handLeft = Find("hand_l");
+            if (!handRight) handRight = Find("hand_r");
+        }
 
         private void CachePose()
         {
+            shoulderLeftRest = shoulderLeft ? shoulderLeft.localRotation : Quaternion.identity;
+            shoulderRightRest = shoulderRight ? shoulderRight.localRotation : Quaternion.identity;
+            armLeftRest = armLeft ? armLeft.localRotation : Quaternion.identity;
+            armRightRest = armRight ? armRight.localRotation : Quaternion.identity;
+            handLeftRest = handLeft ? handLeft.localRotation : Quaternion.identity;
+            handRightRest = handRight ? handRight.localRotation : Quaternion.identity;
             spineRest = spine ? spine.localRotation : Quaternion.identity;
             spinePosition = spine ? spine.localPosition : Vector3.zero;
             chestRest = chest ? chest.localRotation : Quaternion.identity;
@@ -106,6 +145,18 @@ namespace SpriteLab.RiggingV2
             var step = Mathf.Sin(phase * 0.72f + 0.2f) * 0.8f;
             if (legLeft) legLeft.localRotation = legLeftRest * Quaternion.Euler(0f, 0f, step);
             if (legRight) legRight.localRotation = legRightRest * Quaternion.Euler(0f, 0f, -step);
+
+            // 팔: 숨쉬기에 어깨가 살짝 들리고, 팔은 몸통보다 조금 늦게 따라 흔들리며, 손끝은 더 늦게 살랑인다
+            if (armSwayDegrees <= 0f) return;
+            float shoulder = (breath - 0.5f) * armSwayDegrees * 0.5f;
+            float arm = Mathf.Sin(phase - 0.6f) * armSwayDegrees;
+            float hand = Mathf.Sin(phase * 1.3f - 1.4f) * armSwayDegrees * 1.2f;
+            if (shoulderLeft) shoulderLeft.localRotation = shoulderLeftRest * Quaternion.Euler(0f, 0f, shoulder);
+            if (shoulderRight) shoulderRight.localRotation = shoulderRightRest * Quaternion.Euler(0f, 0f, -shoulder);
+            if (armLeft) armLeft.localRotation = armLeftRest * Quaternion.Euler(0f, 0f, arm);
+            if (armRight) armRight.localRotation = armRightRest * Quaternion.Euler(0f, 0f, arm * 0.8f);
+            if (handLeft) handLeft.localRotation = handLeftRest * Quaternion.Euler(0f, 0f, hand);
+            if (handRight) handRight.localRotation = handRightRest * Quaternion.Euler(0f, 0f, -hand);
         }
     }
 }

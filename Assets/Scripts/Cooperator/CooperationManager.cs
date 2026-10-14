@@ -14,6 +14,7 @@ public class CoopCharState
     public bool isJoinedInRun;      // 런 중에 합류했는지 여부(런이 시작될 때마다 false로 초기화 되어야 함!!)
     public Dictionary<int, RankEventData> rankEventDatasDict;
     public CardData joinCardInstance; // 합류 때 덱에 넣은 합류 카드 복사본 (귀환 때 이 한 장만 뺀다)
+    public int skillProgress = -1;    // 전투 충전 스킬의 진행도 (런 단위). -1이면 아직 합류 전 — 첫 전투에서 startReady로 채운다
 }
 
 // 협력자 호감도 관리 스크립트
@@ -76,6 +77,7 @@ public class CooperationManager : MonoBehaviour
         foreach (var charState in coopCharDict.Values)
         {
             charState.isJoinedInRun = false;
+            charState.skillProgress = -1;
         }
     }
 
@@ -223,6 +225,7 @@ public class CooperationManager : MonoBehaviour
             return;
         }
         charState.isJoinedInRun = true;
+        charState.skillProgress = -1;
         // 처음 합류하면 인연이 생긴다 (호감도 Lv.0 → Lv.1). Lv.0에서는 포인트도 랭크업도 받지 않으므로 이게 시작점이다.
         if (charState.currentCoopLevel == 0)
         {
@@ -236,6 +239,11 @@ public class CooperationManager : MonoBehaviour
     {
         return coopCharDict.TryGetValue(charID, out var charState) && charState.isJoinedInRun;
     }
+
+    // 동료 스킬 인연 강화: 호감도 최대 레벨(= 최종 인연 스토리를 봄). 기획: Docs/기획/동료_스킬.md
+    public static bool IsSkillEnhanced(CoopCharState charState)
+        => charState?.charData != null && charState.charData.maxCoopLevel > 0
+           && charState.currentCoopLevel >= charState.charData.maxCoopLevel;
 
     // 현재 런에 합류한 캐릭터들의 상태를 반환하는 메소드
     public List<CoopCharState> GetJoinedInRunCharStates()
@@ -264,6 +272,7 @@ public class CooperationManager : MonoBehaviour
         if (!coopCharDict.TryGetValue(charID, out var charState) || !charState.isJoinedInRun) return;
         var toRemove = CardsLeavingWith(charID);
         charState.isJoinedInRun = false;
+        charState.skillProgress = -1;
 
         if (DeckManager.Instance != null)
             DeckManager.Instance.RemoveCardsWhere(toRemove.Contains);

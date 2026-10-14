@@ -20,6 +20,9 @@ public class LobbyEntranceAnimator : MonoBehaviour
     [SerializeField, Min(0f)] private float sideStart = 0.35f;
     [SerializeField, Min(0f)] private float sideStagger = 0.03f;
 
+    [Header("효과음")]
+    [SerializeField] private string entranceSfx; // 메인 로비만 "ui_lobby_enter". 시설 화면 키트는 비워 둔다(열림 소리는 UISfxOnEnable)
+
     private readonly Dictionary<RectTransform, Vector2> _rest = new();
     private Sequence _sequence;
     private float _lineWidth;
@@ -46,6 +49,7 @@ public class LobbyEntranceAnimator : MonoBehaviour
         _sequence?.Kill();
         RestoreAll();
         _sequence = DOTween.Sequence().SetLink(gameObject);
+        if (!string.IsNullOrEmpty(entranceSfx)) UISfx.Play(entranceSfx);
 
         if (background != null)
         {
