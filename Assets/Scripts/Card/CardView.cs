@@ -24,6 +24,7 @@ public class CardView : MonoBehaviour
     [SerializeField] private Image backgroundImage;
 
     public CardData Data { get; private set; }
+    public RectTransform Visual => backgroundImage != null ? backgroundImage.rectTransform : (RectTransform)transform; // 카드 그림(프레임) — 카드 위 표시를 붙이는 기준
 
     // 강화된 카드는 이름과, 강화로 달라진 코스트를 강조색으로 칠한다 (설명문은 CardUpgradeHighlight).
     private static readonly Color UpgradeNameColor = new(1f, 0.32f, 0.28f, 1f);   // 검은 이름 바 위

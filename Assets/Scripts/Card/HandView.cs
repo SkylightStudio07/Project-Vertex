@@ -54,6 +54,7 @@ public class HandView : MonoBehaviour
 
     private readonly HashSet<CardData> _currentHandCards = new(); // 현재 BattleManager.Hand에 들어 있는 카드 참조 집합.
     private readonly List<CardView> _cardViews = new(); // 현재 화면에서 생존 중인 카드 UI 목록.
+    public IReadOnlyList<CardView> CardViews => _cardViews; // 손패 카드 표시 (초탄·막탄 태그 등 AmmoBoundaryView가 읽는다)
     private readonly List<CardInteractionView> _layoutInteractionViews = new(); // 현재 손패 배치에 사용할 카드 상호작용 뷰 목록.
     private readonly List<CardInteractionView> _newInteractionViews = new(); // 이번 Refresh에서 새로 들어온 카드 뷰 재사용 목록.
     private readonly List<CardInteractionView> _discardInteractionViews = new(); // 턴 종료 시 퇴장할 카드 뷰 재사용 목록.

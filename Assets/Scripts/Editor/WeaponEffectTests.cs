@@ -353,6 +353,32 @@ public class WeaponEffectTests
         Assert.That(both.IsMet(context), Is.True);
     }
 
+    [Test]
+    public void PredictAmmoBoundary_FirstAfterReload_LastWhenEmptying_NotAfterUse()
+    {
+        var weapon = Weapon(Card("Shot", false, 1));
+        _state.ChangePlayerWeapon(weapon); // 재장전 → 7발, 초탄·막탄 가능
+
+        Assert.That(_state.PredictAmmoBoundary(1, false), Is.EqualTo((true, false)));
+        Assert.That(_state.PredictAmmoBoundary(7, false), Is.EqualTo((true, true)));
+        Assert.That(_state.PredictAmmoBoundary(0, true), Is.EqualTo((true, true)), "남은 탄약 전부 쓰기");
+        Assert.That(_state.PredictAmmoBoundary(0, false), Is.EqualTo((false, false)), "탄약을 안 쓰는 카드");
+        Assert.That(_state.PredictAmmoBoundary(8, false), Is.EqualTo((false, false)), "탄약 부족");
+
+        _state.ConsumeAmmo(1, new CardContext { State = _state, Card = Card("Use", false, 1) });
+        Assert.That(_state.PredictAmmoBoundary(1, false), Is.EqualTo((false, false)), "초탄은 이미 씀");
+        Assert.That(_state.PredictAmmoBoundary(6, false), Is.EqualTo((false, true)));
+    }
+
+    [Test]
+    public void PredictAmmoBoundary_NoneForWeaponWithoutBoundary()
+    {
+        var weapon = Weapon(Card("Shot", false, 1));
+        SetField(weapon, "usesAmmoBoundary", false);
+        _state.ChangePlayerWeapon(weapon);
+        Assert.That(_state.PredictAmmoBoundary(7, false), Is.EqualTo((false, false)));
+    }
+
     private CardData Card(string name, bool isShot, int value)
     {
         var card = ScriptableObject.CreateInstance<CardData>();

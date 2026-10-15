@@ -68,11 +68,22 @@ public class BattleState
             context.RecordAmmoUse(spent, first, last);
             if (first) FirstAmmoUseAvailable = false;
             if (last) LastAmmoUseAvailable = false;
+            if (!_ammoPreview && (first || last)) context.Battle?.NotifyAmmoBoundaryUsed(context, first, last);
             if (spent > 0)
                 AmmoStatusEvents.Visit(this, (status, behavior) => behavior.OnAmmoSpent(status, context, spent, first, firstConsumption, _ammoPreview));
             if (!_ammoPreview) Player.RemoveExpiredPassives();
         }
         return spent;
+    }
+
+    // 카드 하나를 지금 쓰면 초탄·막탄이 되는지 (손패 표시용). ammoCost는 보정 후 탄약 비용,
+    // consumesAll은 남은 탄약을 전부 쓰는 효과(AmmoConsumeAllDamageEffect)가 있는지.
+    public (bool first, bool last) PredictAmmoBoundary(int ammoCost, bool consumesAll)
+    {
+        if (CurrentWeapon == null || !CurrentWeapon.UsesAmmoBoundary || ammoCost > Ammo) return (false, false);
+        int spend = consumesAll ? Ammo : ammoCost;
+        if (spend <= 0) return (false, false);
+        return (FirstAmmoUseAvailable, LastAmmoUseAvailable && Ammo - spend == 0);
     }
 
     // 일반 탄약 획득. 총기를 들고 있으면 최대 탄약을 넘지 않는다(하드캡, 넘친 만큼은 버린다).

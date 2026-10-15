@@ -74,6 +74,16 @@ public class BattleManager : MonoBehaviour
     public event Action<BattleReward> OnBattleVictory;
     public event Action OnCompanionSkillsChanged;              // 동료 스킬 충전·사용 (지시 버튼 갱신)
     public event Action<CompanionSkillSlot> OnCompanionSkillUsed; // 동료 스킬 사용 직후, 효과보다 먼저 (컷인)
+    public event Action<CardContext, bool, bool> OnAmmoBoundaryUsed; // 초탄(first)·막탄(last)이 실제로 발동 (탄약을 쓴 직후, 피해보다 먼저)
+    internal void NotifyAmmoBoundaryUsed(CardContext context, bool first, bool last) => OnAmmoBoundaryUsed?.Invoke(context, first, last);
+
+    // 손패의 이 카드를 지금 내면 초탄·막탄이 되는지. 낼 수 없는 카드는 (false, false)
+    public (bool first, bool last) PredictAmmoBoundary(CardData card)
+    {
+        if (_state == null || !IsCardPlayable(card)) return (false, false);
+        bool consumesAll = card.ActiveEffects != null && card.ActiveEffects.Any(e => e is AmmoConsumeAllDamageEffect);
+        return _state.PredictAmmoBoundary(GetCardPlayCost(card).Ammo, consumesAll);
+    }
     public event Action         OnBattleDefeat;
     public event Action         OnBattleEscaped;
     public static event Action<EnemyInstance> EnemyDefeated; // 적 하나가 쓰러질 때마다
