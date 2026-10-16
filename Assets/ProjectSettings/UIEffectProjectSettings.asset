@@ -45,6 +45,22 @@ MonoBehaviour:
     m_OptionalShaders:
     - key: Hidden/UI/Default (SoftMaskable)
       value: Hidden/UI/Default (UIEffect)
+    - key: Hidden/TextMeshPro/Bitmap (SoftMaskable)
+      value: Hidden/TextMeshPro/Bitmap (UIEffect)
+    - key: Hidden/TextMeshPro/Distance Field (SoftMaskable)
+      value: Hidden/TextMeshPro/Distance Field (UIEffect)
+    - key: Hidden/TextMeshPro/Distance Field Overlay (SoftMaskable)
+      value: Hidden/TextMeshPro/Distance Field Overlay (UIEffect)
+    - key: Hidden/TextMeshPro/Distance Field SSD (SoftMaskable)
+      value: Hidden/TextMeshPro/Distance Field SSD (UIEffect)
+    - key: Hidden/TextMeshPro/Mobile/Bitmap (SoftMaskable)
+      value: Hidden/TextMeshPro/Mobile/Bitmap (UIEffect)
+    - key: Hidden/TextMeshPro/Mobile/Distance Field (SoftMaskable)
+      value: Hidden/TextMeshPro/Mobile/Distance Field (UIEffect)
+    - key: Hidden/TextMeshPro/Mobile/Distance Field Overlay (SoftMaskable)
+      value: Hidden/TextMeshPro/Mobile/Distance Field Overlay (UIEffect)
+    - key: Hidden/TextMeshPro/Mobile/Distance Field SSD (SoftMaskable)
+      value: Hidden/TextMeshPro/Mobile/Distance Field SSD (UIEffect)
     m_Asset: {fileID: -8787555309615387321}
     m_RegisteredShaders:
     - {fileID: 4800000, guid: 96246b1ead49a4c5a996fd477bc5a117, type: 3}

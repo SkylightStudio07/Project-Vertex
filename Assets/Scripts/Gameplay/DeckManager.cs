@@ -170,7 +170,7 @@ public class DeckManager : MonoBehaviour
         if (!TrainingSession.IsActive) PlayerRecord.AddObtainedCard(newCard);
         RunStats.AddCard();
 
-        return newCard;
+        return copy;   // 덱에 들어간 복사본 (원본 SO를 돌려주면 호출부에서 수정 시 에셋이 오염된다)
     }
 
     // 변화 후보: 획득 가능한 카드(보상 풀 전 등급) 중 Owner가 같은 카드. 자기 자신은 변화 대상에서 제외한다.

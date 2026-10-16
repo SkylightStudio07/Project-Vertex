@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61e595b875def948a5ed08c5927f167, type: 3}
+  m_Name: "event_\uBC84\uB824\uC9C4 \uC7A5\uB09C\uAC10"
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventJson: {fileID: 4900000, guid: 06edecccbfcbf6f488fd56e6cab754c9, type: 3}
+  choiceEffects:
+  - effects:
+    - rid: 646458146125512821
+    - rid: 646458161760829440
+    conditions:
+    - rid: 646458146125512822
+    - rid: 646458161760829441
+  - effects:
+    - rid: 646458161760829442
+    conditions: []
+  dialogueJson: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  eventImage: {fileID: 5226312615441349864, guid: 29e6edda6c701e94ebe96ae98208ca08, type: 3}
+  eventImageFocus: {x: 0.5, y: 0.5}
+  eventImageZoom: 1
+  illustration: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 646458146125512821
+      type: {class: TransmogrifyCardEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 2
+    - rid: 646458146125512822
+      type: {class: HasTransmogrifiableCardCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 646458161760829440
+      type: {class: GainGoldEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: -155
+    - rid: 646458161760829441
+      type: {class: GoldIsEnoughCondition, ns: , asm: Assembly-CSharp}
+      data:
+        requiredGold: 155
+    - rid: 646458161760829442
+      type: {class: GainGoldEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 35

@@ -46,6 +46,32 @@ public static class UIDissolve
                       .SetEase(Ease.OutQuad).SetLink(graphic.gameObject);
     }
 
+    // root 아래 보이는 요소 전부를 디졸브로 나타나게(rate 1→0) 한다. Out의 반대.
+    // 글자(TMP)와 노이즈가 없는 경우는 페이드인으로 처리하고, 글자는 그림보다 살짝 늦게 떠오르게 한다.
+    // 호출 즉시 전부 숨긴 상태로 만든다 — 모습을 바꾼 직후 부르면 바뀐 모습이 한 프레임도 비치지 않는다.
+    public static Sequence In(GameObject root, Texture noise, float duration, Color edge,
+                              ICollection<Graphic> exclude = null)
+    {
+        var seq = DOTween.Sequence().SetLink(root);
+
+        foreach (var g in root.GetComponentsInChildren<Graphic>())
+        {
+            if (!g.enabled || (exclude != null && exclude.Contains(g))) continue;
+
+            var fx = g is TMP_Text ? null : Prepare(g, noise, edge);
+            if (fx == null)
+            {
+                seq.Insert(duration * 0.4f, FadeIn(g, duration * 0.6f));
+                continue;
+            }
+
+            fx.transitionRate = 1f;
+            seq.Join(DOTween.To(() => fx.transitionRate, r => fx.transitionRate = r, 0f, duration)
+                            .SetEase(Ease.OutQuad));
+        }
+        return seq;
+    }
+
     // root 아래 보이는 요소 전부를 디졸브로 사라지게(rate 0→1) 한다. exclude에 든 Graphic은 건드리지 않는다.
     // filter: 기본 Dissolve. 카드 제거처럼 불타 없어지는 연출은 Burn.
     public static Sequence Out(GameObject root, Texture noise, float duration, Color edge,
@@ -79,6 +105,14 @@ public static class UIDissolve
     {
         var cr = g.canvasRenderer;
         return DOTween.To(() => cr.GetAlpha(), a => cr.SetAlpha(a), 0f, duration);
+    }
+
+    // FadeOut의 반대. 호출 즉시 CanvasRenderer 알파를 0으로 만든 뒤 1까지 올린다.
+    private static Tween FadeIn(Graphic g, float duration)
+    {
+        var cr = g.canvasRenderer;
+        cr.SetAlpha(0f);
+        return DOTween.To(() => cr.GetAlpha(), a => cr.SetAlpha(a), 1f, duration);
     }
 
     private static Tween FadeFrom0(Graphic graphic, float duration)
