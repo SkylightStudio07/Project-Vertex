@@ -7,6 +7,6 @@ public class AddAmmoEffect : CardEffect
     public override void Execute(CardContext context)
     {
         if (context.State == null) return;
-        context.State.Ammo += amount + scaling.Evaluate(context);
+        context.State.GainAmmo(amount + scaling.Evaluate(context));
     }
 }

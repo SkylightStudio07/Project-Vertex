@@ -78,7 +78,7 @@ public class WeaponEffectTests
         Assert.That(_state.Hand[0].CardName, Is.EqualTo("Second"));
         Assert.That(_state.CreateCard(original).CardName, Is.EqualTo("Second"));
         var currentCard = _state.Hand[0];
-        Assert.That(_state.ChangePlayerWeapon(second), Is.True);
+        Assert.That(_state.ChangePlayerWeapon(second), Is.False); // 같은 무기는 변화 없음
         Assert.That(_state.Hand[0], Is.SameAs(currentCard));
         Assert.That(_state.ChangePlayerWeapon(Weapon(null)), Is.False);
         Assert.That(_state.CurrentWeapon, Is.SameAs(second));
@@ -99,8 +99,9 @@ public class WeaponEffectTests
         Assert.That(_state.Ammo, Is.EqualTo(7));
         new ChangeWeaponEffect { weapon = weapon }.Execute(context);
         Assert.That(_state.Ammo, Is.EqualTo(7));
+        _state.Ammo = 4; // 탄창(7)이 가득 차 있으면 획득이 상한에 막히므로 비운 뒤 확인
         effect.Execute(context);
-        Assert.That(_state.Ammo, Is.EqualTo(9));
+        Assert.That(_state.Ammo, Is.EqualTo(6));
         Assert.That(_state.Player.Passives, Is.Empty);
         Assert.That(condition.IsMet(new CardContext()), Is.False);
         Assert.That(condition.IsMet(null), Is.False);
@@ -138,6 +139,40 @@ public class WeaponEffectTests
         Assert.That(battle.CurrentWeapon, Is.SameAs(defaultWeapon));
         Assert.That(battle.State.DrawPile[0].CardName, Is.EqualTo("Default"));
         Assert.That(shot.CardName, Is.EqualTo("Original"));
+    }
+
+    [Test]
+    public void ArmoryUpgradeRaisesMaxAmmoOrShotDamageByWeaponType()
+    {
+        var card = Card("Shot", false, 1);
+        var magazine = Weapon(card); // 연사형: 최대 탄약 강화
+        SetField(magazine, "maxAmmo", 3);
+        SetField(magazine, "upgradeType", WeaponUpgradeType.MaxAmmo);
+        SetField(magazine, "upgradeValues", new[] { 1, 2 });
+        var heavy = Weapon(card);    // 한방형: 사격 피해 강화
+        SetField(heavy, "maxAmmo", 1);
+        SetField(heavy, "upgradeType", WeaponUpgradeType.ShotDamage);
+        SetField(heavy, "upgradeValues", new[] { 3, 6 });
+
+        _state.WeaponUpgradeLevel = _ => 2;
+        _state.ChangePlayerWeapon(magazine);
+        Assert.That(_state.MaxAmmo, Is.EqualTo(5));
+        Assert.That(_state.Ammo, Is.EqualTo(5)); // 장착(재장전) 탄약도 강화된 최대치
+        Assert.That(_state.ShotDamageBonus, Is.Zero);
+
+        _state.ChangePlayerWeapon(heavy);
+        Assert.That(_state.MaxAmmo, Is.EqualTo(1)); // 한방형은 탄창이 늘지 않는다
+        Assert.That(_state.ShotDamageBonus, Is.EqualTo(6));
+        var effect = new DamageEffect { amount = 9 };
+        var used = new CardContext { State = _state, Card = card };
+        Assert.That(effect.GetRawAmount(used, null), Is.EqualTo(9)); // 탄약을 쓰기 전에는 보너스 없음
+        _state.ConsumeAmmo(1, used);
+        Assert.That(effect.GetRawAmount(used, null), Is.EqualTo(15));
+
+        _state.WeaponUpgradeLevel = _ => 9; // 최대 단계를 넘는 값은 마지막 단계로
+        Assert.That(_state.ShotDamageBonus, Is.EqualTo(6));
+        _state.WeaponUpgradeLevel = null;   // 연결이 없으면 강화 없음
+        Assert.That(_state.ShotDamageBonus, Is.Zero);
     }
 
     private CardContext AmmoCard(int cost, int capacity = 3)
@@ -318,6 +353,32 @@ public class WeaponEffectTests
         Assert.That(both.IsMet(context), Is.True);
     }
 
+    [Test]
+    public void PredictAmmoBoundary_FirstAfterReload_LastWhenEmptying_NotAfterUse()
+    {
+        var weapon = Weapon(Card("Shot", false, 1));
+        _state.ChangePlayerWeapon(weapon); // 재장전 → 7발, 초탄·막탄 가능
+
+        Assert.That(_state.PredictAmmoBoundary(1, false), Is.EqualTo((true, false)));
+        Assert.That(_state.PredictAmmoBoundary(7, false), Is.EqualTo((true, true)));
+        Assert.That(_state.PredictAmmoBoundary(0, true), Is.EqualTo((true, true)), "남은 탄약 전부 쓰기");
+        Assert.That(_state.PredictAmmoBoundary(0, false), Is.EqualTo((false, false)), "탄약을 안 쓰는 카드");
+        Assert.That(_state.PredictAmmoBoundary(8, false), Is.EqualTo((false, false)), "탄약 부족");
+
+        _state.ConsumeAmmo(1, new CardContext { State = _state, Card = Card("Use", false, 1) });
+        Assert.That(_state.PredictAmmoBoundary(1, false), Is.EqualTo((false, false)), "초탄은 이미 씀");
+        Assert.That(_state.PredictAmmoBoundary(6, false), Is.EqualTo((false, true)));
+    }
+
+    [Test]
+    public void PredictAmmoBoundary_NoneForWeaponWithoutBoundary()
+    {
+        var weapon = Weapon(Card("Shot", false, 1));
+        SetField(weapon, "usesAmmoBoundary", false);
+        _state.ChangePlayerWeapon(weapon);
+        Assert.That(_state.PredictAmmoBoundary(7, false), Is.EqualTo((false, false)));
+    }
+
     private CardData Card(string name, bool isShot, int value)
     {
         var card = ScriptableObject.CreateInstance<CardData>();
@@ -341,7 +402,7 @@ public class WeaponEffectTests
     [TestCase(1)]
     [TestCase(3)]
     [TestCase(9)]
-    public void ReloadAndSameWeaponSwitchSetMaximumWithoutReplacingCards(int ammo)
+    public void ReloadSetsMaximumAndSameWeaponSwitchKeepsAmmoAndCards(int ammo)
     {
         var weapon = Weapon(Card("Shot", true, 1));
         SetField(weapon, "maxAmmo", 3);
@@ -353,13 +414,13 @@ public class WeaponEffectTests
         Assert.That(_state.Ammo, Is.EqualTo(3));
         Assert.That(_state.MaxAmmo, Is.EqualTo(3));
         _state.Ammo = ammo;
-        Assert.That(_state.ChangePlayerWeapon(weapon), Is.True);
-        Assert.That(_state.Ammo, Is.EqualTo(3));
+        Assert.That(_state.ChangePlayerWeapon(weapon), Is.False);
+        Assert.That(_state.Ammo, Is.EqualTo(ammo)); // 같은 무기로 전환해도 재장전하지 않는다
         Assert.That(_state.Hand[0], Is.SameAs(shot));
     }
 
     [Test]
-    public void ReloadWithoutWeaponDoesNotEraseAmmoAndGainIsStillAdditive()
+    public void ReloadWithoutWeaponDoesNotEraseAmmoAndGainIsCappedByMagazine()
     {
         var effect = new ReloadAmmoEffect();
         Assert.DoesNotThrow(() => effect.Execute(null));
@@ -369,8 +430,12 @@ public class WeaponEffectTests
         var weapon = Weapon(Card("Shot", false, 1));
         SetField(weapon, "maxAmmo", 3);
         _state.ChangePlayerWeapon(weapon);
-        new AddAmmoEffect { amount = 2 }.Execute(new CardContext { State = _state });
-        Assert.That(_state.Ammo, Is.EqualTo(5));
+        // 총기를 들면 탄약 획득은 최대 탄약에서 멈춘다 (넘친 만큼은 버림)
+        _state.Ammo = 1;
+        new AddAmmoEffect { amount = 1 }.Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(2));
+        new AddAmmoEffect { amount = 5 }.Execute(new CardContext { State = _state });
+        Assert.That(_state.Ammo, Is.EqualTo(3));
         effect.Execute(new CardContext { State = _state });
         Assert.That(_state.Ammo, Is.EqualTo(3));
     }
@@ -407,6 +472,7 @@ public class WeaponEffectTests
         _assets.Add(weapon);
         SetField(weapon, "shootingCard", shot);
         SetField(weapon, "maxAmmo", 7);
+        SetField(weapon, "usesAmmoBoundary", true);
         return weapon;
     }
 
@@ -425,9 +491,9 @@ public class WeaponEffectTests
         card.isUpgraded = upgraded;
         var target = new TestTarget();
         var context = new CardContext { State = _state, Card = card, PrimaryTargetOverride = target };
-        // 같은 권총으로 다시 전환해도 이전 탄약 수에 관계없이 세 발을 쏜다.
+        // 다른 무기에서 권총으로 전환하면 이전 탄약 수에 관계없이 세 발을 쏜다.
         var weapon = ((ChangeWeaponEffect)card.ActiveEffects[0]).weapon;
-        _state.ChangePlayerWeapon(weapon);
+        _state.ChangePlayerWeapon(Weapon(Card("Other", false, 1)));
         _state.Ammo = ammo;
         target.OnHit = () => Assert.That(_state.Ammo, Is.Zero);
         RunSequence(EffectRunner.ExecuteSequence(card.ActiveEffects, context));

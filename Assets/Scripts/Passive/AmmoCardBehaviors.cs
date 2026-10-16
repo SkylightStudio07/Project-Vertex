@@ -17,6 +17,7 @@ public static class AmmoStatusEvents
     {
         if (context?.State == null || context.TriggeringPassive != null || context.Source != context.State.Player) return 0;
         int bonus = context.NextAmmoDamageBonus;
+        if (context.HasAmmoUsage) bonus += context.State.ShotDamageBonus; // 무기고 강화(한방형): 탄약을 쓴 공격만
         Visit(context.State, (status, behavior) => bonus += behavior.CardDamageBonus(status, context));
         return bonus;
     }

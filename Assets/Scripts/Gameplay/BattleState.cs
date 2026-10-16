@@ -13,7 +13,18 @@ public class BattleState
     public WeaponData CurrentWeapon { get; private set; }
     private Dictionary<WeaponData, int> _magazineBonuses = new();
     private bool _ammoPreview;
-    public int MaxAmmo => CurrentWeapon != null ? CurrentWeapon.MaxAmmo + (_magazineBonuses.TryGetValue(CurrentWeapon, out int bonus) ? bonus : 0) : 0;
+
+    // 무기고 영구 강화 단계. 전투 시작 때 BattleManager가 PlayerRecord로 연결한다. 비어 있으면 강화 없음(테스트 등).
+    public System.Func<WeaponData, int> WeaponUpgradeLevel;
+    private int UpgradeLevelOf(WeaponData weapon) => weapon != null && WeaponUpgradeLevel != null ? WeaponUpgradeLevel(weapon) : 0;
+
+    // 최대 탄약 = 무기 기본 + 무기고 강화 + 이번 전투 탄창 확장
+    public int MaxAmmo => CurrentWeapon != null
+        ? CurrentWeapon.MaxAmmo + CurrentWeapon.MaxAmmoBonusAt(UpgradeLevelOf(CurrentWeapon)) + (_magazineBonuses.TryGetValue(CurrentWeapon, out int bonus) ? bonus : 0)
+        : 0;
+
+    // 탄약을 쓰는 공격의 타격마다 더하는 피해 (한방형 무기의 무기고 강화)
+    public int ShotDamageBonus => CurrentWeapon != null ? CurrentWeapon.ShotDamageBonusAt(UpgradeLevelOf(CurrentWeapon)) : 0;
 
     public void IncreaseMagazine(WeaponData weapon, int amount)
     {
@@ -49,17 +60,40 @@ public class BattleState
                        context.TriggeringPassive == null && Player != null && context.Source == Player;
         if (cardUse)
         {
-            bool first = spent > 0 && FirstAmmoUseAvailable;
-            bool last = spent > 0 && Ammo == 0 && LastAmmoUseAvailable;
+            // 초탄·막탄은 그 판정을 쓰는 무기(WeaponData.UsesAmmoBoundary)에서만 성립한다
+            bool boundary = CurrentWeapon != null && CurrentWeapon.UsesAmmoBoundary;
+            bool first = boundary && spent > 0 && FirstAmmoUseAvailable;
+            bool last = boundary && spent > 0 && Ammo == 0 && LastAmmoUseAvailable;
             bool firstConsumption = context.AmmoSpent == 0;
             context.RecordAmmoUse(spent, first, last);
             if (first) FirstAmmoUseAvailable = false;
             if (last) LastAmmoUseAvailable = false;
+            if (!_ammoPreview && (first || last)) context.Battle?.NotifyAmmoBoundaryUsed(context, first, last);
             if (spent > 0)
                 AmmoStatusEvents.Visit(this, (status, behavior) => behavior.OnAmmoSpent(status, context, spent, first, firstConsumption, _ammoPreview));
             if (!_ammoPreview) Player.RemoveExpiredPassives();
         }
         return spent;
+    }
+
+    // 카드 하나를 지금 쓰면 초탄·막탄이 되는지 (손패 표시용). ammoCost는 보정 후 탄약 비용,
+    // consumesAll은 남은 탄약을 전부 쓰는 효과(AmmoConsumeAllDamageEffect)가 있는지.
+    public (bool first, bool last) PredictAmmoBoundary(int ammoCost, bool consumesAll)
+    {
+        if (CurrentWeapon == null || !CurrentWeapon.UsesAmmoBoundary || ammoCost > Ammo) return (false, false);
+        int spend = consumesAll ? Ammo : ammoCost;
+        if (spend <= 0) return (false, false);
+        return (FirstAmmoUseAvailable, LastAmmoUseAvailable && Ammo - spend == 0);
+    }
+
+    // 일반 탄약 획득. 총기를 들고 있으면 최대 탄약을 넘지 않는다(하드캡, 넘친 만큼은 버린다).
+    // 총기가 없으면 상한이 없으므로 그대로 더한다. 이미 상한을 넘어 있으면 줄이지 않고 더하지도 않는다.
+    public int GainAmmo(int amount)
+    {
+        if (amount <= 0) return 0;
+        int before = Ammo;
+        Ammo = CurrentWeapon == null ? Ammo + amount : System.Math.Max(Ammo, System.Math.Min(Ammo + amount, MaxAmmo));
+        return Ammo - before;
     }
 
     // 일반 탄약 획득과 구분되는 재장전 진입점. 총기가 없으면 탄약을 변경하지 않는다.
@@ -91,16 +125,14 @@ public class BattleState
         if (Player == null || weapon == null || weapon.ShootingCard == null)
             return false;
 
-        bool changed = CurrentWeapon != weapon;
-        if (changed)
-        {
-            CurrentWeapon = weapon;
-            ReplaceShootingCards(Hand);
-            ReplaceShootingCards(DrawPile);
-            ReplaceShootingCards(DiscardPile);
-            ReplaceShootingCards(ExhaustPile);
-        }
-        // 동일 총기는 카드 사본을 교체하지 않고 재장전만 한다.
+        // 이미 든 총기로의 전환은 아무 일도 하지 않는다(재장전 없음). 재장전은 재장전 효과로만 한다.
+        if (CurrentWeapon == weapon) return false;
+
+        CurrentWeapon = weapon;
+        ReplaceShootingCards(Hand);
+        ReplaceShootingCards(DrawPile);
+        ReplaceShootingCards(DiscardPile);
+        ReplaceShootingCards(ExhaustPile);
         return ReloadAmmo();
     }
 
@@ -129,6 +161,7 @@ public class BattleState
     // 0이면 현재 의도만, 양수면 각 적의 향후 행동을 해당 개수만큼 추가 표시한다.
     public int EnemyIntentLookahead;
     public int TurnNumber;
+    public List<CompanionSkillSlot> CompanionSkills = new(); // 동행 동료 스킬 (지시 버튼)
     public bool PlayerLostHpThisTurn;
     public BattlePhase Phase;
 

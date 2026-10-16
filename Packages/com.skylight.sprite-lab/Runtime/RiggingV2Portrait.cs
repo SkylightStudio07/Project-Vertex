@@ -36,6 +36,8 @@ namespace SpriteLab.RiggingV2
         [SerializeField, Range(0f, 0.05f)] private float breathingScale = 0.008f;
         [SerializeField, Range(0.1f, 3f)] private float idleSpeed = 0.8f;
         [SerializeField, Range(0f, 0.2f)] private float bodyBob;
+        [Tooltip("팔·손 대기 흔들림 폭(도). 0이면 팔은 가만히 있다")]
+        [SerializeField, Range(0f, 6f)] private float armSwayDegrees;
 
         private RawImage targetImage;
         private GameObject stage;
@@ -60,7 +62,7 @@ namespace SpriteLab.RiggingV2
                     equipmentSwayDegrees, clothSwayDegrees);
             var idle = AvatarInstance.GetComponent<RiggingV2Avatar>();
             if (idle)
-                idle.ApplyIdleSettings(automaticIdle, bodySwayDegrees, headFollowDegrees, breathingScale, idleSpeed, bodyBob);
+                idle.ApplyIdleSettings(automaticIdle, bodySwayDegrees, headFollowDegrees, breathingScale, idleSpeed, bodyBob, armSwayDegrees);
         }
 
         private void OnValidate()

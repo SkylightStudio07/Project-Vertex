@@ -51,7 +51,8 @@ public class StatusTooltipView : MonoBehaviour
     }
 
     // 상태 정의 없이 임의 내용(적 인텐트 등)을 anchor 왼쪽에 띄운다. 화면 밖으로 나가면 안쪽으로 민다.
-    public void ShowNear(RectTransform anchor, Sprite icon, string title, string description)
+    // placeRight면 오른쪽에 아래 끝을 맞춰 띄운다 (화면 왼쪽 아래 UI — 동료 지시 목록 등)
+    public void ShowNear(RectTransform anchor, Sprite icon, string title, string description, bool placeRight = false)
     {
         gameObject.SetActive(true);
         if (iconImage != null)
@@ -71,10 +72,13 @@ public class StatusTooltipView : MonoBehaviour
 
         // 툴팁 오른쪽 끝을 아이콘 왼쪽 끝 - 여백에, 세로 가운데를 아이콘 가운데에 맞춘다
         const float margin = 16f;
-        Vector2 shift = new(a.min.x - margin - t.max.x, a.center.y - t.center.y);
+        Vector2 shift = placeRight
+            ? new(a.max.x + margin - t.min.x, a.min.y - t.min.y) // 오른쪽: 아래 끝을 맞춰 위로 자란다 (화면 아래 UI용)
+            : new(a.min.x - margin - t.max.x, a.center.y - t.center.y);
         Rect area = root.rect;
-        float minX = t.min.x + shift.x, maxY = t.max.y + shift.y, minY = t.min.y + shift.y;
+        float minX = t.min.x + shift.x, maxX = t.max.x + shift.x, maxY = t.max.y + shift.y, minY = t.min.y + shift.y;
         if (minX < area.xMin + margin) shift.x += area.xMin + margin - minX;          // 왼쪽 끝이면 오른쪽으로
+        else if (maxX > area.xMax - margin) shift.x -= maxX - (area.xMax - margin);   // 오른쪽 끝이면 왼쪽으로
         if (maxY > area.yMax - margin) shift.y -= maxY - (area.yMax - margin);        // 위로 넘치면 아래로
         if (minY < area.yMin + margin) shift.y += area.yMin + margin - minY;
         _rect.position = root.TransformPoint(pivotInRoot + (Vector3)shift);

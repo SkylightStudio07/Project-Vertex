@@ -6,6 +6,7 @@ using UnityEngine;
 //   - 적 격퇴 수: 실전 전투에서 적이 쓰러질 때 (훈련 전투는 세지 않음) — BattleManager.SetupEnemies
 //   - 얻은 카드: 런 중 플레이어 덱에 카드가 들어올 때 — DeckManager.AddCardToPlayerDeck
 //   - 동료 호감도: 레벨·포인트가 바뀔 때 — CooperationManager
+//   - 무기고 강화 단계: 무기별 — WeaponUpgrades
 // 키는 에셋 이름이다(Instantiate한 복사본의 "(Clone)"은 떼고 센다).
 public static class PlayerRecord
 {
@@ -32,6 +33,7 @@ public static class PlayerRecord
         public List<CountEntry> defeats = new();
         public List<string> obtainedCards = new();
         public List<CoopEntry> coop = new();
+        public List<CountEntry> weaponUpgrades = new();
     }
 
     private static SaveData s_data;
@@ -92,6 +94,24 @@ public static class PlayerRecord
         if (entry == null) Data.coop.Add(entry = new CoopEntry { id = charID });
         entry.level = level;
         entry.point = point;
+        Save();
+    }
+
+    // ── 무기고 강화 ──
+    public static int GetWeaponUpgrade(WeaponData weapon)
+    {
+        string key = KeyOf(weapon);
+        var entry = key != null ? Data.weaponUpgrades.Find(e => e.id == key) : null;
+        return entry != null ? entry.count : 0;
+    }
+
+    public static void SetWeaponUpgrade(WeaponData weapon, int level)
+    {
+        string key = KeyOf(weapon);
+        if (key == null) return;
+        var entry = Data.weaponUpgrades.Find(e => e.id == key);
+        if (entry == null) Data.weaponUpgrades.Add(entry = new CountEntry { id = key });
+        entry.count = Mathf.Max(0, level);
         Save();
     }
 

@@ -60,6 +60,9 @@ public class CoopCharData : CharData
     [Header("합류 시 획득 카드")]
     public CardData joinRewardCard;
 
+    [Header("동료 스킬 — 전투 HUD 지시 버튼 (기획: Docs/기획/동료_스킬.md)")]
+    public CompanionSkillData skill;
+
     [Header("합류 시 재생할 짧은 대사 (선택)")]
     public TextAsset joinDialogueJson;
 

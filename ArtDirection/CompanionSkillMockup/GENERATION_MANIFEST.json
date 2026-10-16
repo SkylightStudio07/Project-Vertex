@@ -1,0 +1,47 @@
+{
+  "artifacts": [
+    {
+      "file": "CompanionSkill_Order_Mockup.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen, followed by bicubic size normalization. Not native 2x art."
+    },
+    {
+      "file": "CompanionSkill_CutIn_Mockup.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen, followed by bicubic size normalization. Not native 2x art."
+    },
+    {
+      "file": "CompanionSkill_CutIn_Enhanced_Mockup.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "delivery_size": [
+        1920,
+        1080
+      ],
+      "method": "Built-in image_gen, followed by bicubic size normalization. Not native 2x art."
+    }
+  ],
+  "status": "Review mockups; slicing deferred until approval",
+  "notes": [
+    "User-approved corner triangle composition overrides prior cut-in layout; see USER_DIRECTION_OVERRIDE.md.",
+    "Generated background and item are reference-based renderings, not guaranteed pixel-identical composites.",
+    "Exact layout coordinates, uniform dimmer opacity and flat text surfaces must be enforced in future slicing/implementation.",
+    "Native images retained under Generated_Originals; all prompts retained in GENERATION_PROMPTS.json."
+  ]
+}

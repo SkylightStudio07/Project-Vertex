@@ -26,6 +26,7 @@ public class ItemTargetingController : MonoBehaviour
     private TargetArrow arrow;
 
     private ItemData targetingItem;
+    private System.Action<EnemyInstance> onTargetPicked; // 아이템이 아닌 대상 지정 (동료 스킬 등)
     private Vector3 originWorldPos;
     private bool isTargeting;
 
@@ -45,10 +46,24 @@ public class ItemTargetingController : MonoBehaviour
         UpdateArrow(GetPointerScreenPosition());
     }
 
+    // 아이템이 아닌 것의 대상 지정. 적을 찍으면 onPicked를 부르고, 빈 곳·우클릭·ESC면 아무것도 하지 않고 끝난다.
+    public void BeginTargeting(Vector3 originWorldPos, System.Action<EnemyInstance> onPicked)
+    {
+        if (onPicked == null || BattleManager.Instance == null || !BattleManager.Instance.CanUseItemNow) return;
+        targetingItem = null;
+        onTargetPicked = onPicked;
+        this.originWorldPos = originWorldPos;
+        isTargeting = true;
+
+        EnsureArrow();
+        UpdateArrow(GetPointerScreenPosition());
+    }
+
     public void CancelTargeting()
     {
         isTargeting = false;
         targetingItem = null;
+        onTargetPicked = null;
         if (arrow != null) arrow.Hide();
     }
 
@@ -87,7 +102,10 @@ public class ItemTargetingController : MonoBehaviour
         var eventData = new PointerEventData(EventSystem.current) { position = pointerScreenPosition };
 
         if (EnemyTargeting.TryGetUnderPointer(eventData, out EnemyInstance target))
-            BattleManager.Instance.TryUseItem(targetingItem, target);   // 성공 시 소비는 TryUseItem 내부에서 처리
+        {
+            if (onTargetPicked != null) onTargetPicked(target);
+            else BattleManager.Instance.TryUseItem(targetingItem, target);   // 성공 시 소비는 TryUseItem 내부에서 처리
+        }
 
         // 적을 맞췄든(사용) 빈 곳을 찍었든(취소) 타겟팅 종료
         CancelTargeting();

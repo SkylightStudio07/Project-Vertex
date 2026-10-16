@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9def5190bb693a48908bab684e2783d, type: 3}
+  m_Name: Skill_Cp01_Drain
+  m_EditorClassIdentifier: Assembly-CSharp::CompanionSkillData
+  skillName: "\uD761\uD608"
+  icon: {fileID: 0}
+  description: "\uC801 \uD558\uB098\uC5D0\uAC8C\uC11C \uCCB4\uB825\uC744 {0.amount}
+    \uD761\uC218\uD569\uB2C8\uB2E4."
+  chargeType: 1
+  chargeAmount: 3
+  startReady: 1
+  selectEnemy: 1
+  effects:
+  - rid: 8755282777898483821
+  enhancedEffects:
+  - rid: 8755282777898483822
+  - rid: 8755282777898483823
+  enhancedChargeAmount: 0
+  enhancedDescription: "\uC801 \uD558\uB098\uC5D0\uAC8C\uC11C \uCCB4\uB825\uC744
+    {0.amount} \uD761\uC218\uD558\uACE0 \uCDE8\uC57D {1.amount}\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  cutinArt: {fileID: 21300000, guid: e72a1d2c9eca0134b96da4cc65413b1b, type: 3}
+  cutinLine: "\u2026\uC4F4 \uB9CC\uD07C, \uCC44\uC6B8\uAC8C."
+  enhancedCutinLine: "\u2026\uC6B0\uB9AC \uB458 \uBAAB\uC774\uC57C. \uB0A8\uAE40\uC5C6\uC774."
+  references:
+    version: 2
+    RefIds:
+    - rid: 8755282777898483821
+      type: {class: LifeDrainEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 6
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        targets:
+          mode: 1
+        piercing: 0
+    - rid: 8755282777898483822
+      type: {class: LifeDrainEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 6
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        targets:
+          mode: 1
+        piercing: 0
+    - rid: 8755282777898483823
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000002, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
