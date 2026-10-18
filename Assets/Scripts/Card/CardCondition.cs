@@ -42,6 +42,14 @@ public enum IntComparison
     GreaterThan,
 }
 
+// 대상(선택한 적)이 나열한 속성 중 하나라도 가지면. 피해 외 특효(관통·상태 부여 등)를 ConditionalEffect로 걸 때 쓴다
+[Serializable]
+public class TargetTraitCondition : CardCondition
+{
+    public EnemyTrait traits;
+    public override bool IsMet(CardContext context) => EnemyTraits.HasAny(context?.PrimaryTarget, traits);
+}
+
 [Serializable]
 public class FirstAmmoUseCondition : CardCondition
 {

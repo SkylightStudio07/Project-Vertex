@@ -13,6 +13,8 @@ public class EnemyData : ScriptableObject
     public string enemyName;
     public int health;
     public Sprite enemyImage;
+    [Tooltip("속성 (여러 개 가능). 카드의 특효가 이 속성에 걸린다")]
+    public EnemyTrait traits;
 
     [Header("마테리얼")]
     [Tooltip("적 등급 — 마테리얼이 몇 번 격퇴마다 열리는지 정한다 (일반 3 · 엘리트 2 · 보스 1). 훈련장 해금도 첫 기록 기준")]

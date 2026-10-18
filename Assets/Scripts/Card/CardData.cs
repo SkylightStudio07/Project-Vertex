@@ -168,13 +168,38 @@ public class CardData : ScriptableObject
         if (st.isRetain)   list.Add("보존");
         if (st.isEthereal) list.Add("휘발성");
         if (st.isExhaust)  list.Add("소멸");
+        var traits = EffectiveTraitsOf(upgraded);
+        if (traits != EnemyTrait.None) list.Add(EnemyTraits.Label(traits) + " 특효");
         return list;
     }
 
     private const string BuffedValueColor = "#6FE38A";   // 보정으로 오른 수치
     private const string DebuffedValueColor = "#FF6B5E"; // 보정으로 내린 수치
 
+    // 특효 키워드("인간·신비 특효")는 설명문 템플릿에 적혀 있지 않으면 앞에 자동으로 붙인다.
+    // 겨냥 중인 적에게 특효가 걸리면 강조색(청록)으로 칠한다.
     public string GetDescription(bool upgraded, BattleState state = null, EnemyInstance target = null)
+    {
+        string text = ResolveDescription(upgraded, state, target);
+        var traits = EffectiveTraitsOf(upgraded);
+        if (traits == EnemyTrait.None) return text;
+        string keyword = EnemyTraits.Label(traits) + " 특효";
+        if (text.Contains(keyword)) return text;
+        if (target != null && EnemyTraits.HasAny(target, traits)) keyword = $"<color={EffectiveKeywordColor}>{keyword}</color>";
+        return string.IsNullOrEmpty(text) ? keyword + "." : keyword + ". " + text;
+    }
+
+    private const string EffectiveKeywordColor = "#0DB8F2";
+
+    public EnemyTrait EffectiveTraitsOf(bool upgraded)
+    {
+        var traits = EnemyTrait.None;
+        foreach (var effect in EffectsOf(upgraded))
+            if (effect is DamageEffect damage) traits |= damage.effectiveAgainst;
+        return traits;
+    }
+
+    private string ResolveDescription(bool upgraded, BattleState state, EnemyInstance target)
     {
         if (string.IsNullOrEmpty(cardDescription)) return string.Empty;
         var effects = EffectsOf(upgraded);

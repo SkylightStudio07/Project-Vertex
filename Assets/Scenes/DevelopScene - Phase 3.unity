@@ -5446,6 +5446,7 @@ RectTransform:
   - {fileID: 523753937}
   - {fileID: 1524281369}
   - {fileID: 1784437585}
+  - {fileID: 1496373531}
   - {fileID: 520571023}
   - {fileID: 587496735}
   - {fileID: 671325404}
@@ -44105,6 +44106,7 @@ MonoBehaviour:
   hammerClip: {fileID: 0}
   upgradeDoneClip: {fileID: 0}
   burnClip: {fileID: 0}
+  transmogrifyClip: {fileID: 0}
 --- !u!1 &1486399159
 GameObject:
   m_ObjectHideFlags: 0
@@ -44709,6 +44711,93 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494846968}
   m_CullTransparentMesh: 1
+--- !u!1 &1496373530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1496373531}
+  - component: {fileID: 1496373532}
+  m_Layer: 5
+  m_Name: BattleImpactFx
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1496373531
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496373530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 169565602}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1496373532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496373530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7168348811e00fa4497905bd3efc76a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleImpactFx
+  font: {fileID: 11400000, guid: 41d41edc777433f46bd79202e7b819e1, type: 2}
+  sortingOrder: 95
+  numberSize: 46
+  bigNumberSize: 64
+  bigDamage: 15
+  numberColor: {r: 0.933, g: 0.941, b: 0.949, a: 1}
+  bigNumberColor: {r: 0.051, g: 0.722, b: 0.949, a: 1}
+  playerNumberColor: {r: 0.93, g: 0.33, b: 0.31, a: 1}
+  outlineColor: {r: 0.086, g: 0.094, b: 0.106, a: 1}
+  playerNumberPos: {x: 300, y: 900}
+  hitStop: 1
+  hitStopBase: 0.035
+  hitStopPerDamage: 0.003
+  hitStopMax: 0.11
+  hitStopKillBonus: 0.05
+  hitStopScale: 0.04
+  shakeTargetNames:
+  - Background
+  - EnemyArea
+  - PlayerDraft
+  - CoopDraft
+  - PlayerShadow
+  - PartyViewer
+  - CoopTransform1
+  - CoopTransform2
+  - CoopTransform3
+  shakeThreshold: 8
+  shakeStrength: 9
+  shakeStrengthMax: 26
+  shakeDuration: 0.22
+  knockback: 18
+  knockbackMax: 40
+  vignetteColor: {r: 0.78, g: 0.12, b: 0.14, a: 0.55}
+  hitClip: {fileID: 0}
+  heavyHitClip: {fileID: 0}
+  killClip: {fileID: 0}
+  playerHitClip: {fileID: 0}
+  playerBlockClip: {fileID: 0}
+  volume: 0.8
 --- !u!1 &1501450038
 GameObject:
   m_ObjectHideFlags: 0

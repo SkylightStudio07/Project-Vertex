@@ -23,6 +23,7 @@ public class EnemyView : MonoBehaviour
 
     [Header("스프라이트")]
     [SerializeField] private Image enemyImage;
+    public RectTransform SpriteRect => enemyImage != null ? enemyImage.rectTransform : (RectTransform)transform; // 피해 숫자 위치 기준 (BattleImpactFx)
 
     [Header("HP 바")]
     [SerializeField] private Image  hpFill;     // Image Type: Filled (Horizontal)
