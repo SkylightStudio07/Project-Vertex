@@ -38,6 +38,10 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private GameObject intentField; // 단순 blob 용도
     [SerializeField] private TextMeshProUGUI intentValueText; // 공격 수치 등. DamageEffect 없는 행동이면 숨김
     [SerializeField] private List<IntentSprite> intentSprites;
+    [Header("강한 공격 인텐트 (HeavyAttack 기준: 강함 15+ / 치명 30+)")]
+    [SerializeField] private float heavyIntentScale = 1.15f;
+    [SerializeField] private float lethalIntentScale = 1.3f;
+    [SerializeField] private Color lethalIntentColor = new(0.88f, 0.27f, 0.24f, 1f);
 
     [Header("인텐트 부유 애니메이션")]
     [SerializeField] private float bobAmplitude = 6f; // 위아래로 움직이는 폭(px)
@@ -106,8 +110,14 @@ public class EnemyView : MonoBehaviour
 
     public EnemyInstance Instance { get; private set; }
 
+    private Tween _intentPulse;
+    private Vector3 _intentIconScale = Vector3.one, _intentValueScale = Vector3.one;
+    private Color _intentIconColor = Color.white, _intentValueColor = Color.white;
+
     private void Awake()
     {
+        if (intentIcon != null) { _intentIconScale = intentIcon.rectTransform.localScale; _intentIconColor = intentIcon.color; }
+        if (intentValueText != null) { _intentValueScale = intentValueText.rectTransform.localScale; _intentValueColor = intentValueText.color; }
         if (enemyImage != null)
         {
             _enemyImageBaseScale = enemyImage.rectTransform.localScale;
@@ -654,8 +664,30 @@ public class EnemyView : MonoBehaviour
             intentValueText.gameObject.SetActive(amount.HasValue);
             if (amount.HasValue) intentValueText.text = amount.Value.ToString();
         }
+        ApplyIntentTier(action != null ? Instance.GetIntentDamageAmount() : null);
 
         RefreshLookaheadIcons();
+    }
+
+    // 강함: 아이콘 확대 / 치명: 더 크게 + 아이콘·숫자가 붉게 맥동
+    private void ApplyIntentTier(int? damage)
+    {
+        _intentPulse?.Kill();
+        _intentPulse = null;
+        var tier = HeavyAttack.Of(damage);
+        if (intentIcon != null)
+        {
+            float k = tier == HeavyAttack.Tier.Lethal ? lethalIntentScale : tier == HeavyAttack.Tier.Heavy ? heavyIntentScale : 1f;
+            intentIcon.rectTransform.localScale = _intentIconScale * k;
+            intentIcon.color = _intentIconColor;
+        }
+        if (intentValueText != null)
+        {
+            intentValueText.color = tier == HeavyAttack.Tier.Lethal ? lethalIntentColor : _intentValueColor;
+            intentValueText.rectTransform.localScale = _intentValueScale * (tier == HeavyAttack.Tier.Lethal ? 1.2f : 1f);
+        }
+        if (tier == HeavyAttack.Tier.Lethal && intentIcon != null)
+            _intentPulse = intentIcon.DOColor(lethalIntentColor, 0.45f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetLink(gameObject);
     }
 
     private void RefreshLookaheadIcons()

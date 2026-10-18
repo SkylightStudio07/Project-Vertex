@@ -92,6 +92,8 @@ public class BattleManager : MonoBehaviour
     public BattleType CurrentBattleType => _currentBattleType;
     private System.Random _rnd = new();
     private WaitForSeconds _lungeOutWait; // 적 전진 타이밍 대기에 재사용할 객체.
+    [SerializeField] private float _lethalWindupDuration = 0.55f; // 치명 공격(HeavyAttack.Lethal) 직전 예비 동작 시간
+    public event Action<EnemyInstance> OnEnemyLethalWindup; // 치명 공격 예비 동작 시작 (BattleImpactFx: 떨림·화면 어둡게)
     private WaitForSeconds _lungeBackAndPostActionWait; // 적 후퇴와 후처리 대기에 재사용할 객체.
     // 카드 이펙트(DamageEffect 등)가 RandomEnemy 타겟을 결정할 때 이 인스턴스를 사용해야
     // 전투 시드 기반의 결정론적 동작이 보장된다. UnityEngine.Random.Range는 시드와 무관하다.
@@ -380,6 +382,13 @@ public class BattleManager : MonoBehaviour
             string actionName = action != null ? action.name : "없음";
             string intentDesc = action != null ? action.intentType.ToString() : "없음";
             Debug.Log($"[BattleManager] 적 턴 진행: '{enemy.Data?.enemyName}' -> 행동: '{actionName}' (인텐트: {intentDesc}, 현재 HP: {enemy.HP}/{enemy.MaxHP})");
+
+            if (HeavyAttack.Of(enemy.GetIntentDamageAmount()) == HeavyAttack.Tier.Lethal && _lethalWindupDuration > 0f)
+            {
+                OnEnemyLethalWindup?.Invoke(enemy);
+                yield return new WaitForSeconds(_lethalWindupDuration);
+                if (!_isInBattle || _state.Player.IsDead || enemy.IsDead) continue;
+            }
 
             enemy.NotifyActionStarted();
             yield return _lungeOutWait;
