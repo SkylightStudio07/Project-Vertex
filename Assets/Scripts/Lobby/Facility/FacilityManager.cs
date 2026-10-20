@@ -8,7 +8,8 @@ public enum FacilityUpgradeResult
     Locked,
     NotUpgradeable,
     ExperienceManagerMissing,
-    NotEnoughExperience
+    NotEnoughExperience,
+    NotEnoughParts
 }
 
 public class FacilityManager : MonoBehaviour
@@ -150,9 +151,6 @@ public class FacilityManager : MonoBehaviour
 
     public FacilityUpgradeResult UpgradeFacility(FacilityType facilityType)
     {
-        if (userExpManager == null)
-            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.ExperienceManagerMissing);
-
         if (!IsFacilityActive(facilityType))
             return LogUpgradeFailed(facilityType, FacilityUpgradeResult.Locked);
 
@@ -160,14 +158,13 @@ public class FacilityManager : MonoBehaviour
         if (facility == null || !facility.CanUpgrade)
             return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotUpgradeable);
 
-        if (!userExpManager.HasExperience(facility.UpgradeRequiredExp))
-            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotEnoughExperience);
-
-        if (!userExpManager.TrySpendExperience(facility.UpgradeRequiredExp))
-            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotEnoughExperience);
+        // 시설 강화는 파츠를 쓴다 (기획 8. 재화). 강화하면 거점 개발도도 오른다
+        if (!MetaProgress.TrySpendParts(facility.UpgradeRequiredParts))
+            return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotEnoughParts);
 
         if (!ApplyUpgrade(facilityType))
             return LogUpgradeFailed(facilityType, FacilityUpgradeResult.NotUpgradeable);
+        MetaProgress.AwardDevelopment("facility:" + facility.FacilityId + ":upgrade", MetaProgress.DevFacilityUpgrade);
 
         EndInteraction(facilityType);
         return FacilityUpgradeResult.Success;

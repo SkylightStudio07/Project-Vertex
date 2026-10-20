@@ -29,7 +29,8 @@ public class LobbyManager : SingletonBehaviour<LobbyManager>
         facilityManager?.Initialize(completedRunCount);
         // 로비에 들어올 때마다(첫 실행·런 귀환) 다음 런용 시작 덱으로 되돌린다. 덱은 씬을 넘어 유지되므로 지난 런 덱이 남아 있다.
         DeckManager.Instance?.InitializeStartingDeck();
-        QuestManager.Instance.ClaimRewards(); // 지난 런에서 완료한 의뢰 보상을 로비 경험치로
+        MetaProgressBackfill.Run();           // 재화 시스템 이전 기록을 거점 개발도에 한 번 소급
+        QuestManager.Instance.ClaimRewards(); // 지난 런에서 완료한 일반 의뢰 보상을 탈린으로
     }
 
     public void AddCompletedRun()

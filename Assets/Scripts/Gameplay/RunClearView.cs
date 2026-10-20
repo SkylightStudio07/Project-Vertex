@@ -79,10 +79,11 @@ public class RunClearView : MonoBehaviour
     public void Open(ActData clearedAct)
     {
         QuestManager.Instance.SettleRun(); // 런 클리어 → 의뢰 정산 (보상은 로비에서 수령)
+        int talin = SettleTalin();
         Show("런 클리어",
-             clearedAct != null && !string.IsNullOrWhiteSpace(clearedAct.actName)
+             (clearedAct != null && !string.IsNullOrWhiteSpace(clearedAct.actName)
                  ? $"{clearedAct.actNumber}막 · {clearedAct.actName} 돌파"
-                 : "모든 작전을 완료했습니다", success: true);
+                 : "모든 작전을 완료했습니다") + TalinSuffix(talin), success: true);
     }
 
     // 실전 승리는 보상 화면(RewardsView)이 받는다. 훈련장만 여기서 결과를 띄운다.
@@ -111,11 +112,18 @@ public class RunClearView : MonoBehaviour
             return;
         }
         QuestManager.Instance.SettleRun(); // 패배도 런 종료 — 이미 정산했으면 무시된다
+        int talin = SettleTalin();
         int floor = RunData.Instance != null ? RunData.Instance.currentFloor + 1 : 0;
         int chapter = GameManager.Instance != null ? GameManager.Instance.Chapter : 1;
-        DOVirtual.DelayedCall(defeatDelay, () => Show("작전 실패", $"{chapter}막 {floor}층에서 쓰러졌습니다", success: false), ignoreTimeScale: true)
+        DOVirtual.DelayedCall(defeatDelay, () => Show("작전 실패", $"{chapter}막 {floor}층에서 쓰러졌습니다" + TalinSuffix(talin), success: false), ignoreTimeScale: true)
                  .SetLink(gameObject);
     }
+
+    // 남은 크레딧의 1/10을 탈린으로 (런마다 한 번, 패배 포함)
+    private static int SettleTalin()
+        => MetaProgress.SettleRun(GameManager.Instance != null ? GameManager.Instance.PlayerGold : 0);
+
+    private static string TalinSuffix(int talin) => talin > 0 ? $"  ·  <color=#0DB8F2>탈린 +{talin}</color>" : "";
 
     private void Show(string title, string subtitle, bool success)
     {

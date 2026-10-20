@@ -31859,8 +31859,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6188b0647dfb422c83ec7182664c79c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UserExpManager
-  defaultExperience: 0
-  maxExperience: 100
 --- !u!1 &837841640
 GameObject:
   m_ObjectHideFlags: 0
@@ -49514,6 +49512,7 @@ GameObject:
   - component: {fileID: 1241861807}
   - component: {fileID: 1241861809}
   - component: {fileID: 1241861808}
+  - component: {fileID: 1241861810}
   m_Layer: 0
   m_Name: Txt_ExpValue
   m_TagString: Untagged
@@ -49640,6 +49639,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241861806}
   m_CullTransparentMesh: 1
+--- !u!114 &1241861810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241861806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c641c01bafa07489e34e4b96102713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyDevelopmentGauge
+  valueText: {fileID: 1241861808}
+  track: {fileID: 744495804}
+  trackColor: {r: 0.85, g: 0.86, b: 0.87, a: 1}
+  fillColor: {r: 0.051, g: 0.722, b: 0.949, a: 1}
 --- !u!1 &1242784125
 GameObject:
   m_ObjectHideFlags: 0

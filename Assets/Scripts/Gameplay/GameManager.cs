@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
         }
 
         QuestManager.Instance.BeginRun(); // 수주한 의뢰의 진행을 이번 런 기준으로 시작
+        MetaProgress.BeginRun();          // 런이 끝나면 남은 크레딧 1/10을 탈린으로 정산 (RunClearView)
 
         // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행
         // ?? 는 Unity의 파괴된 오브젝트를 null로 보지 않는다. 두 번째 런에서는 BlessingView가 비활성이라 Awake 전이고,
@@ -211,6 +212,8 @@ public class GameManager : MonoBehaviour
         Debug.Log($"<color=#FACC15>[GameManager] {chapter}막 클리어!</color>");
         // 스토리 진행도용 영구 플래그 (보스 대사 조건 등에서 사용: act1_cleared …)
         BlessingAffinityManager.Instance.SetFlag($"act{chapter}_cleared", true);
+        // 막 보스 첫 격파: 거점 개발도 + 아티팩트 1 + 로비 상점 파츠 재고 채움 (두 번째부터는 없음)
+        if (!TrainingSession.IsActive) MetaProgress.OnActBossCleared(chapter);
         if (act != null && act.isFinalAct && RunClearView.Instance != null)
         {
             RunClearView.Instance.Open(act);

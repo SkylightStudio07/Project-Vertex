@@ -177,6 +177,7 @@ public class CooperationManager : MonoBehaviour
             {
                 charState.currentCoopPoint -= current.requiredPoint;
                 charState.currentCoopLevel++;
+                MetaProgress.AwardDevelopment($"rank:{charID}:{charState.currentCoopLevel}", MetaProgress.DevRankUp);
                 charState.isLevelUp = TryGetNextRankEvent(charState, out var next) && charState.currentCoopPoint >= next.requiredPoint;
             }
             SaveCoop(charState);
@@ -232,6 +233,7 @@ public class CooperationManager : MonoBehaviour
             charState.currentCoopLevel = 1;
             SaveCoop(charState);
         }
+        MetaProgress.AwardDevelopment("join:" + charID, MetaProgress.DevJoin); // 거점에 처음 들어온 동료 (한 번만)
     }
 
     // 특정 협력자가 이번 런에 합류했는지 여부. 이벤트 조건(CompanionJoinedCondition) 등에서 사용.

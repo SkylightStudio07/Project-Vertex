@@ -61,6 +61,10 @@ public static class PlayerRecord
         if (entry == null) Data.defeats.Add(entry = new CountEntry { id = key });
         entry.count++;
         Save();
+        // 마테리얼 편이 새로 열리면 거점 개발도 +1 (편마다 한 번)
+        int step = MaterialArchive.DefeatStep(enemy.rank);
+        if (step > 0 && entry.count % step == 0 && entry.count / step <= MaterialArchive.EntryCount)
+            MetaProgress.AwardDevelopment($"material:{key}:{entry.count / step}", MetaProgress.DevMaterial);
     }
 
     // ── 얻은 카드 ──
@@ -85,6 +89,11 @@ public static class PlayerRecord
         level = entry != null ? entry.level : 0;
         point = entry != null ? entry.point : 0;
         return entry != null;
+    }
+
+    public static IEnumerable<(string id, int level)> AllCoop()
+    {
+        foreach (var e in Data.coop) yield return (e.id, e.level);
     }
 
     public static void SetCoop(string charID, int level, int point)
