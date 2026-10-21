@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(RectTransform))]
 public class UIPerspectiveTilt : MonoBehaviour
 {
-    [Tooltip("기본 각도. y가 음수면 오른쪽이 안쪽으로 물러난다")]
+    [Tooltip("기본 각도 (x 위아래, y 좌우). y가 양수면 바깥(오른쪽)이 가깝고 안쪽이 물러난다 = 명일방주식. 클수록 더 기운다")]
     [SerializeField] private Vector2 baseAngle = new(2f, -14f);       // (x, y)
     [Tooltip("마우스가 화면 끝에 있을 때 더해지는 각도")]
     [SerializeField] private Vector2 parallaxAngle = new(1.5f, 2.5f);
