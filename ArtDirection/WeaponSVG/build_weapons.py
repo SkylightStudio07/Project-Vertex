@@ -1,13 +1,12 @@
 # 무기고 무기 그림 — 손으로 짠 SVG (측면도, 총구 오른쪽). python -I build_weapons.py
-# 두 벌: Dark(회백 판 위, 먹색 몸통) / Light(먹색 칸 위, 회백 몸통). 강조색은 청록 하나.
+# 단색 실루엣 두 벌: Dark(회백 판 위, 먹색) / Light(먹색 칸 위, 회백). 디테일(결·홈·구멍)은 실루엣에서 파낸다(마스크).
+# 그리기 함수는 팔레트 키로 칠한다: body·part·hi = 실루엣, line·acc = 파냄.
 import pathlib, subprocess
 
 OUT = pathlib.Path(__file__).parent
 RESVG = 'C:/Users/SKYLIGHT/.codex/tmp/currency-f-render/node_modules/@resvg/resvg-js'
-PAL = {
-    'Dark':  dict(body='#1D2125', part='#2F353B', line='#4E565E', hi='#3A4148', acc='#0DB8F2'),
-    'Light': dict(body='#D9DEE2', part='#AEB6BD', line='#7E878F', hi='#EEF0F2', acc='#0DB8F2'),
-}
+COLOR = {'Dark': '#1D2125', 'Light': '#D9DEE2'}
+MASK = dict(body='white', part='white', hi='white', line='black', acc='black')
 
 
 def poly(pts, fill, extra=''):
@@ -161,17 +160,49 @@ def railgun(p):
     return (1200, 320), s
 
 
-DEFS = dict(Pistol=pistol, SMG=smg, Sniper=sniper, Shotgun=shotgun, Railgun=railgun)
+def revolver(p):
+    s = []
+    s.append(path('M150 176 Q118 222 104 300 Q100 342 132 354 L190 354 Q206 342 202 300 Q198 240 216 196 L170 196 Z', p['body']))  # 손잡이
+    for i in range(6):
+        s.append(line(134 - i * 3, 236 + i * 20, 180 - i * 3, 236 + i * 20, p['line'], 3))      # 그립 결
+    s.append(circle(160, 330, 6, p['line']))                                                    # 손잡이 나사
+    s.append(path('M206 194 L214 236 Q218 256 238 256 L276 256 Q292 256 292 240 L292 194 L278 194 L278 234 '
+                  'Q278 242 270 242 L242 242 Q232 242 230 232 L224 194 Z', p['part']))          # 방아쇠울
+    s.append(path('M246 196 Q252 222 240 236 L252 236 Q264 220 258 196 Z', p['body']))           # 방아쇠
+    s.append(poly([(150, 84), (304, 84), (304, 180), (276, 198), (168, 198), (148, 176)], p['body']))  # 프레임
+    s.append(poly([(138, 70), (166, 60), (178, 92), (152, 98)], p['body']))                       # 공이치기
+    s.append(rect(186, 94, 118, 92, p['body'], rx=12))                                             # 실린더
+    s.append(f'<rect x="186" y="94" width="118" height="92" rx="12" fill="none" stroke="{p['line']}" stroke-width="4"/>')  # 실린더 테두리
+    for y in (116, 136, 156):
+        s.append(rect(204, y, 84, 7, p['line'], rx=3.5))                                            # 실린더 홈
+    s.append(rect(304, 96, 296, 36, p['body']))                                                    # 총열
+    s.append(rect(304, 84, 292, 14, p['body']))                                                    # 윗면 리브
+    s.append(rect(576, 70, 20, 16, p['body']))                                                     # 가늠쇠
+    s.append(rect(596, 100, 12, 28, p['body']))                                                    # 총구
+    s.append(path('M330 132 L556 132 Q566 141 556 150 L330 150 Z', p['body']))                    # 이젝터 로드 덮개
+    s.append(line(308, 96, 308, 132, p['line'], 4))                                                # 실린더-총열 틈
+    s.append(line(324, 112, 572, 112, p['line'], 3))                                               # 총열 결
+    s.append(line(340, 141, 548, 141, p['line'], 2))
+    s.append(circle(170, 118, 5, p['line']))                                                        # 프레임 나사
+    s.append(circle(286, 164, 5, p['line']))
+    return (620, 370), s
+
+
+DEFS = dict(Pistol=revolver, SMG=smg, Sniper=sniper, Shotgun=shotgun, Railgun=railgun)
 
 if __name__ == '__main__':
     svgdir = OUT / 'SVG'
     svgdir.mkdir(exist_ok=True)
     for name, fn in DEFS.items():
-        for variant, p in PAL.items():
-            (w, h), body = fn(p)
-            pad = 12
+        (w, h), body = fn(MASK)
+        pad = 12
+        mid = f'weapon_{name}'
+        for variant, color in COLOR.items():
             svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-pad} {-pad} {w + 2 * pad} {h + 2 * pad}" '
-                   f'width="{w + 2 * pad}" height="{h + 2 * pad}">' + ''.join(body) + '</svg>')
+                   f'width="{w + 2 * pad}" height="{h + 2 * pad}">'
+                   f'<defs><mask id="{mid}" maskUnits="userSpaceOnUse" x="{-pad}" y="{-pad}" width="{w + 2 * pad}" height="{h + 2 * pad}">'
+                   f'<rect x="{-pad}" y="{-pad}" width="{w + 2 * pad}" height="{h + 2 * pad}" fill="black"/>' + ''.join(body) + '</mask></defs>'
+                   f'<rect x="{-pad}" y="{-pad}" width="{w + 2 * pad}" height="{h + 2 * pad}" fill="{color}" mask="url(#{mid})"/></svg>')
             (svgdir / f'Weapon_{name}_{variant}.svg').write_text(svg, encoding='utf-8')
     renderer = OUT / 'render.cjs'
     renderer.write_text(

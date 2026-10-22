@@ -1,0 +1,97 @@
+{
+  "style": "single ink / transparent cutouts",
+  "assets": {
+    "Revolver": {
+      "name_ko": "리볼버",
+      "svg": "SVG/Weapon_Revolver_Mono.svg",
+      "png": "PNG/Weapon_Revolver_Mono.png",
+      "viewBox": [
+        0,
+        0,
+        1080,
+        650
+      ],
+      "png_scale": 2,
+      "facing": "right",
+      "ink": "#16181B",
+      "recolor": "root color attribute / currentColor",
+      "detail": "Cylinder / heavy underlug",
+      "alpha_bounds_pixels": [
+        172,
+        208,
+        2014,
+        1225
+      ],
+      "png_sha256": "71146535851470d655f6b0add80c5625d25da1b96526efe2f92925907a0faf57"
+    },
+    "Sniper": {
+      "name_ko": "저격총",
+      "svg": "SVG/Weapon_Sniper_Mono.svg",
+      "png": "PNG/Weapon_Sniper_Mono.png",
+      "viewBox": [
+        0,
+        0,
+        1600,
+        500
+      ],
+      "png_scale": 2,
+      "facing": "right",
+      "ink": "#16181B",
+      "recolor": "root color attribute / currentColor",
+      "detail": "Precision chassis / long optic",
+      "alpha_bounds_pixels": [
+        72,
+        206,
+        3128,
+        924
+      ],
+      "png_sha256": "600ba524155b74ef48237c26f387d867c2b0179c617b3e9704911a75e9d1f989"
+    },
+    "SMG": {
+      "name_ko": "기관단총",
+      "svg": "SVG/Weapon_SMG_Mono.svg",
+      "png": "PNG/Weapon_SMG_Mono.png",
+      "viewBox": [
+        0,
+        0,
+        1120,
+        590
+      ],
+      "png_scale": 2,
+      "facing": "right",
+      "ink": "#16181B",
+      "recolor": "root color attribute / currentColor",
+      "detail": "Compact receiver / curved magazine",
+      "alpha_bounds_pixels": [
+        102,
+        188,
+        2142,
+        1096
+      ],
+      "png_sha256": "81a1e78b663ec97a8f6a105b312629ae1b85c56db09d93a492497d63bed55438"
+    },
+    "Railgun": {
+      "name_ko": "레일건",
+      "svg": "SVG/Weapon_Railgun_Mono.svg",
+      "png": "PNG/Weapon_Railgun_Mono.png",
+      "viewBox": [
+        0,
+        0,
+        1480,
+        570
+      ],
+      "png_scale": 2,
+      "facing": "right",
+      "ink": "#16181B",
+      "recolor": "root color attribute / currentColor",
+      "detail": "Twin open rails / capacitor core",
+      "alpha_bounds_pixels": [
+        96,
+        220,
+        2860,
+        1052
+      ],
+      "png_sha256": "4fb7e7edd553bdc9806aa2d3f75154a58dbdc7992ed6e92e45a7b4781e1a3077"
+    }
+  }
+}
