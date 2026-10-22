@@ -4,10 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 로비 마테리얼(시설 05) 화면. 분류 탭(적 / 동료) → 4열 대상 격자 → 오른쪽 대상 머리 + 01~05 색인 탭 + 서류 한 장.
+// 아카이브 > 적 기록 · 동료 기록 (옛 로비 마테리얼) 화면. 분류 탭(적 / 동료) → 4열 대상 격자 → 오른쪽 대상 머리 + 01~05 색인 탭 + 서류 한 장.
 // 적은 격퇴 수(일반 3 · 엘리트 2 · 보스 1회마다), 동료는 호감도 레벨마다 한 편씩 열린다 (MaterialArchive).
-// 무기고·훈련장처럼 로비 버튼이 SetActive(true)로 연다. 기획: Docs/기획/마테리얼.md
-// 아트: Assets/Art/Lobby/Material (원본 ArtDirection/MaterialMockup/Extracted, 좌표는 그 layout.json — 1672×941 좌상단)
+// 아카이브(ArchiveView)의 적 기록 / 동료 기록 메뉴가 Open(companions)으로 연다. 닫으면 아카이브로 돌아간다. 기획: Docs/기획/마테리얼.md
+// 아트: Assets/Art/Lobby/Material/Dark (아카이브 테마 어두운 판, ArtDirection/MaterialDarkMockup) — 배치는 ArtDirection/MaterialMockup layout.json (1672×941 좌상단)
 public class MaterialView : MonoBehaviour
 {
     private enum Tab { Enemy, Companion }
@@ -24,6 +24,10 @@ public class MaterialView : MonoBehaviour
     [Header("대상")]
     [SerializeField] private List<EnemyData> enemies = new();
     [SerializeField] private List<CoopCharData> companions = new();
+
+    [Header("제목 (탭에 따라: 적 기록 / 동료 기록)")]
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private TextMeshProUGUI titleEnglish;
 
     [Header("분류 · 필터")]
     [SerializeField] private Button closeButton;
@@ -105,6 +109,16 @@ public class MaterialView : MonoBehaviour
 
     private void OnEnable() => SwitchTab(_tab, force: true);
 
+    // 아카이브 입구(적 기록 / 동료 기록)에서 해당 탭으로 바로 연다
+    public void Open(bool companions)
+    {
+        var tab = companions ? Tab.Companion : Tab.Enemy;
+        if (_tab != tab) _selected = null;
+        _tab = tab;
+        if (gameObject.activeSelf) SwitchTab(_tab, force: true);
+        else gameObject.SetActive(true);
+    }
+
     private void SwitchTab(Tab tab, bool force = false)
     {
         if (_tab == tab && !force) return;
@@ -115,6 +129,8 @@ public class MaterialView : MonoBehaviour
 
         // 필터는 탭마다 다르다: 적 = 등급, 동료 = 소속
         bool enemy = tab == Tab.Enemy;
+        if (titleText != null) titleText.text = enemy ? "적 기록" : "동료 기록";
+        if (titleEnglish != null) titleEnglish.text = enemy ? "ENEMY RECORDS" : "COMPANION RECORDS";
         filterHeading.text = enemy ? "등급" : "소속";
         var keys = enemy ? EnemyFilterKeys : CompanionFilterKeys;
         var labels = enemy ? EnemyFilterLabels : CompanionFilterLabels;

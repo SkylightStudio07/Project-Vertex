@@ -1,0 +1,4224 @@
+{
+  "version": 2,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "unity_rect_transform_note": "Use top-left anchors, invert canvas y for anchoredPosition; explicit character pivot uses Unity bottom-left convention.",
+  "palette": {
+    "ink": "#16181B",
+    "paper": "#EEF0F2",
+    "accent": "#0DB8F2"
+  },
+  "assets": {
+    "List_BG": {
+      "file": "List_BG.png",
+      "svg": "SVG/List_BG.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        1920,
+        1080
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "opaque": true
+    },
+    "Detail_BG": {
+      "file": "Detail_BG.png",
+      "svg": "SVG/Detail_BG.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        1920,
+        1080
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "opaque": true
+    },
+    "Card_Frame": {
+      "file": "Card_Frame.png",
+      "svg": "SVG/Card_Frame.svg",
+      "logical_size": [
+        258,
+        386
+      ],
+      "source_pixels": [
+        516,
+        772
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "minimum_logical_size": [
+          37,
+          37
+        ]
+      }
+    },
+    "Card_Frame_Hover": {
+      "file": "Card_Frame_Hover.png",
+      "svg": "SVG/Card_Frame_Hover.svg",
+      "logical_size": [
+        258,
+        386
+      ],
+      "source_pixels": [
+        516,
+        772
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "minimum_logical_size": [
+          37,
+          37
+        ]
+      }
+    },
+    "Card_Frame_Locked": {
+      "file": "Card_Frame_Locked.png",
+      "svg": "SVG/Card_Frame_Locked.svg",
+      "logical_size": [
+        258,
+        386
+      ],
+      "source_pixels": [
+        516,
+        772
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "minimum_logical_size": [
+          37,
+          37
+        ]
+      }
+    },
+    "Card_Frame_Empty": {
+      "file": "Card_Frame_Empty.png",
+      "svg": "SVG/Card_Frame_Empty.svg",
+      "logical_size": [
+        258,
+        386
+      ],
+      "source_pixels": [
+        516,
+        772
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          90,
+          90,
+          90,
+          90
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          45,
+          45,
+          45,
+          45
+        ],
+        "minimum_logical_size": [
+          91,
+          91
+        ]
+      }
+    },
+    "Empty_Plus": {
+      "file": "Empty_Plus.png",
+      "svg": "SVG/Empty_Plus.svg",
+      "logical_size": [
+        48,
+        48
+      ],
+      "source_pixels": [
+        96,
+        96
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Separate centered overlay; prevents symbol stretching during 9-slice."
+    },
+    "Card_NameBand": {
+      "file": "Card_NameBand.png",
+      "svg": "SVG/Card_NameBand.svg",
+      "logical_size": [
+        250,
+        98
+      ],
+      "source_pixels": [
+        500,
+        196
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          32,
+          40,
+          80,
+          12
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          16,
+          20,
+          40,
+          6
+        ],
+        "minimum_logical_size": [
+          57,
+          27
+        ]
+      }
+    },
+    "Pip_Empty": {
+      "file": "Pip_Empty.png",
+      "svg": "SVG/Pip_Empty.svg",
+      "logical_size": [
+        18,
+        18
+      ],
+      "source_pixels": [
+        36,
+        36
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Pip_Filled": {
+      "file": "Pip_Filled.png",
+      "svg": "SVG/Pip_Filled.svg",
+      "logical_size": [
+        18,
+        18
+      ],
+      "source_pixels": [
+        36,
+        36
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "SortTab_Underline": {
+      "file": "SortTab_Underline.png",
+      "svg": "SVG/SortTab_Underline.svg",
+      "logical_size": [
+        150,
+        4
+      ],
+      "source_pixels": [
+        300,
+        8
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "minimum_logical_size": [
+          3,
+          3
+        ]
+      }
+    },
+    "Panel_Title": {
+      "file": "Panel_Title.png",
+      "svg": "SVG/Panel_Title.svg",
+      "logical_size": [
+        425,
+        136
+      ],
+      "source_pixels": [
+        850,
+        272
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          220,
+          16,
+          248,
+          16
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          110,
+          8,
+          124,
+          8
+        ],
+        "minimum_logical_size": [
+          235,
+          17
+        ]
+      }
+    },
+    "Button_Lobby": {
+      "file": "Button_Lobby.png",
+      "svg": "SVG/Button_Lobby.svg",
+      "logical_size": [
+        230,
+        64
+      ],
+      "source_pixels": [
+        460,
+        128
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          32,
+          32,
+          32,
+          32
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          16,
+          16,
+          16,
+          16
+        ],
+        "minimum_logical_size": [
+          33,
+          33
+        ]
+      }
+    },
+    "Panel_Section": {
+      "file": "Panel_Section.png",
+      "svg": "SVG/Panel_Section.svg",
+      "logical_size": [
+        694,
+        170
+      ],
+      "source_pixels": [
+        1388,
+        340
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "fixed_header_height": 48,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          48,
+          20,
+          552,
+          108
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          10,
+          276,
+          54
+        ],
+        "minimum_logical_size": [
+          301,
+          65
+        ]
+      }
+    },
+    "Bond_Seg_Empty": {
+      "file": "Bond_Seg_Empty.png",
+      "svg": "SVG/Bond_Seg_Empty.svg",
+      "logical_size": [
+        57,
+        26
+      ],
+      "source_pixels": [
+        114,
+        52
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Bond_Seg_Filled": {
+      "file": "Bond_Seg_Filled.png",
+      "svg": "SVG/Bond_Seg_Filled.svg",
+      "logical_size": [
+        57,
+        26
+      ],
+      "source_pixels": [
+        114,
+        52
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Skill_Slot": {
+      "file": "Skill_Slot.png",
+      "svg": "SVG/Skill_Slot.svg",
+      "logical_size": [
+        116,
+        112
+      ],
+      "source_pixels": [
+        232,
+        224
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          14,
+          14,
+          14,
+          14
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "minimum_logical_size": [
+          15,
+          15
+        ]
+      }
+    },
+    "Skill_Icon": {
+      "file": "Skill_Icon.png",
+      "svg": "SVG/Skill_Icon.svg",
+      "logical_size": [
+        90,
+        90
+      ],
+      "source_pixels": [
+        180,
+        180
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Tag_Small": {
+      "file": "Tag_Small.png",
+      "svg": "SVG/Tag_Small.svg",
+      "logical_size": [
+        198,
+        44
+      ],
+      "source_pixels": [
+        396,
+        88
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          15,
+          15,
+          15,
+          15
+        ],
+        "minimum_logical_size": [
+          31,
+          31
+        ]
+      }
+    },
+    "CardThumb_Frame": {
+      "file": "CardThumb_Frame.png",
+      "svg": "SVG/CardThumb_Frame.svg",
+      "logical_size": [
+        142,
+        174
+      ],
+      "source_pixels": [
+        284,
+        348
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          10,
+          54,
+          46,
+          10
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          5,
+          27,
+          23,
+          5
+        ],
+        "minimum_logical_size": [
+          29,
+          33
+        ]
+      }
+    },
+    "CardThumb_Locked": {
+      "file": "CardThumb_Locked.png",
+      "svg": "SVG/CardThumb_Locked.svg",
+      "logical_size": [
+        142,
+        174
+      ],
+      "source_pixels": [
+        284,
+        348
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "symbol_overlay": "Unlock_Lock centered separately",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          10,
+          54,
+          46,
+          10
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          5,
+          27,
+          23,
+          5
+        ],
+        "minimum_logical_size": [
+          29,
+          33
+        ]
+      }
+    },
+    "Unlock_Mark": {
+      "file": "Unlock_Mark.png",
+      "svg": "SVG/Unlock_Mark.svg",
+      "logical_size": [
+        24,
+        24
+      ],
+      "source_pixels": [
+        48,
+        48
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Unlock_Lock": {
+      "file": "Unlock_Lock.png",
+      "svg": "SVG/Unlock_Lock.svg",
+      "logical_size": [
+        32,
+        36
+      ],
+      "source_pixels": [
+        64,
+        72
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Icon_Lock_White": {
+      "file": "Icon_Lock_White.png",
+      "svg": "SVG/Icon_Lock_White.svg",
+      "logical_size": [
+        32,
+        36
+      ],
+      "source_pixels": [
+        64,
+        72
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Panel_NameBlock": {
+      "file": "Panel_NameBlock.png",
+      "svg": "SVG/Panel_NameBlock.svg",
+      "logical_size": [
+        598,
+        250
+      ],
+      "source_pixels": [
+        1196,
+        500
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          216,
+          60,
+          116,
+          114
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          108,
+          30,
+          58,
+          57
+        ],
+        "minimum_logical_size": [
+          167,
+          88
+        ]
+      }
+    },
+    "Arrow_Prev": {
+      "file": "Arrow_Prev.png",
+      "svg": "SVG/Arrow_Prev.svg",
+      "logical_size": [
+        34,
+        60
+      ],
+      "source_pixels": [
+        68,
+        120
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Arrow_Next": {
+      "file": "Arrow_Next.png",
+      "svg": "SVG/Arrow_Next.svg",
+      "logical_size": [
+        34,
+        60
+      ],
+      "source_pixels": [
+        68,
+        120
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Button_Record": {
+      "file": "Button_Record.png",
+      "svg": "SVG/Button_Record.svg",
+      "logical_size": [
+        248,
+        66
+      ],
+      "source_pixels": [
+        496,
+        132
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          34,
+          34,
+          34,
+          34
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          17,
+          17,
+          17,
+          17
+        ],
+        "minimum_logical_size": [
+          35,
+          35
+        ]
+      }
+    },
+    "Button_Camp": {
+      "file": "Button_Camp.png",
+      "svg": "SVG/Button_Camp.svg",
+      "logical_size": [
+        328,
+        66
+      ],
+      "source_pixels": [
+        656,
+        132
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          34,
+          34,
+          34,
+          34
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          17,
+          17,
+          17,
+          17
+        ],
+        "minimum_logical_size": [
+          35,
+          35
+        ]
+      }
+    },
+    "Rule_Horizontal": {
+      "file": "Rule_Horizontal.png",
+      "svg": "SVG/Rule_Horizontal.svg",
+      "logical_size": [
+        694,
+        1
+      ],
+      "source_pixels": [
+        1388,
+        2
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Icon_Record": {
+      "file": "Icon_Record.png",
+      "svg": "SVG/Icon_Record.svg",
+      "logical_size": [
+        30,
+        32
+      ],
+      "source_pixels": [
+        60,
+        64
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Shadow_Card": {
+      "file": "Shadow_Card.png",
+      "svg": "SVG/Shadow_Card.svg",
+      "logical_size": [
+        318,
+        446
+      ],
+      "source_pixels": [
+        636,
+        892
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "padding": 30,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          92,
+          92,
+          92,
+          92
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          46,
+          46,
+          46,
+          46
+        ],
+        "minimum_logical_size": [
+          93,
+          93
+        ]
+      }
+    },
+    "Shadow_Panel": {
+      "file": "Shadow_Panel.png",
+      "svg": "SVG/Shadow_Panel.svg",
+      "logical_size": [
+        754,
+        230
+      ],
+      "source_pixels": [
+        1508,
+        460
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "padding": 30,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          92,
+          92,
+          92,
+          92
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          46,
+          46,
+          46,
+          46
+        ],
+        "minimum_logical_size": [
+          93,
+          93
+        ]
+      }
+    },
+    "Shadow_Title": {
+      "file": "Shadow_Title.png",
+      "svg": "SVG/Shadow_Title.svg",
+      "logical_size": [
+        485,
+        196
+      ],
+      "source_pixels": [
+        970,
+        392
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "padding": 30,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          92,
+          92,
+          92,
+          92
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          46,
+          46,
+          46,
+          46
+        ],
+        "minimum_logical_size": [
+          93,
+          93
+        ]
+      }
+    },
+    "Shadow_Name": {
+      "file": "Shadow_Name.png",
+      "svg": "SVG/Shadow_Name.svg",
+      "logical_size": [
+        658,
+        310
+      ],
+      "source_pixels": [
+        1316,
+        620
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference",
+      "padding": 30,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          92,
+          92,
+          92,
+          92
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          46,
+          46,
+          46,
+          46
+        ],
+        "minimum_logical_size": [
+          93,
+          93
+        ]
+      }
+    },
+    "Shadow_Character": {
+      "file": "Shadow_Character.png",
+      "svg": "SVG/Shadow_Character.svg",
+      "logical_size": [
+        630,
+        90
+      ],
+      "source_pixels": [
+        1260,
+        180
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2 visual reference"
+    },
+    "Chara_ChiharaSho_Full": {
+      "file": "Chara_ChiharaSho_Full.png",
+      "source_pixels": [
+        832,
+        1216
+      ],
+      "logical_size": [
+        832,
+        1216
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.02
+      ],
+      "text_baked": false,
+      "method": "byte-identical original project character, not generated mockup cutout",
+      "source": "Assets\\Art\\Characters\\Joining Characters\\CP01 복사.png"
+    }
+  },
+  "screens": {
+    "list": {
+      "placements": [
+        {
+          "asset": "List_BG",
+          "rect": [
+            0,
+            0,
+            1920,
+            1080
+          ]
+        },
+        {
+          "asset": "Shadow_Title",
+          "rect": [
+            -18,
+            -12,
+            485,
+            196
+          ]
+        },
+        {
+          "asset": "Panel_Title",
+          "rect": [
+            0,
+            0,
+            425,
+            136
+          ]
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1612,
+            12,
+            290,
+            124
+          ]
+        },
+        {
+          "asset": "Button_Lobby",
+          "rect": [
+            1630,
+            24,
+            230,
+            64
+          ]
+        },
+        {
+          "asset": "SortTab_Underline",
+          "rect": [
+            467,
+            115,
+            6,
+            28
+          ]
+        },
+        {
+          "asset": "SortTab_Underline",
+          "rect": [
+            1308,
+            151,
+            156,
+            4
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            167,
+            174,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Hover",
+          "rect": [
+            185,
+            186,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            190,
+            192,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "sho",
+          "slot": 0
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            189,
+            470,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Pip_Filled",
+          "rect": [
+            202,
+            545,
+            18,
+            18
+          ]
+        },
+        {
+          "asset": "Pip_Filled",
+          "rect": [
+            226,
+            545,
+            18,
+            18
+          ]
+        },
+        {
+          "asset": "Pip_Filled",
+          "rect": [
+            250,
+            545,
+            18,
+            18
+          ]
+        },
+        {
+          "asset": "Pip_Empty",
+          "rect": [
+            274,
+            545,
+            18,
+            18
+          ]
+        },
+        {
+          "asset": "Pip_Empty",
+          "rect": [
+            298,
+            545,
+            18,
+            18
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            448,
+            174,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame",
+          "rect": [
+            466,
+            186,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            471,
+            192,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "icarus",
+          "slot": 1
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            470,
+            470,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            729,
+            174,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Locked",
+          "rect": [
+            747,
+            186,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            752,
+            192,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "silhouette",
+          "slot": 2
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            751,
+            470,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Icon_Lock_White",
+          "rect": [
+            860,
+            362,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            1010,
+            174,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Locked",
+          "rect": [
+            1028,
+            186,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            1033,
+            192,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "silhouette",
+          "slot": 3
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            1032,
+            470,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Icon_Lock_White",
+          "rect": [
+            1141,
+            362,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            1291,
+            174,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Locked",
+          "rect": [
+            1309,
+            186,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            1314,
+            192,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "silhouette",
+          "slot": 4
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            1313,
+            470,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Icon_Lock_White",
+          "rect": [
+            1422,
+            362,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            1572,
+            174,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Locked",
+          "rect": [
+            1590,
+            186,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            1595,
+            192,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "silhouette",
+          "slot": 5
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            1594,
+            470,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Icon_Lock_White",
+          "rect": [
+            1703,
+            362,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            167,
+            584,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Locked",
+          "rect": [
+            185,
+            596,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            190,
+            602,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "silhouette",
+          "slot": 6
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            189,
+            880,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Icon_Lock_White",
+          "rect": [
+            298,
+            772,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            448,
+            584,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Locked",
+          "rect": [
+            466,
+            596,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            471,
+            602,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "silhouette",
+          "slot": 7
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            470,
+            880,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Icon_Lock_White",
+          "rect": [
+            579,
+            772,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            729,
+            584,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Locked",
+          "rect": [
+            747,
+            596,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "__portrait__",
+          "rect": [
+            752,
+            602,
+            248,
+            281
+          ],
+          "preview_only": true,
+          "source": "silhouette",
+          "slot": 8
+        },
+        {
+          "asset": "Card_NameBand",
+          "rect": [
+            751,
+            880,
+            250,
+            98
+          ]
+        },
+        {
+          "asset": "Icon_Lock_White",
+          "rect": [
+            860,
+            772,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            1010,
+            584,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Empty",
+          "rect": [
+            1028,
+            596,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "Empty_Plus",
+          "rect": [
+            1133,
+            762,
+            48,
+            48
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            1291,
+            584,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Empty",
+          "rect": [
+            1309,
+            596,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "Empty_Plus",
+          "rect": [
+            1414,
+            762,
+            48,
+            48
+          ]
+        },
+        {
+          "asset": "Shadow_Card",
+          "rect": [
+            1572,
+            584,
+            318,
+            446
+          ]
+        },
+        {
+          "asset": "Card_Frame_Empty",
+          "rect": [
+            1590,
+            596,
+            258,
+            386
+          ]
+        },
+        {
+          "asset": "Empty_Plus",
+          "rect": [
+            1695,
+            762,
+            48,
+            48
+          ]
+        }
+      ],
+      "text_boxes": [
+        {
+          "id": "header.number",
+          "text": "04",
+          "rect": [
+            36,
+            34,
+            48,
+            44
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "header.title",
+          "text": "동료",
+          "rect": [
+            133,
+            20,
+            180,
+            65
+          ],
+          "font_size": 55,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "header.caption",
+          "text": "COMPANIONS",
+          "rect": [
+            136,
+            92,
+            180,
+            22
+          ],
+          "font_size": 15,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "header.back",
+          "text": "←  로비",
+          "rect": [
+            1640,
+            28,
+            210,
+            52
+          ],
+          "font_size": 25,
+          "color": "#16181B",
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "section.title",
+          "text": "동료 목록",
+          "rect": [
+            496,
+            107,
+            130,
+            42
+          ],
+          "font_size": 26,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "section.english",
+          "text": "COMPANION ROSTER",
+          "rect": [
+            638,
+            111,
+            275,
+            30
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "sort.0",
+          "text": "합류순",
+          "rect": [
+            1308,
+            112,
+            156,
+            35
+          ],
+          "font_size": 24,
+          "color": "#16181B",
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "sort.1",
+          "text": "호감도",
+          "rect": [
+            1486,
+            112,
+            156,
+            35
+          ],
+          "font_size": 24,
+          "color": "#16181B",
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "sort.2",
+          "text": "막",
+          "rect": [
+            1664,
+            112,
+            156,
+            35
+          ],
+          "font_size": 24,
+          "color": "#16181B",
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.0.number",
+          "text": "01",
+          "rect": [
+            200,
+            199,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.0.name",
+          "text": "치하라 쇼",
+          "rect": [
+            201,
+            479,
+            178,
+            34
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.0.level",
+          "text": "Lv.3",
+          "rect": [
+            380,
+            481,
+            50,
+            32
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.0.faction",
+          "text": "VERTEX / 협력자",
+          "rect": [
+            201,
+            518,
+            210,
+            24
+          ],
+          "font_size": 16,
+          "color": "#B7BFC7",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.1.number",
+          "text": "02",
+          "rect": [
+            481,
+            199,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.1.name",
+          "text": "이카루스 군",
+          "rect": [
+            482,
+            479,
+            225,
+            34
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.1.faction",
+          "text": "이벤트 동료",
+          "rect": [
+            482,
+            521,
+            220,
+            24
+          ],
+          "font_size": 18,
+          "color": "#B7BFC7",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.2.number",
+          "text": "03",
+          "rect": [
+            762,
+            199,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.2.name",
+          "text": "???",
+          "rect": [
+            763,
+            479,
+            210,
+            35
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.2.condition",
+          "text": "2막 구출 의뢰",
+          "rect": [
+            763,
+            521,
+            220,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.3.number",
+          "text": "04",
+          "rect": [
+            1043,
+            199,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.3.name",
+          "text": "???",
+          "rect": [
+            1044,
+            479,
+            210,
+            35
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.3.condition",
+          "text": "3막 진입",
+          "rect": [
+            1044,
+            521,
+            220,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.4.number",
+          "text": "05",
+          "rect": [
+            1324,
+            199,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.4.name",
+          "text": "???",
+          "rect": [
+            1325,
+            479,
+            210,
+            35
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.4.condition",
+          "text": "특수 의뢰 완료",
+          "rect": [
+            1325,
+            521,
+            220,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.5.number",
+          "text": "06",
+          "rect": [
+            1605,
+            199,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.5.name",
+          "text": "???",
+          "rect": [
+            1606,
+            479,
+            210,
+            35
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.5.condition",
+          "text": "2막 구출 의뢰",
+          "rect": [
+            1606,
+            521,
+            220,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.6.number",
+          "text": "07",
+          "rect": [
+            200,
+            609,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.6.name",
+          "text": "???",
+          "rect": [
+            201,
+            889,
+            210,
+            35
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.6.condition",
+          "text": "3막 진입",
+          "rect": [
+            201,
+            931,
+            220,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.7.number",
+          "text": "08",
+          "rect": [
+            481,
+            609,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.7.name",
+          "text": "???",
+          "rect": [
+            482,
+            889,
+            210,
+            35
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.7.condition",
+          "text": "특수 의뢰 완료",
+          "rect": [
+            482,
+            931,
+            220,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.8.number",
+          "text": "09",
+          "rect": [
+            762,
+            609,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.8.name",
+          "text": "???",
+          "rect": [
+            763,
+            889,
+            210,
+            35
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.8.condition",
+          "text": "2막 구출 의뢰",
+          "rect": [
+            763,
+            931,
+            220,
+            26
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.9.number",
+          "text": "10",
+          "rect": [
+            1043,
+            609,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.10.number",
+          "text": "11",
+          "rect": [
+            1324,
+            609,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "card.11.number",
+          "text": "12",
+          "rect": [
+            1605,
+            609,
+            38,
+            25
+          ],
+          "font_size": 17,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "footer.hint",
+          "text": "ⓘ  동료를 선택해 전력 정보를 확인하세요.",
+          "rect": [
+            350,
+            997,
+            1000,
+            43
+          ],
+          "font_size": 22,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        }
+      ],
+      "cards": [
+        {
+          "index": 1,
+          "state": "hover",
+          "rect": [
+            185,
+            186,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            190,
+            192,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            189,
+            470,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 2,
+          "state": "normal",
+          "rect": [
+            466,
+            186,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            471,
+            192,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            470,
+            470,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 3,
+          "state": "locked",
+          "rect": [
+            747,
+            186,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            752,
+            192,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            751,
+            470,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 4,
+          "state": "locked",
+          "rect": [
+            1028,
+            186,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            1033,
+            192,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            1032,
+            470,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 5,
+          "state": "locked",
+          "rect": [
+            1309,
+            186,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            1314,
+            192,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            1313,
+            470,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 6,
+          "state": "locked",
+          "rect": [
+            1590,
+            186,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            1595,
+            192,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            1594,
+            470,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 7,
+          "state": "locked",
+          "rect": [
+            185,
+            596,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            190,
+            602,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            189,
+            880,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 8,
+          "state": "locked",
+          "rect": [
+            466,
+            596,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            471,
+            602,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            470,
+            880,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 9,
+          "state": "locked",
+          "rect": [
+            747,
+            596,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            752,
+            602,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            751,
+            880,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 10,
+          "state": "empty",
+          "rect": [
+            1028,
+            596,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            1033,
+            602,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            1032,
+            880,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 11,
+          "state": "empty",
+          "rect": [
+            1309,
+            596,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            1314,
+            602,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            1313,
+            880,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        },
+        {
+          "index": 12,
+          "state": "empty",
+          "rect": [
+            1590,
+            596,
+            258,
+            386
+          ],
+          "portrait_rect": [
+            1595,
+            602,
+            248,
+            281
+          ],
+          "name_band_rect": [
+            1594,
+            880,
+            250,
+            98
+          ],
+          "mask": "clipped card corners; portrait clipped before overlaying name band"
+        }
+      ],
+      "overflow": {
+        "mode": "vertical_scroll",
+        "viewport_rect": [
+          175,
+          178,
+          1690,
+          809
+        ],
+        "columns": 6,
+        "pagination": false,
+        "spacing": [
+          23,
+          24
+        ]
+      }
+    },
+    "detail": {
+      "placements": [
+        {
+          "asset": "Detail_BG",
+          "rect": [
+            0,
+            0,
+            1920,
+            1080
+          ]
+        },
+        {
+          "asset": "Shadow_Title",
+          "rect": [
+            -18,
+            -12,
+            485,
+            196
+          ]
+        },
+        {
+          "asset": "Panel_Title",
+          "rect": [
+            0,
+            0,
+            425,
+            136
+          ]
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1612,
+            12,
+            290,
+            124
+          ]
+        },
+        {
+          "asset": "Button_Lobby",
+          "rect": [
+            1630,
+            24,
+            230,
+            64
+          ]
+        },
+        {
+          "asset": "Shadow_Character",
+          "rect": [
+            410,
+            982,
+            660,
+            70
+          ]
+        },
+        {
+          "asset": "Chara_ChiharaSho_Full",
+          "rect": [
+            350,
+            58,
+            650,
+            950
+          ]
+        },
+        {
+          "asset": "Arrow_Prev",
+          "rect": [
+            116,
+            279,
+            10,
+            18
+          ]
+        },
+        {
+          "asset": "Arrow_Next",
+          "rect": [
+            318,
+            279,
+            10,
+            18
+          ]
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1154,
+            74,
+            754,
+            207
+          ]
+        },
+        {
+          "asset": "Panel_Section",
+          "rect": [
+            1172,
+            86,
+            694,
+            147
+          ],
+          "id": "section.bond"
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1154,
+            241,
+            754,
+            250
+          ]
+        },
+        {
+          "asset": "Panel_Section",
+          "rect": [
+            1172,
+            253,
+            694,
+            190
+          ],
+          "id": "section.skill"
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1154,
+            453,
+            754,
+            305
+          ]
+        },
+        {
+          "asset": "Panel_Section",
+          "rect": [
+            1172,
+            465,
+            694,
+            245
+          ],
+          "id": "section.cards"
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1154,
+            715,
+            754,
+            295
+          ]
+        },
+        {
+          "asset": "Panel_Section",
+          "rect": [
+            1172,
+            727,
+            694,
+            235
+          ],
+          "id": "section.unlocks"
+        },
+        {
+          "asset": "Bond_Seg_Filled",
+          "rect": [
+            1404,
+            165,
+            57,
+            26
+          ]
+        },
+        {
+          "asset": "Bond_Seg_Filled",
+          "rect": [
+            1464,
+            165,
+            57,
+            26
+          ]
+        },
+        {
+          "asset": "Bond_Seg_Filled",
+          "rect": [
+            1524,
+            165,
+            57,
+            26
+          ]
+        },
+        {
+          "asset": "Bond_Seg_Empty",
+          "rect": [
+            1584,
+            165,
+            57,
+            26
+          ]
+        },
+        {
+          "asset": "Bond_Seg_Empty",
+          "rect": [
+            1644,
+            165,
+            57,
+            26
+          ]
+        },
+        {
+          "asset": "Skill_Slot",
+          "rect": [
+            1206,
+            318,
+            116,
+            112
+          ]
+        },
+        {
+          "asset": "Skill_Icon",
+          "rect": [
+            1219,
+            328,
+            90,
+            90
+          ]
+        },
+        {
+          "asset": "Tag_Small",
+          "rect": [
+            1640,
+            347,
+            198,
+            44
+          ]
+        },
+        {
+          "asset": "CardThumb_Frame",
+          "rect": [
+            1206,
+            527,
+            142,
+            174
+          ]
+        },
+        {
+          "asset": "Skill_Icon",
+          "rect": [
+            1224,
+            541,
+            100,
+            110
+          ],
+          "tint": "#16181B",
+          "preview_art_placeholder": true
+        },
+        {
+          "asset": "CardThumb_Frame",
+          "rect": [
+            1364,
+            527,
+            142,
+            174
+          ]
+        },
+        {
+          "asset": "Skill_Icon",
+          "rect": [
+            1382,
+            541,
+            100,
+            110
+          ],
+          "tint": "#16181B",
+          "preview_art_placeholder": true
+        },
+        {
+          "asset": "CardThumb_Locked",
+          "rect": [
+            1522,
+            527,
+            142,
+            174
+          ]
+        },
+        {
+          "asset": "Unlock_Lock",
+          "rect": [
+            1577,
+            595,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "CardThumb_Locked",
+          "rect": [
+            1680,
+            527,
+            142,
+            174
+          ]
+        },
+        {
+          "asset": "Unlock_Lock",
+          "rect": [
+            1735,
+            595,
+            32,
+            36
+          ]
+        },
+        {
+          "asset": "Unlock_Mark",
+          "rect": [
+            1212,
+            789,
+            20,
+            23
+          ]
+        },
+        {
+          "asset": "Rule_Horizontal",
+          "rect": [
+            1255,
+            817,
+            580,
+            1
+          ]
+        },
+        {
+          "asset": "Unlock_Mark",
+          "rect": [
+            1212,
+            821,
+            20,
+            23
+          ]
+        },
+        {
+          "asset": "Rule_Horizontal",
+          "rect": [
+            1255,
+            849,
+            580,
+            1
+          ]
+        },
+        {
+          "asset": "Unlock_Mark",
+          "rect": [
+            1212,
+            853,
+            20,
+            23
+          ]
+        },
+        {
+          "asset": "Rule_Horizontal",
+          "rect": [
+            1255,
+            881,
+            580,
+            1
+          ]
+        },
+        {
+          "asset": "Unlock_Lock",
+          "rect": [
+            1212,
+            885,
+            20,
+            23
+          ]
+        },
+        {
+          "asset": "Rule_Horizontal",
+          "rect": [
+            1255,
+            913,
+            580,
+            1
+          ]
+        },
+        {
+          "asset": "Unlock_Lock",
+          "rect": [
+            1212,
+            917,
+            20,
+            23
+          ]
+        },
+        {
+          "asset": "Shadow_Name",
+          "rect": [
+            -18,
+            688,
+            658,
+            310
+          ]
+        },
+        {
+          "asset": "Panel_NameBlock",
+          "rect": [
+            0,
+            700,
+            598,
+            250
+          ]
+        },
+        {
+          "asset": "Arrow_Prev",
+          "rect": [
+            29,
+            474,
+            34,
+            60
+          ]
+        },
+        {
+          "asset": "Arrow_Next",
+          "rect": [
+            1867,
+            474,
+            34,
+            60
+          ]
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1249,
+            968,
+            308,
+            126
+          ]
+        },
+        {
+          "asset": "Button_Record",
+          "rect": [
+            1267,
+            980,
+            248,
+            66
+          ]
+        },
+        {
+          "asset": "Shadow_Panel",
+          "rect": [
+            1520,
+            968,
+            388,
+            126
+          ]
+        },
+        {
+          "asset": "Button_Camp",
+          "rect": [
+            1538,
+            980,
+            328,
+            66
+          ]
+        },
+        {
+          "asset": "Icon_Record",
+          "rect": [
+            1314,
+            997,
+            27,
+            31
+          ]
+        }
+      ],
+      "text_boxes": [
+        {
+          "id": "header.number",
+          "text": "04",
+          "rect": [
+            36,
+            34,
+            48,
+            44
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "header.title",
+          "text": "동료",
+          "rect": [
+            133,
+            20,
+            180,
+            65
+          ],
+          "font_size": 55,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "header.caption",
+          "text": "COMPANIONS",
+          "rect": [
+            136,
+            92,
+            180,
+            22
+          ],
+          "font_size": 15,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "header.back",
+          "text": "←  로비",
+          "rect": [
+            1640,
+            28,
+            210,
+            52
+          ],
+          "font_size": 25,
+          "color": "#16181B",
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "quote",
+          "text": "「쓴 만큼 채워.」",
+          "rect": [
+            98,
+            214,
+            420,
+            48
+          ],
+          "font_size": 32,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "quote.index",
+          "text": "LINE 01 / 03",
+          "rect": [
+            140,
+            275,
+            170,
+            25
+          ],
+          "font_size": 16,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "bond.heading",
+          "text": "호감도",
+          "rect": [
+            1216,
+            92,
+            210,
+            35
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "bond.caption",
+          "text": "FAVOR",
+          "rect": [
+            1430,
+            98,
+            250,
+            27
+          ],
+          "font_size": 15,
+          "color": "#A5ADB5",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "skill.heading",
+          "text": "지시 스킬",
+          "rect": [
+            1216,
+            259,
+            210,
+            35
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "skill.caption",
+          "text": "ORDER SKILL",
+          "rect": [
+            1430,
+            265,
+            250,
+            27
+          ],
+          "font_size": 15,
+          "color": "#A5ADB5",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "cards.heading",
+          "text": "동료 카드",
+          "rect": [
+            1216,
+            471,
+            210,
+            35
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "cards.caption",
+          "text": "COMPANION CARDS",
+          "rect": [
+            1430,
+            477,
+            250,
+            27
+          ],
+          "font_size": 15,
+          "color": "#A5ADB5",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlocks.heading",
+          "text": "단계별 해금",
+          "rect": [
+            1216,
+            733,
+            210,
+            35
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlocks.caption",
+          "text": "UNLOCK LIST",
+          "rect": [
+            1430,
+            739,
+            250,
+            27
+          ],
+          "font_size": 15,
+          "color": "#A5ADB5",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "bond.lv",
+          "text": "Lv.",
+          "rect": [
+            1205,
+            153,
+            54,
+            43
+          ],
+          "font_size": 28,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "bond.value",
+          "text": "3",
+          "rect": [
+            1263,
+            132,
+            62,
+            80
+          ],
+          "font_size": 66,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "bond.max",
+          "text": "/ 5",
+          "rect": [
+            1327,
+            161,
+            64,
+            35
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "bond.remaining",
+          "text": "다음 단계까지 2 PT",
+          "rect": [
+            1540,
+            200,
+            305,
+            25
+          ],
+          "font_size": 18,
+          "color": "#16181B",
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "skill.name",
+          "text": "흡혈",
+          "rect": [
+            1347,
+            310,
+            210,
+            43
+          ],
+          "font_size": 32,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "skill.description",
+          "text": "적 하나에게 흡혈 6",
+          "rect": [
+            1347,
+            359,
+            275,
+            32
+          ],
+          "font_size": 23,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "skill.cooldown",
+          "text": "3전투마다 사용 가능",
+          "rect": [
+            1347,
+            395,
+            310,
+            28
+          ],
+          "font_size": 21,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "skill.upgrade",
+          "text": "최대 호감도 시 강화",
+          "rect": [
+            1646,
+            350,
+            186,
+            36
+          ],
+          "font_size": 18,
+          "color": "#16181B",
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.0.index",
+          "text": "01",
+          "rect": [
+            1310,
+            534,
+            30,
+            22
+          ],
+          "font_size": 16,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.0.name",
+          "text": "재장전",
+          "rect": [
+            1218,
+            664,
+            115,
+            30
+          ],
+          "font_size": 19,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.1.index",
+          "text": "02",
+          "rect": [
+            1468,
+            534,
+            30,
+            22
+          ],
+          "font_size": 16,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.1.name",
+          "text": "흡혈",
+          "rect": [
+            1376,
+            664,
+            115,
+            30
+          ],
+          "font_size": 19,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.2.index",
+          "text": "03",
+          "rect": [
+            1626,
+            534,
+            30,
+            22
+          ],
+          "font_size": 16,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.2.name",
+          "text": "???",
+          "rect": [
+            1534,
+            664,
+            115,
+            30
+          ],
+          "font_size": 19,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.3.index",
+          "text": "04",
+          "rect": [
+            1784,
+            534,
+            30,
+            22
+          ],
+          "font_size": 16,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "thumb.3.name",
+          "text": "???",
+          "rect": [
+            1692,
+            664,
+            115,
+            30
+          ],
+          "font_size": 19,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.0.level",
+          "text": "Lv.1",
+          "rect": [
+            1255,
+            787,
+            70,
+            28
+          ],
+          "font_size": 20,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.0.content",
+          "text": "동료 기록 I · 합류 카드",
+          "rect": [
+            1338,
+            787,
+            500,
+            28
+          ],
+          "font_size": 21,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.1.level",
+          "text": "Lv.2",
+          "rect": [
+            1255,
+            819,
+            70,
+            28
+          ],
+          "font_size": 20,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.1.content",
+          "text": "동료 기록 II",
+          "rect": [
+            1338,
+            819,
+            500,
+            28
+          ],
+          "font_size": 21,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.2.level",
+          "text": "Lv.3",
+          "rect": [
+            1255,
+            851,
+            70,
+            28
+          ],
+          "font_size": 20,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.2.content",
+          "text": "동료 기록 III · 동료 카드",
+          "rect": [
+            1338,
+            851,
+            500,
+            28
+          ],
+          "font_size": 21,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.3.level",
+          "text": "Lv.4",
+          "rect": [
+            1255,
+            883,
+            70,
+            28
+          ],
+          "font_size": 20,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.3.content",
+          "text": "동료 기록 IV",
+          "rect": [
+            1338,
+            883,
+            500,
+            28
+          ],
+          "font_size": 21,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.4.level",
+          "text": "Lv.5",
+          "rect": [
+            1255,
+            915,
+            70,
+            28
+          ],
+          "font_size": 20,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "unlock.4.content",
+          "text": "동료 기록 V · 지시 스킬 강화",
+          "rect": [
+            1338,
+            915,
+            500,
+            28
+          ],
+          "font_size": 21,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "identity.faction",
+          "text": "VERTEX / 협력자",
+          "rect": [
+            119,
+            763,
+            375,
+            34
+          ],
+          "font_size": 21,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "identity.name",
+          "text": "치하라 쇼",
+          "rect": [
+            116,
+            809,
+            440,
+            86
+          ],
+          "font_size": 66,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "identity.english",
+          "text": "CHIHARA SHO",
+          "rect": [
+            119,
+            900,
+            390,
+            26
+          ],
+          "font_size": 18,
+          "color": "#9299A2",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 7,
+          "font_family": "Malgun Gothic",
+          "font_weight": 400,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "button.record",
+          "text": "기록 보기",
+          "rect": [
+            1351,
+            985,
+            144,
+            55
+          ],
+          "font_size": 26,
+          "color": "#16181B",
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        },
+        {
+          "id": "button.camp",
+          "text": "베이스캠프에서 만나기  →",
+          "rect": [
+            1551,
+            986,
+            302,
+            53
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2",
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "font_family": "Malgun Gothic",
+          "font_weight": 700,
+          "runtime": "TMP",
+          "wrap": false
+        }
+      ],
+      "character": {
+        "asset": "Chara_ChiharaSho_Full",
+        "rect": [
+          350,
+          58,
+          650,
+          950
+        ],
+        "preserve_aspect": true,
+        "pivot_normalized_bottom_left": [
+          0.5,
+          0.02
+        ],
+        "foot_anchor_canvas_top_left": [
+          675,
+          989
+        ],
+        "source_foot_anchor_pixels_top_left": [
+          416,
+          1192
+        ],
+        "runtime_source": "CoopCharData.sanctuaryFullArt",
+        "note": "Pivot at front shoe sole near source x416/y1192; preserve source aspect ratio."
+      },
+      "dialogue": {
+        "mode": "text_line_cycle",
+        "audio": false,
+        "previous_rect": [
+          110,
+          271,
+          26,
+          34
+        ],
+        "next_rect": [
+          310,
+          271,
+          26,
+          34
+        ],
+        "label_id": "quote.index",
+        "sample_count": 3
+      },
+      "unlock_rows": [
+        {
+          "level": 1,
+          "record": 1,
+          "additional_unlock_sample": "합류 카드",
+          "rect": [
+            1204,
+            787,
+            640,
+            31
+          ],
+          "unlocked_sample": true
+        },
+        {
+          "level": 2,
+          "record": 2,
+          "additional_unlock_sample": "",
+          "rect": [
+            1204,
+            819,
+            640,
+            31
+          ],
+          "unlocked_sample": true
+        },
+        {
+          "level": 3,
+          "record": 3,
+          "additional_unlock_sample": "동료 카드",
+          "rect": [
+            1204,
+            851,
+            640,
+            31
+          ],
+          "unlocked_sample": true
+        },
+        {
+          "level": 4,
+          "record": 4,
+          "additional_unlock_sample": "",
+          "rect": [
+            1204,
+            883,
+            640,
+            31
+          ],
+          "unlocked_sample": false
+        },
+        {
+          "level": 5,
+          "record": 5,
+          "additional_unlock_sample": "지시 스킬 강화",
+          "rect": [
+            1204,
+            915,
+            640,
+            31
+          ],
+          "unlocked_sample": false
+        }
+      ]
+    }
+  },
+  "rendering": {
+    "sprite_scale": 2,
+    "background_scale": 1,
+    "color_space": "sRGB",
+    "alpha": "straight",
+    "filter": "bilinear",
+    "mipmaps": false,
+    "shadow_order": "behind corresponding plate; see ordered placements",
+    "nine_slice_border_order": "left,bottom,right,top",
+    "tmp_font_recommendation": "project Korean TMP font, Malgun Gothic used only in assembly proof"
+  },
+  "notes": [
+    "SVG reconstruction, not pixel-identical raster extraction.",
+    "Texts exist only in layout.json and assembly previews, never baked into delivered sprites.",
+    "Backgrounds fixed at 1920x1080; UI sprite PNGs 2x SVG logical dimensions. Original character copied at native dimensions.",
+    "No pagination; list uses vertical scroll on overflow. No voice controls; text line navigation only.",
+    "Every affection level grants the corresponding record. Additional unlocks shown are layout samples, bind actual game data.",
+    "__portrait__ entries are external runtime layers and preview-only source crops, not delivered frame sprites.",
+    "Empty_Plus and Unlock_Lock are centered overlay sprites, separate from their 9-sliced frames to prevent symbol distortion.",
+    "Preview card art uses a tinted Skill_Icon placeholder; replace with real card artwork at runtime."
+  ]
+}

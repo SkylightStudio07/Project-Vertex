@@ -1,0 +1,310 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "assets": {
+    "Loading_BG": {
+      "file": "Loading_BG.png",
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "svg": "SVG/Loading_BG.svg",
+      "file_2x": "2x/Loading_BG.png",
+      "pixel_size_2x": [
+        3840,
+        2160
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "source_method": "Original raster with masked runtime elements removed; SVG contains embedded raster, not pure vector reconstruction."
+    },
+    "Emblem_Star": {
+      "file": "Emblem_Star.png",
+      "pixel_size": [
+        512,
+        512
+      ],
+      "svg": "SVG/Emblem_Star.svg",
+      "file_2x": "2x/Emblem_Star.png",
+      "pixel_size_2x": [
+        1024,
+        1024
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    "Emblem_Frame": {
+      "file": "Emblem_Frame.png",
+      "pixel_size": [
+        512,
+        512
+      ],
+      "svg": "SVG/Emblem_Frame.svg",
+      "file_2x": "2x/Emblem_Frame.png",
+      "pixel_size_2x": [
+        1024,
+        1024
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    "Track": {
+      "file": "Track.png",
+      "pixel_size": [
+        16,
+        6
+      ],
+      "svg": "SVG/Track.svg",
+      "file_2x": "2x/Track.png",
+      "pixel_size_2x": [
+        32,
+        12
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice": {
+        "base_pixels_left_bottom_right_top": [
+          3,
+          0,
+          3,
+          0
+        ],
+        "source_2x_pixels_left_bottom_right_top": [
+          6,
+          0,
+          6,
+          0
+        ],
+        "mode": "horizontal stretch; preserve end caps; retain height"
+      }
+    },
+    "Fill": {
+      "file": "Fill.png",
+      "pixel_size": [
+        16,
+        6
+      ],
+      "svg": "SVG/Fill.svg",
+      "file_2x": "2x/Fill.png",
+      "pixel_size_2x": [
+        32,
+        12
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice": {
+        "base_pixels_left_bottom_right_top": [
+          3,
+          0,
+          3,
+          0
+        ],
+        "source_2x_pixels_left_bottom_right_top": [
+          6,
+          0,
+          6,
+          0
+        ],
+        "mode": "horizontal stretch; preserve end caps; retain height"
+      }
+    },
+    "Head_Diamond": {
+      "file": "Head_Diamond.png",
+      "pixel_size": [
+        26,
+        26
+      ],
+      "svg": "SVG/Head_Diamond.svg",
+      "file_2x": "2x/Head_Diamond.png",
+      "pixel_size_2x": [
+        52,
+        52
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "resolution_policy": "Main files follow explicitly requested sizes: BG 1920x1080, emblem 512x512. Additional 2x folder contains 3840x2160 / 1024x1024 and double-size small sprites. Use same logical rects with either set.",
+  "emblem": {
+    "center": [
+      960,
+      380
+    ],
+    "star_rect": [
+      704,
+      124,
+      512,
+      512
+    ],
+    "frame_rect": [
+      704,
+      124,
+      512,
+      512
+    ],
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "animation": "Rotate/flip star only; keep frame static. Do not trim transparent margins."
+  },
+  "progress": {
+    "track_rect": [
+      159,
+      738,
+      1602,
+      6
+    ],
+    "fill_rect_at_1": [
+      159,
+      738,
+      1602,
+      6
+    ],
+    "head_size": [
+      26,
+      26
+    ],
+    "head_center_y": 741,
+    "value_range": [
+      0,
+      1
+    ],
+    "fill_width_formula": "1602 * progress",
+    "head_center_x_formula": "159 + 1602 * progress",
+    "reference_visual_progress": 0.696,
+    "reference_label": "68%",
+    "preview_progress": 0.68,
+    "note": "Generated reference endpoint is about 69.6% despite label 68%; assembly uses true 68%. Fill/head advance together. Hide head at progress=0 if required."
+  },
+  "text_boxes": [
+    {
+      "id": "wordmark",
+      "text": "VERTEX",
+      "rect": [
+        810,
+        540,
+        300,
+        39
+      ],
+      "font_size_px": 30,
+      "weight": 500,
+      "color": "#16181B",
+      "alignment": "center",
+      "letter_spacing_px": 22,
+      "font": "Bahnschrift"
+    },
+    {
+      "id": "status",
+      "text": "기록을 불러오는 중...",
+      "rect": [
+        800,
+        601,
+        320,
+        38
+      ],
+      "font_size_px": 26,
+      "weight": 500,
+      "color": "#60676D",
+      "alignment": "center",
+      "letter_spacing_px": 0,
+      "font": "Malgun Gothic"
+    },
+    {
+      "id": "percent",
+      "text": "68%",
+      "rect": [
+        1688,
+        759,
+        77,
+        32
+      ],
+      "font_size_px": 28,
+      "weight": 400,
+      "color": "#454C53",
+      "alignment": "right",
+      "letter_spacing_px": 0,
+      "font": "Bahnschrift"
+    },
+    {
+      "id": "tip_label",
+      "text": "FIELD GUIDE",
+      "rect": [
+        129,
+        949,
+        126,
+        20
+      ],
+      "font_size_px": 13,
+      "weight": 400,
+      "color": "#7D838A",
+      "alignment": "left",
+      "letter_spacing_px": 3,
+      "font": "Bahnschrift"
+    },
+    {
+      "id": "tip",
+      "text": "동료의 호감도가 오르면 새로운 기록이 열립니다.",
+      "rect": [
+        129,
+        978,
+        650,
+        29
+      ],
+      "font_size_px": 21,
+      "weight": 500,
+      "color": "#555D65",
+      "alignment": "left",
+      "letter_spacing_px": 0,
+      "font": "Malgun Gothic"
+    },
+    {
+      "id": "footer",
+      "text": "PROJECT VERTEX / ARCHIVE",
+      "rect": [
+        1495,
+        980,
+        268,
+        20
+      ],
+      "font_size_px": 12,
+      "weight": 400,
+      "color": "#7D838A",
+      "alignment": "right",
+      "letter_spacing_px": 3,
+      "font": "Bahnschrift"
+    }
+  ],
+  "letter_spacing_units": "Design pixels per character gap, not font-dependent TMP spacing units; convert after choosing TMP font.",
+  "layer_order": [
+    "Loading_BG",
+    "Track",
+    "Fill",
+    "Head_Diamond",
+    "Emblem_Frame",
+    "Emblem_Star",
+    "TMP text"
+  ],
+  "text_baked": false,
+  "notes": [
+    "Foreground geometry traced from approved image using SVG; not extracted photographic pixels.",
+    "Background uses source raster inpainting only inside runtime-element removal mask.",
+    "Background SVG embeds cleaned raster to preserve original grain and polygon facets."
+  ]
+}

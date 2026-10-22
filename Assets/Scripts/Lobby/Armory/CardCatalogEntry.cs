@@ -14,6 +14,9 @@ public class CardCatalogEntry : MonoBehaviour
     [SerializeField] private TextMeshProUGUI descText;
     [SerializeField] private TextMeshProUGUI lockText;
     [SerializeField] private GameObject selectedMark;
+    [SerializeField] private GameObject upgradedMark;   // 무기고에서 영구 강화한 카드
+    [SerializeField] private Image selectFrame;         // 고른 칸 틀 (없으면 selectedMark만)
+    [SerializeField] private Sprite frameSelected;
 
     [Header("틀 스프라이트")]
     [SerializeField] private Sprite frameNormal;
@@ -46,11 +49,18 @@ public class CardCatalogEntry : MonoBehaviour
         if (!locked) descText.text = card.GetFullDescription();
         lockText.gameObject.SetActive(locked);
         lockText.text = lockCondition;
+        RefreshUpgraded();
         SetSelected(false);
+    }
+
+    public void RefreshUpgraded()
+    {
+        if (upgradedMark != null) upgradedMark.SetActive(!Locked && CardUpgrades.IsUpgraded(Card));
     }
 
     public void SetSelected(bool selected)
     {
         if (selectedMark != null) selectedMark.SetActive(selected);
+        if (frameSelected != null && !Locked) frame.sprite = selected ? frameSelected : frameNormal;
     }
 }

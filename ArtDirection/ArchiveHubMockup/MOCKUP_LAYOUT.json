@@ -1,0 +1,632 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "bg": "Source_BG.png",
+  "bg_crop_ltrb": [
+    0,
+    4,
+    1920,
+    1084
+  ],
+  "character": "Source_Chara.png",
+  "character_rect": [
+    70,
+    155,
+    1305,
+    870
+  ],
+  "menus": [
+    [
+      1390,
+      225,
+      430,
+      118
+    ],
+    [
+      1420,
+      389,
+      430,
+      118
+    ],
+    [
+      1390,
+      553,
+      430,
+      118
+    ],
+    [
+      1420,
+      717,
+      430,
+      118
+    ]
+  ],
+  "variants": {
+    "A": {
+      "accent": "#0DB8F2",
+      "text_boxes": [
+        {
+          "text": "03",
+          "rect": [
+            176,
+            43,
+            45,
+            34
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "아카이브",
+          "rect": [
+            265,
+            29,
+            190,
+            51
+          ],
+          "font_size": 43,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "ARCHIVES",
+          "rect": [
+            267,
+            95,
+            180,
+            18
+          ],
+          "font_size": 14,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "← 로비",
+          "rect": [
+            1698,
+            42,
+            146,
+            31
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "01",
+          "rect": [
+            1481,
+            234,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "적",
+          "rect": [
+            1481,
+            246,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#0DB8F2"
+        },
+        {
+          "text": "기록",
+          "rect": [
+            1541,
+            265,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "ENEMY RECORDS",
+          "rect": [
+            1484,
+            304,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "수집 12 / 40",
+          "rect": [
+            1677,
+            321,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "02",
+          "rect": [
+            1511,
+            398,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "동",
+          "rect": [
+            1511,
+            410,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#0DB8F2"
+        },
+        {
+          "text": "료 기록",
+          "rect": [
+            1571,
+            429,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "COMPANION RECORDS",
+          "rect": [
+            1514,
+            468,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "수집 3 / 15",
+          "rect": [
+            1707,
+            485,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "03",
+          "rect": [
+            1481,
+            562,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "아",
+          "rect": [
+            1481,
+            574,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#0DB8F2"
+        },
+        {
+          "text": "이템 도감",
+          "rect": [
+            1541,
+            593,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "ITEM CODEX",
+          "rect": [
+            1484,
+            632,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "수집 8 / 30",
+          "rect": [
+            1677,
+            649,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "04",
+          "rect": [
+            1511,
+            726,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "플",
+          "rect": [
+            1511,
+            738,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#0DB8F2"
+        },
+        {
+          "text": "레이 기록",
+          "rect": [
+            1571,
+            757,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "PLAY RECORDS",
+          "rect": [
+            1514,
+            796,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "런 14회",
+          "rect": [
+            1707,
+            813,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "기록관 담당",
+          "rect": [
+            90,
+            922,
+            310,
+            24
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "어떤 이야기를 펼쳐 볼까요?",
+          "rect": [
+            90,
+            965,
+            428,
+            29
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2"
+        }
+      ]
+    },
+    "B": {
+      "accent": "#B3263A",
+      "text_boxes": [
+        {
+          "text": "03",
+          "rect": [
+            176,
+            43,
+            45,
+            34
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "아카이브",
+          "rect": [
+            265,
+            29,
+            190,
+            51
+          ],
+          "font_size": 43,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "ARCHIVES",
+          "rect": [
+            267,
+            95,
+            180,
+            18
+          ],
+          "font_size": 14,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "← 로비",
+          "rect": [
+            1698,
+            42,
+            146,
+            31
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "01",
+          "rect": [
+            1481,
+            234,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "적",
+          "rect": [
+            1481,
+            246,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#B3263A"
+        },
+        {
+          "text": "기록",
+          "rect": [
+            1541,
+            265,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "ENEMY RECORDS",
+          "rect": [
+            1484,
+            304,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "수집 12 / 40",
+          "rect": [
+            1677,
+            321,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "02",
+          "rect": [
+            1511,
+            398,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "동",
+          "rect": [
+            1511,
+            410,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#B3263A"
+        },
+        {
+          "text": "료 기록",
+          "rect": [
+            1571,
+            429,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "COMPANION RECORDS",
+          "rect": [
+            1514,
+            468,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "수집 3 / 15",
+          "rect": [
+            1707,
+            485,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "03",
+          "rect": [
+            1481,
+            562,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "아",
+          "rect": [
+            1481,
+            574,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#B3263A"
+        },
+        {
+          "text": "이템 도감",
+          "rect": [
+            1541,
+            593,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "ITEM CODEX",
+          "rect": [
+            1484,
+            632,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "수집 8 / 30",
+          "rect": [
+            1677,
+            649,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "04",
+          "rect": [
+            1511,
+            726,
+            28,
+            13
+          ],
+          "font_size": 10,
+          "color": "#B8B1BF"
+        },
+        {
+          "text": "플",
+          "rect": [
+            1511,
+            738,
+            62,
+            61
+          ],
+          "font_size": 54,
+          "color": "#B3263A"
+        },
+        {
+          "text": "레이 기록",
+          "rect": [
+            1571,
+            757,
+            250,
+            38
+          ],
+          "font_size": 28,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "PLAY RECORDS",
+          "rect": [
+            1514,
+            796,
+            290,
+            13
+          ],
+          "font_size": 10,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "런 14회",
+          "rect": [
+            1707,
+            813,
+            128,
+            17
+          ],
+          "font_size": 13,
+          "color": "#BCB6C2"
+        },
+        {
+          "text": "기록관 담당",
+          "rect": [
+            90,
+            922,
+            310,
+            24
+          ],
+          "font_size": 18,
+          "color": "#EEF0F2"
+        },
+        {
+          "text": "어떤 이야기를 펼쳐 볼까요?",
+          "rect": [
+            90,
+            965,
+            428,
+            29
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2"
+        }
+      ]
+    }
+  },
+  "mode": "Original PNG alpha composition + SVG UI; no generative redrawing",
+  "note": "First menu shown in hover state. Sample collection counts/dialogue per layout brief. Sprite extraction deferred until variant selection."
+}

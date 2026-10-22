@@ -1,0 +1,16 @@
+{
+  "tool": "built-in image_gen",
+  "scope": "Mockup only per user clarification; no extracted pieces or layout.json",
+  "prompt": "Create Project Vertex Currency HUD draft E, one landscape 1920x1080 raster mockup. Image 1 is original lobby edit target. Image 2 is D design reference only. Preserve image1's character, scene, menu geometry and Korean menu words exactly; do not move or redraw menu. Preserve original top right paper strip. Change existing gauge/settings to the new floating borderless HUD. No plates, cells, category labels or separators. E improves D: numbers heavier and larger, 34px EXTRA BLACK ink #16181B; icons ~38px, twice D's line weight, mostly solid bold silhouettes, gaps ~48px between currency groups. TALIN: angular clipped engraved token slab, NO microchip pins, no round coin. Then \"1,240\" and small cyan circle 24px with white plus close beside number. PARTS: bold gear with hexagonal hub then \"36\". ARTIFACT: filled four point star crystal with two thin diamond outlines then \"2\". Settings: bold gear with round hole at far right. All icons flat ink/paper monochrome. Above big digits one tiny lightweight line \"BASE DEV  Lv.3\" with thin 2px track and \"0 / 30\". At zero, empty neutral gray track, only cyan start cap, NOT partly filled. Cyan #0DB8F2 only plus and start cap. Keep entire HUD within top right existing paper strip (approximately x1240..1730,y12..90); preserve outer right ornaments, logo and menu below. Prioritize big readable digits and clean generous grouping, no decoration. No shadows on any NEW HUD element, no bevel, gradient, glow or translucent panels. Original background scene lighting unchanged.\nAt bottom right show exact 2x enlarged copy of the same HUD, on plain opaque paper, no border, no shadow, same icons and numeric values, full unclipped content, small label \"E · DETAIL ×2\". Inset can overlay bottom of scene but do not rearrange underlying scene. Output one completed mockup only.",
+  "correctionPrompt": "Edit this E mockup with ONE precise correction: the artifact four-point star icon, both in upper-right runtime HUD and bottom-right magnified detail, must be enclosed within TWO COMPLETE CLOSED CONCENTRIC DIAMOND OUTLINES. Draw all four sides of each diamond continuously, with a clear gap between the outlines and the solid central star. Currently these are open chevrons: replace with closed nested diamonds. Keep same center, ink monochrome, no glow or shadow. Preserve every other pixel, all bold numbers, gear icons, token, plus, background and menu arrangement. Output same landscape screenshot. No other changes.",
+  "output": "CurrencyBar_E_Mockup.png",
+  "size": [
+    1920,
+    1080
+  ],
+  "notes": [
+    "Resized delivery; generated original preserved.",
+    "Generated background not pixel identical to original.",
+    "Detail inset shows currency row only; spacing and 2x scale are approximate."
+  ]
+}

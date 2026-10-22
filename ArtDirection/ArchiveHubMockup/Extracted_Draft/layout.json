@@ -1,0 +1,1206 @@
+{
+  "variant": "B",
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "accent": "#B3263A",
+  "hover_accent": "#D43A50",
+  "assets": {
+    "Panel_Menu": {
+      "file": "Panel_Menu.png",
+      "svg": "SVG/Panel_Menu.svg",
+      "source_pixels": [
+        860,
+        236
+      ],
+      "logical_size": [
+        430,
+        118
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mode": "stretch center; preserve corners",
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Panel_Menu_Hover": {
+      "file": "Panel_Menu_Hover.png",
+      "svg": "SVG/Panel_Menu_Hover.svg",
+      "source_pixels": [
+        860,
+        236
+      ],
+      "logical_size": [
+        430,
+        118
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mode": "stretch center; preserve corners",
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Panel_Menu_Locked": {
+      "file": "Panel_Menu_Locked.png",
+      "svg": "SVG/Panel_Menu_Locked.svg",
+      "source_pixels": [
+        860,
+        236
+      ],
+      "logical_size": [
+        430,
+        118
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mode": "stretch center; preserve corners",
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Rule_Menu": {
+      "file": "Rule_Menu.png",
+      "svg": "SVG/Rule_Menu.svg",
+      "source_pixels": [
+        634,
+        2
+      ],
+      "logical_size": [
+        317,
+        1
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Deco_Diamond": {
+      "file": "Deco_Diamond.png",
+      "svg": "SVG/Deco_Diamond.svg",
+      "source_pixels": [
+        180,
+        180
+      ],
+      "logical_size": [
+        90,
+        90
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Deco_Diamond_Hover": {
+      "file": "Deco_Diamond_Hover.png",
+      "svg": "SVG/Deco_Diamond_Hover.svg",
+      "source_pixels": [
+        180,
+        180
+      ],
+      "logical_size": [
+        90,
+        90
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Icon_Enemy": {
+      "file": "Icon_Enemy.png",
+      "svg": "SVG/Icon_Enemy.svg",
+      "source_pixels": [
+        96,
+        96
+      ],
+      "logical_size": [
+        48,
+        48
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Icon_Companion": {
+      "file": "Icon_Companion.png",
+      "svg": "SVG/Icon_Companion.svg",
+      "source_pixels": [
+        96,
+        96
+      ],
+      "logical_size": [
+        48,
+        48
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Icon_Item": {
+      "file": "Icon_Item.png",
+      "svg": "SVG/Icon_Item.svg",
+      "source_pixels": [
+        96,
+        96
+      ],
+      "logical_size": [
+        48,
+        48
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Icon_Play": {
+      "file": "Icon_Play.png",
+      "svg": "SVG/Icon_Play.svg",
+      "source_pixels": [
+        96,
+        96
+      ],
+      "logical_size": [
+        48,
+        48
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Icon_Lock": {
+      "file": "Icon_Lock.png",
+      "svg": "SVG/Icon_Lock.svg",
+      "source_pixels": [
+        96,
+        96
+      ],
+      "logical_size": [
+        48,
+        48
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Panel_Title": {
+      "file": "Panel_Title.png",
+      "svg": "SVG/Panel_Title.svg",
+      "source_pixels": [
+        920,
+        292
+      ],
+      "logical_size": [
+        460,
+        146
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mode": "stretch center; preserve corners",
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Rule_Title": {
+      "file": "Rule_Title.png",
+      "svg": "SVG/Rule_Title.svg",
+      "source_pixels": [
+        2,
+        156
+      ],
+      "logical_size": [
+        1,
+        78
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Button_Lobby": {
+      "file": "Button_Lobby.png",
+      "svg": "SVG/Button_Lobby.svg",
+      "source_pixels": [
+        426,
+        112
+      ],
+      "logical_size": [
+        213,
+        56
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mode": "stretch center; preserve corners",
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Panel_Dialogue": {
+      "file": "Panel_Dialogue.png",
+      "svg": "SVG/Panel_Dialogue.svg",
+      "source_pixels": [
+        1000,
+        224
+      ],
+      "logical_size": [
+        500,
+        112
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mode": "stretch center; preserve corners",
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Rule_Dialogue": {
+      "file": "Rule_Dialogue.png",
+      "svg": "SVG/Rule_Dialogue.svg",
+      "source_pixels": [
+        904,
+        122
+      ],
+      "logical_size": [
+        452,
+        61
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false
+    },
+    "Deco_Butterfly_01": {
+      "file": "Deco_Butterfly_01.png",
+      "svg": "SVG/Deco_Butterfly_01.svg",
+      "source_pixels": [
+        128,
+        128
+      ],
+      "logical_size": [
+        128,
+        128
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "pose": "open",
+      "method": "Vector interpretation of Source_Chara red pointed-wing butterflies; not an exact source-pixel extraction."
+    },
+    "Deco_Butterfly_02": {
+      "file": "Deco_Butterfly_02.png",
+      "svg": "SVG/Deco_Butterfly_02.svg",
+      "source_pixels": [
+        128,
+        128
+      ],
+      "logical_size": [
+        128,
+        128
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "pose": "half-folded",
+      "method": "Vector interpretation of Source_Chara red pointed-wing butterflies; not an exact source-pixel extraction."
+    },
+    "Deco_Butterfly_03": {
+      "file": "Deco_Butterfly_03.png",
+      "svg": "SVG/Deco_Butterfly_03.svg",
+      "source_pixels": [
+        128,
+        128
+      ],
+      "logical_size": [
+        128,
+        128
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "pose": "nearly-folded",
+      "method": "Vector interpretation of Source_Chara red pointed-wing butterflies; not an exact source-pixel extraction."
+    },
+    "Glow_Red": {
+      "file": "Glow_Red.png",
+      "svg": "SVG/Glow_Red.svg",
+      "source_pixels": [
+        512,
+        512
+      ],
+      "logical_size": [
+        512,
+        512
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "tint": "#B3263A",
+      "blend": "straight-alpha RGBA; multiply RGB by tint at runtime; do not multiply alpha twice"
+    }
+  },
+  "background": {
+    "file": "../Source_BG.png",
+    "source_crop_ltrb": [
+      0,
+      4,
+      1920,
+      1084
+    ],
+    "rect": [
+      0,
+      0,
+      1920,
+      1080
+    ]
+  },
+  "character": {
+    "file": "../Source_Chara.png",
+    "rect": [
+      70,
+      155,
+      1305,
+      870
+    ],
+    "unchanged_source": true
+  },
+  "menus": [
+    {
+      "id": "enemy",
+      "rect": [
+        1390,
+        225,
+        430,
+        118
+      ],
+      "diamond_rect": [
+        1379,
+        237,
+        90,
+        90
+      ],
+      "icon_rect": [
+        1400,
+        258,
+        48,
+        48
+      ],
+      "rule_rect": [
+        1481,
+        314,
+        317,
+        1
+      ],
+      "state": "hover"
+    },
+    {
+      "id": "companion",
+      "rect": [
+        1420,
+        389,
+        430,
+        118
+      ],
+      "diamond_rect": [
+        1409,
+        401,
+        90,
+        90
+      ],
+      "icon_rect": [
+        1430,
+        422,
+        48,
+        48
+      ],
+      "rule_rect": [
+        1511,
+        478,
+        317,
+        1
+      ],
+      "state": "normal"
+    },
+    {
+      "id": "item",
+      "rect": [
+        1390,
+        553,
+        430,
+        118
+      ],
+      "diamond_rect": [
+        1379,
+        565,
+        90,
+        90
+      ],
+      "icon_rect": [
+        1400,
+        586,
+        48,
+        48
+      ],
+      "rule_rect": [
+        1481,
+        642,
+        317,
+        1
+      ],
+      "state": "normal"
+    },
+    {
+      "id": "play",
+      "rect": [
+        1420,
+        717,
+        430,
+        118
+      ],
+      "diamond_rect": [
+        1409,
+        729,
+        90,
+        90
+      ],
+      "icon_rect": [
+        1430,
+        750,
+        48,
+        48
+      ],
+      "rule_rect": [
+        1511,
+        806,
+        317,
+        1
+      ],
+      "state": "normal"
+    }
+  ],
+  "placements": [
+    {
+      "asset": "Panel_Menu_Hover",
+      "rect": [
+        1390,
+        225,
+        430,
+        118
+      ]
+    },
+    {
+      "asset": "Deco_Diamond_Hover",
+      "rect": [
+        1379,
+        237,
+        90,
+        90
+      ]
+    },
+    {
+      "asset": "Icon_Enemy",
+      "rect": [
+        1400,
+        258,
+        48,
+        48
+      ],
+      "tint": "#D43A50"
+    },
+    {
+      "asset": "Rule_Menu",
+      "rect": [
+        1481,
+        314,
+        317,
+        1
+      ]
+    },
+    {
+      "asset": "Panel_Menu",
+      "rect": [
+        1420,
+        389,
+        430,
+        118
+      ]
+    },
+    {
+      "asset": "Deco_Diamond",
+      "rect": [
+        1409,
+        401,
+        90,
+        90
+      ]
+    },
+    {
+      "asset": "Icon_Companion",
+      "rect": [
+        1430,
+        422,
+        48,
+        48
+      ],
+      "tint": "#EEF0F2"
+    },
+    {
+      "asset": "Rule_Menu",
+      "rect": [
+        1511,
+        478,
+        317,
+        1
+      ]
+    },
+    {
+      "asset": "Panel_Menu",
+      "rect": [
+        1390,
+        553,
+        430,
+        118
+      ]
+    },
+    {
+      "asset": "Deco_Diamond",
+      "rect": [
+        1379,
+        565,
+        90,
+        90
+      ]
+    },
+    {
+      "asset": "Icon_Item",
+      "rect": [
+        1400,
+        586,
+        48,
+        48
+      ],
+      "tint": "#EEF0F2"
+    },
+    {
+      "asset": "Rule_Menu",
+      "rect": [
+        1481,
+        642,
+        317,
+        1
+      ]
+    },
+    {
+      "asset": "Panel_Menu",
+      "rect": [
+        1420,
+        717,
+        430,
+        118
+      ]
+    },
+    {
+      "asset": "Deco_Diamond",
+      "rect": [
+        1409,
+        729,
+        90,
+        90
+      ]
+    },
+    {
+      "asset": "Icon_Play",
+      "rect": [
+        1430,
+        750,
+        48,
+        48
+      ],
+      "tint": "#EEF0F2"
+    },
+    {
+      "asset": "Rule_Menu",
+      "rect": [
+        1511,
+        806,
+        317,
+        1
+      ]
+    },
+    {
+      "asset": "Panel_Title",
+      "rect": [
+        0,
+        0,
+        460,
+        146
+      ]
+    },
+    {
+      "asset": "Rule_Title",
+      "rect": [
+        238,
+        30,
+        1,
+        78
+      ]
+    },
+    {
+      "asset": "Button_Lobby",
+      "rect": [
+        1641,
+        30,
+        213,
+        56
+      ]
+    },
+    {
+      "asset": "Panel_Dialogue",
+      "rect": [
+        40,
+        909,
+        500,
+        112
+      ]
+    },
+    {
+      "asset": "Rule_Dialogue",
+      "rect": [
+        54,
+        938,
+        452,
+        61
+      ]
+    }
+  ],
+  "text_boxes": [
+    {
+      "text": "03",
+      "rect": [
+        176,
+        43,
+        45,
+        34
+      ],
+      "font_size": 28,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "아카이브",
+      "rect": [
+        265,
+        29,
+        190,
+        51
+      ],
+      "font_size": 43,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "ARCHIVES",
+      "rect": [
+        267,
+        95,
+        180,
+        18
+      ],
+      "font_size": 14,
+      "color": "#B8B1BF"
+    },
+    {
+      "text": "← 로비",
+      "rect": [
+        1698,
+        42,
+        146,
+        31
+      ],
+      "font_size": 25,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "01",
+      "rect": [
+        1481,
+        234,
+        28,
+        13
+      ],
+      "font_size": 10,
+      "color": "#B8B1BF"
+    },
+    {
+      "text": "적",
+      "rect": [
+        1481,
+        246,
+        62,
+        61
+      ],
+      "font_size": 54,
+      "color": "#B3263A"
+    },
+    {
+      "text": "기록",
+      "rect": [
+        1541,
+        265,
+        250,
+        38
+      ],
+      "font_size": 28,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "ENEMY RECORDS",
+      "rect": [
+        1484,
+        304,
+        290,
+        13
+      ],
+      "font_size": 10,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "수집 12 / 40",
+      "rect": [
+        1677,
+        321,
+        128,
+        17
+      ],
+      "font_size": 13,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "02",
+      "rect": [
+        1511,
+        398,
+        28,
+        13
+      ],
+      "font_size": 10,
+      "color": "#B8B1BF"
+    },
+    {
+      "text": "동",
+      "rect": [
+        1511,
+        410,
+        62,
+        61
+      ],
+      "font_size": 54,
+      "color": "#B3263A"
+    },
+    {
+      "text": "료 기록",
+      "rect": [
+        1571,
+        429,
+        250,
+        38
+      ],
+      "font_size": 28,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "COMPANION RECORDS",
+      "rect": [
+        1514,
+        468,
+        290,
+        13
+      ],
+      "font_size": 10,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "수집 3 / 15",
+      "rect": [
+        1707,
+        485,
+        128,
+        17
+      ],
+      "font_size": 13,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "03",
+      "rect": [
+        1481,
+        562,
+        28,
+        13
+      ],
+      "font_size": 10,
+      "color": "#B8B1BF"
+    },
+    {
+      "text": "아",
+      "rect": [
+        1481,
+        574,
+        62,
+        61
+      ],
+      "font_size": 54,
+      "color": "#B3263A"
+    },
+    {
+      "text": "이템 도감",
+      "rect": [
+        1541,
+        593,
+        250,
+        38
+      ],
+      "font_size": 28,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "ITEM CODEX",
+      "rect": [
+        1484,
+        632,
+        290,
+        13
+      ],
+      "font_size": 10,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "수집 8 / 30",
+      "rect": [
+        1677,
+        649,
+        128,
+        17
+      ],
+      "font_size": 13,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "04",
+      "rect": [
+        1511,
+        726,
+        28,
+        13
+      ],
+      "font_size": 10,
+      "color": "#B8B1BF"
+    },
+    {
+      "text": "플",
+      "rect": [
+        1511,
+        738,
+        62,
+        61
+      ],
+      "font_size": 54,
+      "color": "#B3263A"
+    },
+    {
+      "text": "레이 기록",
+      "rect": [
+        1571,
+        757,
+        250,
+        38
+      ],
+      "font_size": 28,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "PLAY RECORDS",
+      "rect": [
+        1514,
+        796,
+        290,
+        13
+      ],
+      "font_size": 10,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "런 14회",
+      "rect": [
+        1707,
+        813,
+        128,
+        17
+      ],
+      "font_size": 13,
+      "color": "#BCB6C2"
+    },
+    {
+      "text": "기록관 담당",
+      "rect": [
+        90,
+        922,
+        310,
+        24
+      ],
+      "font_size": 18,
+      "color": "#EEF0F2"
+    },
+    {
+      "text": "어떤 이야기를 펼쳐 볼까요?",
+      "rect": [
+        90,
+        965,
+        428,
+        29
+      ],
+      "font_size": 22,
+      "color": "#EEF0F2"
+    }
+  ],
+  "states": {
+    "normal": {
+      "panel": "Panel_Menu",
+      "diamond": "Deco_Diamond",
+      "icon_tint": "#EEF0F2"
+    },
+    "hover": {
+      "panel": "Panel_Menu_Hover",
+      "diamond": "Deco_Diamond_Hover",
+      "icon_tint": "#D43A50"
+    },
+    "locked": {
+      "panel": "Panel_Menu_Locked",
+      "diamond": "Deco_Diamond",
+      "replace_icon": "Icon_Lock",
+      "icon_tint": "#77717E",
+      "text_tint": "#77717E",
+      "interactable": false
+    }
+  },
+  "butterfly_animation": {
+    "frames": [
+      "Deco_Butterfly_01",
+      "Deco_Butterfly_02",
+      "Deco_Butterfly_03"
+    ],
+    "loop_sequence": [
+      0,
+      1,
+      2,
+      1
+    ],
+    "frame_duration_seconds": 0.09,
+    "cycle_seconds": 0.36,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "trim": false,
+    "filter": "bilinear",
+    "placements_suggested": [
+      {
+        "rect": [
+          1310,
+          168,
+          64,
+          64
+        ],
+        "phase_offset_seconds": 0
+      },
+      {
+        "rect": [
+          1801,
+          513,
+          48,
+          48
+        ],
+        "phase_offset_seconds": 0.12
+      },
+      {
+        "rect": [
+          1311,
+          850,
+          56,
+          56
+        ],
+        "phase_offset_seconds": 0.24
+      }
+    ]
+  },
+  "glow": {
+    "asset": "Glow_Red",
+    "suggested_rect": [
+      1190,
+      475,
+      300,
+      300
+    ],
+    "tint": "#B3263A",
+    "opacity": 0.16,
+    "order": "after background and character, before menu and butterflies"
+  },
+  "notes": [
+    "Original B positions preserved. Hover edge intentionally brighter per section 5.",
+    "Panel glyphs are not baked; text is TMP. Icons use white RGB and runtime tint.",
+    "All panel and icon PNGs generated from included SVG sources. Butterfly frames are source-inspired vector art.",
+    "Background and character are referenced, never modified.",
+    "9-slice values refer to source PNG pixels in left,bottom,right,top order; logical sizes are half for scale=2."
+  ]
+}

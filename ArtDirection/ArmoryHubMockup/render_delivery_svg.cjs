@@ -1,0 +1,1 @@
+const fs=require('fs'),p=require('path');const {Resvg}=require(process.env.VERTEX_RESVG_MODULE||'C:/Users/SKYLIGHT/.codex/tmp/currency-f-render/node_modules/@resvg/resvg-js');for(const f of fs.readdirSync(process.argv[2]))if(f.endsWith('.svg'))fs.writeFileSync(p.join(process.argv[3],f.replace('.svg','.png')),new Resvg(fs.readFileSync(p.join(process.argv[2],f))).render().asPng());

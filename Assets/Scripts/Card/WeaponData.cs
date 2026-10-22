@@ -30,7 +30,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private WeaponUpgradeType upgradeType;
     [Tooltip("단계별 누적 수치. [1, 2]면 1단계 +1, 2단계 +2. 배열 길이가 최대 단계다.")]
     [SerializeField] private int[] upgradeValues = new int[0];
-    [Tooltip("각 단계로 올리는 비용 (재화 미정 — 임시 값)")]
+    [Tooltip("각 단계로 올리는 파츠. 마지막 단계는 무기고 시설 Lv.2가 필요하다 (WeaponUpgrades)")]
     [SerializeField] private int[] upgradeCosts = new int[0];
 
     public string WeaponName => weaponName;

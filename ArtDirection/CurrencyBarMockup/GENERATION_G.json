@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Edit image1 Project Vertex lobby into a borderless resource HUD concept inspired by image2 Arknights. Main requested change: REMOVE the entire WHITE PAPER BACKPLATE / angular white corner ribbon behind the top-right resource HUD, including its tiny decoration. Reconstruct continuous mountain/sky environment behind that area, matching adjacent scene. The resources must float directly on scene with absolutely NO panel, backing strip, translucent band, rectangles or icon cells. Keep all six menu cards, character, left VERTEX logo and remaining environment exactly as image1; do not change menu positions. No inset, no annotation.\nKeep HUD same position at top-right and same numeric contents: tiny \"BASE DEV Lv.3\", thin progress track and \"0 / 30\" above a larger bold number row. Row: flat clipped token with diamond engraving, \"1,240\", small cyan filled circle white plus; hex nut and bolt icon (NOT gear), \"36\"; four-point star crystal within double diamond, \"2\"; settings gear. Use WHITE / off-white bold numbers and white icons, like floating Arknights HUD, readable against environment; cyan only on plus and progress start. Neutral dark hairline edge on white glyphs if needed for legibility, no glow or colored rarity icons. Ensure mountainous area behind HUD is naturally dark enough for white glyphs, no artificial rectangular darkening. Keep main menu white card below unchanged. 1920x1080 landscape. This is a new alternative to F, not a replacement. Image2 is layout/style reference only; do not copy its character, menu, palette of colored resource icons or resource values.",
+  "output": "CurrencyBar_G_Borderless_Mockup.png",
+  "size": [
+    1920,
+    1080
+  ],
+  "notes": [
+    "Removed paper backing behind HUD; white floating glyphs.",
+    "Generated concept: surrounding scene is not pixel-identical to original."
+  ]
+}

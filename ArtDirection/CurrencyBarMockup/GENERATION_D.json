@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Edit Image 1, the Project Vertex lobby screenshot, into draft D of its currency HUD. Image 2 is ONLY a layout reference for the floating borderless resource line at top right. Output one 1920x1080 landscape raster mockup.\nPreserve Image 1's entire scene, character, all six menu cards, Korean text, menu positions and dimensions, left VERTEX logo and right coordinate ornaments exactly. Change ONLY existing top right development gauge/settings in the thin blank paper-colored strip above 탐색 개시. Do not push the menu downward, redraw or rearrange it.\nD DESIGN: BORDERLESS FLOATING TYPE AND ICONS. No panels, boxes, icon cells, separators, category names or enclosing border. On existing paper background place a tiny top line \"BASE DEV  Lv.3\", a thin 2px cyan progress line and \"0 / 30\". Below it one larger line: angular engraved chip icon, bold ink \"1,240\", small CYAN FILLED CIRCLE with white plus directly beside that number; mechanical gear icon, bold \"36\"; angular star crystal icon encircled by ONLY a delicate DOUBLE DIAMOND outline, bold \"2\"; settings gear at far right. Icons about same height as digits. Numbers ~30px at 1920 width, strong bold weight. Adequate empty space for five digits per currency, but never print placeholder 99,999. Only one plus control, next to 1,240. NO labels 탈린/파츠/아티팩트. No coin, no lightning bolt.\nKeep total upper HUD inside x1190..1735 and y12..85 at 1920x1080, use compact spacing to fit the EXISTING blank strip without overlapping menu. Development line small/light like battery and time in Image 2. Main currency line is the focal point. Ink #16181B, paper #EEF0F2, cyan #0DB8F2 ONLY on progress and plus circle. No gold, red, yellow, glow, translucency or gradients in new HUD.\nAt bottom right include a single inspection inset displaying an EXACT TWO TIMES enlargement of the same HUD, identical icons/text/spacing, on plain opaque paper with NO frame and NO additional decorations. Inset about 1090x146px at x800,y910; small \"D · DETAIL ×2\" above it. This explicitly requested inset may cover the bottom-right portion but must not rearrange underlying lobby. Do not add any other text. Crisp original monochrome icon drawing, 1px or thicker strokes.",
+  "output": "CurrencyBar_D_Mockup.png",
+  "size": [
+    1920,
+    1080
+  ],
+  "notes": [
+    "Generated original preserved. Delivery resized.",
+    "Draft deviations: token resembles electronic chip; progress partially filled despite 0/30; background is regenerated, not pixel-identical; inset not exact duplicate."
+  ]
+}

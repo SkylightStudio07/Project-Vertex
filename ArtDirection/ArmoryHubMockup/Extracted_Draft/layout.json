@@ -1,0 +1,5270 @@
+{
+  "version": 2,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "assets": {
+    "Workshop_BG": {
+      "file": "Workshop_BG.png",
+      "svg": "SVG/Workshop_BG.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        3840,
+        2160
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "image_gen clean plate; embedded raster SVG wrapper, not vectorized"
+    },
+    "Panel_Title": {
+      "file": "Panel_Title.png",
+      "svg": "SVG/Panel_Title.svg",
+      "logical_size": [
+        450,
+        130
+      ],
+      "source_pixels": [
+        900,
+        260
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Panel_TitlePath": {
+      "file": "Panel_TitlePath.png",
+      "svg": "SVG/Panel_TitlePath.svg",
+      "logical_size": [
+        650,
+        118
+      ],
+      "source_pixels": [
+        1300,
+        236
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Button_Back": {
+      "file": "Button_Back.png",
+      "svg": "SVG/Button_Back.svg",
+      "logical_size": [
+        240,
+        58
+      ],
+      "source_pixels": [
+        480,
+        116
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Panel_Dark": {
+      "file": "Panel_Dark.png",
+      "svg": "SVG/Panel_Dark.svg",
+      "logical_size": [
+        500,
+        500
+      ],
+      "source_pixels": [
+        1000,
+        1000
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Menu_Panel": {
+      "file": "Menu_Panel.png",
+      "svg": "SVG/Menu_Panel.svg",
+      "logical_size": [
+        710,
+        215
+      ],
+      "source_pixels": [
+        1420,
+        430
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          60,
+          84,
+          60,
+          60
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          30,
+          42,
+          30,
+          30
+        ],
+        "minimum_logical_size": [
+          61,
+          73
+        ]
+      }
+    },
+    "Menu_Panel_Hover": {
+      "file": "Menu_Panel_Hover.png",
+      "svg": "SVG/Menu_Panel_Hover.svg",
+      "logical_size": [
+        710,
+        215
+      ],
+      "source_pixels": [
+        1420,
+        430
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          60,
+          84,
+          60,
+          60
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          30,
+          42,
+          30,
+          30
+        ],
+        "minimum_logical_size": [
+          61,
+          73
+        ]
+      }
+    },
+    "Panel_Dialogue": {
+      "file": "Panel_Dialogue.png",
+      "svg": "SVG/Panel_Dialogue.svg",
+      "logical_size": [
+        560,
+        126
+      ],
+      "source_pixels": [
+        1120,
+        252
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Panel_CardDetail": {
+      "file": "Panel_CardDetail.png",
+      "svg": "SVG/Panel_CardDetail.svg",
+      "logical_size": [
+        560,
+        830
+      ],
+      "source_pixels": [
+        1120,
+        1660
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Currency_Bar": {
+      "file": "Currency_Bar.png",
+      "svg": "SVG/Currency_Bar.svg",
+      "logical_size": [
+        450,
+        58
+      ],
+      "source_pixels": [
+        900,
+        116
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Panel_Paper": {
+      "file": "Panel_Paper.png",
+      "svg": "SVG/Panel_Paper.svg",
+      "logical_size": [
+        794,
+        830
+      ],
+      "source_pixels": [
+        1588,
+        1660
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          56,
+          56,
+          56,
+          56
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          28,
+          28,
+          28,
+          28
+        ],
+        "minimum_logical_size": [
+          57,
+          57
+        ]
+      }
+    },
+    "Tab_Normal": {
+      "file": "Tab_Normal.png",
+      "svg": "SVG/Tab_Normal.svg",
+      "logical_size": [
+        260,
+        48
+      ],
+      "source_pixels": [
+        520,
+        96
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          60,
+          12,
+          60,
+          12
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          30,
+          6,
+          30,
+          6
+        ],
+        "minimum_logical_size": [
+          61,
+          13
+        ]
+      }
+    },
+    "Tab_Selected": {
+      "file": "Tab_Selected.png",
+      "svg": "SVG/Tab_Selected.svg",
+      "logical_size": [
+        260,
+        48
+      ],
+      "source_pixels": [
+        520,
+        96
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          60,
+          12,
+          60,
+          12
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          30,
+          6,
+          30,
+          6
+        ],
+        "minimum_logical_size": [
+          61,
+          13
+        ]
+      }
+    },
+    "Menu_Diamond": {
+      "file": "Menu_Diamond.png",
+      "svg": "SVG/Menu_Diamond.svg",
+      "logical_size": [
+        156,
+        156
+      ],
+      "source_pixels": [
+        312,
+        312
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Menu_Diamond_Hover": {
+      "file": "Menu_Diamond_Hover.png",
+      "svg": "SVG/Menu_Diamond_Hover.svg",
+      "logical_size": [
+        156,
+        156
+      ],
+      "source_pixels": [
+        312,
+        312
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Icon_Equipment": {
+      "file": "Icon_Equipment.png",
+      "svg": "SVG/Icon_Equipment.svg",
+      "logical_size": [
+        100,
+        100
+      ],
+      "source_pixels": [
+        200,
+        200
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Icon_CardUpgrade": {
+      "file": "Icon_CardUpgrade.png",
+      "svg": "SVG/Icon_CardUpgrade.svg",
+      "logical_size": [
+        100,
+        100
+      ],
+      "source_pixels": [
+        200,
+        200
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "WeaponSlot": {
+      "file": "WeaponSlot.png",
+      "svg": "SVG/WeaponSlot.svg",
+      "logical_size": [
+        310,
+        138
+      ],
+      "source_pixels": [
+        620,
+        276
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          10,
+          10,
+          10,
+          10
+        ],
+        "minimum_logical_size": [
+          21,
+          21
+        ]
+      }
+    },
+    "WeaponSlot_Selected": {
+      "file": "WeaponSlot_Selected.png",
+      "svg": "SVG/WeaponSlot_Selected.svg",
+      "logical_size": [
+        310,
+        138
+      ],
+      "source_pixels": [
+        620,
+        276
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          10,
+          10,
+          10,
+          10
+        ],
+        "minimum_logical_size": [
+          21,
+          21
+        ]
+      }
+    },
+    "WeaponSlot_Locked": {
+      "file": "WeaponSlot_Locked.png",
+      "svg": "SVG/WeaponSlot_Locked.svg",
+      "logical_size": [
+        310,
+        138
+      ],
+      "source_pixels": [
+        620,
+        276
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          10,
+          10,
+          10,
+          10
+        ],
+        "minimum_logical_size": [
+          21,
+          21
+        ]
+      }
+    },
+    "Weapon_Sniper_Silhouette": {
+      "file": "Weapon_Sniper_Silhouette.png",
+      "svg": "SVG/Weapon_Sniper_Silhouette.svg",
+      "logical_size": [
+        240,
+        85
+      ],
+      "source_pixels": [
+        480,
+        170
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "Vector placeholder rifle silhouette for locked equipment"
+    },
+    "Weapon_Shotgun_Silhouette": {
+      "file": "Weapon_Shotgun_Silhouette.png",
+      "svg": "SVG/Weapon_Shotgun_Silhouette.svg",
+      "logical_size": [
+        240,
+        85
+      ],
+      "source_pixels": [
+        480,
+        170
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "Vector placeholder shotgun silhouette for locked equipment"
+    },
+    "Icon_Lock": {
+      "file": "Icon_Lock.png",
+      "svg": "SVG/Icon_Lock.svg",
+      "logical_size": [
+        40,
+        46
+      ],
+      "source_pixels": [
+        80,
+        92
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Step_Done": {
+      "file": "Step_Done.png",
+      "svg": "SVG/Step_Done.svg",
+      "logical_size": [
+        70,
+        70
+      ],
+      "source_pixels": [
+        140,
+        140
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Step_Current": {
+      "file": "Step_Current.png",
+      "svg": "SVG/Step_Current.svg",
+      "logical_size": [
+        70,
+        70
+      ],
+      "source_pixels": [
+        140,
+        140
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Step_Locked": {
+      "file": "Step_Locked.png",
+      "svg": "SVG/Step_Locked.svg",
+      "logical_size": [
+        70,
+        70
+      ],
+      "source_pixels": [
+        140,
+        140
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Step_Line": {
+      "file": "Step_Line.png",
+      "svg": "SVG/Step_Line.svg",
+      "logical_size": [
+        4,
+        150
+      ],
+      "source_pixels": [
+        8,
+        300
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "minimum_logical_size": [
+          3,
+          3
+        ]
+      }
+    },
+    "Button_Upgrade": {
+      "file": "Button_Upgrade.png",
+      "svg": "SVG/Button_Upgrade.svg",
+      "logical_size": [
+        514,
+        115
+      ],
+      "source_pixels": [
+        1028,
+        230
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          56,
+          56,
+          56,
+          56
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          28,
+          28,
+          28,
+          28
+        ],
+        "minimum_logical_size": [
+          57,
+          57
+        ]
+      }
+    },
+    "Button_Upgrade_Disabled": {
+      "file": "Button_Upgrade_Disabled.png",
+      "svg": "SVG/Button_Upgrade_Disabled.svg",
+      "logical_size": [
+        514,
+        115
+      ],
+      "source_pixels": [
+        1028,
+        230
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          56,
+          56,
+          56,
+          56
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          28,
+          28,
+          28,
+          28
+        ],
+        "minimum_logical_size": [
+          57,
+          57
+        ]
+      }
+    },
+    "Button_Small": {
+      "file": "Button_Small.png",
+      "svg": "SVG/Button_Small.svg",
+      "logical_size": [
+        290,
+        54
+      ],
+      "source_pixels": [
+        580,
+        108
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          10,
+          10,
+          10,
+          10
+        ],
+        "minimum_logical_size": [
+          21,
+          21
+        ]
+      }
+    },
+    "Row_BaseCard": {
+      "file": "Row_BaseCard.png",
+      "svg": "SVG/Row_BaseCard.svg",
+      "logical_size": [
+        710,
+        64
+      ],
+      "source_pixels": [
+        1420,
+        128
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "minimum_logical_size": [
+          9,
+          9
+        ]
+      }
+    },
+    "Checkbox_Off": {
+      "file": "Checkbox_Off.png",
+      "svg": "SVG/Checkbox_Off.svg",
+      "logical_size": [
+        28,
+        28
+      ],
+      "source_pixels": [
+        56,
+        56
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Checkbox_On": {
+      "file": "Checkbox_On.png",
+      "svg": "SVG/Checkbox_On.svg",
+      "logical_size": [
+        28,
+        28
+      ],
+      "source_pixels": [
+        56,
+        56
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "CardCell": {
+      "file": "CardCell.png",
+      "svg": "SVG/CardCell.svg",
+      "logical_size": [
+        194,
+        348
+      ],
+      "source_pixels": [
+        388,
+        696
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          22,
+          22,
+          22,
+          22
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          11,
+          11,
+          11,
+          11
+        ],
+        "minimum_logical_size": [
+          23,
+          23
+        ]
+      }
+    },
+    "CardCell_Selected": {
+      "file": "CardCell_Selected.png",
+      "svg": "SVG/CardCell_Selected.svg",
+      "logical_size": [
+        194,
+        348
+      ],
+      "source_pixels": [
+        388,
+        696
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design",
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          22,
+          22,
+          22,
+          22
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          11,
+          11,
+          11,
+          11
+        ],
+        "minimum_logical_size": [
+          23,
+          23
+        ]
+      }
+    },
+    "Mark_Upgraded": {
+      "file": "Mark_Upgraded.png",
+      "svg": "SVG/Mark_Upgraded.svg",
+      "logical_size": [
+        34,
+        34
+      ],
+      "source_pixels": [
+        68,
+        68
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Rule": {
+      "file": "Rule.png",
+      "svg": "SVG/Rule.svg",
+      "logical_size": [
+        700,
+        2
+      ],
+      "source_pixels": [
+        1400,
+        4
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Icon_Attack": {
+      "file": "Icon_Attack.png",
+      "svg": "SVG/Icon_Attack.svg",
+      "logical_size": [
+        48,
+        48
+      ],
+      "source_pixels": [
+        96,
+        96
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Icon_Defense": {
+      "file": "Icon_Defense.png",
+      "svg": "SVG/Icon_Defense.svg",
+      "logical_size": [
+        48,
+        48
+      ],
+      "source_pixels": [
+        96,
+        96
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Icon_Check": {
+      "file": "Icon_Check.png",
+      "svg": "SVG/Icon_Check.svg",
+      "logical_size": [
+        32,
+        32
+      ],
+      "source_pixels": [
+        64,
+        64
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Compass": {
+      "file": "Compass.png",
+      "svg": "SVG/Compass.svg",
+      "logical_size": [
+        500,
+        500
+      ],
+      "source_pixels": [
+        1000,
+        1000
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "method": "SVG reconstruction of approved design"
+    },
+    "Icon_Artifact": {
+      "file": "Icon_Artifact.png",
+      "source_pixels": [
+        76,
+        76
+      ],
+      "logical_size": [
+        38.0,
+        38.0
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "method": "byte-identical supplied currency icon",
+      "source": "../../LobbyShopMockup/Currency_Icons/Icon_Artifact.png",
+      "sha256": "c0c3c6ba3de971ad435009fabb22452a1685240222e8558d9ea34ebbc3f37df8"
+    },
+    "Icon_Artifact_White": {
+      "file": "Icon_Artifact_White.png",
+      "source_pixels": [
+        76,
+        76
+      ],
+      "logical_size": [
+        38.0,
+        38.0
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "method": "byte-identical supplied currency icon",
+      "source": "../../LobbyShopMockup/Currency_Icons/Icon_Artifact_White.png",
+      "sha256": "3b972b0deb2d9ed86ad3ab72594cb7a227702efbd6e4f32212ce738c27274ba5"
+    },
+    "Icon_Parts": {
+      "file": "Icon_Parts.png",
+      "source_pixels": [
+        76,
+        76
+      ],
+      "logical_size": [
+        38.0,
+        38.0
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "method": "byte-identical supplied currency icon",
+      "source": "../../LobbyShopMockup/Currency_Icons/Icon_Parts.png",
+      "sha256": "ed901958e119f1b2f5b9c55f73207c56904ca807341bb7af6f79fdf5a6cd9805"
+    },
+    "Icon_Parts_White": {
+      "file": "Icon_Parts_White.png",
+      "source_pixels": [
+        76,
+        76
+      ],
+      "logical_size": [
+        38.0,
+        38.0
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "method": "byte-identical supplied currency icon",
+      "source": "../../LobbyShopMockup/Currency_Icons/Icon_Parts_White.png",
+      "sha256": "f7beaed01eeacffc0920ca0db637a020577f4253e36d20e3a75a1c86891c48ac"
+    },
+    "Icon_Talin": {
+      "file": "Icon_Talin.png",
+      "source_pixels": [
+        76,
+        76
+      ],
+      "logical_size": [
+        38.0,
+        38.0
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "method": "byte-identical supplied currency icon",
+      "source": "../../LobbyShopMockup/Currency_Icons/Icon_Talin.png",
+      "sha256": "80102349c21b9a1403c771763fe9ace4eb7b8e19873a059cc09a0f19d240dbc7"
+    },
+    "Icon_Talin_White": {
+      "file": "Icon_Talin_White.png",
+      "source_pixels": [
+        76,
+        76
+      ],
+      "logical_size": [
+        38.0,
+        38.0
+      ],
+      "scale": 2,
+      "text_baked": false,
+      "method": "byte-identical supplied currency icon",
+      "source": "../../LobbyShopMockup/Currency_Icons/Icon_Talin_White.png",
+      "sha256": "9a70f24a45be067a7bf93f568d2b697ca440a53d888083e17555300158bc0600"
+    },
+    "Weapon_Pistol": {
+      "file": "Weapon_Pistol.png",
+      "source_pixels": [
+        411,
+        345
+      ],
+      "logical_size": [
+        411,
+        345
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "existing project-separated raster art; native resolution preserved",
+      "source": "ArmoryMockup\\Extracted\\WeaponArt_Pistol.png"
+    },
+    "Weapon_SMG": {
+      "file": "Weapon_SMG.png",
+      "source_pixels": [
+        211,
+        98
+      ],
+      "logical_size": [
+        211,
+        98
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "existing project-separated raster art; native resolution preserved",
+      "source": "ArmoryMockup\\Extracted\\SMG_Thumbnail.png"
+    },
+    "Art_Shot": {
+      "file": "Art_Shot.png",
+      "source_pixels": [
+        153,
+        150
+      ],
+      "logical_size": [
+        153,
+        150
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        368,
+        255,
+        521,
+        405
+      ]
+    },
+    "Art_Defense": {
+      "file": "Art_Defense.png",
+      "source_pixels": [
+        149,
+        115
+      ],
+      "logical_size": [
+        149,
+        115
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        550,
+        290,
+        699,
+        405
+      ]
+    },
+    "Art_Reload": {
+      "file": "Art_Reload.png",
+      "source_pixels": [
+        153,
+        150
+      ],
+      "logical_size": [
+        153,
+        150
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        733,
+        255,
+        886,
+        405
+      ]
+    },
+    "Art_StockStrike": {
+      "file": "Art_StockStrike.png",
+      "source_pixels": [
+        153,
+        150
+      ],
+      "logical_size": [
+        153,
+        150
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        912,
+        255,
+        1065,
+        405
+      ]
+    },
+    "Art_QED": {
+      "file": "Art_QED.png",
+      "source_pixels": [
+        153,
+        150
+      ],
+      "logical_size": [
+        153,
+        150
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        368,
+        570,
+        521,
+        720
+      ]
+    },
+    "Art_Advance": {
+      "file": "Art_Advance.png",
+      "source_pixels": [
+        153,
+        150
+      ],
+      "logical_size": [
+        153,
+        150
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        550,
+        570,
+        703,
+        720
+      ]
+    },
+    "Art_EmptyMagazine": {
+      "file": "Art_EmptyMagazine.png",
+      "source_pixels": [
+        153,
+        150
+      ],
+      "logical_size": [
+        153,
+        150
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        733,
+        570,
+        886,
+        720
+      ]
+    },
+    "Art_Vest": {
+      "file": "Art_Vest.png",
+      "source_pixels": [
+        153,
+        150
+      ],
+      "logical_size": [
+        153,
+        150
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop from image_gen v2",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        912,
+        570,
+        1065,
+        720
+      ]
+    },
+    "Art_Shot_Detail": {
+      "file": "Art_Shot_Detail.png",
+      "source_pixels": [
+        406,
+        187
+      ],
+      "logical_size": [
+        406,
+        187
+      ],
+      "scale": 1,
+      "text_baked": false,
+      "method": "art-only crop",
+      "source": "../Armory_Card_Generated_v2.png",
+      "source_crop_ltrb": [
+        1162,
+        255,
+        1568,
+        442
+      ]
+    }
+  },
+  "screens": {
+    "hub": {
+      "placements": [
+        {
+          "asset": "Workshop_BG",
+          "rect": [
+            0,
+            0,
+            1920,
+            1080
+          ],
+          "id": "Workshop_BG"
+        },
+        {
+          "asset": "Panel_Title",
+          "rect": [
+            0,
+            0,
+            450,
+            130
+          ],
+          "id": "header.plate"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            140,
+            32,
+            2,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Currency_Bar",
+          "rect": [
+            1135,
+            40,
+            450,
+            58
+          ],
+          "id": "Currency_Bar"
+        },
+        {
+          "asset": "Button_Back",
+          "rect": [
+            1610,
+            40,
+            240,
+            58
+          ],
+          "id": "Button_Back"
+        },
+        {
+          "asset": "Icon_Talin_White",
+          "rect": [
+            1150,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.talin.icon"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1310,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.parts.icon"
+        },
+        {
+          "asset": "Icon_Artifact_White",
+          "rect": [
+            1455,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.artifact.icon"
+        },
+        {
+          "asset": "__mechanic__",
+          "rect": [
+            485,
+            32,
+            670,
+            1005
+          ],
+          "id": "__mechanic__",
+          "external_source": "../Source_Mechanic.png",
+          "preserve_aspect": true,
+          "package_excluded": true
+        },
+        {
+          "asset": "Menu_Panel_Hover",
+          "rect": [
+            1125,
+            245,
+            710,
+            215
+          ],
+          "id": "Menu_Panel_Hover"
+        },
+        {
+          "asset": "Menu_Diamond_Hover",
+          "rect": [
+            1140,
+            272,
+            156,
+            156
+          ],
+          "id": "Menu_Diamond_Hover"
+        },
+        {
+          "asset": "Icon_Equipment",
+          "rect": [
+            1168,
+            300,
+            100,
+            100
+          ],
+          "id": "Icon_Equipment"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            1317,
+            403,
+            460,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Menu_Panel",
+          "rect": [
+            1125,
+            515,
+            710,
+            215
+          ],
+          "id": "Menu_Panel"
+        },
+        {
+          "asset": "Menu_Diamond",
+          "rect": [
+            1140,
+            542,
+            156,
+            156
+          ],
+          "id": "Menu_Diamond"
+        },
+        {
+          "asset": "Icon_CardUpgrade",
+          "rect": [
+            1168,
+            570,
+            100,
+            100
+          ],
+          "id": "Icon_CardUpgrade"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            1317,
+            673,
+            460,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Panel_Dialogue",
+          "rect": [
+            30,
+            892,
+            560,
+            126
+          ],
+          "id": "Panel_Dialogue"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            80,
+            942,
+            480,
+            2
+          ],
+          "id": "Rule"
+        }
+      ],
+      "text_boxes": [
+        {
+          "id": "header.number",
+          "text": "03",
+          "rect": [
+            35,
+            26,
+            85,
+            65
+          ],
+          "font_size": 48,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "header.title",
+          "text": "무기고",
+          "rect": [
+            170,
+            22,
+            240,
+            65
+          ],
+          "font_size": 46,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "header.en",
+          "text": "ARMORY / UPGRADE",
+          "rect": [
+            172,
+            91,
+            255,
+            24
+          ],
+          "font_size": 17,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.talin.value",
+          "text": "1,240",
+          "rect": [
+            1197,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.parts.value",
+          "text": "36",
+          "rect": [
+            1357,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.artifact.value",
+          "text": "2",
+          "rect": [
+            1502,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "header.back",
+          "text": "←  로비",
+          "rect": [
+            1622,
+            44,
+            216,
+            48
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.0.index",
+          "text": "01",
+          "rect": [
+            1315,
+            258,
+            65,
+            24
+          ],
+          "font_size": 16,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.0.initial",
+          "text": "장",
+          "rect": [
+            1312,
+            274,
+            88,
+            86
+          ],
+          "font_size": 74,
+          "color": "#0DB8F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.0.rest",
+          "text": "비 강화",
+          "rect": [
+            1398,
+            305,
+            300,
+            62
+          ],
+          "font_size": 43,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.0.english",
+          "text": "EQUIPMENT UPGRADE",
+          "rect": [
+            1317,
+            374,
+            460,
+            26
+          ],
+          "font_size": 17,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.0.description",
+          "text": "무기 성능을 강화합니다",
+          "rect": [
+            1317,
+            415,
+            460,
+            31
+          ],
+          "font_size": 24,
+          "color": "#BEC6CD",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.0.arrow",
+          "text": "›",
+          "rect": [
+            1780,
+            324,
+            35,
+            53
+          ],
+          "font_size": 48,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.1.index",
+          "text": "02",
+          "rect": [
+            1315,
+            528,
+            65,
+            24
+          ],
+          "font_size": 16,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.1.initial",
+          "text": "카",
+          "rect": [
+            1312,
+            544,
+            88,
+            86
+          ],
+          "font_size": 74,
+          "color": "#0DB8F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.1.rest",
+          "text": "드 강화",
+          "rect": [
+            1398,
+            575,
+            300,
+            62
+          ],
+          "font_size": 43,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.1.english",
+          "text": "CARD UPGRADE",
+          "rect": [
+            1317,
+            644,
+            460,
+            26
+          ],
+          "font_size": 17,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.1.description",
+          "text": "카드 효과를 강화합니다",
+          "rect": [
+            1317,
+            685,
+            460,
+            31
+          ],
+          "font_size": 24,
+          "color": "#BEC6CD",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "menu.1.arrow",
+          "text": "›",
+          "rect": [
+            1780,
+            594,
+            35,
+            53
+          ],
+          "font_size": 48,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "dialogue.name",
+          "text": "정비 담당",
+          "rect": [
+            80,
+            902,
+            430,
+            31
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "dialogue.line",
+          "text": "어떤 장비를 손봐 줄까?",
+          "rect": [
+            80,
+            953,
+            470,
+            42
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        }
+      ],
+      "character": {
+        "external_source": "../Source_Mechanic.png",
+        "rect": [
+          485,
+          32,
+          670,
+          1005
+        ],
+        "pivot_normalized_bottom_left": [
+          0.5,
+          0.02
+        ],
+        "package_excluded": true,
+        "runtime": "use original Source_Mechanic, not generated character"
+      }
+    },
+    "equipment": {
+      "placements": [
+        {
+          "asset": "Workshop_BG",
+          "rect": [
+            0,
+            0,
+            1920,
+            1080
+          ],
+          "id": "Workshop_BG"
+        },
+        {
+          "asset": "Panel_TitlePath",
+          "rect": [
+            80,
+            24,
+            650,
+            110
+          ],
+          "id": "header.plate"
+        },
+        {
+          "asset": "Currency_Bar",
+          "rect": [
+            1135,
+            40,
+            450,
+            58
+          ],
+          "id": "Currency_Bar"
+        },
+        {
+          "asset": "Button_Back",
+          "rect": [
+            1610,
+            40,
+            240,
+            58
+          ],
+          "id": "Button_Back"
+        },
+        {
+          "asset": "Icon_Talin_White",
+          "rect": [
+            1150,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.talin.icon"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1310,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.parts.icon"
+        },
+        {
+          "asset": "Icon_Artifact_White",
+          "rect": [
+            1455,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.artifact.icon"
+        },
+        {
+          "asset": "Tab_Selected",
+          "rect": [
+            108,
+            144,
+            260,
+            48
+          ],
+          "id": "Tab_Selected"
+        },
+        {
+          "asset": "Tab_Normal",
+          "rect": [
+            368,
+            144,
+            260,
+            48
+          ],
+          "id": "Tab_Normal"
+        },
+        {
+          "asset": "Panel_Dark",
+          "rect": [
+            80,
+            198,
+            350,
+            830
+          ],
+          "id": "Panel_Dark"
+        },
+        {
+          "asset": "Panel_Paper",
+          "rect": [
+            460,
+            198,
+            794,
+            830
+          ],
+          "id": "Panel_Paper"
+        },
+        {
+          "asset": "Panel_Dark",
+          "rect": [
+            1272,
+            198,
+            576,
+            830
+          ],
+          "id": "Panel_Dark"
+        },
+        {
+          "asset": "WeaponSlot_Selected",
+          "rect": [
+            108,
+            282,
+            298,
+            138
+          ],
+          "id": "WeaponSlot_Selected"
+        },
+        {
+          "asset": "Weapon_Pistol",
+          "rect": [
+            168,
+            292,
+            196,
+            90
+          ],
+          "id": "Weapon_Pistol",
+          "fit": "contain"
+        },
+        {
+          "asset": "Icon_Check",
+          "rect": [
+            360,
+            292,
+            32,
+            32
+          ],
+          "id": "Icon_Check"
+        },
+        {
+          "asset": "WeaponSlot",
+          "rect": [
+            108,
+            431,
+            298,
+            138
+          ],
+          "id": "WeaponSlot"
+        },
+        {
+          "asset": "Weapon_SMG",
+          "rect": [
+            168,
+            441,
+            196,
+            90
+          ],
+          "id": "Weapon_SMG",
+          "fit": "contain",
+          "tint": "#A5AFB8"
+        },
+        {
+          "asset": "WeaponSlot_Locked",
+          "rect": [
+            108,
+            580,
+            298,
+            138
+          ],
+          "id": "WeaponSlot_Locked"
+        },
+        {
+          "asset": "Weapon_Sniper_Silhouette",
+          "rect": [
+            139,
+            595,
+            240,
+            75
+          ],
+          "id": "Weapon_Sniper_Silhouette",
+          "fit": "contain",
+          "opacity": 0.7,
+          "placeholder": true
+        },
+        {
+          "asset": "Icon_Lock",
+          "rect": [
+            240,
+            611,
+            35,
+            40
+          ],
+          "id": "Icon_Lock"
+        },
+        {
+          "asset": "Icon_Artifact_White",
+          "rect": [
+            267,
+            676,
+            28,
+            28
+          ],
+          "id": "weapon.2.unlock.icon"
+        },
+        {
+          "asset": "WeaponSlot_Locked",
+          "rect": [
+            108,
+            729,
+            298,
+            138
+          ],
+          "id": "WeaponSlot_Locked"
+        },
+        {
+          "asset": "Weapon_Shotgun_Silhouette",
+          "rect": [
+            139,
+            744,
+            240,
+            75
+          ],
+          "id": "Weapon_Shotgun_Silhouette",
+          "fit": "contain",
+          "opacity": 0.7,
+          "placeholder": true
+        },
+        {
+          "asset": "Icon_Lock",
+          "rect": [
+            240,
+            760,
+            35,
+            40
+          ],
+          "id": "Icon_Lock"
+        },
+        {
+          "asset": "Icon_Artifact_White",
+          "rect": [
+            267,
+            825,
+            28,
+            28
+          ],
+          "id": "weapon.3.unlock.icon"
+        },
+        {
+          "asset": "Compass",
+          "rect": [
+            650,
+            208,
+            530,
+            530
+          ],
+          "id": "Compass"
+        },
+        {
+          "asset": "Weapon_Pistol",
+          "rect": [
+            680,
+            294,
+            515,
+            420
+          ],
+          "id": "Weapon_Pistol",
+          "fit": "contain"
+        },
+        {
+          "asset": "Icon_Check",
+          "rect": [
+            510,
+            366,
+            27,
+            27
+          ],
+          "id": "Icon_Check"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            510,
+            750,
+            700,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Row_BaseCard",
+          "rect": [
+            510,
+            852,
+            710,
+            64
+          ],
+          "id": "Row_BaseCard"
+        },
+        {
+          "asset": "Icon_Attack",
+          "rect": [
+            524,
+            861,
+            45,
+            45
+          ],
+          "id": "Icon_Attack"
+        },
+        {
+          "asset": "Button_Small",
+          "rect": [
+            919,
+            857,
+            290,
+            54
+          ],
+          "id": "Button_Small"
+        },
+        {
+          "asset": "Icon_Talin_White",
+          "rect": [
+            932,
+            867,
+            31,
+            31
+          ],
+          "id": "base.0.talin.icon"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1038,
+            867,
+            31,
+            31
+          ],
+          "id": "base.0.parts.icon"
+        },
+        {
+          "asset": "Row_BaseCard",
+          "rect": [
+            510,
+            922,
+            710,
+            64
+          ],
+          "id": "Row_BaseCard"
+        },
+        {
+          "asset": "Icon_Defense",
+          "rect": [
+            524,
+            931,
+            45,
+            45
+          ],
+          "id": "Icon_Defense"
+        },
+        {
+          "asset": "Button_Small",
+          "rect": [
+            919,
+            927,
+            290,
+            54
+          ],
+          "id": "Button_Small"
+        },
+        {
+          "asset": "Icon_Talin_White",
+          "rect": [
+            932,
+            937,
+            31,
+            31
+          ],
+          "id": "base.1.talin.icon"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1038,
+            937,
+            31,
+            31
+          ],
+          "id": "base.1.parts.icon"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            1305,
+            283,
+            510,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Step_Line",
+          "rect": [
+            1442,
+            350,
+            4,
+            294
+          ],
+          "id": "Step_Line"
+        },
+        {
+          "asset": "Step_Done",
+          "rect": [
+            1408,
+            316,
+            70,
+            70
+          ],
+          "id": "Step_Done"
+        },
+        {
+          "asset": "Step_Current",
+          "rect": [
+            1408,
+            470,
+            70,
+            70
+          ],
+          "id": "Step_Current"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1660,
+            480,
+            31,
+            31
+          ],
+          "id": "step.1.cost.icon"
+        },
+        {
+          "asset": "Step_Locked",
+          "rect": [
+            1408,
+            624,
+            70,
+            70
+          ],
+          "id": "Step_Locked"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1660,
+            634,
+            31,
+            31
+          ],
+          "id": "step.2.cost.icon"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            1305,
+            740,
+            510,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1314,
+            808,
+            64,
+            64
+          ],
+          "id": "cost.parts.icon"
+        },
+        {
+          "asset": "Button_Upgrade",
+          "rect": [
+            1299,
+            902,
+            514,
+            115
+          ],
+          "id": "upgrade.button"
+        }
+      ],
+      "text_boxes": [
+        {
+          "id": "header.path",
+          "text": "03 무기고 › 장비 강화",
+          "rect": [
+            108,
+            37,
+            600,
+            56
+          ],
+          "font_size": 36,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "header.en",
+          "text": "ARMORY / EQUIPMENT UPGRADE",
+          "rect": [
+            110,
+            98,
+            560,
+            23
+          ],
+          "font_size": 16,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.talin.value",
+          "text": "1,240",
+          "rect": [
+            1197,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.parts.value",
+          "text": "36",
+          "rect": [
+            1357,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.artifact.value",
+          "text": "2",
+          "rect": [
+            1502,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "header.back",
+          "text": "←  무기고",
+          "rect": [
+            1622,
+            44,
+            216,
+            48
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "tab.0",
+          "text": "장비 강화",
+          "rect": [
+            130,
+            149,
+            210,
+            35
+          ],
+          "font_size": 24,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "tab.1",
+          "text": "카드 강화",
+          "rect": [
+            390,
+            149,
+            210,
+            35
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapons.heading",
+          "text": "무기 목록",
+          "rect": [
+            118,
+            218,
+            270,
+            60
+          ],
+          "font_size": 37,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.0.name",
+          "text": "권총",
+          "rect": [
+            125,
+            381,
+            135,
+            30
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.1.name",
+          "text": "SMG",
+          "rect": [
+            125,
+            530,
+            135,
+            30
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.2.unlock.value",
+          "text": "1",
+          "rect": [
+            304,
+            676,
+            90,
+            28
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.2.name",
+          "text": "저격총",
+          "rect": [
+            125,
+            679,
+            135,
+            30
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.3.unlock.value",
+          "text": "1",
+          "rect": [
+            304,
+            825,
+            90,
+            28
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.3.name",
+          "text": "산탄총",
+          "rect": [
+            125,
+            828,
+            135,
+            30
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "unlock.title",
+          "text": "무기 해금",
+          "rect": [
+            124,
+            920,
+            255,
+            36
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "unlock.hint",
+          "text": "아티팩트로 새 무기 해금",
+          "rect": [
+            124,
+            963,
+            275,
+            31
+          ],
+          "font_size": 20,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.title",
+          "text": "권총",
+          "rect": [
+            500,
+            214,
+            300,
+            80
+          ],
+          "font_size": 62,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.level",
+          "text": "Lv.1",
+          "rect": [
+            510,
+            305,
+            112,
+            43
+          ],
+          "font_size": 30,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "weapon.unlocked",
+          "text": "해금 완료",
+          "rect": [
+            546,
+            360,
+            155,
+            40
+          ],
+          "font_size": 23,
+          "color": "#65717A",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "stat.0.label",
+          "text": "탄창",
+          "rect": [
+            510,
+            648,
+            185,
+            30
+          ],
+          "font_size": 23,
+          "color": "#16181B",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "stat.0.value",
+          "text": "3",
+          "rect": [
+            510,
+            686,
+            200,
+            54
+          ],
+          "font_size": 43,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "stat.1.label",
+          "text": "사격",
+          "rect": [
+            728,
+            648,
+            185,
+            30
+          ],
+          "font_size": 23,
+          "color": "#16181B",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "stat.1.value",
+          "text": "6 → 7",
+          "rect": [
+            728,
+            686,
+            200,
+            54
+          ],
+          "font_size": 43,
+          "color": "#0DB8F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "stat.2.label",
+          "text": "연사",
+          "rect": [
+            946,
+            648,
+            185,
+            30
+          ],
+          "font_size": 23,
+          "color": "#16181B",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "stat.2.value",
+          "text": "3 × 3",
+          "rect": [
+            946,
+            686,
+            200,
+            54
+          ],
+          "font_size": 43,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "next",
+          "text": "다음 강화: 사격 피해 +1",
+          "rect": [
+            515,
+            754,
+            680,
+            37
+          ],
+          "font_size": 25,
+          "color": "#16181B",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.title",
+          "text": "기본 카드 강화",
+          "rect": [
+            510,
+            798,
+            650,
+            45
+          ],
+          "font_size": 32,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.0.name",
+          "text": "사격",
+          "rect": [
+            585,
+            862,
+            85,
+            43
+          ],
+          "font_size": 25,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.0.effect",
+          "text": "피해 6 → 7",
+          "rect": [
+            675,
+            865,
+            225,
+            37
+          ],
+          "font_size": 23,
+          "color": "#626D77",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.0.talin.value",
+          "text": "80",
+          "rect": [
+            972,
+            867,
+            90,
+            31
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.0.parts.value",
+          "text": "3",
+          "rect": [
+            1078,
+            867,
+            90,
+            31
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.0.action",
+          "text": "강화",
+          "rect": [
+            1136,
+            865,
+            65,
+            37
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.1.name",
+          "text": "방어",
+          "rect": [
+            585,
+            932,
+            85,
+            43
+          ],
+          "font_size": 25,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.1.effect",
+          "text": "방어 5 → 6",
+          "rect": [
+            675,
+            935,
+            225,
+            37
+          ],
+          "font_size": 23,
+          "color": "#626D77",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.1.talin.value",
+          "text": "80",
+          "rect": [
+            972,
+            937,
+            90,
+            31
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.1.parts.value",
+          "text": "3",
+          "rect": [
+            1078,
+            937,
+            90,
+            31
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.1.action",
+          "text": "강화",
+          "rect": [
+            1136,
+            935,
+            65,
+            37
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "base.hint",
+          "text": "출정 준비의 시작 덱에 반영",
+          "rect": [
+            800,
+            992,
+            415,
+            27
+          ],
+          "font_size": 19,
+          "color": "#626D77",
+          "font_weight": 400,
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "progress.title",
+          "text": "강화 단계",
+          "rect": [
+            1305,
+            221,
+            240,
+            49
+          ],
+          "font_size": 37,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "facility",
+          "text": "시설 Lv.1  |  최대 강화 Lv.2",
+          "rect": [
+            1510,
+            239,
+            310,
+            30
+          ],
+          "font_size": 19,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.0.level",
+          "text": "Lv.1",
+          "rect": [
+            1520,
+            318,
+            130,
+            43
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.0.description",
+          "text": "기본 성능",
+          "rect": [
+            1520,
+            365,
+            300,
+            37
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.1.level",
+          "text": "Lv.2",
+          "rect": [
+            1520,
+            472,
+            130,
+            43
+          ],
+          "font_size": 33,
+          "color": "#0DB8F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.1.description",
+          "text": "사격 피해 +1",
+          "rect": [
+            1520,
+            519,
+            300,
+            37
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.1.cost.value",
+          "text": "10",
+          "rect": [
+            1700,
+            480,
+            90,
+            31
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.2.level",
+          "text": "Lv.3",
+          "rect": [
+            1520,
+            626,
+            130,
+            43
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.2.description",
+          "text": "시설 Lv.2 필요",
+          "rect": [
+            1520,
+            673,
+            300,
+            37
+          ],
+          "font_size": 24,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "step.2.cost.value",
+          "text": "20",
+          "rect": [
+            1700,
+            634,
+            90,
+            31
+          ],
+          "font_size": 26,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cost.label",
+          "text": "강화 비용",
+          "rect": [
+            1305,
+            759,
+            230,
+            34
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cost.parts.value",
+          "text": "10",
+          "rect": [
+            1387,
+            808,
+            90,
+            64
+          ],
+          "font_size": 59,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "balance",
+          "text": "보유 36 → 강화 후 26",
+          "rect": [
+            1515,
+            819,
+            307,
+            40
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "upgrade.label",
+          "text": "강화 →",
+          "rect": [
+            1340,
+            920,
+            425,
+            75
+          ],
+          "font_size": 56,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        }
+      ],
+      "costs": {
+        "level2": {
+          "parts": 10
+        },
+        "level3": {
+          "parts": 20,
+          "requires_facility_level": 2
+        },
+        "base_card": {
+          "talin": 80,
+          "parts": 3
+        },
+        "weapon_unlock": {
+          "artifact": 1
+        },
+        "wallet_example": {
+          "talin": 1240,
+          "parts": 36,
+          "artifact": 2
+        },
+        "after_example": {
+          "parts": 26
+        }
+      }
+    },
+    "card": {
+      "placements": [
+        {
+          "asset": "Workshop_BG",
+          "rect": [
+            0,
+            0,
+            1920,
+            1080
+          ],
+          "id": "Workshop_BG"
+        },
+        {
+          "asset": "Panel_TitlePath",
+          "rect": [
+            80,
+            24,
+            650,
+            110
+          ],
+          "id": "header.plate"
+        },
+        {
+          "asset": "Currency_Bar",
+          "rect": [
+            1135,
+            40,
+            450,
+            58
+          ],
+          "id": "Currency_Bar"
+        },
+        {
+          "asset": "Button_Back",
+          "rect": [
+            1610,
+            40,
+            240,
+            58
+          ],
+          "id": "Button_Back"
+        },
+        {
+          "asset": "Icon_Talin_White",
+          "rect": [
+            1150,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.talin.icon"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1310,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.parts.icon"
+        },
+        {
+          "asset": "Icon_Artifact_White",
+          "rect": [
+            1455,
+            50,
+            38,
+            38
+          ],
+          "id": "currency.artifact.icon"
+        },
+        {
+          "asset": "Tab_Normal",
+          "rect": [
+            108,
+            144,
+            260,
+            48
+          ],
+          "id": "Tab_Normal"
+        },
+        {
+          "asset": "Tab_Selected",
+          "rect": [
+            368,
+            144,
+            260,
+            48
+          ],
+          "id": "Tab_Selected"
+        },
+        {
+          "asset": "Panel_Dark",
+          "rect": [
+            80,
+            198,
+            292,
+            830
+          ],
+          "id": "Panel_Dark"
+        },
+        {
+          "asset": "Panel_Dark",
+          "rect": [
+            387,
+            198,
+            884,
+            830
+          ],
+          "id": "Panel_Dark"
+        },
+        {
+          "asset": "Panel_CardDetail",
+          "rect": [
+            1288,
+            198,
+            560,
+            830
+          ],
+          "id": "Panel_CardDetail"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            112,
+            287,
+            224,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Checkbox_On",
+          "rect": [
+            119,
+            355,
+            28,
+            28
+          ],
+          "id": "Checkbox_On"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            402,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            449,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            496,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            112,
+            551,
+            224,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            619,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            666,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            713,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            112,
+            757,
+            224,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            825,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            872,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "Checkbox_Off",
+          "rect": [
+            119,
+            919,
+            28,
+            28
+          ],
+          "id": "Checkbox_Off"
+        },
+        {
+          "asset": "CardCell_Selected",
+          "rect": [
+            419,
+            290,
+            194,
+            348
+          ],
+          "id": "CardCell_Selected"
+        },
+        {
+          "asset": "Art_Shot",
+          "rect": [
+            426,
+            297,
+            180,
+            174
+          ],
+          "id": "Art_Shot",
+          "fit": "cover"
+        },
+        {
+          "asset": "CardCell",
+          "rect": [
+            626,
+            290,
+            194,
+            348
+          ],
+          "id": "CardCell"
+        },
+        {
+          "asset": "Art_Defense",
+          "rect": [
+            633,
+            297,
+            180,
+            174
+          ],
+          "id": "Art_Defense",
+          "fit": "cover"
+        },
+        {
+          "asset": "Mark_Upgraded",
+          "rect": [
+            777,
+            302,
+            34,
+            34
+          ],
+          "id": "card.upgraded.mark"
+        },
+        {
+          "asset": "CardCell",
+          "rect": [
+            833,
+            290,
+            194,
+            348
+          ],
+          "id": "CardCell"
+        },
+        {
+          "asset": "Art_Reload",
+          "rect": [
+            840,
+            297,
+            180,
+            174
+          ],
+          "id": "Art_Reload",
+          "fit": "cover"
+        },
+        {
+          "asset": "CardCell",
+          "rect": [
+            1040,
+            290,
+            194,
+            348
+          ],
+          "id": "CardCell"
+        },
+        {
+          "asset": "Art_StockStrike",
+          "rect": [
+            1047,
+            297,
+            180,
+            174
+          ],
+          "id": "Art_StockStrike",
+          "fit": "cover"
+        },
+        {
+          "asset": "CardCell",
+          "rect": [
+            419,
+            652,
+            194,
+            348
+          ],
+          "id": "CardCell"
+        },
+        {
+          "asset": "Art_QED",
+          "rect": [
+            426,
+            659,
+            180,
+            174
+          ],
+          "id": "Art_QED",
+          "fit": "cover"
+        },
+        {
+          "asset": "CardCell",
+          "rect": [
+            626,
+            652,
+            194,
+            348
+          ],
+          "id": "CardCell"
+        },
+        {
+          "asset": "Art_Advance",
+          "rect": [
+            633,
+            659,
+            180,
+            174
+          ],
+          "id": "Art_Advance",
+          "fit": "cover"
+        },
+        {
+          "asset": "CardCell",
+          "rect": [
+            833,
+            652,
+            194,
+            348
+          ],
+          "id": "CardCell"
+        },
+        {
+          "asset": "Art_EmptyMagazine",
+          "rect": [
+            840,
+            659,
+            180,
+            174
+          ],
+          "id": "Art_EmptyMagazine",
+          "fit": "cover"
+        },
+        {
+          "asset": "CardCell",
+          "rect": [
+            1040,
+            652,
+            194,
+            348
+          ],
+          "id": "CardCell"
+        },
+        {
+          "asset": "Art_Vest",
+          "rect": [
+            1047,
+            659,
+            180,
+            174
+          ],
+          "id": "Art_Vest",
+          "fit": "cover"
+        },
+        {
+          "asset": "Art_Shot_Detail",
+          "rect": [
+            1325,
+            290,
+            485,
+            214
+          ],
+          "id": "Art_Shot_Detail",
+          "fit": "cover"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            1325,
+            613,
+            485,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            1325,
+            701,
+            485,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Rule",
+          "rect": [
+            1325,
+            800,
+            485,
+            2
+          ],
+          "id": "Rule"
+        },
+        {
+          "asset": "Icon_Talin_White",
+          "rect": [
+            1335,
+            882,
+            37,
+            37
+          ],
+          "id": "cost.talin.icon"
+        },
+        {
+          "asset": "Icon_Parts_White",
+          "rect": [
+            1575,
+            882,
+            37,
+            37
+          ],
+          "id": "cost.parts.icon"
+        },
+        {
+          "asset": "Button_Upgrade",
+          "rect": [
+            1315,
+            965,
+            514,
+            60
+          ],
+          "id": "upgrade.button"
+        }
+      ],
+      "text_boxes": [
+        {
+          "id": "header.path",
+          "text": "03 무기고 › 카드 강화",
+          "rect": [
+            108,
+            37,
+            600,
+            56
+          ],
+          "font_size": 36,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "header.en",
+          "text": "ARMORY / CARD UPGRADE",
+          "rect": [
+            110,
+            98,
+            560,
+            23
+          ],
+          "font_size": 16,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.talin.value",
+          "text": "1,240",
+          "rect": [
+            1197,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.parts.value",
+          "text": "36",
+          "rect": [
+            1357,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "currency.artifact.value",
+          "text": "2",
+          "rect": [
+            1502,
+            50,
+            90,
+            38
+          ],
+          "font_size": 33,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "header.back",
+          "text": "←  무기고",
+          "rect": [
+            1622,
+            44,
+            216,
+            48
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "tab.0",
+          "text": "장비 강화",
+          "rect": [
+            130,
+            149,
+            210,
+            35
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "tab.1",
+          "text": "카드 강화",
+          "rect": [
+            390,
+            149,
+            210,
+            35
+          ],
+          "font_size": 24,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.title",
+          "text": "필터",
+          "rect": [
+            112,
+            222,
+            215,
+            50
+          ],
+          "font_size": 37,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속",
+          "text": "소속",
+          "rect": [
+            112,
+            303,
+            220,
+            40
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.0",
+          "text": "전체",
+          "rect": [
+            165,
+            353,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.0.count",
+          "text": "41",
+          "rect": [
+            310,
+            353,
+            40,
+            32
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.1",
+          "text": "주인공",
+          "rect": [
+            165,
+            400,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.1.count",
+          "text": "39",
+          "rect": [
+            310,
+            400,
+            40,
+            32
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.2",
+          "text": "치하라 쇼",
+          "rect": [
+            165,
+            447,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.2.count",
+          "text": "2",
+          "rect": [
+            310,
+            447,
+            40,
+            32
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.3",
+          "text": "무색",
+          "rect": [
+            165,
+            494,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.소속.3.count",
+          "text": "0",
+          "rect": [
+            310,
+            494,
+            40,
+            32
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.종류",
+          "text": "종류",
+          "rect": [
+            112,
+            567,
+            220,
+            40
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.종류.0",
+          "text": "공격",
+          "rect": [
+            165,
+            617,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.종류.1",
+          "text": "스킬",
+          "rect": [
+            165,
+            664,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.종류.2",
+          "text": "파워",
+          "rect": [
+            165,
+            711,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.등급",
+          "text": "등급",
+          "rect": [
+            112,
+            773,
+            220,
+            40
+          ],
+          "font_size": 27,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.등급.0",
+          "text": "일반",
+          "rect": [
+            165,
+            823,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.등급.1",
+          "text": "특별",
+          "rect": [
+            165,
+            870,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "filter.등급.2",
+          "text": "희귀",
+          "rect": [
+            165,
+            917,
+            140,
+            32
+          ],
+          "font_size": 23,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "collection",
+          "text": "수집 40 / 41",
+          "rect": [
+            119,
+            974,
+            225,
+            35
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "grid.title",
+          "text": "카드 목록",
+          "rect": [
+            419,
+            220,
+            360,
+            50
+          ],
+          "font_size": 37,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "grid.count",
+          "text": "표시 41 / 41",
+          "rect": [
+            1000,
+            232,
+            222,
+            36
+          ],
+          "font_size": 22,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.0.name",
+          "text": "사격",
+          "rect": [
+            430,
+            474,
+            173,
+            39
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.0.description",
+          "text": "적에게 6 피해를\n줍니다.",
+          "rect": [
+            431,
+            529,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.0.footer",
+          "text": "VERTEX",
+          "rect": [
+            431,
+            606,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.1.name",
+          "text": "방어",
+          "rect": [
+            637,
+            474,
+            173,
+            39
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.1.description",
+          "text": "방어도 5만큼\n증가합니다.",
+          "rect": [
+            638,
+            529,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.1.footer",
+          "text": "VERTEX",
+          "rect": [
+            638,
+            606,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.2.name",
+          "text": "재장전",
+          "rect": [
+            844,
+            474,
+            173,
+            39
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.2.description",
+          "text": "최대 탄약으로\n재장전합니다.",
+          "rect": [
+            845,
+            529,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.2.footer",
+          "text": "VERTEX",
+          "rect": [
+            845,
+            606,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.3.name",
+          "text": "개머리판 타격",
+          "rect": [
+            1051,
+            474,
+            173,
+            39
+          ],
+          "font_size": 22,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.3.description",
+          "text": "적에게 8 피해를\n줍니다.",
+          "rect": [
+            1052,
+            529,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.3.footer",
+          "text": "VERTEX",
+          "rect": [
+            1052,
+            606,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.4.name",
+          "text": "Q.E.D",
+          "rect": [
+            430,
+            836,
+            173,
+            39
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.4.description",
+          "text": "3턴 동안 방어도를\n얻습니다.",
+          "rect": [
+            431,
+            891,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.4.footer",
+          "text": "VERTEX",
+          "rect": [
+            431,
+            968,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.5.name",
+          "text": "전진사격",
+          "rect": [
+            637,
+            836,
+            173,
+            39
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.5.description",
+          "text": "적에게 6 피해를\n줍니다.",
+          "rect": [
+            638,
+            891,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.5.footer",
+          "text": "VERTEX",
+          "rect": [
+            638,
+            968,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.6.name",
+          "text": "엠티 매거진",
+          "rect": [
+            844,
+            836,
+            173,
+            39
+          ],
+          "font_size": 22,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.6.description",
+          "text": "남은 탄약을 모두\n소비합니다.",
+          "rect": [
+            845,
+            891,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.6.footer",
+          "text": "VERTEX",
+          "rect": [
+            845,
+            968,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.7.name",
+          "text": "방탄복",
+          "rect": [
+            1051,
+            836,
+            173,
+            39
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cell.7.description",
+          "text": "방어도 1만큼\n증가합니다.",
+          "rect": [
+            1052,
+            891,
+            168,
+            65
+          ],
+          "font_size": 20,
+          "color": "#5D6973",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP",
+          "line_height": 1.35
+        },
+        {
+          "id": "cell.7.footer",
+          "text": "VERTEX",
+          "rect": [
+            1052,
+            968,
+            168,
+            20
+          ],
+          "font_size": 12,
+          "color": "#7E8992",
+          "font_weight": 400,
+          "alignment": "center",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "detail.title",
+          "text": "카드 상세",
+          "rect": [
+            1325,
+            222,
+            400,
+            50
+          ],
+          "font_size": 37,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "detail.name",
+          "text": "사격",
+          "rect": [
+            1325,
+            514,
+            460,
+            53
+          ],
+          "font_size": 38,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "detail.type",
+          "text": "공격 · 일반",
+          "rect": [
+            1325,
+            572,
+            460,
+            35
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "current.title",
+          "text": "현재 효과",
+          "rect": [
+            1325,
+            625,
+            470,
+            32
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "current.body",
+          "text": "적에게 6 피해를 줍니다.",
+          "rect": [
+            1325,
+            659,
+            470,
+            35
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "next.title",
+          "text": "강화 시",
+          "rect": [
+            1325,
+            713,
+            470,
+            32
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "next.body",
+          "text": "적에게 9 피해를 줍니다.",
+          "rect": [
+            1325,
+            747,
+            470,
+            35
+          ],
+          "font_size": 24,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "unlock",
+          "text": "시작 덱 포함",
+          "rect": [
+            1325,
+            807,
+            470,
+            26
+          ],
+          "font_size": 18,
+          "color": "#929AA3",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cost.label",
+          "text": "강화 비용",
+          "rect": [
+            1325,
+            841,
+            470,
+            32
+          ],
+          "font_size": 25,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cost.talin.value",
+          "text": "80",
+          "rect": [
+            1381,
+            882,
+            90,
+            37
+          ],
+          "font_size": 32,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "cost.parts.value",
+          "text": "3",
+          "rect": [
+            1621,
+            882,
+            90,
+            37
+          ],
+          "font_size": 32,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "balance",
+          "text": "보유 탈린 1,240 · 파츠 36",
+          "rect": [
+            1325,
+            925,
+            480,
+            32
+          ],
+          "font_size": 22,
+          "color": "#EEF0F2",
+          "font_weight": 400,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        },
+        {
+          "id": "upgrade.label",
+          "text": "강화하기 →",
+          "rect": [
+            1340,
+            971,
+            460,
+            45
+          ],
+          "font_size": 34,
+          "color": "#EEF0F2",
+          "font_weight": 700,
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "runtime": "TMP"
+        }
+      ],
+      "grid": {
+        "columns": 4,
+        "cells": [
+          [
+            419,
+            290,
+            194,
+            348
+          ],
+          [
+            626,
+            290,
+            194,
+            348
+          ],
+          [
+            833,
+            290,
+            194,
+            348
+          ],
+          [
+            1040,
+            290,
+            194,
+            348
+          ],
+          [
+            419,
+            652,
+            194,
+            348
+          ],
+          [
+            626,
+            652,
+            194,
+            348
+          ],
+          [
+            833,
+            652,
+            194,
+            348
+          ],
+          [
+            1040,
+            652,
+            194,
+            348
+          ]
+        ],
+        "overflow": "vertical_scroll",
+        "viewport_rect": [
+          410,
+          282,
+          850,
+          726
+        ],
+        "upgraded_example_index": 1
+      },
+      "costs": {
+        "upgrade": {
+          "talin": 80,
+          "parts": 3
+        },
+        "wallet_example": {
+          "talin": 1240,
+          "parts": 36,
+          "artifact": 2
+        },
+        "once_only": true
+      }
+    }
+  },
+  "states": {
+    "equipment_insufficient": {
+      "screen": "equipment",
+      "reason": "parts < 10",
+      "button_asset": "Button_Upgrade_Disabled",
+      "button_text": "강화",
+      "price_text_ids": [
+        "cost.parts.value"
+      ],
+      "price_color": "#929AA3",
+      "interactable": false
+    },
+    "card_insufficient": {
+      "screen": "card",
+      "reason": "talin < 80 OR parts < 3",
+      "button_asset": "Button_Upgrade_Disabled",
+      "button_text": "강화하기",
+      "price_text_ids": [
+        "cost.talin.value",
+        "cost.parts.value"
+      ],
+      "price_color": "#929AA3",
+      "interactable": false
+    },
+    "card_upgraded": {
+      "screen": "card",
+      "reason": "already upgraded",
+      "button_asset": "Button_Upgrade_Disabled",
+      "button_text": "강화 완료",
+      "price_text_ids": [],
+      "interactable": false,
+      "selected_card_mark": "Mark_Upgraded"
+    },
+    "card_ineligible": {
+      "screen": "card",
+      "reason": "card cannot upgrade (e.g. status)",
+      "button_asset": "Button_Upgrade_Disabled",
+      "button_text": "강화 불가",
+      "price_text_ids": [],
+      "interactable": false
+    }
+  },
+  "rendering": {
+    "ui_scale": 2,
+    "nine_slice_border_order": "left,bottom,right,top SOURCE PNG pixels",
+    "alpha": "straight",
+    "filter": "bilinear",
+    "font": "Malgun Gothic (preview), bind project Korean TMP font at runtime"
+  },
+  "notes": [
+    "SVG panels reconstructed; detailed painted background remains an image_gen raster embedded in an SVG wrapper.",
+    "Currency PNGs are byte-identical supplied icons; their SVG source was not supplied and was not invented.",
+    "Character intentionally excluded. External Source_Mechanic is referenced only in hub preview.",
+    "Raster weapon/card art preserved at native source resolution; SVG panels and background exported at 2x logical resolution.",
+    "All labels, numbers, costs and state captions are TMP text_boxes, not sprite pixels.",
+    "Generated_v2 files are image_gen working images; final Mockup_v2 files are exact-icon corrections, and Assembly_v2 files prove sprite/layout reconstruction."
+  ]
+}

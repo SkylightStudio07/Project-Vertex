@@ -7,6 +7,8 @@ using UnityEngine;
 //   - 얻은 카드: 런 중 플레이어 덱에 카드가 들어올 때 — DeckManager.AddCardToPlayerDeck
 //   - 동료 호감도: 레벨·포인트가 바뀔 때 — CooperationManager
 //   - 무기고 강화 단계: 무기별 — WeaponUpgrades
+//   - 얻은 아이템: 인벤토리에 처음 들어올 때 — ItemInventoryManager.AddItem
+//   - 런 기록: 런이 끝날 때(클리어·패배) — RunClearView
 // 키는 에셋 이름이다(Instantiate한 복사본의 "(Clone)"은 떼고 센다).
 public static class PlayerRecord
 {
@@ -34,7 +36,26 @@ public static class PlayerRecord
         public List<string> obtainedCards = new();
         public List<CoopEntry> coop = new();
         public List<CountEntry> weaponUpgrades = new();
+        public List<string> obtainedItems = new();
+        public List<RunEntry> runs = new(); // 오래된 것부터
     }
+
+    // 끝난 런 하나 (아카이브 > 플레이 기록). 훈련장은 남기지 않는다
+    [Serializable]
+    public class RunEntry
+    {
+        public long endedTicks;   // DateTime.Now.Ticks
+        public bool cleared;
+        public int act;
+        public int floor;         // 1부터
+        public int kills;
+        public int turns;
+        public int cards;
+        public int talin;
+        public DateTime Ended => new(endedTicks);
+    }
+
+    public const int MaxRuns = 100;
 
     private static SaveData s_data;
     private static SaveData Data => s_data ??= Load();
@@ -79,6 +100,38 @@ public static class PlayerRecord
         string key = KeyOf(card);
         if (key == null || Data.obtainedCards.Contains(key)) return;
         Data.obtainedCards.Add(key);
+        Save();
+    }
+
+    // ── 얻은 아이템 (아카이브 > 아이템 도감) ──
+    public static bool HasObtained(ItemData item)
+    {
+        string key = KeyOf(item);
+        return key != null && Data.obtainedItems.Contains(key);
+    }
+
+    public static void AddObtainedItem(ItemData item)
+    {
+        string key = KeyOf(item);
+        if (key == null || Data.obtainedItems.Contains(key)) return;
+        Data.obtainedItems.Add(key);
+        Save();
+    }
+
+    // ── 런 기록 (아카이브 > 플레이 기록) ──
+    public static int RunCount => Data.runs.Count;
+
+    // 최근 것부터
+    public static IEnumerable<RunEntry> Runs()
+    {
+        for (int i = Data.runs.Count - 1; i >= 0; i--) yield return Data.runs[i];
+    }
+
+    public static void AddRun(RunEntry entry)
+    {
+        if (entry == null) return;
+        Data.runs.Add(entry);
+        if (Data.runs.Count > MaxRuns) Data.runs.RemoveRange(0, Data.runs.Count - MaxRuns);
         Save();
     }
 

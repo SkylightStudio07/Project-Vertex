@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 
         QuestManager.Instance.BeginRun(); // 수주한 의뢰의 진행을 이번 런 기준으로 시작
         MetaProgress.BeginRun();          // 런이 끝나면 남은 크레딧 1/10을 탈린으로 정산 (RunClearView)
+        RunClearView.BeginRun();          // 런 기록(아카이브 > 플레이 기록)도 런마다 한 번
 
         // 0층 축복 노드 UI가 존재하면 축복 화면을 열고, 없으면 레거시(전투) 실행
         // ?? 는 Unity의 파괴된 오브젝트를 null로 보지 않는다. 두 번째 런에서는 BlessingView가 비활성이라 Awake 전이고,

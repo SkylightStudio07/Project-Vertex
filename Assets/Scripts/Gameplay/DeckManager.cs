@@ -57,14 +57,31 @@ public class DeckManager : MonoBehaviour
         PlayerDeck = new List<CardData>();
         for (int i = 0; i < 5; i++)
         {
-            PlayerDeck.Add(Instantiate(strikeCard));
-            PlayerDeck.Add(Instantiate(blockCard));
+            PlayerDeck.Add(CopyForRun(strikeCard));
+            PlayerDeck.Add(CopyForRun(blockCard));
         }
-        PlayerDeck.Add(Instantiate(reloadCard));
+        PlayerDeck.Add(CopyForRun(reloadCard));
 
         // 디버그용 시작 덱. 실제 릴리즈 시에는 이 부분 제거할 것.
-        PlayerDeck.Add(Instantiate(strikeCard_Debug));
-        PlayerDeck.Add(Instantiate(blockCard_Debug));
+        PlayerDeck.Add(CopyForRun(strikeCard_Debug));
+        PlayerDeck.Add(CopyForRun(blockCard_Debug));
+    }
+
+    // 무기고에서 방금 강화한 카드: 이미 만들어 둔 덱(로비 진입 때 구성)에도 바로 반영
+    public static void ApplyArmoryUpgrade(CardData source)
+    {
+        if (source == null || s_playerDeck == null) return;
+        string key = PlayerRecord.KeyOf(source);
+        foreach (var c in s_playerDeck)
+            if (c != null && PlayerRecord.KeyOf(c) == key && c.CanUpgrade) c.isUpgraded = true;
+    }
+
+    // 덱에 넣을 복사본. 무기고에서 영구 강화한 카드(CardUpgrades)는 처음부터 강화된 상태로 들어간다.
+    private static CardData CopyForRun(CardData card)
+    {
+        var copy = Instantiate(card);
+        if (copy.CanUpgrade && CardUpgrades.IsUpgraded(card)) copy.isUpgraded = true;
+        return copy;
     }
 
     // 플레이어 덱에 획득 카드를 추가하는 메소드. 덱에 들어간 복사본을 돌려준다 (동료 합류 카드 추적용).
@@ -72,7 +89,7 @@ public class DeckManager : MonoBehaviour
     {
         if (card == null) return null;
 
-        var instance = Instantiate(card);
+        var instance = CopyForRun(card);
         PlayerDeck.Add(instance);
         if (!TrainingSession.IsActive) PlayerRecord.AddObtainedCard(card); // 한 번이라도 얻은 카드 (훈련장 덱 구성)
         RunStats.AddCard(); // 결과 화면 '획득 카드'
@@ -107,7 +124,7 @@ public class DeckManager : MonoBehaviour
         PlayerDeck = new List<CardData>();
         if (cards == null) return;
         foreach (var card in cards)
-            if (card != null) PlayerDeck.Add(Instantiate(card));
+            if (card != null) PlayerDeck.Add(CopyForRun(card));
     }
     // 플레이어 덱에서 카드를 제거하는 메소드
     public bool RemoveCardFromPlayerDeck(CardData card)
@@ -160,7 +177,7 @@ public class DeckManager : MonoBehaviour
         {
             return null;
         }
-        CardData copy = Instantiate(newCard);
+        CardData copy = CopyForRun(newCard);
 
         // 기존 카드의 위치를 유지하기 위해 인덱스를 저장한다.
         int index = PlayerDeck.IndexOf(card);

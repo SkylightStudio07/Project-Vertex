@@ -1,0 +1,1167 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "assets": {
+    "Panel_Item": {
+      "file": "Panel_Item.png",
+      "svg": "SVG/Panel_Item.svg",
+      "pixel_size": [
+        608,
+        708
+      ],
+      "logical_size": [
+        304,
+        354
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18.0,
+          18.0,
+          18.0,
+          18.0
+        ]
+      }
+    },
+    "Panel_Item_Selected": {
+      "file": "Panel_Item_Selected.png",
+      "svg": "SVG/Panel_Item_Selected.svg",
+      "pixel_size": [
+        608,
+        708
+      ],
+      "logical_size": [
+        304,
+        354
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18.0,
+          18.0,
+          18.0,
+          18.0
+        ]
+      }
+    },
+    "Band_SoldOut": {
+      "file": "Band_SoldOut.png",
+      "svg": "SVG/Band_SoldOut.svg",
+      "pixel_size": [
+        608,
+        88
+      ],
+      "logical_size": [
+        304,
+        44
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "Band_Unlocked": {
+      "file": "Band_Unlocked.png",
+      "svg": "SVG/Band_Unlocked.svg",
+      "pixel_size": [
+        608,
+        88
+      ],
+      "logical_size": [
+        304,
+        44
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "Panel_BuyBar": {
+      "file": "Panel_BuyBar.png",
+      "svg": "SVG/Panel_BuyBar.svg",
+      "pixel_size": [
+        1860,
+        156
+      ],
+      "logical_size": [
+        930,
+        78
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18.0,
+          18.0,
+          18.0,
+          18.0
+        ]
+      }
+    },
+    "Button_Buy": {
+      "file": "Button_Buy.png",
+      "svg": "SVG/Button_Buy.svg",
+      "pixel_size": [
+        430,
+        156
+      ],
+      "logical_size": [
+        215,
+        78
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ]
+      }
+    },
+    "Button_Buy_Disabled": {
+      "file": "Button_Buy_Disabled.png",
+      "svg": "SVG/Button_Buy_Disabled.svg",
+      "pixel_size": [
+        430,
+        156
+      ],
+      "logical_size": [
+        215,
+        78
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ]
+      }
+    },
+    "Button_Qty_Minus": {
+      "file": "Button_Qty_Minus.png",
+      "svg": "SVG/Button_Qty_Minus.svg",
+      "pixel_size": [
+        68,
+        68
+      ],
+      "logical_size": [
+        34,
+        34
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "Button_Qty_Plus": {
+      "file": "Button_Qty_Plus.png",
+      "svg": "SVG/Button_Qty_Plus.svg",
+      "pixel_size": [
+        68,
+        68
+      ],
+      "logical_size": [
+        34,
+        34
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "Tab_Normal": {
+      "file": "Tab_Normal.png",
+      "svg": "SVG/Tab_Normal.svg",
+      "pixel_size": [
+        462,
+        84
+      ],
+      "logical_size": [
+        231,
+        42
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          70,
+          4,
+          4,
+          4
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          35.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    },
+    "Tab_Selected": {
+      "file": "Tab_Selected.png",
+      "svg": "SVG/Tab_Selected.svg",
+      "pixel_size": [
+        462,
+        84
+      ],
+      "logical_size": [
+        231,
+        42
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          70,
+          4,
+          4,
+          4
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          35.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    },
+    "Panel_Dialogue": {
+      "file": "Panel_Dialogue.png",
+      "svg": "SVG/Panel_Dialogue.svg",
+      "pixel_size": [
+        1004,
+        258
+      ],
+      "logical_size": [
+        502,
+        129
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          104,
+          48,
+          90,
+          108
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          52.0,
+          24.0,
+          45.0,
+          54.0
+        ]
+      }
+    },
+    "Button_Lobby": {
+      "file": "Button_Lobby.png",
+      "svg": "SVG/Button_Lobby.svg",
+      "pixel_size": [
+        424,
+        112
+      ],
+      "logical_size": [
+        212,
+        56
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18.0,
+          18.0,
+          18.0,
+          18.0
+        ]
+      }
+    },
+    "Panel_CardFace": {
+      "file": "Panel_CardFace.png",
+      "svg": "SVG/Panel_CardFace.svg",
+      "pixel_size": [
+        260,
+        404
+      ],
+      "logical_size": [
+        130,
+        202
+      ],
+      "asset_scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          18.0,
+          18.0,
+          18.0,
+          18.0
+        ]
+      }
+    },
+    "Mark_CardLock": {
+      "file": "Mark_CardLock.png",
+      "svg": "SVG/Mark_CardLock.svg",
+      "pixel_size": [
+        40,
+        50
+      ],
+      "logical_size": [
+        20,
+        25
+      ],
+      "asset_scale": 2
+    },
+    "Icon_Artifact": {
+      "file": "Icon_Artifact.png",
+      "pixel_size": [
+        76,
+        76
+      ],
+      "source": "../Currency_Icons/Icon_Artifact.png",
+      "unaltered_sha256": "c0c3c6ba3de971ad435009fabb22452a1685240222e8558d9ea34ebbc3f37df8"
+    },
+    "Icon_Artifact_White": {
+      "file": "Icon_Artifact_White.png",
+      "pixel_size": [
+        76,
+        76
+      ],
+      "source": "../Currency_Icons/Icon_Artifact_White.png",
+      "unaltered_sha256": "3b972b0deb2d9ed86ad3ab72594cb7a227702efbd6e4f32212ce738c27274ba5"
+    },
+    "Icon_Parts": {
+      "file": "Icon_Parts.png",
+      "pixel_size": [
+        76,
+        76
+      ],
+      "source": "../Currency_Icons/Icon_Parts.png",
+      "unaltered_sha256": "ed901958e119f1b2f5b9c55f73207c56904ca807341bb7af6f79fdf5a6cd9805"
+    },
+    "Icon_Parts_White": {
+      "file": "Icon_Parts_White.png",
+      "pixel_size": [
+        76,
+        76
+      ],
+      "source": "../Currency_Icons/Icon_Parts_White.png",
+      "unaltered_sha256": "f7beaed01eeacffc0920ca0db637a020577f4253e36d20e3a75a1c86891c48ac"
+    },
+    "Icon_Talin": {
+      "file": "Icon_Talin.png",
+      "pixel_size": [
+        76,
+        76
+      ],
+      "source": "../Currency_Icons/Icon_Talin.png",
+      "unaltered_sha256": "80102349c21b9a1403c771763fe9ace4eb7b8e19873a059cc09a0f19d240dbc7"
+    },
+    "Icon_Talin_White": {
+      "file": "Icon_Talin_White.png",
+      "pixel_size": [
+        76,
+        76
+      ],
+      "source": "../Currency_Icons/Icon_Talin_White.png",
+      "unaltered_sha256": "9a70f24a45be067a7bf93f568d2b697ca440a53d888083e17555300158bc0600"
+    },
+    "Item_PartsBundle": {
+      "file": "Item_PartsBundle.png",
+      "source_rect_ltrb": [
+        814,
+        224,
+        1044,
+        384
+      ],
+      "pixel_size": [
+        230,
+        160
+      ],
+      "method": "GrabCut foreground extraction; original RGB retained"
+    },
+    "Item_SupplyPackage": {
+      "file": "Item_SupplyPackage.png",
+      "source_rect_ltrb": [
+        1378,
+        535,
+        1596,
+        704
+      ],
+      "pixel_size": [
+        218,
+        169
+      ],
+      "method": "GrabCut foreground extraction; original RGB retained"
+    },
+    "Item_Coffee": {
+      "file": "Item_Coffee.png",
+      "source_rect_ltrb": [
+        1418,
+        217,
+        1590,
+        384
+      ],
+      "pixel_size": [
+        172,
+        167
+      ],
+      "method": "GrabCut foreground extraction; original RGB retained"
+    },
+    "Item_Notebook": {
+      "file": "Item_Notebook.png",
+      "source_rect_ltrb": [
+        835,
+        528,
+        1012,
+        706
+      ],
+      "pixel_size": [
+        177,
+        178
+      ],
+      "method": "GrabCut foreground extraction; original RGB retained"
+    },
+    "Keeper_Full": {
+      "file": "Keeper_Full.png",
+      "source_rect_ltrb": [
+        16,
+        34,
+        795,
+        941
+      ],
+      "pixel_size": [
+        779,
+        907
+      ],
+      "method": "Original visible pixels only; boundary segmentation",
+      "occluded_by_dialogue_source_polygon": [
+        [
+          31,
+          811
+        ],
+        [
+          67,
+          778
+        ],
+        [
+          468,
+          778
+        ],
+        [
+          468,
+          850
+        ],
+        [
+          426,
+          890
+        ],
+        [
+          31,
+          890
+        ]
+      ],
+      "limitation": "Not an unseen full-body reconstruction. Source crops the legs and dialogue occludes part of lower-left body; those pixels remain transparent. Use with dialogue at source placement."
+    },
+    "Card_Art_Reference": {
+      "file": "Card_Art_Reference.png",
+      "source": "../Reference_Armory.png",
+      "illustration_only": true
+    },
+    "Card_Locked_Reference": {
+      "file": "Card_Locked_Reference.png",
+      "source": "../Reference_Armory.png",
+      "note": "Reference silhouette artwork; mockup question marks and lock are separate."
+    }
+  },
+  "elements": [
+    {
+      "id": "LobbyBack",
+      "asset": "Button_Lobby",
+      "rect": [
+        1641,
+        30,
+        213,
+        56
+      ],
+      "text": "← 로비",
+      "reference": "Exact armory button crop in mockup; editable SVG in assets"
+    },
+    {
+      "id": "Icon_TalinTop",
+      "asset": "Icon_Talin",
+      "rect": [
+        1201,
+        47,
+        38,
+        38
+      ]
+    },
+    {
+      "id": "Icon_PartsTop",
+      "asset": "Icon_Parts",
+      "rect": [
+        1374,
+        47,
+        38,
+        38
+      ]
+    },
+    {
+      "id": "Icon_ArtifactTop",
+      "asset": "Icon_Artifact",
+      "rect": [
+        1504,
+        47,
+        38,
+        38
+      ]
+    },
+    {
+      "id": "Tab0",
+      "asset": "Tab_Selected",
+      "rect": [
+        930,
+        140,
+        231,
+        42
+      ]
+    },
+    {
+      "id": "Tab1",
+      "asset": "Tab_Normal",
+      "rect": [
+        1161,
+        140,
+        231,
+        42
+      ]
+    },
+    {
+      "id": "Tab2",
+      "asset": "Tab_Normal",
+      "rect": [
+        1392,
+        140,
+        231,
+        42
+      ]
+    },
+    {
+      "id": "Tab3",
+      "asset": "Tab_Normal",
+      "rect": [
+        1623,
+        140,
+        231,
+        42
+      ]
+    },
+    {
+      "id": "Item1",
+      "asset": "Panel_Item_Selected",
+      "rect": [
+        916,
+        222,
+        304,
+        354
+      ],
+      "product": "parts",
+      "state": "selected"
+    },
+    {
+      "id": "Item2",
+      "asset": "Panel_Item",
+      "rect": [
+        1236,
+        222,
+        304,
+        354
+      ],
+      "product": "supply",
+      "state": "stock"
+    },
+    {
+      "id": "Item3",
+      "asset": "Panel_Item",
+      "rect": [
+        1556,
+        222,
+        304,
+        354
+      ],
+      "product": "coffee",
+      "state": "normal"
+    },
+    {
+      "id": "Item4",
+      "asset": "Panel_Item",
+      "rect": [
+        916,
+        590,
+        304,
+        354
+      ],
+      "product": "note",
+      "state": "normal"
+    },
+    {
+      "id": "Item5",
+      "asset": "Panel_Item",
+      "rect": [
+        1236,
+        590,
+        304,
+        354
+      ],
+      "product": "card",
+      "state": "normal"
+    },
+    {
+      "id": "Item6",
+      "asset": "Panel_Item",
+      "rect": [
+        1556,
+        590,
+        304,
+        354
+      ],
+      "product": "unknown",
+      "state": "normal"
+    },
+    {
+      "id": "BuyBar",
+      "asset": "Panel_BuyBar",
+      "rect": [
+        944,
+        960,
+        930,
+        78
+      ]
+    }
+  ],
+  "text_boxes": [
+    {
+      "text": "05",
+      "rect": [
+        176,
+        42,
+        46,
+        35
+      ],
+      "font_size_px": 28,
+      "color": "#16181B",
+      "weight": 400,
+      "font": "Bahnschrift",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "상점",
+      "rect": [
+        265,
+        21,
+        176,
+        66
+      ],
+      "font_size_px": 59,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "SUPPLY EXCHANGE",
+      "rect": [
+        266,
+        94,
+        150,
+        19
+      ],
+      "font_size_px": 13,
+      "color": "#94999D",
+      "weight": 400,
+      "font": "Bahnschrift",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "1,240",
+      "rect": [
+        1250,
+        45,
+        92,
+        42
+      ],
+      "font_size_px": 25,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "36",
+      "rect": [
+        1423,
+        45,
+        48,
+        42
+      ],
+      "font_size_px": 25,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "2",
+      "rect": [
+        1553,
+        45,
+        48,
+        42
+      ],
+      "font_size_px": 25,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "전체",
+      "rect": [
+        960,
+        144,
+        192,
+        34
+      ],
+      "font_size_px": 23,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "강화 재료",
+      "rect": [
+        1191,
+        144,
+        192,
+        34
+      ],
+      "font_size_px": 23,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "선물",
+      "rect": [
+        1422,
+        144,
+        192,
+        34
+      ],
+      "font_size_px": 23,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "무색 카드",
+      "rect": [
+        1653,
+        144,
+        192,
+        34
+      ],
+      "font_size_px": 23,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "보유 1,240 → 구매 후 1,120",
+      "rect": [
+        964,
+        981,
+        350,
+        37
+      ],
+      "font_size_px": 20,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "-",
+      "rect": [
+        1323,
+        982,
+        34,
+        34
+      ],
+      "font_size_px": 24,
+      "color": "#16181B",
+      "weight": 400,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "+",
+      "rect": [
+        1399,
+        982,
+        34,
+        34
+      ],
+      "font_size_px": 24,
+      "color": "#16181B",
+      "weight": 400,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "1",
+      "rect": [
+        1359,
+        982,
+        38,
+        34
+      ],
+      "font_size_px": 23,
+      "color": "#16181B",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "120",
+      "rect": [
+        1494,
+        976,
+        144,
+        46
+      ],
+      "font_size_px": 35,
+      "color": "#0DB8F2",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "left-middle",
+      "baked_in_asset": false
+    },
+    {
+      "text": "구매하기 →",
+      "rect": [
+        1669,
+        970,
+        195,
+        58
+      ],
+      "font_size_px": 25,
+      "color": "#EEF0F2",
+      "weight": 700,
+      "font": "Malgun Gothic",
+      "alignment": "center-middle",
+      "baked_in_asset": false
+    }
+  ],
+  "item_template": {
+    "size": [
+      304,
+      354
+    ],
+    "text_boxes": [
+      {
+        "id": "index",
+        "rect": [
+          17,
+          15,
+          35,
+          18
+        ],
+        "size": 15,
+        "color": "#94999D"
+      },
+      {
+        "id": "stock",
+        "rect": [
+          184,
+          12,
+          105,
+          25
+        ],
+        "size": 15,
+        "color": "#16181B"
+      },
+      {
+        "id": "name",
+        "rect": [
+          23,
+          237,
+          258,
+          31
+        ],
+        "size": 26,
+        "color": "#16181B"
+      },
+      {
+        "id": "description",
+        "rect": [
+          23,
+          274,
+          258,
+          23
+        ],
+        "size": 18,
+        "color": "#16181B"
+      },
+      {
+        "id": "price",
+        "rect": [
+          64,
+          313,
+          204,
+          35
+        ],
+        "size": 30,
+        "color": "#16181B",
+        "insufficient_color": "#94999D"
+      },
+      {
+        "id": "state_band",
+        "rect": [
+          0,
+          140,
+          304,
+          44
+        ],
+        "size": 25,
+        "alignment": "center"
+      }
+    ],
+    "product_art_rect": [
+      23,
+      38,
+      258,
+      176
+    ],
+    "price_icon_rect": [
+      25,
+      319,
+      25,
+      25
+    ],
+    "card_front_rect": [
+      87,
+      31,
+      130,
+      202
+    ]
+  },
+  "dialogue": {
+    "rect": [
+      36,
+      893,
+      502,
+      129
+    ],
+    "name_box": [
+      95,
+      915,
+      410,
+      25
+    ],
+    "dialogue_box": [
+      95,
+      955,
+      410,
+      53
+    ],
+    "name_size": 18,
+    "dialogue_size": 22,
+    "name": "보급 담당",
+    "lines": {
+      "entry": "필요한 물건 있어? 천천히 둘러봐.",
+      "purchased": "준비해 뒀어. 잘 써.",
+      "insufficient": "탈린이 조금 모자라네.",
+      "sold_out": "지금은 재고가 없어."
+    },
+    "mockup": "Original dialogue pixels unchanged"
+  },
+  "keeper": {
+    "file": "Keeper_Full.png",
+    "rect": [
+      18,
+      39,
+      895,
+      1041
+    ],
+    "source_rect_ltrb": [
+      16,
+      34,
+      795,
+      941
+    ],
+    "occlusion_notice": "Not an unseen full-body reconstruction. Source crops the legs and dialogue occludes part of lower-left body; those pixels remain transparent. Use with dialogue at source placement."
+  },
+  "buybar": {
+    "rect": [
+      944,
+      960,
+      930,
+      78
+    ],
+    "quantity_minus_rect": [
+      1323,
+      982,
+      34,
+      34
+    ],
+    "quantity_text_rect": [
+      1359,
+      982,
+      38,
+      34
+    ],
+    "quantity_plus_rect": [
+      1399,
+      982,
+      34,
+      34
+    ],
+    "button_rect": [
+      1659,
+      960,
+      215,
+      78
+    ],
+    "formula": "remaining = balance - unitPrice * quantity",
+    "quantity_max": "min(sharedPartsStock, floor(balance / unitPrice), 99); unlock cards fixed at 1",
+    "example": {
+      "balance": 1240,
+      "unitPrice": 120,
+      "quantity": 1,
+      "remaining": 1120
+    }
+  },
+  "state_rules": {
+    "priority": [
+      "already_unlocked",
+      "sold_out",
+      "insufficient_currency"
+    ],
+    "shared_parts_stock": "2/3 applies to both parts products",
+    "sold_out": "Dim entire card; centered SoldOut band; no purchase",
+    "unlocked": "Unlocked band; price and currency icon hidden",
+    "unknown": "Armory silhouette + ???; no purchase",
+    "insufficient": "Gray price digits and disabled buy button"
+  },
+  "notes": [
+    "All panel/icon SVG assets are text-free; quantity symbols and labels belong to TMP.",
+    "Tab placement kept at shop right per user clarification; armory tab shape/height used.",
+    "The two card slots are visual previews; current game catalog contains the four physical products only.",
+    "Keeper is visible original pixels, with missing occluded pixels transparent; do not treat as a completed full-body illustration."
+  ]
+}

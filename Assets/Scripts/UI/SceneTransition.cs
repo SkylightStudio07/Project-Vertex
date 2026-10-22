@@ -5,43 +5,59 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// 씬 전환 막 (로비 종이 문법). SceneTransition.Load("씬 이름")만 부르면 된다. 귀환: Load(씬, "귀환", "기지로 복귀합니다", "RETURN  //  BASE")
-//   닫힘: 위 막(오른쪽에서)·아래 막(왼쪽에서)이 들어와 맞물리고, 이음새 선이 그어진 뒤 제목 틀·엠블럼·글자·로딩 칩이 나타난다
-//         막의 앞장서는 끝(위 막 왼쪽 / 아래 막 오른쪽)은 먹색 사선 띠라 들어오는 동안 < 모양으로 보인다
-//   로딩: 이음새 청록 막대가 진행률만큼 차오르고(선두 표식이 따라감), 엠블럼이 천천히 돌고, 로딩 칩 점이 차례로 깜빡인다
-//   열림: 새 씬이 켜진 뒤 글자가 빠지고 막이 반대 방향으로 빠지며 흰 섬광
-// 조각: Resources/SceneTransition/*.png (원본 ArtDirection/SceneTransitionMockup/Extracted, 좌표는 그 layout.json — 1920×1080 왼쪽 위 기준).
-//   2배 해상도(PPU 200) 조각이다. 막 한 장(2640×548)은 텍스처 한도 때문에 Lead / Body / Tail 세 조각을 한 부모 아래 붙여 움직인다.
-// 조각이 없으면 단색 도형으로 대신 그린다. 씬을 넘어가야 하므로 스스로 만든 DontDestroyOnLoad 오버레이 캔버스에 그리고 끝나면 사라진다.
+// 씬 전환 로딩 화면. SceneTransition.Load("씬 이름")만 부르면 된다.
+//   들어감: 로딩 화면이 지금 화면 위로 떠오른다 (회백 다각 면 바탕 · 가운데 VERTEX 엠블럼 · 안내 한 줄 · 청록 진행선 · 왼쪽 아래 FIELD GUIDE 팁)
+//   로딩: 엠블럼의 별만 주기적으로 세로축으로 뒤집히고(틀은 고정), 진행선이 차오르며 끝 마름모와 % 숫자가 따라간다
+//   나감: 로딩 화면이 덮은 채로 새 씬을 켜고, 로딩 화면이 걷히며 새 화면
+// 그림: Resources/SceneTransition (Loading_BG · Emblem_Star · Emblem_Frame · Line_Track · Line_Fill · Line_Head, 2배 해상도).
+//   원본 ArtDirection/LoadingMockup/Extracted_Draft, 좌표는 그 layout.json (1920×1080 왼쪽 위). 그림이 없으면 단색으로 대신 그린다.
+// 씬을 넘어가야 하므로 스스로 만든 DontDestroyOnLoad 오버레이 캔버스에 그리고 끝나면 사라진다.
 public class SceneTransition : MonoBehaviour
 {
     private const float W = 1920f, H = 1080f;
-    private const float CurtainW = 2640f, CurtainH = 548f;
-    private const float LeadW = 920f, BodyW = 1120f, TailW = 600f;
-    private const float UpperClosedX = -520f, LowerClosedX = -200f; // 닫혔을 때 앞장서는 사선 띠(390)는 화면 밖에 숨는다
-    private static readonly Color Ink = new(0.086f, 0.094f, 0.106f, 1f);     // #16181B
-    private static readonly Color Paper = new(0.933f, 0.941f, 0.949f, 1f);   // #EEF0F2
-    private static readonly Color Muted = new(0.447f, 0.475f, 0.498f, 1f);   // #72797F
-    private static readonly Color Faint = new(0.576f, 0.6f, 0.624f, 1f);     // #93999F
-    private static readonly Color Accent = new(0.05f, 0.72f, 0.95f, 1f);
+    private const float EmblemX = 960f, EmblemY = 380f, EmblemSize = 512f;
+    private const float TrackX = 159f, TrackY = 738f, TrackW = 1602f, TrackH = 6f;
+    private const float MinHold = 1.1f;
+    private static readonly Color Ink = new(0.086f, 0.094f, 0.106f, 1f);       // #16181B
+    private static readonly Color Cyan = new(0.051f, 0.722f, 0.949f, 1f);      // #0DB8F2
+    private static readonly Color StatusCol = new(0.376f, 0.404f, 0.427f, 1f); // #60676D
+    private static readonly Color PercentCol = new(0.271f, 0.298f, 0.325f, 1f);// #454C53
+    private static readonly Color LabelCol = new(0.49f, 0.514f, 0.541f, 1f);   // #7D838A
+    private static readonly Color TipCol = new(0.333f, 0.365f, 0.396f, 1f);    // #555D65
+
+    // FIELD GUIDE — 로딩마다 하나를 무작위로
+    private static readonly string[] Tips =
+    {
+        "동료의 호감도가 오르면 새로운 기록이 열립니다.",
+        "특효 카드는 맞는 속성의 적에게 피해가 1.2배로 들어갑니다.",
+        "런이 끝나면 남은 크레딧의 1/10이 탈린으로 바뀝니다.",
+        "탈린은 로비 상점에서 파츠와 선물로 바꿀 수 있습니다.",
+        "상점의 파츠 재고는 스토리가 진행될 때마다 다시 채워집니다.",
+        "의뢰는 한 번에 두 개까지 수주할 수 있습니다.",
+        "탄창의 첫 탄과 마지막 탄에는 추가 효과가 붙는 카드가 있습니다.",
+        "적의 의도 아이콘이 크게 흔들리면 강한 공격이 옵니다.",
+        "막 보스를 처음 쓰러뜨리면 아티팩트와 거점 개발도를 얻습니다.",
+        "적을 여러 번 쓰러뜨릴수록 아카이브의 관측 기록이 열립니다.",
+        "훈련장에서는 기록에 남지 않는 모의 전투를 할 수 있습니다.",
+    };
 
     public static bool IsTransitioning { get; private set; }
 
-    private RectTransform _root, _top, _bottom, _seam, _seamFill, _seamHead, _emblem;
-    private CanvasGroup _textCg, _chipCg, _seamCg;
-    private TextMeshProUGUI _title;
-    private Image[] _dots;
-    private Image _flash;
-    private const float MinHold = 0.9f;
+    private CanvasGroup _stage;
+    private RectTransform _star, _frame, _head;
+    private Image _fill;
+    private TextMeshProUGUI _status, _percent;
+    private string _statusText;
+    private Sequence _flipLoop;
 
-    // tag: 제목 틀 왼쪽 위 작은 먹색 칸 글자 (훈련은 "SIM"). 비우면 칸을 숨긴다
+    // title·eng는 예전 막 연출의 큰 제목용이라 지금은 쓰지 않는다. 안내 한 줄은 sub, tag("SIM")는 앞에 붙인다
     public static void Load(string sceneName, string title = "출정", string sub = "작전 지역으로 이동합니다", string eng = "OPERATION  //  DEPLOY", string tag = null)
     {
         if (IsTransitioning || string.IsNullOrWhiteSpace(sceneName)) return;
         var go = new GameObject("[SceneTransition]");
         DontDestroyOnLoad(go);
         var t = go.AddComponent<SceneTransition>();
-        t.Build(title, sub, eng, tag);
+        t.Build(string.IsNullOrEmpty(tag) ? sub : $"{tag}  ·  {sub}");
         t.StartCoroutine(t.Run(sceneName));
     }
 
@@ -50,90 +66,87 @@ public class SceneTransition : MonoBehaviour
         IsTransitioning = true;
         Time.timeScale = 1f;
 
-        // 1) 닫힘
-        _top.anchoredPosition = new Vector2(W + 100f, 0f);
-        _bottom.anchoredPosition = new Vector2(-CurtainW - 100f, -532f);
-        _seam.localScale = new Vector3(0f, 1f, 1f);
-        _seamCg.alpha = 1f;
+        // 1) 로딩 화면이 지금 화면 위로 떠오른다
+        _stage.alpha = 0f;
         SetFill(0f);
-        _textCg.alpha = 0f;
-        _chipCg.alpha = 0f;
-        _title.characterSpacing = 60f;
-        _emblem.localScale = Vector3.one * 1.4f;
-        var close = DOTween.Sequence().SetUpdate(true).SetLink(gameObject)
-            .Append(_top.DOAnchorPosX(UpperClosedX, 0.42f).SetEase(Ease.OutCubic))
-            .Insert(0.06f, _bottom.DOAnchorPosX(LowerClosedX, 0.42f).SetEase(Ease.OutCubic))
-            .Insert(0.3f, _seam.DOScaleX(1f, 0.3f).SetEase(Ease.OutCubic))
-            .Insert(0.38f, _textCg.DOFade(1f, 0.22f))
-            .Insert(0.38f, _emblem.DOScale(1f, 0.35f).SetEase(Ease.OutBack))
-            .Insert(0.38f, DOTween.To(() => _title.characterSpacing, v => _title.characterSpacing = v, 4f, 0.5f).SetEase(Ease.OutCubic))
-            .Insert(0.5f, _chipCg.DOFade(1f, 0.2f));
-        yield return close.WaitForCompletion();
+        _star.localScale = Vector3.one * 0.7f;
+        _frame.localScale = Vector3.one * 1.08f;
+        var enter = DOTween.Sequence().SetUpdate(true).SetLink(gameObject)
+            .Append(_stage.DOFade(1f, 0.3f).SetEase(Ease.OutQuad))
+            .Insert(0.06f, _frame.DOScale(1f, 0.45f).SetEase(Ease.OutCubic))
+            .Insert(0.1f, _star.DOScale(1f, 0.45f).SetEase(Ease.OutBack));
+        StartFlipLoop();
+        StartCoroutine(Dots());
+        yield return enter.WaitForCompletion(); // 로딩 화면이 다 덮은 뒤에 이전 씬을 내린다
 
-        // 로딩 중 반복 연출: 엠블럼 회전, 로딩 칩 점 차례로 깜빡임
-        _emblem.DORotate(new Vector3(0f, 0f, -360f), 6f, RotateMode.FastBeyond360)
-               .SetEase(Ease.Linear).SetLoops(-1).SetUpdate(true).SetLink(gameObject);
-        for (int i = 0; i < _dots.Length; i++)
-            _dots[i].DOFade(1f, 0.25f).SetDelay(i * 0.18f).SetLoops(-1, LoopType.Yoyo)
-                    .SetUpdate(true).SetLink(_dots[i].gameObject);
-
-        // 2) 로딩 — 막이 완전히 닫힌 뒤에 불러 이전 씬이 사라지는 순간을 가린다
+        // 2) 로딩
         float shownAt = Time.unscaledTime;
         var op = SceneManager.LoadSceneAsync(sceneName);
-        if (op == null) { yield return Open(); yield break; }
+        if (op == null) { yield return Leave(); yield break; }
         op.allowSceneActivation = false;
         float shown = 0f;
         while (op.progress < 0.9f || Time.unscaledTime - shownAt < MinHold)
         {
             float target = Mathf.Min(op.progress / 0.9f, (Time.unscaledTime - shownAt) / MinHold);
-            shown = Mathf.MoveTowards(shown, target, Time.unscaledDeltaTime * 2.5f);
+            shown = Mathf.MoveTowards(shown, target, Time.unscaledDeltaTime * 2f);
             SetFill(shown);
             yield return null;
         }
-        SetFill(1f);
+        while (shown < 1f) { shown = Mathf.MoveTowards(shown, 1f, Time.unscaledDeltaTime * 3f); SetFill(shown); yield return null; }
+        yield return new WaitForSecondsRealtime(0.12f);
+
+        // 3) 로딩 화면이 덮은 채로 새 씬을 켠다 → 새 씬의 Start가 한 번 돈 뒤에 로딩 화면이 걷힌다
         op.allowSceneActivation = true;
         while (!op.isDone) yield return null;
-
-        // 새 씬의 Start(런 초기화·첫 화면 열기)가 한 번 돈 뒤에 연다
         yield return null;
-        yield return new WaitForSecondsRealtime(0.15f);
-        yield return Open();
+        yield return new WaitForSecondsRealtime(0.1f);
+        yield return Leave();
     }
 
-    private IEnumerator Open()
+    private IEnumerator Leave()
     {
-        var textRt = (RectTransform)_textCg.transform;
-        var open = DOTween.Sequence().SetUpdate(true).SetLink(gameObject)
-            .Append(_textCg.DOFade(0f, 0.18f))
-            .Join(textRt.DOAnchorPosX(textRt.anchoredPosition.x + 80f, 0.25f).SetEase(Ease.InCubic))
-            .Join(_chipCg.DOFade(0f, 0.15f))
-            .Insert(0.08f, _seamCg.DOFade(0f, 0.2f))
-            .Insert(0.08f, _seamFill.GetComponent<Image>().DOFade(0f, 0.2f))
-            .Insert(0.1f, _top.DOAnchorPosX(-CurtainW - 100f, 0.5f).SetEase(Ease.InCubic))
-            .Insert(0.14f, _bottom.DOAnchorPosX(W + 100f, 0.5f).SetEase(Ease.InCubic))
-            .Insert(0.34f, _flash.DOFade(0.35f, 0.06f))
-            .Insert(0.4f, _flash.DOFade(0f, 0.45f));
-        if (_seamHead != null) _seamHead.gameObject.SetActive(false);
-        yield return open.WaitForCompletion();
+        yield return _stage.DOFade(0f, 0.4f).SetEase(Ease.InQuad).SetUpdate(true).SetLink(gameObject).WaitForCompletion();
+        _flipLoop?.Kill();
         IsTransitioning = false;
         Destroy(gameObject);
     }
 
+    // 별: 잠깐 멈춤 → 세로축으로 뒤집혀 납작해짐 → 다시 펼쳐짐 (틀은 고정)
+    private void StartFlipLoop()
+    {
+        _flipLoop = DOTween.Sequence().SetUpdate(true).SetLink(gameObject)
+            .AppendInterval(0.7f)
+            .Append(_star.DOScaleX(0f, 0.18f).SetEase(Ease.InQuad))
+            .Append(_star.DOScaleX(1f, 0.26f).SetEase(Ease.OutBack))
+            .SetLoops(-1);
+    }
+
+    // "기지로 복귀합니다" 뒤에 점 . .. ...
+    private IEnumerator Dots()
+    {
+        int n = 0;
+        while (true)
+        {
+            _status.text = _statusText + new string('.', n % 4);
+            n++;
+            yield return new WaitForSecondsRealtime(0.35f);
+        }
+    }
+
     private void SetFill(float t)
     {
-        _seamFill.localScale = new Vector3(t, 1f, 1f);
-        _seamFill.gameObject.SetActive(t > 0.001f);
-        if (_seamHead != null)
-        {
-            _seamHead.anchoredPosition = new Vector2(W * t, -540f);
-            _seamHead.gameObject.SetActive(t > 0.01f && t < 0.999f);
-        }
+        _fill.rectTransform.sizeDelta = new Vector2(TrackW * t, TrackH);
+        _fill.enabled = t > 0.002f;
+        _head.anchoredPosition = new Vector2(TrackX + TrackW * t, -(TrackY + TrackH * 0.5f));
+        _head.gameObject.SetActive(t > 0.002f);
+        _percent.text = Mathf.RoundToInt(t * 100f) + "%";
     }
 
     // ───────── 생성 ─────────
 
-    private void Build(string title, string sub, string eng, string tag)
+    private void Build(string status)
     {
+        _statusText = status;
         var canvas = gameObject.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.sortingOrder = 1000;
@@ -143,153 +156,83 @@ public class SceneTransition : MonoBehaviour
         scaler.matchWidthOrHeight = 0.5f;
         gameObject.AddComponent<GraphicRaycaster>();
 
-        // 1920×1080 판을 화면 가운데에 두고 그 위에 왼쪽 위 기준으로 배치한다
-        _root = NewRect("Stage", transform);
-        _root.anchorMin = _root.anchorMax = _root.pivot = new Vector2(0.5f, 0.5f);
-        _root.sizeDelta = new Vector2(W, H);
-
         var blocker = NewGraphic<Image>("Blocker", transform); // 입력 차단 (화면 전체, 투명)
-        var brt = blocker.rectTransform;
-        brt.anchorMin = Vector2.zero; brt.anchorMax = Vector2.one; brt.offsetMin = brt.offsetMax = Vector2.zero;
+        Stretch(blocker.rectTransform);
         blocker.color = new Color(0f, 0f, 0f, 0f);
         blocker.raycastTarget = true;
-        blocker.transform.SetAsFirstSibling();
 
-        // 막: 위는 Lead(왼쪽 사선)-Body-Tail, 아래는 Tail-Body-Lead(오른쪽 사선). 막에 붙은 작은 글자는 막과 같이 움직인다
-        _top = Curtain("CurtainU", UpperClosedX, 0f, false, out var uLead, out var uTail);
-        NewText("Brand", uLead, "VERTEX  //  TRANSIT", 15f, Ink, 616f, 40f, 304f, 24f).characterSpacing = 30f;
-        NewText("Motto", uLead, "EXPEDITION\nPEOPLE\nA MORE DISTANT TOMORROW", 10f, Faint, 616f, 82f, 302f, 46f).characterSpacing = 20f;
-        NewText("No", uTail, "01", 15f, Faint, 286f, 40f, 34f, 22f).alignment = TextAlignmentOptions.Center;
+        var stageRt = NewRect("Stage", transform);
+        Stretch(stageRt);
+        _stage = stageRt.gameObject.AddComponent<CanvasGroup>();
+        var bg = NewGraphic<Image>("Background", stageRt);
+        Stretch(bg.rectTransform);
+        bg.sprite = LoadSprite("Loading_BG");
+        bg.color = bg.sprite != null ? Color.white : new Color(0.933f, 0.941f, 0.949f, 1f);
 
-        _bottom = Curtain("CurtainL", LowerClosedX, 532f, true, out var lLead, out var lTail);
-        NewText("No", lLead, "02", 15f, Faint, 292f, 352f, 34f, 22f).alignment = TextAlignmentOptions.Center;
-        NewText("Motto", lTail, "SHELTER\nPEOPLE\nTOWARD A CLEANER TOMORROW", 10f, Faint, 296f, 424f, 324f, 40f).characterSpacing = 20f;
+        // 1920×1080 판을 가운데에 두고 왼쪽 위 기준으로 배치
+        var root = NewRect("Board", stageRt);
+        root.anchorMin = root.anchorMax = root.pivot = new Vector2(0.5f, 0.5f);
+        root.sizeDelta = new Vector2(W, H);
 
-        // 이음새 (y=540): 레일 → 채움(왼쪽 기준 가로 스케일) → 선두 표식
-        _seam = Place("Seam", _root, 0f, 528f, W, 24f);
-        _seam.pivot = new Vector2(0.5f, 0.5f);
-        _seam.anchoredPosition = new Vector2(W * 0.5f, -540f);
-        _seamCg = _seam.gameObject.AddComponent<CanvasGroup>();
-        SpriteOr("Seam_Base", _seam, 0f, 0f, W, 24f, Ink);
-        var fill = SpriteOr("Seam_Fill", _root, 0f, 537f, W, 6f, Accent);
-        _seamFill = fill.rectTransform;
-        _seamFill.pivot = new Vector2(0f, 1f);
-        _seamFill.anchoredPosition = new Vector2(0f, -537f);
-        if (LoadSprite("Seam_Head") != null)
-        {
-            _seamHead = SpriteOr("Seam_Head", _root, 0f, 524f, 32f, 32f, Accent).rectTransform;
-            _seamHead.pivot = new Vector2(0.5f, 0.5f);
-        }
+        // 진행선: 회색 바탕 → 청록 채움 → 끝 마름모
+        var track = Sprite("Track", root, "Line_Track", TrackX, TrackY, TrackW, TrackH, new Color(0.75f, 0.76f, 0.78f, 1f));
+        Sliced(track);
+        _fill = Sprite("Fill", root, "Line_Fill", TrackX, TrackY, 0f, TrackH, Cyan);
+        Sliced(_fill);
+        var head = Sprite("Head", root, "Line_Head", 0f, 0f, 26f, 26f, Cyan);
+        _head = head.rectTransform;
+        _head.pivot = new Vector2(0.5f, 0.5f);
 
-        // 가운데 글자 무리 (제목 틀·엠블럼·글자). 페이드·밀림을 한 번에
-        var text = Place("TitleGroup", _root, 0f, 0f, W, H);
-        _textCg = text.gameObject.AddComponent<CanvasGroup>();
-        SpriteOr("TitleFrame", text, 468f, 306f, 984f, 364f, Color.clear);
-        var emblem = SpriteOr("Emblem", text, 604f, 340f, 180f, 180f, Color.clear);
-        _emblem = emblem.rectTransform;
-        _emblem.pivot = new Vector2(0.5f, 0.5f);
-        _emblem.anchoredPosition = new Vector2(694f, -430f);
-        var engText = NewText("Eng", text, eng, 20f, Accent, 764f, 328f, 500f, 26f);
-        engText.characterSpacing = 30f;
-        engText.alignment = TextAlignmentOptions.Center;
-        _title = NewText("Title", text, title, 124f, Ink, 745f, 368f, 500f, 136f);
-        _title.fontStyle = FontStyles.Bold;
-        _title.alignment = TextAlignmentOptions.Center;
-        var subText = NewText("Sub", text, sub, 30f, Muted, 697f, 574f, 600f, 42f);
-        subText.characterSpacing = 4f;
-        subText.alignment = TextAlignmentOptions.Center;
-        if (!string.IsNullOrEmpty(tag))
-        {
-            var tagImg = SpriteOr("Tag_Sim", text, 474f, 274f, 150f, 34f, Ink);
-            NewText("Label", tagImg.transform, tag, 20f, Color.white, 8f, 3f, 116f, 26f).alignment = TextAlignmentOptions.Center;
-        }
+        // 엠블럼: 틀(고정) + 별(뒤집힘), 같은 512 칸·같은 중심
+        _frame = Centered(Sprite("Frame", root, "Emblem_Frame", 0f, 0f, EmblemSize, EmblemSize, new Color(0, 0, 0, 0)).rectTransform);
+        _star = Centered(Sprite("Star", root, "Emblem_Star", 0f, 0f, EmblemSize, EmblemSize, Ink).rectTransform);
 
-        // 우하단 로딩 칩 + 깜빡이는 점 3개
-        var chip = Place("LoadingChip", _root, 1432f, 946f, 364f, 48f);
-        _chipCg = chip.gameObject.AddComponent<CanvasGroup>();
-        SpriteOr("LoadingChip", chip, 0f, 0f, 364f, 48f, Ink);
-        _dots = new Image[3];
-        var dotSprite = LoadSprite("Chip_Dot");
-        float[] dotX = { 254f, 276f, 298f };
-        for (int i = 0; i < 3; i++)
-        {
-            var d = NewGraphic<Image>("Dot" + i, chip);
-            Place(d.rectTransform, dotX[i] - 4f, 20f, 8f, 8f);
-            d.sprite = dotSprite != null ? dotSprite : Circle;
-            d.color = new Color(1f, 1f, 1f, 0f);
-            _dots[i] = d;
-        }
-        NewText("Label", chip, "NOW LOADING", 16f, Color.white, 68f, 13f, 170f, 22f).characterSpacing = 20f;
-
-        _flash = NewGraphic<Image>("Flash", transform);
-        var frt = _flash.rectTransform;
-        frt.anchorMin = Vector2.zero; frt.anchorMax = Vector2.one; frt.offsetMin = frt.offsetMax = Vector2.zero;
-        _flash.color = new Color(1f, 1f, 1f, 0f);
+        // 글자
+        var word = NewText("Wordmark", root, "VERTEX", 30f, Ink, 760f, 540f, 400f, 39f);
+        word.alignment = TextAlignmentOptions.Center;
+        word.characterSpacing = 73f; // 디자인 자간 22px ÷ 30px
+        _status = NewText("Status", root, status, 26f, StatusCol, 560f, 601f, 800f, 38f);
+        _status.alignment = TextAlignmentOptions.Center;
+        _percent = NewText("Percent", root, "0%", 28f, PercentCol, 1565f, 759f, 200f, 32f);
+        _percent.alignment = TextAlignmentOptions.MidlineRight;
+        var label = NewText("TipLabel", root, "FIELD GUIDE", 13f, LabelCol, 129f, 949f, 200f, 20f);
+        label.characterSpacing = 23f;
+        NewText("Tip", root, Tips[Random.Range(0, Tips.Length)], 21f, TipCol, 129f, 978f, 900f, 29f);
+        var footer = NewText("Footer", root, "PROJECT VERTEX  /  ARCHIVE", 12f, LabelCol, 1363f, 980f, 400f, 20f);
+        footer.alignment = TextAlignmentOptions.MidlineRight;
+        footer.characterSpacing = 25f;
     }
 
-    // 막 부모(2640×548) + 조각 세 개. 그림이 없으면 사선 종이색 도형 하나로 대신한다
-    private RectTransform Curtain(string name, float x, float y, bool leadOnRight, out Transform lead, out Transform tail)
+    private RectTransform Centered(RectTransform rt)
     {
-        var rt = Place(name, _root, x, y, CurtainW, CurtainH);
-        if (LoadSprite(name + "_Lead") == null)
-        {
-            var q = NewGraphic<UISkewQuad>(name + "_Fallback", rt);
-            q.color = Paper;
-            q.Skew = 70f;
-            Place(q.rectTransform, 0f, 0f, CurtainW, CurtainH);
-            lead = Place(name + "_Lead", rt, leadOnRight ? TailW + BodyW : 0f, 0f, LeadW, CurtainH);
-            tail = Place(name + "_Tail", rt, leadOnRight ? 0f : LeadW + BodyW, 0f, TailW, CurtainH);
-            return rt;
-        }
-        float leadX = leadOnRight ? TailW + BodyW : 0f;
-        float tailX = leadOnRight ? 0f : LeadW + BodyW;
-        float bodyX = leadOnRight ? TailW : LeadW;
-        lead = SpriteOr(name + "_Lead", rt, leadX, 0f, LeadW, CurtainH, Paper).transform;
-        SpriteOr(name + "_Body", rt, bodyX, 0f, BodyW, CurtainH, Paper);
-        tail = SpriteOr(name + "_Tail", rt, tailX, 0f, TailW, CurtainH, Paper).transform;
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(EmblemX, -EmblemY);
         return rt;
+    }
+
+    // 2배 해상도 9-slice (가로로 늘림, 양 끝 유지)
+    private static void Sliced(Image img)
+    {
+        if (img.sprite == null) return;
+        img.type = Image.Type.Sliced;
+        img.pixelsPerUnitMultiplier = 2f;
     }
 
     private static Sprite LoadSprite(string name) => Resources.Load<Sprite>("SceneTransition/" + name);
 
-    private static Sprite _circle;
-    private static Sprite Circle
-    {
-        get
-        {
-            if (_circle != null) return _circle;
-            const int n = 32;
-            var tex = new Texture2D(n, n, TextureFormat.RGBA32, false);
-            var px = new Color32[n * n];
-            for (int y = 0; y < n; y++)
-            for (int x = 0; x < n; x++)
-            {
-                float d = Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), new Vector2(n * 0.5f, n * 0.5f));
-                px[y * n + x] = new Color32(255, 255, 255, (byte)(Mathf.Clamp01(n * 0.5f - d) * 255));
-            }
-            tex.SetPixels32(px);
-            tex.Apply();
-            _circle = Sprite.Create(tex, new Rect(0, 0, n, n), new Vector2(0.5f, 0.5f));
-            return _circle;
-        }
-    }
-
-    // 그림 조각을 놓는다. 그림이 없으면 fallback 색의 사각형(투명이면 안 보임)
-    private Image SpriteOr(string name, Transform parent, float x, float y, float w, float h, Color fallback)
+    private static Image Sprite(string name, Transform parent, string sprite, float x, float y, float w, float h, Color fallback)
     {
         var img = NewGraphic<Image>(name, parent);
         Place(img.rectTransform, x, y, w, h);
-        var sprite = LoadSprite(name);
-        img.sprite = sprite;
-        img.color = sprite != null ? Color.white : fallback;
+        img.sprite = LoadSprite(sprite);
+        img.color = img.sprite != null ? Color.white : fallback;
         return img;
     }
 
-    private static RectTransform Place(string name, Transform parent, float x, float y, float w, float h)
+    private static void Stretch(RectTransform rt)
     {
-        var rt = NewRect(name, parent);
-        Place(rt, x, y, w, h);
-        return rt;
+        rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
+        rt.offsetMin = rt.offsetMax = Vector2.zero;
     }
 
     private static void Place(RectTransform rt, float x, float y, float w, float h)

@@ -36,6 +36,14 @@ public static class MetaProgress
         public int development;
         public List<string> milestones = new();
         public int shopPartsStock;
+        public List<ItemCount> gifts = new(); // 로비 상점에서 산 선물 (동료 화면에서 준다)
+    }
+
+    [Serializable]
+    private class ItemCount
+    {
+        public string id;
+        public int count;
     }
 
     private static SaveData s_data;
@@ -129,10 +137,35 @@ public static class MetaProgress
         Save();
     }
 
-    public static bool TryTakeShopParts()
+    public static bool TryTakeShopParts(int count = 1)
     {
-        if (Data.shopPartsStock <= 0) return false;
-        Data.shopPartsStock--;
+        if (count <= 0 || Data.shopPartsStock < count) return false;
+        Data.shopPartsStock -= count;
+        Save();
+        return true;
+    }
+
+    // ── 선물 (로비 상점에서 사고, 동료 화면에서 준다) ──
+    public static int GiftCount(string id)
+    {
+        var e = Data.gifts.Find(g => g.id == id);
+        return e != null ? e.count : 0;
+    }
+
+    public static void AddGift(string id, int count)
+    {
+        if (string.IsNullOrEmpty(id) || count <= 0) return;
+        var e = Data.gifts.Find(g => g.id == id);
+        if (e == null) Data.gifts.Add(e = new ItemCount { id = id });
+        e.count += count;
+        Save();
+    }
+
+    public static bool TryTakeGift(string id, int count = 1)
+    {
+        var e = Data.gifts.Find(g => g.id == id);
+        if (e == null || count <= 0 || e.count < count) return false;
+        e.count -= count;
         Save();
         return true;
     }
