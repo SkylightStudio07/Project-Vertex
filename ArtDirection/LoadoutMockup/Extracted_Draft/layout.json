@@ -1,0 +1,2664 @@
+{
+  "version": 3,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "source_mockup": {
+    "file": "../Loadout_Mockup_v2.png",
+    "size": [
+      1672,
+      941
+    ],
+    "reference_scale_xy": [
+      1.1483253588516746,
+      1.1477151965993624
+    ],
+    "note": "Scaled reference; weapon info moved slightly down to fit unchanged right-facing WeaponSVG pistol without occlusion."
+  },
+  "assets": {
+    "Loadout_BG": {
+      "file": "Loadout_BG.png",
+      "svg": "SVG/Loadout_BG.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        1920,
+        1080
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "opaque": true
+    },
+    "Panel_Title": {
+      "file": "Panel_Title.png",
+      "svg": "SVG/Panel_Title.svg",
+      "logical_size": [
+        500,
+        122
+      ],
+      "source_pixels": [
+        1000,
+        244
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          125,
+          10,
+          100,
+          10
+        ],
+        "source_pixels_left_bottom_right_top": [
+          250,
+          20,
+          200,
+          20
+        ],
+        "minimum_logical_size": [
+          226,
+          21
+        ]
+      }
+    },
+    "Button_Back": {
+      "file": "Button_Back.png",
+      "svg": "SVG/Button_Back.svg",
+      "logical_size": [
+        248,
+        60
+      ],
+      "source_pixels": [
+        496,
+        120
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "source_pixels_left_bottom_right_top": [
+          40,
+          40,
+          40,
+          40
+        ],
+        "minimum_logical_size": [
+          41,
+          41
+        ]
+      }
+    },
+    "Tag_Selected": {
+      "file": "Tag_Selected.png",
+      "svg": "SVG/Tag_Selected.svg",
+      "logical_size": [
+        202,
+        48
+      ],
+      "source_pixels": [
+        404,
+        96
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          45,
+          3,
+          45,
+          3
+        ],
+        "source_pixels_left_bottom_right_top": [
+          90,
+          6,
+          90,
+          6
+        ],
+        "minimum_logical_size": [
+          91,
+          7
+        ]
+      }
+    },
+    "Panel_WeaponInfo": {
+      "file": "Panel_WeaponInfo.png",
+      "svg": "SVG/Panel_WeaponInfo.svg",
+      "logical_size": [
+        590,
+        330
+      ],
+      "source_pixels": [
+        1180,
+        660
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          35,
+          20,
+          205,
+          72
+        ],
+        "source_pixels_left_bottom_right_top": [
+          70,
+          40,
+          410,
+          144
+        ],
+        "minimum_logical_size": [
+          241,
+          93
+        ]
+      }
+    },
+    "Rule_Vertical": {
+      "file": "Rule_Vertical.png",
+      "svg": "SVG/Rule_Vertical.svg",
+      "logical_size": [
+        2,
+        80
+      ],
+      "source_pixels": [
+        4,
+        160
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "source_pixels_left_bottom_right_top": [
+          0,
+          2,
+          0,
+          2
+        ],
+        "minimum_logical_size": [
+          1,
+          3
+        ]
+      }
+    },
+    "Rule_Horizontal": {
+      "file": "Rule_Horizontal.png",
+      "svg": "SVG/Rule_Horizontal.svg",
+      "logical_size": [
+        510,
+        2
+      ],
+      "source_pixels": [
+        1020,
+        4
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "source_pixels_left_bottom_right_top": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "minimum_logical_size": [
+          3,
+          1
+        ]
+      }
+    },
+    "Button_ToArmory": {
+      "file": "Button_ToArmory.png",
+      "svg": "SVG/Button_ToArmory.svg",
+      "logical_size": [
+        350,
+        38
+      ],
+      "source_pixels": [
+        700,
+        76
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          1,
+          4,
+          40,
+          4
+        ],
+        "source_pixels_left_bottom_right_top": [
+          2,
+          8,
+          80,
+          8
+        ],
+        "minimum_logical_size": [
+          42,
+          9
+        ]
+      }
+    },
+    "WeaponSlot": {
+      "file": "WeaponSlot.png",
+      "svg": "SVG/WeaponSlot.svg",
+      "logical_size": [
+        250,
+        172
+      ],
+      "source_pixels": [
+        500,
+        344
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          57,
+          24,
+          8
+        ],
+        "source_pixels_left_bottom_right_top": [
+          48,
+          114,
+          48,
+          16
+        ],
+        "minimum_logical_size": [
+          49,
+          66
+        ]
+      }
+    },
+    "WeaponSlot_Selected": {
+      "file": "WeaponSlot_Selected.png",
+      "svg": "SVG/WeaponSlot_Selected.svg",
+      "logical_size": [
+        250,
+        172
+      ],
+      "source_pixels": [
+        500,
+        344
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          57,
+          24,
+          8
+        ],
+        "source_pixels_left_bottom_right_top": [
+          48,
+          114,
+          48,
+          16
+        ],
+        "minimum_logical_size": [
+          49,
+          66
+        ]
+      }
+    },
+    "WeaponSlot_Locked": {
+      "file": "WeaponSlot_Locked.png",
+      "svg": "SVG/WeaponSlot_Locked.svg",
+      "logical_size": [
+        250,
+        172
+      ],
+      "source_pixels": [
+        500,
+        344
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          57,
+          24,
+          8
+        ],
+        "source_pixels_left_bottom_right_top": [
+          48,
+          114,
+          48,
+          16
+        ],
+        "minimum_logical_size": [
+          49,
+          66
+        ]
+      }
+    },
+    "WeaponSlot_Empty": {
+      "file": "WeaponSlot_Empty.png",
+      "svg": "SVG/WeaponSlot_Empty.svg",
+      "logical_size": [
+        250,
+        172
+      ],
+      "source_pixels": [
+        500,
+        344
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          57,
+          24,
+          8
+        ],
+        "source_pixels_left_bottom_right_top": [
+          48,
+          114,
+          48,
+          16
+        ],
+        "minimum_logical_size": [
+          49,
+          66
+        ]
+      }
+    },
+    "Mark_Empty": {
+      "file": "Mark_Empty.png",
+      "svg": "SVG/Mark_Empty.svg",
+      "logical_size": [
+        38,
+        38
+      ],
+      "source_pixels": [
+        76,
+        76
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2"
+    },
+    "Icon_Lock": {
+      "file": "Icon_Lock.png",
+      "svg": "SVG/Icon_Lock.svg",
+      "logical_size": [
+        44,
+        54
+      ],
+      "source_pixels": [
+        88,
+        108
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2"
+    },
+    "Panel_Section": {
+      "file": "Panel_Section.png",
+      "svg": "SVG/Panel_Section.svg",
+      "logical_size": [
+        610,
+        480
+      ],
+      "source_pixels": [
+        1220,
+        960
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "fixed_header_logical_height": 84,
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          28,
+          18,
+          260,
+          90
+        ],
+        "source_pixels_left_bottom_right_top": [
+          56,
+          36,
+          520,
+          180
+        ],
+        "minimum_logical_size": [
+          289,
+          109
+        ]
+      }
+    },
+    "Row_Deck": {
+      "file": "Row_Deck.png",
+      "svg": "SVG/Row_Deck.svg",
+      "logical_size": [
+        562,
+        110
+      ],
+      "source_pixels": [
+        1124,
+        220
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "source_pixels_left_bottom_right_top": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "minimum_logical_size": [
+          9,
+          9
+        ]
+      }
+    },
+    "Slot_CardIcon": {
+      "file": "Slot_CardIcon.png",
+      "svg": "SVG/Slot_CardIcon.svg",
+      "logical_size": [
+        80,
+        80
+      ],
+      "source_pixels": [
+        160,
+        160
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "source_pixels_left_bottom_right_top": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "minimum_logical_size": [
+          9,
+          9
+        ]
+      }
+    },
+    "Icon_Card_Attack": {
+      "file": "Icon_Card_Attack.png",
+      "svg": "SVG/Icon_Card_Attack.svg",
+      "logical_size": [
+        64,
+        64
+      ],
+      "source_pixels": [
+        128,
+        128
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2"
+    },
+    "Icon_Card_Defense": {
+      "file": "Icon_Card_Defense.png",
+      "svg": "SVG/Icon_Card_Defense.svg",
+      "logical_size": [
+        64,
+        64
+      ],
+      "source_pixels": [
+        128,
+        128
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2"
+    },
+    "Icon_Card_Reload": {
+      "file": "Icon_Card_Reload.png",
+      "svg": "SVG/Icon_Card_Reload.svg",
+      "logical_size": [
+        64,
+        64
+      ],
+      "source_pixels": [
+        128,
+        128
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2"
+    },
+    "Panel_Perk_Locked": {
+      "file": "Panel_Perk_Locked.png",
+      "svg": "SVG/Panel_Perk_Locked.svg",
+      "logical_size": [
+        548,
+        128
+      ],
+      "source_pixels": [
+        1096,
+        256
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Panel_Perk": {
+      "file": "Panel_Perk.png",
+      "svg": "SVG/Panel_Perk.svg",
+      "logical_size": [
+        548,
+        128
+      ],
+      "source_pixels": [
+        1096,
+        256
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "source_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "minimum_logical_size": [
+          49,
+          49
+        ]
+      }
+    },
+    "Perk_Thumbnail": {
+      "file": "Perk_Thumbnail.png",
+      "svg": "SVG/Perk_Thumbnail.svg",
+      "logical_size": [
+        83,
+        100
+      ],
+      "source_pixels": [
+        166,
+        200
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "preserve_aspect": true,
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          10,
+          10,
+          10,
+          10
+        ],
+        "source_pixels_left_bottom_right_top": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "minimum_logical_size": [
+          21,
+          21
+        ]
+      }
+    },
+    "Button_Deploy": {
+      "file": "Button_Deploy.png",
+      "svg": "SVG/Button_Deploy.svg",
+      "logical_size": [
+        610,
+        145
+      ],
+      "source_pixels": [
+        1220,
+        290
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          30,
+          30,
+          228,
+          30
+        ],
+        "source_pixels_left_bottom_right_top": [
+          60,
+          60,
+          456,
+          60
+        ],
+        "minimum_logical_size": [
+          259,
+          61
+        ]
+      }
+    },
+    "Button_Deploy_Hover": {
+      "file": "Button_Deploy_Hover.png",
+      "svg": "SVG/Button_Deploy_Hover.svg",
+      "logical_size": [
+        610,
+        145
+      ],
+      "source_pixels": [
+        1220,
+        290
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          30,
+          30,
+          228,
+          30
+        ],
+        "source_pixels_left_bottom_right_top": [
+          60,
+          60,
+          456,
+          60
+        ],
+        "minimum_logical_size": [
+          259,
+          61
+        ]
+      }
+    },
+    "Button_Deploy_Disabled": {
+      "file": "Button_Deploy_Disabled.png",
+      "svg": "SVG/Button_Deploy_Disabled.svg",
+      "logical_size": [
+        610,
+        145
+      ],
+      "source_pixels": [
+        1220,
+        290
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          30,
+          30,
+          228,
+          30
+        ],
+        "source_pixels_left_bottom_right_top": [
+          60,
+          60,
+          456,
+          60
+        ],
+        "minimum_logical_size": [
+          259,
+          61
+        ]
+      }
+    },
+    "Chip_Quest": {
+      "file": "Chip_Quest.png",
+      "svg": "SVG/Chip_Quest.svg",
+      "logical_size": [
+        300,
+        40
+      ],
+      "source_pixels": [
+        600,
+        80
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "source_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "minimum_logical_size": [
+          25,
+          25
+        ]
+      }
+    },
+    "Mark_QuestDot": {
+      "file": "Mark_QuestDot.png",
+      "svg": "SVG/Mark_QuestDot.svg",
+      "logical_size": [
+        14,
+        14
+      ],
+      "source_pixels": [
+        28,
+        28
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2"
+    },
+    "Icon_Quest": {
+      "file": "Icon_Quest.png",
+      "svg": "SVG/Icon_Quest.svg",
+      "logical_size": [
+        28,
+        28
+      ],
+      "source_pixels": [
+        56,
+        56
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2"
+    },
+    "Shadow_Panel": {
+      "file": "Shadow_Panel.png",
+      "svg": "SVG/Shadow_Panel.svg",
+      "logical_size": [
+        650,
+        390
+      ],
+      "source_pixels": [
+        1300,
+        780
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "transparent_padding": 30,
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "source_pixels_left_bottom_right_top": [
+          96,
+          96,
+          96,
+          96
+        ],
+        "minimum_logical_size": [
+          97,
+          97
+        ]
+      }
+    },
+    "Shadow_Slot": {
+      "file": "Shadow_Slot.png",
+      "svg": "SVG/Shadow_Slot.svg",
+      "logical_size": [
+        310,
+        232
+      ],
+      "source_pixels": [
+        620,
+        464
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "SVG reconstruction from approved v2",
+      "transparent_padding": 30,
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "source_pixels_left_bottom_right_top": [
+          96,
+          96,
+          96,
+          96
+        ],
+        "minimum_logical_size": [
+          97,
+          97
+        ]
+      }
+    },
+    "Icon_Artifact": {
+      "file": "Icon_Artifact.png",
+      "source_pixels": [
+        76,
+        76
+      ],
+      "scale": 2,
+      "logical_size": [
+        38.0,
+        38.0
+      ],
+      "text_baked": false,
+      "method": "byte-identical supplied asset",
+      "source": "LobbyShopMockup\\Currency_Icons\\Icon_Artifact.png",
+      "sha256": "c0c3c6ba3de971ad435009fabb22452a1685240222e8558d9ea34ebbc3f37df8"
+    },
+    "Mark_Upgraded": {
+      "file": "Mark_Upgraded.png",
+      "source_pixels": [
+        68,
+        68
+      ],
+      "scale": 2,
+      "logical_size": [
+        34.0,
+        34.0
+      ],
+      "text_baked": false,
+      "method": "byte-identical supplied asset",
+      "source": "ArmoryHubMockup\\Extracted_Draft\\Mark_Upgraded.png",
+      "sha256": "d6fc514ef8c5a611886a1a1f09571f7bf7d8b81b68bdfc1c9745a1e7f9497120",
+      "svg": "SVG/Mark_Upgraded.svg"
+    }
+  },
+  "external_weapons": {
+    "pistol": {
+      "source": "../../WeaponSVG/Weapon_Pistol_Dark.png",
+      "source_from_project": "ArtDirection/WeaponSVG/Weapon_Pistol_Dark.png",
+      "source_pixels": [
+        1248,
+        888
+      ],
+      "sha256": "47b1386321162362775d28fb294c18d122313e9452fb7028c22bf4d49eee312b",
+      "included": false
+    },
+    "sniper": {
+      "source": "../../WeaponSVG/Weapon_Sniper_Dark.png",
+      "source_from_project": "ArtDirection/WeaponSVG/Weapon_Sniper_Dark.png",
+      "source_pixels": [
+        2468,
+        628
+      ],
+      "sha256": "2fe04f17ed429032d98bcbc9444400c1f634f2917e2a5e9c26b74367fe8b6719",
+      "included": false
+    },
+    "railgun": {
+      "source": "../../WeaponSVG/Weapon_Railgun_Dark.png",
+      "source_from_project": "ArtDirection/WeaponSVG/Weapon_Railgun_Dark.png",
+      "source_pixels": [
+        2448,
+        688
+      ],
+      "sha256": "8fa098c529026582db314a1eacdeb562eaa4c3e741569546ce1215a715007a0b",
+      "included": false
+    }
+  },
+  "hero_weapon": {
+    "rect": [
+      335,
+      175,
+      855,
+      395
+    ],
+    "external": "pistol",
+    "fit": "contain_alpha_bounds",
+    "preserve_aspect": true,
+    "flip": false,
+    "rotation": 0
+  },
+  "weapon_slots": [
+    {
+      "index": 0,
+      "weapon_id": "pistol",
+      "state": "selected",
+      "rect": [
+        65,
+        833,
+        250,
+        172
+      ],
+      "art_rect": [
+        80,
+        843,
+        220,
+        100
+      ],
+      "fit": "contain_alpha_bounds",
+      "external_source": "../../WeaponSVG/Weapon_Pistol_Dark.png",
+      "unlock_cost": null
+    },
+    {
+      "index": 1,
+      "weapon_id": "sniper",
+      "state": "locked",
+      "rect": [
+        341,
+        833,
+        250,
+        172
+      ],
+      "art_rect": [
+        356,
+        843,
+        220,
+        100
+      ],
+      "fit": "contain_alpha_bounds",
+      "external_source": "../../WeaponSVG/Weapon_Sniper_Dark.png",
+      "unlock_cost": {
+        "artifact": 1
+      }
+    },
+    {
+      "index": 2,
+      "weapon_id": "railgun",
+      "state": "locked",
+      "rect": [
+        617,
+        833,
+        250,
+        172
+      ],
+      "art_rect": [
+        632,
+        843,
+        220,
+        100
+      ],
+      "fit": "contain_alpha_bounds",
+      "external_source": "../../WeaponSVG/Weapon_Railgun_Dark.png",
+      "unlock_cost": {
+        "artifact": 1
+      }
+    },
+    {
+      "index": 3,
+      "weapon_id": null,
+      "state": "empty",
+      "rect": [
+        893,
+        833,
+        250,
+        172
+      ],
+      "art_rect": [
+        908,
+        843,
+        220,
+        100
+      ],
+      "fit": "contain_alpha_bounds",
+      "external_source": null,
+      "unlock_cost": null
+    }
+  ],
+  "placements": [
+    {
+      "asset": "Loadout_BG",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "id": "Loadout_BG"
+    },
+    {
+      "asset": "Shadow_Panel",
+      "rect": [
+        56,
+        7,
+        560,
+        182
+      ],
+      "id": "Shadow_Panel"
+    },
+    {
+      "asset": "Panel_Title",
+      "rect": [
+        72,
+        17,
+        500,
+        122
+      ],
+      "id": "Panel_Title"
+    },
+    {
+      "asset": "Shadow_Panel",
+      "rect": [
+        1589,
+        27,
+        308,
+        120
+      ],
+      "id": "Shadow_Panel"
+    },
+    {
+      "asset": "Button_Back",
+      "rect": [
+        1605,
+        37,
+        248,
+        60
+      ],
+      "id": "Button_Back"
+    },
+    {
+      "asset": "Chip_Quest",
+      "rect": [
+        1248,
+        24,
+        300,
+        40
+      ],
+      "id": "quest.header"
+    },
+    {
+      "asset": "Chip_Quest",
+      "rect": [
+        1248,
+        66,
+        300,
+        40
+      ],
+      "id": "quest.row.0"
+    },
+    {
+      "asset": "Icon_Quest",
+      "rect": [
+        1263,
+        71,
+        28,
+        28
+      ],
+      "id": "quest.icon.0"
+    },
+    {
+      "asset": "Mark_QuestDot",
+      "rect": [
+        1500,
+        78,
+        14,
+        14
+      ],
+      "id": "quest.dot.0"
+    },
+    {
+      "asset": "Tag_Selected",
+      "rect": [
+        85,
+        186,
+        202,
+        48
+      ],
+      "id": "Tag_Selected"
+    },
+    {
+      "asset": "__weapon__",
+      "rect": [
+        335,
+        175,
+        855,
+        395
+      ],
+      "id": "weapon.hero",
+      "external": "pistol",
+      "fit": "contain_alpha_bounds"
+    },
+    {
+      "asset": "Shadow_Panel",
+      "rect": [
+        44,
+        560,
+        650,
+        290
+      ],
+      "id": "Shadow_Panel"
+    },
+    {
+      "asset": "Panel_WeaponInfo",
+      "rect": [
+        60,
+        570,
+        590,
+        230
+      ],
+      "id": "Panel_WeaponInfo"
+    },
+    {
+      "asset": "Rule_Horizontal",
+      "rect": [
+        108,
+        691,
+        505,
+        2
+      ],
+      "id": "Rule_Horizontal"
+    },
+    {
+      "asset": "Rule_Vertical",
+      "rect": [
+        250,
+        705,
+        2,
+        54
+      ],
+      "id": "Rule_Vertical"
+    },
+    {
+      "asset": "Rule_Vertical",
+      "rect": [
+        460,
+        705,
+        2,
+        54
+      ],
+      "id": "Rule_Vertical"
+    },
+    {
+      "asset": "Button_ToArmory",
+      "rect": [
+        108,
+        765,
+        350,
+        28
+      ],
+      "id": "button.armory"
+    },
+    {
+      "asset": "Shadow_Slot",
+      "rect": [
+        49,
+        823,
+        310,
+        232
+      ],
+      "id": "Shadow_Slot"
+    },
+    {
+      "asset": "WeaponSlot_Selected",
+      "rect": [
+        65,
+        833,
+        250,
+        172
+      ],
+      "id": "weapon.slot.0"
+    },
+    {
+      "asset": "__weapon__",
+      "rect": [
+        80,
+        843,
+        220,
+        100
+      ],
+      "id": "weapon.slot.art.0",
+      "external": "pistol",
+      "fit": "contain_alpha_bounds"
+    },
+    {
+      "asset": "Shadow_Slot",
+      "rect": [
+        325,
+        823,
+        310,
+        232
+      ],
+      "id": "Shadow_Slot"
+    },
+    {
+      "asset": "WeaponSlot_Locked",
+      "rect": [
+        341,
+        833,
+        250,
+        172
+      ],
+      "id": "weapon.slot.1"
+    },
+    {
+      "asset": "__weapon__",
+      "rect": [
+        356,
+        843,
+        220,
+        100
+      ],
+      "id": "weapon.slot.art.1",
+      "external": "sniper",
+      "fit": "contain_alpha_bounds"
+    },
+    {
+      "asset": "Icon_Lock",
+      "rect": [
+        450,
+        878,
+        32,
+        40
+      ],
+      "id": "Icon_Lock"
+    },
+    {
+      "asset": "Icon_Artifact",
+      "rect": [
+        524,
+        962,
+        25,
+        25
+      ],
+      "id": "Icon_Artifact"
+    },
+    {
+      "asset": "Shadow_Slot",
+      "rect": [
+        601,
+        823,
+        310,
+        232
+      ],
+      "id": "Shadow_Slot"
+    },
+    {
+      "asset": "WeaponSlot_Locked",
+      "rect": [
+        617,
+        833,
+        250,
+        172
+      ],
+      "id": "weapon.slot.2"
+    },
+    {
+      "asset": "__weapon__",
+      "rect": [
+        632,
+        843,
+        220,
+        100
+      ],
+      "id": "weapon.slot.art.2",
+      "external": "railgun",
+      "fit": "contain_alpha_bounds"
+    },
+    {
+      "asset": "Icon_Lock",
+      "rect": [
+        726,
+        878,
+        32,
+        40
+      ],
+      "id": "Icon_Lock"
+    },
+    {
+      "asset": "Icon_Artifact",
+      "rect": [
+        800,
+        962,
+        25,
+        25
+      ],
+      "id": "Icon_Artifact"
+    },
+    {
+      "asset": "Shadow_Slot",
+      "rect": [
+        877,
+        823,
+        310,
+        232
+      ],
+      "id": "Shadow_Slot"
+    },
+    {
+      "asset": "WeaponSlot_Empty",
+      "rect": [
+        893,
+        833,
+        250,
+        172
+      ],
+      "id": "weapon.slot.3"
+    },
+    {
+      "asset": "Mark_Empty",
+      "rect": [
+        999,
+        878,
+        38,
+        38
+      ],
+      "id": "Mark_Empty"
+    },
+    {
+      "asset": "Shadow_Panel",
+      "rect": [
+        1236,
+        143,
+        670,
+        539
+      ],
+      "id": "Shadow_Panel"
+    },
+    {
+      "asset": "Panel_Section",
+      "rect": [
+        1252,
+        153,
+        610,
+        479
+      ],
+      "id": "deck.panel"
+    },
+    {
+      "asset": "Row_Deck",
+      "rect": [
+        1276,
+        262,
+        562,
+        110
+      ],
+      "id": "deck.row.0"
+    },
+    {
+      "asset": "Slot_CardIcon",
+      "rect": [
+        1289,
+        277,
+        80,
+        80
+      ],
+      "id": "Slot_CardIcon"
+    },
+    {
+      "asset": "Icon_Card_Attack",
+      "rect": [
+        1297,
+        285,
+        64,
+        64
+      ],
+      "id": "Icon_Card_Attack"
+    },
+    {
+      "asset": "Mark_Upgraded",
+      "rect": [
+        1795,
+        268,
+        28,
+        28
+      ],
+      "id": "deck.upgraded.0"
+    },
+    {
+      "asset": "Row_Deck",
+      "rect": [
+        1276,
+        372,
+        562,
+        110
+      ],
+      "id": "deck.row.1"
+    },
+    {
+      "asset": "Slot_CardIcon",
+      "rect": [
+        1289,
+        387,
+        80,
+        80
+      ],
+      "id": "Slot_CardIcon"
+    },
+    {
+      "asset": "Icon_Card_Defense",
+      "rect": [
+        1297,
+        395,
+        64,
+        64
+      ],
+      "id": "Icon_Card_Defense"
+    },
+    {
+      "asset": "Mark_Upgraded",
+      "rect": [
+        1795,
+        378,
+        28,
+        28
+      ],
+      "id": "deck.upgraded.1"
+    },
+    {
+      "asset": "Row_Deck",
+      "rect": [
+        1276,
+        482,
+        562,
+        110
+      ],
+      "id": "deck.row.2"
+    },
+    {
+      "asset": "Slot_CardIcon",
+      "rect": [
+        1289,
+        497,
+        80,
+        80
+      ],
+      "id": "Slot_CardIcon"
+    },
+    {
+      "asset": "Icon_Card_Reload",
+      "rect": [
+        1297,
+        505,
+        64,
+        64
+      ],
+      "id": "Icon_Card_Reload"
+    },
+    {
+      "asset": "Shadow_Panel",
+      "rect": [
+        1236,
+        640,
+        670,
+        272
+      ],
+      "id": "Shadow_Panel"
+    },
+    {
+      "asset": "Panel_Section",
+      "rect": [
+        1252,
+        650,
+        610,
+        212
+      ],
+      "id": "perk.section"
+    },
+    {
+      "asset": "Panel_Perk_Locked",
+      "rect": [
+        1284,
+        742,
+        548,
+        101
+      ],
+      "id": "perk.body"
+    },
+    {
+      "asset": "Icon_Lock",
+      "rect": [
+        1430,
+        766,
+        38,
+        47
+      ],
+      "id": "perk.lock"
+    },
+    {
+      "asset": "Shadow_Panel",
+      "rect": [
+        1236,
+        873,
+        670,
+        205
+      ],
+      "id": "Shadow_Panel"
+    },
+    {
+      "asset": "Button_Deploy",
+      "rect": [
+        1252,
+        883,
+        610,
+        145
+      ],
+      "id": "deploy.button"
+    }
+  ],
+  "text_boxes": [
+    {
+      "id": "header.number",
+      "text": "01",
+      "rect": [
+        120,
+        45,
+        65,
+        50
+      ],
+      "font_size": 30,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "header.title",
+      "text": "출정 준비",
+      "rect": [
+        214,
+        31,
+        340,
+        65
+      ],
+      "font_size": 52,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "header.en",
+      "text": "EXPEDITION / LOADOUT",
+      "rect": [
+        216,
+        106,
+        330,
+        23
+      ],
+      "font_size": 16,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP",
+      "spacing_note": "runtime may apply 1.5px tracking"
+    },
+    {
+      "id": "back",
+      "text": "←  로비",
+      "rect": [
+        1615,
+        43,
+        228,
+        47
+      ],
+      "font_size": 28,
+      "color": "#16181B",
+      "alignment": "center",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "quest.heading",
+      "text": "진행 중 의뢰 1 / 2",
+      "rect": [
+        1262,
+        28,
+        273,
+        32
+      ],
+      "font_size": 19,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "quest.name.0",
+      "text": "블랙박스 회수",
+      "rect": [
+        1298,
+        70,
+        192,
+        31
+      ],
+      "font_size": 18,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "selected",
+      "text": "선택 중",
+      "rect": [
+        115,
+        193,
+        139,
+        33
+      ],
+      "font_size": 22,
+      "color": "#16181B",
+      "alignment": "center",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "weapon.name",
+      "text": "권총",
+      "rect": [
+        108,
+        584,
+        290,
+        67
+      ],
+      "font_size": 53,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "weapon.subtitle",
+      "text": "기본 시작 무기",
+      "rect": [
+        110,
+        651,
+        400,
+        29
+      ],
+      "font_size": 24,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "stat.0.label",
+      "text": "탄창",
+      "rect": [
+        110,
+        701,
+        120,
+        26
+      ],
+      "font_size": 19,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "stat.0.value",
+      "text": "3",
+      "rect": [
+        110,
+        729,
+        120,
+        42
+      ],
+      "font_size": 31,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "stat.1.label",
+      "text": "사격 추가 피해",
+      "rect": [
+        280,
+        701,
+        165,
+        26
+      ],
+      "font_size": 19,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "stat.1.value",
+      "text": "+0",
+      "rect": [
+        280,
+        729,
+        165,
+        42
+      ],
+      "font_size": 31,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "stat.2.label",
+      "text": "강화",
+      "rect": [
+        491,
+        701,
+        122,
+        26
+      ],
+      "font_size": 19,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "stat.2.value",
+      "text": "0 / 2",
+      "rect": [
+        491,
+        729,
+        122,
+        42
+      ],
+      "font_size": 31,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "button.armory.label",
+      "text": "무기고에서 강화",
+      "rect": [
+        108,
+        765,
+        275,
+        26
+      ],
+      "font_size": 19,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "weapon.slot.name.0",
+      "text": "권총",
+      "rect": [
+        77,
+        959,
+        226,
+        34
+      ],
+      "font_size": 25,
+      "color": "#EEF0F2",
+      "alignment": "center",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "weapon.slot.cost.1",
+      "text": "1",
+      "rect": [
+        559,
+        960,
+        25,
+        29
+      ],
+      "font_size": 21,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "weapon.slot.name.1",
+      "text": "스나이퍼",
+      "rect": [
+        353,
+        959,
+        165,
+        34
+      ],
+      "font_size": 25,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "weapon.slot.cost.2",
+      "text": "1",
+      "rect": [
+        835,
+        960,
+        25,
+        29
+      ],
+      "font_size": 21,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "weapon.slot.name.2",
+      "text": "레일건",
+      "rect": [
+        629,
+        959,
+        165,
+        34
+      ],
+      "font_size": 25,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.title",
+      "text": "시작 덱 (10)",
+      "rect": [
+        1298,
+        167,
+        390,
+        40
+      ],
+      "font_size": 31,
+      "color": "#EEF0F2",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.en",
+      "text": "STARTING DECK",
+      "rect": [
+        1300,
+        211,
+        390,
+        24
+      ],
+      "font_size": 17,
+      "color": "#ABB5BD",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.0.name",
+      "text": "사격",
+      "rect": [
+        1404,
+        278,
+        305,
+        35
+      ],
+      "font_size": 27,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.0.effect",
+      "text": "피해 6 → 7",
+      "rect": [
+        1404,
+        319,
+        315,
+        31
+      ],
+      "font_size": 23,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.0.count",
+      "text": "×5",
+      "rect": [
+        1736,
+        298,
+        80,
+        45
+      ],
+      "font_size": 33,
+      "color": "#16181B",
+      "alignment": "right",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.1.name",
+      "text": "방어",
+      "rect": [
+        1404,
+        388,
+        305,
+        35
+      ],
+      "font_size": 27,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.1.effect",
+      "text": "방어 5 → 6",
+      "rect": [
+        1404,
+        429,
+        315,
+        31
+      ],
+      "font_size": 23,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.1.count",
+      "text": "×4",
+      "rect": [
+        1736,
+        408,
+        80,
+        45
+      ],
+      "font_size": 33,
+      "color": "#16181B",
+      "alignment": "right",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.2.name",
+      "text": "재장전",
+      "rect": [
+        1404,
+        498,
+        305,
+        35
+      ],
+      "font_size": 27,
+      "color": "#16181B",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.2.effect",
+      "text": "탄약 3",
+      "rect": [
+        1404,
+        539,
+        315,
+        31
+      ],
+      "font_size": 23,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.2.count",
+      "text": "×1",
+      "rect": [
+        1736,
+        518,
+        80,
+        45
+      ],
+      "font_size": 33,
+      "color": "#16181B",
+      "alignment": "right",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deck.hint",
+      "text": "강화 수치 반영",
+      "rect": [
+        1590,
+        597,
+        246,
+        26
+      ],
+      "font_size": 18,
+      "color": "#68737D",
+      "alignment": "right",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "perk.title",
+      "text": "특전 카드",
+      "rect": [
+        1298,
+        667,
+        480,
+        43
+      ],
+      "font_size": 32,
+      "color": "#EEF0F2",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "perk.locked",
+      "text": "올클리어 시 해금",
+      "rect": [
+        1498,
+        777,
+        290,
+        36
+      ],
+      "font_size": 25,
+      "color": "#68737D",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deploy.en",
+      "text": "DEPLOY",
+      "rect": [
+        1298,
+        903,
+        360,
+        26
+      ],
+      "font_size": 20,
+      "color": "#AAB4BD",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 400,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    },
+    {
+      "id": "deploy.label",
+      "text": "출정 →",
+      "rect": [
+        1295,
+        932,
+        390,
+        78
+      ],
+      "font_size": 56,
+      "color": "#EEF0F2",
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "font_family": "Malgun Gothic",
+      "font_weight": 700,
+      "character_spacing_px": 0,
+      "runtime": "TMP"
+    }
+  ],
+  "deck_rows": [
+    {
+      "rect": [
+        1276,
+        262,
+        562,
+        110
+      ],
+      "name": "사격",
+      "effect": "피해 6 → 7",
+      "count": 5,
+      "icon": "Icon_Card_Attack",
+      "upgraded": true
+    },
+    {
+      "rect": [
+        1276,
+        372,
+        562,
+        110
+      ],
+      "name": "방어",
+      "effect": "방어 5 → 6",
+      "count": 4,
+      "icon": "Icon_Card_Defense",
+      "upgraded": true
+    },
+    {
+      "rect": [
+        1276,
+        482,
+        562,
+        110
+      ],
+      "name": "재장전",
+      "effect": "탄약 3",
+      "count": 1,
+      "icon": "Icon_Card_Reload",
+      "upgraded": false
+    }
+  ],
+  "templates": {
+    "deck_row": {
+      "asset": "Row_Deck",
+      "size": [
+        562,
+        110
+      ],
+      "origin": [
+        1276,
+        262
+      ],
+      "row_stride": 110,
+      "gap": 0,
+      "dynamic_panel_height": "84 + 25 + row_count * 110 + 35",
+      "placements": [
+        {
+          "asset": "Slot_CardIcon",
+          "rect": [
+            13,
+            15,
+            80,
+            80
+          ]
+        },
+        {
+          "asset": "{card_icon}",
+          "rect": [
+            21,
+            23,
+            64,
+            64
+          ]
+        },
+        {
+          "asset": "Mark_Upgraded",
+          "rect": [
+            519,
+            6,
+            28,
+            28
+          ],
+          "visible_if": "upgraded"
+        }
+      ],
+      "text_boxes": [
+        {
+          "binding": "name",
+          "rect": [
+            128,
+            16,
+            305,
+            35
+          ],
+          "font_size": 27,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "character_spacing_px": 0
+        },
+        {
+          "binding": "effect",
+          "rect": [
+            128,
+            57,
+            315,
+            31
+          ],
+          "font_size": 23,
+          "color": "#68737D",
+          "alignment": "left",
+          "character_spacing_px": 0
+        },
+        {
+          "binding": "count",
+          "format": "×{count}",
+          "rect": [
+            460,
+            36,
+            80,
+            45
+          ],
+          "font_size": 33,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "right",
+          "character_spacing_px": 0
+        }
+      ],
+      "overflow": "scroll deck body if growth would overlap perk section; header fixed"
+    },
+    "quest_row": {
+      "asset": "Chip_Quest",
+      "size": [
+        300,
+        40
+      ],
+      "origin": [
+        1248,
+        66
+      ],
+      "row_stride": 42,
+      "max_rows": 2,
+      "placements": [
+        {
+          "asset": "Icon_Quest",
+          "rect": [
+            15,
+            5,
+            28,
+            28
+          ]
+        },
+        {
+          "asset": "Mark_QuestDot",
+          "rect": [
+            252,
+            12,
+            14,
+            14
+          ]
+        }
+      ],
+      "text_boxes": [
+        {
+          "binding": "quest_name",
+          "rect": [
+            50,
+            4,
+            192,
+            31
+          ],
+          "font_size": 18,
+          "color": "#16181B",
+          "font_weight": 700,
+          "alignment": "left",
+          "character_spacing_px": 0
+        }
+      ],
+      "overflow": "truncate with ellipsis, no third row"
+    },
+    "perk_unlocked": {
+      "asset": "Panel_Perk",
+      "rect": [
+        1284,
+        742,
+        548,
+        101
+      ],
+      "thumbnail_rect": [
+        1294,
+        748,
+        70,
+        89
+      ],
+      "name_rect": [
+        1382,
+        752,
+        428,
+        33
+      ],
+      "effect_rect": [
+        1382,
+        791,
+        428,
+        41
+      ],
+      "thumbnail_source": "runtime perk card artwork",
+      "example_name": "특전 카드",
+      "example_effect": "선택한 특전의 효과가 표시됩니다."
+    }
+  },
+  "states": {
+    "deploy": {
+      "normal": {
+        "asset": "Button_Deploy",
+        "interactable": true
+      },
+      "hover": {
+        "asset": "Button_Deploy_Hover",
+        "interactable": true
+      },
+      "disabled": {
+        "asset": "Button_Deploy_Disabled",
+        "text_color": "#D5DCE2",
+        "interactable": false
+      }
+    },
+    "perk": {
+      "locked": {
+        "asset": "Panel_Perk_Locked",
+        "label": "올클리어 시 해금",
+        "icon": "Icon_Lock"
+      },
+      "unlocked": {
+        "asset": "Panel_Perk",
+        "template": "perk_unlocked",
+        "hide": [
+          "perk.lock",
+          "perk.locked"
+        ]
+      }
+    },
+    "quests": {
+      "empty": {
+        "header": "진행 중 의뢰 없음",
+        "row_count": 0
+      },
+      "active": {
+        "header": "진행 중 의뢰 {count} / 2",
+        "template": "quest_row",
+        "max_rows": 2
+      }
+    }
+  },
+  "rendering": {
+    "alpha": "straight",
+    "filter": "bilinear",
+    "ui_png_scale": 2,
+    "background_png_scale": 1,
+    "nine_slice_order": "left,bottom,right,top SOURCE PNG pixels",
+    "font": "project Korean TMP font; preview uses Windows Malgun Gothic"
+  },
+  "notes": [
+    "All UI labels/numbers are separate TMP text.",
+    "Weapon rasters are EXTERNAL and intentionally absent from delivery. Source pixels preserved, alpha bbox used only for preview fitting.",
+    "Deck and quest rows instantiate templates; max quest count 2.",
+    "Perk preview thumbnail is a geometric placeholder, replace with actual perk art.",
+    "Geometric background/panels rebuilt as SVG, not pixel-identical image crop."
+  ]
+}

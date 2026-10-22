@@ -114,6 +114,8 @@ public class UIScreenEntrance : MonoBehaviour
                     _seq.Insert((at + 0.1f) / speed, g.DOFade(1f, 0.35f / speed));
                     _seq.Insert((at + 0.1f) / speed, rt.DOScale(_scale[rt], 0.45f / speed).SetEase(Ease.OutBack));
                 }
+                else if (rt.name.Contains("Keeper"))                      // 시설 담당 캐릭터: 왼쪽에서 천천히 들어옴
+                    Slide(rt, new Vector2(-70f, 0f), at, 0.55f);
                 else Slide(rt, new Vector2(0f, -22f), at, 0.32f);
 
                 var scroll = rt.GetComponent<ScrollRect>();

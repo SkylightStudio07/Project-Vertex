@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f13c1a0ca9ccb4396080e59e8fa0d9, type: 3}
+  m_Name: Chapter_2-1
+  m_EditorClassIdentifier: Assembly-CSharp::StoryChapterData
+  chapterId: 2-1
+  title: "\uC601\uC6D0\uD558\uC9C0 \uC54A\uAE30\uC5D0 \uBE5B\uB098\uB294 \uAC83\uB4E4"
+  thumbnail: {fileID: 21300000, guid: 7f72ddedb6c8e6a42b1c9de6ccb2a463, type: 3}
+  objectives: []

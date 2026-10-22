@@ -1,95 +1,44 @@
 using System;
 using UnityEngine;
 
+// 로비 상단 게이지·의뢰 게시판 머리가 보던 "로비 경험치" 창구. 이제 거점 개발도(MetaProgress)를 보여 준다.
+//   - 개발도는 쓰지 않고 쌓기만 한다. 이정표(동료 첫 합류, 보스 첫 격파, 스토리 의뢰 …)마다 MetaProgress가 올린다
+//   - Experience = 누적 개발도, MaxExperience = 다음 레벨에 필요한 누적 개발도 (최대 레벨이면 현재 값)
+//   - 예전 저장 키(VERTEX_USER_EXP)는 더 이상 읽지 않는다
+// 기획: 노션 VERTEX 기획서 v2 > 8. 재화 & 거점 개발도
 public class UserExpManager : SingletonBehaviour<UserExpManager>
 {
-    [SerializeField] private int defaultExperience;
-    [SerializeField, Min(0)] private int maxExperience = 100;
+    public int Experience => MetaProgress.Development;
+    public int Level => MetaProgress.DevelopmentLevel;
 
-    public int Experience { get; private set; }
-    public int MaxExperience => Mathf.Max(0, maxExperience);
+    public int MaxExperience
+    {
+        get
+        {
+            var (current, total) = MetaProgress.LevelProgress();
+            return total > 0 ? MetaProgress.Development - current + total : MetaProgress.Development;
+        }
+    }
 
     public event Action<int> OnExperienceChanged;
-
-    private const string PrefsKey = "VERTEX_USER_EXP";
 
     protected override void Init()
     {
         m_IsDestroyOnLoad = true;
         base.Init();
-
-        // 로비 경험치는 로비 씬을 나갔다 들어와도(런 귀환) 이어져야 하므로 PlayerPrefs에 둔다. 저장값이 없으면 기본값.
-        if (PlayerPrefs.HasKey(PrefsKey)) Experience = Mathf.Clamp(PlayerPrefs.GetInt(PrefsKey), 0, MaxExperience);
-        else SetDefaultExperience();
+        MetaProgress.OnChanged += Notify;
     }
 
-    public void SetDefaultExperience()
+    private void OnDestroy() => MetaProgress.OnChanged -= Notify;
+
+    private void Notify() => OnExperienceChanged?.Invoke(Experience);
+
+    public bool HasExperience(int requiredExperience) => Experience >= Mathf.Max(0, requiredExperience);
+
+    [ContextMenu("Debug/Add 10 Development")]
+    private void DebugAdd10()
     {
-        Experience = Mathf.Clamp(defaultExperience, 0, MaxExperience);
-        Save();
-        OnExperienceChanged?.Invoke(Experience);
+        MetaProgress.AwardDevelopment("debug:" + DateTime.Now.Ticks, 10);
+        Logger.Log(this, $"Development {Experience} (Lv.{Level})");
     }
-
-    public void AddExperience(int amount)
-    {
-        if (amount <= 0)
-            return;
-
-        long increasedExperience = (long)Experience + amount;
-        SetExperience((int)Math.Min(increasedExperience, MaxExperience));
-    }
-
-    public bool HasExperience(int requiredExperience)
-    {
-        return Experience >= Mathf.Max(0, requiredExperience);
-    }
-
-    public bool TrySpendExperience(int amount)
-    {
-        if (amount < 0 || !HasExperience(amount))
-            return false;
-
-        SetExperience(Experience - amount);
-        return true;
-    }
-
-    private void SetExperience(int experience)
-    {
-        int clampedExperience = Mathf.Clamp(experience, 0, MaxExperience);
-        if (Experience == clampedExperience)
-            return;
-
-        Experience = clampedExperience;
-        Save();
-        OnExperienceChanged?.Invoke(Experience);
-    }
-
-    private void Save()
-    {
-        PlayerPrefs.SetInt(PrefsKey, Experience);
-        PlayerPrefs.Save();
-    }
-
-    // 디버깅용 버튼 함수들.
-    [ContextMenu("Debug/Add 10 Experience")]
-    private void DebugAdd10Experience()
-    {
-        AddExperience(10);
-        Logger.Log(this, $"Experience changed to {Experience}.");
-    }
-
-    [ContextMenu("Debug/Reset Experience")]
-    private void DebugResetExperience()
-    {
-        SetDefaultExperience();
-        Logger.Log(this, $"Experience reset to {Experience}.");
-    }
-
-    [ContextMenu("Debug/Set Max Experience")]
-    private void DebugSetMaxExperience()
-    {
-        SetExperience(MaxExperience);
-        Logger.Log(this, $"Experience set to max: {Experience}.");
-    }
-
 }

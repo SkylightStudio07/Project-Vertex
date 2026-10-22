@@ -12,8 +12,6 @@ public class CardCatalogView : MonoBehaviour
     [SerializeField] private TentInteractionHandler startingDeckSource;
     [SerializeField] private PlayerRewardPoolSO playerRewardPool;
     [SerializeField] private List<CoopCharData> coopCharacters = new();
-    [Tooltip("무기고 장비 강화에서 기본 수치를 올릴 수 있는 카드 이름 (사격·방어 등)")]
-    [SerializeField] private List<string> armoryUpgradeableNames = new() { "사격", "방어" };
 
     [Header("그리드")]
     [SerializeField] private CardCatalogEntry entryPrefab;
@@ -43,6 +41,7 @@ public class CardCatalogView : MonoBehaviour
     [SerializeField] private Sprite lockedArt; // 잠긴 카드 상세에 보여줄 실루엣
     [SerializeField] private TextMeshProUGUI detailName;
     [SerializeField] private TextMeshProUGUI detailType;
+    [SerializeField] private TextMeshProUGUI detailCurrent;   // 현재 효과 (없으면 비교 글만)
     [SerializeField] private TextMeshProUGUI detailCompare;
     [SerializeField] private TextMeshProUGUI detailUnlock;
     [SerializeField] private TextMeshProUGUI detailUpgrade;
@@ -51,6 +50,14 @@ public class CardCatalogView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI upgradeLabel;
     [SerializeField] private Sprite upgradeNormal;
     [SerializeField] private Sprite upgradeDisabled;
+
+    [Header("카드 강화 비용 (탈린 + 파츠, CardUpgrades)")]
+    [SerializeField] private GameObject costRoot;
+    [SerializeField] private TextMeshProUGUI talinCostText;
+    [SerializeField] private TextMeshProUGUI partsCostText;
+    [SerializeField] private TextMeshProUGUI balanceText;
+    [SerializeField] private Color paperColor = new(0.933f, 0.941f, 0.949f, 1f);
+    [SerializeField] private Color grayColor = new(0.573f, 0.604f, 0.639f, 1f);
 
     private class Entry { public CardData card; public string source; public string ownerKey; public bool locked; public string lockCondition; }
 
@@ -62,12 +69,29 @@ public class CardCatalogView : MonoBehaviour
             if (r.button != null) r.button.onClick.AddListener(() => ToggleFilter(r));
             r.on = r.group == 0 && r.key == "all";
         }
+        if (upgradeButton != null) upgradeButton.onClick.AddListener(UpgradeSelected);
+    }
+
+    private void UpgradeSelected()
+    {
+        if (_selected == null || _selected.Locked) return;
+        if (CardUpgrades.TryUpgrade(_selected.Card) != CardUpgrades.Result.Ok) return;
+        _selected.RefreshUpgraded();
+        Select(_selected);
     }
 
     private readonly List<CardCatalogEntry> _views = new();
     private CardCatalogEntry _selected;
 
-    private void OnEnable() => Rebuild();
+    private void OnEnable()
+    {
+        MetaProgress.OnChanged += RefreshSelected;
+        Rebuild();
+    }
+
+    private void OnDisable() => MetaProgress.OnChanged -= RefreshSelected;
+
+    private void RefreshSelected() { if (_selected != null) Select(_selected); }
 
     public void Rebuild()
     {
@@ -227,19 +251,26 @@ public class CardCatalogView : MonoBehaviour
             detailName.text = "???";
             detailType.text = "미해금";
             detailCompare.text = "해금 후 확인할 수 있습니다.";
+            if (detailCurrent != null) detailCurrent.text = "—";
             detailUnlock.text = e.lockCondition;
-            SetUpgrade(false, "—");
+            SetUpgrade(CardUpgrades.Result.InvalidCard, "—");
             return;
         }
 
         detailArt.SetSprite(card.CardImage);
         detailName.text = card.CardName;
         detailType.text = $"{TypeName(card.Type)}  ·  {RarityName(card.Rarity)}";
-        detailCompare.text = CompareText(card);
+        if (detailCurrent != null) detailCurrent.text = card.GetDescription(false);
+        detailCompare.text = card.CanUpgrade ? CompareText(card) : "강화 효과 없음";
         detailUnlock.text = e.source;
 
-        bool upgradeable = armoryUpgradeableNames.Contains(card.CardName);
-        SetUpgrade(upgradeable, upgradeable ? "Lv.1  →  <color=#0DB8F2>Lv. 2</color>" : "무기고 강화 대상이 아닙니다");
+        var result = CardUpgrades.Check(card);
+        SetUpgrade(result, result switch
+        {
+            CardUpgrades.Result.AlreadyUpgraded => "강화 완료 · 런에서 강화된 상태로 나옵니다",
+            CardUpgrades.Result.NotUpgradable => "강화할 수 없는 카드입니다",
+            _ => $"탈린 {CardUpgrades.TalinCost} + 파츠 {CardUpgrades.PartsCost}",
+        });
     }
 
     // 강화 전·후 설명을 비교해 강화로 달라진 부분만 청록으로 칠한 강화 후 설명을 보여준다
@@ -253,12 +284,25 @@ public class CardCatalogView : MonoBehaviour
         return text;
     }
 
-    private void SetUpgrade(bool enabled, string levelText)
+    private void SetUpgrade(CardUpgrades.Result result, string levelText)
     {
-        detailUpgrade.text = levelText;
+        bool enabled = result == CardUpgrades.Result.Ok;
+        if (detailUpgrade != null) detailUpgrade.text = levelText;
         upgradeButton.interactable = enabled;
         upgradeImage.sprite = enabled ? upgradeNormal : upgradeDisabled;
-        upgradeLabel.text = enabled ? "강화하기" : "강화 불가";
+        upgradeLabel.text = result switch
+        {
+            CardUpgrades.Result.AlreadyUpgraded => "강화 완료",
+            CardUpgrades.Result.NotUpgradable or CardUpgrades.Result.InvalidCard => "강화 불가",
+            _ => "강화하기  →",
+        };
+        upgradeLabel.color = enabled ? paperColor : grayColor;
+
+        bool showCost = result is CardUpgrades.Result.Ok or CardUpgrades.Result.NotEnoughTalin or CardUpgrades.Result.NotEnoughParts;
+        if (costRoot != null) costRoot.SetActive(showCost);
+        if (talinCostText != null) { talinCostText.text = CardUpgrades.TalinCost.ToString(); talinCostText.color = MetaProgress.Talin >= CardUpgrades.TalinCost ? paperColor : grayColor; }
+        if (partsCostText != null) { partsCostText.text = CardUpgrades.PartsCost.ToString(); partsCostText.color = MetaProgress.Parts >= CardUpgrades.PartsCost ? paperColor : grayColor; }
+        if (balanceText != null) balanceText.text = showCost ? $"보유 탈린 {MetaProgress.Talin:N0} · 파츠 {MetaProgress.Parts:N0}" : "";
     }
 
     private static string TypeName(CardData.CardType t) => t switch

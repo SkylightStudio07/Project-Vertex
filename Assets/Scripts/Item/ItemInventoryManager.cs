@@ -71,6 +71,7 @@ public class ItemInventoryManager : MonoBehaviour
             return false;
         }
         _items.Add(Instantiate(item));
+        if (!TrainingSession.IsActive) PlayerRecord.AddObtainedItem(item); // 아카이브 아이템 도감
         OnInventoryChanged?.Invoke();
         Debug.Log($"Added item: {item.ItemName}");
         Debug.Log($"Current capacity: {_items.Count}/{maxSlots}");

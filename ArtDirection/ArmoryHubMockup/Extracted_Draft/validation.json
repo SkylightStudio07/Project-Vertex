@@ -1,0 +1,30 @@
+{
+  "assets": 58,
+  "svg_assets": 41,
+  "required_assets_present": 32,
+  "exact_currency_hashes": 6,
+  "character_excluded": true,
+  "text_not_baked_in_ui": true,
+  "nine_slice_valid": true,
+  "text_bounds_checked": true,
+  "no_exp": true,
+  "three_layouts": [
+    "hub",
+    "equipment",
+    "card"
+  ],
+  "states": [
+    "equipment_insufficient",
+    "card_insufficient",
+    "card_upgraded",
+    "card_ineligible"
+  ],
+  "workshop_png": [
+    3840,
+    2160
+  ],
+  "preview_canvas": [
+    1920,
+    1080
+  ]
+}

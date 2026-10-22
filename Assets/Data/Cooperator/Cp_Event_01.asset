@@ -37,6 +37,7 @@ MonoBehaviour:
   sanctuarySelectionFocus: {x: 0.5, y: 0.5}
   sanctuaryHoverFocus: {x: 0.5, y: 0.5}
   sanctuaryFullArt: {fileID: 0}
+  rosterFullArt: {fileID: 21300000, guid: 9c7df2af807120248a0045514a5f5f5f, type: 3}
   isEventCompanion: 1
   faceFocus: {x: 0.45, y: 0.72}
   faceZoom: 1.6
@@ -53,6 +54,7 @@ MonoBehaviour:
   campLines: []
   restArrivalLines: []
   joinRewardCard: {fileID: 11400000, guid: 0234eac721c9ae941830e1a83a6d769f, type: 2}
+  skill: {fileID: 0}
   joinDialogueJson: {fileID: 0}
   rewardPoolCommon: []
   rewardPoolRare: []

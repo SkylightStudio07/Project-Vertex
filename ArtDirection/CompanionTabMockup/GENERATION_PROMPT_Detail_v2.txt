@@ -1,0 +1,23 @@
+Use case: ui-mockup / design revision. Redesign the BACKGROUND AND PANEL PRESENTATION of the supplied Project VERTEX companion detail mockup toward clean Arknights-like geometric staging with strong cast shadows, per the user's new direction. Output one polished single full-screen landscape 16:9 mockup, preferably 1920x1080. This is a substantial visual art-direction revision.
+
+INPUTS:
+Image 1 is the previous VERTEX detail mockup: preserve its character identity, illustration pose, Korean information hierarchy and all core functions.
+Image 2 is the user's Arknights-like reference: study its graphic geometric staging, overlapping flat slabs, cast shadows, bold rectangular information panels, and character prominence. Do not copy its exact arrangement, triangular Rhodes Island logo, character, yellow accent, labels or stats.
+Image 3 is original Chihara Sho character art: preserve her costume, face, flowing pale hair, red hand effect and full-body pose.
+
+NEW ART DIRECTION:
+Remove the old two-half black/white diagonal poster composition entirely. Remove the huge ghosted face, full-height cyan slash, starry decoration and grungy texture. This must look clearly different from an Astrae Oratio character poster.
+Build a clean off-white/light-gray geometric stage from several large INDEPENDENT overlapping architectural graphic shapes: one broad light-gray rectangular backdrop behind the character, an offset charcoal rectangular slab, one restrained clipped polygon near the far left, and a low wide horizontal plinth shape near the feet. Predominantly horizontal and vertical lines, occasional clipped corners; no giant diagonal dividing the screen into two halves.
+Use shadows actively: each offset plane should cast a visible soft gray directional shadow to the lower-right onto the plane behind it. Clear dark contact shadows under raised panels, a soft grounded shadow beneath the character's shoes, and a restrained offset silhouette shadow behind the character for figure separation. Flat matte graphic surfaces, layered depth via lighting/shadow only, no metallic bevels, no glossy 3D render or physical room.
+Palette: VERTEX off-white #EEF0F2, graphite and ink #16181B. Cyan #0DB8F2 only for selection, bond bar, short accent rules. Original red character effect remains. Strong black/white contrast, sparse tiny measurement ticks and four-point compass mark used like technical signage. No starfield, fake script, fog, bloom, colored light spill or noisy textures.
+
+LAYOUT:
+Top-left shared clipped header "04 동료" with "COMPANIONS"; upper-right "← 로비".
+Left/center 60% is the character stage. Sho prominent at center-left, full body entirely visible with minimum 25px below both shoe soles. Give her air around the hair. Lower-left on a separate pale offset slab, set identity "VERTEX / 협력자", large "치하라 쇼", small "CHIHARA SHO". Upper-left small quote "「쓴 만큼 채워.」". Identity should now read naturally as an operator profile, not the old lower-right poster name.
+Right about 35% is an organized vertical rail of FLOATING RECTANGULAR INFORMATION PANELS with deliberately visible soft drop shadows and dark section header strips. Tighten contents sensibly to fit while retaining generous space around each group. Mix off-white panels with one dark skill block for contrast. Four groups:
+1 "호감도", "Lv.3 / 5", exactly five segments, 3 cyan and 2 gray, "다음 단계까지 2 PT".
+2 "지시 스킬", "흡혈", geometric monochrome icon, "적 하나에게 흡혈 6", "3전투마다 사용 가능", small "최대 호감도 시 강화". The exact text is 3전투, NOT 3턴.
+3 "동료 카드": four portrait card thumbnails, first two simple monochrome illustration motifs labeled "재장전", "흡혈", last two muted lock icons.
+4 "단계별 해금": five small clean rows: "Lv.1 합류 카드", "Lv.2 동료 기록 I", "Lv.3 동료 카드", "Lv.4 동료 기록 II", "Lv.5 지시 스킬 강화". First three active, last two gray locked.
+At right bottom two functional buttons "기록 보기", "베이스캠프에서 만나기". Previous/next chevrons near screen sides.
+Readable Korean typography, exact deliberate alignment, avoid text overlap and tiny captions. Sample contents are for the mockup. No new game stats or actions. Do not invent characters. Final should feel like crisp geometric tactical game UI with confident layered shadows and a clear character silhouette.

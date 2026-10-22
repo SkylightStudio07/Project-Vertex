@@ -30,6 +30,7 @@ public class Facility : ScriptableObject
     [SerializeField] private bool isUpgradedFacility;
     [SerializeField] private Facility upgradeFacility;
     [FormerlySerializedAs("requiredExp")]
+    [Tooltip("강화 비용 (파츠). 예전 로비 경험치 칸을 그대로 쓴다 — 기획 8. 재화")]
     [SerializeField, Min(0)] private int upgradeRequiredExp;
 
     public FacilityType FacilityType => facilityType;
@@ -41,6 +42,7 @@ public class Facility : ScriptableObject
     public bool IsUpgradedFacility => isUpgradedFacility;
     public Facility UpgradeFacility => upgradeFacility;
     public int UpgradeRequiredExp => upgradeRequiredExp;
+    public int UpgradeRequiredParts => upgradeRequiredExp;
     public bool CanUpgrade => upgradeFacility != null;
 
     public bool IsUnlockConditionMet(int completedRunCount)

@@ -18,7 +18,7 @@ MonoBehaviour:
     \uCE90\uB9AD\uD130"
   affiliation: "VERTEX / \uD611\uB825\uC790"
   themeColor: {r: 0.7019608, g: 0.14901961, b: 0.24313726, a: 1}
-  charImage: {fileID: 1208040086343421634, guid: d4bc5696e090072499c4fd4b27043d8a, type: 3}
+  charImage: {fileID: 21300000, guid: eaef2e4f228497d45b375f87d8951258, type: 3}
   charIcon: {fileID: 0}
   standingSprite: {fileID: -4441471344451506041, guid: 5a974cd7ef47c7a49bb4cda67d8a4d45, type: 3}
   idleFrames: []
@@ -36,9 +36,10 @@ MonoBehaviour:
   sanctuarySelectionFocus: {x: 0.5, y: 0.5}
   sanctuaryHoverFocus: {x: 0.5, y: 0.5}
   sanctuaryFullArt: {fileID: 0}
+  rosterFullArt: {fileID: 21300000, guid: d1c8e7815dd85404b8d4e1677c3e1a32, type: 3}
   isEventCompanion: 0
-  faceFocus: {x: 0.55, y: 0.97}
-  faceZoom: 3
+  faceFocus: {x: 0.51, y: 0.78}
+  faceZoom: 2.4
   materialJson: {fileID: 4900000, guid: 64759934bcbd7d74eb9a9837e979d1bc, type: 3}
   actNumber: 1
   trainingRequiredLevel: 2

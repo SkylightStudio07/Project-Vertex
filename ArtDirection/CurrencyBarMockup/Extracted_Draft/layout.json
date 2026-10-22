@@ -1,0 +1,282 @@
+{
+  "variant": "F",
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "asset_scale": 2,
+  "colors": {
+    "ink": "#16181B",
+    "paper": "#EEF0F2",
+    "cyan": "#0DB8F2"
+  },
+  "shadows": false,
+  "reference": {
+    "file": "../Reference_Lobby_Current.png",
+    "original_size": [
+      1280,
+      720
+    ],
+    "resampling": "Lanczos to 1920x1080; no generative repaint"
+  },
+  "elements": {
+    "Icon_Talin": {
+      "file": "Icon_Talin.png",
+      "rect": [
+        1310,
+        50,
+        38,
+        38
+      ],
+      "source_size": [
+        76,
+        76
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    "Icon_Parts": {
+      "file": "Icon_Parts.png",
+      "rect": [
+        1501,
+        50,
+        38,
+        38
+      ],
+      "source_size": [
+        76,
+        76
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    "Icon_Artifact": {
+      "file": "Icon_Artifact.png",
+      "rect": [
+        1609,
+        49,
+        38,
+        38
+      ],
+      "source_size": [
+        76,
+        76
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    "Icon_Settings": {
+      "file": "Icon_Settings.png",
+      "rect": [
+        1720,
+        50,
+        38,
+        38
+      ],
+      "source_size": [
+        76,
+        76
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    "Button_Plus": {
+      "file": "Button_Plus.png",
+      "rect": [
+        1451,
+        56,
+        28,
+        28
+      ],
+      "source_size": [
+        48,
+        48
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "specified_runtime_size": [
+        24,
+        24
+      ]
+    },
+    "Dev_Track": {
+      "file": "Dev_Track.png",
+      "rect": [
+        1449,
+        25,
+        200,
+        8
+      ],
+      "source_size": [
+        16,
+        4
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "border_source_pixels_lbrt": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "slicing": "horizontal; preserve 4px source height at 2x; stretch center",
+      "specified_runtime_height": 2
+    },
+    "Dev_Fill": {
+      "file": "Dev_Fill.png",
+      "rect": [
+        1449,
+        25,
+        12,
+        8
+      ],
+      "source_size": [
+        16,
+        4
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "border_source_pixels_lbrt": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "slicing": "horizontal; preserve 4px source height at 2x; stretch center",
+      "note": "E cyan start cap retained; zero value, not a proportional fill.",
+      "specified_runtime_height": 2
+    }
+  },
+  "numbers": {
+    "Talin": {
+      "sample": "1,240",
+      "box": [
+        1353,
+        49,
+        96,
+        39
+      ],
+      "alignment": "left-middle",
+      "font_size": 34,
+      "font_weight": 900,
+      "color": "#16181B",
+      "recommended_font": "Arial Black",
+      "overflow": "expand left within group or use TMP autosize for five digits",
+      "mockup_source_E_box": [
+        1353,
+        49,
+        1449,
+        88
+      ]
+    },
+    "Parts": {
+      "sample": "36",
+      "box": [
+        1544,
+        49,
+        46,
+        38
+      ],
+      "alignment": "left-middle",
+      "font_size": 34,
+      "font_weight": 900,
+      "color": "#16181B",
+      "recommended_font": "Arial Black",
+      "overflow": "expand left within group or use TMP autosize for five digits",
+      "mockup_source_E_box": [
+        1544,
+        49,
+        1590,
+        87
+      ]
+    },
+    "Artifact": {
+      "sample": "2",
+      "box": [
+        1660,
+        49,
+        29,
+        39
+      ],
+      "alignment": "left-middle",
+      "font_size": 34,
+      "font_weight": 900,
+      "color": "#16181B",
+      "recommended_font": "Arial Black",
+      "overflow": "expand left within group or use TMP autosize for five digits",
+      "mockup_source_E_box": [
+        1660,
+        49,
+        1689,
+        88
+      ]
+    }
+  },
+  "development": {
+    "label": "BASE DEV  Lv.3",
+    "label_box": [
+      1313,
+      17,
+      123,
+      23
+    ],
+    "value": "0 / 30",
+    "value_box": [
+      1660,
+      17,
+      51,
+      23
+    ],
+    "font_size": 14,
+    "color": "#16181B",
+    "alignment": "left",
+    "mockup_typography": "E raster glyphs retained"
+  },
+  "mockup": {
+    "file": "../CurrencyBar_F_Mockup.png",
+    "clean_runtime": "../CurrencyBar_F_Runtime.png",
+    "hud_source_box": [
+      1306,
+      14,
+      1764,
+      92
+    ],
+    "detail_position": [
+      994,
+      917
+    ],
+    "detail_scale": 2,
+    "inset_box": [
+      984,
+      900,
+      1918,
+      1078
+    ],
+    "old_hud_cover_box": [
+      1312,
+      34,
+      1718,
+      69
+    ]
+  },
+  "notes": [
+    "No digits baked into extracted PNG assets.",
+    "E number glyphs reused in mockup; TMP font is an implementation recommendation, not the source of mockup glyphs.",
+    "All rect values are x,y,width,height except explicitly named boxes, which are left,top,right,bottom."
+  ]
+}

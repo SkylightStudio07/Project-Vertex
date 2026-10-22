@@ -1,0 +1,1517 @@
+{
+  "version": 2,
+  "canvas": [
+    1672,
+    941
+  ],
+  "assets": [
+    {
+      "name": "Back_Normal",
+      "file": "Back_Normal.png",
+      "output_size": [
+        185,
+        49
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "svg": "SVG/Back_Normal.svg",
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "border_source_meta": "Assets\\Art\\Lobby\\Armory\\Back_Normal.png.meta",
+      "source_sha256": "256e4a22c47d0cf6ee921193bf7fb633f7f9293ceb2cffc6fe611c7d715567e9"
+    },
+    {
+      "name": "Back_Normal_Hover",
+      "file": "Back_Normal_Hover.png",
+      "output_size": [
+        185,
+        49
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "svg": "SVG/Back_Normal_Hover.svg",
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "border_source_meta": "Assets\\Art\\Lobby\\Armory\\Back_Normal_Hover.png.meta",
+      "source_sha256": "cdb6e42a9ea59eaaad964c2617e1530d0d16f227732654cef8998ea9f4c55d2d"
+    },
+    {
+      "name": "Badge_Affiliation",
+      "file": "Badge_Affiliation.png",
+      "source": "Material_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1191,
+        218,
+        199,
+        35
+      ],
+      "output_size": [
+        198,
+        35
+      ],
+      "placement_1672_xy": [
+        1191,
+        218
+      ],
+      "nine_slice_lbrt": [
+        4.0,
+        4.0,
+        4.0,
+        4.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "text_slots_local": {
+        "label": [
+          13,
+          8
+        ]
+      },
+      "svg": "SVG/Badge_Affiliation.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\Badge_Affiliation.png.meta",
+      "source_sha256": "15a4e168f7e45581cd1e72661b850f6ea4fe29461283b4fa880d4eb8401a68f3"
+    },
+    {
+      "name": "Base_Material",
+      "file": "Base_Material.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "output_size": [
+        1672,
+        941
+      ],
+      "placement_1672_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "texture_sample_xywh": [
+        618,
+        33,
+        104,
+        38
+      ],
+      "note": "SubjectHeader, entry tabs and document all removed; original exterior lobby retained.",
+      "svg": "SVG/Base_Material.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\Base_Material.png.meta",
+      "source_sha256": "df36de3dfb96e3e2f72243f0cce352f3a67ee3a52a1fb8670a1d87563f5d88dc"
+    },
+    {
+      "name": "CategoryTab_Hover",
+      "file": "CategoryTab_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Hover",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      },
+      "svg": "SVG/CategoryTab_Hover.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\CategoryTab_Hover.png.meta",
+      "source_sha256": "fa6881c68a892ba5b452a90c87d359bba430cca2ffaafb4834f81e9659609372"
+    },
+    {
+      "name": "CategoryTab_Normal",
+      "file": "CategoryTab_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Normal",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      },
+      "svg": "SVG/CategoryTab_Normal.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\CategoryTab_Normal.png.meta",
+      "source_sha256": "39b976dc716349b14504ad09776e445fd3792c21c49192eaa3cd4806efb09cbe"
+    },
+    {
+      "name": "CategoryTab_Selected",
+      "file": "CategoryTab_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Selected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      },
+      "svg": "SVG/CategoryTab_Selected.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\CategoryTab_Selected.png.meta",
+      "source_sha256": "45991aa4e85bfbcaab90a3d1c815f3285d8868556bae6ac17c6f5df4c2a5eddc"
+    },
+    {
+      "name": "Checkbox_Selected",
+      "file": "Checkbox_Selected.png",
+      "x": 114,
+      "y": 301,
+      "width": 29,
+      "height": 29,
+      "kind": "textless-crop",
+      "output_size": [
+        29,
+        29
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "svg": "SVG/Checkbox_Selected.svg",
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "border_source_meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Selected.png.meta",
+      "source_sha256": "35c0c32a9fe0ad5707f0afc37d203d42d96d4f5c6fb72d32e2241d51fb2f4874"
+    },
+    {
+      "name": "Checkbox_Selected_Hover",
+      "file": "Checkbox_Selected_Hover.png",
+      "x": 114,
+      "y": 301,
+      "width": 29,
+      "height": 29,
+      "kind": "hover",
+      "normal": "Checkbox_Selected",
+      "output_size": [
+        29,
+        29
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "svg": "SVG/Checkbox_Selected_Hover.svg",
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "border_source_meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Selected_Hover.png.meta",
+      "source_sha256": "6020a2622f64e4df739f0fde0f603bb0c575e73263d3806e4b6adb5ed42b4985"
+    },
+    {
+      "name": "Checkbox_Unchecked",
+      "file": "Checkbox_Unchecked.png",
+      "x": 114,
+      "y": 342,
+      "width": 29,
+      "height": 29,
+      "kind": "textless-crop",
+      "output_size": [
+        29,
+        29
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "svg": "SVG/Checkbox_Unchecked.svg",
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "border_source_meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Unchecked.png.meta",
+      "source_sha256": "faddc2251935890e12df778b1e9c29077ea4b5723afb9daddbc778269edd9644"
+    },
+    {
+      "name": "Checkbox_Unchecked_Hover",
+      "file": "Checkbox_Unchecked_Hover.png",
+      "x": 114,
+      "y": 342,
+      "width": 29,
+      "height": 29,
+      "kind": "hover",
+      "normal": "Checkbox_Unchecked",
+      "output_size": [
+        29,
+        29
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "svg": "SVG/Checkbox_Unchecked_Hover.svg",
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "border_source_meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Unchecked_Hover.png.meta",
+      "source_sha256": "0f7bba56d996f388534b18b3ef3a04a10cdf1aa40927bac2c8c5963cb21ff2e7"
+    },
+    {
+      "name": "DefeatPip_Empty",
+      "file": "DefeatPip_Empty.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        352,
+        256,
+        16,
+        16
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1672_xy": [
+        352,
+        256
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "repeat_step": [
+        24,
+        0
+      ],
+      "svg": "SVG/DefeatPip_Empty.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\DefeatPip_Empty.png.meta",
+      "source_sha256": "9d0c684fc6b02d028fe16b5bbf8702e3d5deb3cc78624c6e2ad4502045414fcd"
+    },
+    {
+      "name": "DefeatPip_Filled",
+      "file": "DefeatPip_Filled.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        352,
+        256,
+        16,
+        16
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1672_xy": [
+        352,
+        256
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "repeat_step": [
+        24,
+        0
+      ],
+      "svg": "SVG/DefeatPip_Filled.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\DefeatPip_Filled.png.meta",
+      "source_sha256": "ce69f725c9a3ce2427b23aa24dec33ffb0224521d91db747525a41febd4ac58a"
+    },
+    {
+      "name": "Document_Clip",
+      "file": "Document_Clip.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1536,
+        450,
+        40,
+        58
+      ],
+      "output_size": [
+        40,
+        58
+      ],
+      "placement_1672_xy": [
+        1536,
+        450
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/Document_Clip.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\Document_Clip.png.meta",
+      "source_sha256": "2927c99d9de239fbd342d4b22470b68bf6138a7cea9240855373b604965b8229"
+    },
+    {
+      "name": "Document_Paper",
+      "file": "Document_Paper.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        457,
+        655,
+        470
+      ],
+      "output_size": [
+        655,
+        470
+      ],
+      "placement_1672_xy": [
+        947,
+        457
+      ],
+      "nine_slice_lbrt": [
+        28.0,
+        28.0,
+        28.0,
+        28.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "document_regions_local": {
+        "document_number": [
+          44,
+          23,
+          560,
+          20
+        ],
+        "title": [
+          44,
+          50,
+          560,
+          35
+        ],
+        "title_rule": [
+          44,
+          96,
+          564,
+          2
+        ],
+        "body_scroll": [
+          44,
+          121,
+          561,
+          297
+        ],
+        "scrollbar": [
+          636,
+          82,
+          5,
+          316
+        ],
+        "source_footer": [
+          355,
+          431,
+          254,
+          18
+        ],
+        "locked_icon": [
+          296,
+          172,
+          62,
+          80
+        ],
+        "locked_message": [
+          60,
+          274,
+          535,
+          28
+        ],
+        "locked_current_level": [
+          60,
+          310,
+          535,
+          22
+        ]
+      },
+      "svg": "SVG/Document_Paper.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\Document_Paper.png.meta",
+      "source_sha256": "6bf1f54856ec21564b3a9d6ca7bd16dc1e6dbdd9cb38bbeb0f2bf3f895cd8772"
+    },
+    {
+      "name": "Document_Rule",
+      "file": "Document_Rule.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        993,
+        552,
+        564,
+        2
+      ],
+      "output_size": [
+        566,
+        2
+      ],
+      "placement_1672_xy": [
+        993,
+        552
+      ],
+      "nine_slice_lbrt": [
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/Document_Rule.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\Document_Rule.png.meta",
+      "source_sha256": "9767e053179db7cc73ea3de1db3d2d317c164ad106ce1ad6c21c5b6062fc72a7"
+    },
+    {
+      "name": "EntryTab_Hover",
+      "file": "EntryTab_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Hover",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      },
+      "svg": "SVG/EntryTab_Hover.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Hover.png.meta",
+      "source_sha256": "ea546629890cc1015eb54388dda77075455ad1c20588312606df4ba13aebbbf0"
+    },
+    {
+      "name": "EntryTab_Locked",
+      "file": "EntryTab_Locked.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Locked",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      },
+      "svg": "SVG/EntryTab_Locked.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Locked.png.meta",
+      "source_sha256": "42a79b631ee66c4b8557f527bc9eb18a4c0f7020045bb23b06ad5707ebd0480c"
+    },
+    {
+      "name": "EntryTab_LockedSelected",
+      "file": "EntryTab_LockedSelected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "LockedSelected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      },
+      "svg": "SVG/EntryTab_LockedSelected.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\EntryTab_LockedSelected.png.meta",
+      "source_sha256": "4ab10cb2c0ef316e2d1675b6cace5e18278a7eaa3b031419829335fddfb25c89"
+    },
+    {
+      "name": "EntryTab_Normal",
+      "file": "EntryTab_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Normal",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      },
+      "svg": "SVG/EntryTab_Normal.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Normal.png.meta",
+      "source_sha256": "9b7fd5e16cf10d1266dc16fee6fd2bdf70d8fbd5f71b4bf12f424606e6e64a01"
+    },
+    {
+      "name": "EntryTab_Selected",
+      "file": "EntryTab_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Selected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      },
+      "svg": "SVG/EntryTab_Selected.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Selected.png.meta",
+      "source_sha256": "6f36e435956b417210f099529c593770f1ff5790f6d1c28a8d9c43b0b66d1304"
+    },
+    {
+      "name": "Icon_Lock",
+      "file": "Icon_Lock.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        824,
+        751,
+        26,
+        37
+      ],
+      "output_size": [
+        28,
+        34
+      ],
+      "placement_1672_xy": [
+        824,
+        751
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "note": "Tint light on dark silhouette.",
+      "svg": "SVG/Icon_Lock.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\Icon_Lock.png.meta",
+      "source_sha256": "944db95bb5603b580fb36e3048c36127d274eee7c4377963e1695977622ea849"
+    },
+    {
+      "name": "Icon_LockLarge",
+      "file": "Icon_LockLarge.png",
+      "source": "Material_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1235,
+        627,
+        63,
+        80
+      ],
+      "output_size": [
+        62,
+        80
+      ],
+      "placement_1672_xy": [
+        1235,
+        627
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/Icon_LockLarge.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\Icon_LockLarge.png.meta",
+      "source_sha256": "0e6556abe60dec96583cea0b02e1c5bc5384aee3ebbfa3b57d9558b63102a14b"
+    },
+    {
+      "name": "Icon_LockTab",
+      "file": "Icon_LockTab.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1237,
+        403,
+        19,
+        24
+      ],
+      "output_size": [
+        18,
+        24
+      ],
+      "placement_1672_xy": [
+        1237,
+        403
+      ],
+      "nine_slice_lbrt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/Icon_LockTab.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\Icon_LockTab.png.meta",
+      "source_sha256": "48354d4eb5a900d092c41c5165bace1933358314bde4760ee5d2c1ec5803a3b5"
+    },
+    {
+      "name": "ProgressCell_Empty",
+      "file": "ProgressCell_Empty.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1193,
+        314,
+        49,
+        31
+      ],
+      "output_size": [
+        50,
+        32
+      ],
+      "placement_1672_xy": [
+        1193,
+        314
+      ],
+      "nine_slice_lbrt": [
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/ProgressCell_Empty.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\ProgressCell_Empty.png.meta",
+      "source_sha256": "adf5441645738331f90840019e7b27ee76a32d2b1e3e95f0aa263e9b45ec3667"
+    },
+    {
+      "name": "ProgressCell_Filled",
+      "file": "ProgressCell_Filled.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1193,
+        314,
+        49,
+        31
+      ],
+      "output_size": [
+        50,
+        32
+      ],
+      "placement_1672_xy": [
+        1193,
+        314
+      ],
+      "nine_slice_lbrt": [
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/ProgressCell_Filled.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\ProgressCell_Filled.png.meta",
+      "source_sha256": "ad11e00fdae7bc163b5bdc5685e8b858e7efe94b94b364d9cebb45377bbc80c2"
+    },
+    {
+      "name": "Scrollbar_Handle",
+      "file": "Scrollbar_Handle.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        543,
+        213,
+        5,
+        89
+      ],
+      "output_size": [
+        4,
+        88
+      ],
+      "placement_1672_xy": [
+        543,
+        213
+      ],
+      "nine_slice_lbrt": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/Scrollbar_Handle.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\Scrollbar_Handle.png.meta",
+      "source_sha256": "1b1af7e3571443551b9446b38391faedfcfa959915d2f5d6b1da11c44bfb3550"
+    },
+    {
+      "name": "Scrollbar_Track",
+      "file": "Scrollbar_Track.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        543,
+        213,
+        5,
+        673
+      ],
+      "output_size": [
+        4,
+        674
+      ],
+      "placement_1672_xy": [
+        543,
+        213
+      ],
+      "nine_slice_lbrt": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "svg": "SVG/Scrollbar_Track.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\Scrollbar_Track.png.meta",
+      "source_sha256": "5b44b8752b2dd6728a60ab97bf668b87100cca53b0ccc802273a9beabc1a3a96"
+    },
+    {
+      "name": "SubjectCell_Hover",
+      "file": "SubjectCell_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Hover",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      },
+      "svg": "SVG/SubjectCell_Hover.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Hover.png.meta",
+      "source_sha256": "8b9822e86a8e2153ff544dd6d6be96c65881e75eac7c2480be70526e4b2cef48"
+    },
+    {
+      "name": "SubjectCell_Normal",
+      "file": "SubjectCell_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Normal",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      },
+      "svg": "SVG/SubjectCell_Normal.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Normal.png.meta",
+      "source_sha256": "30198726ec79a7399aa017fc99b85b51ded17bda0ef133648cc6b510e3343b21"
+    },
+    {
+      "name": "SubjectCell_Selected",
+      "file": "SubjectCell_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Selected",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      },
+      "svg": "SVG/SubjectCell_Selected.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Selected.png.meta",
+      "source_sha256": "8b9822e86a8e2153ff544dd6d6be96c65881e75eac7c2480be70526e4b2cef48"
+    },
+    {
+      "name": "SubjectCell_Unknown",
+      "file": "SubjectCell_Unknown.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Unknown",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      },
+      "svg": "SVG/SubjectCell_Unknown.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Unknown.png.meta",
+      "source_sha256": "62fc099f7c5050a590971e927725d72bee7014f42a4103f6d918b32ab9f7050c"
+    },
+    {
+      "name": "SubjectHeader",
+      "file": "SubjectHeader.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        125,
+        655,
+        249
+      ],
+      "output_size": [
+        655,
+        249
+      ],
+      "placement_1672_xy": [
+        947,
+        125
+      ],
+      "nine_slice_lbrt": [
+        16.0,
+        16.0,
+        16.0,
+        16.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "state": "Normal",
+      "portrait_window_xywh": [
+        24,
+        23,
+        190,
+        208
+      ],
+      "text_slots_local": {
+        "name": [
+          246,
+          26
+        ],
+        "badge": [
+          246,
+          91
+        ],
+        "progress_text": [
+          246,
+          151
+        ],
+        "progress_cells": [
+          246,
+          186
+        ]
+      },
+      "svg": "SVG/SubjectHeader.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Material\\SubjectHeader.png.meta",
+      "source_sha256": "496e3b118fb98c9510bbe787938bf9caaa4d814a483e063558e9fc6149f8e79d"
+    },
+    {
+      "name": "TypeBadge_Boss",
+      "file": "TypeBadge_Boss.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      },
+      "svg": "SVG/TypeBadge_Boss.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\TypeBadge_Boss.png.meta",
+      "source_sha256": "064d140a6e8fb8d1664c20e6ef26b0d518fb9ee3817e928c69168396378ed33b"
+    },
+    {
+      "name": "TypeBadge_Elite",
+      "file": "TypeBadge_Elite.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      },
+      "svg": "SVG/TypeBadge_Elite.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\TypeBadge_Elite.png.meta",
+      "source_sha256": "17c1cb2086e147bfe7ea3f797bdd9db72b4985e19d3097551f013aa7266f403d"
+    },
+    {
+      "name": "TypeBadge_Normal",
+      "file": "TypeBadge_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "method": "dark-theme SVG redraw, original dimensions/window/border metadata retained",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      },
+      "svg": "SVG/TypeBadge_Normal.svg",
+      "border_source_meta": "Assets\\Art\\Lobby\\Training\\TypeBadge_Normal.png.meta",
+      "source_sha256": "b8625ee9b5566182db654ec258554f1ac0952f3938040b2e2b0722e0cc1d64f3"
+    }
+  ],
+  "reuse": {},
+  "coordinates": "Top-left native1672x941. source_crop_xywh are reference areas; text/windows local to sprite unless screen is specified.",
+  "repeats": {
+    "subject_grid": {
+      "origin": [
+        350,
+        193
+      ],
+      "cell_size": [
+        139,
+        192
+      ],
+      "columns": 4,
+      "column_step": 145,
+      "row_step": 195,
+      "count": 14
+    },
+    "entry_tabs": {
+      "origin": [
+        947,
+        389
+      ],
+      "step": [
+        131,
+        0
+      ],
+      "count": 5
+    },
+    "progress_cells": {
+      "origin": [
+        1193,
+        314
+      ],
+      "step": [
+        57,
+        0
+      ],
+      "count": 5
+    },
+    "record_dots": {
+      "local_origin": [
+        22,
+        172
+      ],
+      "step": [
+        23,
+        0
+      ],
+      "count": 5
+    },
+    "category_tabs": {
+      "origin": [
+        99,
+        148
+      ],
+      "step": [
+        0,
+        112
+      ],
+      "count": 2
+    }
+  },
+  "text_screen": {
+    "title": [
+      233,
+      28
+    ],
+    "subtitle": [
+      233,
+      82
+    ],
+    "grid_title": [
+      350,
+      150
+    ],
+    "grid_count": [
+      737,
+      153
+    ],
+    "filter_heading": [
+      120,
+      410
+    ],
+    "filter_1": [
+      172,
+      460
+    ],
+    "filter_2": [
+      172,
+      514
+    ],
+    "filter_3": [
+      172,
+      565
+    ],
+    "filter_event": [
+      172,
+      617
+    ],
+    "unlock_rules": [
+      110,
+      791
+    ],
+    "rule_footer": [
+      110,
+      854
+    ],
+    "subject_name": [
+      1193,
+      160
+    ],
+    "subject_badge": [
+      1193,
+      220
+    ],
+    "subject_progress": [
+      1193,
+      279
+    ]
+  },
+  "document_regions_screen": {
+    "document_number": [
+      991,
+      480,
+      560,
+      20
+    ],
+    "title": [
+      991,
+      507,
+      560,
+      35
+    ],
+    "title_rule": [
+      991,
+      553,
+      564,
+      2
+    ],
+    "body_scroll": [
+      991,
+      578,
+      561,
+      297
+    ],
+    "scrollbar": [
+      1583,
+      539,
+      5,
+      316
+    ],
+    "source_footer": [
+      1302,
+      888,
+      254,
+      18
+    ],
+    "locked_icon": [
+      1243,
+      629,
+      62,
+      80
+    ],
+    "locked_message": [
+      1007,
+      731,
+      535,
+      28
+    ],
+    "locked_current_level": [
+      1007,
+      767,
+      535,
+      22
+    ]
+  },
+  "locked_state": {
+    "selected_tab": "EntryTab_LockedSelected",
+    "lock_tab": "Icon_LockTab",
+    "body_lock": "Icon_LockLarge",
+    "runtime_message": "호감도 Lv.3에 열립니다",
+    "runtime_subtext": "(현재 Lv.2)"
+  },
+  "decisions": {
+    "SubjectHeader": "Separate bordered plate in both mockups, exported with transparent art window.",
+    "Icon_LockTab": "Smaller glyph than reused grid lock; exported18x24.",
+    "Icon_LockLarge": "Distinct large body lock62x80, exported separately."
+  },
+  "source_differences": "Enemy screenshot has bottom grid framing irregularities; shared four-column/14-cell layout follows companion regular grid.",
+  "layering": [
+    "Base_Material",
+    "category tabs",
+    "subject cells",
+    "existing game art clipped to windows",
+    "record dots",
+    "SubjectHeader",
+    "EntryTab states",
+    "Document_Paper",
+    "Document_Rule",
+    "Document_Clip",
+    "runtime text/locks"
+  ],
+  "theme": "Archive B dark crimson",
+  "palette": {
+    "panel": "#16181B",
+    "edge": "#77717E",
+    "text": "#EEF0F2",
+    "secondary": "#B8B1BF",
+    "accent": "#B3263A",
+    "hover": "#D43A50"
+  },
+  "base_background_darken_alpha": 0.45,
+  "metadata_policy": "Borders copied from hash-matched runtime .meta files; no runtime asset modified.",
+  "source_layout": "../MaterialMockup/Extracted/layout.json",
+  "notes": [
+    "All 36 assets supplied locally; no dependency on old light sprites.",
+    "Windows remain transparent; portraits and all text belong to runtime layers.",
+    "Mockups use actual current screenshots for subject portraits and current unlock counts."
+  ]
+}

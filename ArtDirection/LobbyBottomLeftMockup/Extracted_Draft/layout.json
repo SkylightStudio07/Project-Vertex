@@ -1,0 +1,647 @@
+{
+  "version": "A2",
+  "reference": "../Reference_Lobby_Current_v2.png",
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "asset_scale": 2,
+  "unity_pixels_per_unit": 200,
+  "shadows": false,
+  "assets": {
+    "Panel_Dialogue": {
+      "file": "Panel_Dialogue.png",
+      "svg": "SVG/Panel_Dialogue.svg",
+      "pixel_size": [
+        960,
+        180
+      ],
+      "logical_size": [
+        480,
+        90
+      ],
+      "scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          4,
+          4,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          2.0,
+          2.0,
+          20.0,
+          20.0
+        ],
+        "mode": "sliced; preserve corners; stretch center",
+        "minimum_logical_size": [
+          40,
+          40
+        ]
+      }
+    },
+    "Panel_Story": {
+      "file": "Panel_Story.png",
+      "svg": "SVG/Panel_Story.svg",
+      "pixel_size": [
+        640,
+        272
+      ],
+      "logical_size": [
+        320,
+        136
+      ],
+      "scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          4,
+          4,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          2.0,
+          2.0,
+          20.0,
+          20.0
+        ],
+        "mode": "sliced; preserve corners; stretch center",
+        "minimum_logical_size": [
+          40,
+          40
+        ]
+      }
+    },
+    "Panel_Small": {
+      "file": "Panel_Small.png",
+      "svg": "SVG/Panel_Small.svg",
+      "pixel_size": [
+        296,
+        128
+      ],
+      "logical_size": [
+        148,
+        64
+      ],
+      "scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          4,
+          4,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          2.0,
+          2.0,
+          20.0,
+          20.0
+        ],
+        "mode": "sliced; preserve corners; stretch center",
+        "minimum_logical_size": [
+          40,
+          40
+        ]
+      }
+    },
+    "Mask_StoryThumb": {
+      "file": "Mask_StoryThumb.png",
+      "svg": "SVG/Mask_StoryThumb.svg",
+      "pixel_size": [
+        640,
+        272
+      ],
+      "logical_size": [
+        320,
+        136
+      ],
+      "scale": 2,
+      "nine_slice": {
+        "source_pixels_left_bottom_right_top": [
+          4,
+          4,
+          40,
+          40
+        ],
+        "logical_pixels_left_bottom_right_top": [
+          2.0,
+          2.0,
+          20.0,
+          20.0
+        ],
+        "mode": "sliced; preserve corners; stretch center",
+        "minimum_logical_size": [
+          40,
+          40
+        ]
+      }
+    },
+    "Overlay_StoryGradient": {
+      "file": "Overlay_StoryGradient.png",
+      "svg": "SVG/Overlay_StoryGradient.svg",
+      "pixel_size": [
+        640,
+        272
+      ],
+      "logical_size": [
+        320,
+        136
+      ],
+      "scale": 2
+    },
+    "Icon_Archive": {
+      "file": "Icon_Archive.png",
+      "svg": "SVG/Icon_Archive.svg",
+      "pixel_size": [
+        80,
+        80
+      ],
+      "logical_size": [
+        40,
+        40
+      ],
+      "scale": 2
+    },
+    "Icon_Companions": {
+      "file": "Icon_Companions.png",
+      "svg": "SVG/Icon_Companions.svg",
+      "pixel_size": [
+        80,
+        80
+      ],
+      "logical_size": [
+        40,
+        40
+      ],
+      "scale": 2
+    },
+    "Mark_Next": {
+      "file": "Mark_Next.png",
+      "svg": "SVG/Mark_Next.svg",
+      "pixel_size": [
+        20,
+        28
+      ],
+      "logical_size": [
+        10,
+        14
+      ],
+      "scale": 2
+    },
+    "Mark_Underline": {
+      "file": "Mark_Underline.png",
+      "svg": "SVG/Mark_Underline.svg",
+      "pixel_size": [
+        24,
+        4
+      ],
+      "logical_size": [
+        12,
+        2
+      ],
+      "scale": 2
+    },
+    "Mark_UnderlineLight": {
+      "file": "Mark_UnderlineLight.png",
+      "svg": "SVG/Mark_UnderlineLight.svg",
+      "pixel_size": [
+        24,
+        4
+      ],
+      "logical_size": [
+        12,
+        2
+      ],
+      "scale": 2
+    },
+    "Thumb_Sample": {
+      "file": "Thumb_Sample.png",
+      "pixel_size": [
+        640,
+        272
+      ],
+      "logical_size": [
+        320,
+        136
+      ],
+      "scale": 2,
+      "source": "../Sources/Thumb_Generated.png",
+      "mask": "Mask_StoryThumb.png"
+    }
+  },
+  "elements_in_draw_order": [
+    {
+      "id": "Panel_Dialogue",
+      "asset": "Panel_Dialogue",
+      "rect": [
+        40,
+        800,
+        480,
+        90
+      ]
+    },
+    {
+      "id": "StoryThumbnail",
+      "asset": "Thumb_Sample",
+      "mask": "Mask_StoryThumb",
+      "rect": [
+        40,
+        905,
+        320,
+        136
+      ]
+    },
+    {
+      "id": "Overlay_StoryGradient",
+      "asset": "Overlay_StoryGradient",
+      "rect": [
+        40,
+        905,
+        320,
+        136
+      ]
+    },
+    {
+      "id": "Panel_Story",
+      "asset": "Panel_Story",
+      "rect": [
+        40,
+        905,
+        320,
+        136
+      ]
+    },
+    {
+      "id": "ArchivePanel",
+      "asset": "Panel_Small",
+      "rect": [
+        372,
+        905,
+        148,
+        64
+      ]
+    },
+    {
+      "id": "CompanionPanel",
+      "asset": "Panel_Small",
+      "rect": [
+        372,
+        977,
+        148,
+        64
+      ]
+    },
+    {
+      "id": "Icon_Archive",
+      "asset": "Icon_Archive",
+      "rect": [
+        382,
+        918,
+        34,
+        34
+      ]
+    },
+    {
+      "id": "Icon_Companions",
+      "asset": "Icon_Companions",
+      "rect": [
+        382,
+        990,
+        34,
+        34
+      ]
+    },
+    {
+      "id": "DialogueNext",
+      "asset": "Mark_Next",
+      "rect": [
+        495,
+        868,
+        9,
+        12
+      ]
+    },
+    {
+      "id": "ObjectiveNext",
+      "asset": "Mark_Next",
+      "rect": [
+        54,
+        1022,
+        6,
+        8
+      ]
+    },
+    {
+      "id": "DialogueUnderline",
+      "asset": "Mark_Underline",
+      "rect": [
+        54,
+        822,
+        12,
+        2
+      ]
+    },
+    {
+      "id": "StoryUnderline",
+      "asset": "Mark_UnderlineLight",
+      "rect": [
+        54,
+        927,
+        12,
+        2
+      ]
+    },
+    {
+      "id": "ArchiveUnderline",
+      "asset": "Mark_Underline",
+      "rect": [
+        380,
+        919,
+        9,
+        2
+      ]
+    },
+    {
+      "id": "CompanionUnderline",
+      "asset": "Mark_Underline",
+      "rect": [
+        380,
+        991,
+        9,
+        2
+      ]
+    }
+  ],
+  "text_boxes": [
+    {
+      "id": "DialogueNumber",
+      "text": "01",
+      "rect": [
+        54,
+        809,
+        16,
+        12
+      ],
+      "font_size_px": 10,
+      "font": "bahnschrift.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "Speaker",
+      "text": "치하라 쇼",
+      "rect": [
+        78,
+        807,
+        200,
+        20
+      ],
+      "font_size_px": 18,
+      "font": "malgunbd.ttf",
+      "weight": 700,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "DialogueCaption",
+      "text": "DIALOGUE",
+      "rect": [
+        426,
+        811,
+        78,
+        12
+      ],
+      "font_size_px": 10,
+      "font": "bahnschrift.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "DialogueLine1",
+      "text": "비 오는 날엔 총기 손질이 두 배야.",
+      "rect": [
+        54,
+        837,
+        440,
+        20
+      ],
+      "font_size_px": 19,
+      "font": "malgun.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "DialogueLine2",
+      "text": "다음 여정을 준비할까요?",
+      "rect": [
+        54,
+        862,
+        430,
+        20
+      ],
+      "font_size_px": 19,
+      "font": "malgun.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "StoryHeader",
+      "text": "02 / STORY CH.2-1",
+      "rect": [
+        54,
+        914,
+        275,
+        12
+      ],
+      "font_size_px": 11,
+      "font": "bahnschrift.ttf",
+      "weight": 400,
+      "color": "#EEF0F2",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "StoryTitle1",
+      "text": "영원하지 않기에",
+      "rect": [
+        54,
+        938,
+        282,
+        26
+      ],
+      "font_size_px": 24,
+      "font": "malgunbd.ttf",
+      "weight": 700,
+      "color": "#EEF0F2",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "StoryTitle2",
+      "text": "빛나는 것들",
+      "rect": [
+        54,
+        969,
+        282,
+        26
+      ],
+      "font_size_px": 24,
+      "font": "malgunbd.ttf",
+      "weight": 700,
+      "color": "#EEF0F2",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "StoryObjective",
+      "text": "다음 목표: 1막 보스 격파",
+      "rect": [
+        66,
+        1019,
+        274,
+        16
+      ],
+      "font_size_px": 14,
+      "font": "malgun.ttf",
+      "weight": 400,
+      "color": "#EEF0F2",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "ArchiveNumber",
+      "text": "03",
+      "rect": [
+        380,
+        910,
+        14,
+        9
+      ],
+      "font_size_px": 8,
+      "font": "bahnschrift.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "ArchiveName",
+      "text": "아카이브",
+      "rect": [
+        423,
+        922,
+        91,
+        22
+      ],
+      "font_size_px": 20,
+      "font": "malgunbd.ttf",
+      "weight": 700,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "ArchiveCaption",
+      "text": "ARCHIVES",
+      "rect": [
+        423,
+        949,
+        91,
+        10
+      ],
+      "font_size_px": 9,
+      "font": "bahnschrift.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "CompanionNumber",
+      "text": "04",
+      "rect": [
+        380,
+        982,
+        14,
+        9
+      ],
+      "font_size_px": 8,
+      "font": "bahnschrift.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "CompanionName",
+      "text": "동료",
+      "rect": [
+        423,
+        994,
+        91,
+        22
+      ],
+      "font_size_px": 20,
+      "font": "malgunbd.ttf",
+      "weight": 700,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    },
+    {
+      "id": "CompanionCaption",
+      "text": "COMPANIONS",
+      "rect": [
+        423,
+        1021,
+        91,
+        10
+      ],
+      "font_size_px": 9,
+      "font": "bahnschrift.ttf",
+      "weight": 400,
+      "color": "#16181B",
+      "alignment": "top-left",
+      "auto_size": false,
+      "baked_in_asset": false
+    }
+  ],
+  "story_composition": [
+    "Thumb_Sample clipped with Mask_StoryThumb alpha",
+    "Overlay_StoryGradient",
+    "Panel_Story transparent-center border",
+    "TMP labels and next marker"
+  ],
+  "notes": [
+    "Text and numbers only appear in mockup; sprites contain no glyphs.",
+    "Use Simple full-rect thumbnail and gradient fitted to story rect; sliced mask and border preserve cut corner.",
+    "Thumbnail unchanged in tone from A, cropped to full-card 2.35:1 per section 4.",
+    "4-sided slice values use source PNG pixels; divide by 2 for design pixels."
+  ]
+}

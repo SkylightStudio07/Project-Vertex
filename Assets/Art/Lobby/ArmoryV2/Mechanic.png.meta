@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: 27e40781e7e407f469193f01e856f546
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5527972174669230038
+    second: Mechanic_0
+  - first:
+      213: 234506128942489151
+    second: Mechanic_1
+  - first:
+      213: -3320277611777720690
+    second: Mechanic_2
+  - first:
+      213: 8900618965382115629
+    second: Mechanic_3
+  - first:
+      213: 2430875944146907098
+    second: Mechanic_4
+  - first:
+      213: 1091499860427299931
+    second: Mechanic_5
+  - first:
+      213: 8173564417486565508
+    second: Mechanic_6
+  - first:
+      213: -3057666430944593323
+    second: Mechanic_7
+  - first:
+      213: -7884682577431925706
+    second: Mechanic_8
+  - first:
+      213: -514953864029045617
+    second: Mechanic_9
+  - first:
+      213: 4033453090925907666
+    second: Mechanic_10
+  - first:
+      213: -5651577983066030148
+    second: Mechanic_11
+  - first:
+      213: 5758640476608617760
+    second: Mechanic_12
+  - first:
+      213: -4685540795618786939
+    second: Mechanic_13
+  - first:
+      213: -6818266526845897310
+    second: Mechanic_14
+  - first:
+      213: -2984484597056939118
+    second: Mechanic_15
+  - first:
+      213: 8115288266443284624
+    second: Mechanic_16
+  - first:
+      213: -6889000152212114786
+    second: Mechanic_17
+  - first:
+      213: 746600422512944429
+    second: Mechanic_18
+  - first:
+      213: 9153908730074361043
+    second: Mechanic_19
+  - first:
+      213: -8640419966048596702
+    second: Mechanic_20
+  - first:
+      213: -4723042006730017970
+    second: Mechanic_21
+  - first:
+      213: 8954283254970401257
+    second: Mechanic_22
+  - first:
+      213: -8519517900772744353
+    second: Mechanic_23
+  - first:
+      213: -7449931551666182112
+    second: Mechanic_24
+  - first:
+      213: -1576721786750495275
+    second: Mechanic_25
+  - first:
+      213: 6608138298726943793
+    second: Mechanic_26
+  - first:
+      213: -6484413276698625298
+    second: Mechanic_27
+  - first:
+      213: -2530042208467304992
+    second: Mechanic_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mechanic_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1527
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a20d8987892b843b0800000000000000
+      internalID: -5527972174669230038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1416
+        width: 16
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3ed441f412214300800000000000000
+      internalID: 234506128942489151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_2
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 598
+        height: 1535
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8e7e4a8a110ce1d0800000000000000
+      internalID: -3320277611777720690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1391
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d21b4b0aac9558b70800000000000000
+      internalID: 8900618965382115629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1388
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf2be7bac43cb120800000000000000
+      internalID: 2430875944146907098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1259
+        width: 16
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c582d0759c52f00800000000000000
+      internalID: 1091499860427299931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1231
+        width: 15
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4803f0548855e6170800000000000000
+      internalID: 8173564417486565508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1133
+        width: 15
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55a39edc49cf095d0800000000000000
+      internalID: -3057666430944593323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1079
+        width: 15
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63c657d78faf39290800000000000000
+      internalID: -7884682577431925706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1044
+        width: 15
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8c75d260348ad8f0800000000000000
+      internalID: -514953864029045617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1031
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2de07de4734b9f730800000000000000
+      internalID: 4033453090925907666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_11
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1041
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbf3eea84cf8191b0800000000000000
+      internalID: -5651577983066030148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1008
+        width: 15
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02d517db00dcaef40800000000000000
+      internalID: 5758640476608617760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 948
+        width: 15
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5818a80b87d99feb0800000000000000
+      internalID: -4685540795618786939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 897
+        width: 15
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a5f963f7b6a061a0800000000000000
+      internalID: -6818266526845897310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 785
+        width: 15
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29bdbca421bf496d0800000000000000
+      internalID: -2984484597056939118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 685
+        width: 15
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0906f338eab4f9070800000000000000
+      internalID: 8115288266443284624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 776
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e92f8cd6cda5560a0800000000000000
+      internalID: -6889000152212114786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 238
+        width: 15
+        height: 449
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d256a0de0257c5a00800000000000000
+      internalID: 746600422512944429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 220
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dced629d77390f70800000000000000
+      internalID: 9153908730074361043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 199
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22d0b7dd1df071880800000000000000
+      internalID: -8640419966048596702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_21
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 223
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43fb919152647eb0800000000000000
+      internalID: -4723042006730017970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 164
+        width: 15
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e14db6bd21044c70800000000000000
+      internalID: 8954283254970401257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 113
+        width: 15
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f53ebda8b9794c980800000000000000
+      internalID: -8519517900772744353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_24
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 161
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02866f5a9b68c9890800000000000000
+      internalID: -7449931551666182112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d51e1783eb5e1ae0800000000000000
+      internalID: -1576721786750495275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 98
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c064275c2d4bb50800000000000000
+      internalID: 6608138298726943793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 58
+        width: 15
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eea3d811b7cb206a0800000000000000
+      internalID: -6484413276698625298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mechanic_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 15
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0edbf81240c73ecd0800000000000000
+      internalID: -2530042208467304992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Mechanic_0: -5527972174669230038
+      Mechanic_1: 234506128942489151
+      Mechanic_10: 4033453090925907666
+      Mechanic_11: -5651577983066030148
+      Mechanic_12: 5758640476608617760
+      Mechanic_13: -4685540795618786939
+      Mechanic_14: -6818266526845897310
+      Mechanic_15: -2984484597056939118
+      Mechanic_16: 8115288266443284624
+      Mechanic_17: -6889000152212114786
+      Mechanic_18: 746600422512944429
+      Mechanic_19: 9153908730074361043
+      Mechanic_2: -3320277611777720690
+      Mechanic_20: -8640419966048596702
+      Mechanic_21: -4723042006730017970
+      Mechanic_22: 8954283254970401257
+      Mechanic_23: -8519517900772744353
+      Mechanic_24: -7449931551666182112
+      Mechanic_25: -1576721786750495275
+      Mechanic_26: 6608138298726943793
+      Mechanic_27: -6484413276698625298
+      Mechanic_28: -2530042208467304992
+      Mechanic_3: 8900618965382115629
+      Mechanic_4: 2430875944146907098
+      Mechanic_5: 1091499860427299931
+      Mechanic_6: 8173564417486565508
+      Mechanic_7: -3057666430944593323
+      Mechanic_8: -7884682577431925706
+      Mechanic_9: -514953864029045617
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

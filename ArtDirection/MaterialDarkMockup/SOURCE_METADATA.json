@@ -1,0 +1,1827 @@
+{
+  "Base_Material": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Base_Material",
+      "file": "Base_Material.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "output_size": [
+        1672,
+        941
+      ],
+      "placement_1672_xy": [
+        0,
+        0
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "texture_sample_xywh": [
+        618,
+        33,
+        104,
+        38
+      ],
+      "note": "SubjectHeader, entry tabs and document all removed; original exterior lobby retained."
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\Base_Material.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "CategoryTab_Normal": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "CategoryTab_Normal",
+      "file": "CategoryTab_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\CategoryTab_Normal.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "CategoryTab_Hover": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "CategoryTab_Hover",
+      "file": "CategoryTab_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Hover",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\CategoryTab_Hover.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "CategoryTab_Selected": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "CategoryTab_Selected",
+      "file": "CategoryTab_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        99,
+        148,
+        209,
+        99
+      ],
+      "output_size": [
+        209,
+        99
+      ],
+      "placement_1672_xy": [
+        99,
+        148
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Selected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "title": [
+          24,
+          18
+        ],
+        "english": [
+          24,
+          59
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\CategoryTab_Selected.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "SubjectCell_Normal": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "SubjectCell_Normal",
+      "file": "SubjectCell_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Normal.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "SubjectCell_Hover": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "SubjectCell_Hover",
+      "file": "SubjectCell_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Hover",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Hover.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "SubjectCell_Selected": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "SubjectCell_Selected",
+      "file": "SubjectCell_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Selected",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Selected.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "SubjectCell_Unknown": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "SubjectCell_Unknown",
+      "file": "SubjectCell_Unknown.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        350,
+        193,
+        139,
+        192
+      ],
+      "output_size": [
+        139,
+        192
+      ],
+      "placement_1672_xy": [
+        350,
+        193
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Unknown",
+      "portrait_window_xywh": [
+        4,
+        4,
+        131,
+        132
+      ],
+      "text_slots_local": {
+        "name": [
+          12,
+          143
+        ],
+        "progress_origin": [
+          22,
+          172
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\SubjectCell_Unknown.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "SubjectHeader": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "SubjectHeader",
+      "file": "SubjectHeader.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        125,
+        655,
+        249
+      ],
+      "output_size": [
+        655,
+        249
+      ],
+      "placement_1672_xy": [
+        947,
+        125
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": [
+        24,
+        23,
+        190,
+        208
+      ],
+      "text_slots_local": {
+        "name": [
+          246,
+          26
+        ],
+        "badge": [
+          246,
+          91
+        ],
+        "progress_text": [
+          246,
+          151
+        ],
+        "progress_cells": [
+          246,
+          186
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\SubjectHeader.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "Badge_Affiliation": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      4.0,
+      4.0,
+      4.0,
+      4.0
+    ],
+    "asset": {
+      "name": "Badge_Affiliation",
+      "file": "Badge_Affiliation.png",
+      "source": "Material_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1191,
+        218,
+        199,
+        35
+      ],
+      "output_size": [
+        198,
+        35
+      ],
+      "placement_1672_xy": [
+        1191,
+        218
+      ],
+      "nine_slice_lbrt": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "text_slots_local": {
+        "label": [
+          13,
+          8
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\Badge_Affiliation.png.meta",
+        "border": [
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ]
+      }
+    ]
+  },
+  "ProgressCell_Filled": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      2.0,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "asset": {
+      "name": "ProgressCell_Filled",
+      "file": "ProgressCell_Filled.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1193,
+        314,
+        49,
+        31
+      ],
+      "output_size": [
+        50,
+        32
+      ],
+      "placement_1672_xy": [
+        1193,
+        314
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\ProgressCell_Filled.png.meta",
+        "border": [
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ]
+  },
+  "ProgressCell_Empty": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      2.0,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "asset": {
+      "name": "ProgressCell_Empty",
+      "file": "ProgressCell_Empty.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1193,
+        314,
+        49,
+        31
+      ],
+      "output_size": [
+        50,
+        32
+      ],
+      "placement_1672_xy": [
+        1193,
+        314
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\ProgressCell_Empty.png.meta",
+        "border": [
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ]
+  },
+  "EntryTab_Normal": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "EntryTab_Normal",
+      "file": "EntryTab_Normal.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Normal",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Normal.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "EntryTab_Hover": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "EntryTab_Hover",
+      "file": "EntryTab_Hover.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Hover",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Hover.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "EntryTab_Selected": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "EntryTab_Selected",
+      "file": "EntryTab_Selected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Selected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Selected.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "EntryTab_Locked": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "EntryTab_Locked",
+      "file": "EntryTab_Locked.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "Locked",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\EntryTab_Locked.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "EntryTab_LockedSelected": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "asset": {
+      "name": "EntryTab_LockedSelected",
+      "file": "EntryTab_LockedSelected.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        389,
+        120,
+        58
+      ],
+      "output_size": [
+        120,
+        58
+      ],
+      "placement_1672_xy": [
+        947,
+        389
+      ],
+      "nine_slice_lbrt": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "state": "LockedSelected",
+      "portrait_window_xywh": null,
+      "text_slots_local": {
+        "number": [
+          58,
+          18
+        ],
+        "lock": [
+          20,
+          16
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\EntryTab_LockedSelected.png.meta",
+        "border": [
+          16.0,
+          16.0,
+          16.0,
+          16.0
+        ]
+      }
+    ]
+  },
+  "Icon_LockTab": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Icon_LockTab",
+      "file": "Icon_LockTab.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1237,
+        403,
+        19,
+        24
+      ],
+      "output_size": [
+        18,
+        24
+      ],
+      "placement_1672_xy": [
+        1237,
+        403
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\Icon_LockTab.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Icon_LockLarge": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Icon_LockLarge",
+      "file": "Icon_LockLarge.png",
+      "source": "Material_Companion_Mockup.png",
+      "source_crop_xywh": [
+        1235,
+        627,
+        63,
+        80
+      ],
+      "output_size": [
+        62,
+        80
+      ],
+      "placement_1672_xy": [
+        1235,
+        627
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\Icon_LockLarge.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Document_Paper": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      28.0,
+      28.0,
+      28.0,
+      28.0
+    ],
+    "asset": {
+      "name": "Document_Paper",
+      "file": "Document_Paper.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        947,
+        457,
+        655,
+        470
+      ],
+      "output_size": [
+        655,
+        470
+      ],
+      "placement_1672_xy": [
+        947,
+        457
+      ],
+      "nine_slice_lbrt": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed",
+      "shadow_offset": [
+        4,
+        4
+      ],
+      "document_regions_local": {
+        "document_number": [
+          44,
+          23,
+          560,
+          20
+        ],
+        "title": [
+          44,
+          50,
+          560,
+          35
+        ],
+        "title_rule": [
+          44,
+          96,
+          564,
+          2
+        ],
+        "body_scroll": [
+          44,
+          121,
+          561,
+          297
+        ],
+        "scrollbar": [
+          636,
+          82,
+          5,
+          316
+        ],
+        "source_footer": [
+          355,
+          431,
+          254,
+          18
+        ],
+        "locked_icon": [
+          296,
+          172,
+          62,
+          80
+        ],
+        "locked_message": [
+          60,
+          274,
+          535,
+          28
+        ],
+        "locked_current_level": [
+          60,
+          310,
+          535,
+          22
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\Document_Paper.png.meta",
+        "border": [
+          28.0,
+          28.0,
+          28.0,
+          28.0
+        ]
+      }
+    ]
+  },
+  "Document_Clip": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Document_Clip",
+      "file": "Document_Clip.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        1536,
+        450,
+        40,
+        58
+      ],
+      "output_size": [
+        40,
+        58
+      ],
+      "placement_1672_xy": [
+        1536,
+        450
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\Document_Clip.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Document_Rule": {
+    "metadata": "ArtDirection/MaterialMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      1.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Document_Rule",
+      "file": "Document_Rule.png",
+      "source": "Material_Enemy_Mockup.png",
+      "source_crop_xywh": [
+        993,
+        552,
+        564,
+        2
+      ],
+      "output_size": [
+        566,
+        2
+      ],
+      "placement_1672_xy": [
+        993,
+        552
+      ],
+      "nine_slice_lbrt": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "method": "canonical-guided contour reconstruction with sampled paper grain; lettering and art removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Material\\Document_Rule.png.meta",
+        "border": [
+          1.0,
+          0.0,
+          1.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "TypeBadge_Normal": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      2.0,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "asset": {
+      "name": "TypeBadge_Normal",
+      "file": "TypeBadge_Normal.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\TypeBadge_Normal.png.meta",
+        "border": [
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ]
+  },
+  "TypeBadge_Elite": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      2.0,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "asset": {
+      "name": "TypeBadge_Elite",
+      "file": "TypeBadge_Elite.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\TypeBadge_Elite.png.meta",
+        "border": [
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ]
+  },
+  "TypeBadge_Boss": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      2.0,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "asset": {
+      "name": "TypeBadge_Boss",
+      "file": "TypeBadge_Boss.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        282,
+        366,
+        52,
+        23
+      ],
+      "output_size": [
+        56,
+        26
+      ],
+      "placement_1672_xy": [
+        282,
+        366
+      ],
+      "nine_slice_lbrt": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "text_slots_local": {
+        "label": [
+          7,
+          4
+        ]
+      }
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\TypeBadge_Boss.png.meta",
+        "border": [
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ]
+  },
+  "DefeatPip_Filled": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "DefeatPip_Filled",
+      "file": "DefeatPip_Filled.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        352,
+        256,
+        16,
+        16
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1672_xy": [
+        352,
+        256
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "repeat_step": [
+        24,
+        0
+      ]
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\DefeatPip_Filled.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "DefeatPip_Empty": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "DefeatPip_Empty",
+      "file": "DefeatPip_Empty.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        352,
+        256,
+        16,
+        16
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "placement_1672_xy": [
+        352,
+        256
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "repeat_step": [
+        24,
+        0
+      ]
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\DefeatPip_Empty.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Icon_Lock": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Icon_Lock",
+      "file": "Icon_Lock.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        824,
+        751,
+        26,
+        37
+      ],
+      "output_size": [
+        28,
+        34
+      ],
+      "placement_1672_xy": [
+        824,
+        751
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed",
+      "note": "Tint light on dark silhouette."
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\Icon_Lock.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Scrollbar_Track": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "asset": {
+      "name": "Scrollbar_Track",
+      "file": "Scrollbar_Track.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        543,
+        213,
+        5,
+        673
+      ],
+      "output_size": [
+        4,
+        674
+      ],
+      "placement_1672_xy": [
+        543,
+        213
+      ],
+      "nine_slice_lbrt": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\Scrollbar_Track.png.meta",
+        "border": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "Scrollbar_Handle": {
+    "metadata": "ArtDirection/TrainingMockup/Extracted/layout.json",
+    "nine_slice_lbrt": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "asset": {
+      "name": "Scrollbar_Handle",
+      "file": "Scrollbar_Handle.png",
+      "source": "Training_Main_Mockup.png",
+      "source_crop_xywh": [
+        543,
+        213,
+        5,
+        89
+      ],
+      "output_size": [
+        4,
+        88
+      ],
+      "placement_1672_xy": [
+        543,
+        213
+      ],
+      "nine_slice_lbrt": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "method": "source-guided restoration; source paper texture; typography and artwork removed"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Training\\Scrollbar_Handle.png.meta",
+        "border": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "Checkbox_Selected": {
+    "metadata": "ArtDirection/ArmoryMockup/CardCatalogExtracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Checkbox_Selected",
+      "file": "Checkbox_Selected.png",
+      "x": 114,
+      "y": 301,
+      "width": 29,
+      "height": 29,
+      "kind": "textless-crop"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Selected.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Checkbox_Selected_Hover": {
+    "metadata": "ArtDirection/ArmoryMockup/CardCatalogExtracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Checkbox_Selected_Hover",
+      "file": "Checkbox_Selected_Hover.png",
+      "x": 114,
+      "y": 301,
+      "width": 29,
+      "height": 29,
+      "kind": "hover",
+      "normal": "Checkbox_Selected"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Selected_Hover.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Checkbox_Unchecked": {
+    "metadata": "ArtDirection/ArmoryMockup/CardCatalogExtracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Checkbox_Unchecked",
+      "file": "Checkbox_Unchecked.png",
+      "x": 114,
+      "y": 342,
+      "width": 29,
+      "height": 29,
+      "kind": "textless-crop"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Unchecked.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Checkbox_Unchecked_Hover": {
+    "metadata": "ArtDirection/ArmoryMockup/CardCatalogExtracted/layout.json",
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "asset": {
+      "name": "Checkbox_Unchecked_Hover",
+      "file": "Checkbox_Unchecked_Hover.png",
+      "x": 114,
+      "y": 342,
+      "width": 29,
+      "height": 29,
+      "kind": "hover",
+      "normal": "Checkbox_Unchecked"
+    },
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Catalog\\Checkbox_Unchecked_Hover.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Back_Normal": {
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Armory\\Back_Normal.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "Back_Normal_Hover": {
+    "nine_slice_lbrt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "unity_metadata": [
+      {
+        "meta": "Assets\\Art\\Lobby\\Armory\\Back_Normal_Hover.png.meta",
+        "border": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  }
+}

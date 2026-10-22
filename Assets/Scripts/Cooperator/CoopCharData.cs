@@ -16,6 +16,10 @@ public class CoopCharData : CharData
     [Header("성소 선택 상세 화면 전신 아트 (초상화와 별도)")]
     public Sprite sanctuaryFullArt;
 
+    [Header("로비 동료 탭 상세 전신 (투명 배경, 서 있는 포즈). 비우면 성소 전신을 쓴다")]
+    public Sprite rosterFullArt;
+    public Sprite RosterFullArt => rosterFullArt != null ? rosterFullArt : sanctuaryFullArt;
+
     [Tooltip("이벤트로만 합류하는 동료 (성소 후보·잠긴 후보 실루엣에 나오지 않음)")]
     public bool isEventCompanion;
 

@@ -148,14 +148,13 @@ public class QuestManager : MonoBehaviour
         OnStateChanged?.Invoke();
     }
 
-    // 로비 복귀 시 호출: 적립된 경험치를 로비 경험치로 옮긴다. 옮긴 양을 돌려준다.
+    // 로비 복귀 시 호출: 적립된 일반 의뢰 보상을 탈린으로 옮긴다. 옮긴 양을 돌려준다.
+    // (저장 필드 이름 pendingExp는 기존 저장과 호환하려고 그대로 둔다 — 값은 탈린)
     public int ClaimRewards()
     {
         int exp = _state.pendingExp;
         if (exp <= 0) return 0;
-        var userExp = UserExpManager.Instance;
-        if (userExp == null) return 0;
-        userExp.AddExperience(exp);
+        MetaProgress.AddTalin(exp);
         _state.pendingExp = 0; // 완료 도장 목록(pendingCompleted)은 게시판이 연출 후 비운다
         Save();
         OnStateChanged?.Invoke();
@@ -326,12 +325,18 @@ public class QuestManager : MonoBehaviour
     {
         if (!_state.completed.Contains(quest.questId)) _state.completed.Add(quest.questId);
         _state.pendingCompleted.Add(quest.questId);
-        _state.pendingExp += quest.rewardExp;
+        // 보상: 일반 의뢰는 탈린(rewardExp 값)을 로비에서 수령. 스토리·구출 의뢰는 거점 개발도 + 아티팩트 + 상점 재고 채움(즉시)
+        if (quest.tag == QuestTag.None) _state.pendingExp += quest.rewardExp;
+        else if (MetaProgress.AwardDevelopment("quest:" + quest.questId, MetaProgress.DevStoryQuest))
+        {
+            MetaProgress.AddArtifacts(1);
+            MetaProgress.RestockShop();
+        }
         var flags = BlessingAffinityManager.Instance;
         foreach (var f in quest.rewardFlags)
             if (!string.IsNullOrWhiteSpace(f)) flags.SetFlag(f, true);
         if (quest.tag == QuestTag.Rescue && quest.RescueFlag != null) flags.SetFlag(quest.RescueFlag, true);
-        Debug.Log($"<color=#22D3EE>[Quest] '{quest.title}' 완료 — 보상 {quest.rewardExp} EXP 적립</color>");
+        Debug.Log($"<color=#22D3EE>[Quest] '{quest.title}' 완료 — 보상 적립 (일반: 탈린 {quest.rewardExp} / 스토리: 개발도·아티팩트)</color>");
     }
 
     // 인벤토리의 아이템은 원본의 복제본이라 이름으로 찾는다

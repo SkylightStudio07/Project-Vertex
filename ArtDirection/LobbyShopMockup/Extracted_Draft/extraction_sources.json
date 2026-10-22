@@ -1,0 +1,94 @@
+{
+  "Item_PartsBundle": {
+    "source_rect_ltrb": [
+      814,
+      224,
+      1044,
+      384
+    ],
+    "pixel_size": [
+      230,
+      160
+    ],
+    "method": "GrabCut foreground extraction; original RGB retained"
+  },
+  "Item_SupplyPackage": {
+    "source_rect_ltrb": [
+      1378,
+      535,
+      1596,
+      704
+    ],
+    "pixel_size": [
+      218,
+      169
+    ],
+    "method": "GrabCut foreground extraction; original RGB retained"
+  },
+  "Item_Coffee": {
+    "source_rect_ltrb": [
+      1418,
+      217,
+      1590,
+      384
+    ],
+    "pixel_size": [
+      172,
+      167
+    ],
+    "method": "GrabCut foreground extraction; original RGB retained"
+  },
+  "Item_Notebook": {
+    "source_rect_ltrb": [
+      835,
+      528,
+      1012,
+      706
+    ],
+    "pixel_size": [
+      177,
+      178
+    ],
+    "method": "GrabCut foreground extraction; original RGB retained"
+  },
+  "Keeper_Full": {
+    "source_rect_ltrb": [
+      16,
+      34,
+      795,
+      941
+    ],
+    "pixel_size": [
+      779,
+      907
+    ],
+    "method": "Original visible pixels only; boundary segmentation",
+    "occluded_by_dialogue_source_polygon": [
+      [
+        31,
+        811
+      ],
+      [
+        67,
+        778
+      ],
+      [
+        468,
+        778
+      ],
+      [
+        468,
+        850
+      ],
+      [
+        426,
+        890
+      ],
+      [
+        31,
+        890
+      ]
+    ],
+    "limitation": "Not an unseen full-body reconstruction. Source crops the legs and dialogue occludes part of lower-left body; those pixels remain transparent. Use with dialogue at source placement."
+  }
+}
