@@ -19,6 +19,7 @@ public class ArmoryHubView : MonoBehaviour
 
     [Header("대사")]
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private LobbyKeeperTalk talk;
     [SerializeField] private string lineEntry = "어떤 장비를 손봐 줄까?";
     [SerializeField] private string lineEquipment = "총은 손볼수록 손에 붙어. 파츠만 있으면 돼.";
     [SerializeField] private string lineCard = "기술도 정비가 필요하지. 탈린이랑 파츠 조금이면 돼.";
@@ -26,8 +27,8 @@ public class ArmoryHubView : MonoBehaviour
     private void Awake()
     {
         closeButton.onClick.AddListener(() => gameObject.SetActive(false));
-        equipmentMenu.OnHovered += _ => dialogueText.text = lineEquipment;
-        cardMenu.OnHovered += _ => dialogueText.text = lineCard;
+        equipmentMenu.OnHovered += _ => Line(lineEquipment);
+        cardMenu.OnHovered += _ => Line(lineCard);
         equipmentMenu.OnClicked += _ => Show(equipmentKit);
         cardMenu.OnClicked += _ => Show(cardKit);
         foreach (var b in backToHubButtons) if (b != null) b.onClick.AddListener(() => Show(hubKit));
@@ -35,17 +36,26 @@ public class ArmoryHubView : MonoBehaviour
         foreach (var b in cardTabs) if (b != null) b.onClick.AddListener(() => Show(cardKit));
     }
 
-    private void OnEnable()
+    private void Line(string line)
     {
-        dialogueText.text = lineEntry;
-        Show(hubKit);
+        if (talk != null) talk.Say(line);
+        else dialogueText.text = line;
     }
 
-    private void Show(GameObject kit)
+    private void OnEnable()
     {
+        if (talk == null) dialogueText.text = lineEntry;
+        Show(hubKit, greet: false);
+    }
+
+    private void Show(GameObject kit) => Show(kit, greet: true);
+
+    private void Show(GameObject kit, bool greet)
+    {
+        bool wasHub = hubKit.activeSelf;
         hubKit.SetActive(kit == hubKit);
         equipmentKit.SetActive(kit == equipmentKit);
         cardKit.SetActive(kit == cardKit);
-        if (kit == hubKit) dialogueText.text = lineEntry;
+        if (kit == hubKit && greet && !wasHub) { if (talk != null) talk.Greet(); else dialogueText.text = lineEntry; }
     }
 }

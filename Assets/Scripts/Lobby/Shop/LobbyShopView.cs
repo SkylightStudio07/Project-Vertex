@@ -51,6 +51,8 @@ public class LobbyShopView : MonoBehaviour
 
     [Header("대사")]
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [Tooltip("담당 캐릭터 말 (있으면 입장·클릭·혼잣말을 맡고, 아래 상황 대사도 이쪽으로 찍힌다)")]
+    [SerializeField] private LobbyKeeperTalk talk;
     [SerializeField] private string lineEntry = "필요한 물건 있어? 천천히 둘러봐.";
     [SerializeField] private string linePurchased = "준비해 뒀어. 잘 써.";
     [SerializeField] private string lineInsufficient = "탈린이 조금 모자라.";
@@ -85,7 +87,7 @@ public class LobbyShopView : MonoBehaviour
     private void OnEnable()
     {
         MetaProgress.OnChanged += RefreshState;
-        dialogueText.text = lineEntry;
+        if (talk == null) dialogueText.text = lineEntry;
         SwitchTab(_tab, force: true);
     }
 
@@ -154,16 +156,23 @@ public class LobbyShopView : MonoBehaviour
         if (_selected == null) return;
         var item = _selected.Item;
         var result = LobbyShop.Buy(item, _quantity);
-        dialogueText.text = result switch
+        Line(result switch
         {
             LobbyShop.Result.Ok => linePurchased,
             LobbyShop.Result.NotEnoughTalin => lineInsufficient,
             LobbyShop.Result.SoldOut => lineSoldOut,
             LobbyShop.Result.AlreadyOwned => lineOwned,
-            _ => dialogueText.text,
-        };
+            _ => null,
+        });
         _quantity = 1;
         RefreshState(); // MetaProgress.OnChanged로도 오지만, 실패했을 때도 갱신한다
+    }
+
+    private void Line(string line)
+    {
+        if (string.IsNullOrEmpty(line)) return;
+        if (talk != null) talk.Say(line);
+        else dialogueText.text = line;
     }
 
     private void RefreshState()

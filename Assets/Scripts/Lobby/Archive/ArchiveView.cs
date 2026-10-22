@@ -28,6 +28,7 @@ public class ArchiveView : MonoBehaviour
 
     [Header("대사")]
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private LobbyKeeperTalk talk;
     [SerializeField] private string lineEntry = "어떤 이야기를 펼쳐 볼까요?";
     [SerializeField] private string lineEnemy = "쓰러뜨린 것들의 기록이에요. 무서운 얼굴도 많죠.";
     [SerializeField] private string lineCompanion = "함께 걸은 이들의 이야기예요.";
@@ -47,13 +48,19 @@ public class ArchiveView : MonoBehaviour
 
     private void Bind(ArchiveMenuEntry entry, string line, System.Action open)
     {
-        entry.OnHovered += _ => dialogueText.text = line;
+        entry.OnHovered += _ => Line(line);
         entry.OnClicked += _ => open();
+    }
+
+    private void Line(string line)
+    {
+        if (talk != null) talk.Say(line);
+        else dialogueText.text = line;
     }
 
     private void OnEnable()
     {
-        dialogueText.text = lineEntry;
+        if (talk == null) dialogueText.text = lineEntry;
         itemPage.gameObject.SetActive(false);
         playPage.gameObject.SetActive(false);
         SetHub(true);
@@ -74,7 +81,7 @@ public class ArchiveView : MonoBehaviour
     private void ClosePage()
     {
         SetHub(true);
-        dialogueText.text = lineEntry;
+        if (talk != null) talk.Greet(); else dialogueText.text = lineEntry;
         RefreshCounts();
     }
 

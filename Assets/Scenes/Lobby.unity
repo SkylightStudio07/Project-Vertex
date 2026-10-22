@@ -5533,10 +5533,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1949479112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 19, y: -20}
+  m_SizeDelta: {x: 38, y: 38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &57835372
 MonoBehaviour:
@@ -9154,6 +9154,7 @@ GameObject:
   - component: {fileID: 133523890}
   - component: {fileID: 133523889}
   - component: {fileID: 133523888}
+  - component: {fileID: 133523893}
   m_Layer: 5
   m_Name: ArmoryHubView
   m_TagString: Untagged
@@ -9189,6 +9190,7 @@ MonoBehaviour:
   - {fileID: 1153971678}
   - {fileID: 1127559681}
   dialogueText: {fileID: 1336254254}
+  talk: {fileID: 133523893}
   lineEntry: "\uC5B4\uB5A4 \uC7A5\uBE44\uB97C \uC190\uBD10 \uC904\uAE4C?"
   lineEquipment: "\uCD1D\uC740 \uC190\uBCFC\uC218\uB85D \uC190\uC5D0 \uBD99\uC5B4.
     \uD30C\uCE20\uB9CC \uC788\uC73C\uBA74 \uB3FC."
@@ -9267,6 +9269,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &133523893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133523887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1cf24d9d69fa043845aa8f8af78061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyKeeperTalk
+  data: {fileID: 11400000, guid: 1cc510ca2a30aea44a41309ba92cf1c2, type: 2}
+  lineText: {fileID: 1336254254}
+  nameText: {fileID: 1305871459}
+  clickTargets:
+  - {fileID: 480525384}
+  - {fileID: 1235517742}
+  bounceTarget: {fileID: 480525383}
+  charsPerSecond: 40
 --- !u!1 &134106774
 GameObject:
   m_ObjectHideFlags: 0
@@ -17616,10 +17638,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1949479112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 160.98001, y: -20}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &256010255
 MonoBehaviour:
@@ -30076,10 +30098,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1286907310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 58.38, y: -20}
+  m_SizeDelta: {x: 20.76, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &422665263
 MonoBehaviour:
@@ -49538,10 +49560,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1949479112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 92.490005, y: -20}
+  m_SizeDelta: {x: 98.98, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718526618
 MonoBehaviour:
@@ -53008,6 +53030,7 @@ GameObject:
   - component: {fileID: 757799570}
   - component: {fileID: 757799569}
   - component: {fileID: 757799568}
+  - component: {fileID: 757799572}
   m_Layer: 5
   m_Name: ShopView
   m_TagString: Untagged
@@ -53082,6 +53105,7 @@ MonoBehaviour:
   buyNormal: {fileID: 21300000, guid: f11ba21327b40ac47a09690cd5c02fee, type: 3}
   buyDisabled: {fileID: 21300000, guid: 84d90163bd3111149a5937a06b7fe204, type: 3}
   dialogueText: {fileID: 1002279631}
+  talk: {fileID: 757799572}
   lineEntry: "\uD544\uC694\uD55C \uBB3C\uAC74 \uC788\uC5B4? \uCC9C\uCC9C\uD788 \uB458\uB7EC\uBD10."
   linePurchased: "\uC900\uBE44\uD574 \uB480\uC5B4. \uC798 \uC368."
   lineInsufficient: "\uD0C8\uB9B0\uC774 \uC870\uAE08 \uBAA8\uC790\uB77C."
@@ -53142,6 +53166,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757799566}
   m_CullTransparentMesh: 1
+--- !u!114 &757799572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757799566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1cf24d9d69fa043845aa8f8af78061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyKeeperTalk
+  data: {fileID: 11400000, guid: 364a28aaf72e28446b03c3e23078823a, type: 2}
+  lineText: {fileID: 1002279631}
+  nameText: {fileID: 599254366}
+  clickTargets:
+  - {fileID: 1682346440}
+  - {fileID: 1658534961}
+  bounceTarget: {fileID: 1682346439}
+  charsPerSecond: 40
 --- !u!1 &758253308
 GameObject:
   m_ObjectHideFlags: 0
@@ -76587,6 +76631,7 @@ GameObject:
   - component: {fileID: 1046408011}
   - component: {fileID: 1046408010}
   - component: {fileID: 1046408009}
+  - component: {fileID: 1046408013}
   m_Layer: 5
   m_Name: ArchiveView
   m_TagString: Untagged
@@ -76664,6 +76709,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
   items: {fileID: 11400000, guid: e6bd302f6b1fbc74782807033f84fd91, type: 2}
   dialogueText: {fileID: 1384226142}
+  talk: {fileID: 1046408013}
   lineEntry: "\uC5B4\uB5A4 \uC774\uC57C\uAE30\uB97C \uD3BC\uCCD0 \uBCFC\uAE4C\uC694?"
   lineEnemy: "\uC4F0\uB7EC\uB728\uB9B0 \uAC83\uB4E4\uC758 \uAE30\uB85D\uC774\uC5D0\uC694.
     \uBB34\uC11C\uC6B4 \uC5BC\uAD74\uB3C4 \uB9CE\uC8E0."
@@ -76722,6 +76768,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046408007}
   m_CullTransparentMesh: 1
+--- !u!114 &1046408013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046408007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1cf24d9d69fa043845aa8f8af78061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyKeeperTalk
+  data: {fileID: 11400000, guid: 9ab6edc13deb78140ac99019db809b70, type: 2}
+  lineText: {fileID: 1384226142}
+  nameText: {fileID: 167912766}
+  clickTargets:
+  - {fileID: 1124462730}
+  - {fileID: 1799381548}
+  bounceTarget: {fileID: 1124462729}
+  charsPerSecond: 40
 --- !u!1 &1047387510
 GameObject:
   m_ObjectHideFlags: 0
@@ -93250,10 +93316,10 @@ RectTransform:
   - {fileID: 422665262}
   m_Father: {fileID: 1756150861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 339.31, y: -20}
+  m_SizeDelta: {x: 68.76, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286907311
 MonoBehaviour:
@@ -93589,10 +93655,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1714565292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 19, y: -20}
+  m_SizeDelta: {x: 38, y: 38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1289530004
 MonoBehaviour:
@@ -96109,7 +96175,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -102520,10 +102586,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1286907310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 19, y: -20}
+  m_SizeDelta: {x: 38, y: 38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1430253415
 MonoBehaviour:
@@ -112489,10 +112555,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1714565292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 66.975, y: -20}
+  m_SizeDelta: {x: 45.95, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595889002
 MonoBehaviour:
@@ -119627,10 +119693,10 @@ RectTransform:
   - {fileID: 1595889001}
   m_Father: {fileID: 1756150861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 239.95502, y: -20}
+  m_SizeDelta: {x: 89.95, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1714565293
 MonoBehaviour:
@@ -123005,7 +123071,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 386, y: -54}
-  m_SizeDelta: {x: 0, y: 40}
+  m_SizeDelta: {x: 373.69, y: 40}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1756150862
 MonoBehaviour:
@@ -136461,10 +136527,10 @@ RectTransform:
   - {fileID: 256010254}
   m_Father: {fileID: 1756150861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 87.490005, y: -20}
+  m_SizeDelta: {x: 174.98001, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949479113
 MonoBehaviour:
