@@ -380,6 +380,8 @@ public class BattleOperationFx : MonoBehaviour
     private void AddFeed(string enemyName, bool boss)
     {
         const string k = "KillFeed/";
+        // 의뢰 추적 패널(QuestTrackerView)이 떠 있으면 그 아래로 내린다 (기본 첫 줄 y 258)
+        _feed.anchoredPosition = new Vector2(0f, -Mathf.Max(0f, QuestTrackerView.Bottom + 16f - 258f));
         var row = Group("Feed", _feed);
         // 기존 기록은 아래로 민다
         for (int i = 0; i < _feed.childCount - 1; i++)
