@@ -221,6 +221,8 @@ public class EnemyView : MonoBehaviour
             }
 
             enemyImage.rectTransform.localScale = new Vector3(_enemyImageBaseScale.x * scale, _enemyImageBaseScale.y * scale, 1f);
+            BattleUnitLook.Apply(enemyImage, BattleUnitLook.Side.Enemy); // 외곽선 · 림라이트 · 색 보정 · 발밑 그림자 (아군과 같은 처리)
+            AlignHpBarToBody(instance);
 
             if (instance.EnemySprite == null && (instance.IdleFrames == null || instance.IdleFrames.Length == 0))
             {
@@ -260,6 +262,26 @@ public class EnemyView : MonoBehaviour
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _intentFieldBasePos;
         LayoutLookaheadIcons();
+    }
+
+    // 시트 안에서 캐릭터가 한쪽으로 치우쳐 그려져도(노상강도) HP 바 · 상태 줄이 보이는 몸 가운데 아래에 오게 가로만 맞춘다.
+    // 처음 위치를 기억해 두고 거기서부터 옮겨, 같은 뷰를 다시 쓸 때 밀림이 쌓이지 않게 한다
+    private bool _hpHomeSet;
+    private Vector2 _hpHome, _statusHome;
+    private void AlignHpBarToBody(EnemyInstance instance)
+    {
+        if (instance?.Data == null || instance.Data.useScreenRect || hpFill == null) return;
+        var hpBar = hpFill.transform.parent as RectTransform;
+        var parent = hpBar != null ? hpBar.parent as RectTransform : null;
+        if (parent == null) return;
+        var status = statusList != null ? statusList.transform as RectTransform : null;
+        if (!_hpHomeSet) { _hpHome = hpBar.anchoredPosition; _statusHome = status != null ? status.anchoredPosition : Vector2.zero; _hpHomeSet = true; }
+        hpBar.anchoredPosition = _hpHome;
+        if (status != null) status.anchoredPosition = _statusHome;
+        if (!BattleUnitLook.TryVisibleFeetWorld(enemyImage, out Vector3 feet)) return;
+        float dx = parent.InverseTransformPoint(feet).x - parent.InverseTransformPoint(hpBar.position).x;
+        hpBar.anchoredPosition += new Vector2(dx, 0f);
+        if (status != null) status.anchoredPosition += new Vector2(dx, 0f);
     }
 
     // 화면 고정 배치(EnemyData.useScreenRect) — 화면 끝에 붙는 거대 보스용.

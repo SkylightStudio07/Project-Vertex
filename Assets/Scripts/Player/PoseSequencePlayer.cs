@@ -17,6 +17,10 @@ public class PoseSequencePlayer : MonoBehaviour
     private Vector3 restingScale; // localScale은 Vector3 — Vector2로 다루면 대입 시 z가 0으로 날아간다
     private float restingRotation;
     private Vector2 restingSizeDelta;
+    // 부모를 꽉 채우는 늘림 앵커(동료 프리팹 CharacterSprite)는 sizeDelta가 0이라 프레임 비율 맞추기가 안 먹는다.
+    // 재생 동안만 가운데 앵커 + 실제 크기로 바꿨다가 되돌린다
+    private bool restingStretched;
+    private Vector2 restingAnchorMin, restingAnchorMax, restingOffsetMin, restingOffsetMax;
     private bool hasResting; // restingXxx가 실제 대기 포즈를 담고 있는지(트랜지션 중간값이 아닌지)
 
     private Coroutine playing;
@@ -118,10 +122,20 @@ public class PoseSequencePlayer : MonoBehaviour
 
         if (!hasResting) return;
         image.sprite = restingSprite;
-        rt.anchoredPosition = restingAnchoredPosition;
         rt.localScale = restingScale;
         rt.localEulerAngles = new Vector3(0, 0, restingRotation);
-        rt.sizeDelta = restingSizeDelta;
+        if (restingStretched)
+        {
+            // 늘림 앵커로 되돌리면 위치 · 크기는 오프셋이 정한다
+            rt.anchorMin = restingAnchorMin; rt.anchorMax = restingAnchorMax;
+            rt.offsetMin = restingOffsetMin; rt.offsetMax = restingOffsetMax;
+            restingStretched = false;
+        }
+        else
+        {
+            rt.anchoredPosition = restingAnchoredPosition;
+            rt.sizeDelta = restingSizeDelta;
+        }
     }
 
     private IEnumerator PlaySequence(AttackKeyframe[] frames)
@@ -190,6 +204,18 @@ public class PoseSequencePlayer : MonoBehaviour
 
     private IEnumerator PlaySpriteFrames(Sprite[] frames, float fps, float scaleMultiplier)
     {
+        if (rt.anchorMin != rt.anchorMax)
+        {
+            restingStretched = true;
+            restingAnchorMin = rt.anchorMin; restingAnchorMax = rt.anchorMax;
+            restingOffsetMin = rt.offsetMin; restingOffsetMax = rt.offsetMax;
+            Vector2 size = rt.rect.size;
+            Vector3 world = rt.position;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = size;
+            rt.position = world;
+        }
+
         // 대기 포즈 기록 — 시퀀스 끝나면 여기로 복귀.
         restingSprite = image.sprite;
         restingAnchoredPosition = rt.anchoredPosition;
@@ -209,6 +235,16 @@ public class PoseSequencePlayer : MonoBehaviour
 
         float delay = 1f / Mathf.Max(1f, fps);
 
+        // 공격 프레임 높이 = 대기 그림이 영역 안에 실제로 그려진 높이. 시트마다 해상도가 달라도(주인공) 같은 틀로 잘랐으면 크기가 맞는다.
+        // 예전엔 영역 높이를 그대로 써서, 가로로 넓은 시트(제파러)는 대기 때 폭에 맞춰 작게 그려지다가 공격 때 커졌다
+        Vector2 box = rt.rect.size;
+        float drawnHeight = restingSizeDelta.y;
+        if (restingSprite != null && restingSprite.rect.width > 0f && restingSprite.rect.height > 0f && box.x > 0f && box.y > 0f)
+        {
+            float aspect = restingSprite.rect.width / restingSprite.rect.height;
+            drawnHeight = Mathf.Min(box.y, box.x / aspect);
+        }
+
         for (int i = 0; i < frames.Length; i++)
         {
             Sprite f = frames[i];
@@ -216,11 +252,7 @@ public class PoseSequencePlayer : MonoBehaviour
             {
                 image.sprite = f;
                 Rect r = f.rect;
-                if (r.height > 0f)
-                {
-                    float aspect = r.width / r.height;
-                    rt.sizeDelta = new Vector2(restingSizeDelta.y * aspect, restingSizeDelta.y);
-                }
+                if (r.height > 0f) rt.sizeDelta = new Vector2(drawnHeight * r.width / r.height, drawnHeight);
             }
             OnSpriteFrameShown?.Invoke(frames, i);
             yield return new WaitForSeconds(delay);
