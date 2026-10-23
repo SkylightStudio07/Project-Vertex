@@ -15,6 +15,10 @@ public class CoopCharData : CharData
 
     [Header("성소 선택 상세 화면 전신 아트 (초상화와 별도)")]
     public Sprite sanctuaryFullArt;
+    [Tooltip("상세 화면 그림 배율 (상반신 구도면 키운다). 그림은 영역 바닥 기준")]
+    [Min(0.1f)] public float sanctuaryArtScale = 1f;
+    [Tooltip("상세 화면 그림 위치 보정 (영역 크기 비율, x 오른쪽 · y 위)")]
+    public Vector2 sanctuaryArtOffset;
 
     [Header("로비 동료 탭 상세 전신 (투명 배경, 서 있는 포즈). 비우면 성소 전신을 쓴다")]
     public Sprite rosterFullArt;
@@ -46,6 +50,9 @@ public class CoopCharData : CharData
     public float floatAmplitude;
     [Tooltip("떠다니기 한 번 왕복 시간(초)")]
     public float floatPeriod = 2.4f;
+
+    [Tooltip("이 동료 카드의 소속 (CardData.cardOwner). 이 소속의 공격 카드를 내면 이 동료가 공격 모션을 한다")]
+    public CardData.CardOwner cardOwner = CardData.CardOwner.Non_Color;
 
     [Header("호감도 레벨 당 해금 카드")]
     public List<CardData> unlockCardCoopLevel = new();

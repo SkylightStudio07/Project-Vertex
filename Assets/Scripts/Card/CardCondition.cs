@@ -50,6 +50,30 @@ public class TargetTraitCondition : CardCondition
     public override bool IsMet(CardContext context) => EnemyTraits.HasAny(context?.PrimaryTarget, traits);
 }
 
+// 지정한 카드가 소멸 더미에 있으면 (같은 기본 이름 기준 — 전투 중 복사본도 잡는다). 예: 회수
+[Serializable]
+public class ExhaustPileHasCardCondition : CardCondition
+{
+    public CardData card;
+    public override bool IsMet(CardContext context)
+    {
+        var pile = context?.State?.ExhaustPile;
+        if (card == null || pile == null) return false;
+        foreach (var c in pile)
+            if (c != null && c.BaseCardName == card.BaseCardName) return true;
+        return false;
+    }
+}
+
+// 지금 낸 카드가 지정한 카드인지 (같은 기본 이름 기준). 상태의 '카드를 낼 때' 효과를 특정 카드로 좁힐 때. 예: 로테이션
+[Serializable]
+public class PlayedCardCondition : CardCondition
+{
+    public CardData card;
+    public override bool IsMet(CardContext context)
+        => card != null && context?.Card != null && context.Card.BaseCardName == card.BaseCardName;
+}
+
 [Serializable]
 public class FirstAmmoUseCondition : CardCondition
 {

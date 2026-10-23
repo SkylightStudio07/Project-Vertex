@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: DefenseLine
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: ch02.power.defense-line
+  displayName: "\uBC29\uC5B4\uC120 \uAD6C\uCD95"
+  description: "\uCCB4\uB825 \uD53C\uD574\uB97C \uBC1B\uC744 \uB54C\uB9C8\uB2E4 \uBBFC\uCCA9\uC744
+    (\uC218\uCE58) \uC5BB\uC2B5\uB2C8\uB2E4."
+  icon: {fileID: -341932676665991959, guid: 5ea3c566637acd0459594eaadd86fce0, type: 3}
+  disposition: 1
+  stackPolicy: 0
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 0
+  behaviors:
+  - rid: 8755282979299786895
+  references:
+    version: 2
+    RefIds:
+    - rid: 8755282979299786895
+      type: {class: AfterDamageTakenEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 8755282979299786896
+    - rid: 8755282979299786896
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000006, type: 2}
+        operation: 0
+        amount: 0
+        scaling:
+          source: 7
+          target: 0
+          status: {fileID: 0}
+          multiplier: 1
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 0

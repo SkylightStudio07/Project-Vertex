@@ -21,9 +21,11 @@ MonoBehaviour:
   cardDescription: "\uCCB4\uB825\uC744 {1.amount} \uC783\uACE0 \uBC29\uC5B4\uB3C4\uB97C
     {0.amount} \uC5BB\uB294\uB2E4."
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uD53C\uC758 \uAC11\uC637"
+    cardName: "\uD53C\uC758 \uBB34\uC7A5"
     energyCost: 0
     ammoCost: 0
     effects:
@@ -34,7 +36,7 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uD53C\uC758 \uAC11\uC637+"
+    cardName: "\uD53C\uC758 \uBB34\uC7A5+"
     energyCost: 0
     ammoCost: 0
     effects:
@@ -49,6 +51,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2470581146967605266
       type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -76,7 +80,7 @@ MonoBehaviour:
     - rid: 5573463116610797690
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 10
+        amount: 12
         scaling:
           source: 0
           target: 0

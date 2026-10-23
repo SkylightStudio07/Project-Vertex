@@ -1,27 +1,36 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
-
-// ¼º¼Ò °ü¸® ¸Å´ÏÀú
+// ì„±ì†Œ ê´€ë¦¬ ë§¤ë‹ˆì €
 public class HolyPlaceManager : MonoBehaviour
 {
     public static HolyPlaceManager Instance { get; private set; }
 
-    // ÀÎ½ºÆåÅÍ¿¡¼­ Ãş¸¶´Ù ¼±ÅÃ °¡´ÉÇÑ Ä³¸¯ÅÍ ID ¸®½ºÆ®¸¦ ¹Ş°í, 
-    // ½ÇÇà ½Ã µñ¼Å³Ê¸®¿¡ ÀúÀåÇÏ¿© ÇöÀç Ãş¿¡ µû¶ó ¼±ÅÃ °¡´ÉÇÑ Ä³¸¯ÅÍ¸¦ ºÒ·¯¿À´Â ¹æ½Ä
+    // ì¸ìŠ¤í™í„°ì—ì„œ ì¸µë³„ ì„ íƒ ê°€ëŠ¥ ìºë¦­í„° ID ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ê³ ,
+    // ì‹œì‘ ì‹œ ë”•ì…”ë„ˆë¦¬ë¡œ ë³€í™˜í•´ í˜„ì¬ ì¸µì—ì„œ ì„ íƒ ê°€ëŠ¥í•œ ìºë¦­í„°ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” ë°©ì‹
     private Dictionary<int, List<string>> selectableCharPerFloor;
     [SerializeField] private HolyPlaceData holyPlaceData;
 
+    // êµ¬ì¶œ ì˜ë¢°ë¥¼ ì™„ë£Œí•˜ë©´ ì¼œì§€ëŠ” í”Œë˜ê·¸ (QuestData.RescueFlag ì™€ ê°™ì€ ê·œì¹™)
+    public static string RescueFlagOf(string charID) => "coop_rescued_" + charID;
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    // ë””ë²„ê·¸: ì¸µê³¼ ìƒê´€ì—†ì´ ì„±ì†Œ í›„ë³´ë¡œ ì˜¬ë¦´ ìºë¦­í„° (CooperationManagerEditor ì—ì„œ í† ê¸€)
+    public static readonly HashSet<string> DebugForcedCandidates = new HashSet<string>();
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetDebug() => DebugForcedCandidates.Clear();
+#endif
+
     private void Awake()
     {
-        #region ½Ì±ÛÅæ ÆĞÅÏ
-        // ÀüÅõ(·±) ¾À Àü¿ë: °°Àº ¿ÀºêÁ§Æ®(GameplayManager)¿¡ GameManager µîÀÌ ºÙ¾î ÀÖ¾î DontDestroyOnLoad¸¦ ¾²Áö ¾Ê´Â´Ù.
-        // ¾ÀÀ» ´Ù½Ã ºÒ·¯¿À¸é »õ ÀÎ½ºÅÏ½º°¡ Instance°¡ µÈ´Ù.
+        #region ì‹±ê¸€í†¤ ì„¤ì •
+        // ì”¬(ì¸µ) ë³„ ì¡´ì¬: ê°™ì€ ì˜¤ë¸Œì íŠ¸(GameplayManager)ì— GameManager ë“±ê³¼ ë¶™ì–´ ìˆì–´ DontDestroyOnLoadë¥¼ ì“°ì§€ ì•ŠëŠ”ë‹¤.
+        // ì”¬ì„ ë‹¤ì‹œ ë¶ˆëŸ¬ì˜¤ë©´ ìƒˆ ì¸ìŠ¤í„´ìŠ¤ê°€ Instanceê°€ ëœë‹¤.
         Instance = this;
-#endregion
+        #endregion
 
-        // Ãş¸¶´Ù ¼±ÅÃ °¡´ÉÇÑ Ä³¸¯ÅÍ ID ¸®½ºÆ®¸¦ µñ¼Å³Ê¸®¿¡ ÀúÀå
+        // ë°ì´í„°ì— ì íŒ ì¸µë³„ ìºë¦­í„° ID ë¦¬ìŠ¤íŠ¸ë¥¼ ë”•ì…”ë„ˆë¦¬ë¡œ ë³€í™˜
         selectableCharPerFloor = new Dictionary<int, List<string>>();
         foreach (var data in holyPlaceData.selectableCharDatas)
         {
@@ -29,17 +38,28 @@ public class HolyPlaceManager : MonoBehaviour
         }
     }
 
-    // ÇöÀç Ãş¿¡ µû¶ó ¼±ÅÃ °¡´ÉÇÑ Ä³¸¯ÅÍ ID ¸®½ºÆ® ¹İÈ¯
+    // í˜„ì¬ ì¸µì—ì„œ ì„ íƒ ê°€ëŠ¥í•œ ìºë¦­í„° ID ë¦¬ìŠ¤íŠ¸ ë°˜í™˜.
+    // ì¸µ ëª©ë¡ì— ë”í•´, êµ¬ì¶œ ì˜ë¢°ë¥¼ ëë‚¸ ìºë¦­í„°(coop_rescued_{ID})ëŠ” ì–´ëŠ ì¸µì˜ ì„±ì†Œì—ì„œë“  í›„ë³´ê°€ ëœë‹¤.
     public List<string> GetSeletableChar(int floor)
     {
-        if (selectableCharPerFloor.TryGetValue(floor, out var charIDs))
+        var result = new List<string>();
+        if (selectableCharPerFloor.TryGetValue(floor, out var charIDs)) result.AddRange(charIDs);
+
+        var coop = CooperationManager.Instance;
+        var flags = BlessingAffinityManager.Instance;
+        if (coop != null && flags != null)
         {
-            return charIDs;
+            foreach (var data in coop.AllCharData())
+                if (!result.Contains(data.charID) && flags.HasFlag(RescueFlagOf(data.charID))) result.Add(data.charID);
         }
-        return null;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        foreach (var id in DebugForcedCandidates)
+            if (!result.Contains(id)) result.Add(id);
+#endif
+        return result.Count > 0 ? result : null;
     }
-    
-    // ¼º¼Ò ÀÌº¥Æ® ¿ÀÇÂ ¸Ş¼Òµå
+
+    // ì„±ì†Œ ì´ë²¤íŠ¸ ì‹¤í–‰ ë©”ì†Œë“œ
     public void OpenHolyPlaceEvent()
     {
 

@@ -1,0 +1,20 @@
+{
+  "characters": [
+    { "id": "Cp_02", "name": "알레시아", "slot": 0 },
+    { "id": "player", "name": "방랑자", "slot": 3 }
+  ],
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "lines": [
+        { "type": "line", "speaker": "", "emotion": "idle", "text": "(제 키만 한 방패를 땅에 꽂은 소녀가, 던졌던 창을 손목 장치로 끌어당겨 받아 든다.)" },
+        { "type": "line", "speaker": "Cp_02", "emotion": "idle", "text": "황동 기사단 선봉, 알레시아. 인사는 이걸로 끝." },
+        { "type": "line", "speaker": "Cp_02", "emotion": "confident", "text": "적은 셋, 엄폐물은 둘, 퇴로는 하나. 방금 다 봤어." },
+        { "type": "line", "speaker": "Cp_02", "emotion": "annoyed", "text": "…설명 길게 하는 거 싫어해. 먼저 들어갈 테니까 뒤만 맡아." },
+        { "type": "line", "speaker": "Cp_02", "emotion": "confident", "text": "빨리 끝내자. 오래 끄는 싸움은 질색이거든." },
+        { "type": "end" }
+      ]
+    }
+  ]
+}

@@ -84,6 +84,8 @@ public class CardData : ScriptableObject
     // EffectTokenHint가 인스펙터에 사용 가능 토큰 목록과 치환 미리보기를 띄워준다.
     [SerializeField, EffectTokenHint("normalState.effects")] public string cardDescription;
     [SerializeField] private CardUseMode useMode = CardUseMode.DropToPlayArea;
+    [Tooltip("사용 조건. 비우면 언제나 쓸 수 있다 (예: 회수 — 특정 카드가 소멸 더미에 있을 때만)")]
+    [SerializeReference, SubclassPicker] private CardCondition playCondition;
 
     [Header("기본/강화 상태")]
     // 이름·코스트·키워드·이펙트는 상태별로 CardUpgradeState에 담는다. 이펙트는 SO 참조가 아니라
@@ -123,6 +125,7 @@ public class CardData : ScriptableObject
     public CardUseMode UseMode    => useMode;
     // 저주 등 사용 불가 카드. 손패에는 남지만 플레이가 막힌다(드래그해서 놓아도 사용되지 않음).
     public bool IsUnplayable      => useMode == CardUseMode.Unplayable;
+    public bool IsPlayConditionMet(BattleState state) => playCondition == null || playCondition.IsMet(state, this);
     public CardType   Type        => cardType;
     public CardRarity Rarity      => cardRarity;
     public CardOwner  Owner       => cardOwner;
@@ -253,6 +256,7 @@ public class CardData : ScriptableObject
     {
         Player, Jogasaki, CanadaMarine, GermanDeserter,
         NamibiaPartisan, BrassKnight, ChinaSpecOps,
-        Non_Color
+        Non_Color,
+        Alchemist
     }
 }

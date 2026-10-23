@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: SpearElement_Vulnerable
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: ch02.spear-element.vulnerable
+  displayName: "\uCC3D \uC18D\uC131: \uCDE8\uC57D"
+  description: "\uC804\uC220 \uAC1C\uB7C9\uD615 \uD22C\uCC99 \uCC3D\uC220\uC774 \uC801\uC911\uD55C
+    \uC801\uC5D0\uAC8C \uCDE8\uC57D 1\uC744 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  icon: {fileID: -9120369034046867018, guid: 2ca80cb858646e34eab882523ed2a603, type: 3}
+  disposition: 1
+  stackPolicy: 1
+  durationPolicy: 1
+  maxStacks: 1
+  dispellable: 0
+  behaviors: []
+  references:
+    version: 2
+    RefIds: []

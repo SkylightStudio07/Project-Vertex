@@ -18,9 +18,12 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 1
   isWeaponShootingCard: 0
-  cardDescription: "{0.targets}\uC5D0\uAC8C {0.amount}\uC758 \uB370\uBBF8\uC9C0\uB97C
-    \uC8FC\uACE0 {1.status}\uB97C {1.amount}\uBC30 \uB9CC\uB4E0\uB2E4. \uC18C\uBA78 "
+  cardDescription: "{0.targets}\uC5D0\uAC8C {0.amount}\uC758 \uD53C\uD574\uB97C \uC8FC\uACE0
+    \uB300\uC0C1\uC758 \uCDE8\uC57D\uC744 {1.amount}\uBC30\uB85C \uB9CC\uB4E0\uB2E4.
+    \uC18C\uBA78"
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uC0C1\uCC98 \uBC8C\uB9AC\uAE30"
@@ -49,6 +52,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2470581257654239302
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -80,7 +85,7 @@ MonoBehaviour:
         potency: 0
         secondaryPotency: 0
         targets:
-          mode: 0
+          mode: 1
     - rid: 5573463116610797674
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -91,12 +96,21 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+        conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0
     - rid: 5573463116610797675
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -107,9 +121,18 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+        conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0

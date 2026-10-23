@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: CH_02_C15
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
+  cardType: 2
+  cardRarity: 1
+  cardOwner: 5
+  isWeaponShootingCard: 0
+  cardDescription: "\uBC84\uB9B0 \uCE74\uB4DC \uB354\uBBF8\uC5D0 <b>\uC18D\uC131\uBCC0\uACBD</b>
+    \uCE74\uB4DC 3\uC7A5(\uCDE8\uC57D\xB7\uC57D\uD654\xB7\uB3C5\uC131)\uC744 \uB123\uC2B5\uB2C8\uB2E4."
+  useMode: 0
+  playCondition:
+    rid: -2
+  isUpgraded: 0
+  normalState:
+    cardName: "\uD0C0\uC785 \uBCC0\uACBD"
+    energyCost: 2
+    ammoCost: 0
+    effects:
+    - rid: 8755282979299786957
+    - rid: 8755282979299786958
+    - rid: 8755282979299786959
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: "\uD0C0\uC785 \uBCC0\uACBD+"
+    energyCost: 1
+    ammoCost: 0
+    effects:
+    - rid: 8755282979299786960
+    - rid: 8755282979299786961
+    - rid: 8755282979299786962
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8755282979299786957
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 0
+        cardToAdd: {fileID: 11400000, guid: c3d77841004a59b43b64df58583572d4, type: 2}
+        targetPile: 1
+        count: 1
+        allowDuplicateRandomCards: 0
+    - rid: 8755282979299786958
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 0
+        cardToAdd: {fileID: 11400000, guid: 9203a1284345dff4b955ee166e37e102, type: 2}
+        targetPile: 1
+        count: 1
+        allowDuplicateRandomCards: 0
+    - rid: 8755282979299786959
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 0
+        cardToAdd: {fileID: 11400000, guid: d7fb41fd6b6976e4bb2268bab2b737e2, type: 2}
+        targetPile: 1
+        count: 1
+        allowDuplicateRandomCards: 0
+    - rid: 8755282979299786960
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 0
+        cardToAdd: {fileID: 11400000, guid: c3d77841004a59b43b64df58583572d4, type: 2}
+        targetPile: 1
+        count: 1
+        allowDuplicateRandomCards: 0
+    - rid: 8755282979299786961
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 0
+        cardToAdd: {fileID: 11400000, guid: 9203a1284345dff4b955ee166e37e102, type: 2}
+        targetPile: 1
+        count: 1
+        allowDuplicateRandomCards: 0
+    - rid: 8755282979299786962
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 0
+        cardToAdd: {fileID: 11400000, guid: d7fb41fd6b6976e4bb2268bab2b737e2, type: 2}
+        targetPile: 1
+        count: 1
+        allowDuplicateRandomCards: 0

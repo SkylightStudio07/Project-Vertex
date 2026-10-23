@@ -17,6 +17,7 @@ public abstract class StatusBehavior
     public virtual DamageInfo ModifyIncomingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;
     public virtual int ModifyBlockGain(StatusInstance status, int amount, ICombatant owner) => amount;
     public virtual CardPlayCost ModifyCardPlayCost(StatusInstance status, CardPlayCost cost, CardContext context) => cost;
+    public virtual bool AllowsCardPlay(StatusInstance status, CardContext context) => true;
     public virtual void OnAfterDamageTaken(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnAfterDamageDealt(StatusInstance status, CardContext context, ICombatant owner) { }
 }
@@ -205,4 +206,13 @@ public sealed class AfterDamageDealtEffectsStatusBehavior : TriggeredEffectsStat
 {
     public override void OnAfterDamageDealt(StatusInstance status, CardContext context, ICombatant owner)
         => Execute(context);
+}
+
+// 한 턴에 손으로 낼 수 있는 카드 수 제한. 스택이 최대 장수다 (예: 전술 대형 전환 — 3장, 강화 4장).
+// 상태 정의의 durationPolicy는 Permanent로 둘 것.
+[Serializable]
+public sealed class CardPlayLimitStatusBehavior : StatusBehavior
+{
+    public override bool AllowsCardPlay(StatusInstance status, CardContext context)
+        => context?.State == null || context.State.CardsPlayedThisTurn < status.Stacks;
 }

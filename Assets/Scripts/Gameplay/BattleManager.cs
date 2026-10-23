@@ -225,6 +225,7 @@ public class BattleManager : MonoBehaviour
         // 블록은 적 턴의 공격을 막아주는 용도라 적 턴이 끝난 뒤(=내 턴 시작 시점)에 초기화해야 한다.
         // PlayerTurnEnd에서 초기화하면 적이 공격하기 전에 블록이 사라져 무의미해진다.
         _state.PlayerLostHpThisTurn = false;
+        _state.CardsPlayedThisTurn = 0;
         _state.Player.ResetBlockGainHistory();
         _state.Player.ResetBlock();
 
@@ -441,6 +442,8 @@ public class BattleManager : MonoBehaviour
     {
         if (card == null || _state == null || !_state.Hand.Contains(card)) return false;
         if (card.IsUnplayable) return false;   // 저주 등 사용 불가 카드 — 손패에는 남지만 플레이 불가
+        if (!card.IsPlayConditionMet(_state)) return false;
+        if (_state.Player != null && !_state.Player.Statuses.AllowsCardPlay(CreateCardPlayContext(card, null))) return false;
         if (!CanPayCardPlayCost(GetCardPlayCost(card))) return false;
 
         if (card.UseMode == CardData.CardUseMode.SelectEnemy)
@@ -472,6 +475,7 @@ public class BattleManager : MonoBehaviour
             PayCardPlayCost(cost, ctx);
 
             _state.Hand.Remove(card);
+            _state.CardsPlayedThisTurn++;
             // 파워 카드는 isExhaust 설정과 무관하게 항상 소멸 — 패시브가 영구 등록되므로
             // 덱 순환으로 다시 뽑혀 중복 사용되는 것을 시스템 차원에서 차단한다.
             if (card.IsExhaust || card.Type == CardData.CardType.Power)
@@ -771,6 +775,15 @@ public class BattleManager : MonoBehaviour
         if (_state == null || card == null || _state.Hand.Count >= 10) return;
 
         _state.Hand.Add(_state.CreateCard(card));
+        NotifyHandChanged();
+    }
+
+    // 이미 전투 안에 있는 카드(소멸 더미에서 꺼낸 것 등)를 복사하지 않고 그대로 손패에 넣는다. 가득이면 버린 더미로.
+    public void ReturnCardToHand(CardData card)
+    {
+        if (_state == null || card == null) return;
+        if (_state.Hand.Count >= 10) { _state.DiscardPile.Add(card); return; }
+        _state.Hand.Add(card);
         NotifyHandChanged();
     }
 

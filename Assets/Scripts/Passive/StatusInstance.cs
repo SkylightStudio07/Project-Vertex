@@ -138,6 +138,14 @@ public sealed class StatusInstance : IPassiveLogic
         return cost;
     }
 
+    public bool AllowsCardPlay(CardContext context)
+    {
+        if (Definition == null) return true;
+        foreach (var behavior in Definition.Behaviors)
+            if (behavior != null && !behavior.AllowsCardPlay(this, context)) return false;
+        return true;
+    }
+
     public void OnAfterDamageTaken(CardContext context, ICombatant owner)
     {
         if (Definition == null) return;
