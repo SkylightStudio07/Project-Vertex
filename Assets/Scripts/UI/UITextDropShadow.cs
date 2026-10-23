@@ -67,6 +67,10 @@ public class UITextDropShadow : MonoBehaviour
         _shadow.fontSize = _text.fontSize;
         _shadow.fontStyle = _text.fontStyle;
         _shadow.alignment = _text.alignment;
+        _shadow.characterSpacing = _text.characterSpacing;
+        _shadow.wordSpacing = _text.wordSpacing;
+        _shadow.lineSpacing = _text.lineSpacing;
+        _shadow.margin = _text.margin;
         _shadow.textWrappingMode = _text.textWrappingMode;
         _shadow.overflowMode = _text.overflowMode;
         _shadow.color = new Color(color.r, color.g, color.b, color.a * _text.alpha);

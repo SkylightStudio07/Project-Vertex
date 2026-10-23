@@ -32,6 +32,15 @@ public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointer
     [Tooltip("비활성일 때 흐리게 할 글자·기호")]
     [SerializeField] private Graphic[] dimOnDisabled;
 
+    [Header("축복 A안 (판·기호 상태 교체)")]
+    [Tooltip("content 안에 들어 있는 판. 호버 때 내용과 함께 밀린다")]
+    [SerializeField] private Image panelImage;
+    [SerializeField] private Sprite panelNormal, panelHover, panelDisabled;
+    [SerializeField] private Image chevronImage;
+    [SerializeField] private Sprite chevronNormal, chevronHover;
+    [Tooltip("켜면 아이콘을 항상 \"_White\" 버전으로 쓴다 (어두운 마름모 칸)")]
+    [SerializeField] private bool alwaysWhiteIcon;
+
     private static readonly Color DimColor = new(0.55f, 0.58f, 0.62f, 1f);
     private Color[] _baseColors;
     private Sprite _icon, _iconHover;
@@ -65,6 +74,7 @@ public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointer
                 if (hoverIcons != null)
                     foreach (var s in hoverIcons)
                         if (s != null && s.name == choice.icon.name + "_White") { _iconHover = s; break; }
+                if (alwaysWhiteIcon && _iconHover != null) { _icon = _iconHover; iconImage.sprite = _icon; }
             }
             else
             {
@@ -115,6 +125,8 @@ public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointer
         _available = available;
         if (button != null) button.interactable = available;
         if (iconCell != null && cellNormal != null) iconCell.sprite = available ? cellNormal : (cellDisabled != null ? cellDisabled : cellNormal);
+        if (panelImage != null && panelNormal != null) panelImage.sprite = available ? panelNormal : (panelDisabled != null ? panelDisabled : panelNormal);
+        if (chevronImage != null && chevronNormal != null) chevronImage.sprite = chevronNormal;
         if (dimOnDisabled == null) return;
         if (_baseColors == null || _baseColors.Length != dimOnDisabled.Length) Awake();
         for (int i = 0; i < dimOnDisabled.Length; i++)
@@ -142,6 +154,10 @@ public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointer
         bool hover = on && _available;
         if (iconCell != null && cellNormal != null && _available)
             iconCell.sprite = hover && cellHover != null ? cellHover : cellNormal;
+        if (panelImage != null && panelNormal != null && _available)
+            panelImage.sprite = hover && panelHover != null ? panelHover : panelNormal;
+        if (chevronImage != null && chevronNormal != null)
+            chevronImage.sprite = hover && chevronHover != null ? chevronHover : chevronNormal;
         // 먹색 칸 위에서는 흰 아이콘으로 바꿔 끼운다
         if (iconImage != null && _icon != null) iconImage.sprite = hover && _iconHover != null ? _iconHover : _icon;
         if (content == null) return;

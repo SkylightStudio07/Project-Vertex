@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
@@ -13,6 +14,8 @@ public class SelectCoopCharUI : MonoBehaviour
 
     [Header("후보 선택")]
     [SerializeField] private RectTransform selectView;
+    [Tooltip("v3 판 (넓은 칸 + 좁은 칸 둘). 지정하면 아래 띠(strips) 대신 이걸 쓴다")]
+    [SerializeField] private SanctuarySelectBoard board;
     [Tooltip("띠는 항상 이 개수만큼 보인다. 후보가 모자라면 잠긴 후보로 채운다")]
     [SerializeField] private List<SelectCoopCharBtn> strips = new();
     [SerializeField] private Button detailButton;
@@ -46,9 +49,11 @@ public class SelectCoopCharUI : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button proceedButton;
 
-    [Header("글자 색")]
-    [SerializeField] private Color inkColor = new(0.086f, 0.094f, 0.106f, 1f);
-    [SerializeField] private Color disabledColor = new(0.62f, 0.64f, 0.67f, 1f);
+    [Header("후보 확인 버튼 글자 색")]
+    [FormerlySerializedAs("inkColor")]
+    [SerializeField] private Color detailLabelColor = new(0.086f, 0.094f, 0.106f, 1f);
+    [FormerlySerializedAs("disabledColor")]
+    [SerializeField] private Color detailLabelDisabledColor = new(0.62f, 0.64f, 0.67f, 1f);
 
     private SelectCoopCharBtn selectedStrip;
     private string pendingCharID;
@@ -100,6 +105,12 @@ public class SelectCoopCharUI : MonoBehaviour
         if (guideText != null) guideText.text = partyFull ? partyFullGuide : defaultGuide;
 
         List<CoopCharData> lockedSources = CollectLockedSilhouettes(candidates);
+        if (board != null)
+        {
+            board.Show(this, candidates, lockedSources, partyFull);
+            RefreshDetailButton();
+            return;
+        }
         for (int i = 0; i < strips.Count; i++)
         {
             if (i < candidates.Count) strips[i].SetCandidate(candidates[i], i, partyFull ? partyFullHint : null);
@@ -124,19 +135,24 @@ public class SelectCoopCharUI : MonoBehaviour
         RefreshDetailButton();
     }
 
+    // v3 판에서 좁은 칸 후보를 골라 자리를 바꿨을 때
+    public void RefreshBoardSelection() => RefreshDetailButton();
+
+    private string SelectedCharID => board != null ? board.SelectedCharID : selectedStrip != null ? selectedStrip.CharID : null;
+
     private void RefreshDetailButton()
     {
-        bool ready = selectedStrip != null || partyFull;
+        bool ready = SelectedCharID != null || partyFull;
         if (detailButton != null) detailButton.interactable = ready;
         if (detailButtonLabel != null) detailButtonLabel.text = partyFull ? "돌아가기" : defaultDetailLabel;
-        if (detailButtonLabel != null) detailButtonLabel.color = ready ? inkColor : disabledColor;
-        if (detailButtonArrow != null) detailButtonArrow.color = ready ? inkColor : disabledColor;
+        if (detailButtonLabel != null) detailButtonLabel.color = ready ? detailLabelColor : detailLabelDisabledColor;
+        if (detailButtonArrow != null) detailButtonArrow.color = ready ? detailLabelColor : detailLabelDisabledColor;
     }
 
     private void OpenSelectedDetails()
     {
         if (partyFull) { CloseUI(); return; }
-        if (selectedStrip != null) OpenDetails(selectedStrip.CharID);
+        if (SelectedCharID != null) OpenDetails(SelectedCharID);
     }
 
     public void OpenDetails(string charID)
@@ -147,8 +163,8 @@ public class SelectCoopCharUI : MonoBehaviour
 
         if (fx != null) fx.Stop(); // 진행 중인 연출을 제자리로 되돌린 뒤 배치를 바꾼다
         pendingCharID = charID;
-        int index = Mathf.Max(0, strips.FindIndex(s => s.CharID == charID));
-        detailNumber.text = $"{index + 1:00}";
+        int number = board != null ? board.NumberOf(charID) : Mathf.Max(0, strips.FindIndex(s => s.CharID == charID)) + 1;
+        detailNumber.text = $"{number:00}";
         detailName.text = string.IsNullOrWhiteSpace(data.charName) ? charID : data.charName;
         detailAffiliation.text = data.affiliation;
         detailAccent.color = data.themeColor;
@@ -196,7 +212,9 @@ public class SelectCoopCharUI : MonoBehaviour
     // 성소 전신 아트 → 스탠딩 → 초상화 순. 영역 높이에 맞추고 너비가 넘치면 너비에 맞춘다.
     private void ApplyFullArt(CoopCharData data)
     {
-        Sprite art = data.sanctuaryFullArt != null ? data.sanctuaryFullArt
+        // 성소 전신 → 동료 탭 전신 → 전투 스탠딩(시트 프레임일 수 있어 뒤로) → 초상
+        Sprite art = data.RosterFullArt != null && data.sanctuaryFullArt == null ? data.RosterFullArt
+            : data.sanctuaryFullArt != null ? data.sanctuaryFullArt
             : data.standingSprite != null ? data.standingSprite
             : data.charImage;
         detailFullArt.sprite = art;
@@ -208,8 +226,8 @@ public class SelectCoopCharUI : MonoBehaviour
         RectTransform rt = detailFullArt.rectTransform;
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
         rt.pivot = new Vector2(0.5f, 0f);
-        rt.anchoredPosition = Vector2.zero;
-        rt.sizeDelta = art.rect.size * scale;
+        rt.anchoredPosition = Vector2.Scale(data.sanctuaryArtOffset, area);
+        rt.sizeDelta = art.rect.size * scale * Mathf.Max(0.1f, data.sanctuaryArtScale);
     }
 
     private void BackToCandidates()
@@ -266,7 +284,7 @@ public class SelectCoopCharUI : MonoBehaviour
 
         foreach (string charID in selectable)
         {
-            if (candidates.Count >= strips.Count) break;
+            if (candidates.Count >= (board != null ? board.Capacity : strips.Count)) break;
             if (CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charID)) continue;
             candidates.Add(charID);
         }
@@ -282,7 +300,9 @@ public class SelectCoopCharUI : MonoBehaviour
         foreach (CoopCharData data in CooperationManager.Instance.AllCharData())
         {
             if (candidates.Contains(data.charID) || CooperationManager.Instance.IsJoinedInRun(data.charID)) continue;
-            if (data.standingSprite == null || data.isEventCompanion) continue;
+            // 투명 배경 전신이 있어야 실루엣이 사람 모양으로 나온다 (초상화는 배경이 칠해져 있을 수 있음)
+            bool hasArt = data.sanctuarySelectionArt != null || data.RosterFullArt != null || data.standingSprite != null;
+            if (!hasArt || data.isEventCompanion) continue;
             list.Add(data);
         }
         return list;

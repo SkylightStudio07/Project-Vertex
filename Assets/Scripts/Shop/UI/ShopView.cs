@@ -55,7 +55,8 @@ public class ShopView : MonoBehaviour
     [SerializeField] private float cardEntryScale = 0.66f;
     [SerializeField] private int cardGridColumns = 3;
     [SerializeField] private Vector2 cardGridSpacing = new(40f, 12f);
-    private static readonly Vector2 CardEntryFootprint = new(310f, 472f); // 카드 그림(1024×1480×0.3) + 아래 가격
+    [Tooltip("카드 상품 한 칸 크기 (스케일 1 기준). v2: 카드 그림(1024×1480×0.3) + 아래 가격 = 310×472, v4: 받침 222×326")]
+    [SerializeField] private Vector2 cardEntryFootprint = new(310f, 472f);
 
     private const string CardGridContainerName = "CardGridContainer";
 
@@ -90,6 +91,7 @@ public class ShopView : MonoBehaviour
 
     private void HideScene(bool hide)
     {
+        QuestTrackerView.Suppressed = hide;
         if (hide)
         {
             _hidden.Clear();
@@ -259,7 +261,7 @@ public class ShopView : MonoBehaviour
         gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         int columns = Mathf.Max(1, cardGridColumns);
         int rows = Mathf.Max(1, Mathf.CeilToInt((stock?.CardGoods.Count ?? columns) / (float)columns));
-        Vector2 cell = CardEntryFootprint * cardEntryScale;
+        Vector2 cell = cardEntryFootprint * cardEntryScale;
         gridLayout.constraintCount = columns;
         gridLayout.cellSize = cell;
         gridLayout.spacing = cardGridSpacing;
@@ -420,12 +422,25 @@ public class ShopView : MonoBehaviour
         {
             cardRemovePriceText.text = price.ToString();
         }
+        bool canRemove = GameManager.Instance.PlayerGold >= price && !removedCardThisVisit;
         if(cardRemoveButton != null)
         {
             // 골드가 충분하고, 이 상점에서 아직 제거하지 않았을 때만 누를 수 있다
-            cardRemoveButton.interactable = GameManager.Instance.PlayerGold >= price && !removedCardThisVisit;
+            cardRemoveButton.interactable = canRemove;
         }
+        // v4: 돈이 모자라면 가격 붉게 · 가격표 흐리게 (이미 제거했으면 가격은 먹색 그대로)
+        bool poor = GameManager.Instance.PlayerGold < price && !removedCardThisVisit;
+        if (cardRemovePriceText != null && removePriceColor.a > 0f) cardRemovePriceText.color = poor ? removePricePoorColor : removePriceColor;
+        if (cardRemovePriceTag != null && removeTagNormal != null)
+            cardRemovePriceTag.sprite = !canRemove && removeTagDisabled != null ? removeTagDisabled : removeTagNormal;
     }
+
+    [Header("카드 제거 가격표 (v4, 비우면 쓰지 않음)")]
+    [SerializeField] private Image cardRemovePriceTag;
+    [SerializeField] private Sprite removeTagNormal, removeTagDisabled;
+    [Tooltip("알파 0이면 가격 글자 색을 건드리지 않는다")]
+    [SerializeField] private Color removePriceColor = new(0f, 0f, 0f, 0f);
+    [SerializeField] private Color removePricePoorColor = Color.red;
 
 
     [Header("작별 인사")]

@@ -20,6 +20,11 @@ public class ShopStockEntry : MonoBehaviour, IPointerClickHandler, IPointerEnter
     [Tooltip("아이템 칸 틀 (아이템 상품만). 호버 때 hoverSprite로 바꾼다")]
     [SerializeField] private Image cellFrame;
     [SerializeField] private Sprite priceTagNormal, priceTagHover, cellNormal, cellHover;
+
+    [Header("상점 v4 — 살 수 없음 상태 · 보급품 이름 (비워두면 쓰지 않음)")]
+    [Tooltip("크레딧이 모자랄 때. 마우스를 올려도 이 그림을 유지한다 (품절 > 살 수 없음 > 올림 > 보통)")]
+    [SerializeField] private Sprite priceTagUnaffordable, cellUnaffordable;
+    [SerializeField] private TextMeshProUGUI nameText;
     [Tooltip("품절이면 흐리게 할 그림 묶음 (카드/아이콘)")]
     [SerializeField] private CanvasGroup dimOnSold;
 
@@ -59,6 +64,7 @@ public class ShopStockEntry : MonoBehaviour, IPointerClickHandler, IPointerEnter
                 itemIconImage.sprite = (goods.Data as ItemData).ItemIcon;
             }
         }
+        if (nameText != null) nameText.text = !isCard && goods.Data is ItemData item ? item.ItemName : "";
 
         priceText.text = goods.Price.ToString();
         Refresh();
@@ -76,13 +82,27 @@ public class ShopStockEntry : MonoBehaviour, IPointerClickHandler, IPointerEnter
         bool affordable = GameManager.Instance != null && GameManager.Instance.PlayerGold >= goods.Price;
         priceText.color = goods.IsSold ? unaffordableColor : affordable ? affordableColor : unaffordableColor;
         if (dimOnSold != null) dimOnSold.alpha = goods.IsSold ? 0.45f : 1f;
+        ApplyFrames();
     }
+
+    private bool _hovered;
 
     private void SetHover(bool on)
     {
-        bool can = on && goods != null && !goods.IsSold;
-        if (priceTag != null && priceTagNormal != null) priceTag.sprite = can && priceTagHover != null ? priceTagHover : priceTagNormal;
-        if (cellFrame != null && cellNormal != null) cellFrame.sprite = can && cellHover != null ? cellHover : cellNormal;
+        _hovered = on;
+        ApplyFrames();
+    }
+
+    // 품절 > 살 수 없음 > 올림 > 보통. 살 수 없을 때는 올려도 그림이 바뀌지 않는다 (툴팁은 뜬다)
+    private void ApplyFrames()
+    {
+        bool sold = goods != null && goods.IsSold;
+        bool poor = goods != null && !sold && (GameManager.Instance == null || GameManager.Instance.PlayerGold < goods.Price);
+        bool hover = _hovered && goods != null && !sold && !poor;
+        if (priceTag != null && priceTagNormal != null)
+            priceTag.sprite = poor && priceTagUnaffordable != null ? priceTagUnaffordable : hover && priceTagHover != null ? priceTagHover : priceTagNormal;
+        if (cellFrame != null && cellNormal != null)
+            cellFrame.sprite = poor && cellUnaffordable != null ? cellUnaffordable : hover && cellHover != null ? cellHover : cellNormal;
     }
 
     // 아이템 상품은 호버 시 아이템바와 같은 공용 툴팁(이름·설명)을 상품 위쪽에 띄운다.
