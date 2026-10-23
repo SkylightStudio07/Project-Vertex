@@ -1,0 +1,1 @@
+const fs=require('fs'); const {Resvg}=require('C:/Users/SKYLIGHT/.codex/tmp/currency-f-render/node_modules/@resvg/resvg-js'); for(const j of JSON.parse(fs.readFileSync(process.argv[2],'utf8'))){fs.writeFileSync(j.output,new Resvg(fs.readFileSync(j.input),{fitTo:{mode:'width',value:j.width}}).render().asPng());}

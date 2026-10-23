@@ -1,0 +1,1769 @@
+{
+  "version": 2,
+  "source": "Blessing_A_Canonical.png",
+  "source_canvas": [
+    1672,
+    941
+  ],
+  "design_canvas": [
+    1920,
+    1080
+  ],
+  "canvas": [
+    1920,
+    1080
+  ],
+  "coordinates": "top-left origin; rect=x,y,width,height; PNG output_size and nine_slice_lbrt in 2x SOURCE pixels",
+  "origin": "top-left",
+  "assets": [
+    {
+      "name": "Panel_Dialogue",
+      "file": "Panel_Dialogue.png",
+      "svg": "SVG/Panel_Dialogue.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        1840,
+        348
+      ],
+      "logical_size": [
+        920,
+        174
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": [
+        966,
+        214
+      ],
+      "nine_slice_lbrt": [
+        84,
+        64,
+        68,
+        72
+      ],
+      "nine_slice_logical_lbrt": [
+        42,
+        32,
+        34,
+        36
+      ],
+      "state": "Normal",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art",
+      "face_color": {
+        "srgb_hex": "#0D1420",
+        "alpha": 0.9
+      }
+    },
+    {
+      "name": "Panel_Option_Normal",
+      "file": "Panel_Option_Normal.png",
+      "svg": "SVG/Panel_Option_Normal.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        1840,
+        272
+      ],
+      "logical_size": [
+        920,
+        136
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": [
+        966,
+        410
+      ],
+      "nine_slice_lbrt": [
+        60,
+        64,
+        68,
+        48
+      ],
+      "nine_slice_logical_lbrt": [
+        30,
+        32,
+        34,
+        24
+      ],
+      "state": "Normal",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art",
+      "face_color": {
+        "srgb_hex": "#0D1420",
+        "alpha": 0.9
+      }
+    },
+    {
+      "name": "Option_IconDiamond_Normal",
+      "file": "Option_IconDiamond_Normal.png",
+      "svg": "SVG/Option_IconDiamond_Normal.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        224,
+        228
+      ],
+      "logical_size": [
+        112,
+        114
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": [
+        978,
+        420
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_logical_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state": "Normal",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art"
+    },
+    {
+      "name": "Panel_Option_Hover",
+      "file": "Panel_Option_Hover.png",
+      "svg": "SVG/Panel_Option_Hover.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        1840,
+        272
+      ],
+      "logical_size": [
+        920,
+        136
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": null,
+      "nine_slice_lbrt": [
+        60,
+        64,
+        68,
+        48
+      ],
+      "nine_slice_logical_lbrt": [
+        30,
+        32,
+        34,
+        24
+      ],
+      "state": "Hover",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art",
+      "face_color": {
+        "srgb_hex": "#192A3B",
+        "alpha": 0.9
+      }
+    },
+    {
+      "name": "Option_IconDiamond_Hover",
+      "file": "Option_IconDiamond_Hover.png",
+      "svg": "SVG/Option_IconDiamond_Hover.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        224,
+        228
+      ],
+      "logical_size": [
+        112,
+        114
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": null,
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_logical_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state": "Hover",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art"
+    },
+    {
+      "name": "Panel_Option_Disabled",
+      "file": "Panel_Option_Disabled.png",
+      "svg": "SVG/Panel_Option_Disabled.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        1840,
+        272
+      ],
+      "logical_size": [
+        920,
+        136
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": null,
+      "nine_slice_lbrt": [
+        60,
+        64,
+        68,
+        48
+      ],
+      "nine_slice_logical_lbrt": [
+        30,
+        32,
+        34,
+        24
+      ],
+      "state": "Disabled",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art",
+      "face_color": {
+        "srgb_hex": "#121923",
+        "alpha": 0.9
+      }
+    },
+    {
+      "name": "Option_IconDiamond_Disabled",
+      "file": "Option_IconDiamond_Disabled.png",
+      "svg": "SVG/Option_IconDiamond_Disabled.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        224,
+        228
+      ],
+      "logical_size": [
+        112,
+        114
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": null,
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_logical_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state": "Disabled",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art"
+    },
+    {
+      "name": "Icon_Chevron_Normal",
+      "file": "Icon_Chevron_Normal.png",
+      "svg": "SVG/Icon_Chevron_Normal.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        36,
+        56
+      ],
+      "logical_size": [
+        18,
+        28
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": [
+        1836,
+        464
+      ],
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_logical_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state": "Normal",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art"
+    },
+    {
+      "name": "Icon_Chevron_Hover",
+      "file": "Icon_Chevron_Hover.png",
+      "svg": "SVG/Icon_Chevron_Hover.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        36,
+        56
+      ],
+      "logical_size": [
+        18,
+        28
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": null,
+      "nine_slice_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_logical_lbrt": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state": "Hover",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art"
+    },
+    {
+      "name": "Panel_Nameplate",
+      "file": "Panel_Nameplate.png",
+      "svg": "SVG/Panel_Nameplate.svg",
+      "source": "../Blessing_A_Canonical.png",
+      "output_size": [
+        940,
+        380
+      ],
+      "logical_size": [
+        470,
+        190
+      ],
+      "png_scale": 2,
+      "placement_1920_xy": [
+        36,
+        842
+      ],
+      "nine_slice_lbrt": [
+        48,
+        48,
+        72,
+        72
+      ],
+      "nine_slice_logical_lbrt": [
+        24,
+        24,
+        36,
+        36
+      ],
+      "state": "Normal",
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "Editable SVG reconstruction; uniform face alpha; no raster art",
+      "face_color": {
+        "srgb_hex": "#0D1420",
+        "alpha": 0.9
+      }
+    }
+  ],
+  "external_assets": {
+    "Corner_Marks": {
+      "file": "../../Extracted/Corner_Marks.png",
+      "output_size": [
+        1920,
+        1080
+      ],
+      "included": false,
+      "method": "unchanged v1; optional runtime tint"
+    },
+    "Option_Divider": {
+      "file": "../../Extracted/Option_Divider.png",
+      "output_size": [
+        2,
+        40
+      ],
+      "included": false,
+      "method": "unchanged v1; optional runtime tint"
+    },
+    "Nameplate_AccentLine": {
+      "file": "../../Extracted/Nameplate_AccentLine.png",
+      "output_size": [
+        60,
+        2
+      ],
+      "included": false,
+      "method": "unchanged v1; optional runtime tint"
+    },
+    "Icon_Plus": {
+      "file": "../../Extracted/Icon_Plus.png",
+      "output_size": [
+        16,
+        16
+      ],
+      "included": false,
+      "method": "unchanged v1; optional runtime tint"
+    },
+    "purify": {
+      "file": "../../../../Assets/Art/Blessing/UI/UI_Blessing_Cleanse_White.png",
+      "included": false,
+      "logical_size": [
+        52,
+        52
+      ],
+      "preserve_aspect": true
+    },
+    "refine": {
+      "file": "../../../../Assets/Art/Blessing/UI/UI_Blessing_Refine_White.png",
+      "included": false,
+      "logical_size": [
+        52,
+        52
+      ],
+      "preserve_aspect": true
+    },
+    "supply": {
+      "file": "../../../../Assets/Art/Blessing/UI/UI_Blessing_Supply_White.png",
+      "included": false,
+      "logical_size": [
+        52,
+        52
+      ],
+      "preserve_aspect": true
+    },
+    "commune": {
+      "file": "../../../../Assets/Art/Blessing/UI/UI_Blessing_Communion_White.png",
+      "included": false,
+      "logical_size": [
+        52,
+        52
+      ],
+      "preserve_aspect": true
+    }
+  },
+  "placements": [
+    {
+      "id": "corners",
+      "asset": "Corner_Marks",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "z": 2,
+      "tint": "#B1BCC6",
+      "opacity": 0.55,
+      "external": true
+    },
+    {
+      "id": "dialogue",
+      "asset": "Panel_Dialogue",
+      "rect": [
+        966,
+        214,
+        920,
+        174
+      ],
+      "z": 10,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "dialogue_plus",
+      "asset": "Icon_Plus",
+      "rect": [
+        989,
+        236,
+        28,
+        28
+      ],
+      "z": 11,
+      "tint": "#AFBBC8",
+      "opacity": 0.65,
+      "external": true
+    },
+    {
+      "id": "dialogue_rule",
+      "asset": "Option_Divider",
+      "rect": [
+        1040,
+        257,
+        790,
+        1
+      ],
+      "z": 11,
+      "tint": "#A3B2C2",
+      "opacity": 0.4,
+      "external": true
+    },
+    {
+      "id": "nameplate",
+      "asset": "Panel_Nameplate",
+      "rect": [
+        36,
+        842,
+        470,
+        190
+      ],
+      "z": 10,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "name_accent",
+      "asset": "Nameplate_AccentLine",
+      "rect": [
+        64,
+        957,
+        224,
+        2
+      ],
+      "z": 11,
+      "tint": null,
+      "opacity": 1,
+      "external": true
+    },
+    {
+      "id": "name_plus_top",
+      "asset": "Icon_Plus",
+      "rect": [
+        460,
+        860,
+        20,
+        20
+      ],
+      "z": 11,
+      "tint": "#AABACA",
+      "opacity": 0.7,
+      "external": true
+    },
+    {
+      "id": "name_plus_bottom",
+      "asset": "Icon_Plus",
+      "rect": [
+        460,
+        1001,
+        20,
+        20
+      ],
+      "z": 11,
+      "tint": "#AABACA",
+      "opacity": 0.7,
+      "external": true
+    },
+    {
+      "id": "purify_panel",
+      "asset": "Panel_Option_Normal",
+      "rect": [
+        966,
+        410,
+        920,
+        136
+      ],
+      "z": 10,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "purify_diamond",
+      "asset": "Option_IconDiamond_Normal",
+      "rect": [
+        978,
+        420,
+        112,
+        114
+      ],
+      "z": 11,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "purify_icon",
+      "asset": "purify",
+      "rect": [
+        1008,
+        450,
+        52,
+        52
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": true
+    },
+    {
+      "id": "purify_divider",
+      "asset": "Option_Divider",
+      "rect": [
+        1268,
+        442,
+        2,
+        70
+      ],
+      "z": 11,
+      "tint": "#A5B6C5",
+      "opacity": 0.5,
+      "external": true
+    },
+    {
+      "id": "purify_chevron",
+      "asset": "Icon_Chevron_Normal",
+      "rect": [
+        1836,
+        464,
+        18,
+        28
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "refine_panel",
+      "asset": "Panel_Option_Normal",
+      "rect": [
+        966,
+        568,
+        920,
+        136
+      ],
+      "z": 10,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "refine_diamond",
+      "asset": "Option_IconDiamond_Normal",
+      "rect": [
+        978,
+        578,
+        112,
+        114
+      ],
+      "z": 11,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "refine_icon",
+      "asset": "refine",
+      "rect": [
+        1008,
+        608,
+        52,
+        52
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": true
+    },
+    {
+      "id": "refine_divider",
+      "asset": "Option_Divider",
+      "rect": [
+        1268,
+        600,
+        2,
+        70
+      ],
+      "z": 11,
+      "tint": "#A5B6C5",
+      "opacity": 0.5,
+      "external": true
+    },
+    {
+      "id": "refine_chevron",
+      "asset": "Icon_Chevron_Normal",
+      "rect": [
+        1836,
+        622,
+        18,
+        28
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "supply_panel",
+      "asset": "Panel_Option_Normal",
+      "rect": [
+        966,
+        726,
+        920,
+        136
+      ],
+      "z": 10,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "supply_diamond",
+      "asset": "Option_IconDiamond_Normal",
+      "rect": [
+        978,
+        736,
+        112,
+        114
+      ],
+      "z": 11,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "supply_icon",
+      "asset": "supply",
+      "rect": [
+        1008,
+        766,
+        52,
+        52
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": true
+    },
+    {
+      "id": "supply_divider",
+      "asset": "Option_Divider",
+      "rect": [
+        1268,
+        758,
+        2,
+        70
+      ],
+      "z": 11,
+      "tint": "#A5B6C5",
+      "opacity": 0.5,
+      "external": true
+    },
+    {
+      "id": "supply_chevron",
+      "asset": "Icon_Chevron_Normal",
+      "rect": [
+        1836,
+        780,
+        18,
+        28
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "commune_panel",
+      "asset": "Panel_Option_Normal",
+      "rect": [
+        966,
+        884,
+        920,
+        136
+      ],
+      "z": 10,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "commune_diamond",
+      "asset": "Option_IconDiamond_Normal",
+      "rect": [
+        978,
+        894,
+        112,
+        114
+      ],
+      "z": 11,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    },
+    {
+      "id": "commune_icon",
+      "asset": "commune",
+      "rect": [
+        1008,
+        924,
+        52,
+        52
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": true
+    },
+    {
+      "id": "commune_divider",
+      "asset": "Option_Divider",
+      "rect": [
+        1268,
+        916,
+        2,
+        70
+      ],
+      "z": 11,
+      "tint": "#A5B6C5",
+      "opacity": 0.5,
+      "external": true
+    },
+    {
+      "id": "commune_chevron",
+      "asset": "Icon_Chevron_Normal",
+      "rect": [
+        1836,
+        938,
+        18,
+        28
+      ],
+      "z": 12,
+      "tint": null,
+      "opacity": 1,
+      "external": false
+    }
+  ],
+  "text_boxes": [
+    {
+      "id": "title",
+      "text": "BLESSING",
+      "rect": [
+        94,
+        96,
+        280,
+        25
+      ],
+      "font_size": 20,
+      "color": "#F1F4F7",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 5,
+      "preview_line_widths": [
+        129.0
+      ]
+    },
+    {
+      "id": "subtitle",
+      "text": "BETWEEN REBIRTH AND DEATH",
+      "rect": [
+        94,
+        133,
+        360,
+        22
+      ],
+      "font_size": 12,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 1.5,
+      "preview_line_widths": [
+        213.0
+      ]
+    },
+    {
+      "id": "encounter_label",
+      "text": "VERTEX / ENCOUNTER LOG",
+      "rect": [
+        1040,
+        235,
+        760,
+        22
+      ],
+      "font_size": 13,
+      "color": "#A9B7C7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_line_widths": [
+        205.0
+      ]
+    },
+    {
+      "id": "dialogue_text",
+      "text": "재회를 축복할지, 아니면 첫 대면을 환영해야 할지 알 수 없는 일이야.\n버텍스에 온 것을 환영해, 탐색자. 후후, 여기는 버텍스가 아니지만.",
+      "rect": [
+        1046,
+        282,
+        792,
+        90
+      ],
+      "font_size": 22,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "max_lines": 3,
+      "line_height": 29,
+      "binding": "BlessingView.dialogueText",
+      "overflow": "page; do not resize panel",
+      "preview_line_widths": [
+        575.0,
+        558.0
+      ]
+    },
+    {
+      "id": "entity_label",
+      "text": "ENTITY / MACHINA",
+      "rect": [
+        64,
+        862,
+        360,
+        23
+      ],
+      "font_size": 15,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_line_widths": [
+        165.0
+      ]
+    },
+    {
+      "id": "name",
+      "text": "마키나",
+      "rect": [
+        64,
+        904,
+        360,
+        47
+      ],
+      "font_size": 44,
+      "color": "#F1F4F7",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_line_widths": [
+        114.0
+      ]
+    },
+    {
+      "id": "intro",
+      "text": "재생과 죽음의 경계에서",
+      "rect": [
+        64,
+        979,
+        375,
+        31
+      ],
+      "font_size": 23,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_line_widths": [
+        212.0
+      ]
+    },
+    {
+      "id": "purify_number",
+      "text": "01",
+      "rect": [
+        1114,
+        426,
+        60,
+        21
+      ],
+      "font_size": 15,
+      "color": "#F1F4F7",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 1,
+      "preview_line_widths": [
+        18.0
+      ]
+    },
+    {
+      "id": "purify_title",
+      "text": "정화",
+      "rect": [
+        1114,
+        452,
+        144,
+        53
+      ],
+      "font_size": 42,
+      "color": "#F1F4F7",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "first_syllable_emphasis": false,
+      "preview_line_widths": [
+        72.0
+      ]
+    },
+    {
+      "id": "purify_english",
+      "text": "PURIFY",
+      "rect": [
+        1114,
+        512,
+        175,
+        22
+      ],
+      "font_size": 14,
+      "color": "#A7B8CA",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_line_widths": [
+        59.0
+      ]
+    },
+    {
+      "id": "purify_description",
+      "text": "덱에서 불필요한 카드 1장을 완전히 제거합니다.",
+      "rect": [
+        1304,
+        452,
+        526,
+        75
+      ],
+      "font_size": 21,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "max_lines": 2,
+      "line_height": 28,
+      "preview_line_widths": [
+        382.0
+      ]
+    },
+    {
+      "id": "refine_number",
+      "text": "02",
+      "rect": [
+        1114,
+        584,
+        60,
+        21
+      ],
+      "font_size": 15,
+      "color": "#F1F4F7",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 1,
+      "preview_line_widths": [
+        20.0
+      ]
+    },
+    {
+      "id": "refine_title",
+      "text": "연마",
+      "rect": [
+        1114,
+        610,
+        144,
+        53
+      ],
+      "font_size": 42,
+      "color": "#F1F4F7",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "first_syllable_emphasis": false,
+      "preview_line_widths": [
+        72.0
+      ]
+    },
+    {
+      "id": "refine_english",
+      "text": "REFINE",
+      "rect": [
+        1114,
+        670,
+        175,
+        22
+      ],
+      "font_size": 14,
+      "color": "#A7B8CA",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_line_widths": [
+        57.0
+      ]
+    },
+    {
+      "id": "refine_description",
+      "text": "기본 카드 2장을 선택하여 강화합니다.",
+      "rect": [
+        1304,
+        610,
+        526,
+        75
+      ],
+      "font_size": 21,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "max_lines": 2,
+      "line_height": 28,
+      "preview_line_widths": [
+        308.0
+      ]
+    },
+    {
+      "id": "supply_number",
+      "text": "03",
+      "rect": [
+        1114,
+        742,
+        60,
+        21
+      ],
+      "font_size": 15,
+      "color": "#F1F4F7",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 1,
+      "preview_line_widths": [
+        20.0
+      ]
+    },
+    {
+      "id": "supply_title",
+      "text": "보급",
+      "rect": [
+        1114,
+        768,
+        144,
+        53
+      ],
+      "font_size": 42,
+      "color": "#F1F4F7",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "first_syllable_emphasis": false,
+      "preview_line_widths": [
+        72.0
+      ]
+    },
+    {
+      "id": "supply_english",
+      "text": "SUPPLY",
+      "rect": [
+        1114,
+        828,
+        175,
+        22
+      ],
+      "font_size": 14,
+      "color": "#A7B8CA",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_line_widths": [
+        64.0
+      ]
+    },
+    {
+      "id": "supply_description",
+      "text": "모험에 도움이 되는 소모품 아이템 2개를\n가방에 획득합니다.",
+      "rect": [
+        1304,
+        768,
+        526,
+        75
+      ],
+      "font_size": 21,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "max_lines": 2,
+      "line_height": 28,
+      "preview_line_widths": [
+        325.0,
+        155.0
+      ]
+    },
+    {
+      "id": "commune_number",
+      "text": "04",
+      "rect": [
+        1114,
+        900,
+        60,
+        21
+      ],
+      "font_size": 15,
+      "color": "#F1F4F7",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 1,
+      "preview_line_widths": [
+        21.0
+      ]
+    },
+    {
+      "id": "commune_title",
+      "text": "교감",
+      "rect": [
+        1114,
+        926,
+        144,
+        53
+      ],
+      "font_size": 42,
+      "color": "#F1F4F7",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "first_syllable_emphasis": false,
+      "preview_line_widths": [
+        72.0
+      ]
+    },
+    {
+      "id": "commune_english",
+      "text": "COMMUNE",
+      "rect": [
+        1114,
+        986,
+        175,
+        22
+      ],
+      "font_size": 14,
+      "color": "#A7B8CA",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_line_widths": [
+        84.0
+      ]
+    },
+    {
+      "id": "commune_description",
+      "text": "마키나와 대화를 나누어 친밀도를 쌓습니다.",
+      "rect": [
+        1304,
+        926,
+        526,
+        75
+      ],
+      "font_size": 21,
+      "color": "#F1F4F7",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "max_lines": 2,
+      "line_height": 28,
+      "preview_line_widths": [
+        350.0
+      ]
+    }
+  ],
+  "option_instances": [
+    {
+      "index": 1,
+      "id": "purify",
+      "panel": "Panel_Option_Normal",
+      "position": [
+        966,
+        410
+      ],
+      "panel_rect": [
+        966,
+        410,
+        920,
+        136
+      ],
+      "icon_cell": "Option_IconDiamond_Normal",
+      "icon_diamond_rect": [
+        978,
+        420,
+        112,
+        114
+      ],
+      "icon_rect": [
+        1008,
+        450,
+        52,
+        52
+      ],
+      "number_rect": [
+        1114,
+        426,
+        60,
+        21
+      ],
+      "title_rect": [
+        1114,
+        452,
+        144,
+        53
+      ],
+      "english_rect": [
+        1114,
+        512,
+        175,
+        22
+      ],
+      "divider_rect": [
+        1268,
+        442,
+        2,
+        70
+      ],
+      "description_rect": [
+        1304,
+        452,
+        526,
+        75
+      ],
+      "chevron_rect": [
+        1836,
+        464,
+        18,
+        28
+      ],
+      "default_state": "Normal",
+      "content_group_includes_panel": true
+    },
+    {
+      "index": 2,
+      "id": "refine",
+      "panel": "Panel_Option_Normal",
+      "position": [
+        966,
+        568
+      ],
+      "panel_rect": [
+        966,
+        568,
+        920,
+        136
+      ],
+      "icon_cell": "Option_IconDiamond_Normal",
+      "icon_diamond_rect": [
+        978,
+        578,
+        112,
+        114
+      ],
+      "icon_rect": [
+        1008,
+        608,
+        52,
+        52
+      ],
+      "number_rect": [
+        1114,
+        584,
+        60,
+        21
+      ],
+      "title_rect": [
+        1114,
+        610,
+        144,
+        53
+      ],
+      "english_rect": [
+        1114,
+        670,
+        175,
+        22
+      ],
+      "divider_rect": [
+        1268,
+        600,
+        2,
+        70
+      ],
+      "description_rect": [
+        1304,
+        610,
+        526,
+        75
+      ],
+      "chevron_rect": [
+        1836,
+        622,
+        18,
+        28
+      ],
+      "default_state": "Normal",
+      "content_group_includes_panel": true
+    },
+    {
+      "index": 3,
+      "id": "supply",
+      "panel": "Panel_Option_Normal",
+      "position": [
+        966,
+        726
+      ],
+      "panel_rect": [
+        966,
+        726,
+        920,
+        136
+      ],
+      "icon_cell": "Option_IconDiamond_Normal",
+      "icon_diamond_rect": [
+        978,
+        736,
+        112,
+        114
+      ],
+      "icon_rect": [
+        1008,
+        766,
+        52,
+        52
+      ],
+      "number_rect": [
+        1114,
+        742,
+        60,
+        21
+      ],
+      "title_rect": [
+        1114,
+        768,
+        144,
+        53
+      ],
+      "english_rect": [
+        1114,
+        828,
+        175,
+        22
+      ],
+      "divider_rect": [
+        1268,
+        758,
+        2,
+        70
+      ],
+      "description_rect": [
+        1304,
+        768,
+        526,
+        75
+      ],
+      "chevron_rect": [
+        1836,
+        780,
+        18,
+        28
+      ],
+      "default_state": "Normal",
+      "content_group_includes_panel": true
+    },
+    {
+      "index": 4,
+      "id": "commune",
+      "panel": "Panel_Option_Normal",
+      "position": [
+        966,
+        884
+      ],
+      "panel_rect": [
+        966,
+        884,
+        920,
+        136
+      ],
+      "icon_cell": "Option_IconDiamond_Normal",
+      "icon_diamond_rect": [
+        978,
+        894,
+        112,
+        114
+      ],
+      "icon_rect": [
+        1008,
+        924,
+        52,
+        52
+      ],
+      "number_rect": [
+        1114,
+        900,
+        60,
+        21
+      ],
+      "title_rect": [
+        1114,
+        926,
+        144,
+        53
+      ],
+      "english_rect": [
+        1114,
+        986,
+        175,
+        22
+      ],
+      "divider_rect": [
+        1268,
+        916,
+        2,
+        70
+      ],
+      "description_rect": [
+        1304,
+        926,
+        526,
+        75
+      ],
+      "chevron_rect": [
+        1836,
+        938,
+        18,
+        28
+      ],
+      "default_state": "Normal",
+      "content_group_includes_panel": true
+    }
+  ],
+  "hover_runtime_offset": [
+    -8,
+    0
+  ],
+  "hud_reserved_rect": [
+    0,
+    0,
+    1920,
+    80
+  ],
+  "portrait": {
+    "speakerAvatarImage_enabled": false
+  },
+  "spacing": {
+    "row_height": 136,
+    "row_gap": 22,
+    "row_pitch": 158,
+    "dialogue_to_first_row_gap": 22
+  },
+  "dialogue": {
+    "panel_rect": [
+      966,
+      214,
+      920,
+      174
+    ],
+    "text_rect": [
+      1046,
+      282,
+      792,
+      90
+    ],
+    "max_lines": 3,
+    "line_height": 29,
+    "height_mode": "fixed",
+    "three_lines": "same panel and row positions; text box supports 3 lines",
+    "overflow": "paginate at 3 lines; next page uses existing advance behavior",
+    "header_rule_rect": [
+      1040,
+      257,
+      790,
+      1
+    ]
+  },
+  "character": {
+    "rect": [
+      -100,
+      -169,
+      1229,
+      2150
+    ],
+    "visible_bounds_approx": [
+      60,
+      65,
+      920,
+      1015
+    ],
+    "runtime": "BlessingView.characterImage; preserve current placement/rig",
+    "included": false,
+    "overlap_check": "Face and hand outside x966 menu/dialogue boundary. Nameplate intentionally overlays lower torso as canonical.",
+    "preview": "Original game background and sprite first frame, positioned using supplied capture. Runtime HUD comes from the capture. No generative repainting."
+  },
+  "color_intent": {
+    "Normal": {
+      "srgb_hex": "#0D1420",
+      "rgba_srgb": [
+        0.05098,
+        0.078431,
+        0.12549,
+        0.9
+      ],
+      "rgb_linear": [
+        0.0040247,
+        0.0069954,
+        0.0144438
+      ],
+      "alpha": 0.9,
+      "alpha_byte": 230,
+      "image_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "texture_srgb": true,
+      "alpha_is_transparency": true,
+      "note": "RGB already in PNG. Use white Image tint at alpha 1; do not apply .9 a second time."
+    },
+    "Hover": {
+      "srgb_hex": "#192A3B",
+      "rgba_srgb": [
+        0.098039,
+        0.164706,
+        0.231373,
+        0.9
+      ],
+      "rgb_linear": [
+        0.0097212,
+        0.0231534,
+        0.043735
+      ],
+      "alpha": 0.9,
+      "alpha_byte": 230,
+      "image_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "texture_srgb": true,
+      "alpha_is_transparency": true,
+      "note": "RGB already in PNG. Use white Image tint at alpha 1; do not apply .9 a second time."
+    },
+    "Disabled": {
+      "srgb_hex": "#121923",
+      "rgba_srgb": [
+        0.070588,
+        0.098039,
+        0.137255,
+        0.9
+      ],
+      "rgb_linear": [
+        0.0060488,
+        0.0097212,
+        0.0168074
+      ],
+      "alpha": 0.9,
+      "alpha_byte": 230,
+      "image_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "texture_srgb": true,
+      "alpha_is_transparency": true,
+      "note": "RGB already in PNG. Use white Image tint at alpha 1; do not apply .9 a second time."
+    }
+  },
+  "states": {
+    "default": "Normal for all four rows",
+    "Normal": {
+      "panel": "Panel_Option_Normal",
+      "diamond": "Option_IconDiamond_Normal",
+      "chevron": "Icon_Chevron_Normal",
+      "text_color": "#F1F4F7",
+      "title_font_size": 42,
+      "title_first_syllable_emphasis": false
+    },
+    "Hover": {
+      "panel": "Panel_Option_Hover",
+      "diamond": "Option_IconDiamond_Hover",
+      "chevron": "Icon_Chevron_Hover",
+      "outline_logical_px": 2,
+      "outline_color": "#49C6E5",
+      "offset": [
+        -8,
+        0
+      ],
+      "move": "Entire row: panel, diamond, icon, number, title, English, divider, description, chevron",
+      "glow": false,
+      "bloom": false
+    },
+    "Disabled": {
+      "panel": "Panel_Option_Disabled",
+      "diamond": "Option_IconDiamond_Disabled",
+      "chevron": "Icon_Chevron_Normal",
+      "text_color": "#8C949E",
+      "icon_alpha": 0.5,
+      "interactable": false,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "DialogueRunning": {
+      "show": [
+        "dialogue",
+        "nameplate",
+        "existing scenery",
+        "HUD"
+      ],
+      "hide": [
+        "all option row groups"
+      ],
+      "portrait_enabled": false
+    }
+  },
+  "rendering": {
+    "alpha": "straight; RGB stored sRGB, alpha linear",
+    "preview_compositing": "linear-light source-over to approximate Unity Linear UI",
+    "texture_srgb": true,
+    "image_tint": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "ui_png_scale": 2,
+    "nine_slice_order": "left,bottom,right,top SOURCE pixels",
+    "material": "default UI material, no additive passes, no glow, no shadow",
+    "raycast": "row button receives; decorative elements raycastTarget=false"
+  },
+  "preview_sources": {
+    "capture": "../../Alternatives_v2/Reference_Current.png",
+    "background": "Assets/Art/Blessing/Machina/Backgrounds.png",
+    "frame": "Assets/Art/Blessing/Machina/machina_idle_sprite_64_sheet.png; first sprite 768x1344 top-left; metadata Unity rect [0,9408,768,1344]",
+    "limitation": "Capture contains old UI over torso/background. For a continuous clean scene, preview rebuilds from original game background/frame rather than retaining occluding pixels. Capture supplies placement reference and HUD. Animated pose is not pixel-identical."
+  },
+  "excluded": [
+    "character",
+    "background",
+    "moon",
+    "petals",
+    "HUD",
+    "icons",
+    "text",
+    "numbers",
+    "portrait"
+  ],
+  "notes": [
+    "Nameplate A differs from v1 opaque plate: rebuilt with uniform .9 alpha. Accent line/plus/divider/corners reuse existing sprites.",
+    "No first-syllable styling. No permanently highlighted row.",
+    "Hover shift must target whole row container, not only content; existing component requires placement integration by game implementer.",
+    "No Unity scene, importer, prefab or meta changes."
+  ]
+}

@@ -1,0 +1,32 @@
+Use case: ui-mockup. Create ONE restrained, polished full-screen landscape 16:9 Project VERTEX SANCTUARY COMPANION SELECTION redesign, preferably 1920x1080. This is a first visual proposal, not a production screenshot.
+The user rejected the immediately previous map design as excessive. CRITICAL: be restrained, useful and character-first. No aggressive poster geometry, enormous black bands, giant circles, massive numbers, cyan wedges or new elaborate scenery.
+
+INPUTS:
+Reference 1 is current Sanctuary selection screen: keep meaningful header/HUD/navigation, three candidate positions, first Chihara Sho and two locked candidates, and the bottom "후보 확인" action. It is a functional reference, NOT a mandate to retain its floating narrow parallelogram cards or severe portrait crop.
+Reference 2 is the EXACT current Chihara Sho full-body standing illustration. Preserve her short silver-white bob with vivid red streak, reddish eyes, white collared blouse, black narrow tie, charcoal flared trousers, black platform heeled shoes, red gloves, dagger over shoulder, lowered hand and subtle original red effect. Preserve her face, original pose, costume and proportions. NO old long-haired black-jacket version. No new characters. No tilted/cropped character, no redesign.
+
+DESIGN:
+A quiet full-bleed off-white companion selection interface, like three spacious editorial panels. The content area under the existing top HUD is continuously divided by two subtle /-sloping boundaries, with NO gutters or floating card outlines. The diagonal shapes are BACKGROUND PLANES, not masks cutting the characters. Pale colors only: selected left plane near-white, middle plane #E5E9ED, right plane #DCE2E8. Approximately 45% width for available candidate at left and two ~27% locked candidate planes at right. Background fills every part of the screen. Very thin graphite separators; only selected boundary has a single 1px cyan segment, not a neon border. Extremely subtle shadow at one plane edge, no 3D beveled panels.
+Very sparse technical detail: tiny registration ticks at screen margins and a faint horizontal baseline. No all-over grid texture, compass watermark, petals, stars, decorative label noise, barcodes, room scene or mysterious shrine imagery. Opaque matte surfaces.
+
+HEADER AND HUD:
+Preserve slim black battle HUD at top y0..100 matching reference 1, "FLOOR 03", "TURN 1", "BATTLE FIELD", "만발한 백피안화의 정원"; MAP and DECK black-square icons at upper-right. No extra resource or HP display.
+At upper-left below HUD around x75 y135, small "01", large readable Korean "성소" and quiet "SANCTUARY / COMPANION SELECT", then "동료를 한 명 고르십시오." Keep header compact and away from character face. No newly invented back/skip buttons.
+Top of candidate regions small index labels "01", "02", "03", aligned in a common row around y255. First may have a tiny cyan dot and "선택 중", others gray.
+
+CHARACTER / AVAILABLE CANDIDATE:
+Place reference 2 full-body character upright on top of left background plane, occupying approximately x330..820, y220..965. Her entire hair, dagger, lowered hand, shoes and original base effect remain inside screen with breathing room, none cut by the diagonal border. Use uniform aspect-fit, do not stretch; don't let a UI panel obscure her body. She is the only detailed colored visual.
+At lower-left of her plane, to the LEFT of the legs rather than covering them, a compact label group on bare pale background: large bold ink "치하라 쇼", smaller cyan "VERTEX / 협력자", a short thin burgundy personal-color rule, and small gray "합류 가능". No invented personality description or stats.
+No huge opaque black name band. Identity and silhouette should feel airy, balanced and intentional.
+
+LOCKED CANDIDATES:
+In the middle and right planes, low-contrast anonymous neutral gray standing silhouettes at about 8% opacity, positioned behind the lock/label. Do not depict recognizable new characters or detailed art. A small lock symbol at center, modest bold "잠긴 후보", smaller "구출 의뢰 · 구조 신호". Give the empty regions an intentional quiet appearance; no giant solid black card bands and no fake portrait illustrations.
+These planes stay visible as unavailable options, but the selected character is the obvious main focus.
+
+ACTION:
+Bottom-right a single well-proportioned clipped-corner button approximately 340x76 at x1510 y970, dark ink with white "후보 확인 →", small "DETAIL" above/beside main label, thin cyan lower rule. Preserve sufficient spacing from locked text and panel boundaries. This leads to a separate detail screen, not immediate recruitment; do NOT label it 합류.
+No extra action panels or card catalogs on this selection page.
+
+FINISH:
+Clean readable Korean typography. Black/off-white/grays plus tiny cyan, original character colors retained. Distinct visual improvement through full-body presentation, coherent edge-to-edge panel spacing and reduced black visual weight. Keep the whole result understated. No abstract art poster aesthetic, no gigantic geometric collage.
+

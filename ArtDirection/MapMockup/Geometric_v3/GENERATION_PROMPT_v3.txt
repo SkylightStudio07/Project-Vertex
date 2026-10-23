@@ -1,0 +1,34 @@
+Use case: ui-mockup. Create a radically redesigned full-screen 16:9 Project VERTEX roguelike route-map interface, preferably 1920x1080. ONE finished usable game screen. The user rejected scenic/fantasy backgrounds and found the previous generic white map too timid. This design must have bold deliberate GRAPHIC COMPOSITION, grounded in the four supplied abstract references, with high practical route readability.
+
+INPUT ROLES:
+1: Current VERTEX screenshot = gameplay information, left-to-right branching structure, node-type icon vocabulary. Do NOT retain its uniform square tiles or white rounded map board.
+2: black/white converging polygon artwork = directional energy and bold positive/negative shape language. Borrow only in outer margins; NO vanishing point or perspective distortion of gameplay.
+3: angular broadcast ribbon designs = sharply cut asymmetric header/tab silhouette. Borrow geometry only, NOT sample words, logos, watermark, credits or branding.
+4: white mechanical panel shell with black seams = broad smooth off-white plates, fine seams and dark exposed gaps at edges. Abstract these into clean flat graphic facets; NO rendered gears, screws, metal machinery or green lighting.
+5: monochrome/cyan experimental editorial poster = PRIMARY visual language: immense off-white/ink shapes, thin offset circles and crosshairs, clipped diagonal fields, spacious clean typography, a single strategic cyan geometric plane. Ignore ALL reference text. DO NOT copy any text, symbols with unrelated meaning, rainbow sidebars, barcodes or designer credits.
+
+COMPOSITION / DESIGN:
+Full-screen graphic tactical chart, predominantly flat vector-like geometry, not realistic environment, not frosted glass UI. Top header and bottom margins are cool off-white #EEF0F2. A single broad asymmetrical INK BLACK #16181B route field runs horizontally across the middle, spanning x35..1885, roughly y300..850. Its upper and lower contours have a few very deliberate slanted steps and cuts rather than a rectangle, but the entire game graph lies INSIDE a calm contiguous dark interior. Slightly tilted underlying pale slabs protrude past its edges. Crisp super-fine seam lines at outer margins. A large cyan parallelogram partially emerges from UNDER the lower-left edge of the dark field around x330..610 y820..970; only a small triangular portion is exposed, approximately 3% total screen. No other large cyan areas.
+Use one huge open thin circle cropped off the far left, and a very faint sphere-grid segment cropped along the extreme bottom-left, from reference 5. These are decorative margin elements only; NEVER cross or confuse map routes. Small crosshairs at only two corners. Diagonal black shards at upper-right and lower-left direct the eye into the map, at most three broad shapes. Clean matte surfaces, crisp silhouettes, subtle offsets/contact shadows only at overlapping header slabs. Absolutely no weathered paper, fog, scenery, flower painting, mountains, floating ruins, starfield, neon or ornamental frames.
+The result should look like a deliberately art-directed experimental observation system with an actual playable map, not a screenshot with geometric wallpaper added.
+
+TOP:
+Reserve y0..85 for existing compact game HUD: "FLOOR 01", "TURN 1", small "BATTLE FIELD", and far-right recognizable MAP / DECK icon buttons. Thin separators, no HP or END TURN.
+Between y110..265 a confident chapter header: oversized BLACK "01" at left, a black angular ribbon next to it carrying white Korean title "만발한 백피안화의 정원", smaller "ACT 01 / OPERATION MAP" on a pale offset under-strip. Bold readable Korean sans-serif, not decorative fantasy type. A tiny "1막" near 01 if needed. At upper-right compact "BOSS · 남은 층 15  ▶" and close button "×". Do not invent resources or tutorial text.
+Floor ruler in the calm band above the graph: 01 to 09, aligned to their node columns, restrained hairline ticks and only 01 with a cyan square highlight.
+
+GRAPH IS PRIMARY:
+Use same approximate branches/types/relative arrangement as current screenshot, in a clean 2D orthographic network. Horizontal progression. Keep clickable nodes at least 56px across; overall 9 visible columns; use vertical spacing so no icons collide. Connections run between node edges, never through their pictograms. No dead-end lines floating in space. This viewport is beginning of a 16-floor map; routes continue out of the right viewport and a small horizontal scrollbar at bottom conveys that.
+Leftmost current node at column 01: blessing/winged-compass icon in a larger open circular/diamond frame. Small cyan diamond and "HERE / 현재 위치" above. It branches to THREE accessible combat nodes in column 02: upper, middle, lower.
+Regular future nodes have NO filled square cards. Use a crisp off-white functional glyph suspended inside a thin broken hexagon or open diamond-corner frame, with very small dark interior matching background. Combat crossed swords; event "?"; shop awning; shrine arch; rest bed. Make these pictograms legible and sparse, not detailed illustrations.
+Accessible three combat nodes: bright white crossed swords, more complete cyan angular brackets, larger partial circular ring, a tiny short cyan tick. Current-to-available lines light neutral SOLID. Use cyan on node states, not the entire network.
+Future network routes: fine medium-light-gray DASHED strokes, clear against charcoal. Future symbols off-white at 70% opacity, never almost invisible. Maintain branch connectivity, don't reinterpret as separate rows of filter choices.
+Elite nodes get a larger filled OFF-WHITE sharply cut diamond with a black elite mask, so they pop in inverse contrast. Rest node a small cyan underline. Other types same restrained open geometry.
+Do not populate nodes with lengthy labels, index badges, giant cards or copious technical numbers. Label only the current node and one available combat with a tiny angular tag "전투". No new sidebars or huge detail panel. Avoid all-nodes-identical-boxes visual fatigue. No final boss icon in this beginning-view; boss direction remains in header.
+
+FOOTER:
+At bottom on off-white, compact single-row legend in dark text with eight icons: "전투 / 엘리트 / 이벤트 / 상점 / 휴식 / 성소 / 축복 / 보스". Small horizontal scroll track below. Remaining lower area is mostly whitespace with the cropped cyan plane and faint circle line, not filler copy.
+
+FINISH:
+Palette strictly #EEF0F2, #16181B, neutral gray, tiny cyan #0DB8F2. Typography clean Korean sans-serif, strong scale difference between chapter identity and gameplay labels. Main central graph must be the most readable, functional part. This is a bold black-field geometric route map, not a scenic map, not a UI kit sheet, not a mere wallpaper.
+
