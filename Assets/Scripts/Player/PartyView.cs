@@ -436,6 +436,9 @@ public class PartyView : MonoBehaviour
         float k = parent.rect.width / 1920f;
         Vector2 center = _homeFeet + formationCenterOffset * k;
         if (matchEnemyGround && TryEnemyGroundY(parent, out float groundY)) center.y = groundY + enemyGroundOffsetY * k;
+        // 배경마다 바닥 높이 · 서는 자리가 달라서, 배경(BattleStageData)이 아군 위치를 옮길 수 있다
+        var stage = BattleStageView.Active;
+        if (stage != null) center += stage.partyOffset * k;
         var order = new List<(Transform t, float y)>();
         for (int i = 0; i < units.Count && i < layout.Length; i++)
         {

@@ -12,6 +12,17 @@ public class BattleStageData : ScriptableObject
     [Tooltip("어느 막의 배경인지 (막 개념이 들어오면 이걸로 거른다)")]
     [Min(1)] public int actNumber = 1;
 
+    [Header("층 범위 (일반 전투용)")]
+    [Tooltip("이 배경이 나오는 층 (화면에 보이는 1층부터, 최소~최대 포함). 둘 다 0이면 아무 층에서나")]
+    [Min(0)] public int minFloor;
+    [Min(0)] public int maxFloor;
+
+    [Header("전용 배경 · 아군 위치")]
+    [Tooltip("이 적이 나오는 전투에서만 쓰는 배경 (엘리트 · 보스). 비우면 일반 배경 풀에서 무작위로 뽑힌다")]
+    public List<EnemyData> featuredEnemies = new();
+    [Tooltip("아군 진형 중심을 옮긴다 (1920×1080 기준 px, x 오른쪽 · y 위). 배경마다 바닥 높이 · 서는 자리가 달라서")]
+    public Vector2 partyOffset;
+
     [Header("유닛 조명 — 배경의 주광에 맞춘다")]
     [Tooltip("주광이 오는 방향 (화면 기준, x 오른쪽 · y 위). 림라이트 방향")]
     public Vector2 lightFrom = new(-0.7f, 0.7f);

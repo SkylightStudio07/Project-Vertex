@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleStageData
   background: {fileID: 21300000, guid: e3d5ac0b2702d9c409b775533446886e, type: 3}
   actNumber: 1
+  minFloor: 1
+  maxFloor: 5
+  featuredEnemies: []
+  partyOffset: {x: 0, y: 0}
   lightFrom: {x: -0.55, y: 0.85}
   rimColor: {r: 0.78, g: 0.88, b: 1, a: 0.65}
   allyGrade: {r: 0.92, g: 0.95, b: 1, a: 1}
