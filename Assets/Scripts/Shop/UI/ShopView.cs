@@ -27,6 +27,8 @@ public class ShopView : MonoBehaviour
     [Header("상점 주인")]
     // 막마다 다른 상점 주인. GameManager.Chapter와 일치하는 것을 쓰고, 없으면 첫 번째.
     [SerializeField] private List<ShopkeeperData> shopkeepers = new();
+    [Tooltip("처음 입장할 때 손 흔드는 연출 (상점 주인 초상에 붙인다. 비우면 자식에서 찾는다)")]
+    [SerializeField] private ShopkeeperWave shopkeeperWave;
     [SerializeField] private NpcDialogueOverlay dialogueOverlay;
     [Tooltip("상점 주인 말풍선 — 입장·구매·클릭·가만히 있을 때 잠깐 떴다 사라진다 (ShopkeeperData의 말풍선 대사)")]
     [SerializeField] private SpeechBubble shopkeeperBubble;
@@ -87,6 +89,8 @@ public class ShopView : MonoBehaviour
         var keeper = ResolveShopkeeper();
         if (shopkeeperNameText != null && keeper != null) shopkeeperNameText.text = keeper.entityName;
         PlayShopkeeperGreeting();
+        if (shopkeeperWave == null) shopkeeperWave = GetComponentInChildren<ShopkeeperWave>(true);
+        if (shopkeeperWave != null) shopkeeperWave.PlayOnEnter(); // 입장할 때마다 손을 흔든다
     }
 
     private void HideScene(bool hide)

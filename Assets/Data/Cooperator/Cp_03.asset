@@ -17,7 +17,7 @@ MonoBehaviour:
   charDescription: "\uCE90\uB9AD\uD130 \uC124"
   affiliation: "VERTEX / \uD611\uB825\uC790"
   themeColor: {r: 0.05, g: 0.72, b: 0.95, a: 1}
-  charImage: {fileID: -1239302344545342076, guid: 05feb4187e10ad640acddb36ab13afd7, type: 3}
+  charImage: {fileID: 21300000, guid: b3d2db58cd4b1f74a9662a47b0872627, type: 3}
   charIcon: {fileID: 0}
   standingSprite: {fileID: 21300000, guid: b3d2db58cd4b1f74a9662a47b0872627, type: 3}
   idleFrames:
@@ -183,13 +183,16 @@ MonoBehaviour:
   sanctuaryArtScale: 1.7
   sanctuaryArtOffset: {x: -0.03, y: 0.05}
   rosterFullArt: {fileID: 21300000, guid: b3d2db58cd4b1f74a9662a47b0872627, type: 3}
+  cardUseFullArt: 1
+  cardFocus: {x: 0.5, y: 1}
+  cardZoom: 1.9
   isEventCompanion: 0
-  faceFocus: {x: 0.55, y: 0.97}
+  faceFocus: {x: 0.5, y: 0.97}
   faceZoom: 3
   materialJson: {fileID: 0}
   actNumber: 1
   trainingRequiredLevel: 2
-  battleScale: 1.265
+  battleScale: 1.3282499
   battleOffset: {x: 0, y: 230}
   floatAmplitude: 0
   floatPeriod: 2.4

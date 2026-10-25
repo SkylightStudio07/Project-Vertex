@@ -24,6 +24,14 @@ public class CoopCharData : CharData
     public Sprite rosterFullArt;
     public Sprite RosterFullArt => rosterFullArt != null ? rosterFullArt : sanctuaryFullArt;
 
+    [Header("로비 동료 목록 카드 (상반신 크롭)")]
+    [Tooltip("켜면 카드 그림을 charImage 대신 전신(rosterFullArt)에서 잘라 쓴다. charImage가 초상이 아니거나 얼굴만 나올 때")]
+    public bool cardUseFullArt;
+    [Tooltip("남길 부분의 중심 (0~1, 좌하단 원점). y 1 = 맨 위(머리)")]
+    public Vector2 cardFocus = new(0.5f, 1f);
+    [Min(1f), Tooltip("확대 배율. 1이면 전신 비율 그대로, 2 안팎이면 상반신")]
+    public float cardZoom = 1.9f;
+
     [Tooltip("이벤트로만 합류하는 동료 (성소 후보·잠긴 후보 실루엣에 나오지 않음)")]
     public bool isEventCompanion;
 

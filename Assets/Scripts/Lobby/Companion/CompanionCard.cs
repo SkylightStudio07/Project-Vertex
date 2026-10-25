@@ -59,12 +59,14 @@ public class CompanionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         lockIcon.SetActive(!joined);
         button.interactable = joined;
 
-        var art = data.charImage != null ? data.charImage : data.standingSprite;
+        bool fullArt = data.cardUseFullArt && data.RosterFullArt != null;
+        var art = fullArt ? data.RosterFullArt : data.charImage != null ? data.charImage : data.standingSprite;
         portrait.gameObject.SetActive(art != null);
         if (art != null)
         {
-            // 카드는 얼굴보다 넓게(상반신): 얼굴 크롭 배율의 절반 정도
-            portrait.SetSprite(art, new Vector2(data.faceFocus.x, Mathf.Clamp01(data.faceFocus.y - 0.12f)), Mathf.Max(1f, data.faceZoom * 0.55f));
+            // 카드는 얼굴보다 넓게(상반신): 얼굴 크롭 배율의 절반 정도. 전신 그림을 쓰는 동료는 자기 크롭 값(cardFocus · cardZoom)
+            if (fullArt) portrait.SetSprite(art, data.cardFocus, data.cardZoom);
+            else portrait.SetSprite(art, new Vector2(data.faceFocus.x, Mathf.Clamp01(data.faceFocus.y - 0.12f)), Mathf.Max(1f, data.faceZoom * 0.55f));
             var raw = portrait.GetComponent<RawImage>();
             raw.material = joined ? null : silhouetteMaterial;
             raw.color = joined ? Color.white : silhouetteColor;

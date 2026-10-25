@@ -160,7 +160,19 @@ public class TrainingView : MonoBehaviour
     // 조우 안의 모든 적이 첫 마테리얼을 열었으면(일반 3 · 엘리트 2 · 보스 1회 격퇴) 훈련 상대로 열린다
     public static bool IsEncounterUnlocked(EnemyEncounter encounter)
         => encounter != null && encounter.enemies != null && encounter.enemies.Count > 0 &&
-           encounter.enemies.All(e => e != null && MaterialArchive.IsTrainingUnlocked(e));
+           (DebugUnlockAll || encounter.enemies.All(e => e != null && MaterialArchive.IsTrainingUnlocked(e)));
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    // 디버그: 격퇴 기록과 무관하게 모든 훈련 상대를 연다 (TrainingViewEditor 인스펙터 토글, 저장 기록은 건드리지 않는다)
+    public static bool DebugUnlockAll;
+#if UNITY_EDITOR
+    public const string DebugUnlockPref = "Vertex.Debug.UnlockAllTraining";
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void LoadDebugFlag() => DebugUnlockAll = UnityEditor.EditorPrefs.GetBool(DebugUnlockPref, false);
+#endif
+#else
+    private const bool DebugUnlockAll = false;
+#endif
 
     private static int RequiredDefeatsOf(EnemyEncounter encounter)
         => encounter.enemies == null ? RequiredDefeats
