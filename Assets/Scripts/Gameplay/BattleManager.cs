@@ -113,6 +113,10 @@ public class BattleManager : MonoBehaviour
     [FormerlySerializedAs("playerTurnBanner")]
     [SerializeField] private EnemyTurnBannerView _playerTurnBanner; // 플레이어 턴 시작 배너를 표시하는 뷰.
     [FormerlySerializedAs("postActionDelay")]
+    [Tooltip("공격 애니메이션(시트)이 있는 적은 피해를 이만큼 늦게 적용한다 — 총을 쏘는 순간 · 휘두르는 순간에 맞추려고")]
+    [SerializeField] private float _animatedAttackHitDelay = 0.45f;
+    [Tooltip("공격 애니메이션이 있는 적은 모션이 끝난 뒤에야 다음 적이 행동한다")]
+    [SerializeField] private bool _waitForAttackMotion = true;
     [SerializeField] private float _postActionDelay = 0.3f; // 적 행동 후 추가 후처리를 기다릴 시간.
 
     // ─────────────────────────────────────────────
@@ -392,7 +396,14 @@ public class BattleManager : MonoBehaviour
             }
 
             enemy.NotifyActionStarted();
+            float motionStart = Time.time;
+            bool animated = enemy.AttackFrames != null && enemy.AttackFrames.Length > 0;
             yield return _lungeOutWait;
+            if (animated && _animatedAttackHitDelay > 0f)
+            {
+                yield return new WaitForSeconds(_animatedAttackHitDelay);
+                if (!_isInBattle || _state.Player.IsDead || enemy.IsDead) continue;
+            }
 
             yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
 
@@ -401,6 +412,14 @@ public class BattleManager : MonoBehaviour
             if (!_isInBattle || _state.Player.IsDead) yield break;
 
             yield return _lungeBackAndPostActionWait;
+
+            // 공격 모션(시트) 재생이 끝날 때까지 다음 적은 기다린다
+            if (animated && _waitForAttackMotion)
+            {
+                float motion = enemy.AttackFrames.Length / Mathf.Max(1f, enemy.AttackFrameRate);
+                float remain = motion - (Time.time - motionStart);
+                if (remain > 0f) yield return new WaitForSeconds(remain);
+            }
 
             if (_state.Player.IsDead) yield break; // OnDied → Defeat()는 이미 구독되어 있음
         }
