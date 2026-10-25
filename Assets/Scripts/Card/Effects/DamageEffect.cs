@@ -10,6 +10,8 @@ public class DamageEffect : CardEffect
     [Tooltip("조건을 만족하는 증가량을 기본 피해에 더한 뒤 한 타격으로 처리합니다.")]
     public List<ConditionalDamageBonus> conditionalBonuses = new();
     public int hitCount = 1;
+    [Tooltip("타수에 더할 값 (예: 대상의 취약 수치만큼 — 혈흔 폭발). 대상마다 공격 시작 때 한 번 계산")]
+    public EffectValue hitCountScaling;
     public EffectTargetSelector targets = EffectTargetSelector.PrimaryTarget;
     public bool piercing;
     public bool environmentalDamage;
@@ -23,13 +25,20 @@ public class DamageEffect : CardEffect
     {
         if (context?.State == null) return;
         foreach (var target in targets.Resolve(context))
-            for (int i = 0; i < hitCount && !target.IsDead; i++)
+        {
+            int hits = HitsFor(context, target);
+            for (int i = 0; i < hits && !target.IsDead; i++)
                 DealDamage(context, target);
+        }
     }
+
+    // 타격 중에 상태가 바뀌어도(점혈로 취약이 붙는 등) 타수는 시작 때 값으로 고정
+    public int HitsFor(CardContext context, ICombatant target)
+        => Mathf.Max(0, hitCount + hitCountScaling.Evaluate(context, target));
 
     public override IEnumerator ExecuteCoroutine(CardContext context)
     {
-        if (hitCount <= 1 || hitInterval <= 0f)
+        if ((hitCount <= 1 && hitCountScaling.source == EffectValueSource.None) || hitInterval <= 0f)
         {
             Execute(context);
             yield break;
@@ -39,10 +48,11 @@ public class DamageEffect : CardEffect
         var delay = new WaitForSeconds(hitInterval);
         foreach (var target in targets.Resolve(context))
         {
-            for (int i = 0; i < hitCount && !target.IsDead; i++)
+            int hits = HitsFor(context, target);
+            for (int i = 0; i < hits && !target.IsDead; i++)
             {
                 DealDamage(context, target);
-                if (i < hitCount - 1 && !target.IsDead) yield return delay;
+                if (i < hits - 1 && !target.IsDead) yield return delay;
             }
         }
     }

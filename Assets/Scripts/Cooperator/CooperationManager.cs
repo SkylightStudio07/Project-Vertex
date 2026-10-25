@@ -327,6 +327,27 @@ public class CooperationManager : MonoBehaviour
             charState.isJoinedInRun = true;
     }
 
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    // ── 디버그 (CooperationManagerEditor 인스펙터 버튼에서 호출) ──
+    // 호감도를 레벨·포인트로 직접 맞춘다. 0이면 인연 전(합류 때 1로 시작)
+    public void DebugSetLevel(string charID, int level, int point = 0)
+    {
+        if (!coopCharDict.TryGetValue(charID, out var charState)) return;
+        charState.currentCoopLevel = Mathf.Clamp(level, 0, Mathf.Max(1, charState.charData.maxCoopLevel));
+        charState.currentCoopPoint = Mathf.Max(0, point);
+        charState.isLevelUp = TryGetNextRankEvent(charState, out var next) && charState.currentCoopPoint >= next.requiredPoint;
+        SaveCoop(charState);
+    }
+
+    // 성소를 거치지 않고 이번 런에 바로 합류 (이미 합류했거나 자리가 없으면 무시)
+    public bool DebugJoinNow(string charID)
+    {
+        if (IsJoinedInRun(charID) || IsPartyFull) return false;
+        SelectChar(charID);
+        return IsJoinedInRun(charID);
+    }
+#endif
+
     // 호감도 증가 테스트 메소드
     public void Debug1()
     {

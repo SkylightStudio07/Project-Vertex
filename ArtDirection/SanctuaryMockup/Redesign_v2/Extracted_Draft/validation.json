@@ -1,0 +1,164 @@
+{
+  "passed": true,
+  "asset_count": 15,
+  "checks": [
+    {
+      "asset": "Panel_Active",
+      "size": [
+        1950,
+        1948
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Panel_Active_Hover",
+      "size": [
+        1950,
+        1948
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Panel_Locked",
+      "size": [
+        1560,
+        1948
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Panel_Locked_Right",
+      "size": [
+        1570,
+        1948
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Sanctuary_BG",
+      "size": [
+        1920,
+        1080
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Sanctuary_Base",
+      "size": [
+        1920,
+        1080
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Overlay_Guides",
+      "size": [
+        1920,
+        1080
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Line_ActiveEdge",
+      "size": [
+        628,
+        1948
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Line_ActiveEdge_Hover",
+      "size": [
+        628,
+        1948
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Mark_Selected",
+      "size": [
+        24,
+        24
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Rule_Name",
+      "size": [
+        184,
+        8
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Button_Detail",
+      "size": [
+        864,
+        216
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Button_Detail_Hover",
+      "size": [
+        864,
+        216
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Button_Detail_Disabled",
+      "size": [
+        864,
+        216
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    },
+    {
+      "asset": "Shadow_Button",
+      "size": [
+        864,
+        216
+      ],
+      "text_free": true,
+      "embedded_art": false,
+      "blur_filter": false
+    }
+  ],
+  "same_character_slot_height": 930,
+  "hud_top_plain": true,
+  "text_widths_fit": true,
+  "external_references_exist": true,
+  "character_source_sha256_verified": true,
+  "limitations": [
+    "Current Alesia source differs from requested oversized shield / short spear design. Source art preserved; runtime art replacement remains external."
+  ]
+}

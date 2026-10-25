@@ -1,0 +1,256 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: CH_02_C02
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
+  cardType: 0
+  cardRarity: 0
+  cardOwner: 5
+  isWeaponShootingCard: 0
+  cardDescription: "\uAC1C\uB7C9\uD615 \uC2A4\uD53C\uC5B4\uB97C \uB358\uC838 {0.amount}\uC758
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4. \uBC84\uB9B0 \uCE74\uB4DC \uB354\uBBF8\uC5D0
+    <b>\uD68C\uC218</b>\uB97C \uB123\uC2B5\uB2C8\uB2E4. \uCC3D \uC18D\uC131\uC774
+    \uC788\uC73C\uBA74 \uC801\uC911\uD55C \uC801\uC5D0\uAC8C \uBD80\uC5EC\uD569\uB2C8\uB2E4.
+    \uC18C\uBA78."
+  useMode: 1
+  playCondition:
+    rid: -2
+  isUpgraded: 0
+  normalState:
+    cardName: "\uC804\uC220 \uAC1C\uB7C9\uD615 \uD22C\uCC99 \uCC3D\uC220"
+    energyCost: 2
+    ammoCost: 0
+    effects:
+    - rid: 8755282979299786903
+    - rid: 8755282979299786904
+    - rid: 8755282979299786905
+    - rid: 8755282979299786908
+    - rid: 8755282979299786911
+    - rid: 8755282979299786914
+    - rid: 8755282979299786917
+    isExhaust: 1
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: 
+    energyCost: 0
+    ammoCost: 0
+    effects: []
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8755282979299786903
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 10
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        conditionalBonuses: []
+        hitCount: 1
+        targets:
+          mode: 1
+        piercing: 0
+        environmentalDamage: 0
+        hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0
+    - rid: 8755282979299786904
+      type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
+      data:
+        sourceMode: 0
+        cardToAdd: {fileID: 11400000, guid: 2433a347e0ba9464f8d2e62b164f8c40, type: 2}
+        targetPile: 1
+        count: 1
+        allowDuplicateRandomCards: 0
+    - rid: 8755282979299786905
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8755282979299786906
+        effectsWhenMet:
+        - rid: 8755282979299786907
+    - rid: 8755282979299786906
+      type: {class: HasStatusCondition, ns: , asm: Assembly-CSharp}
+      data:
+        targets:
+          mode: 0
+        status: {fileID: 11400000, guid: 2549366797d197a46925889b5d4f9388, type: 2}
+        minimumMagnitude: 1
+    - rid: 8755282979299786907
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000002, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
+    - rid: 8755282979299786908
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8755282979299786909
+        effectsWhenMet:
+        - rid: 8755282979299786910
+    - rid: 8755282979299786909
+      type: {class: HasStatusCondition, ns: , asm: Assembly-CSharp}
+      data:
+        targets:
+          mode: 0
+        status: {fileID: 11400000, guid: 70a36d1a62f7af54a9f04bfaeaa36bb9, type: 2}
+        minimumMagnitude: 1
+    - rid: 8755282979299786910
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
+    - rid: 8755282979299786911
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8755282979299786912
+        effectsWhenMet:
+        - rid: 8755282979299786913
+    - rid: 8755282979299786912
+      type: {class: HasStatusCondition, ns: , asm: Assembly-CSharp}
+      data:
+        targets:
+          mode: 0
+        status: {fileID: 11400000, guid: 2d834b4b4767f1c479d19c073db1a84e, type: 2}
+        minimumMagnitude: 1
+    - rid: 8755282979299786913
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: 10000000000000000000000000000003, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
+    - rid: 8755282979299786914
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8755282979299786915
+        effectsWhenMet:
+        - rid: 8755282979299786916
+    - rid: 8755282979299786915
+      type: {class: HasStatusCondition, ns: , asm: Assembly-CSharp}
+      data:
+        targets:
+          mode: 0
+        status: {fileID: 11400000, guid: a2b851819f3687541a0b8547b6214bf3, type: 2}
+        minimumMagnitude: 1
+    - rid: 8755282979299786916
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: d05c2ce41f978b84083aac01ccd230d4, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
+    - rid: 8755282979299786917
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8755282979299786918
+        effectsWhenMet:
+        - rid: 8755282979299786919
+    - rid: 8755282979299786918
+      type: {class: AllConditions, ns: , asm: Assembly-CSharp}
+      data:
+        conditions:
+        - rid: 8755282979299786920
+        - rid: 8755282979299786921
+    - rid: 8755282979299786919
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        status: {fileID: 11400000, guid: aa32c06580f926f4bbdcc12acd6f8a87, type: 2}
+        operation: 0
+        amount: 1
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        potency: 0
+        secondaryPotency: 0
+        targets:
+          mode: 1
+    - rid: 8755282979299786920
+      type: {class: HasStatusCondition, ns: , asm: Assembly-CSharp}
+      data:
+        targets:
+          mode: 0
+        status: {fileID: 11400000, guid: 626868ec363eee845ac1cd00a45d5cc4, type: 2}
+        minimumMagnitude: 1
+    - rid: 8755282979299786921
+      type: {class: NotCondition, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8755282979299786922
+    - rid: 8755282979299786922
+      type: {class: HasStatusCondition, ns: , asm: Assembly-CSharp}
+      data:
+        targets:
+          mode: 0
+        status: {fileID: 11400000, guid: a2b851819f3687541a0b8547b6214bf3, type: 2}
+        minimumMagnitude: 1

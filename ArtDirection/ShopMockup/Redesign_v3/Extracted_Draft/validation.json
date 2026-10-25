@@ -1,0 +1,222 @@
+{
+  "passed": true,
+  "assets": 20,
+  "external_reuses": 15,
+  "card_capture_source_size": [
+    1566,
+    871
+  ],
+  "checks": [
+    {
+      "asset": "Shop_BG",
+      "size": [
+        1920,
+        1080
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Panel_Cards",
+      "size": [
+        1548,
+        1540
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Panel_Supply",
+      "size": [
+        720,
+        1260
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Panel_Credits",
+      "size": [
+        720,
+        224
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Plate_Shopkeeper",
+      "size": [
+        1180,
+        296
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Panel_Service_Normal",
+      "size": [
+        1548,
+        260
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Panel_Service_Hover",
+      "size": [
+        1548,
+        260
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Panel_Service_Disabled",
+      "size": [
+        1548,
+        260
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Button_Leave_Normal",
+      "size": [
+        720,
+        256
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Button_Leave_Hover",
+      "size": [
+        720,
+        256
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Button_Leave_Pressed",
+      "size": [
+        720,
+        256
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Plinth_Card_Normal",
+      "size": [
+        444,
+        652
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Plinth_Card_Hover",
+      "size": [
+        444,
+        652
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "Plinth_Card_Unaffordable",
+      "size": [
+        444,
+        652
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "ItemCell_Normal",
+      "size": [
+        276,
+        264
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "ItemCell_Hover",
+      "size": [
+        276,
+        264
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "ItemCell_Unaffordable",
+      "size": [
+        276,
+        264
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "PriceTag_Normal",
+      "size": [
+        352,
+        76
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "PriceTag_Hover",
+      "size": [
+        352,
+        76
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    },
+    {
+      "asset": "PriceTag_Unaffordable",
+      "size": [
+        352,
+        76
+      ],
+      "alpha": true,
+      "text_free": true,
+      "shadow_free": true
+    }
+  ],
+  "bg_left_and_hud_transparent": true,
+  "source_refs_exist": true,
+  "text_widths_fit": true,
+  "nine_slice_valid": true,
+  "original_source_hashes": {
+    "scene": "8e38ed4ea9df56091f24f57517abab46b36eeb91928d79509bbaba20a0ede343",
+    "keeper": "39f8264b20ace4b4ce1cc715664e10b0fadb5fd84ece37d9267670a2ac3085b6",
+    "counter": "e33722077542c1be232adc57c67be9b42ff0b433bf5bdf35496c75acecf30fa3"
+  },
+  "card_count": 6,
+  "item_count": 4
+}

@@ -90,6 +90,13 @@ public sealed class StatusContainer
         return cost;
     }
 
+    public bool AllowsCardPlay(CardContext context)
+    {
+        foreach (var entry in _entries)
+            if (entry is StatusInstance status && !status.AllowsCardPlay(context)) return false;
+        return true;
+    }
+
     public void NotifyBattleStart(BattleState state, ICombatant owner)
     {
         var snapshot = new List<IPassiveLogic>(_entries);

@@ -1575,6 +1575,9 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: ae8d45aac8a35cb4aac012d86cb96425, type: 3}
   - intentType: 4
     sprite: {fileID: 21300000, guid: 10c82cea9cf01f64ba5e6c9c622fc268, type: 3}
+  heavyIntentScale: 1.15
+  lethalIntentScale: 1.3
+  lethalIntentColor: {r: 0.88, g: 0.27, b: 0.24, a: 1}
   bobAmplitude: 6
   bobSpeed: 2
   intentGap: 4
@@ -1781,10 +1784,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bda09f79349b445bdc98a0feaba747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BatSwingOverlay
-  attackSheet: {fileID: 2800000, guid: 3261d6506e8e3934bb4c5e12839fc805, type: 3}
-  triggerFrame: 16
-  anchorPixel: {x: 0, y: 560}
-  sourceFrameSize: {x: 832, y: 1216}
+  attackSheet: {fileID: 2800000, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  triggerFrame: 14
+  anchorPixel: {x: 50, y: 300}
+  sourceFrameSize: {x: 768, y: 768}
   swingFrames:
   - {fileID: 7196097290509207113, guid: e0371ada25db8784f8c802742cfea8ec, type: 3}
   - {fileID: -8387639880536298250, guid: e0371ada25db8784f8c802742cfea8ec, type: 3}

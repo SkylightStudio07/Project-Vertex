@@ -163,6 +163,7 @@ public class BattleState
     public int TurnNumber;
     public List<CompanionSkillSlot> CompanionSkills = new(); // 동행 동료 스킬 (지시 버튼)
     public bool PlayerLostHpThisTurn;
+    public int CardsPlayedThisTurn; // 손으로 낸 카드 수 (한 턴 사용 제한: CardPlayLimitStatusBehavior)
     public BattlePhase Phase;
 
     public List<CardData> Hand        = new();

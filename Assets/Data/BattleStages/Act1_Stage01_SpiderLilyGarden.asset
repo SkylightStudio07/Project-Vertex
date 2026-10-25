@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b746ef9229024478d319e5bfadf9e3, type: 3}
+  m_Name: Act1_Stage01_SpiderLilyGarden
+  m_EditorClassIdentifier: Assembly-CSharp::BattleStageData
+  background: {fileID: 21300000, guid: e3d5ac0b2702d9c409b775533446886e, type: 3}
+  actNumber: 1
+  minFloor: 1
+  maxFloor: 5
+  featuredEnemies: []
+  partyOffset: {x: 0, y: 0}
+  lightFrom: {x: -0.55, y: 0.85}
+  rimColor: {r: 0.78, g: 0.88, b: 1, a: 0.65}
+  allyGrade: {r: 0.92, g: 0.95, b: 1, a: 1}
+  allyBrightness: 0.95
+  enemyGrade: {r: 0.82, g: 0.9, b: 1, a: 1}
+  enemySaturation: 0.5
+  enemyBrightness: 0.92
+  topLight: {r: 0.7, g: 0.85, b: 1, a: 0.22}
+  topFalloff: 2.4
+  bottomShade: 0.3
+  spotlightColor: {r: 0.65, g: 0.82, b: 1, a: 0.1}
+  moteCount: 22
+  moteColor: {r: 0.72, g: 0.88, b: 1, a: 0.9}
+  moteArea:
+    serializedVersion: 2
+    x: 0.02
+    y: 0.18
+    width: 0.96
+    height: 0.42
+  petalCount: 7
+  petalColor: {r: 0.86, g: 0.93, b: 1, a: 0.85}
+  lightShaft: 1
+  shaftOrigin: {x: 0.1, y: 1.02}
+  shaftAngle: 24
+  shaftSize: {x: 0.34, y: 0.85}
+  shaftColor: {r: 0.62, g: 0.8, b: 1, a: 0.16}
+  fogColor: {r: 0.55, g: 0.68, b: 0.82, a: 0.22}
+  fogBands:
+  - 0.47
+  - 0.3
+  blinkLights:
+  - position: {x: 0.923, y: 0.595}
+    color: {r: 1, g: 0.22, b: 0.18, a: 0.85}
+    size: 0.045
+  standPools:
+  - {x: 0.24, y: 0.38}
+  - {x: 0.74, y: 0.35}
+  standPoolColor: {r: 0.6, g: 0.78, b: 1, a: 0.16}
+  screenBottomShade: 0.55
+  vignette: 0.45
+  hudDecorTint: {r: 0.05, g: 0.07, b: 0.1, a: 0.9}

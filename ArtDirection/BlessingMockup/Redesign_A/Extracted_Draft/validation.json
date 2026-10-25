@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "new_svg_png_pairs": 10,
+  "external_reuses": 8,
+  "checks": [
+    {
+      "name": "Panel_Dialogue",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Panel_Option_Normal",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Option_IconDiamond_Normal",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Panel_Option_Hover",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Option_IconDiamond_Hover",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Panel_Option_Disabled",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Option_IconDiamond_Disabled",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Icon_Chevron_Normal",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Icon_Chevron_Hover",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    },
+    {
+      "name": "Panel_Nameplate",
+      "text_free": true,
+      "uniform_face_alpha": true,
+      "size_ok": true,
+      "nine_slice_ok": true
+    }
+  ],
+  "all_rows_normal": true,
+  "title_size_uniform": 42,
+  "capture_sha256": "66940d66ccb92bb54afbd798d6d397ccf64cc9fff845d82f24126373e9f9d3f0",
+  "text_widths_fit": true,
+  "external_refs_exist": true,
+  "preview_only_restoration_disclosed": true
+}

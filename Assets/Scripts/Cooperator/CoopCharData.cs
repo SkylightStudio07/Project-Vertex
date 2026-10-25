@@ -15,10 +15,22 @@ public class CoopCharData : CharData
 
     [Header("성소 선택 상세 화면 전신 아트 (초상화와 별도)")]
     public Sprite sanctuaryFullArt;
+    [Tooltip("상세 화면 그림 배율 (상반신 구도면 키운다). 그림은 영역 바닥 기준")]
+    [Min(0.1f)] public float sanctuaryArtScale = 1f;
+    [Tooltip("상세 화면 그림 위치 보정 (영역 크기 비율, x 오른쪽 · y 위)")]
+    public Vector2 sanctuaryArtOffset;
 
     [Header("로비 동료 탭 상세 전신 (투명 배경, 서 있는 포즈). 비우면 성소 전신을 쓴다")]
     public Sprite rosterFullArt;
     public Sprite RosterFullArt => rosterFullArt != null ? rosterFullArt : sanctuaryFullArt;
+
+    [Header("로비 동료 목록 카드 (상반신 크롭)")]
+    [Tooltip("켜면 카드 그림을 charImage 대신 전신(rosterFullArt)에서 잘라 쓴다. charImage가 초상이 아니거나 얼굴만 나올 때")]
+    public bool cardUseFullArt;
+    [Tooltip("남길 부분의 중심 (0~1, 좌하단 원점). y 1 = 맨 위(머리)")]
+    public Vector2 cardFocus = new(0.5f, 1f);
+    [Min(1f), Tooltip("확대 배율. 1이면 전신 비율 그대로, 2 안팎이면 상반신")]
+    public float cardZoom = 1.9f;
 
     [Tooltip("이벤트로만 합류하는 동료 (성소 후보·잠긴 후보 실루엣에 나오지 않음)")]
     public bool isEventCompanion;
@@ -46,6 +58,9 @@ public class CoopCharData : CharData
     public float floatAmplitude;
     [Tooltip("떠다니기 한 번 왕복 시간(초)")]
     public float floatPeriod = 2.4f;
+
+    [Tooltip("이 동료 카드의 소속 (CardData.cardOwner). 이 소속의 공격 카드를 내면 이 동료가 공격 모션을 한다")]
+    public CardData.CardOwner cardOwner = CardData.CardOwner.Non_Color;
 
     [Header("호감도 레벨 당 해금 카드")]
     public List<CardData> unlockCardCoopLevel = new();

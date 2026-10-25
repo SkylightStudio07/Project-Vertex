@@ -1,0 +1,1018 @@
+{
+  "version": 3,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "source_mockup": {
+    "file": "../Sanctuary_Select_Mockup_v2.png",
+    "size": [
+      1672,
+      941
+    ],
+    "reference_scale_xy": [
+      1.1483253588516746,
+      1.1477151965993624
+    ],
+    "note": "Reference scaled, then corrected per SPLIT_REQUEST_v2; deterministic SVG reconstruction, not pixel crop."
+  },
+  "delivery_mockup": "../Sanctuary_Select_Mockup_v3.png",
+  "hud_reserved_rect": [
+    0,
+    0,
+    1920,
+    106
+  ],
+  "assets": {
+    "Panel_Active": {
+      "file": "Panel_Active.png",
+      "svg": "SVG/Panel_Active.svg",
+      "logical_size": [
+        975,
+        974
+      ],
+      "source_pixels": [
+        1950,
+        1948
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Panel_Active_Hover": {
+      "file": "Panel_Active_Hover.png",
+      "svg": "SVG/Panel_Active_Hover.svg",
+      "logical_size": [
+        975,
+        974
+      ],
+      "source_pixels": [
+        1950,
+        1948
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Panel_Locked": {
+      "file": "Panel_Locked.png",
+      "svg": "SVG/Panel_Locked.svg",
+      "logical_size": [
+        780,
+        974
+      ],
+      "source_pixels": [
+        1560,
+        1948
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Panel_Locked_Right": {
+      "file": "Panel_Locked_Right.png",
+      "svg": "SVG/Panel_Locked_Right.svg",
+      "logical_size": [
+        785,
+        974
+      ],
+      "source_pixels": [
+        1570,
+        1948
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Sanctuary_BG": {
+      "file": "Sanctuary_BG.png",
+      "svg": "SVG/Sanctuary_BG.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        1920,
+        1080
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction",
+      "opaque": true
+    },
+    "Sanctuary_Base": {
+      "file": "Sanctuary_Base.png",
+      "svg": "SVG/Sanctuary_Base.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        1920,
+        1080
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction",
+      "opaque": true
+    },
+    "Overlay_Guides": {
+      "file": "Overlay_Guides.png",
+      "svg": "SVG/Overlay_Guides.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        1920,
+        1080
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Line_ActiveEdge": {
+      "file": "Line_ActiveEdge.png",
+      "svg": "SVG/Line_ActiveEdge.svg",
+      "logical_size": [
+        314,
+        974
+      ],
+      "source_pixels": [
+        628,
+        1948
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Line_ActiveEdge_Hover": {
+      "file": "Line_ActiveEdge_Hover.png",
+      "svg": "SVG/Line_ActiveEdge_Hover.svg",
+      "logical_size": [
+        314,
+        974
+      ],
+      "source_pixels": [
+        628,
+        1948
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Mark_Selected": {
+      "file": "Mark_Selected.png",
+      "svg": "SVG/Mark_Selected.svg",
+      "logical_size": [
+        12,
+        12
+      ],
+      "source_pixels": [
+        24,
+        24
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Rule_Name": {
+      "file": "Rule_Name.png",
+      "svg": "SVG/Rule_Name.svg",
+      "logical_size": [
+        92,
+        4
+      ],
+      "source_pixels": [
+        184,
+        8
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction",
+      "tint": "candidate.theme_color"
+    },
+    "Button_Detail": {
+      "file": "Button_Detail.png",
+      "svg": "SVG/Button_Detail.svg",
+      "logical_size": [
+        432,
+        108
+      ],
+      "source_pixels": [
+        864,
+        216
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Button_Detail_Hover": {
+      "file": "Button_Detail_Hover.png",
+      "svg": "SVG/Button_Detail_Hover.svg",
+      "logical_size": [
+        432,
+        108
+      ],
+      "source_pixels": [
+        864,
+        216
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Button_Detail_Disabled": {
+      "file": "Button_Detail_Disabled.png",
+      "svg": "SVG/Button_Detail_Disabled.svg",
+      "logical_size": [
+        432,
+        108
+      ],
+      "source_pixels": [
+        864,
+        216
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction"
+    },
+    "Shadow_Button": {
+      "file": "Shadow_Button.png",
+      "svg": "SVG/Shadow_Button.svg",
+      "logical_size": [
+        432,
+        108
+      ],
+      "source_pixels": [
+        864,
+        216
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "method": "Editable SVG reconstruction",
+      "offset": [
+        12,
+        12
+      ]
+    }
+  },
+  "external_assets": {
+    "Icon_Lock": {
+      "file": "../../../LoadoutMockup/Extracted_Draft/Icon_Lock.png",
+      "svg": "../../../LoadoutMockup/Extracted_Draft/SVG/Icon_Lock.svg",
+      "logical_size": [
+        44,
+        54
+      ],
+      "included": false
+    }
+  },
+  "external_characters": [
+    {
+      "slot": "01",
+      "source": "Assets/Art/Characters/Joining Characters/CP_01/CP_01_Chihara.png",
+      "rect": [
+        280,
+        118,
+        660,
+        930
+      ],
+      "silhouette": false,
+      "sha256": "5bcb217bf9f37ce166fa428f9c498761fd28d0caa993f658f7df0bbb96896e66",
+      "alpha_bounds_source": [
+        0,
+        0,
+        914,
+        1536
+      ],
+      "preview_rendered_rect": [
+        333,
+        118,
+        553,
+        930
+      ],
+      "fit": "contain",
+      "preserve_aspect": true,
+      "rotation": 0,
+      "clip_to_panel": false,
+      "asset_included": false
+    },
+    {
+      "slot": "02",
+      "source": "Assets/Art/Characters/Joining Characters/CP_02/알레시아_Standing.png",
+      "rect": [
+        800,
+        118,
+        600,
+        930
+      ],
+      "silhouette": true,
+      "sha256": "eb5a8a254d8f32ddac64d5b06ba3224c8bf6dd16d2f08cea3cac394ce1e31ce8",
+      "alpha_bounds_source": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "preview_rendered_rect": [
+        800,
+        383,
+        600,
+        400
+      ],
+      "fit": "contain",
+      "preserve_aspect": true,
+      "rotation": 0,
+      "clip_to_panel": false,
+      "asset_included": false
+    },
+    {
+      "slot": "03",
+      "source": "Assets/Art/Characters/Joining Characters/CP_03/2058009_image.png",
+      "rect": [
+        1280,
+        118,
+        600,
+        930
+      ],
+      "silhouette": true,
+      "sha256": "c89f1a24fc11dcbf993a36369dfbb0fbdd060a5791364ca0548b353adb24c270",
+      "alpha_bounds_source": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "preview_rendered_rect": [
+        1280,
+        133,
+        600,
+        900
+      ],
+      "fit": "contain",
+      "preserve_aspect": true,
+      "rotation": 0,
+      "clip_to_panel": false,
+      "asset_included": false
+    }
+  ],
+  "candidates": [
+    {
+      "slot": "01",
+      "state": "active",
+      "panel_asset": "Panel_Active",
+      "panel_rect": [
+        0,
+        106,
+        975,
+        974
+      ],
+      "polygon": [
+        [
+          0,
+          106
+        ],
+        [
+          975,
+          106
+        ],
+        [
+          665,
+          1080
+        ],
+        [
+          0,
+          1080
+        ]
+      ],
+      "character_rect": [
+        280,
+        118,
+        660,
+        930
+      ],
+      "theme_color": "#AC173C",
+      "text_ids": [
+        "candidate_01",
+        "selected",
+        "name",
+        "faction",
+        "availability"
+      ]
+    },
+    {
+      "slot": "02",
+      "state": "locked",
+      "panel_asset": "Panel_Locked",
+      "panel_rect": [
+        665,
+        106,
+        780,
+        974
+      ],
+      "polygon": [
+        [
+          975,
+          106
+        ],
+        [
+          1445,
+          106
+        ],
+        [
+          1135,
+          1080
+        ],
+        [
+          665,
+          1080
+        ]
+      ],
+      "character_rect": [
+        800,
+        118,
+        600,
+        930
+      ],
+      "silhouette": true,
+      "theme_color": "#AD8C54",
+      "text_ids": [
+        "candidate_02",
+        "locked_02",
+        "condition_02"
+      ],
+      "art_requirement": "Alesia: shield 1.5x character height + short spear. Current standing source has different weapon proportions; preview uses source unchanged."
+    },
+    {
+      "slot": "03",
+      "state": "locked",
+      "panel_asset": "Panel_Locked_Right",
+      "panel_rect": [
+        1135,
+        106,
+        785,
+        974
+      ],
+      "polygon": [
+        [
+          1445,
+          106
+        ],
+        [
+          1920,
+          106
+        ],
+        [
+          1920,
+          1080
+        ],
+        [
+          1135,
+          1080
+        ]
+      ],
+      "character_rect": [
+        1280,
+        118,
+        600,
+        930
+      ],
+      "silhouette": true,
+      "text_ids": [
+        "candidate_03",
+        "locked_03",
+        "condition_03"
+      ]
+    }
+  ],
+  "placements": [
+    {
+      "id": "background",
+      "asset": "Sanctuary_BG",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "z": 0,
+      "mode": "flattened"
+    },
+    {
+      "id": "active_edge",
+      "asset": "Line_ActiveEdge",
+      "rect": [
+        663,
+        106,
+        314,
+        974
+      ],
+      "z": 3
+    },
+    {
+      "id": "selected_dot",
+      "asset": "Mark_Selected",
+      "rect": [
+        492,
+        153,
+        12,
+        12
+      ],
+      "z": 20
+    },
+    {
+      "id": "name_rule",
+      "asset": "Rule_Name",
+      "rect": [
+        96,
+        812,
+        92,
+        4
+      ],
+      "tint": "#AC173C",
+      "tint_binding": "candidate.theme_color",
+      "z": 20
+    },
+    {
+      "id": "lock_02",
+      "external_asset": "Icon_Lock",
+      "rect": [
+        1078,
+        538,
+        44,
+        54
+      ],
+      "z": 20
+    },
+    {
+      "id": "lock_03",
+      "external_asset": "Icon_Lock",
+      "rect": [
+        1558,
+        538,
+        44,
+        54
+      ],
+      "z": 20
+    },
+    {
+      "id": "detail_shadow",
+      "asset": "Shadow_Button",
+      "rect": [
+        1460,
+        940,
+        432,
+        108
+      ],
+      "z": 30
+    },
+    {
+      "id": "detail",
+      "asset": "Button_Detail",
+      "rect": [
+        1448,
+        928,
+        432,
+        108
+      ],
+      "z": 31
+    }
+  ],
+  "text_boxes": [
+    {
+      "id": "title",
+      "text": "성소",
+      "rect": [
+        82,
+        158,
+        300,
+        72
+      ],
+      "font_size": 60,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 104.0
+    },
+    {
+      "id": "subtitle",
+      "text": "SANCTUARY / COMPANION SELECT",
+      "rect": [
+        84,
+        247,
+        350,
+        26
+      ],
+      "font_size": 16,
+      "color": "#626F7B",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0.4,
+      "preview_text_width": 273.8
+    },
+    {
+      "id": "instruction",
+      "text": "동료를 한 명 고르십시오.",
+      "rect": [
+        84,
+        282,
+        335,
+        32
+      ],
+      "font_size": 23,
+      "color": "#16181B",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 224.0
+    },
+    {
+      "id": "candidate_01",
+      "text": "01",
+      "rect": [
+        438,
+        143,
+        45,
+        32
+      ],
+      "font_size": 24,
+      "color": "#596571",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 25.0
+    },
+    {
+      "id": "candidate_02",
+      "text": "02",
+      "rect": [
+        980,
+        143,
+        45,
+        32
+      ],
+      "font_size": 24,
+      "color": "#596571",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 28.0
+    },
+    {
+      "id": "candidate_03",
+      "text": "03",
+      "rect": [
+        1462,
+        143,
+        45,
+        32
+      ],
+      "font_size": 24,
+      "color": "#596571",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 29.0
+    },
+    {
+      "id": "selected",
+      "text": "선택 중",
+      "rect": [
+        438,
+        184,
+        100,
+        28
+      ],
+      "font_size": 18,
+      "color": "#0DB8F2",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 52.0
+    },
+    {
+      "id": "name",
+      "text": "치하라 쇼",
+      "rect": [
+        96,
+        733,
+        310,
+        72
+      ],
+      "font_size": 56,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "binding": "candidate.display_name",
+      "preview_text_width": 205.0
+    },
+    {
+      "id": "faction",
+      "text": "VERTEX / 협력자",
+      "rect": [
+        96,
+        835,
+        310,
+        32
+      ],
+      "font_size": 22,
+      "color": "#AC173C",
+      "font_weight": 600,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "binding": "candidate.faction",
+      "color_binding": "candidate.theme_color",
+      "preview_text_width": 159.0
+    },
+    {
+      "id": "availability",
+      "text": "합류 가능",
+      "rect": [
+        96,
+        879,
+        330,
+        60
+      ],
+      "font_size": 21,
+      "color": "#66717C",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "binding": "party.capacity_message",
+      "max_lines": 2,
+      "preview_text_width": 77.0
+    },
+    {
+      "id": "locked_02",
+      "text": "잠긴 후보",
+      "rect": [
+        940,
+        612,
+        320,
+        50
+      ],
+      "font_size": 36,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "opacity": 0.7,
+      "preview_text_width": 132.0
+    },
+    {
+      "id": "condition_02",
+      "text": "구출 의뢰 · 구조 신호",
+      "rect": [
+        920,
+        687,
+        360,
+        60
+      ],
+      "font_size": 20,
+      "color": "#16181B",
+      "font_weight": 400,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "opacity": 0.55,
+      "max_lines": 2,
+      "binding": "candidates.02.unlock_condition",
+      "preview_text_width": 161.0
+    },
+    {
+      "id": "locked_03",
+      "text": "잠긴 후보",
+      "rect": [
+        1420,
+        612,
+        320,
+        50
+      ],
+      "font_size": 36,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "opacity": 0.7,
+      "preview_text_width": 132.0
+    },
+    {
+      "id": "condition_03",
+      "text": "구출 의뢰 · 구조 신호",
+      "rect": [
+        1400,
+        687,
+        360,
+        60
+      ],
+      "font_size": 20,
+      "color": "#16181B",
+      "font_weight": 400,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "opacity": 0.55,
+      "max_lines": 2,
+      "binding": "candidates.03.unlock_condition",
+      "preview_text_width": 161.0
+    },
+    {
+      "id": "detail_en",
+      "text": "DETAIL",
+      "rect": [
+        1488,
+        945,
+        240,
+        22
+      ],
+      "font_size": 14,
+      "color": "#C1CAD1",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_text_width": 58.0
+    },
+    {
+      "id": "detail_label",
+      "text": "후보 확인",
+      "rect": [
+        1488,
+        974,
+        280,
+        47
+      ],
+      "font_size": 36,
+      "color": "#FFFFFF",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 132.0
+    },
+    {
+      "id": "detail_arrow",
+      "text": "→",
+      "rect": [
+        1810,
+        963,
+        48,
+        54
+      ],
+      "font_size": 44,
+      "color": "#FFFFFF",
+      "font_weight": 400,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "preview_text_width": 40.0
+    }
+  ],
+  "states": {
+    "candidate": {
+      "active": {
+        "asset": "Panel_Active",
+        "show": [
+          "name",
+          "name_rule",
+          "faction",
+          "availability",
+          "selected_dot",
+          "selected"
+        ]
+      },
+      "hover": {
+        "asset": "Panel_Active_Hover",
+        "edge_asset": "Line_ActiveEdge_Hover",
+        "edge_width_px": 4
+      },
+      "locked": {
+        "asset": "Panel_Locked",
+        "silhouette_color": "#687785",
+        "silhouette_opacity": 0.16,
+        "lock_label_opacity": 0.7,
+        "condition_opacity": 0.55
+      },
+      "party_full": {
+        "availability_text": "동행 인원이 가득 찼습니다",
+        "detail_state": "disabled",
+        "interactable": false
+      }
+    },
+    "detail": {
+      "normal": {
+        "asset": "Button_Detail",
+        "interactable": true
+      },
+      "hover": {
+        "asset": "Button_Detail_Hover",
+        "interactable": true
+      },
+      "disabled": {
+        "asset": "Button_Detail_Disabled",
+        "interactable": false,
+        "text_color": "#E5E9ED"
+      }
+    }
+  },
+  "rendering": {
+    "alpha": "straight",
+    "filter": "bilinear",
+    "ui_png_scale": 2,
+    "background_png_scale": 1,
+    "font": "Pretendard; runtime TMP",
+    "shadow": {
+      "offset_canvas": [
+        12,
+        12
+      ],
+      "unity_effect_distance": [
+        12,
+        -12
+      ],
+      "color": "#16181B",
+      "opacity": 0.35,
+      "blur": 0,
+      "use_either_shadow_sprite_or_unity_shadow": true
+    },
+    "background_modes": {
+      "flattened": [
+        "Sanctuary_BG"
+      ],
+      "modular": [
+        "Sanctuary_Base",
+        "candidate panel assets",
+        "Overlay_Guides"
+      ],
+      "rule": "Choose ONE background mode. Common overlays, characters and text follow; never draw flattened and modular background together."
+    },
+    "edge_note": "Cyan line follows approved mockup active/right boundary (left edge of slot 02). Hover replaces normal edge, not additive."
+  },
+  "notes": [
+    "UI geometry is rebuilt as SVG; characters, silhouettes, lock icon and HUD are not included in sprites.",
+    "All character slots have identical 930px height, contain fit, no tilt or panel clipping. Wide art may render shorter due to preserved aspect ratio.",
+    "Tiny cyan button edge retained as explicitly requested in asset table; faction and name rule use character theme color.",
+    "Background top 106px remains plain for runtime HUD.",
+    "No nine-slice: use authored size or proportional scale. Panel polygon hit areas must follow candidate polygon, not bounding rect."
+  ]
+}

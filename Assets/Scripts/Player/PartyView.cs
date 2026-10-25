@@ -32,6 +32,29 @@ public class PartyView : MonoBehaviour
     [SerializeField] private GameObject companionPrefab; // 루트 밑에 "CharacterSprite"(Image) 자식 필요 — 발밑 그림자(Shadow)도 같이 딸려옴
     [SerializeField] private Transform[] companionSlots = new Transform[3];
 
+    [Header("진형 — 인원에 따라 자리 (1: 가운데, 2: 위아래, 3: 삼각형, 4: 마름모)")]
+    [Tooltip("끄면 예전처럼 씬에 놓인 고정 위치")]
+    [SerializeField] private bool useFormation = true;
+    [Tooltip("진형 중심 = 처음 주인공 발 위치 + 이 값 (1920×1080 화면 기준 px)")]
+    [SerializeField] private Vector2 formationCenterOffset = new(-60f, 0f);
+    [Tooltip("켜면 진형 중심의 세로(발 높이)를 적들이 서 있는 바닥선에 맞춘다. 적이 없으면 주인공 처음 자리")]
+    [SerializeField] private bool matchEnemyGround = true;
+    [Tooltip("적 바닥선에서 더 내리거나(−) 올릴(+) 값 (1920×1080 화면 기준 px)")]
+    [SerializeField] private float enemyGroundOffsetY = 0f;
+    [Tooltip("진형 반지름 (가로, 세로 · 1920×1080 화면 기준 px). 세로는 원근감으로 납작하게")]
+    [SerializeField] private Vector2 formationSpread = new(170f, 72f);
+
+    // 진형 자리 (반지름 단위). 0번 = 주인공, 적 쪽(+x)이 앞. 아래(-y)일수록 화면 앞에 그린다
+    private static readonly Vector2[][] Formations =
+    {
+        new[] { Vector2.zero },
+        new[] { new Vector2(0.2f, -0.55f), new Vector2(-0.2f, 0.55f) },
+        new[] { new Vector2(0.85f, 0f), new Vector2(-0.6f, 1f), new Vector2(-0.6f, -1f) },
+        new[] { new Vector2(1f, 0f), new Vector2(0f, 1f), new Vector2(0f, -1f), new Vector2(-1f, 0f) },
+    };
+    private bool _hasHomeFeet;
+    private Vector2 _homeFeet;
+
     [Header("방어도 획득 이펙트 — 파티 전원에게 재생")]
     // 협력자(CoopCharState)는 자기 HP/방어도가 없는 순수 장식 캐릭터라(호감도/카드 언락만 가짐),
     // 방어도는 여전히 PlayerCombatant 하나의 값이다. 그래도 "파티 전체가 함께 막아낸다"는
@@ -47,6 +70,8 @@ public class PartyView : MonoBehaviour
     // OnBattleStarted를 발화하기 전에 이미 새 PlayerCombatant를 State.Player에 대입해두므로 안전하다.
     private PlayerCombatant _subscribedPlayer;
 
+    private readonly Dictionary<string, (PoseSequencePlayer sequencer, CoopCharData data)> _companionVisuals = new();
+
     private void Start()
     {
         if (BattleManager.Instance != null)
@@ -54,6 +79,7 @@ public class PartyView : MonoBehaviour
             BattleManager.Instance.OnBattleStarted += Refresh;
             BattleManager.Instance.OnCardPlayed += OnCardPlayed;
             BattleManager.Instance.OnWeaponChanged += OnWeaponChanged;
+            BattleManager.Instance.OnCompanionSkillUsed += OnCompanionSkillUsed;
         }
 
         // 이 오브젝트가 활성화되기 전에 이미 전투가 시작돼 있었을 경우(에디터에서 오브젝트를
@@ -68,6 +94,7 @@ public class PartyView : MonoBehaviour
             BattleManager.Instance.OnBattleStarted -= Refresh;
             BattleManager.Instance.OnCardPlayed -= OnCardPlayed;
             BattleManager.Instance.OnWeaponChanged -= OnWeaponChanged;
+            BattleManager.Instance.OnCompanionSkillUsed -= OnCompanionSkillUsed;
         }
 
         if (_subscribedPlayer != null)
@@ -82,17 +109,46 @@ public class PartyView : MonoBehaviour
         BindPlayer();
     }
 
+    private void OnCompanionSkillUsed(CompanionSkillSlot slot)
+    {
+        if (slot?.Owner == null) return;
+        PlayCompanionAttack(slot.Owner.charID);
+    }
+
+    private void PlayCompanionAttack(string charId)
+    {
+        if (string.IsNullOrEmpty(charId)) return;
+        if (_companionVisuals.TryGetValue(charId, out var visual) && visual.sequencer != null && visual.data != null)
+        {
+            if (visual.data.attackFrames != null && visual.data.attackFrames.Length > 0)
+            {
+                visual.sequencer.Play(visual.data.attackFrames, visual.data.attackFrameRate);
+            }
+            else if (visual.data.attackSequence != null && visual.data.attackSequence.Length > 0)
+            {
+                visual.sequencer.Play(visual.data.attackSequence);
+            }
+        }
+    }
+
     // OnCardPlayed는 공격 카드를 낼 때마다(전투 중 빈번히) 불리므로, 설정 미비 경고는
     // 매번 다시 찍지 않고 한 번만 띄운다 — 안 그러면 콘솔이 같은 경고로 도배돼서 다른 로그를 가린다.
     private bool warnedMissingPoseSequencer;
     private bool warnedMissingPlayerCharData;
     private bool warnedEmptyAttackSequence;
 
-    // 공격 카드를 냈을 때 플레이어 스탠딩에 연출을 재생한다. 데미지 적용을 기다리지 않는
+    // 공격 카드를 냈을 때 플레이어/협력자 스탠딩에 연출을 재생한다. 데미지 적용을 기다리지 않는
     // "구경용" 재생 — 결과와 무관하게 그냥 재생만 하고 끝난다.
     private void OnCardPlayed(CardData card)
     {
         if (card == null || card.Type != CardData.CardType.Attack) return;
+
+        // 동료 소속 카드면 그 동료가 공격 모션 (소속은 CoopCharData.cardOwner)
+        if (card.Owner != CardData.CardOwner.Player && card.Owner != CardData.CardOwner.Non_Color)
+        {
+            foreach (var (sequencer, data) in _companionVisuals.Values)
+                if (data != null && data.cardOwner == card.Owner) { PlayCompanionAttack(data.charID); return; }
+        }
 
         if (playerPoseSequencer == null)
         {
@@ -141,7 +197,17 @@ public class PartyView : MonoBehaviour
     {
         BindPlayer();
         BindCompanions();
+        ApplyFormation();
         UpdateBlockGainSubscription();
+        // 적 그림은 같은 이벤트 안에서 뒤늦게 자리 잡으므로, 한 프레임 뒤에 적 바닥선에 다시 맞춘다
+        if (matchEnemyGround && isActiveAndEnabled) StartCoroutine(ReapplyFormationNextFrame());
+    }
+
+    private System.Collections.IEnumerator ReapplyFormationNextFrame()
+    {
+        yield return null;
+        yield return null;
+        ApplyFormation();
     }
 
     private void UpdateBlockGainSubscription()
@@ -225,6 +291,7 @@ public class PartyView : MonoBehaviour
 
         playerImage.sprite  = sprite;
         playerImage.enabled = sprite != null;
+        BattleUnitLook.Apply(playerImage, BattleUnitLook.Side.Ally);
 
         // 스프라이트 시트 기반 대기(Idle) 애니메이션 제어
         if (playerSheetAnimator != null && playerCharData != null)
@@ -281,6 +348,8 @@ public class PartyView : MonoBehaviour
         if (joined.Count == 0)
             Debug.LogWarning("[PartyView] 합류한 협력자가 0명임 — 성소에서 SelectChar()가 호출됐는지 확인 필요.");
 
+        _companionVisuals.Clear();
+
         for (int i = 0; i < companionSlots.Length; i++)
         {
             Transform slot = companionSlots[i];
@@ -312,13 +381,96 @@ public class PartyView : MonoBehaviour
                 continue;
             }
 
-            image.sprite  = joined[i].charData.standingSprite;
+            var coopData = joined[i].charData;
+            image.sprite  = coopData.standingSprite;
             image.enabled = image.sprite != null;
             if (image.sprite == null)
-                Debug.LogWarning($"[PartyView] '{joined[i].charData.name}'의 standingSprite가 비어있음.");
+                Debug.LogWarning($"[PartyView] '{coopData.name}'의 standingSprite가 비어있음.");
 
-            ApplyStandingPose(instance.transform, image.rectTransform, joined[i].charData);
+            ApplyStandingPose(instance.transform, image.rectTransform, coopData);
+            // 떠다니는 동료는 프리팹 그림자(크기만 숨 쉬듯 변함)를 그대로 쓴다
+            BattleUnitLook.Apply(image, BattleUnitLook.Side.Ally, shadow: coopData.floatAmplitude <= 0f);
+
+            // 대기(Idle) 스프라이트 애니메이션이 등록되어 있으면 재생
+            if (coopData.idleFrames != null && coopData.idleFrames.Length > 0)
+            {
+                var sheetAnimator = spriteChild.GetComponent<UISpriteSheetAnimator>();
+                if (sheetAnimator == null) sheetAnimator = spriteChild.gameObject.AddComponent<UISpriteSheetAnimator>();
+                sheetAnimator.enabled = true;
+                sheetAnimator.Configure(coopData.idleFrames, coopData.idleFrameRate, true);
+            }
+
+            // 공격 포즈 재생기(PoseSequencePlayer) 준비
+            var compSequencer = spriteChild.GetComponent<PoseSequencePlayer>();
+            if (compSequencer == null) compSequencer = spriteChild.gameObject.AddComponent<PoseSequencePlayer>();
+
+            if (!string.IsNullOrEmpty(coopData.charID))
+            {
+                _companionVisuals[coopData.charID] = (compSequencer, coopData);
+            }
         }
+    }
+
+    // 주인공 + 합류 동료를 인원수 진형에 세운다. 각자 보이는 그림의 발끝을 진형 자리에 맞춘다(그림마다 여백이 달라서).
+    private void ApplyFormation()
+    {
+        if (!useFormation || playerImage == null) return;
+        var parent = playerImage.rectTransform.parent as RectTransform;
+        if (parent == null) return;
+
+        // (움직일 트랜스폼, 발을 잴 그림)
+        var units = new List<(RectTransform move, Image image)> { (playerImage.rectTransform, playerImage) };
+        if (companionSlots != null)
+            foreach (var slot in companionSlots)
+            {
+                if (slot == null || slot.childCount == 0 || slot.parent != parent) continue;
+                var sprite = slot.GetChild(0).Find("CharacterSprite");
+                if (sprite != null && sprite.TryGetComponent(out Image img) && img.enabled) units.Add(((RectTransform)slot, img));
+            }
+
+        Vector2 Feet(Image img) => BattleUnitLook.TryVisibleFeetWorld(img, out Vector3 w) ? (Vector2)parent.InverseTransformPoint(w) : (Vector2)img.rectTransform.localPosition;
+        if (!_hasHomeFeet) { _homeFeet = Feet(playerImage); _hasHomeFeet = true; }
+
+        var layout = Formations[Mathf.Clamp(units.Count, 1, Formations.Length) - 1];
+        // 값은 1920 화면 기준 px → 이 캔버스 단위로 (캔버스 기준 해상도가 달라도 같은 화면 간격)
+        float k = parent.rect.width / 1920f;
+        Vector2 center = _homeFeet + formationCenterOffset * k;
+        if (matchEnemyGround && TryEnemyGroundY(parent, out float groundY)) center.y = groundY + enemyGroundOffsetY * k;
+        // 배경마다 바닥 높이 · 서는 자리가 달라서, 배경(BattleStageData)이 아군 위치를 옮길 수 있다
+        var stage = BattleStageView.Active;
+        if (stage != null) center += stage.partyOffset * k;
+        var order = new List<(Transform t, float y)>();
+        for (int i = 0; i < units.Count && i < layout.Length; i++)
+        {
+            Vector2 target = center + Vector2.Scale(layout[i], formationSpread * k);
+            var (move, img) = units[i];
+            Vector2 delta = target - Feet(img);
+            move.localPosition += (Vector3)delta;
+            order.Add((move, target.y));
+        }
+
+        // 아래(앞) 유닛이 위(뒤) 유닛을 가리게: 같은 자리 번호 묶음 안에서 위쪽부터 그린다
+        var indices = new List<int>();
+        foreach (var o in order) indices.Add(o.t.GetSiblingIndex());
+        indices.Sort();
+        order.Sort((a, b) => b.y.CompareTo(a.y));
+        for (int i = 0; i < order.Count; i++) order[i].t.SetSiblingIndex(indices[i]);
+    }
+
+    // 살아 있는 적들의 발끝 높이 평균 (parent 로컬 좌표)
+    private static bool TryEnemyGroundY(RectTransform parent, out float y)
+    {
+        y = 0f;
+        float sum = 0f; int n = 0;
+        foreach (var ev in FindObjectsByType<EnemyView>(FindObjectsSortMode.None))
+        {
+            if (!ev.isActiveAndEnabled || !ev.SpriteRect.TryGetComponent(out Image img) || !img.enabled) continue;
+            if (!BattleUnitLook.TryVisibleFeetWorld(img, out Vector3 w)) continue;
+            sum += parent.InverseTransformPoint(w).y; n++;
+        }
+        if (n == 0) return false;
+        y = sum / n;
+        return true;
     }
 
     // 동료별 크기·위치 보정과, 애니메이션이 없는 동료의 위아래 떠다니기.

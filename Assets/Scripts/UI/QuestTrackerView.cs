@@ -28,6 +28,9 @@ public class QuestTrackerView : MonoBehaviour
     // 패널 맨 아래 y (1920×1080 좌상단 기준). 숨겨져 있으면 0
     public static float Bottom { get; private set; }
 
+    // 전투 위에 덮이는 화면(상점 등)이 열려 있는 동안 숨긴다. 그 화면의 제목 자리와 겹친다
+    public static bool Suppressed { get; set; }
+
     private RectTransform _root;
     private Sprite _band, _titleBand;
     private string _lastKey;
@@ -51,7 +54,7 @@ public class QuestTrackerView : MonoBehaviour
     private void Update()
     {
         var quests = Active();
-        bool show = quests.Count > 0;
+        bool show = quests.Count > 0 && !Suppressed;
         if (_root.gameObject.activeSelf != show) _root.gameObject.SetActive(show);
         if (!show) { Bottom = 0f; _lastKey = null; return; }
 

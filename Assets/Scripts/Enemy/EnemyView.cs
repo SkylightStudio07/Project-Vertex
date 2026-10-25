@@ -221,6 +221,8 @@ public class EnemyView : MonoBehaviour
             }
 
             enemyImage.rectTransform.localScale = new Vector3(_enemyImageBaseScale.x * scale, _enemyImageBaseScale.y * scale, 1f);
+            BattleUnitLook.Apply(enemyImage, BattleUnitLook.Side.Enemy); // 외곽선 · 림라이트 · 색 보정 · 발밑 그림자 (아군과 같은 처리)
+            AlignHpBarToBody(instance);
 
             if (instance.EnemySprite == null && (instance.IdleFrames == null || instance.IdleFrames.Length == 0))
             {
@@ -260,6 +262,29 @@ public class EnemyView : MonoBehaviour
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _intentFieldBasePos;
         LayoutLookaheadIcons();
+    }
+
+    // 시트 안에서 캐릭터가 한쪽으로 치우쳐 그려져도(노상강도) HP 바 · 상태 줄이 보이는 몸 가운데 아래에 오게 가로만 맞춘다.
+    // 처음 위치를 기억해 두고 거기서부터 옮겨, 같은 뷰를 다시 쓸 때 밀림이 쌓이지 않게 한다
+    private bool _hpHomeSet;
+    private Vector2 _hpHome, _statusHome;
+    private void AlignHpBarToBody(EnemyInstance instance)
+    {
+        if (instance?.Data == null || instance.Data.useScreenRect || hpFill == null) return;
+        var hpBar = hpFill.transform.parent as RectTransform;
+        var parent = hpBar != null ? hpBar.parent as RectTransform : null;
+        if (parent == null) return;
+        var status = statusList != null ? statusList.transform as RectTransform : null;
+        if (!_hpHomeSet) { _hpHome = hpBar.anchoredPosition; _statusHome = status != null ? status.anchoredPosition : Vector2.zero; _hpHomeSet = true; }
+        hpBar.anchoredPosition = _hpHome;
+        if (status != null) status.anchoredPosition = _statusHome;
+        float dx = 0f;
+        if (BattleUnitLook.TryVisibleFeetWorld(enemyImage, out Vector3 feet))
+            dx = parent.InverseTransformPoint(feet).x - parent.InverseTransformPoint(hpBar.position).x;
+        // 몸 가운데로 맞춘 뒤 hpBarOffset(수동 보정)을 더한다
+        Vector2 move = new Vector2(dx, 0f) + instance.Data.hpBarOffset;
+        hpBar.anchoredPosition += move;
+        if (status != null) status.anchoredPosition += move;
     }
 
     // 화면 고정 배치(EnemyData.useScreenRect) — 화면 끝에 붙는 거대 보스용.
@@ -525,6 +550,7 @@ public class EnemyView : MonoBehaviour
             if (swingOverlay != null) swingOverlay.EnsurePlayerBinding();
             seqPlayer.Play(Instance.AttackFrames, Instance.AttackFrameRate,
                            Instance.Data != null ? Instance.Data.AttackScaleMultiplier : 1f); // 시트 여백 차이 보정
+            ScheduleGroundFx();
         }
 
         // 화면 끝에 붙은 보스는 앞으로 나오지 않고 제자리에서 움찔한다
@@ -543,6 +569,41 @@ public class EnemyView : MonoBehaviour
         Vector2 forward = originalPos + new Vector2(-lungeDistance, 0f);
         _rect.DOAnchorPos(forward, lungeOutDuration)
             .OnComplete(() => _rect.DOAnchorPos(originalPos, lungeBackDuration));
+    }
+
+    // 공격 프레임 번호마다 땅이 파이는 충격을 터뜨린다 (EnemyData.groundFxShots)
+    private void ScheduleGroundFx()
+    {
+        var d = Instance?.Data;
+        if (d == null || d.groundFxShots == null || d.groundFxShots.Count == 0 || enemyImage == null) return;
+        float fps = Mathf.Max(1f, Instance.AttackFrameRate);
+        // 총구마다 자기 탄착점에서 터진다
+        foreach (var shot in d.groundFxShots)
+        {
+            Vector2 point = shot.point;
+            DOVirtual.DelayedCall(shot.frame / fps, () => SpawnGroundFx(point)).SetLink(gameObject);
+        }
+    }
+
+    private void SpawnGroundFx(Vector2 point)
+    {
+        var d = Instance?.Data;
+        if (d == null || enemyImage == null) return;
+        // 탄착점은 "그려진 그림" 기준이다. Image는 preserveAspect로 상자 안에 맞춰 그리므로 상자 전체가 아니라 맞춰 그려진 영역을 쓴다
+        Rect r = enemyImage.rectTransform.rect;
+        Vector2 drawn = r.size;
+        var sprite = enemyImage.sprite;
+        if (sprite != null && enemyImage.preserveAspect)
+        {
+            float k = Mathf.Min(r.width / sprite.rect.width, r.height / sprite.rect.height);
+            drawn = sprite.rect.size * k;
+        }
+        Vector3 world = enemyImage.rectTransform.TransformPoint(new Vector3(r.center.x + (point.x - 0.5f) * drawn.x, r.center.y + (point.y - 0.5f) * drawn.y, 0f));
+        // 먼지 색은 배경의 안개 색에 바닥 흙색을 섞는다
+        Color fog = BattleStageView.Active != null ? BattleStageView.Active.fogColor : new Color(0.55f, 0.58f, 0.62f);
+        Color dust = Color.Lerp(new Color(fog.r, fog.g, fog.b), new Color(0.62f, 0.58f, 0.52f), 0.5f);
+        dust.a = 0.55f;
+        GroundImpactFx.Play(transform as RectTransform, world, d.groundFxScale, dust);
     }
 
     private void SpawnHitEffect()

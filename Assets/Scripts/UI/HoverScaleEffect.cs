@@ -20,13 +20,18 @@ public class HoverScaleEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [Tooltip("확대했을 때 화면(루트 캔버스) 밖으로 나가면 안쪽으로 밀어 넣기. 가장자리 줄의 상점 카드 등")]
     [SerializeField] private bool keepInsideScreen;
     [SerializeField] private float screenMargin = 12f;
+    [Tooltip("자기 자신 대신 이 자식들을 함께 키운다 (자기 피벗 기준으로 위치도 같이 벌어진다). 예: 상점 받침은 두고 카드·가격표만. 비우면 자기 자신")]
+    [SerializeField] private Transform[] scaleParts;
 
-    private Vector3 originalScale;
-    private Vector3 originalLocalPos;
+    private bool Grouped => scaleParts != null && scaleParts.Length > 0;
+    private Transform[] _parts;
+    private Vector3[] _origScale, _origPos;
     private bool hasOriginal;
     private bool hovering;
     private Coroutine scaleCoroutine;
     private Canvas frontCanvas;
+
+    private Transform[] Parts => _parts ??= Grouped ? scaleParts : new[] { transform };
 
     // 원래 크기는 Awake가 아니라 "호버가 시작될 때"(되돌아가는 중이 아닐 때) 잡는다.
     // 생성 직후 다른 코드가 스케일을 바꾸는 경우(ShopView가 상점 카드를 0.95로 조정 등)
@@ -35,22 +40,33 @@ public class HoverScaleEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (!hovering && scaleCoroutine == null)
         {
-            originalScale = transform.localScale;
-            originalLocalPos = transform.localPosition;
+            var parts = Parts;
+            _origScale = new Vector3[parts.Length];
+            _origPos = new Vector3[parts.Length];
+            for (int i = 0; i < parts.Length; i++) { _origScale[i] = parts[i].localScale; _origPos[i] = parts[i].localPosition; }
             hasOriginal = true;
         }
         hovering = true;
         SetFront(true);
-        AnimateTo(originalScale * hoverScaleMultiplier, originalLocalPos + InsideScreenOffset());
+        Vector3 shift = InsideScreenOffset();
+        var targetScale = new Vector3[Parts.Length];
+        var targetPos = new Vector3[Parts.Length];
+        for (int i = 0; i < Parts.Length; i++)
+        {
+            targetScale[i] = _origScale[i] * hoverScaleMultiplier;
+            // 묶음은 자기 피벗(원점) 기준으로 위치도 같이 벌려야 한 덩어리로 커진다
+            targetPos[i] = (Grouped ? _origPos[i] * hoverScaleMultiplier : _origPos[i]) + shift;
+        }
+        AnimateTo(targetScale, targetPos);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         hovering = false;
-        if (hasOriginal) AnimateTo(originalScale, originalLocalPos);
+        if (hasOriginal) AnimateTo(_origScale, _origPos);
     }
 
-    // 확대 후 크기를 미리 계산해 루트 캔버스 영역을 벗어나는 만큼 반대로 밀어낼 로컬 오프셋.
+    // 확대 후 크기를 미리 계산해 루트 캔버스 영역을 벗어나는 만큼 반대로 밀어낼 로컬 오프셋 (움직이는 대상의 부모 좌표).
     private Vector3 InsideScreenOffset()
     {
         if (!keepInsideScreen || transform.parent == null) return Vector3.zero;
@@ -59,7 +75,7 @@ public class HoverScaleEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         var root = canvas.rootCanvas.transform as RectTransform;
 
         // 원래 크기 기준 자식 전체(카드 그림·가격)의 영역을 루트 캔버스 좌표로 구하고, 피벗 중심으로 배율만큼 키운다
-        transform.localScale = originalScale;
+        for (int i = 0; i < Parts.Length; i++) { Parts[i].localScale = _origScale[i]; Parts[i].localPosition = _origPos[i]; }
         Bounds b = RectTransformUtility.CalculateRelativeRectTransformBounds(root, transform);
         Vector3 pivot = root.InverseTransformPoint(transform.position);
         Vector3 min = pivot + (b.min - pivot) * hoverScaleMultiplier;
@@ -73,9 +89,9 @@ public class HoverScaleEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         else if (min.x < area.xMin + screenMargin) shift.x = area.xMin + screenMargin - min.x;
         if (shift == Vector2.zero) return Vector3.zero;
 
-        // 루트 캔버스 좌표 이동량 → 부모 로컬 좌표 이동량
+        // 루트 캔버스 좌표 이동량 → 움직이는 대상의 부모 로컬 좌표 이동량
         Vector3 worldDelta = root.TransformVector(shift);
-        return transform.parent.InverseTransformVector(worldDelta);
+        return (Grouped ? transform : transform.parent).InverseTransformVector(worldDelta);
     }
 
     private void OnDisable()
@@ -84,40 +100,53 @@ public class HoverScaleEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (scaleCoroutine != null) StopCoroutine(scaleCoroutine);
         scaleCoroutine = null;
         if (hasOriginal)
-        {
-            transform.localScale = originalScale;
-            if (keepInsideScreen) transform.localPosition = originalLocalPos;
-        }
+            for (int i = 0; i < Parts.Length; i++)
+            {
+                Parts[i].localScale = _origScale[i];
+                if (keepInsideScreen || Grouped) Parts[i].localPosition = _origPos[i];
+            }
         hovering = false;
         SetFront(false);
     }
 
-    private void AnimateTo(Vector3 targetScale, Vector3 targetPos)
+    private void AnimateTo(Vector3[] targetScale, Vector3[] targetPos)
     {
         // 이전 코루틴을 반드시 중단
         if (scaleCoroutine != null) StopCoroutine(scaleCoroutine);
         scaleCoroutine = null;
-        if (!isActiveAndEnabled) { transform.localScale = targetScale; transform.localPosition = targetPos; return; }
+        if (!isActiveAndEnabled)
+        {
+            for (int i = 0; i < Parts.Length; i++) { Parts[i].localScale = targetScale[i]; Parts[i].localPosition = targetPos[i]; }
+            return;
+        }
         scaleCoroutine = StartCoroutine(AnimateScale(targetScale, targetPos));
     }
 
-    private IEnumerator AnimateScale(Vector3 targetScale, Vector3 targetPos)
+    private IEnumerator AnimateScale(Vector3[] targetScale, Vector3[] targetPos)
     {
-        Vector3 startScale = transform.localScale;
-        Vector3 startPos = transform.localPosition;
-        // 화면 밀어넣기를 안 쓰면 위치는 건드리지 않는다(레이아웃이 잡은 위치를 그대로 둠)
-        bool movePos = keepInsideScreen;
+        var parts = Parts;
+        var startScale = new Vector3[parts.Length];
+        var startPos = new Vector3[parts.Length];
+        for (int i = 0; i < parts.Length; i++) { startScale[i] = parts[i].localScale; startPos[i] = parts[i].localPosition; }
+        // 화면 밀어넣기를 안 쓰는 단일 대상은 위치를 건드리지 않는다(레이아웃이 잡은 위치를 그대로 둠)
+        bool movePos = keepInsideScreen || Grouped;
         float elapsed = 0f;
         while (elapsed < animationDuration)
         {
             float t = elapsed / animationDuration;
-            transform.localScale = Vector3.Lerp(startScale, targetScale, t);
-            if (movePos) transform.localPosition = Vector3.Lerp(startPos, targetPos, t);
+            for (int i = 0; i < parts.Length; i++)
+            {
+                parts[i].localScale = Vector3.Lerp(startScale[i], targetScale[i], t);
+                if (movePos) parts[i].localPosition = Vector3.Lerp(startPos[i], targetPos[i], t);
+            }
             elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
-        transform.localScale = targetScale;
-        if (movePos) transform.localPosition = targetPos;
+        for (int i = 0; i < parts.Length; i++)
+        {
+            parts[i].localScale = targetScale[i];
+            if (movePos) parts[i].localPosition = targetPos[i];
+        }
         scaleCoroutine = null;
         if (!hovering) SetFront(false); // 완전히 줄어든 뒤에 순서를 내려야 옆 카드에 잘려 보이지 않는다
     }

@@ -113,7 +113,7 @@ public class EnemyZoneView : MonoBehaviour
             RectTransform rt = view.GetComponent<RectTransform>();
             if (rt != null && i < positions.Length)
             {
-                rt.anchoredPosition = positions[i];
+                rt.anchoredPosition = positions[i] + (enemies[i].Data != null ? enemies[i].Data.slotOffset : Vector2.zero);
             }
             view.ApplyScreenLayout(); // 화면 고정 배치 보스면 슬롯 위치가 잡힌 뒤 그림을 화면 좌표로 옮긴다
 

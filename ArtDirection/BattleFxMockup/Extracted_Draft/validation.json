@@ -1,0 +1,131 @@
+{
+  "passed": true,
+  "asset_count": 11,
+  "dust_frames": 8,
+  "dust_sheet_size": [
+    2048,
+    256
+  ],
+  "checks": [
+    {
+      "name": "Crater_A",
+      "size": [
+        380,
+        190
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 230
+    },
+    {
+      "name": "Crater_B",
+      "size": [
+        380,
+        190
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 230
+    },
+    {
+      "name": "Crater_C",
+      "size": [
+        380,
+        190
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 230
+    },
+    {
+      "name": "Dust_Puff",
+      "size": [
+        2048,
+        256
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 247
+    },
+    {
+      "name": "Debris_01",
+      "size": [
+        24,
+        24
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 255
+    },
+    {
+      "name": "Debris_02",
+      "size": [
+        28,
+        28
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 255
+    },
+    {
+      "name": "Debris_03",
+      "size": [
+        32,
+        32
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 255
+    },
+    {
+      "name": "Debris_04",
+      "size": [
+        16,
+        16
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 255
+    },
+    {
+      "name": "Debris_05",
+      "size": [
+        30,
+        30
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 255
+    },
+    {
+      "name": "Debris_06",
+      "size": [
+        22,
+        22
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 255
+    },
+    {
+      "name": "Shock_Ring",
+      "size": [
+        600,
+        300
+      ],
+      "transparent_edges": true,
+      "grayscale": true,
+      "alpha_max": 255
+    }
+  ],
+  "last_dust_frame_nearly_transparent": true,
+  "shock_center_transparent": true,
+  "source_sha256": {
+    "Crater_A": "d678dcc8ce8399ed0f2a4f531d88adccae54a098220ef39a5a0e1aec0f135a7a",
+    "Crater_B": "257da69a3ade29bb7bae437adf6f8b5d9c73bf73bf53fdcda14bc154542e9758",
+    "Crater_C": "d200b881d99c8a363ee132865c283360fa389243a4f6d03e7c8ecff679ca73a5",
+    "Dust_Puff": "f6390096a81b6d82ac062b0b091becb5279a6e07c032d9d7bdf620970a61a9c4",
+    "Debris": "36b75f7d8b6cfee170eea19e04faeba10ea1cbd0d588360616a7ed0053e62136",
+    "Shock_Ring": "befeabc35e06983f49b76257589503fe1a277c8df94bd987efd331a7a61ec70c"
+  }
+}

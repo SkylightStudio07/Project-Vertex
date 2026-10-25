@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: Intimidate
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: ch02.power.intimidate
+  displayName: "\uC704\uC555"
+  description: "\uC804\uC220 \uAC1C\uB7C9\uD615 \uD22C\uCC99 \uCC3D\uC220\uC774 \uC801\uC911\uD55C
+    \uC801\uC740 \uC8FC\uB294 \uD53C\uD574\uAC00 50% \uC904\uC5B4\uB4ED\uB2C8\uB2E4."
+  icon: {fileID: 802980995551194373, guid: 2f8c4c6e350ae5f49855933ec3444b2e, type: 3}
+  disposition: 1
+  stackPolicy: 1
+  durationPolicy: 1
+  maxStacks: 1
+  dispellable: 0
+  behaviors: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,2841 @@
+{
+  "version": 4,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "source_mockup": {
+    "file": "../Shop_Mockup_v3.png",
+    "size": [
+      1672,
+      941
+    ],
+    "reference_scale_xy": [
+      1.1483253588516746,
+      1.1477151965993624
+    ],
+    "note": "Reconstructed geometry with SPLIT_REQUEST_v3 changes. Native character and real game card captures in preview."
+  },
+  "delivery_mockup": "../Shop_Mockup_v4.png",
+  "assets": {
+    "Shop_BG": {
+      "file": "Shop_BG.png",
+      "svg": "SVG/Shop_BG.svg",
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "source_pixels": [
+        1920,
+        1080
+      ],
+      "scale": 1,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Panel_Cards": {
+      "file": "Panel_Cards.png",
+      "svg": "SVG/Panel_Cards.svg",
+      "logical_size": [
+        774,
+        770
+      ],
+      "source_pixels": [
+        1548,
+        1540
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Panel_Supply": {
+      "file": "Panel_Supply.png",
+      "svg": "SVG/Panel_Supply.svg",
+      "logical_size": [
+        360,
+        630
+      ],
+      "source_pixels": [
+        720,
+        1260
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Panel_Credits": {
+      "file": "Panel_Credits.png",
+      "svg": "SVG/Panel_Credits.svg",
+      "logical_size": [
+        360,
+        112
+      ],
+      "source_pixels": [
+        720,
+        224
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Plate_Shopkeeper": {
+      "file": "Plate_Shopkeeper.png",
+      "svg": "SVG/Plate_Shopkeeper.svg",
+      "logical_size": [
+        590,
+        148
+      ],
+      "source_pixels": [
+        1180,
+        296
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Panel_Service_Normal": {
+      "file": "Panel_Service_Normal.png",
+      "svg": "SVG/Panel_Service_Normal.svg",
+      "logical_size": [
+        774,
+        130
+      ],
+      "source_pixels": [
+        1548,
+        260
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Panel_Service_Hover": {
+      "file": "Panel_Service_Hover.png",
+      "svg": "SVG/Panel_Service_Hover.svg",
+      "logical_size": [
+        774,
+        130
+      ],
+      "source_pixels": [
+        1548,
+        260
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Panel_Service_Disabled": {
+      "file": "Panel_Service_Disabled.png",
+      "svg": "SVG/Panel_Service_Disabled.svg",
+      "logical_size": [
+        774,
+        130
+      ],
+      "source_pixels": [
+        1548,
+        260
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Button_Leave_Normal": {
+      "file": "Button_Leave_Normal.png",
+      "svg": "SVG/Button_Leave_Normal.svg",
+      "logical_size": [
+        360,
+        128
+      ],
+      "source_pixels": [
+        720,
+        256
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Button_Leave_Hover": {
+      "file": "Button_Leave_Hover.png",
+      "svg": "SVG/Button_Leave_Hover.svg",
+      "logical_size": [
+        360,
+        128
+      ],
+      "source_pixels": [
+        720,
+        256
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Button_Leave_Pressed": {
+      "file": "Button_Leave_Pressed.png",
+      "svg": "SVG/Button_Leave_Pressed.svg",
+      "logical_size": [
+        360,
+        128
+      ],
+      "source_pixels": [
+        720,
+        256
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Plinth_Card_Normal": {
+      "file": "Plinth_Card_Normal.png",
+      "svg": "SVG/Plinth_Card_Normal.svg",
+      "logical_size": [
+        222,
+        326
+      ],
+      "source_pixels": [
+        444,
+        652
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Plinth_Card_Hover": {
+      "file": "Plinth_Card_Hover.png",
+      "svg": "SVG/Plinth_Card_Hover.svg",
+      "logical_size": [
+        222,
+        326
+      ],
+      "source_pixels": [
+        444,
+        652
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "Plinth_Card_Unaffordable": {
+      "file": "Plinth_Card_Unaffordable.png",
+      "svg": "SVG/Plinth_Card_Unaffordable.svg",
+      "logical_size": [
+        222,
+        326
+      ],
+      "source_pixels": [
+        444,
+        652
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "ItemCell_Normal": {
+      "file": "ItemCell_Normal.png",
+      "svg": "SVG/ItemCell_Normal.svg",
+      "logical_size": [
+        138,
+        132
+      ],
+      "source_pixels": [
+        276,
+        264
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "ItemCell_Hover": {
+      "file": "ItemCell_Hover.png",
+      "svg": "SVG/ItemCell_Hover.svg",
+      "logical_size": [
+        138,
+        132
+      ],
+      "source_pixels": [
+        276,
+        264
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "ItemCell_Unaffordable": {
+      "file": "ItemCell_Unaffordable.png",
+      "svg": "SVG/ItemCell_Unaffordable.svg",
+      "logical_size": [
+        138,
+        132
+      ],
+      "source_pixels": [
+        276,
+        264
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3"
+    },
+    "PriceTag_Normal": {
+      "file": "PriceTag_Normal.png",
+      "svg": "SVG/PriceTag_Normal.svg",
+      "logical_size": [
+        176,
+        38
+      ],
+      "source_pixels": [
+        352,
+        76
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "source_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "minimum_logical_size": [
+          25,
+          25
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "PriceTag_Hover": {
+      "file": "PriceTag_Hover.png",
+      "svg": "SVG/PriceTag_Hover.svg",
+      "logical_size": [
+        176,
+        38
+      ],
+      "source_pixels": [
+        352,
+        76
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "source_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "minimum_logical_size": [
+          25,
+          25
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "PriceTag_Unaffordable": {
+      "file": "PriceTag_Unaffordable.png",
+      "svg": "SVG/PriceTag_Unaffordable.svg",
+      "logical_size": [
+        176,
+        38
+      ],
+      "source_pixels": [
+        352,
+        76
+      ],
+      "scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "text_baked": false,
+      "shadow_baked": false,
+      "method": "SVG reconstruction from approved v3",
+      "nine_slice": {
+        "logical_pixels_left_bottom_right_top": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "source_pixels_left_bottom_right_top": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "minimum_logical_size": [
+          25,
+          25
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    }
+  },
+  "external_assets": {
+    "Icon_Arrow": {
+      "file": "../../Extracted/Icon_Arrow.png",
+      "included": false,
+      "source_pixels": [
+        20,
+        20
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Icon_Scissors": {
+      "file": "../../Extracted/Icon_Scissors.png",
+      "included": false,
+      "source_pixels": [
+        32,
+        40
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Icon_RemoveCard": {
+      "file": "../../Extracted/Icon_RemoveCard.png",
+      "included": false,
+      "source_pixels": [
+        40,
+        40
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Icon_Leave": {
+      "file": "../../Extracted/Icon_Leave.png",
+      "included": false,
+      "source_pixels": [
+        40,
+        48
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Icon_Close": {
+      "file": "../../Extracted/Icon_Close.png",
+      "included": false,
+      "source_pixels": [
+        20,
+        20
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Icon_Credit": {
+      "file": "../../Extracted/Icon_Credit.png",
+      "included": false,
+      "source_pixels": [
+        20,
+        20
+      ],
+      "reuse": "unchanged v2"
+    },
+    "SoldOut_Band": {
+      "file": "../../Extracted/SoldOut_Band.png",
+      "included": false,
+      "source_pixels": [
+        150,
+        230
+      ],
+      "reuse": "unchanged v2"
+    },
+    "SoldOut_Hatching": {
+      "file": "../../Extracted/SoldOut_Hatching.png",
+      "included": false,
+      "source_pixels": [
+        150,
+        230
+      ],
+      "reuse": "unchanged v2"
+    },
+    "SoldOut_Stamp": {
+      "file": "../../Extracted/SoldOut_Stamp.png",
+      "included": false,
+      "source_pixels": [
+        150,
+        230
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Watermark_Cards": {
+      "file": "../../Extracted/Watermark_Cards.png",
+      "included": false,
+      "source_pixels": [
+        170,
+        100
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Watermark_Supply": {
+      "file": "../../Extracted/Watermark_Supply.png",
+      "included": false,
+      "source_pixels": [
+        144,
+        132
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Watermark_Service": {
+      "file": "../../Extracted/Watermark_Service.png",
+      "included": false,
+      "source_pixels": [
+        88,
+        106
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Button_Close_Normal": {
+      "file": "../../Extracted/Button_Close_Normal.png",
+      "included": false,
+      "source_pixels": [
+        40,
+        40
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Button_Close_Hover": {
+      "file": "../../Extracted/Button_Close_Hover.png",
+      "included": false,
+      "source_pixels": [
+        40,
+        40
+      ],
+      "reuse": "unchanged v2"
+    },
+    "Button_Close_Pressed": {
+      "file": "../../Extracted/Button_Close_Pressed.png",
+      "included": false,
+      "source_pixels": [
+        40,
+        40
+      ],
+      "reuse": "unchanged v2"
+    }
+  },
+  "external_art": {
+    "scene": {
+      "source": "Assets/Art/Backgrounds/Act1_BattleBackground_Clean.png",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "fit": "cover",
+      "asset_included": false,
+      "sha256": "8e38ed4ea9df56091f24f57517abab46b36eeb91928d79509bbaba20a0ede343"
+    },
+    "keeper": {
+      "source": "Assets/Art/Shop/1막 상점주인 복사 2.png",
+      "rect": [
+        250,
+        322,
+        430,
+        548
+      ],
+      "source_crop_ltrb": [
+        0,
+        190,
+        1088,
+        1578
+      ],
+      "fit": "contain",
+      "binding": "ShopkeeperData / current chapter standing",
+      "asset_included": false,
+      "sha256": "39f8264b20ace4b4ce1cc715664e10b0fadb5fd84ece37d9267670a2ac3085b6"
+    },
+    "counter": {
+      "source": "Assets/Art/Shop/ShopCounter_WhiteVertex.png",
+      "rect": [
+        0,
+        804,
+        1460,
+        321
+      ],
+      "source_crop_ltrb": [
+        13,
+        337,
+        1955,
+        764
+      ],
+      "fit": "contain main alpha bounds; clipped by viewport/right panels",
+      "asset_included": false,
+      "sha256": "e33722077542c1be232adc57c67be9b42ff0b433bf5bdf35496c75acecf30fa3"
+    }
+  },
+  "reserved_regions": {
+    "hud": [
+      0,
+      0,
+      1920,
+      106
+    ],
+    "quest_tracker": [
+      82,
+      222,
+      580,
+      110
+    ]
+  },
+  "placements": [
+    {
+      "id": "background",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "z": 0,
+      "opacity": 1,
+      "asset": "Shop_BG"
+    },
+    {
+      "id": "cards",
+      "rect": [
+        736,
+        116,
+        774,
+        770
+      ],
+      "z": 10,
+      "opacity": 1,
+      "asset": "Panel_Cards",
+      "shadow": {
+        "offset_canvas": [
+          12,
+          12
+        ],
+        "unity_effect_distance": [
+          12,
+          -12
+        ],
+        "color": "#16181B",
+        "opacity": 0.3,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "supply",
+      "rect": [
+        1532,
+        256,
+        360,
+        630
+      ],
+      "z": 10,
+      "opacity": 1,
+      "asset": "Panel_Supply",
+      "shadow": {
+        "offset_canvas": [
+          12,
+          12
+        ],
+        "unity_effect_distance": [
+          12,
+          -12
+        ],
+        "color": "#16181B",
+        "opacity": 0.3,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "credits",
+      "rect": [
+        1532,
+        124,
+        360,
+        112
+      ],
+      "z": 10,
+      "opacity": 1,
+      "asset": "Panel_Credits",
+      "shadow": {
+        "offset_canvas": [
+          12,
+          12
+        ],
+        "unity_effect_distance": [
+          12,
+          -12
+        ],
+        "color": "#16181B",
+        "opacity": 0.3,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "keeper_plate",
+      "rect": [
+        82,
+        894,
+        590,
+        148
+      ],
+      "z": 40,
+      "opacity": 1,
+      "asset": "Plate_Shopkeeper",
+      "shadow": {
+        "offset_canvas": [
+          12,
+          12
+        ],
+        "unity_effect_distance": [
+          12,
+          -12
+        ],
+        "color": "#16181B",
+        "opacity": 0.3,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "service",
+      "rect": [
+        736,
+        914,
+        774,
+        130
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Panel_Service_Disabled",
+      "shadow": {
+        "offset_canvas": [
+          12,
+          12
+        ],
+        "unity_effect_distance": [
+          12,
+          -12
+        ],
+        "color": "#16181B",
+        "opacity": 0.3,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "leave",
+      "rect": [
+        1532,
+        916,
+        360,
+        128
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Button_Leave_Normal",
+      "shadow": {
+        "offset_canvas": [
+          12,
+          12
+        ],
+        "unity_effect_distance": [
+          12,
+          -12
+        ],
+        "color": "#16181B",
+        "opacity": 0.3,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "watermark_cards",
+      "rect": [
+        1378,
+        138,
+        92,
+        58
+      ],
+      "z": 11,
+      "opacity": 0.18,
+      "external_asset": "Watermark_Cards"
+    },
+    {
+      "id": "watermark_supply",
+      "rect": [
+        1762,
+        282,
+        100,
+        96
+      ],
+      "z": 11,
+      "opacity": 0.45,
+      "external_asset": "Watermark_Supply"
+    },
+    {
+      "id": "watermark_service",
+      "rect": [
+        1070,
+        932,
+        110,
+        86
+      ],
+      "z": 21,
+      "opacity": 0.45,
+      "external_asset": "Watermark_Service"
+    },
+    {
+      "id": "remove_icon",
+      "rect": [
+        1204,
+        949,
+        42,
+        52
+      ],
+      "z": 22,
+      "opacity": 0.6,
+      "external_asset": "Icon_RemoveCard"
+    },
+    {
+      "id": "scissors",
+      "rect": [
+        1250,
+        959,
+        22,
+        32
+      ],
+      "z": 22,
+      "opacity": 0.6,
+      "external_asset": "Icon_Scissors"
+    },
+    {
+      "id": "leave_icon",
+      "rect": [
+        1570,
+        949,
+        40,
+        56
+      ],
+      "z": 22,
+      "opacity": 1,
+      "external_asset": "Icon_Leave"
+    },
+    {
+      "id": "leave_arrow",
+      "rect": [
+        1842,
+        965,
+        16,
+        24
+      ],
+      "z": 22,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "credit_diamond",
+      "rect": [
+        1682,
+        165,
+        22,
+        22
+      ],
+      "z": 22,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "close",
+      "rect": [
+        1836,
+        147,
+        36,
+        36
+      ],
+      "z": 22,
+      "opacity": 1,
+      "external_asset": "Button_Close_Normal"
+    },
+    {
+      "id": "close_icon",
+      "rect": [
+        1846,
+        157,
+        16,
+        16
+      ],
+      "z": 23,
+      "opacity": 1,
+      "external_asset": "Icon_Close"
+    },
+    {
+      "id": "card_0_plinth",
+      "rect": [
+        774,
+        210,
+        222,
+        326
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Plinth_Card_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_0_tag",
+      "rect": [
+        797,
+        494,
+        176,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_0_diamond",
+      "rect": [
+        809,
+        505,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "card_0_arrow",
+      "rect": [
+        952,
+        506,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "card_1_plinth",
+      "rect": [
+        1018,
+        210,
+        222,
+        326
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Plinth_Card_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_1_tag",
+      "rect": [
+        1041,
+        494,
+        176,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_1_diamond",
+      "rect": [
+        1053,
+        505,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "card_1_arrow",
+      "rect": [
+        1196,
+        506,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "card_2_plinth",
+      "rect": [
+        1262,
+        210,
+        222,
+        326
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Plinth_Card_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_2_tag",
+      "rect": [
+        1285,
+        494,
+        176,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_2_diamond",
+      "rect": [
+        1297,
+        505,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "card_2_arrow",
+      "rect": [
+        1440,
+        506,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "card_3_plinth",
+      "rect": [
+        774,
+        544,
+        222,
+        326
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Plinth_Card_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_3_tag",
+      "rect": [
+        797,
+        828,
+        176,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_3_diamond",
+      "rect": [
+        809,
+        839,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "card_3_arrow",
+      "rect": [
+        952,
+        840,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "card_4_plinth",
+      "rect": [
+        1018,
+        544,
+        222,
+        326
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Plinth_Card_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_4_tag",
+      "rect": [
+        1041,
+        828,
+        176,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_4_diamond",
+      "rect": [
+        1053,
+        839,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "card_4_arrow",
+      "rect": [
+        1196,
+        840,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "card_5_plinth",
+      "rect": [
+        1262,
+        544,
+        222,
+        326
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "Plinth_Card_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_5_tag",
+      "rect": [
+        1285,
+        828,
+        176,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "card_5_diamond",
+      "rect": [
+        1297,
+        839,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "card_5_arrow",
+      "rect": [
+        1440,
+        840,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "item_0_cell",
+      "rect": [
+        1562,
+        412,
+        138,
+        132
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "ItemCell_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_0_tag",
+      "rect": [
+        1562,
+        586,
+        138,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_0_diamond",
+      "rect": [
+        1574,
+        597,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "item_0_arrow",
+      "rect": [
+        1679,
+        598,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "item_1_cell",
+      "rect": [
+        1726,
+        412,
+        138,
+        132
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "ItemCell_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_1_tag",
+      "rect": [
+        1726,
+        586,
+        138,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_1_diamond",
+      "rect": [
+        1738,
+        597,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "item_1_arrow",
+      "rect": [
+        1843,
+        598,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "item_2_cell",
+      "rect": [
+        1562,
+        656,
+        138,
+        132
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "ItemCell_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_2_tag",
+      "rect": [
+        1562,
+        830,
+        138,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_2_diamond",
+      "rect": [
+        1574,
+        841,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "item_2_arrow",
+      "rect": [
+        1679,
+        842,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "item_3_cell",
+      "rect": [
+        1726,
+        656,
+        138,
+        132
+      ],
+      "z": 20,
+      "opacity": 1,
+      "asset": "ItemCell_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          8,
+          8
+        ],
+        "unity_effect_distance": [
+          8,
+          -8
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_3_tag",
+      "rect": [
+        1726,
+        830,
+        138,
+        38
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "item_3_diamond",
+      "rect": [
+        1738,
+        841,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "item_3_arrow",
+      "rect": [
+        1843,
+        842,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    },
+    {
+      "id": "service_tag",
+      "rect": [
+        1286,
+        957,
+        198,
+        44
+      ],
+      "z": 24,
+      "opacity": 1,
+      "asset": "PriceTag_Unaffordable",
+      "shadow": {
+        "offset_canvas": [
+          6,
+          6
+        ],
+        "unity_effect_distance": [
+          6,
+          -6
+        ],
+        "color": "#16181B",
+        "opacity": 0.24,
+        "blur": 0,
+        "implementation": "UnityEngine.UI.Shadow; do not add a shadow PNG"
+      }
+    },
+    {
+      "id": "service_diamond",
+      "rect": [
+        1298,
+        968,
+        16,
+        16
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Credit"
+    },
+    {
+      "id": "service_arrow",
+      "rect": [
+        1463,
+        969,
+        9,
+        14
+      ],
+      "z": 25,
+      "opacity": 1,
+      "external_asset": "Icon_Arrow"
+    }
+  ],
+  "text_boxes": [
+    {
+      "id": "title",
+      "text": "보급 상점",
+      "rect": [
+        86,
+        118,
+        500,
+        64
+      ],
+      "font_size": 52,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 192.0
+    },
+    {
+      "id": "title_en",
+      "text": "FIELD SUPPLY",
+      "rect": [
+        88,
+        185,
+        400,
+        25
+      ],
+      "font_size": 17,
+      "color": "#68737D",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_text_width": 133.0
+    },
+    {
+      "id": "keeper_en",
+      "text": "SHOPKEEPER",
+      "rect": [
+        112,
+        910,
+        410,
+        22
+      ],
+      "font_size": 14,
+      "color": "#BCC7CE",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 3,
+      "preview_text_width": 116.0
+    },
+    {
+      "id": "keeper_name",
+      "text": "토냐",
+      "rect": [
+        112,
+        941,
+        350,
+        45
+      ],
+      "font_size": 40,
+      "color": "#FFFFFF",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "binding": "ShopkeeperData.entityName",
+      "preview_text_width": 70.0
+    },
+    {
+      "id": "dialogue",
+      "text": "필요한 게 있는 거예요?",
+      "rect": [
+        112,
+        995,
+        510,
+        32
+      ],
+      "font_size": 25,
+      "color": "#FFFFFF",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "binding": "ShopkeeperData.greetingLine",
+      "overflow": "ellipsis",
+      "max_lines": 1,
+      "preview_text_width": 228.0
+    },
+    {
+      "id": "cards_number",
+      "text": "01",
+      "rect": [
+        774,
+        140,
+        40,
+        28
+      ],
+      "font_size": 20,
+      "color": "#68737D",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 21.0
+    },
+    {
+      "id": "cards_title",
+      "text": "카드",
+      "rect": [
+        844,
+        136,
+        160,
+        58
+      ],
+      "font_size": 44,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 76.0
+    },
+    {
+      "id": "cards_en",
+      "text": "CARD MODULE",
+      "rect": [
+        1020,
+        160,
+        260,
+        24
+      ],
+      "font_size": 14,
+      "color": "#68737D",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_text_width": 119.0
+    },
+    {
+      "id": "supply_number",
+      "text": "02",
+      "rect": [
+        1562,
+        284,
+        40,
+        28
+      ],
+      "font_size": 20,
+      "color": "#68737D",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 24.0
+    },
+    {
+      "id": "supply_title",
+      "text": "보급품",
+      "rect": [
+        1562,
+        330,
+        196,
+        54
+      ],
+      "font_size": 44,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 114.0
+    },
+    {
+      "id": "supply_en",
+      "text": "SUPPLY",
+      "rect": [
+        1758,
+        355,
+        110,
+        23
+      ],
+      "font_size": 14,
+      "color": "#68737D",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_text_width": 64.0
+    },
+    {
+      "id": "service_number",
+      "text": "03",
+      "rect": [
+        774,
+        940,
+        40,
+        28
+      ],
+      "font_size": 20,
+      "color": "#68737D",
+      "font_weight": 400,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 24.0
+    },
+    {
+      "id": "service_title",
+      "text": "카드 제거",
+      "rect": [
+        832,
+        941,
+        242,
+        52
+      ],
+      "font_size": 44,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 162.0
+    },
+    {
+      "id": "service_en",
+      "text": "REMOVE SERVICE",
+      "rect": [
+        834,
+        1001,
+        245,
+        22
+      ],
+      "font_size": 14,
+      "color": "#68737D",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_text_width": 142.0
+    },
+    {
+      "id": "credits_label",
+      "text": "CREDITS",
+      "rect": [
+        1560,
+        148,
+        200,
+        24
+      ],
+      "font_size": 16,
+      "color": "#68737D",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 2,
+      "preview_text_width": 77.0
+    },
+    {
+      "id": "credits_value",
+      "text": "33",
+      "rect": [
+        1714,
+        150,
+        110,
+        65
+      ],
+      "font_size": 56,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "binding": "wallet.credits",
+      "preview_text_width": 72.0
+    },
+    {
+      "id": "leave_label",
+      "text": "나가기",
+      "rect": [
+        1638,
+        946,
+        190,
+        51
+      ],
+      "font_size": 38,
+      "color": "#16181B",
+      "font_weight": 700,
+      "alignment": "left",
+      "character_spacing_px": 0,
+      "preview_text_width": 99.0
+    },
+    {
+      "id": "leave_en",
+      "text": "LEAVE",
+      "rect": [
+        1640,
+        1001,
+        160,
+        22
+      ],
+      "font_size": 15,
+      "color": "#68737D",
+      "font_weight": 500,
+      "alignment": "left",
+      "character_spacing_px": 3,
+      "preview_text_width": 58.0
+    },
+    {
+      "id": "card_0_value",
+      "text": "46",
+      "rect": [
+        832,
+        499,
+        112,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "card_0.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 31.0
+    },
+    {
+      "id": "card_1_value",
+      "text": "47",
+      "rect": [
+        1076,
+        499,
+        112,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "card_1.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 30.0
+    },
+    {
+      "id": "card_2_value",
+      "text": "53",
+      "rect": [
+        1320,
+        499,
+        112,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "card_2.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 30.0
+    },
+    {
+      "id": "card_3_value",
+      "text": "49",
+      "rect": [
+        832,
+        833,
+        112,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "card_3.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 31.0
+    },
+    {
+      "id": "card_4_value",
+      "text": "50",
+      "rect": [
+        1076,
+        833,
+        112,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "card_4.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 30.0
+    },
+    {
+      "id": "card_5_value",
+      "text": "46",
+      "rect": [
+        1320,
+        833,
+        112,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "card_5.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 31.0
+    },
+    {
+      "id": "item_0_name",
+      "text": "전투 부스터",
+      "rect": [
+        1562,
+        554,
+        138,
+        24
+      ],
+      "font_size": 16,
+      "color": "#16181B",
+      "font_weight": 500,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "items.0.itemName",
+      "overflow": "ellipsis",
+      "max_lines": 1,
+      "preview_text_width": 74.0
+    },
+    {
+      "id": "item_0_value",
+      "text": "140",
+      "rect": [
+        1597,
+        591,
+        74,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "item_0.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 42.0
+    },
+    {
+      "id": "item_1_name",
+      "text": "최루탄",
+      "rect": [
+        1726,
+        554,
+        138,
+        24
+      ],
+      "font_size": 16,
+      "color": "#16181B",
+      "font_weight": 500,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "items.1.itemName",
+      "overflow": "ellipsis",
+      "max_lines": 1,
+      "preview_text_width": 42.0
+    },
+    {
+      "id": "item_1_value",
+      "text": "162",
+      "rect": [
+        1761,
+        591,
+        74,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "item_1.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 40.0
+    },
+    {
+      "id": "item_2_name",
+      "text": "열화 수류탄",
+      "rect": [
+        1562,
+        798,
+        138,
+        24
+      ],
+      "font_size": 16,
+      "color": "#16181B",
+      "font_weight": 500,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "items.2.itemName",
+      "overflow": "ellipsis",
+      "max_lines": 1,
+      "preview_text_width": 74.0
+    },
+    {
+      "id": "item_2_value",
+      "text": "243",
+      "rect": [
+        1597,
+        835,
+        74,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "item_2.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 45.0
+    },
+    {
+      "id": "item_3_name",
+      "text": "가스 마스크",
+      "rect": [
+        1726,
+        798,
+        138,
+        24
+      ],
+      "font_size": 16,
+      "color": "#16181B",
+      "font_weight": 500,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "items.3.itemName",
+      "overflow": "ellipsis",
+      "max_lines": 1,
+      "preview_text_width": 74.0
+    },
+    {
+      "id": "item_3_value",
+      "text": "153",
+      "rect": [
+        1761,
+        835,
+        74,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "item_3.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 41.0
+    },
+    {
+      "id": "service_value",
+      "text": "75",
+      "rect": [
+        1321,
+        962,
+        134,
+        30
+      ],
+      "font_size": 24,
+      "color": "#FF0000",
+      "font_weight": 600,
+      "alignment": "center",
+      "character_spacing_px": 0,
+      "binding": "service.price",
+      "color_binding": "ShopStockEntry.unaffordableColor",
+      "preview_text_width": 29.0
+    }
+  ],
+  "card_slots": [
+    {
+      "id": "card_0",
+      "name": "견제 초탄",
+      "plinth_rect": [
+        774,
+        210,
+        222,
+        326
+      ],
+      "card_rect": [
+        790,
+        218,
+        190,
+        276
+      ],
+      "price_rect": [
+        797,
+        494,
+        176,
+        38
+      ],
+      "price": 46,
+      "state": "Unaffordable",
+      "runtime": "existing game card prefab; preserve aspect and prefab content; center in card_rect",
+      "capture_source": "../Reference_Current.png",
+      "capture_rect_ltrb": [
+        665,
+        187,
+        801,
+        395
+      ],
+      "capture_included": false
+    },
+    {
+      "id": "card_1",
+      "name": "전진사격",
+      "plinth_rect": [
+        1018,
+        210,
+        222,
+        326
+      ],
+      "card_rect": [
+        1034,
+        218,
+        190,
+        276
+      ],
+      "price_rect": [
+        1041,
+        494,
+        176,
+        38
+      ],
+      "price": 47,
+      "state": "Unaffordable",
+      "runtime": "existing game card prefab; preserve aspect and prefab content; center in card_rect",
+      "capture_source": "../Reference_Current.png",
+      "capture_rect_ltrb": [
+        848,
+        187,
+        984,
+        395
+      ],
+      "capture_included": false
+    },
+    {
+      "id": "card_2",
+      "name": "임시 재장전",
+      "plinth_rect": [
+        1262,
+        210,
+        222,
+        326
+      ],
+      "card_rect": [
+        1278,
+        218,
+        190,
+        276
+      ],
+      "price_rect": [
+        1285,
+        494,
+        176,
+        38
+      ],
+      "price": 53,
+      "state": "Unaffordable",
+      "runtime": "existing game card prefab; preserve aspect and prefab content; center in card_rect",
+      "capture_source": "../Reference_Current.png",
+      "capture_rect_ltrb": [
+        1030,
+        187,
+        1166,
+        395
+      ],
+      "capture_included": false
+    },
+    {
+      "id": "card_3",
+      "name": "Q.E.D",
+      "plinth_rect": [
+        774,
+        544,
+        222,
+        326
+      ],
+      "card_rect": [
+        790,
+        552,
+        190,
+        276
+      ],
+      "price_rect": [
+        797,
+        828,
+        176,
+        38
+      ],
+      "price": 49,
+      "state": "Unaffordable",
+      "runtime": "existing game card prefab; preserve aspect and prefab content; center in card_rect",
+      "capture_source": "../Reference_Current.png",
+      "capture_rect_ltrb": [
+        665,
+        435,
+        801,
+        643
+      ],
+      "capture_included": false
+    },
+    {
+      "id": "card_4",
+      "name": "빠른 후퇴",
+      "plinth_rect": [
+        1018,
+        544,
+        222,
+        326
+      ],
+      "card_rect": [
+        1034,
+        552,
+        190,
+        276
+      ],
+      "price_rect": [
+        1041,
+        828,
+        176,
+        38
+      ],
+      "price": 50,
+      "state": "Unaffordable",
+      "runtime": "existing game card prefab; preserve aspect and prefab content; center in card_rect",
+      "capture_source": "../Reference_Current.png",
+      "capture_rect_ltrb": [
+        848,
+        435,
+        984,
+        643
+      ],
+      "capture_included": false
+    },
+    {
+      "id": "card_5",
+      "name": "후퇴",
+      "plinth_rect": [
+        1262,
+        544,
+        222,
+        326
+      ],
+      "card_rect": [
+        1278,
+        552,
+        190,
+        276
+      ],
+      "price_rect": [
+        1285,
+        828,
+        176,
+        38
+      ],
+      "price": 46,
+      "state": "Unaffordable",
+      "runtime": "existing game card prefab; preserve aspect and prefab content; center in card_rect",
+      "capture_source": "../Reference_Current.png",
+      "capture_rect_ltrb": [
+        1030,
+        435,
+        1166,
+        643
+      ],
+      "capture_included": false
+    }
+  ],
+  "item_slots": [
+    {
+      "id": "item_0",
+      "name": "전투 부스터",
+      "source": "Assets/Art/Items/Item_CombatBooster_Vertex.png",
+      "cell_rect": [
+        1562,
+        412,
+        138,
+        132
+      ],
+      "icon_rect": [
+        1578,
+        424,
+        106,
+        108
+      ],
+      "name_rect": [
+        1562,
+        554,
+        138,
+        24
+      ],
+      "price_rect": [
+        1562,
+        586,
+        138,
+        38
+      ],
+      "price": 140,
+      "state": "Unaffordable",
+      "asset_included": false,
+      "preserve_aspect": true,
+      "tooltip": "existing game tooltip"
+    },
+    {
+      "id": "item_1",
+      "name": "최루탄",
+      "source": "Assets/Art/Items/Item_TearGasGrenade_Vertex.png",
+      "cell_rect": [
+        1726,
+        412,
+        138,
+        132
+      ],
+      "icon_rect": [
+        1742,
+        424,
+        106,
+        108
+      ],
+      "name_rect": [
+        1726,
+        554,
+        138,
+        24
+      ],
+      "price_rect": [
+        1726,
+        586,
+        138,
+        38
+      ],
+      "price": 162,
+      "state": "Unaffordable",
+      "asset_included": false,
+      "preserve_aspect": true,
+      "tooltip": "existing game tooltip"
+    },
+    {
+      "id": "item_2",
+      "name": "열화 수류탄",
+      "source": "Assets/Art/Items/Item_ThermiteGrenade_Vertex.png",
+      "cell_rect": [
+        1562,
+        656,
+        138,
+        132
+      ],
+      "icon_rect": [
+        1578,
+        668,
+        106,
+        108
+      ],
+      "name_rect": [
+        1562,
+        798,
+        138,
+        24
+      ],
+      "price_rect": [
+        1562,
+        830,
+        138,
+        38
+      ],
+      "price": 243,
+      "state": "Unaffordable",
+      "asset_included": false,
+      "preserve_aspect": true,
+      "tooltip": "existing game tooltip"
+    },
+    {
+      "id": "item_3",
+      "name": "가스 마스크",
+      "source": "Assets/Art/Items/Item_GasMask_Vertex.png",
+      "cell_rect": [
+        1726,
+        656,
+        138,
+        132
+      ],
+      "icon_rect": [
+        1742,
+        668,
+        106,
+        108
+      ],
+      "name_rect": [
+        1726,
+        798,
+        138,
+        24
+      ],
+      "price_rect": [
+        1726,
+        830,
+        138,
+        38
+      ],
+      "price": 153,
+      "state": "Unaffordable",
+      "asset_included": false,
+      "preserve_aspect": true,
+      "tooltip": "existing game tooltip"
+    }
+  ],
+  "templates": {
+    "card": {
+      "count": 6,
+      "grid": [
+        3,
+        2
+      ],
+      "hover_preserves_card_prefab": true
+    },
+    "item": {
+      "count": 4,
+      "grid": [
+        2,
+        2
+      ],
+      "name_font_size": 16,
+      "name_max_lines": 1,
+      "name_overflow": "ellipsis"
+    },
+    "sold_out": {
+      "applies_to": "card and item content rect; price remains separate",
+      "overlays": [
+        {
+          "external_asset": "SoldOut_Hatching",
+          "rect_normalized": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "external_asset": "SoldOut_Band",
+          "rect_normalized": [
+            0,
+            0.38,
+            1,
+            0.24
+          ]
+        },
+        {
+          "external_asset": "SoldOut_Stamp",
+          "rect_normalized": [
+            0.12,
+            0.42,
+            0.76,
+            0.16
+          ]
+        }
+      ],
+      "text_box": {
+        "text": "SOLD OUT",
+        "rect_normalized": [
+          0,
+          0.4,
+          1,
+          0.2
+        ],
+        "font_size": 20,
+        "color": "#16181B",
+        "alignment": "center",
+        "character_spacing_px": 1,
+        "font_weight": 700
+      },
+      "interactable": false
+    }
+  },
+  "states": {
+    "goods": {
+      "precedence": [
+        "SoldOut",
+        "Unaffordable",
+        "Hover",
+        "Normal"
+      ],
+      "Normal": {
+        "plinth": "Plinth_Card_Normal",
+        "cell": "ItemCell_Normal",
+        "price_tag": "PriceTag_Normal",
+        "price_color": "#16181B",
+        "interactable": true
+      },
+      "Hover": {
+        "plinth": "Plinth_Card_Hover",
+        "cell": "ItemCell_Hover",
+        "price_tag": "PriceTag_Hover",
+        "price_color": "#16181B",
+        "interactable": true
+      },
+      "Unaffordable": {
+        "plinth": "Plinth_Card_Unaffordable",
+        "cell": "ItemCell_Unaffordable",
+        "price_tag": "PriceTag_Unaffordable",
+        "price_color": "#FF0000",
+        "price_color_binding": "ShopStockEntry.unaffordableColor",
+        "purchase_enabled": false,
+        "tooltip_enabled": true,
+        "pointer_hover_overrides_state": false
+      },
+      "SoldOut": {
+        "template": "sold_out",
+        "purchase_enabled": false
+      }
+    },
+    "service": {
+      "Normal": "Panel_Service_Normal",
+      "Hover": "Panel_Service_Hover",
+      "Disabled": "Panel_Service_Disabled",
+      "disabled_if": "already used OR credits < cost",
+      "disabled_price_tag": "PriceTag_Unaffordable",
+      "insufficient_funds_price_color_binding": "ShopStockEntry.unaffordableColor",
+      "interactable_when_disabled": false
+    },
+    "leave": {
+      "Normal": "Button_Leave_Normal",
+      "Hover": "Button_Leave_Hover",
+      "Pressed": "Button_Leave_Pressed",
+      "pressed_shadow_offset": [
+        6,
+        6
+      ]
+    },
+    "close": {
+      "Normal": "Button_Close_Normal",
+      "Hover": "Button_Close_Hover",
+      "Pressed": "Button_Close_Pressed"
+    }
+  },
+  "rendering": {
+    "alpha": "straight",
+    "filter": "bilinear",
+    "ui_png_scale": 2,
+    "background_png_scale": 1,
+    "font": "Pretendard; actual text uses TMP",
+    "nine_slice_order": "left,bottom,right,top in SOURCE PNG pixels",
+    "shadow_policy": "Unity Shadow only. No shadow baked into exported PNG/SVG. useGraphicAlpha=true. No second shadow sprite.",
+    "sort": "external scene -> counter -> keeper -> Shop_BG -> panels/shadows -> watermarks -> goods -> prices/icons -> TMP -> runtime HUD/QuestTracker",
+    "background_left_transparent_until_x": 690,
+    "background_top_transparent_px": 106
+  },
+  "notes": [
+    "Only new UI geometry included. Existing icons, sold-out masks, watermarks are external v2 references.",
+    "All shop labels and prices are TMP; game card prefab contents are unchanged external runtime visuals.",
+    "PriceTag uses real 9-slice; keep 24 source-pixel borders at 2x, 12 logical pixels.",
+    "Credit value 33 makes all displayed goods and service unaffordable. Source component default is Color.red; serialized game override remains authoritative.",
+    "Mockup uses source screenshot card captures, so their sharpness is limited by supplied screenshot resolution.",
+    "No scene, prefab, importer, or .meta file edits."
+  ]
+}

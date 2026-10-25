@@ -175,7 +175,8 @@ public class DialogueView : MonoBehaviour
 
         Sprite art = null;
         if (CooperationManager.Instance != null && CooperationManager.Instance.TryGetCoopCharData(speakerId, out var data))
-            art = data.sanctuaryFullArt != null ? data.sanctuaryFullArt
+            // 대화창은 서 있는 전신(동료 탭 전신 → 성소 전신 순). 전투 스탠딩은 시트 프레임이라 마지막
+            art = data.RosterFullArt != null ? data.RosterFullArt
                 : data.standingSprite != null ? data.standingSprite
                 : data.charImage;
 

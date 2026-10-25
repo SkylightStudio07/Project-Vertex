@@ -38,6 +38,10 @@ public class EnemyData : ScriptableObject
     public Vector2 intentAnchor = new(0.5f, 1f);
     [Tooltip("그림 안 HP 바 중심 (0~1, 좌하단 원점)")]
     public Vector2 hpBarAnchor = new(0.5f, 0f);
+    [Tooltip("이 적의 배치 자리를 기본 슬롯에서 옮긴다 (슬롯 단위 px, x 오른쪽 · y 위). 체력바가 겹칠 때 이 적만 따로 벌린다")]
+    public Vector2 slotOffset;
+    [Tooltip("HP 바 · 상태 줄을 기본 자리에서 옮긴다 (캔버스 px, y 아래가 −). 화면 고정 배치가 아닐 때만. 공격 연출이 바와 겹칠 때 쓴다")]
+    public Vector2 hpBarOffset;
     [Tooltip("공격할 때 앞으로 튀어나오지 않고 제자리에서 크기만 살짝 튄다")]
     public bool noLunge;
 
@@ -54,6 +58,21 @@ public class EnemyData : ScriptableObject
 
     [Tooltip("공격 애니메이션 초당 프레임 수 (기본 16 FPS)")]
     public float attackFrameRate = 16f;
+
+    [Header("공격 연출 — 땅 파임")]
+    [Tooltip("총구마다 탄착점에서 땅이 파이는 충격. 공격 프레임 번호와 터지는 자리를 한 쌍씩 적는다. 비우면 없음")]
+    public List<GroundFxShot> groundFxShots = new();
+    [Tooltip("충격 크기 배율")]
+    public float groundFxScale = 1f;
+
+    [System.Serializable]
+    public struct GroundFxShot
+    {
+        [Tooltip("공격 애니메이션 프레임 번호 (0부터)")]
+        public int frame;
+        [Tooltip("탄착점 (그림 안 0~1, 좌하단 원점)")]
+        public Vector2 point;
+    }
 
     [Header("시트 여백 (대기/공격 크기 맞추기)")]
     [Tooltip("대기 시트의 여백 비율 — 캐릭터 크기 대비 한쪽 여백. 1할 = 0.1 (프레임 = 캐릭터 × (1 + 2×여백))")]

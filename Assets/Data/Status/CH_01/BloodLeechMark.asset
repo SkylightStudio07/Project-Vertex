@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: BloodLeechMark
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: ch01.blood-leech
+  displayName: "\uCC29\uD608"
+  description: "\uC774 \uC801\uC774 \uCCB4\uB825\uC744 \uC783\uC744 \uB54C\uB9C8\uB2E4
+    \uACF5\uACA9\uD55C \uCABD\uC774 \uCCB4\uB825\uC744 (\uC704\uB825)\uB9CC\uD07C
+    \uD68C\uBCF5\uD569\uB2C8\uB2E4. \uD134\uC774 \uB05D\uB098\uBA74 \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
+  icon: {fileID: -3335127513847250032, guid: 14f26267f86487348a88a6df3a66adf5, type: 3}
+  disposition: 2
+  stackPolicy: 2
+  durationPolicy: 3
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 8755282979299787283
+  references:
+    version: 2
+    RefIds:
+    - rid: 8755282979299787283
+      type: {class: AfterDamageTakenEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 8755282979299787284
+    - rid: 8755282979299787284
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 0
+        scaling:
+          source: 8
+          target: 0
+          status: {fileID: 0}
+          multiplier: 1
+          flatBonus: 0
+        targets:
+          mode: 1

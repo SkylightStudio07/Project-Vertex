@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BattleUnit_Ally
+  m_Shader: {fileID: 4800000, guid: b5056a85bff5a13428bbe8d0d4c70f1f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BottomShade: 0
+    - _Brightness: 1
+    - _ColorMask: 15
+    - _OutlinePx: 1.5
+    - _RimPx: 3.5
+    - _Saturation: 0.95
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TopFalloff: 2.2
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Grade: {r: 0.98, g: 0.99, b: 1, a: 1}
+    - _OutlineColor: {r: 0.086, g: 0.094, b: 0.106, a: 0.7}
+    - _RimColor: {r: 1, g: 0.97, b: 0.92, a: 0.6}
+    - _RimDir: {r: -0.7, g: 0.7, b: 0, a: 0}
+    - _TopLight: {r: 0.8, g: 0.9, b: 1, a: 0}
+    - _VRange: {r: 0, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

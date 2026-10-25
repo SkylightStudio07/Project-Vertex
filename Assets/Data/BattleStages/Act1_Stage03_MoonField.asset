@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b746ef9229024478d319e5bfadf9e3, type: 3}
+  m_Name: Act1_Stage03_MoonField
+  m_EditorClassIdentifier: Assembly-CSharp::BattleStageData
+  background: {fileID: 21300000, guid: ee6ed66e301b2a843b1a897b4ba7dc47, type: 3}
+  actNumber: 1
+  minFloor: 11
+  maxFloor: 15
+  featuredEnemies: []
+  partyOffset: {x: 0, y: 0}
+  lightFrom: {x: 0.05, y: 0.95}
+  rimColor: {r: 0.8, g: 0.9, b: 1, a: 0.85}
+  allyGrade: {r: 0.94, g: 0.97, b: 1, a: 1}
+  allyBrightness: 1
+  enemyGrade: {r: 0.88, g: 0.94, b: 1, a: 1}
+  enemySaturation: 0.75
+  enemyBrightness: 1
+  topLight: {r: 0.75, g: 0.9, b: 1, a: 0.28}
+  topFalloff: 2.2
+  bottomShade: 0.25
+  spotlightColor: {r: 0.75, g: 0.9, b: 1, a: 0.12}
+  moteCount: 40
+  moteColor: {r: 0.82, g: 0.94, b: 1, a: 0.95}
+  moteArea:
+    serializedVersion: 2
+    x: 0.02
+    y: 0.18
+    width: 0.96
+    height: 0.6
+  petalCount: 14
+  petalColor: {r: 0.92, g: 0.97, b: 1, a: 0.9}
+  lightShaft: 1
+  shaftOrigin: {x: 0.49, y: 0.9}
+  shaftAngle: 0
+  shaftSize: {x: 0.42, y: 0.95}
+  shaftColor: {r: 0.72, g: 0.88, b: 1, a: 0.17}
+  fogColor: {r: 0.7, g: 0.84, b: 1, a: 0.15}
+  fogBands:
+  - 0.52
+  - 0.34
+  blinkLights:
+  - position: {x: 0.978, y: 0.58}
+    color: {r: 1, g: 0.22, b: 0.18, a: 0.85}
+    size: 0.05
+  standPools:
+  - {x: 0.25, y: 0.3}
+  - {x: 0.72, y: 0.3}
+  standPoolColor: {r: 0.75, g: 0.9, b: 1, a: 0.2}
+  screenBottomShade: 0.5
+  vignette: 0.38
+  hudDecorTint: {r: 0.05, g: 0.1, b: 0.2, a: 0.9}
