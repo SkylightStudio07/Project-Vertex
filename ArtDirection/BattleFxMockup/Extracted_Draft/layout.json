@@ -1,0 +1,499 @@
+{
+  "version": 1,
+  "canvas_reference": [
+    1920,
+    1080
+  ],
+  "request": "../GROUND_IMPACT_REQUEST.md",
+  "assets": [
+    {
+      "name": "Crater_A",
+      "file": "Crater_A.png",
+      "size": [
+        380,
+        190
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "source_crop_ltrb": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "center_alpha_target": 0.9,
+      "semantic": "dark neutral concrete crater and radiating fractures",
+      "tint": "retain dark painted RGB; do not tint dark twice"
+    },
+    {
+      "name": "Crater_B",
+      "file": "Crater_B.png",
+      "size": [
+        380,
+        190
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "source_crop_ltrb": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "center_alpha_target": 0.9,
+      "semantic": "dark neutral concrete crater and radiating fractures",
+      "tint": "retain dark painted RGB; do not tint dark twice"
+    },
+    {
+      "name": "Crater_C",
+      "file": "Crater_C.png",
+      "size": [
+        380,
+        190
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "source_crop_ltrb": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "center_alpha_target": 0.9,
+      "semantic": "dark neutral concrete crater and radiating fractures",
+      "tint": "retain dark painted RGB; do not tint dark twice"
+    },
+    {
+      "name": "Dust_Puff",
+      "file": "Dust_Puff.png",
+      "size": [
+        2048,
+        256
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 8,
+      "columns": 8,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "frame_size": [
+        256,
+        256
+      ],
+      "padding": 0,
+      "extrude": 0,
+      "reading_order": "left-to-right",
+      "frame_duration_seconds": 0.1,
+      "preview_fps": 10,
+      "playback": "one-shot",
+      "last_frame_alpha_max": 2,
+      "runtime_tint": "multiply white RGB by background-matched dust color",
+      "source_cells": [
+        {
+          "rect": [
+            0.0,
+            219,
+            271.5,
+            281
+          ]
+        },
+        {
+          "rect": [
+            271.5,
+            219,
+            271.5,
+            281
+          ]
+        },
+        {
+          "rect": [
+            543.0,
+            219,
+            271.5,
+            281
+          ]
+        },
+        {
+          "rect": [
+            814.5,
+            219,
+            271.5,
+            281
+          ]
+        },
+        {
+          "rect": [
+            1086.0,
+            219,
+            271.5,
+            281
+          ]
+        },
+        {
+          "rect": [
+            1357.5,
+            219,
+            271.5,
+            281
+          ]
+        },
+        {
+          "rect": [
+            1629.0,
+            219,
+            271.5,
+            281
+          ]
+        },
+        {
+          "rect": [
+            1900.5,
+            219,
+            271.5,
+            281
+          ]
+        }
+      ],
+      "unity_frame_rects": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            1024,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            1280,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            1536,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            1792,
+            0,
+            256,
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Debris_01",
+      "file": "Debris_01.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "semantic": "angular concrete fragment",
+      "source_cell": 0,
+      "source_crop_in_cell_ltrb": [
+        0,
+        0,
+        367,
+        209
+      ],
+      "runtime_tint": "retain dark gray RGB; avoid double darkening"
+    },
+    {
+      "name": "Debris_02",
+      "file": "Debris_02.png",
+      "size": [
+        28,
+        28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "semantic": "angular concrete fragment",
+      "source_cell": 1,
+      "source_crop_in_cell_ltrb": [
+        0,
+        0,
+        203,
+        311
+      ],
+      "runtime_tint": "retain dark gray RGB; avoid double darkening"
+    },
+    {
+      "name": "Debris_03",
+      "file": "Debris_03.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "semantic": "angular concrete fragment",
+      "source_cell": 2,
+      "source_crop_in_cell_ltrb": [
+        0,
+        0,
+        264,
+        324
+      ],
+      "runtime_tint": "retain dark gray RGB; avoid double darkening"
+    },
+    {
+      "name": "Debris_04",
+      "file": "Debris_04.png",
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "semantic": "angular concrete fragment",
+      "source_cell": 3,
+      "source_crop_in_cell_ltrb": [
+        0,
+        0,
+        159,
+        336
+      ],
+      "runtime_tint": "retain dark gray RGB; avoid double darkening"
+    },
+    {
+      "name": "Debris_05",
+      "file": "Debris_05.png",
+      "size": [
+        30,
+        30
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "semantic": "angular concrete fragment",
+      "source_cell": 4,
+      "source_crop_in_cell_ltrb": [
+        0,
+        0,
+        242,
+        233
+      ],
+      "runtime_tint": "retain dark gray RGB; avoid double darkening"
+    },
+    {
+      "name": "Debris_06",
+      "file": "Debris_06.png",
+      "size": [
+        22,
+        22
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "semantic": "angular concrete fragment",
+      "source_cell": 5,
+      "source_crop_in_cell_ltrb": [
+        0,
+        0,
+        308,
+        250
+      ],
+      "runtime_tint": "retain dark gray RGB; avoid double darkening"
+    },
+    {
+      "name": "Shock_Ring",
+      "file": "Shock_Ring.png",
+      "size": [
+        600,
+        300
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "pivot_origin": "bottom-left (Unity normalized)",
+      "frame_count": 1,
+      "columns": 1,
+      "rows": 1,
+      "alpha": "straight",
+      "text_baked": false,
+      "semantic": "thin elliptical white pressure ring; center transparent",
+      "source_crop_ltrb": [
+        79,
+        255,
+        1694,
+        641
+      ],
+      "footprint_aspect": 2,
+      "pre_flattened": true,
+      "runtime_tint": "white RGB supports multiply tint"
+    }
+  ],
+  "rendering": {
+    "alpha": "straight",
+    "texture_srgb": true,
+    "alpha_is_transparency": true,
+    "filter_mode": "Bilinear",
+    "wrap_mode": "Clamp",
+    "compression": "None during review; choose quality after in-game inspection",
+    "mipmaps": false,
+    "sprite_pixels_per_unit": 100,
+    "raycast_target": false,
+    "blend": "standard alpha; no additive required"
+  },
+  "impact_frames_24fps": [
+    15,
+    21,
+    27,
+    33,
+    42,
+    45
+  ],
+  "impact_seconds": [
+    0.625,
+    0.875,
+    1.125,
+    1.375,
+    1.75,
+    1.875
+  ],
+  "source_method": "Built-in imagegen on magenta/black key; deterministic RGBA matte extraction, despill, fit and frame slicing. Native transparent option returned unsupported error.",
+  "runtime_handoff": {
+    "changes_made": "none; art files only",
+    "timing_position_scale": "existing GroundImpactFx.cs remains authoritative",
+    "pivots": "All sprites and each dust frame centered, matching existing Spawn pivot .5,.5. Dust art has a stable near-bottom origin within frame.",
+    "dust_animation": "8-frame deliverable; current code animates a single Soft sprite and has no sheet reader. This package does not silently add animation playback. Individual frame PNGs also supplied.",
+    "ring_aspect": "600x300 already flat. Existing code also scales Y to .38 and uses square size; do not blindly apply both flattenings when binding this art.",
+    "dark_rgb": "Existing crater/chip tint was authored for white masks. New crater/debris preserve dark RGB as requested; assess tint multiplication when binding.",
+    "suggested_binding_review": "Sprite selection/animation wiring and any material/geometry mapping are integration work; this delivery does not modify code, timings or positions."
+  },
+  "optional": {
+    "blue_purple_dust": "not duplicated; tint white source at runtime",
+    "Crater_Glow": "not included (optional; avoids introducing fire flash)"
+  },
+  "notes": [
+    "Exact native export sizes; no invented 2x detail.",
+    "Generated source images preserved separately in GroundImpact/Sources; not import sprites.",
+    "Dust is a generated sequence with alignment and alpha fade normalization, not a simulation.",
+    "Preview timings illustrate supplied attack keyframes; they do not replace runtime timing."
+  ]
+}
