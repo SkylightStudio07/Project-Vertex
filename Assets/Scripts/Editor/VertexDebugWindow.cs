@@ -52,6 +52,18 @@ public class VertexDebugWindow : EditorWindow
         }
         if (GUILayout.Button("폴더 열기", GUILayout.Height(24), GUILayout.Width(70))) ScreenshotTool.Reveal();
         EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
+        using (new EditorGUI.DisabledScope(!Application.isPlaying))
+        {
+            var prev = GUI.backgroundColor;
+            if (GameViewRecorder.IsRecording) GUI.backgroundColor = new Color(1f, 0.45f, 0.45f);
+            string label = GameViewRecorder.IsRecording ? $"■ 녹화 정지 (F10)   {GameViewRecorder.Elapsed:0.0}초" : "● 녹화 시작 (F10)";
+            if (GUILayout.Button(label, GUILayout.Height(24))) ScreenshotTool.ToggleRecording();
+            GUI.backgroundColor = prev;
+        }
+        if (GUILayout.Button("폴더 열기", GUILayout.Height(24), GUILayout.Width(70))) ScreenshotTool.RevealRecordings();
+        EditorGUILayout.EndHorizontal();
     }
 
     // ── 동료 ──

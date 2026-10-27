@@ -5,7 +5,7 @@ using UnityEngine;
 // ============================================================
 // filename   : ScreenshotTool.cs
 // description: 플레이 중 게임뷰 화면만(UI 포함, 에디터 창 제외) PNG로 저장한다.
-//              - 단축키 F12 (Tools ▸ Vertex ▸ 스크린샷)
+//              - 단축키 F12 (Tools ▸ Vertex ▸ 스크린샷), 녹화 F10 (MP4, Recordings/)
 //              - 디버그 패널 맨 위의 버튼 · 지연 촬영
 //              저장 위치: 프로젝트 루트/Screenshots/yyyyMMdd_HHmmss.png (git에는 올라가지 않는다)
 // ============================================================
@@ -42,6 +42,16 @@ public static class ScreenshotTool
         _pendingAt = -1;
         EditorApplication.update -= Tick;
         Capture();
+    }
+
+    // ── 녹화 (GameViewRecorder) ──
+    [MenuItem("Tools/Vertex/녹화 시작 · 정지 _F10")]
+    public static void ToggleRecording() => GameViewRecorder.Toggle();
+
+    public static void RevealRecordings()
+    {
+        Directory.CreateDirectory(GameViewRecorder.Folder);
+        EditorUtility.RevealInFinder(GameViewRecorder.Folder);
     }
 
     public static void Reveal()
