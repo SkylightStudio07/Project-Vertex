@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: Bleed
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: status.bleed
+  displayName: "\uCD9C\uD608"
+  description: "\uCE74\uB4DC\uB97C \uB0BC \uB54C\uB9C8\uB2E4 \uC218\uCE58\uB9CC\uD07C
+    \uAD00\uD1B5 \uD53C\uD574\uB97C \uBC1B\uC2B5\uB2C8\uB2E4. \uD134\uC774 \uB05D\uB098\uBA74
+    1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  icon: {fileID: 8764194169858691371, guid: 26bbcd04fea48ac45b7c81c6fa9c6fbc, type: 3}
+  disposition: 2
+  stackPolicy: 0
+  durationPolicy: 3
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 8755283163869347956
+  references:
+    version: 2
+    RefIds:
+    - rid: 8755283163869347956
+      type: {class: OnCardPlayedEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 8755283163869347957
+    - rid: 8755283163869347957
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 0
+        scaling:
+          source: 7
+          target: 0
+          status: {fileID: 0}
+          multiplier: 1
+          flatBonus: 0
+        conditionalBonuses: []
+        hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+        targets:
+          mode: 0
+        piercing: 1
+        environmentalDamage: 1
+        hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0

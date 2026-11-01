@@ -493,6 +493,26 @@ public class EnemyView : MonoBehaviour
 
     private void HandleDied()
     {
+        // 격퇴 후 대화하는 적: 사라지지 않고 서 있는다 (HP · 인텐트 · 상태만 걷어낸다). 클릭은 DefeatedTalkSession이 맡는다
+        if (Instance?.Data != null && Instance.Data.defeatedTalk != null && enemyImage != null)
+        {
+            var data = Instance.Data.defeatedTalk;
+            Unsubscribe();
+            if (TryGetComponent<EnemyHoverInfo>(out var hoverInfo)) hoverInfo.Hide();
+            enabled = false;
+            if (hpFill != null) hpFill.transform.parent.gameObject.SetActive(false);
+            if (statusList != null) statusList.gameObject.SetActive(false);
+            if (blockBadge != null) blockBadge.SetActive(false);
+            if (intentIcon != null) intentIcon.gameObject.SetActive(false);
+            if (intentField != null) intentField.SetActive(false);
+            if (intentValueText != null) intentValueText.gameObject.SetActive(false);
+            if (actionNameText != null) actionNameText.gameObject.SetActive(false);
+            enemyImage.raycastTarget = false;
+            enemyImage.DOColor(new Color(0.78f, 0.8f, 0.84f, 1f), 0.4f).SetLink(gameObject); // 숨을 고르는 듯 살짝 가라앉힌다
+            DefeatedTalkSession.Register(this, enemyImage.rectTransform, data);
+            return;
+        }
+
         // 구독만 끊는다 — 사라지는 동안 인텐트 갱신·피격 이펙트 등이 더 들어오지 않도록.
         // Unbind()는 스프라이트 크기·인텐트 위치를 기본값으로 되돌려 죽는 순간 적이 작아져 보이므로 쓰지 않는다.
         // (Instance.IsDead가 true라 EnemyTargeting도 이 뷰를 대상으로 잡지 않는다)
@@ -540,6 +560,15 @@ public class EnemyView : MonoBehaviour
     {
         ShowActionName();
         if (_rect == null) return;
+
+        // 키프레임 공격(포즈 몇 장 + 반동 · 돌진): 제자리 돌진 · 움찔 없이 키프레임이 움직임을 다 맡는다
+        if (Instance?.Data != null && Instance.Data.HasAttackKeyframes && enemyImage != null)
+        {
+            var kp = enemyImage.GetComponent<PoseSequencePlayer>();
+            if (kp == null) kp = enemyImage.gameObject.AddComponent<PoseSequencePlayer>();
+            kp.Play(Instance.Data.attackKeyframes.ToArray());
+            return;
+        }
 
         // 공격 스프라이트 애니메이션이 등록되어 있으면 재생 (대기 애니메이션 자동 일시정지 및 복귀)
         if (Instance != null && Instance.AttackFrames != null && Instance.AttackFrames.Length > 0 && enemyImage != null)

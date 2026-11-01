@@ -164,6 +164,8 @@ public class RewardsView : MonoBehaviour
             GameManager.Instance.CompleteAct();
             return;
         }
+        // 격퇴 후 대화할 적이 서 있으면 그 화면을 먼저 (계속을 누르면 맵)
+        if (DefeatedTalkSession.TryShow(mapUIController.OpenMap)) return;
         mapUIController.OpenMap();
     }
 

@@ -121,6 +121,19 @@ public sealed class DamageModifierStatusBehavior : StatusBehavior
     };
 }
 
+// 이 상태를 가진 쪽의 공격이 방어도를 일부 관통한다 (예: 카리나 '천부적 살인술' 25%)
+[Serializable]
+public sealed class BlockPierceStatusBehavior : StatusBehavior
+{
+    [Range(0f, 1f)] public float percent = 0.25f;
+
+    public override DamageInfo ModifyOutgoingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview)
+    {
+        if (info.Source != null) info.PiercePercent = Mathf.Max(info.PiercePercent, percent);
+        return info;
+    }
+}
+
 [Serializable]
 public sealed class BlockModifierStatusBehavior : StatusBehavior
 {

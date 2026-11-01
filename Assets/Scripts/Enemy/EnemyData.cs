@@ -59,6 +59,27 @@ public class EnemyData : ScriptableObject
     [Tooltip("공격 애니메이션 초당 프레임 수 (기본 16 FPS)")]
     public float attackFrameRate = 16f;
 
+    [Header("격퇴 후 대화 (비우면 평소처럼 사라진다)")]
+    [Tooltip("채우면 쓰러뜨려도 그 자리에 서 있고, 보상 화면을 닫은 뒤 클릭하면 대화할 수 있다 (호감도 · 합류)")]
+    public DefeatedTalkData defeatedTalk;
+
+    [Header("공격 연출 — 키프레임 (시트 대신 포즈 몇 장 + 움직임)")]
+    [Tooltip("채우면 attackFrames 대신 이 키프레임으로 공격한다 (포즈 · 위치 · 회전 · 시간). 반동으로 밀려났다 돌아오는 사격 연출 등. 돌진 모션은 쓰지 않는다")]
+    public List<AttackKeyframe> attackKeyframes = new();
+    [Tooltip("공격을 시작하고 몇 초 뒤에 피해가 들어가는지 (전진 0.2초 뒤부터). 음수면 전투 기본값(BattleManager)")]
+    public float attackHitDelay = -1f;
+
+    public bool HasAttackKeyframes => attackKeyframes != null && attackKeyframes.Count > 0;
+    public float AttackKeyframeDuration
+    {
+        get
+        {
+            float t = 0f;
+            if (attackKeyframes != null) foreach (var k in attackKeyframes) if (k != null) t += k.moveDuration + k.holdDuration;
+            return t;
+        }
+    }
+
     [Header("공격 연출 — 땅 파임")]
     [Tooltip("총구마다 탄착점에서 땅이 파이는 충격. 공격 프레임 번호와 터지는 자리를 한 쌍씩 적는다. 비우면 없음")]
     public List<GroundFxShot> groundFxShots = new();

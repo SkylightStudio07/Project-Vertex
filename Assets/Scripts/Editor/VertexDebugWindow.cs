@@ -9,7 +9,7 @@ using UnityEngine;
 //              (인스펙터마다 따로 만들지 않는다).
 //              - 동료: 구출 플래그 해금 · 성소 후보 강제 · 이번 런에 즉시 합류
 //              - 호감도: 협력자 호감도 레벨 · 마키나 · 토냐 · 로비 시설 담당 호감도 등급(0~4) · 이벤트 플래그 초기화
-//              - 적 · 전투: 훈련 상대 전부 해금(격퇴 기록 무시), 조우 목록, 지금 바로 전투 시작
+//              - 적 · 전투: 훈련 상대 전부 해금(격퇴 기록 무시), 조우 목록, 지금 바로 전투 시작, 적 기록(마테리얼) 한 편씩 열기
 //              - 스크린샷: 게임뷰만 PNG로 저장 (F12 · 지연 촬영) → ScreenshotTool
 //              저장된 기록(격퇴 수 · 호감도 파일)은 호감도 버튼을 빼고 건드리지 않는다.
 // ============================================================
@@ -222,6 +222,19 @@ public class VertexDebugWindow : EditorWindow
                 if (GUILayout.Button("전투 시작", GUILayout.Width(80)))
                     GameManager.Instance.StartEncounterBattle(enc, (BattleType)(int)enc.encounterType);
             if (GUILayout.Button("선택", GUILayout.Width(50))) Selection.activeObject = enc;
+            EditorGUILayout.EndHorizontal();
+
+            // 마테리얼(적 기록): 격퇴 수를 올려 기록 · 훈련 상대를 연다 (저장 기록이 바뀐다)
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Space(84);
+            foreach (var e in enc.enemies.Where(x => x != null).Distinct())
+            {
+                int kills = PlayerRecord.GetDefeatCount(e);
+                int open = MaterialArchive.UnlockedCount(e);
+                EditorGUILayout.LabelField($"{e.enemyName}  격퇴 {kills} · 기록 {open}/{MaterialArchive.EntryCount}", GUILayout.Width(250));
+                if (GUILayout.Button("기록 +1편", GUILayout.Width(80)))
+                    for (int i = 0; i < MaterialArchive.DefeatStep(e.rank); i++) PlayerRecord.AddDefeat(e);
+            }
             EditorGUILayout.EndHorizontal();
         }
     }

@@ -397,11 +397,13 @@ public class BattleManager : MonoBehaviour
 
             enemy.NotifyActionStarted();
             float motionStart = Time.time;
-            bool animated = enemy.AttackFrames != null && enemy.AttackFrames.Length > 0;
+            bool keyframed = enemy.Data != null && enemy.Data.HasAttackKeyframes;
+            bool animated = keyframed || enemy.AttackFrames != null && enemy.AttackFrames.Length > 0;
             yield return _lungeOutWait;
-            if (animated && _animatedAttackHitDelay > 0f)
+            float hitDelay = enemy.Data != null && enemy.Data.attackHitDelay >= 0f ? enemy.Data.attackHitDelay : _animatedAttackHitDelay;
+            if (animated && hitDelay > 0f)
             {
-                yield return new WaitForSeconds(_animatedAttackHitDelay);
+                yield return new WaitForSeconds(hitDelay);
                 if (!_isInBattle || _state.Player.IsDead || enemy.IsDead) continue;
             }
 
@@ -416,7 +418,8 @@ public class BattleManager : MonoBehaviour
             // 공격 모션(시트) 재생이 끝날 때까지 다음 적은 기다린다
             if (animated && _waitForAttackMotion)
             {
-                float motion = enemy.AttackFrames.Length / Mathf.Max(1f, enemy.AttackFrameRate);
+                float motion = keyframed ? enemy.Data.AttackKeyframeDuration
+                                         : enemy.AttackFrames.Length / Mathf.Max(1f, enemy.AttackFrameRate);
                 float remain = motion - (Time.time - motionStart);
                 if (remain > 0f) yield return new WaitForSeconds(remain);
             }

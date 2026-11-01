@@ -34,7 +34,9 @@ public class PlayerCombatant : ICombatant
 
         if (!info.IsPiercing)
         {
-            int absorbed = Math.Min(_block, amount);
+            // 일부 관통(PiercePercent): 관통 몫은 방어도를 건너뛰고, 나머지만 방어도가 막는다
+            int pierced = info.PiercedPart;
+            int absorbed = Math.Min(_block, amount - pierced);
             if (absorbed > 0)
             {
                 _block -= absorbed;

@@ -4389,6 +4389,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
   - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
   - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
+  - {fileID: 11400000, guid: a644725714c87d74cab7c15855ae4157, type: 2}
 --- !u!114 &117956444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20633,6 +20634,8 @@ MonoBehaviour:
   confirmButton: {fileID: 225067921}
   cancelButton: {fileID: 1012451626}
   confirmLabelText: {fileID: 1051807123}
+  useV3Buttons: 1
+  v3ButtonScale: 0.8
 --- !u!1 &621897467
 GameObject:
   m_ObjectHideFlags: 0
@@ -20777,6 +20780,8 @@ MonoBehaviour:
   degrees: 9
   waveSpeed: 7
   waves: 4
+  bringToFront: 1
+  frontOf: topwear
   everyVisit: 1
 --- !u!1 &633299691
 GameObject:
@@ -21791,6 +21796,7 @@ MonoBehaviour:
   fadeDuration: 0.8
   lobbySceneName: Lobby
   defeatDelay: 2.2
+  useV3: 1
 --- !u!225 &709554595
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -26580,6 +26586,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b84b0fa42a89a54abc4b8a5daebc21d, type: 2}
   - {fileID: 11400000, guid: fc3d76bd4285ad447b8499863b18192e, type: 2}
   - {fileID: 11400000, guid: 71da86d4f2884d44da1eafe7344808d8, type: 2}
+  - {fileID: 11400000, guid: b262241b9a3ab414598180e6a93c6922, type: 2}
   ambience: {fileID: 1336420981}
   hudDecor:
   - {fileID: 65647712}
@@ -31157,6 +31164,7 @@ MonoBehaviour:
   typewriterCharsPerSecond: 40
   nameplate: {fileID: 2057831049}
   sortingOrder: 58
+  useChoiceView: 1
 --- !u!114 &1024717746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64108,6 +64116,7 @@ MonoBehaviour:
   cardContainer: {fileID: 1761510145}
   titleText: {fileID: 0}
   closeButton: {fileID: 1068784031}
+  useV3CloseButton: 1
 --- !u!1 &1975396848
 GameObject:
   m_ObjectHideFlags: 0
