@@ -130,7 +130,8 @@ public class ShopView : MonoBehaviour
             affinity.GetAffinity(keeper.entityId),
             charId => CooperationManager.Instance != null && CooperationManager.Instance.IsJoinedInRun(charId),
             affinity.GetAllFlags());
-        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, OnGreetingDialogueDone, keeper.portrait, keeper.affiliation, keeper.themeColor);
+        if (sequence != null) dialogueOverlay.Play(sequence, keeper.entityName, OnGreetingDialogueDone, keeper.portrait, keeper.affiliation, keeper.themeColor,
+                                               shopkeeperButton != null ? shopkeeperButton.gameObject : null);
         else OnGreetingDialogueDone();
     }
 

@@ -11,6 +11,7 @@ using UnityEngine.UI;
 //   - playerAnswerText가 비어 있으면: 화면 클릭(또는 스페이스/엔터)으로 다음 줄
 //   - 채워져 있으면: 타이핑이 끝난 뒤 답변 버튼이 뜨고, 그 버튼을 눌러야 다음 줄 (호감도 등급업 이벤트용)
 // 타이핑 중 클릭은 문장을 즉시 완성하는 데만 쓰인다(DialogueView와 같은 관례).
+// 답변은 대화 선택지 v2(DialogueChoiceView.ShowStaged)로 띄운다 — 화면이 어두워지고 오른쪽에 고심하는 주인공, 말하는 NPC 스탠딩만 밝게.
 public class NpcDialogueOverlay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI nameText;
@@ -25,6 +26,8 @@ public class NpcDialogueOverlay : MonoBehaviour
     [SerializeField] private DialogueNameplate nameplate;
     [Tooltip("이 오버레이 Canvas의 정렬 순서. 상점(Nodes 40)·MAP/DECK(55) 위, 스토리 대화(60)·덱 목록(99) 아래")]
     [SerializeField] private int sortingOrder = 58;
+    [Tooltip("켜면 답변을 대화 선택지 v2로 띄운다. 끄면 예전 답변 버튼")]
+    [SerializeField] private bool useChoiceView = true;
 
     private BlessingDialogueSequence _sequence;
     private string _defaultSpeaker;
@@ -35,6 +38,8 @@ public class NpcDialogueOverlay : MonoBehaviour
     private Sprite _portrait;
     private string _affiliation;
     private Color? _accent;
+    private GameObject _standing;
+    private DialogueChoiceView _choice;
 
     public bool IsPlaying => gameObject.activeSelf;
 
@@ -55,9 +60,11 @@ public class NpcDialogueOverlay : MonoBehaviour
     }
 
     // portrait·affiliation·accent: 대화창 v1 초상 칸 / 소속 글자 / 이름 아래 선 색 (비우면 기본)
+    // standing: 화면에 서 있는 NPC 그림 — 답변 선택지가 뜰 때 어둠 위로 꺼낸다 (비우면 전부 어둡게)
     public void Play(BlessingDialogueSequence sequence, string defaultSpeaker, Action onComplete,
-                     Sprite portrait = null, string affiliation = null, Color? accent = null)
+                     Sprite portrait = null, string affiliation = null, Color? accent = null, GameObject standing = null)
     {
+        _standing = standing;
         _portrait = portrait;
         _affiliation = affiliation;
         _accent = accent;
@@ -97,14 +104,18 @@ public class NpcDialogueOverlay : MonoBehaviour
         // 타이핑이 끝난 순간 다음 입력 수단(답변 버튼 또는 ▶ 표시)을 보여준다
         if (!_typewriter.IsTyping)
         {
-            if (_waitingAnswer && answerButton != null && !answerButton.gameObject.activeSelf)
+            if (_waitingAnswer && useChoiceView)
+            {
+                if (_choice == null) ShowAnswerChoice();
+            }
+            else if (_waitingAnswer && answerButton != null && !answerButton.gameObject.activeSelf)
                 answerButton.gameObject.SetActive(true);
             else if (!_waitingAnswer && nameplate != null) nameplate.SetAdvanceVisible(true);
             else if (!_waitingAnswer && nextIndicator != null && !nextIndicator.activeSelf)
                 nextIndicator.SetActive(true);
         }
 
-        if (Keyboard.current == null) return;
+        if (Keyboard.current == null || _choice != null) return; // 선택지가 떠 있으면 클릭으로만 고른다
         if (Keyboard.current[Key.Space].wasPressedThisFrame || Keyboard.current[Key.Enter].wasPressedThisFrame)
         {
             if (_waitingAnswer && !_typewriter.IsTyping) OnAnswer();
@@ -118,6 +129,22 @@ public class NpcDialogueOverlay : MonoBehaviour
         if (_typewriter.CompleteImmediately()) return;
         if (_waitingAnswer) return;
         Next();
+    }
+
+    // 답변 한 줄을 선택지로. "[방랑자] …" 같은 화자 머리표는 떼어 낸다 — 오른쪽에 선 주인공이 곧 화자다
+    private void ShowAnswerChoice()
+    {
+        string text = answerText != null && !string.IsNullOrEmpty(answerText.text) ? answerText.text : _sequence.steps[_index].playerAnswerText;
+        text = text.Trim();
+        if (text.StartsWith("[") && text.IndexOf(']') > 0) text = text.Substring(text.IndexOf(']') + 1).Trim();
+        var stage = new DialogueChoiceView.Stage
+        {
+            DimOrder = sortingOrder - 2,
+            ChoiceOrder = sortingOrder + 1,
+            KeepBright = _standing != null ? new[] { _standing } : null,
+        };
+        _choice = DialogueChoiceView.ShowStaged((RectTransform)transform, stage,
+            new[] { new DialogueChoiceView.Option(text) }, _ => { _choice = null; Next(); });
     }
 
     private void OnAnswer()

@@ -1,0 +1,97 @@
+{
+  "method": "Built-in imagegen NPC removal patch + deterministic v1-derived SVG UI + original player compositing",
+  "rows": [
+    {
+      "id": "01",
+      "text": "오늘 추천은?",
+      "tag": "",
+      "rect": [
+        330,
+        326,
+        850,
+        104
+      ],
+      "angle": -4
+    },
+    {
+      "id": "02",
+      "text": "지난번 일은 고마웠어",
+      "tag": "TALK",
+      "rect": [
+        280,
+        434,
+        850,
+        104
+      ],
+      "angle": 3
+    },
+    {
+      "id": "03",
+      "text": "그냥 둘러볼게",
+      "tag": "",
+      "rect": [
+        320,
+        542,
+        850,
+        104
+      ],
+      "angle": -2
+    }
+  ],
+  "states": {
+    "Default": {
+      "file": "Choice_Mockup_v2_Default.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "player_source_sha256": "81f1ec6d1404c1998cda5745447d701e6c186b58048d28f002f6116cf5c62cab",
+      "player_scale": 1.15,
+      "player_position": [
+        970,
+        -115
+      ],
+      "player_color_change": false,
+      "player_redrawn": false,
+      "bottom_dialogue_y900_plus_exact_source": true
+    },
+    "Hover": {
+      "file": "Choice_Mockup_v2_Hover.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "player_source_sha256": "81f1ec6d1404c1998cda5745447d701e6c186b58048d28f002f6116cf5c62cab",
+      "player_scale": 1.15,
+      "player_position": [
+        970,
+        -115
+      ],
+      "player_color_change": false,
+      "player_redrawn": false,
+      "bottom_dialogue_y900_plus_exact_source": true
+    },
+    "Selected": {
+      "file": "Choice_Mockup_v2_Selected.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "player_source_sha256": "81f1ec6d1404c1998cda5745447d701e6c186b58048d28f002f6116cf5c62cab",
+      "player_scale": 1.15,
+      "player_position": [
+        1044,
+        -115
+      ],
+      "player_color_change": false,
+      "player_redrawn": false,
+      "bottom_dialogue_y900_plus_exact_source": true
+    }
+  },
+  "npc_cleanup_mask": "Only polygon x285..730,y305..900. Source NPC portrait, name and last dialogue preserved.",
+  "selected_row": "02",
+  "native_output": [
+    1920,
+    1080
+  ]
+}

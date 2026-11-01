@@ -20,14 +20,26 @@ public class CardDetailView : MonoBehaviour
     [SerializeField] private Button cancelButton;
     [SerializeField] private TextMeshProUGUI confirmLabelText;
 
+    [Tooltip("확인/취소 버튼을 v3 래스터 조각(Resources/UIButtons)으로 바꿔 입힌다. 판 크기에 곱하는 배율")]
+    [SerializeField] private bool useV3Buttons = true;
+    [SerializeField] private float v3ButtonScale = 0.8f;
+
     private bool isConfirmMode = false;
     private Action onConfirm;
     private Action onCancel;
+    private TextMeshProUGUI confirmEyebrow; // v3 확정 버튼 영문 소제목 (REMOVE · UPGRADE …)
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else { Destroy(gameObject); return; }
+
+        if (useV3Buttons)
+        {
+            confirmEyebrow = UIButtonSkinV3.Apply(confirmButton, confirmLabelText, UIButtonSkinV3.Kind.Primary, v3ButtonScale);
+            UIButtonSkinV3.Apply(cancelButton, cancelButton != null ? cancelButton.GetComponentInChildren<TextMeshProUGUI>(true) : null,
+                UIButtonSkinV3.Kind.Cancel, v3ButtonScale);
+        }
 
         if (backdropButton != null) backdropButton.onClick.AddListener(HandleBackdropClicked);
         if(confirmButton != null) confirmButton.onClick.AddListener(Confirm);
@@ -62,6 +74,7 @@ public class CardDetailView : MonoBehaviour
 
         if(actionButtonGroup != null) actionButtonGroup.SetActive(true);
         if (confirmLabelText != null) confirmLabelText.text = confirmLabel;
+        if (confirmEyebrow != null) confirmEyebrow.text = UIButtonSkinV3.EnglishFor(confirmLabel);
     }
 
     public void Hide()

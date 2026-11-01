@@ -1,0 +1,15 @@
+Dialogue Choice v2 — composition specification
+
+Create three consistent 1920 x 1080 general NPC dialogue-choice mockups over Reference_Shop.png. Remove only the large NPC standing illustration; preserve the bottom NPC portrait, name and last dialogue. Darken the shop behind the choice overlay.
+
+Composite Reference_PlayerPose.png itself, without redrawing, recoloring or changing pose. Show a large chest-up crop on the right, with the thoughtful face and hand visible. Allow cropping at the top and right; keep the player behind the bottom dialogue. Add two narrow cyan diagonal accents behind the player and small RESPONSE / VERTEX / EXPLORER labels.
+
+Extend three staggered strips to the left of the player, angled -4, +3 and -2 degrees. Use off-white paper panels, ink typography, clipped top-right and bottom-left corners, crisp offset shadows, restrained technical labels and cyan #0DB8F2. Each strip has a short angular right-pointing tail integrated into its silhouette. Avoid red, halftone, comic outlines and handwriting.
+
+Text: 01 오늘 추천은? / 02 지난번 일은 고마웠어 (TALK) / 03 그냥 둘러볼게.
+
+Default: all three panels off-white with dark text.
+Hover: row 02 becomes ink with white text and cyan outline, shifted 18 px toward the player; player unchanged.
+Selected: row 02 grows to 1.2x with a cyan lower stripe. Other rows fade and move left. Player begins moving right, shown 74 px beyond the idle position.
+
+Execution: image generation is used only for the NPC-removal clean plate (see GENERATION_PROMPT_CleanPlate.txt). Original player compositing, SVG panel geometry, Korean typography and state variants are produced by build_choice_mockups.py. This document records the full design prompt; it was not submitted as an additional image-generation call.

@@ -1,0 +1,48 @@
+{
+  "Default": {
+    "size": [
+      1920,
+      1080
+    ],
+    "image_model_source": "ImageModel_v2/Generated_Default.png",
+    "npc_face_exact": true,
+    "player_face_exact": true,
+    "panel_source": "../Choice_v1/Extracted_v2",
+    "player_scale": 0.6201171875,
+    "player_position": [
+      1280,
+      35
+    ]
+  },
+  "Hover": {
+    "size": [
+      1920,
+      1080
+    ],
+    "image_model_source": "ImageModel_v2/Generated_Hover.png",
+    "npc_face_exact": true,
+    "player_face_exact": true,
+    "panel_source": "../Choice_v1/Extracted_v2",
+    "player_scale": 0.6201171875,
+    "player_position": [
+      1280,
+      35
+    ]
+  },
+  "Selected": {
+    "size": [
+      1920,
+      1080
+    ],
+    "image_model_source": "ImageModel_v2/Generated_Selected.png",
+    "npc_face_exact": true,
+    "player_face_exact": true,
+    "panel_source": "../Choice_v1/Extracted_v2",
+    "player_scale": 0.6201171875,
+    "player_position": [
+      1345,
+      35
+    ]
+  },
+  "player_reference_sha256": "81f1ec6d1404c1998cda5745447d701e6c186b58048d28f002f6116cf5c62cab"
+}

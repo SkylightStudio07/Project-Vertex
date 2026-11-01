@@ -35,8 +35,13 @@ public class CardListView : MonoBehaviour
         if(Instance == null) Instance = this;
         else { Destroy(gameObject); return; }
         if (closeButton != null) closeButton.onClick.AddListener(Close);
+        // CLOSE 버튼을 v3 래스터 조각(Resources/UIButtons)으로 바꿔 입힌다 — 씬의 코드 도형(VertexFrame)은 끈다
+        if (useV3CloseButton && closeButton != null)
+            UIButtonSkinV3.Apply(closeButton, closeButton.GetComponentInChildren<TextMeshProUGUI>(true), UIButtonSkinV3.Kind.Close);
         if (panel != null) panel.SetActive(false);
     }
+
+    [SerializeField] private bool useV3CloseButton = true;
 
     // 보기 전용 — 덱 확인, 뽑을/버린 카드 더미 확인
     public void OpenAsViewer(string title, IReadOnlyList<CardData> cards)

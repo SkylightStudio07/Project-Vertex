@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 58ea1d6b9ad00df4d99c7a60e984ac27
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7640630518228669517
+    second: Player_Ponder_0
+  - first:
+      213: -2981412660565201430
+    second: Player_Ponder_1
+  - first:
+      213: -2771273061956262333
+    second: Player_Ponder_2
+  - first:
+      213: 6241237070533869663
+    second: Player_Ponder_3
+  - first:
+      213: -7020026283653179790
+    second: Player_Ponder_4
+  - first:
+      213: 3327407247491857261
+    second: Player_Ponder_5
+  - first:
+      213: -5020265847012300792
+    second: Player_Ponder_6
+  - first:
+      213: 4364203833028259342
+    second: Player_Ponder_7
+  - first:
+      213: 830063665343244596
+    second: Player_Ponder_8
+  - first:
+      213: -4249225153953292511
+    second: Player_Ponder_9
+  - first:
+      213: 6253726213170004040
+    second: Player_Ponder_10
+  - first:
+      213: -4056535936424492602
+    second: Player_Ponder_11
+  - first:
+      213: -6674257697572656622
+    second: Player_Ponder_12
+  - first:
+      213: 1958505743878831928
+    second: Player_Ponder_13
+  - first:
+      213: -8980379619984525314
+    second: Player_Ponder_14
+  - first:
+      213: -3066574275047810919
+    second: Player_Ponder_15
+  - first:
+      213: 5528424445301056787
+    second: Player_Ponder_16
+  - first:
+      213: 7790799128136186758
+    second: Player_Ponder_17
+  - first:
+      213: -4472431392628397512
+    second: Player_Ponder_18
+  - first:
+      213: 409514464918050684
+    second: Player_Ponder_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Ponder_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1522
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d44570b79f8f80a60800000000000000
+      internalID: 7640630518228669517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1517
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeda82e3bf4ef96d0800000000000000
+      internalID: -2981412660565201430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_2
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1509
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 346ec7e35d57a89d0800000000000000
+      internalID: -2771273061956262333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_3
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 0
+        width: 724
+        height: 1536
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f50cb245c045d9650800000000000000
+      internalID: 6241237070533869663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1480
+        width: 16
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27652f8e94bd39e90800000000000000
+      internalID: -7020026283653179790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1295
+        width: 16
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bffc123435d2e20800000000000000
+      internalID: 3327407247491857261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1175
+        width: 15
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8086ec68fce645ab0800000000000000
+      internalID: -5020265847012300792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1143
+        width: 15
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0e2c0b7344c09c30800000000000000
+      internalID: 4364203833028259342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 963
+        width: 15
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4392eb9718af48b00800000000000000
+      internalID: 830063665343244596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 954
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12f95ff5c38b705c0800000000000000
+      internalID: -4249225153953292511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 874
+        width: 15
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8400c827bd2b9c650800000000000000
+      internalID: 6253726213170004040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 712
+        width: 15
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c1cfcaee0a44b7c0800000000000000
+      internalID: -4056535936424492602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 630
+        width: 15
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21ae3cc5cf54063a0800000000000000
+      internalID: -6674257697572656622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 434
+        width: 15
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83fb572f8920e2b10800000000000000
+      internalID: 1958505743878831928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 326
+        width: 15
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef73aa2d0584f5380800000000000000
+      internalID: -8980379619984525314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 214
+        width: 15
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9989c6ab1f65175d0800000000000000
+      internalID: -3066574275047810919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 195
+        width: 15
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31561cdfdb8e8bc40800000000000000
+      internalID: 5528424445301056787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 15
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68bfaf4978a7e1c60800000000000000
+      internalID: 7790799128136186758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 20
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83a2418285bbee1c0800000000000000
+      internalID: -4472431392628397512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Ponder_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7713d37c33eea500800000000000000
+      internalID: 409514464918050684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Player_Ponder_0: 7640630518228669517
+      Player_Ponder_1: -2981412660565201430
+      Player_Ponder_10: 6253726213170004040
+      Player_Ponder_11: -4056535936424492602
+      Player_Ponder_12: -6674257697572656622
+      Player_Ponder_13: 1958505743878831928
+      Player_Ponder_14: -8980379619984525314
+      Player_Ponder_15: -3066574275047810919
+      Player_Ponder_16: 5528424445301056787
+      Player_Ponder_17: 7790799128136186758
+      Player_Ponder_18: -4472431392628397512
+      Player_Ponder_19: 409514464918050684
+      Player_Ponder_2: -2771273061956262333
+      Player_Ponder_3: 6241237070533869663
+      Player_Ponder_4: -7020026283653179790
+      Player_Ponder_5: 3327407247491857261
+      Player_Ponder_6: -5020265847012300792
+      Player_Ponder_7: 4364203833028259342
+      Player_Ponder_8: 830063665343244596
+      Player_Ponder_9: -4249225153953292511
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

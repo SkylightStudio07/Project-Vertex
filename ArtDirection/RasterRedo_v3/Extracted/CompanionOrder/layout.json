@@ -1,0 +1,459 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "scale": 2,
+  "origin": "top-left",
+  "nine_slice_order": "left,bottom,right,top; PNG pixels",
+  "assets": [
+    {
+      "file": "List_Panel.png",
+      "screen_rect": [
+        33,
+        680,
+        484,
+        208
+      ],
+      "png_size_px": [
+        968,
+        416
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        14,
+        32,
+        14,
+        78
+      ]
+    },
+    {
+      "file": "List_HeaderRule.png",
+      "screen_rect": [
+        47,
+        719,
+        458,
+        1
+      ],
+      "png_size_px": [
+        916,
+        2
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Row_Normal.png",
+      "screen_rect": [
+        47,
+        722,
+        458,
+        75
+      ],
+      "png_size_px": [
+        916,
+        150
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "file": "Row_Hover.png",
+      "screen_rect": [
+        47,
+        722,
+        458,
+        75
+      ],
+      "png_size_px": [
+        916,
+        150
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "file": "Row_ReadyBar.png",
+      "screen_rect": [
+        46,
+        722,
+        4,
+        75
+      ],
+      "png_size_px": [
+        8,
+        150
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Face_Frame.png",
+      "screen_rect": [
+        70,
+        728,
+        82,
+        63
+      ],
+      "png_size_px": [
+        164,
+        126
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Ready_Tag.png",
+      "screen_rect": [
+        364,
+        738,
+        127,
+        41
+      ],
+      "png_size_px": [
+        254,
+        82
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Charge_Bar_Back.png",
+      "screen_rect": [
+        364,
+        853,
+        127,
+        7
+      ],
+      "png_size_px": [
+        254,
+        14
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "file": "Charge_Bar_Fill.png",
+      "screen_rect": [
+        365,
+        854,
+        65,
+        5
+      ],
+      "png_size_px": [
+        130,
+        10
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "file": "Order_Button.png",
+      "screen_rect": [
+        33,
+        889,
+        324,
+        52
+      ],
+      "png_size_px": [
+        648,
+        104
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Order_Button_Active.png",
+      "screen_rect": [
+        33,
+        889,
+        324,
+        52
+      ],
+      "png_size_px": [
+        648,
+        104
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Order_Button_Disabled.png",
+      "screen_rect": [
+        33,
+        889,
+        324,
+        52
+      ],
+      "png_size_px": [
+        648,
+        104
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Order_Diamond.png",
+      "screen_rect": [
+        56,
+        898,
+        26,
+        26
+      ],
+      "png_size_px": [
+        52,
+        52
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Order_Badge.png",
+      "screen_rect": [
+        316,
+        894,
+        39,
+        39
+      ],
+      "png_size_px": [
+        78,
+        78
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "header",
+      "parent": "List_Panel.png",
+      "text": "ORDER  /  동료 지시",
+      "rect": [
+        30,
+        10,
+        320,
+        25
+      ],
+      "align": "left",
+      "font_size": 18,
+      "weight": 600,
+      "color": "#161D21",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "header_number",
+      "parent": "List_Panel.png",
+      "text": "01",
+      "rect": [
+        434,
+        10,
+        28,
+        25
+      ],
+      "align": "left",
+      "font_size": 18,
+      "weight": 600,
+      "color": "#161D21",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "name",
+      "parent": "Row_Normal.png",
+      "text": "알레시아",
+      "rect": [
+        132,
+        10,
+        170,
+        20
+      ],
+      "align": "left",
+      "font_size": 15,
+      "weight": 600,
+      "color": "#6D7479",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "skill",
+      "parent": "Row_Normal.png",
+      "text": "선봉 투창",
+      "rect": [
+        132,
+        34,
+        180,
+        30
+      ],
+      "align": "left",
+      "font_size": 23,
+      "weight": 600,
+      "color": "#161D21",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "ready",
+      "parent": "Ready_Tag.png",
+      "text": "READY",
+      "rect": [
+        0,
+        9,
+        127,
+        25
+      ],
+      "align": "center",
+      "font_size": 17,
+      "weight": 700,
+      "color": "#FFFFFF",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "tab",
+      "parent": "Order_Button.png",
+      "text": "지시",
+      "rect": [
+        80,
+        9,
+        80,
+        34
+      ],
+      "align": "left",
+      "font_size": 27,
+      "weight": 700,
+      "color": "#FFFFFF",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {
+        "Disabled": "#A3A7AA"
+      }
+    },
+    {
+      "id": "tab_en",
+      "parent": "Order_Button.png",
+      "text": "ORDER",
+      "rect": [
+        160,
+        19,
+        77,
+        20
+      ],
+      "align": "left",
+      "font_size": 13,
+      "weight": 700,
+      "color": "#FFFFFF",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {
+        "Disabled": "#A3A7AA"
+      }
+    },
+    {
+      "id": "count",
+      "parent": "Order_Badge.png",
+      "text": "1",
+      "rect": [
+        0,
+        5,
+        39,
+        30
+      ],
+      "align": "center",
+      "font_size": 27,
+      "weight": 600,
+      "color": "#0E171C",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    }
+  ],
+  "instances": [
+    {
+      "file": "Row_Normal.png",
+      "screen_rect": [
+        47,
+        800,
+        458,
+        75
+      ]
+    },
+    {
+      "file": "Face_Frame.png",
+      "screen_rect": [
+        70,
+        806,
+        82,
+        63
+      ]
+    },
+    {
+      "file": "Ready_Tag.png",
+      "screen_rect": [
+        364,
+        816,
+        127,
+        41
+      ]
+    }
+  ],
+  "row_spacing_px": 78,
+  "header_height_px": 42,
+  "list_vertical_resize": "keep top39/bottom16 screen px fixed; repeat rows at78px",
+  "disabled_tints": {
+    "Order_Diamond.png": "#888D90",
+    "Order_Badge.png": "#888D90"
+  },
+  "row_text_variants": {
+    "second": {
+      "ready": "충전 중",
+      "skill": "선봉 투창",
+      "name": "알레시아"
+    }
+  },
+  "layer_order": [
+    "List_Panel",
+    "List_HeaderRule",
+    "Row_Normal or Row_Hover per row",
+    "runtime portrait",
+    "Face_Frame",
+    "Row_ReadyBar if ready",
+    "Ready_Tag",
+    "Charge_Bar_Back if charging",
+    "Charge_Bar_Fill if charging",
+    "Order_Button state",
+    "Order_Diamond",
+    "Order_Badge",
+    "runtime text"
+  ]
+}

@@ -229,7 +229,8 @@ public class CompanionOrderView : MonoBehaviour
         }
         else row.Face = null;
         if (faceSprite == null) K.Pic(mask.transform, "Placeholder", "Face_Placeholder", 0, 0, 48, 40);
-        K.Pic(row.Root, "Frame", slot.Enhanced ? "Face_Frame_Enhanced" : "Face_Frame", 20, 4, 60, 52);
+        if (slot.Enhanced) K.Pic(row.Root, "Frame", "Face_Frame_Enhanced", 20, 4, 60, 52);
+        else K.Pic(row.Root, "Frame", "Face_Frame", 24, 8, 52, 44); // v3 얇은 먹색 테두리 — 얼굴 칸을 바짝 감싼다
 
         string charName = data != null && !string.IsNullOrWhiteSpace(data.charName) ? data.charName : slot.Owner.charID;
         row.Name = K.Text(row.Root, "Name", font, 104, 5, 120, 21, 12, K.Ink, TextAlignmentOptions.Left);
@@ -242,17 +243,12 @@ public class CompanionOrderView : MonoBehaviour
         row.Skill = K.Text(row.Root, "Skill", font, 104, 26, 120, 28, 20, K.Ink, TextAlignmentOptions.Left, FontStyles.Bold);
         row.Skill.text = slot.Skill.skillName;
 
-        row.ReadyTag = K.Pic(row.Root, "ReadyTag", "Ready_Tag", 276, 16, 86, 30);
-        K.Text(row.ReadyTag.transform, "Label", font, 18, 5, 62, 20, 12, K.Paper, TextAlignmentOptions.Left, FontStyles.Bold).text = "READY";
-
-        int cells = Mathf.Clamp(slot.Required, 1, 4);
-        for (int i = 0; i < cells; i++)
-        {
-            float x = 228 + 21 * i;
-            row.Cells.Add(K.Pic(row.Root, "Cell" + i, "Charge_Bar_Back", x, 22, 18, 16).gameObject);
-            row.Fills.Add(K.Pic(row.Root, "Fill" + i, "Charge_Bar_Fill", x + 2, 24, 14, 12));
-        }
-        row.Remaining = K.Text(row.Root, "Remaining", font, 322, 20, 42, 22, 14, K.Ink, TextAlignmentOptions.Center);
+        // 오른쪽 먹색 태그: 준비되면 "◆ READY", 충전 중이면 "충전 · 2턴" + 태그 아래 가는 충전 막대 (v3 조각, RasterRedo_v3)
+        row.ReadyTag = K.Pic(row.Root, "ReadyTag", "Ready_Tag", 258, 10, 100, 32);
+        row.Remaining = K.Text(row.ReadyTag.transform, "Label", font, 0, 6, 100, 20, 13, K.Paper, TextAlignmentOptions.Center, FontStyles.Bold);
+        row.ReadyDot = K.Pic(row.ReadyTag.transform, "Dot", "Order_Diamond", 22, 11, 10, 10).gameObject;
+        row.ChargeBack = K.Pic(row.Root, "ChargeBack", "Charge_Bar_Back", 258, 47, 100, 4, sliced: true).gameObject;
+        row.ChargeFill = K.Pic(row.Root, "ChargeFill", "Charge_Bar_Fill", 258, 47, 0, 4, sliced: true);
 
         var pointer = row.Back.gameObject.AddComponent<Pointer>();
         pointer.Enter = () => { row.Hover = true; row.Refresh(CanAct); ShowTooltip(row); };
@@ -265,12 +261,12 @@ public class CompanionOrderView : MonoBehaviour
     {
         public CompanionSkillSlot Slot;
         public RectTransform Root;
-        public Image Back, ReadyBar, ReadyTag, Mark;
+        public Image Back, ReadyBar, ReadyTag, Mark, ChargeFill;
+        public GameObject ChargeBack, ReadyDot;
         public RawImage Face;
         public TextMeshProUGUI Name, Skill, Remaining;
-        public readonly List<Image> Fills = new();
-        public readonly List<GameObject> Cells = new();
         public bool Hover;
+        private static readonly Color NameGray = new(0.427f, 0.455f, 0.475f, 1f); // #6D7479
 
         public void Refresh(bool canAct)
         {
@@ -278,16 +274,19 @@ public class CompanionOrderView : MonoBehaviour
             bool lit = ready && Hover && canAct; // 먹색 반전은 쓸 수 있는 줄에만
             Back.sprite = K.Load(lit ? "Row_Hover" : "Row_Normal");
             ReadyBar.gameObject.SetActive(ready);
-            ReadyTag.gameObject.SetActive(ready);
-            foreach (var c in Cells) c.SetActive(!ready);
-            for (int i = 0; i < Fills.Count; i++)
-                Fills[i].gameObject.SetActive(!ready && i < Mathf.RoundToInt((float)Slot.Progress / Slot.Required * Fills.Count));
-            Remaining.gameObject.SetActive(!ready);
-            Remaining.text = Slot.IsTurnCharge ? $"{Slot.Required - Slot.Progress}턴" : $"{Slot.Progress}/{Slot.Required}";
+            ChargeBack.SetActive(!ready);
+            ChargeFill.gameObject.SetActive(!ready && Slot.Progress > 0);
+            ChargeFill.rectTransform.sizeDelta = new Vector2(100f * Mathf.Clamp01((float)Slot.Progress / Mathf.Max(1, Slot.Required)), 4f);
+            ReadyDot.SetActive(ready);
+            Remaining.text = ready ? "  READY" // 앞 칸은 청록 마름모 자리
+                : Slot.IsTurnCharge ? $"충전 · {Slot.Required - Slot.Progress}턴" : $"충전 · {Slot.Progress}/{Slot.Required}";
+            Remaining.color = ready ? K.Paper : K.Muted;
 
             Color text = lit ? K.Paper : K.Ink;
-            if (!ready) text.a = 0.55f;
-            Name.color = Skill.color = text;
+            Color sub = lit ? K.Paper : NameGray;
+            if (!ready) text.a = sub.a = 0.55f;
+            Skill.color = text;
+            Name.color = sub;
             if (Face != null) Face.color = new Color(1f, 1f, 1f, ready ? 1f : 0.5f);
             if (Mark != null) Mark.sprite = K.Load(lit ? "Mark_Enhanced_White" : "Mark_Enhanced");
         }

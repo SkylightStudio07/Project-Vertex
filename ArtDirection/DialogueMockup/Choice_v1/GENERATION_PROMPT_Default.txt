@@ -1,0 +1,15 @@
+Use case: ui-mockup. Project VERTEX dialogue response choices, finished full-screen 16:9 game screenshot.
+Image1 is the CURRENT DIALOGUE scene and must be the base: preserve the blonde long-haired green-eyed Karina character on right holding her black rifle, smaller silver-haired player left, dark warehouse scene, top HUD and bottom dialogue overlay. Do not change the character face, outfit, stance, lighting, rifle, scene camera, bottom portrait or existing dialogue. Bottom overlay starts about y800 on a 1920x1080 canvas. The dialogue must remain '카리나 빈터발트' and '너한테선 이상한 게 느껴져. 운명의 씨실 같은 거.' Existing faction line retained. Remove the old single white response button at x1180..1820 y712..772 so it is replaced by the new choice cluster on left; restore original scene/character behind it. No new portrait thumbnails. Image2 is only the LOBBY design reference for clipped paper panels, ink text, small numeric labels and thin cyan accents; do not copy lobby scenery.
+Create THREE staggered diagonal clipped response panels in left/center empty region, clear of the main character and HUD, above the bottom dialogue. Use nominal 1920x1080 coordinates:
+tiny header 'RESPONSE / 03' at x130 y300 plus thin horizontal hairline.
+01 panel center around(590,410), size(870,88), rotation -4degrees.
+02 panel center around(640,530), size(870,88), rotation +2degrees.
+03 panel center around(600,650), size(900,88), rotation -2degrees.
+All rotated elements (number, text, tag, arrow) belong to the same planar card, no strange angled individual characters. Angular cut corners, opaque off-white #EEF0F2 with very subtle paper grain, thin graphite borders, ink #16181B Korean typography. Crisp hard shadow down-right offset10px; blur0. No blur or glow. Restrained #0DB8F2 cyan only for thin functional accents. Strong Korean legibility 28px at1920 canvas; no enormous menu title.
+Exact rows:
+'01' small underlined number, main '데려간다', tiny right tag 'RECRUIT', thin arrow.
+'02' small underlined number, main '두고 간다', no tag, thin arrow.
+'03' small underlined number, main '…아무 말도 하지 않는다', no tag, thin arrow.
+Leave room for longer response strings (22 Korean characters max). This is a responsive dialogue choice UI, not a new full menu or a comic strip.
+Reference Persona5 ONLY for energetic angled staggered staging and motion; no red, hand lettering, halftone, comic speech balloons, jagged explosion panels or thick comic outlines. No neon filled geometry, stars, compass watermark or extra decorative labels. The bottom dialogue panel and right character are visual constants. No labels Default/Hover/Selected, no annotation outside the actual UI.
+STATE: DEFAULT immediately after all THREE choices have landed. All three panels off-white, ink text. No row hovered or selected. One row only (01) may have two very faint thin contour echoes 12px and24px to its upper-left, representing landing motion; these are crisp outlines, no motion blur. Modest size, never compete with text. Every main choice fully opaque and readable.

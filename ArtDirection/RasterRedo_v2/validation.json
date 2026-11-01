@@ -1,0 +1,572 @@
+{
+  "CutIn": {
+    "Chip_Power.png": {
+      "size": [
+        272,
+        48
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Chip_Unique.png": {
+      "size": [
+        272,
+        48
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Diamond.png": {
+      "size": [
+        28,
+        28
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Frame_Power.png": {
+      "size": [
+        2280,
+        400
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Frame_Unique.png": {
+      "size": [
+        2280,
+        400
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Label_Plate_Power.png": {
+      "size": [
+        848,
+        64
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Label_Plate_Unique.png": {
+      "size": [
+        848,
+        64
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Line.png": {
+      "size": [
+        828,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Ticks_Unique.png": {
+      "size": [
+        500,
+        16
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    }
+  },
+  "Victory": {
+    "Band.png": {
+      "size": [
+        3840,
+        440
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Diamond.png": {
+      "size": [
+        36,
+        36
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Flash.png": {
+      "size": [
+        3840,
+        440
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Label_Line.png": {
+      "size": [
+        536,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Line_Bottom.png": {
+      "size": [
+        1392,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Line_Top.png": {
+      "size": [
+        3524,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Slash.png": {
+      "size": [
+        428,
+        568
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Slash_Edge.png": {
+      "size": [
+        164,
+        220
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Slash_Short.png": {
+      "size": [
+        84,
+        112
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Tag.png": {
+      "size": [
+        784,
+        56
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Title_Line.png": {
+      "size": [
+        412,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    }
+  },
+  "Defeat": {
+    "Band.png": {
+      "size": [
+        3840,
+        440
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Diamond.png": {
+      "size": [
+        36,
+        36
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Label_Line.png": {
+      "size": [
+        536,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Line_Bottom.png": {
+      "size": [
+        1392,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Line_Top.png": {
+      "size": [
+        3524,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Slash.png": {
+      "size": [
+        428,
+        568
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Slash_Edge.png": {
+      "size": [
+        164,
+        220
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Slash_Short.png": {
+      "size": [
+        84,
+        112
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Tag.png": {
+      "size": [
+        784,
+        56
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Title_Line.png": {
+      "size": [
+        412,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    }
+  },
+  "Result": {
+    "Accent_Clear.png": {
+      "size": [
+        112,
+        8
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Accent_Corner_Clear.png": {
+      "size": [
+        52,
+        52
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Accent_Corner_Defeat.png": {
+      "size": [
+        52,
+        52
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Accent_Defeat.png": {
+      "size": [
+        112,
+        8
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Accent_Stat_Clear.png": {
+      "size": [
+        52,
+        4
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Accent_Stat_Defeat.png": {
+      "size": [
+        52,
+        4
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Button_Return_Hover.png": {
+      "size": [
+        780,
+        172
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Button_Return_Normal.png": {
+      "size": [
+        780,
+        172
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Button_Return_Pressed.png": {
+      "size": [
+        780,
+        172
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Panel.png": {
+      "size": [
+        2228,
+        1312
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Rule_Bottom.png": {
+      "size": [
+        1152,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Rule_Top.png": {
+      "size": [
+        1880,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Stat_Divider.png": {
+      "size": [
+        2,
+        252
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    }
+  },
+  "CompanionSkill": {
+    "Charge_Bar_Back.png": {
+      "size": [
+        36,
+        32
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Charge_Bar_Fill.png": {
+      "size": [
+        28,
+        24
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "CutIn_Edge.png": {
+      "size": [
+        1664,
+        824
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "CutIn_Edge_Enhanced.png": {
+      "size": [
+        1664,
+        824
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "CutIn_Eye_Cp01.png": {
+      "size": [
+        1920,
+        912
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "CutIn_Mask.png": {
+      "size": [
+        1600,
+        760
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "CutIn_Watermark.png": {
+      "size": [
+        108,
+        108
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Face_Frame.png": {
+      "size": [
+        120,
+        104
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Face_Frame_Enhanced.png": {
+      "size": [
+        120,
+        104
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Face_Mask.png": {
+      "size": [
+        96,
+        80
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Face_Placeholder.png": {
+      "size": [
+        96,
+        80
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "List_HeaderRule.png": {
+      "size": [
+        740,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "List_Panel.png": {
+      "size": [
+        780,
+        432
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Mark_Enhanced.png": {
+      "size": [
+        28,
+        28
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Mark_Enhanced_White.png": {
+      "size": [
+        28,
+        28
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Order_Badge.png": {
+      "size": [
+        68,
+        64
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Order_Button.png": {
+      "size": [
+        540,
+        88
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Order_Button_Active.png": {
+      "size": [
+        540,
+        88
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Order_Button_Disabled.png": {
+      "size": [
+        540,
+        88
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Order_Diamond.png": {
+      "size": [
+        44,
+        44
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Ready_Tag.png": {
+      "size": [
+        172,
+        60
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Row_Hover.png": {
+      "size": [
+        740,
+        120
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Row_Normal.png": {
+      "size": [
+        740,
+        120
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Row_ReadyBar.png": {
+      "size": [
+        10,
+        120
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    },
+    "Tag_Back.png": {
+      "size": [
+        1140,
+        88
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Tag_Back_Enhanced.png": {
+      "size": [
+        1140,
+        88
+      ],
+      "alpha_exact": true,
+      "method": "imagegen material masked into original fill"
+    },
+    "Tag_Divider.png": {
+      "size": [
+        44,
+        2
+      ],
+      "alpha_exact": true,
+      "method": "byte-identical copy"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "scale": 2,
+  "origin": "top-left; y down",
+  "assets": {
+    "Normal": {
+      "file": "Choice_Tail_Normal.png",
+      "source_pixels": [
+        112,
+        64
+      ],
+      "logical_size": [
+        56,
+        32
+      ],
+      "border_source_pixels": 2,
+      "alpha_shared": true
+    },
+    "Hover": {
+      "file": "Choice_Tail_Hover.png",
+      "source_pixels": [
+        112,
+        64
+      ],
+      "logical_size": [
+        56,
+        32
+      ],
+      "border_source_pixels": 4,
+      "alpha_shared": true
+    },
+    "Selected": {
+      "file": "Choice_Tail_Selected.png",
+      "source_pixels": [
+        112,
+        64
+      ],
+      "logical_size": [
+        56,
+        32
+      ],
+      "border_source_pixels": 6,
+      "alpha_shared": true
+    },
+    "Shadow": {
+      "file": "Choice_Tail_Shadow.png",
+      "source_pixels": [
+        112,
+        64
+      ],
+      "logical_size": [
+        56,
+        32
+      ],
+      "blur": 0,
+      "opacity_baked": 1
+    }
+  },
+  "attachment": {
+    "anchor": "panel top-right",
+    "offset_logical": [
+      -6,
+      30
+    ],
+    "offset_source_pixels": [
+      -12,
+      60
+    ],
+    "pivot": [
+      0,
+      1
+    ],
+    "overlap_logical": 6,
+    "draw_order": "panel shadow, tail shadow, panel, tail",
+    "rotation": "0 in source; inherit row rotation",
+    "stretch": "Simple, fixed 56x32 logical; never stretch with panel width"
+  },
+  "state_changes": {
+    "Hover": "Swap texture only. Inherit panel translation; no tail-only motion.",
+    "Selected": "Swap texture only. Inherit panel 1.2 scale and translation.",
+    "Shadow": "Same screen offset and opacity as v1 panel shadow: Normal (10,10), Hover (14,14), Selected (18,18), alpha .35; apply row alpha once. Parent transform follows v1 layout.json."
+  },
+  "panel_source": "../../Choice_v1/Extracted_v2",
+  "unity": {
+    "anchorMin": [
+      1,
+      1
+    ],
+    "anchorMax": [
+      1,
+      1
+    ],
+    "pivot": [
+      0,
+      1
+    ],
+    "anchoredPosition": [
+      -6,
+      -30
+    ],
+    "sizeDelta": [
+      56,
+      32
+    ]
+  },
+  "source": "Imagegen raster contours/materials; chroma removal, shared alpha, matching fill palette, normalized rim widths; no SVG"
+}

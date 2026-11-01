@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 1a7398ba909869c47a50bfa4a16d7f32
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6322621434333431032
+    second: Emblem_Power_0
+  - first:
+      213: 906930580702164424
+    second: Emblem_Power_1
+  - first:
+      213: 3201985623153962997
+    second: Emblem_Power_2
+  - first:
+      213: 419242914561661469
+    second: Emblem_Power_3
+  - first:
+      213: -784323201113631364
+    second: Emblem_Power_4
+  - first:
+      213: 4966551084445990661
+    second: Emblem_Power_5
+  - first:
+      213: -7585993392071635540
+    second: Emblem_Power_6
+  - first:
+      213: 4479141387105990170
+    second: Emblem_Power_7
+  - first:
+      213: 621984914093550049
+    second: Emblem_Power_8
+  - first:
+      213: -2564615840184237422
+    second: Emblem_Power_9
+  - first:
+      213: 439069449280565041
+    second: Emblem_Power_10
+  - first:
+      213: 9007964780272272185
+    second: Emblem_Power_11
+  - first:
+      213: 681111333146687444
+    second: Emblem_Power_12
+  - first:
+      213: -1821521548664977970
+    second: Emblem_Power_13
+  - first:
+      213: -1277267376999796553
+    second: Emblem_Power_14
+  - first:
+      213: -1524137233916021654
+    second: Emblem_Power_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Emblem_Power_0
+      rect:
+        serializedVersion: 2
+        x: 1972
+        y: 252
+        width: 83
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f407b222b67eb750800000000000000
+      internalID: 6322621434333431032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_1
+      rect:
+        serializedVersion: 2
+        x: 2049
+        y: 328
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c5f0bade80169c00800000000000000
+      internalID: 906930580702164424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_2
+      rect:
+        serializedVersion: 2
+        x: 2077
+        y: 285
+        width: 56
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ffeffb95fcbf6c20800000000000000
+      internalID: 3201985623153962997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_3
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 210
+        width: 99
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1a1c05a53371d500800000000000000
+      internalID: 419242914561661469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_4
+      rect:
+        serializedVersion: 2
+        x: 2058
+        y: 10
+        width: 59
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c75568044368d15f0800000000000000
+      internalID: -784323201113631364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_5
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 285
+        width: 17
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50ffb3bb5ebbce440800000000000000
+      internalID: 4966551084445990661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_6
+      rect:
+        serializedVersion: 2
+        x: 1973
+        y: 243
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cad0c15c33329b690800000000000000
+      internalID: -7585993392071635540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_7
+      rect:
+        serializedVersion: 2
+        x: 2116
+        y: 46
+        width: 19
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a16f33d2c5b192e30800000000000000
+      internalID: 4479141387105990170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_8
+      rect:
+        serializedVersion: 2
+        x: 2123
+        y: 53
+        width: 152
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e9a234ebfbb1a800800000000000000
+      internalID: 621984914093550049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_9
+      rect:
+        serializedVersion: 2
+        x: 1971
+        y: 230
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2928a743b77a86cd0800000000000000
+      internalID: -2564615840184237422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_10
+      rect:
+        serializedVersion: 2
+        x: 1971
+        y: 218
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f281c7653e71600800000000000000
+      internalID: 439069449280565041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_11
+      rect:
+        serializedVersion: 2
+        x: 1978
+        y: 220
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933cb5dcd38b20d70800000000000000
+      internalID: 9007964780272272185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_12
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 57
+        width: 164
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d773b8162bc37900800000000000000
+      internalID: 681111333146687444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_13
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 23
+        width: 132
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec5ca156dc7a8b6e0800000000000000
+      internalID: -1821521548664977970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_14
+      rect:
+        serializedVersion: 2
+        x: 2128
+        y: 21
+        width: 129
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b07bbe761c364ee0800000000000000
+      internalID: -1277267376999796553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emblem_Power_15
+      rect:
+        serializedVersion: 2
+        x: 2259
+        y: 23
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a643d7fc24d29dae0800000000000000
+      internalID: -1524137233916021654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Emblem_Power_0: 6322621434333431032
+      Emblem_Power_1: 906930580702164424
+      Emblem_Power_10: 439069449280565041
+      Emblem_Power_11: 9007964780272272185
+      Emblem_Power_12: 681111333146687444
+      Emblem_Power_13: -1821521548664977970
+      Emblem_Power_14: -1277267376999796553
+      Emblem_Power_15: -1524137233916021654
+      Emblem_Power_2: 3201985623153962997
+      Emblem_Power_3: 419242914561661469
+      Emblem_Power_4: -784323201113631364
+      Emblem_Power_5: 4966551084445990661
+      Emblem_Power_6: -7585993392071635540
+      Emblem_Power_7: 4479141387105990170
+      Emblem_Power_8: 621984914093550049
+      Emblem_Power_9: -2564615840184237422
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

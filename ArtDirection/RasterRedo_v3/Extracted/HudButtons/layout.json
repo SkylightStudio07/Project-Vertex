@@ -1,0 +1,106 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "scale": 2,
+  "origin": "top-left",
+  "nine_slice_order": "left,bottom,right,top; PNG pixels",
+  "assets": [
+    {
+      "file": "Button_Map_Normal.png",
+      "screen_rect": [
+        1703,
+        23,
+        82,
+        82
+      ],
+      "png_size_px": [
+        164,
+        164
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Button_Map_Hover.png",
+      "screen_rect": [
+        1703,
+        23,
+        82,
+        82
+      ],
+      "png_size_px": [
+        164,
+        164
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Button_Map_Pressed.png",
+      "screen_rect": [
+        1703,
+        23,
+        82,
+        82
+      ],
+      "png_size_px": [
+        164,
+        164
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Button_Deck_Normal.png",
+      "screen_rect": [
+        1807,
+        23,
+        82,
+        82
+      ],
+      "png_size_px": [
+        164,
+        164
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Button_Deck_Hover.png",
+      "screen_rect": [
+        1807,
+        23,
+        82,
+        82
+      ],
+      "png_size_px": [
+        164,
+        164
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Button_Deck_Pressed.png",
+      "screen_rect": [
+        1807,
+        23,
+        82,
+        82
+      ],
+      "png_size_px": [
+        164,
+        164
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    }
+  ],
+  "text_slots": [],
+  "instances": [],
+  "layer_order": [
+    "one state image per button"
+  ]
+}

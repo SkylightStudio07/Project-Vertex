@@ -1,0 +1,188 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "scale": 2,
+  "origin": "top-left",
+  "nine_slice_order": "left,bottom,right,top; PNG pixels",
+  "assets": [
+    {
+      "file": "Row.png",
+      "screen_rect": [
+        33,
+        129,
+        574,
+        53
+      ],
+      "png_size_px": [
+        1148,
+        106
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        80,
+        6,
+        440,
+        6
+      ]
+    },
+    {
+      "file": "Row_Accent.png",
+      "screen_rect": [
+        63,
+        136,
+        25,
+        38
+      ],
+      "png_size_px": [
+        50,
+        76
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Separator.png",
+      "screen_rect": [
+        252,
+        136,
+        21,
+        38
+      ],
+      "png_size_px": [
+        42,
+        76
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "BossChip.png",
+      "screen_rect": [
+        514,
+        205,
+        49,
+        24
+      ],
+      "png_size_px": [
+        98,
+        48
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "label",
+      "parent": "Row.png",
+      "text": "TARGET DOWN",
+      "rect": [
+        68,
+        16,
+        145,
+        22
+      ],
+      "align": "left",
+      "font_size": 15,
+      "weight": 700,
+      "color": "#16BBDD",
+      "letter_spacing": 1,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "enemy",
+      "parent": "Row.png",
+      "text": "제파러",
+      "rect": [
+        265,
+        13,
+        75,
+        28
+      ],
+      "align": "left",
+      "font_size": 21,
+      "weight": 700,
+      "color": "#F4F4F1",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "status",
+      "parent": "Row.png",
+      "text": "무력화",
+      "rect": [
+        344,
+        17,
+        88,
+        22
+      ],
+      "align": "left",
+      "font_size": 15,
+      "weight": 600,
+      "color": "#A9AFB3",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "boss",
+      "parent": "BossChip.png",
+      "text": "BOSS",
+      "rect": [
+        0,
+        4,
+        49,
+        18
+      ],
+      "align": "center",
+      "font_size": 12,
+      "weight": 600,
+      "color": "#D8DADC",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    }
+  ],
+  "instances": [
+    {
+      "file": "Row.png",
+      "screen_rect": [
+        33,
+        190,
+        574,
+        53
+      ]
+    },
+    {
+      "file": "Row_Accent.png",
+      "screen_rect": [
+        63,
+        197,
+        25,
+        38
+      ]
+    },
+    {
+      "file": "Separator.png",
+      "screen_rect": [
+        252,
+        197,
+        21,
+        38
+      ]
+    }
+  ],
+  "row_spacing_px": 61,
+  "layer_order": [
+    "Row",
+    "Row_Accent",
+    "Separator",
+    "BossChip optional",
+    "runtime text"
+  ]
+}

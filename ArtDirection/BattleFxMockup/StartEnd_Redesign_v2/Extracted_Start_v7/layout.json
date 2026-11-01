@@ -1,0 +1,356 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "source_resolution": [
+    1685,
+    934
+  ],
+  "origin": "top-left",
+  "scale": 2,
+  "nine_slice_order": "left,bottom,right,top; PNG pixels",
+  "assets": [
+    {
+      "file": "Band_Shadow.png",
+      "png_size_px": [
+        3574,
+        394
+      ],
+      "screen_rect": [
+        80,
+        177,
+        1787,
+        197
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Band.png",
+      "png_size_px": [
+        3574,
+        394
+      ],
+      "screen_rect": [
+        76,
+        172,
+        1787,
+        197
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Serial_Block.png",
+      "png_size_px": [
+        426,
+        394
+      ],
+      "screen_rect": [
+        76,
+        172,
+        213,
+        197
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Serial_Ticks.png",
+      "png_size_px": [
+        30,
+        62
+      ],
+      "screen_rect": [
+        96,
+        321,
+        15,
+        31
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Serial_Rule.png",
+      "png_size_px": [
+        54,
+        2
+      ],
+      "screen_rect": [
+        164,
+        273,
+        27,
+        1
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Serial_Divider.png",
+      "png_size_px": [
+        2,
+        220
+      ],
+      "screen_rect": [
+        314,
+        191,
+        1,
+        110
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Line_Top.png",
+      "png_size_px": [
+        3514,
+        2
+      ],
+      "screen_rect": [
+        99,
+        150,
+        1757,
+        1
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "file": "Title_Rule.png",
+      "png_size_px": [
+        442,
+        2
+      ],
+      "screen_rect": [
+        458,
+        280,
+        221,
+        1
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Ticks_Right.png",
+      "png_size_px": [
+        14,
+        108
+      ],
+      "screen_rect": [
+        1844,
+        239,
+        7,
+        54
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Tag.png",
+      "png_size_px": [
+        1080,
+        84
+      ],
+      "screen_rect": [
+        689,
+        349,
+        540,
+        42
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        72,
+        0,
+        72,
+        0
+      ]
+    },
+    {
+      "file": "Tag_Bar.png",
+      "png_size_px": [
+        2,
+        42
+      ],
+      "screen_rect": [
+        750,
+        360,
+        1,
+        21
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Tag_EliteMark.png",
+      "png_size_px": [
+        6,
+        6
+      ],
+      "screen_rect": [
+        773,
+        368,
+        3,
+        3
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    }
+  ],
+  "instances": [
+    {
+      "file": "Title_Rule.png",
+      "screen_rect": [
+        1236,
+        280,
+        221,
+        1
+      ]
+    },
+    {
+      "file": "Tag_Bar.png",
+      "screen_rect": [
+        1170,
+        360,
+        1,
+        21
+      ]
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "serial",
+      "text": "06",
+      "rect": [
+        162,
+        195,
+        84,
+        68
+      ],
+      "font_size": 58,
+      "weight": 400,
+      "align": "left",
+      "color": "#131718",
+      "letter_spacing": 0,
+      "opacity": 1
+    },
+    {
+      "id": "serial_caption",
+      "text": "OPERATION\nSERIAL\n// 06",
+      "rect": [
+        164,
+        298,
+        97,
+        50
+      ],
+      "font_size": 10,
+      "weight": 600,
+      "align": "left",
+      "color": "#24272A",
+      "letter_spacing": 1,
+      "opacity": 1
+    },
+    {
+      "id": "eng",
+      "text": "OPERATION START",
+      "rect": [
+        775,
+        198,
+        371,
+        25
+      ],
+      "font_size": 16,
+      "weight": 500,
+      "align": "center",
+      "color": "#F1F1EF",
+      "letter_spacing": 8,
+      "opacity": 1
+    },
+    {
+      "id": "title",
+      "text": "작전 개시",
+      "rect": [
+        743,
+        230,
+        438,
+        99
+      ],
+      "font_size": 86,
+      "weight": 700,
+      "align": "center",
+      "color": "#F8F8F5",
+      "letter_spacing": 5,
+      "opacity": 1
+    },
+    {
+      "id": "ghost",
+      "text": "06",
+      "rect": [
+        1506,
+        178,
+        333,
+        260
+      ],
+      "font_size": 260,
+      "weight": 700,
+      "align": "left",
+      "color": "#D0D2D3",
+      "letter_spacing": 0,
+      "opacity": 0.1
+    },
+    {
+      "id": "tag",
+      "text": "일반 조우 · 적 01",
+      "rect": [
+        817,
+        357,
+        285,
+        30
+      ],
+      "font_size": 23,
+      "weight": 700,
+      "align": "center",
+      "color": "#F5F5F2",
+      "letter_spacing": 1,
+      "opacity": 1
+    }
+  ],
+  "ghost_clip": {
+    "mask": "Band.png",
+    "screen_rect": [
+      76,
+      172,
+      1787,
+      197
+    ],
+    "rule": "render ghost on separate layer, intersect alpha with Band at its screen position; clips top,bottom and right corner"
+  },
+  "elite": {
+    "tag_text": "정예 조우 · 적 02",
+    "show": "Tag_EliteMark.png",
+    "tag_elite": null,
+    "note": "3px source chip, no baked text"
+  },
+  "layer_order": [
+    "Band_Shadow",
+    "Band",
+    "ghost text clipped to Band",
+    "Serial_Block",
+    "rules/ticks",
+    "Tag",
+    "Tag_Bar x2",
+    "optional Tag_EliteMark",
+    "remaining runtime text"
+  ],
+  "shadow_offset_screen_px": [
+    3,
+    5
+  ]
+}

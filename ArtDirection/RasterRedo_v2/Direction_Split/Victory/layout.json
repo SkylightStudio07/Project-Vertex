@@ -1,0 +1,257 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "measured_mockup_resolution": [
+    1672,
+    941
+  ],
+  "coordinate_system": "top-left; [x,y,w,h], screen pixels",
+  "png_scale": 2,
+  "source_mockup": "../Direction_Mockups/Victory.png",
+  "assets": [
+    {
+      "file": "Panel_Shadow.png",
+      "png_size_px": [
+        2080,
+        646
+      ],
+      "screen_rect": [
+        426,
+        386,
+        1040,
+        323
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "runtime_opacity": 0.7
+    },
+    {
+      "file": "Panel.png",
+      "png_size_px": [
+        2080,
+        646
+      ],
+      "screen_rect": [
+        440,
+        374,
+        1040,
+        323
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Emblem_Compass.png",
+      "png_size_px": [
+        2080,
+        646
+      ],
+      "screen_rect": [
+        440,
+        374,
+        1040,
+        323
+      ],
+      "alpha": "soft",
+      "fixed_size": true,
+      "rotation": 0,
+      "visible_emblem_rect": [
+        1100,
+        388,
+        343,
+        302
+      ],
+      "pivot_screen": [
+        1271.5,
+        539.0
+      ]
+    },
+    {
+      "file": "Corner_Ink.png",
+      "png_size_px": [
+        180,
+        346
+      ],
+      "screen_rect": [
+        425,
+        384,
+        90,
+        173
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Accent_Bar.png",
+      "png_size_px": [
+        1066,
+        16
+      ],
+      "screen_rect": [
+        442,
+        678,
+        533,
+        8
+      ],
+      "alpha": "binary",
+      "fixed_size": false,
+      "rotation": 0,
+      "nine_slice_px": {
+        "left": 4,
+        "right": 4,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "file": "Tag.png",
+      "png_size_px": [
+        846,
+        84
+      ],
+      "screen_rect": [
+        976,
+        644,
+        423,
+        42
+      ],
+      "alpha": "binary",
+      "fixed_size": false,
+      "rotation": 0,
+      "nine_slice_px": {
+        "left": 86,
+        "right": 86,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "file": "Tag_Mark.png",
+      "png_size_px": [
+        60,
+        2
+      ],
+      "screen_rect": [
+        1043,
+        663,
+        30,
+        1
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "serial",
+      "text": "01",
+      "screen_rect": [
+        529,
+        402,
+        46,
+        23
+      ],
+      "alignment": "left",
+      "font_size_px": 17.22,
+      "font_weight": "Medium",
+      "color": "#60656A",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "title",
+      "text": "작전 종료",
+      "screen_rect": [
+        531,
+        458,
+        494,
+        108
+      ],
+      "alignment": "left",
+      "font_size_px": 98.76,
+      "font_weight": "Bold",
+      "color": "#111518",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "eng",
+      "text": "MISSION ACCOMPLISHED",
+      "screen_rect": [
+        544,
+        581,
+        494,
+        28
+      ],
+      "alignment": "left",
+      "font_size_px": 17.22,
+      "font_weight": "Medium",
+      "color": "#60656A",
+      "letter_spacing_px": 2,
+      "variant": "all"
+    },
+    {
+      "id": "caption",
+      "text": "VERTEX // OPERATION COMPLETE",
+      "screen_rect": [
+        544,
+        632,
+        390,
+        16
+      ],
+      "alignment": "left",
+      "font_size_px": 10.33,
+      "font_weight": "Medium",
+      "color": "#60656A",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "caption_2",
+      "text": "ALL HOSTILES NEUTRALIZED.",
+      "screen_rect": [
+        544,
+        650,
+        390,
+        16
+      ],
+      "alignment": "left",
+      "font_size_px": 10.33,
+      "font_weight": "Medium",
+      "color": "#60656A",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "tag",
+      "text": "ALL HOSTILES NEUTRALIZED",
+      "screen_rect": [
+        1096,
+        655,
+        274,
+        21
+      ],
+      "alignment": "left",
+      "font_size_px": 12.63,
+      "font_weight": "Bold",
+      "color": "#F3F4F5",
+      "letter_spacing_px": 1,
+      "variant": "all"
+    }
+  ],
+  "instances": [],
+  "import": {
+    "pixels_per_unit": 200,
+    "filter_mode": "Bilinear",
+    "compression": "None",
+    "mipmaps": false,
+    "mesh_type": "FullRect"
+  },
+  "layer_order": "See README and reconstruction; shadows behind panel, emblems above panel, accents and runtime text last."
+}

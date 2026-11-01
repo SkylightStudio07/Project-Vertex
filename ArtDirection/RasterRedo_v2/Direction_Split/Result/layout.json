@@ -1,0 +1,749 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "measured_mockup_resolution": [
+    1672,
+    941
+  ],
+  "coordinate_system": "top-left; [x,y,w,h], screen pixels",
+  "png_scale": 2,
+  "source_mockup": "../Direction_Mockups/Result_Clear.png",
+  "assets": [
+    {
+      "file": "Panel.png",
+      "png_size_px": [
+        2684,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        1342,
+        793
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "clear"
+    },
+    {
+      "file": "Emblem_Compass.png",
+      "png_size_px": [
+        2684,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        1342,
+        793
+      ],
+      "alpha": "soft",
+      "fixed_size": true,
+      "rotation": 0,
+      "visible_emblem_rect": [
+        1371,
+        185,
+        419,
+        374
+      ],
+      "pivot_screen": [
+        1580.5,
+        372.0
+      ]
+    },
+    {
+      "file": "Panel_Defeat.png",
+      "png_size_px": [
+        2684,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        1342,
+        793
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "defeat"
+    },
+    {
+      "file": "Emblem_Compass_Defeat.png",
+      "png_size_px": [
+        2684,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        1342,
+        793
+      ],
+      "alpha": "soft",
+      "fixed_size": true,
+      "rotation": 0,
+      "visible_emblem_rect": [
+        1371,
+        185,
+        419,
+        374
+      ],
+      "pivot_screen": [
+        1580.5,
+        372.0
+      ]
+    },
+    {
+      "file": "Panel_Shadow.png",
+      "png_size_px": [
+        2684,
+        1586
+      ],
+      "screen_rect": [
+        527,
+        185,
+        1342,
+        793
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "runtime_opacity": 0.72
+    },
+    {
+      "file": "Strip_Mask.png",
+      "png_size_px": [
+        538,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        269,
+        793
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "usage": "Stencil mask only; do not render white sprite"
+    },
+    {
+      "file": "Strip_Overlay.png",
+      "png_size_px": [
+        538,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        269,
+        793
+      ],
+      "alpha": "soft",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "clear"
+    },
+    {
+      "file": "Strip_Overlay_Defeat.png",
+      "png_size_px": [
+        538,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        269,
+        793
+      ],
+      "alpha": "soft",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "defeat"
+    },
+    {
+      "file": "Strip_Frame.png",
+      "png_size_px": [
+        538,
+        1586
+      ],
+      "screen_rect": [
+        520,
+        174,
+        269,
+        793
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Button_Return_Normal.png",
+      "png_size_px": [
+        954,
+        184
+      ],
+      "screen_rect": [
+        1369,
+        876,
+        477,
+        92
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "clear",
+      "state": "Normal"
+    },
+    {
+      "file": "Button_Return_Hover.png",
+      "png_size_px": [
+        954,
+        184
+      ],
+      "screen_rect": [
+        1369,
+        876,
+        477,
+        92
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "clear",
+      "state": "Hover"
+    },
+    {
+      "file": "Button_Return_Pressed.png",
+      "png_size_px": [
+        954,
+        184
+      ],
+      "screen_rect": [
+        1369,
+        876,
+        477,
+        92
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "clear",
+      "state": "Pressed"
+    },
+    {
+      "file": "Title_Accent.png",
+      "png_size_px": [
+        106,
+        16
+      ],
+      "screen_rect": [
+        804,
+        441,
+        53,
+        8
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Stat_Accent.png",
+      "png_size_px": [
+        42,
+        6
+      ],
+      "screen_rect": [
+        829,
+        678,
+        21,
+        3
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Button_Return_Normal_Defeat.png",
+      "png_size_px": [
+        954,
+        184
+      ],
+      "screen_rect": [
+        1369,
+        876,
+        477,
+        92
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "defeat",
+      "state": "Normal"
+    },
+    {
+      "file": "Button_Return_Hover_Defeat.png",
+      "png_size_px": [
+        954,
+        184
+      ],
+      "screen_rect": [
+        1369,
+        876,
+        477,
+        92
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "defeat",
+      "state": "Hover"
+    },
+    {
+      "file": "Button_Return_Pressed_Defeat.png",
+      "png_size_px": [
+        954,
+        184
+      ],
+      "screen_rect": [
+        1369,
+        876,
+        477,
+        92
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0,
+      "variant": "defeat",
+      "state": "Pressed"
+    },
+    {
+      "file": "Title_Accent_Defeat.png",
+      "png_size_px": [
+        106,
+        16
+      ],
+      "screen_rect": [
+        804,
+        441,
+        53,
+        8
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Stat_Accent_Defeat.png",
+      "png_size_px": [
+        42,
+        6
+      ],
+      "screen_rect": [
+        829,
+        678,
+        21,
+        3
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Stat_Rule_V.png",
+      "png_size_px": [
+        2,
+        360
+      ],
+      "screen_rect": [
+        804,
+        636,
+        1,
+        180
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    },
+    {
+      "file": "Stat_Rule_H.png",
+      "png_size_px": [
+        340,
+        10
+      ],
+      "screen_rect": [
+        804,
+        813,
+        170,
+        5
+      ],
+      "alpha": "binary",
+      "fixed_size": true,
+      "rotation": 0
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "stat_label_0",
+      "text": "도달 층",
+      "screen_rect": [
+        829,
+        638,
+        178,
+        34
+      ],
+      "alignment": "left",
+      "font_size_px": 22.97,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "stat_value_0",
+      "text": "48",
+      "screen_rect": [
+        824,
+        692,
+        178,
+        110
+      ],
+      "alignment": "left",
+      "font_size_px": 103.35,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "stat_label_1",
+      "text": "적 처치",
+      "screen_rect": [
+        1078,
+        638,
+        178,
+        34
+      ],
+      "alignment": "left",
+      "font_size_px": 22.97,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "stat_value_1",
+      "text": "36",
+      "screen_rect": [
+        1074,
+        692,
+        178,
+        110
+      ],
+      "alignment": "left",
+      "font_size_px": 103.35,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "stat_label_2",
+      "text": "획득 카드",
+      "screen_rect": [
+        1329,
+        638,
+        178,
+        34
+      ],
+      "alignment": "left",
+      "font_size_px": 22.97,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "stat_value_2",
+      "text": "24",
+      "screen_rect": [
+        1324,
+        692,
+        178,
+        110
+      ],
+      "alignment": "left",
+      "font_size_px": 103.35,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "stat_label_3",
+      "text": "진행 턴",
+      "screen_rect": [
+        1596,
+        638,
+        178,
+        34
+      ],
+      "alignment": "left",
+      "font_size_px": 22.97,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "stat_value_3",
+      "text": "96",
+      "screen_rect": [
+        1592,
+        692,
+        178,
+        110
+      ],
+      "alignment": "left",
+      "font_size_px": 103.35,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "serial",
+      "text": "01",
+      "screen_rect": [
+        807,
+        217,
+        80,
+        28
+      ],
+      "alignment": "left",
+      "font_size_px": 18.37,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "eyebrow",
+      "text": "OPERATION REPORT",
+      "screen_rect": [
+        807,
+        262,
+        459,
+        29
+      ],
+      "alignment": "left",
+      "font_size_px": 14.93,
+      "font_weight": "Medium",
+      "color": "#16181B",
+      "letter_spacing_px": 2,
+      "variant": "all"
+    },
+    {
+      "id": "title",
+      "text": "런 클리어",
+      "screen_rect": [
+        796,
+        302,
+        517,
+        130
+      ],
+      "alignment": "left",
+      "font_size_px": 118.28,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "subtitle",
+      "text": "모든 작전을 완료했습니다.",
+      "screen_rect": [
+        804,
+        469,
+        666,
+        48
+      ],
+      "alignment": "left",
+      "font_size_px": 35.6,
+      "font_weight": "Bold",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "caption",
+      "text": "EXPEDITION COMPLETE.\nANOTHER LAYER AWAITS.",
+      "screen_rect": [
+        804,
+        537,
+        448,
+        40
+      ],
+      "alignment": "left",
+      "font_size_px": 11.48,
+      "font_weight": "Medium",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "strip_caption",
+      "text": "FIELD RECORD\n/ 04",
+      "screen_rect": [
+        556,
+        864,
+        163,
+        36
+      ],
+      "alignment": "left",
+      "font_size_px": 11.48,
+      "font_weight": "Bold",
+      "color": "#E5E8EB",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "button",
+      "text": "기지로 귀환",
+      "screen_rect": [
+        1453,
+        896,
+        299,
+        45
+      ],
+      "alignment": "left",
+      "font_size_px": 33.3,
+      "font_weight": "Bold",
+      "color": "#E5E8EB",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    },
+    {
+      "id": "emblem_caption",
+      "text": "VERTEX\nEXPEDITION\nRECORD",
+      "screen_rect": [
+        1751,
+        482,
+        103,
+        53
+      ],
+      "alignment": "left",
+      "font_size_px": 10.33,
+      "font_weight": "Medium",
+      "color": "#16181B",
+      "letter_spacing_px": 0,
+      "variant": "all"
+    }
+  ],
+  "instances": [
+    {
+      "file": "Stat_Rule_V.png",
+      "screen_rect": [
+        1053,
+        636,
+        1,
+        180
+      ]
+    },
+    {
+      "file": "Stat_Rule_H.png",
+      "screen_rect": [
+        1053,
+        813,
+        170,
+        5
+      ]
+    },
+    {
+      "file": "Stat_Accent.png",
+      "screen_rect": [
+        1078,
+        678,
+        21,
+        3
+      ],
+      "defeat_file": "Stat_Accent_Defeat.png"
+    },
+    {
+      "file": "Stat_Rule_V.png",
+      "screen_rect": [
+        1303,
+        636,
+        1,
+        180
+      ]
+    },
+    {
+      "file": "Stat_Rule_H.png",
+      "screen_rect": [
+        1303,
+        813,
+        170,
+        5
+      ]
+    },
+    {
+      "file": "Stat_Accent.png",
+      "screen_rect": [
+        1329,
+        678,
+        21,
+        3
+      ],
+      "defeat_file": "Stat_Accent_Defeat.png"
+    },
+    {
+      "file": "Stat_Rule_V.png",
+      "screen_rect": [
+        1571,
+        636,
+        1,
+        180
+      ]
+    },
+    {
+      "file": "Stat_Rule_H.png",
+      "screen_rect": [
+        1571,
+        813,
+        170,
+        5
+      ]
+    },
+    {
+      "file": "Stat_Accent.png",
+      "screen_rect": [
+        1596,
+        678,
+        21,
+        3
+      ],
+      "defeat_file": "Stat_Accent_Defeat.png"
+    }
+  ],
+  "import": {
+    "pixels_per_unit": 200,
+    "filter_mode": "Bilinear",
+    "compression": "None",
+    "mipmaps": false,
+    "mesh_type": "FullRect"
+  },
+  "text_variants": {
+    "defeat": {
+      "title": "런 종료",
+      "subtitle": "작전을 완수하지 못했습니다.",
+      "caption": "EXPEDITION FAILED.\nANOTHER LAYER AWAITS.",
+      "default_color": "#E3E6E9"
+    }
+  },
+  "layer_order": "See README and reconstruction; shadows behind panel, emblems above panel, accents and runtime text last."
+}

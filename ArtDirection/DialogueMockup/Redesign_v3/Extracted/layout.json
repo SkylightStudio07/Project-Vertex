@@ -1,0 +1,324 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "scale": 2,
+  "origin": "top-left, y down",
+  "panel_screen_size": [
+    720,
+    104
+  ],
+  "width_range": [
+    720,
+    960
+  ],
+  "panel_fixed_height": 104,
+  "nine_slice_order": "left,bottom,right,top; source PNG pixels",
+  "assets": [
+    {
+      "file": "Choice_Panel_Normal.png",
+      "png_size_px": [
+        1440,
+        208
+      ],
+      "screen_size": [
+        720.0,
+        104.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px_LBRT": [
+        320,
+        12,
+        640,
+        12
+      ]
+    },
+    {
+      "file": "Choice_Tail_Normal.png",
+      "png_size_px": [
+        112,
+        64
+      ],
+      "screen_size": [
+        56.0,
+        32.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Choice_Panel_Hover.png",
+      "png_size_px": [
+        1440,
+        208
+      ],
+      "screen_size": [
+        720.0,
+        104.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px_LBRT": [
+        320,
+        12,
+        640,
+        12
+      ]
+    },
+    {
+      "file": "Choice_Tail_Hover.png",
+      "png_size_px": [
+        112,
+        64
+      ],
+      "screen_size": [
+        56.0,
+        32.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Choice_Panel_Selected.png",
+      "png_size_px": [
+        1440,
+        208
+      ],
+      "screen_size": [
+        720.0,
+        104.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px_LBRT": [
+        320,
+        12,
+        640,
+        12
+      ]
+    },
+    {
+      "file": "Choice_Tail_Selected.png",
+      "png_size_px": [
+        112,
+        64
+      ],
+      "screen_size": [
+        56.0,
+        32.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Choice_Shadow.png",
+      "png_size_px": [
+        1440,
+        208
+      ],
+      "screen_size": [
+        720.0,
+        104.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px_LBRT": [
+        320,
+        12,
+        640,
+        12
+      ]
+    },
+    {
+      "file": "Choice_Tail_Shadow.png",
+      "png_size_px": [
+        112,
+        64
+      ],
+      "screen_size": [
+        56.0,
+        32.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Choice_NumberLine.png",
+      "png_size_px": [
+        44,
+        4
+      ],
+      "screen_size": [
+        22.0,
+        2.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Choice_Divider.png",
+      "png_size_px": [
+        48,
+        4
+      ],
+      "screen_size": [
+        24.0,
+        2.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    },
+    {
+      "file": "Choice_SelectBand.png",
+      "png_size_px": [
+        320,
+        6
+      ],
+      "screen_size": [
+        160.0,
+        3.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px_LBRT": [
+        4,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "file": "Choice_Arrow.png",
+      "png_size_px": [
+        64,
+        44
+      ],
+      "screen_size": [
+        32.0,
+        22.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0
+    }
+  ],
+  "tail": {
+    "anchor": "panel top-right",
+    "offset_screen_px": [
+      -6,
+      38
+    ],
+    "screen_size": [
+      56,
+      32
+    ],
+    "overlap_px": 6,
+    "draw_order": "panel then tail; tail covers open border seam"
+  },
+  "shadow": {
+    "offset_screen_px": [
+      8,
+      10
+    ],
+    "opacity": 0.65,
+    "tail_same_offset": true
+  },
+  "text_slots": {
+    "number": {
+      "rect": [
+        36,
+        34,
+        40,
+        28
+      ],
+      "font_size": 20,
+      "weight": 600
+    },
+    "label": {
+      "rect": [
+        108,
+        27,
+        492,
+        44
+      ],
+      "font_size": 32,
+      "weight": 600,
+      "width_rule": "panel_width - 228"
+    },
+    "arrow": {
+      "rect": [
+        650,
+        35,
+        32,
+        22
+      ],
+      "anchor": "right",
+      "right_offset": 38
+    }
+  },
+  "text_colors": {
+    "Normal": "#11191E",
+    "Hover": "#FFFFFF",
+    "Selected": "#FFFFFF"
+  },
+  "decorations": {
+    "number_line": [
+      36,
+      68,
+      22,
+      2
+    ],
+    "divider": [
+      108,
+      82,
+      24,
+      2
+    ],
+    "selection_band": [
+      28,
+      101,
+      664,
+      3
+    ],
+    "selection_band_width": "panel_width - 56"
+  },
+  "header": {
+    "text": "RESPONSE / 03",
+    "rect": [
+      750,
+      318,
+      240,
+      28
+    ],
+    "font_size": 18,
+    "color": "#FFFFFF"
+  },
+  "reference_rows": [
+    {
+      "top_left": [
+        732,
+        385
+      ],
+      "approx_width": 670,
+      "rotation_clockwise_degrees": -1.5
+    },
+    {
+      "top_left": [
+        711,
+        475
+      ],
+      "approx_width": 677,
+      "rotation_clockwise_degrees": 2.5
+    },
+    {
+      "top_left": [
+        744,
+        608
+      ],
+      "approx_width": 690,
+      "rotation_clockwise_degrees": -1.5
+    }
+  ],
+  "reference_note": "Canonical rows are approx 670-690 px; reusable plate normalized to requested minimum720. Angles are estimates. Rotate entire parent including tail, shadow and text. Unity Z uses opposite sign to clockwise screen convention."
+}

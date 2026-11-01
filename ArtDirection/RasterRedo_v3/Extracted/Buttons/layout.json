@@ -1,0 +1,404 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "scale": 2,
+  "origin": "top-left",
+  "nine_slice_order": "left,bottom,right,top; PNG pixels",
+  "assets": [
+    {
+      "file": "Button_Close_Normal.png",
+      "screen_rect": [
+        800,
+        926,
+        322,
+        96
+      ],
+      "png_size_px": [
+        644,
+        192
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        42,
+        12,
+        48,
+        12
+      ]
+    },
+    {
+      "file": "Button_Close_Hover.png",
+      "screen_rect": [
+        800,
+        926,
+        322,
+        96
+      ],
+      "png_size_px": [
+        644,
+        192
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        42,
+        12,
+        48,
+        12
+      ]
+    },
+    {
+      "file": "Button_Close_Pressed.png",
+      "screen_rect": [
+        800,
+        926,
+        322,
+        96
+      ],
+      "png_size_px": [
+        644,
+        192
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        42,
+        12,
+        48,
+        12
+      ]
+    },
+    {
+      "file": "Button_Remove_Normal.png",
+      "screen_rect": [
+        890,
+        369,
+        370,
+        151
+      ],
+      "png_size_px": [
+        740,
+        302
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        170,
+        20,
+        220,
+        20
+      ]
+    },
+    {
+      "file": "Button_Remove_Hover.png",
+      "screen_rect": [
+        890,
+        369,
+        370,
+        151
+      ],
+      "png_size_px": [
+        740,
+        302
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        170,
+        20,
+        220,
+        20
+      ]
+    },
+    {
+      "file": "Button_Remove_Pressed.png",
+      "screen_rect": [
+        890,
+        369,
+        370,
+        151
+      ],
+      "png_size_px": [
+        740,
+        302
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        170,
+        20,
+        220,
+        20
+      ]
+    },
+    {
+      "file": "Button_Cancel_Normal.png",
+      "screen_rect": [
+        890,
+        547,
+        375,
+        147
+      ],
+      "png_size_px": [
+        750,
+        294
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        170,
+        20,
+        110,
+        20
+      ]
+    },
+    {
+      "file": "Button_Cancel_Hover.png",
+      "screen_rect": [
+        890,
+        547,
+        375,
+        147
+      ],
+      "png_size_px": [
+        750,
+        294
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        170,
+        20,
+        110,
+        20
+      ]
+    },
+    {
+      "file": "Button_Cancel_Pressed.png",
+      "screen_rect": [
+        890,
+        547,
+        375,
+        147
+      ],
+      "png_size_px": [
+        750,
+        294
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        170,
+        20,
+        110,
+        20
+      ]
+    },
+    {
+      "file": "Button_Close_Underline.png",
+      "screen_rect": [
+        928,
+        995,
+        65,
+        3
+      ],
+      "png_size_px": [
+        130,
+        6
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "file": "Button_Underline.png",
+      "screen_rect": [
+        988,
+        489,
+        46,
+        4
+      ],
+      "png_size_px": [
+        92,
+        8
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        2,
+        0,
+        2,
+        0
+      ]
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "close",
+      "parent": "Button_Close_Normal.png",
+      "text": "CLOSE",
+      "rect": [
+        0,
+        24,
+        322,
+        45
+      ],
+      "align": "center",
+      "font_size": 32,
+      "weight": 600,
+      "color": "#172026",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "remove_number",
+      "parent": "Button_Remove_Normal.png",
+      "text": "01",
+      "rect": [
+        0,
+        45,
+        52,
+        42
+      ],
+      "align": "center",
+      "font_size": 29,
+      "weight": 600,
+      "color": "#171D20",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "remove_en",
+      "parent": "Button_Remove_Normal.png",
+      "text": "REMOVE",
+      "rect": [
+        96,
+        25,
+        175,
+        20
+      ],
+      "align": "left",
+      "font_size": 12,
+      "weight": 500,
+      "color": "#F1F2F1",
+      "letter_spacing": 4,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "remove",
+      "parent": "Button_Remove_Normal.png",
+      "text": "제거",
+      "rect": [
+        96,
+        52,
+        150,
+        55
+      ],
+      "align": "left",
+      "font_size": 42,
+      "weight": 700,
+      "color": "#FFFFFF",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "cancel_number",
+      "parent": "Button_Cancel_Normal.png",
+      "text": "02",
+      "rect": [
+        0,
+        27,
+        53,
+        42
+      ],
+      "align": "center",
+      "font_size": 28,
+      "weight": 600,
+      "color": "#E5E5E1",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "cancel_en",
+      "parent": "Button_Cancel_Normal.png",
+      "text": "RETURN",
+      "rect": [
+        96,
+        23,
+        180,
+        20
+      ],
+      "align": "left",
+      "font_size": 12,
+      "weight": 500,
+      "color": "#20272A",
+      "letter_spacing": 4,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "cancel",
+      "parent": "Button_Cancel_Normal.png",
+      "text": "Cancel",
+      "rect": [
+        96,
+        57,
+        190,
+        49
+      ],
+      "align": "left",
+      "font_size": 37,
+      "weight": 600,
+      "color": "#171D20",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "state_colors": {}
+    },
+    {
+      "id": "cancel_ghost",
+      "parent": "Button_Cancel_Normal.png",
+      "text": "02",
+      "rect": [
+        275,
+        43,
+        95,
+        99
+      ],
+      "align": "left",
+      "font_size": 88,
+      "weight": 700,
+      "color": "#1C2226",
+      "letter_spacing": 0,
+      "opacity": 0.12,
+      "state_colors": {}
+    }
+  ],
+  "instances": [],
+  "ghost_clip": "clip cancel_ghost to Button_Cancel alpha; right edge anchored, keep95px width",
+  "width_rules": {
+    "Remove": "left85px and right110px fixed; label region stretches",
+    "Cancel": "left85px and right55px fixed; ghost at right",
+    "Close": "center label; caps fixed"
+  },
+  "layer_order": [
+    "one state image per button",
+    "optional hover underline",
+    "runtime text incl clipped ghost"
+  ],
+  "underline_visibility": {
+    "Button_Close_Underline.png": "Hover only",
+    "Button_Underline.png": "Hover only; main canonical removal accent may also be kept Normal if desired"
+  }
+}

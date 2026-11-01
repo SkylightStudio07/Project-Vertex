@@ -1,0 +1,1119 @@
+{
+  "version": 1,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "rect_format": "x,y,width,height",
+  "coordinates": "row panel_rect is unrotated screen rect; all child rects relative to unrotated panel top-left",
+  "sources": [
+    "../Choice_Mockup_v1_Default.png",
+    "../Choice_Mockup_v1_Hover.png",
+    "../Choice_Mockup_v1_Selected.png"
+  ],
+  "motion_source": "../MOTION_SPEC.txt",
+  "assets": {
+    "Choice_Panel_Normal": {
+      "file": "Choice_Panel_Normal.png",
+      "svg": "SVG/Choice_Panel_Normal.svg",
+      "logical_size": [
+        736,
+        96
+      ],
+      "source_pixels": [
+        1472,
+        192
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "shadow_baked": false,
+      "fill_color": "#EEF0F2",
+      "border_color": "#959DA5",
+      "border_logical_px": 1,
+      "nine_slice": {
+        "logical_lbrt": [
+          34,
+          34,
+          34,
+          34
+        ],
+        "source_pixels_lbrt": [
+          68,
+          68,
+          68,
+          68
+        ],
+        "minimum_logical_size": [
+          69,
+          69
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "Choice_Panel_Hover": {
+      "file": "Choice_Panel_Hover.png",
+      "svg": "SVG/Choice_Panel_Hover.svg",
+      "logical_size": [
+        736,
+        96
+      ],
+      "source_pixels": [
+        1472,
+        192
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "shadow_baked": false,
+      "fill_color": "#16181B",
+      "border_color": "#0DB8F2",
+      "border_logical_px": 2,
+      "nine_slice": {
+        "logical_lbrt": [
+          34,
+          34,
+          34,
+          34
+        ],
+        "source_pixels_lbrt": [
+          68,
+          68,
+          68,
+          68
+        ],
+        "minimum_logical_size": [
+          69,
+          69
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "Choice_Panel_Selected": {
+      "file": "Choice_Panel_Selected.png",
+      "svg": "SVG/Choice_Panel_Selected.svg",
+      "logical_size": [
+        736,
+        96
+      ],
+      "source_pixels": [
+        1472,
+        192
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "shadow_baked": false,
+      "fill_color": "#16181B",
+      "border_color": "#0DB8F2",
+      "border_logical_px": 3,
+      "nine_slice": {
+        "logical_lbrt": [
+          34,
+          34,
+          34,
+          34
+        ],
+        "source_pixels_lbrt": [
+          68,
+          68,
+          68,
+          68
+        ],
+        "minimum_logical_size": [
+          69,
+          69
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "Choice_Shadow": {
+      "file": "Choice_Shadow.png",
+      "svg": "SVG/Choice_Shadow.svg",
+      "logical_size": [
+        736,
+        96
+      ],
+      "source_pixels": [
+        1472,
+        192
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "opacity_baked": 1,
+      "runtime_opacity": 0.35,
+      "blur": 0,
+      "nine_slice": {
+        "logical_lbrt": [
+          34,
+          34,
+          34,
+          34
+        ],
+        "source_pixels_lbrt": [
+          68,
+          68,
+          68,
+          68
+        ],
+        "minimum_logical_size": [
+          69,
+          69
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "Choice_Ghost": {
+      "file": "Choice_Ghost.png",
+      "svg": "SVG/Choice_Ghost.svg",
+      "logical_size": [
+        736,
+        96
+      ],
+      "source_pixels": [
+        1472,
+        192
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "opacity_baked": 1,
+      "runtime_opacity": [
+        0.22,
+        0.12
+      ],
+      "nine_slice": {
+        "logical_lbrt": [
+          34,
+          34,
+          34,
+          34
+        ],
+        "source_pixels_lbrt": [
+          68,
+          68,
+          68,
+          68
+        ],
+        "minimum_logical_size": [
+          69,
+          69
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "Choice_NumberLine": {
+      "file": "Choice_NumberLine.png",
+      "svg": "SVG/Choice_NumberLine.svg",
+      "logical_size": [
+        20,
+        2
+      ],
+      "source_pixels": [
+        40,
+        4
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "tintable": true
+    },
+    "Choice_Divider": {
+      "file": "Choice_Divider.png",
+      "svg": "SVG/Choice_Divider.svg",
+      "logical_size": [
+        10,
+        48
+      ],
+      "source_pixels": [
+        20,
+        96
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "tintable": true
+    },
+    "Choice_Arrow": {
+      "file": "Choice_Arrow.png",
+      "svg": "SVG/Choice_Arrow.svg",
+      "logical_size": [
+        30,
+        24
+      ],
+      "source_pixels": [
+        60,
+        48
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "tintable": true
+    },
+    "Choice_SelectBand": {
+      "file": "Choice_SelectBand.png",
+      "svg": "SVG/Choice_SelectBand.svg",
+      "logical_size": [
+        736,
+        6
+      ],
+      "source_pixels": [
+        1472,
+        12
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "tintable": false,
+      "nine_slice": {
+        "logical_lbrt": [
+          8,
+          0,
+          8,
+          0
+        ],
+        "source_pixels_lbrt": [
+          16,
+          0,
+          16,
+          0
+        ],
+        "minimum_logical_size": [
+          17,
+          1
+        ],
+        "unity_image_type": "Sliced",
+        "fill_center": true
+      }
+    },
+    "Header_Rule": {
+      "file": "Header_Rule.png",
+      "svg": "SVG/Header_Rule.svg",
+      "logical_size": [
+        138,
+        1
+      ],
+      "source_pixels": [
+        276,
+        2
+      ],
+      "png_scale": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotation_degrees": 0,
+      "text_baked": false,
+      "method": "SVG reconstruction; latest SPLIT_REQUEST corner convention",
+      "tintable": true
+    }
+  },
+  "header": {
+    "text": {
+      "id": "response_header",
+      "rect": [
+        509,
+        256,
+        148,
+        26
+      ],
+      "text_format": "RESPONSE / {count:02}",
+      "font_size": 14,
+      "font_weight": 600,
+      "colors": {
+        "Normal": "#EEF0F2",
+        "Hover": "#EEF0F2",
+        "Selected": "#EEF0F2"
+      },
+      "alignment": "left",
+      "vertical_alignment": "middle",
+      "character_spacing_px": 1.2
+    },
+    "rule": {
+      "asset": "Header_Rule",
+      "rect": [
+        669,
+        269,
+        138,
+        1
+      ],
+      "tint": "#CED7DF"
+    }
+  },
+  "rows": [
+    {
+      "id": "choice_01",
+      "index": 1,
+      "panel_rect": [
+        476,
+        304,
+        724,
+        96
+      ],
+      "rotation_degrees_screen_clockwise": -4,
+      "unity_local_euler_z": 4,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "panel_asset": "Choice_Panel_Normal",
+      "shadow_asset": "Choice_Shadow",
+      "shadow_offset_screen": [
+        10,
+        10
+      ],
+      "example_text": "데려간다",
+      "example_tag": "RECRUIT",
+      "local": {
+        "number": {
+          "id": "number",
+          "rect": [
+            60,
+            24,
+            32,
+            26
+          ],
+          "font_size": 16,
+          "font_weight": 500,
+          "colors": {
+            "Normal": "#404850",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          },
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "example_text": "01",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "number_line": {
+          "asset": "Choice_NumberLine",
+          "rect": [
+            60,
+            56,
+            20,
+            2
+          ],
+          "tints": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          }
+        },
+        "number_divider": {
+          "asset": "Choice_Divider",
+          "rect": [
+            112,
+            24,
+            10,
+            48
+          ],
+          "tints": {
+            "Normal": "#9AA2AA",
+            "Hover": "#9CA8B2",
+            "Selected": "#9CA8B2"
+          }
+        },
+        "label": {
+          "id": "label",
+          "rect": [
+            150,
+            21,
+            358,
+            54
+          ],
+          "font_size": 28,
+          "font_weight": 700,
+          "colors": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          },
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "example_text": "데려간다",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "tag": {
+          "id": "tag",
+          "rect": [
+            528,
+            30,
+            76,
+            36
+          ],
+          "font_size": 13,
+          "font_weight": 500,
+          "colors": {
+            "Normal": "#68737D",
+            "Hover": "#D3DCE2",
+            "Selected": "#D3DCE2"
+          },
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0.2,
+          "example_text": "RECRUIT",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "tag_visible": true,
+        "tag_divider": {
+          "asset": "Choice_Divider",
+          "rect": [
+            618,
+            24,
+            10,
+            48
+          ],
+          "tints": {
+            "Normal": "#9AA2AA",
+            "Hover": "#9CA8B2",
+            "Selected": "#9CA8B2"
+          },
+          "visible_without_tag": true
+        },
+        "arrow": {
+          "asset": "Choice_Arrow",
+          "rect": [
+            656,
+            36,
+            30,
+            24
+          ],
+          "tints": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          }
+        },
+        "selected_band": {
+          "asset": "Choice_SelectBand",
+          "rect": [
+            28,
+            90,
+            696,
+            6
+          ],
+          "z": "above panel, below text",
+          "note": "starts at lower-left cut endpoint; reveal via clipping, not scaling end caps"
+        }
+      }
+    },
+    {
+      "id": "choice_02",
+      "index": 2,
+      "panel_rect": [
+        506,
+        436,
+        724,
+        96
+      ],
+      "rotation_degrees_screen_clockwise": 2,
+      "unity_local_euler_z": -2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "panel_asset": "Choice_Panel_Normal",
+      "shadow_asset": "Choice_Shadow",
+      "shadow_offset_screen": [
+        10,
+        10
+      ],
+      "example_text": "두고 간다",
+      "example_tag": "",
+      "local": {
+        "number": {
+          "id": "number",
+          "rect": [
+            60,
+            24,
+            32,
+            26
+          ],
+          "font_size": 16,
+          "font_weight": 500,
+          "colors": {
+            "Normal": "#404850",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          },
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "example_text": "01",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "number_line": {
+          "asset": "Choice_NumberLine",
+          "rect": [
+            60,
+            56,
+            20,
+            2
+          ],
+          "tints": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          }
+        },
+        "number_divider": {
+          "asset": "Choice_Divider",
+          "rect": [
+            112,
+            24,
+            10,
+            48
+          ],
+          "tints": {
+            "Normal": "#9AA2AA",
+            "Hover": "#9CA8B2",
+            "Selected": "#9CA8B2"
+          }
+        },
+        "label": {
+          "id": "label",
+          "rect": [
+            150,
+            21,
+            444,
+            54
+          ],
+          "font_size": 28,
+          "font_weight": 700,
+          "colors": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          },
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "example_text": "데려간다",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "tag": {
+          "id": "tag",
+          "rect": [
+            528,
+            30,
+            76,
+            36
+          ],
+          "font_size": 13,
+          "font_weight": 500,
+          "colors": {
+            "Normal": "#68737D",
+            "Hover": "#D3DCE2",
+            "Selected": "#D3DCE2"
+          },
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0.2,
+          "example_text": "RECRUIT",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "tag_visible": false,
+        "tag_divider": {
+          "asset": "Choice_Divider",
+          "rect": [
+            618,
+            24,
+            10,
+            48
+          ],
+          "tints": {
+            "Normal": "#9AA2AA",
+            "Hover": "#9CA8B2",
+            "Selected": "#9CA8B2"
+          },
+          "visible_without_tag": true
+        },
+        "arrow": {
+          "asset": "Choice_Arrow",
+          "rect": [
+            656,
+            36,
+            30,
+            24
+          ],
+          "tints": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          }
+        },
+        "selected_band": {
+          "asset": "Choice_SelectBand",
+          "rect": [
+            28,
+            90,
+            696,
+            6
+          ],
+          "z": "above panel, below text",
+          "note": "starts at lower-left cut endpoint; reveal via clipping, not scaling end caps"
+        }
+      }
+    },
+    {
+      "id": "choice_03",
+      "index": 3,
+      "panel_rect": [
+        476,
+        558,
+        736,
+        96
+      ],
+      "rotation_degrees_screen_clockwise": -2,
+      "unity_local_euler_z": 2,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "panel_asset": "Choice_Panel_Normal",
+      "shadow_asset": "Choice_Shadow",
+      "shadow_offset_screen": [
+        10,
+        10
+      ],
+      "example_text": "…아무 말도 하지 않는다",
+      "example_tag": "",
+      "local": {
+        "number": {
+          "id": "number",
+          "rect": [
+            60,
+            24,
+            32,
+            26
+          ],
+          "font_size": 16,
+          "font_weight": 500,
+          "colors": {
+            "Normal": "#404850",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          },
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "example_text": "01",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "number_line": {
+          "asset": "Choice_NumberLine",
+          "rect": [
+            60,
+            56,
+            20,
+            2
+          ],
+          "tints": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          }
+        },
+        "number_divider": {
+          "asset": "Choice_Divider",
+          "rect": [
+            112,
+            24,
+            10,
+            48
+          ],
+          "tints": {
+            "Normal": "#9AA2AA",
+            "Hover": "#9CA8B2",
+            "Selected": "#9CA8B2"
+          }
+        },
+        "label": {
+          "id": "label",
+          "rect": [
+            150,
+            21,
+            456,
+            54
+          ],
+          "font_size": 28,
+          "font_weight": 700,
+          "colors": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          },
+          "alignment": "left",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0,
+          "example_text": "데려간다",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "tag": {
+          "id": "tag",
+          "rect": [
+            540,
+            30,
+            76,
+            36
+          ],
+          "font_size": 13,
+          "font_weight": 500,
+          "colors": {
+            "Normal": "#68737D",
+            "Hover": "#D3DCE2",
+            "Selected": "#D3DCE2"
+          },
+          "alignment": "right",
+          "vertical_alignment": "middle",
+          "character_spacing_px": 0.2,
+          "example_text": "RECRUIT",
+          "wrapping": false,
+          "overflow": "ellipsis",
+          "max_lines": 1
+        },
+        "tag_visible": false,
+        "tag_divider": {
+          "asset": "Choice_Divider",
+          "rect": [
+            630,
+            24,
+            10,
+            48
+          ],
+          "tints": {
+            "Normal": "#9AA2AA",
+            "Hover": "#9CA8B2",
+            "Selected": "#9CA8B2"
+          },
+          "visible_without_tag": true
+        },
+        "arrow": {
+          "asset": "Choice_Arrow",
+          "rect": [
+            668,
+            36,
+            30,
+            24
+          ],
+          "tints": {
+            "Normal": "#16181B",
+            "Hover": "#FFFFFF",
+            "Selected": "#FFFFFF"
+          }
+        },
+        "selected_band": {
+          "asset": "Choice_SelectBand",
+          "rect": [
+            28,
+            90,
+            708,
+            6
+          ],
+          "z": "above panel, below text",
+          "note": "starts at lower-left cut endpoint; reveal via clipping, not scaling end caps"
+        }
+      }
+    }
+  ],
+  "counts": {
+    "3": {
+      "rows": [
+        1,
+        2,
+        3
+      ],
+      "header": "RESPONSE / 03"
+    },
+    "2": {
+      "rows": [
+        1,
+        2
+      ],
+      "header": "RESPONSE / 02"
+    },
+    "1": {
+      "rows": [
+        1
+      ],
+      "header": "RESPONSE / 01"
+    },
+    "rule": "use first N rows in place; no vertical recentering; hide unused rows and renumber remaining options from01"
+  },
+  "text_policy": {
+    "font": "Pretendard TMP",
+    "label_font_size": 28,
+    "label_weight": 700,
+    "max_graphemes": 22,
+    "max_panel_width": 960,
+    "height": 96,
+    "resize_rule": "measure TMP preferredWidth at28px; width=max(base_width,150+preferredWidth+(216 if tag visible else130)); clamp to960",
+    "growth_anchor": "hold original right screen edge fixed; x_new=x_base+w_base-w_new; recompute row center pivot",
+    "local_layout": "call row local formulas again with new width; number area left fixed, tag/divider/arrow right anchored",
+    "label_rect_right_formula": "w-216 with tag; w-130 without tag",
+    "longer_than_22": "truncate at grapheme boundary to21 characters + ellipsis; full original retained in data",
+    "still_overflow": "TMP Ellipsis single line; no auto font shrink",
+    "optional_tag": "hide if empty; reclaim its width for label; retain final divider/arrow",
+    "tag_limit": "10 ASCII characters; ellipsis within76px"
+  },
+  "states": {
+    "Normal": {
+      "panel": "Choice_Panel_Normal",
+      "shadow_alpha": 0.35,
+      "shadow_offset_screen": [
+        10,
+        10
+      ],
+      "offset_screen": [
+        0,
+        0
+      ],
+      "scale": 1,
+      "group_alpha": 1,
+      "band_visible": false
+    },
+    "Hover": {
+      "panel": "Choice_Panel_Hover",
+      "shadow_alpha": 0.35,
+      "shadow_offset_screen": [
+        14,
+        14
+      ],
+      "offset_screen": [
+        18,
+        0
+      ],
+      "scale": 1,
+      "group_alpha": 1,
+      "band_visible": false
+    },
+    "Selected": {
+      "panel": "Choice_Panel_Selected",
+      "shadow_alpha": 0.35,
+      "shadow_offset_screen": [
+        18,
+        18
+      ],
+      "offset_screen": [
+        50,
+        -35
+      ],
+      "scale": 1.2,
+      "group_alpha": 1,
+      "band_visible": true
+    },
+    "Unselected": {
+      "panel": "Choice_Panel_Normal",
+      "uses": "motion.unselected",
+      "band_visible": false
+    },
+    "priority": [
+      "Selected / Unselected",
+      "Hover",
+      "Normal"
+    ],
+    "offset_base": "All state offsets relative to settled normal position, never added to previous hover offsets"
+  },
+  "motion": {
+    "entrance": {
+      "stagger_seconds": 0.06,
+      "row_start_seconds": [
+        0,
+        0.06,
+        0.12
+      ],
+      "start_anchor": "whole row outside left edge",
+      "start_offset_formula": "x=-rotated_row_aabb.right-24; y=-36 relative to final row",
+      "overshoot_seconds": 0.18,
+      "overshoot_offset": [
+        12,
+        0
+      ],
+      "settle_seconds": 0.08,
+      "final_offset": [
+        0,
+        0
+      ],
+      "ghosts": {
+        "asset": "Choice_Ghost",
+        "row_index": 1,
+        "offsets_screen": [
+          [
+            -12,
+            -12
+          ],
+          [
+            -24,
+            -24
+          ]
+        ],
+        "alphas": [
+          0.22,
+          0.12
+        ],
+        "tint": "#D5DCE2",
+        "visible_only_during_landing": true,
+        "blur": 0
+      }
+    },
+    "hover": {
+      "duration_seconds": 0.09,
+      "offset_screen": [
+        18,
+        0
+      ],
+      "scale": 1,
+      "shadow_offset_screen": [
+        14,
+        14
+      ]
+    },
+    "select": {
+      "grow_seconds": 0.1,
+      "scale": 1.2,
+      "offset_screen": [
+        50,
+        -35
+      ],
+      "shadow_offset_screen": [
+        18,
+        18
+      ],
+      "band_asset": "Choice_SelectBand",
+      "band_logical_height_before_scale": 6,
+      "band_reveal_seconds": 0.08,
+      "exit_starts_after_click_seconds": 0.25,
+      "exit_duration_seconds": 0.1,
+      "block_repeat_clicks": true
+    },
+    "unselected": {
+      "exit_order": "remaining rows top-to-bottom",
+      "offsets_screen": [
+        [
+          -95,
+          12
+        ],
+        [
+          -145,
+          24
+        ]
+      ],
+      "alphas": [
+        0.3,
+        0.25
+      ],
+      "scale": 1,
+      "panel": "Choice_Panel_Normal"
+    }
+  },
+  "unity_mapping": {
+    "row_anchor_min_max": [
+      0,
+      1
+    ],
+    "row_pivot": [
+      0.5,
+      0.5
+    ],
+    "anchoredPosition_formula": "(x+w/2, -(y+h/2))",
+    "rotation_formula": "Unity Z = -screen clockwise degrees",
+    "child_anchor_min_max": [
+      0,
+      1
+    ],
+    "child_pivot": [
+      0,
+      1
+    ],
+    "child_anchoredPosition_formula": "(local_x, -local_y)",
+    "shadow": "screen-down-right offsets remain fixed in screen axes; either sibling layer with same rotation/scale or convert via inverse rotation and inverse scale",
+    "shadow_local_formula": "d_local = R(-screen_angle) * d_screen / row_scale; convert y to Unity sign",
+    "png_pixels_per_unit": 100,
+    "canvas_reference_pixels_per_unit": 100,
+    "image_pixels_per_unit_multiplier": 2,
+    "border_note": "At2x PNG, PPU100 + pixelsPerUnitMultiplier2 yields34px logical borders from68 source pixels. Alternatively PPU200 + multiplier1. Do not apply both.",
+    "sliced_assets": "panels/shadow/ghost/band use Image.Type.Sliced; other marks Simple.",
+    "shadow_alpha": "Shadow PNG alpha1; tint alpha.35 once; then row CanvasGroup affects shadow and content together.",
+    "raycast": "button on panel; decorative layers raycastTarget=false; ghost never interactive"
+  },
+  "checks": {
+    "corners": "explicit request wins: lower-left and upper-right cuts,28px. No tail.",
+    "no_environment_rects": true,
+    "no_baked_rotation_or_text": true
+  },
+  "notes": [
+    "Shape reconstructed as clean SVG, not a literal crop of generated raster texture.",
+    "Generated images vary in geometry. Split uses explicit corners and exact MOTION_SPEC numbers.",
+    "All transform values are design handoff, no game implementation included."
+  ]
+}

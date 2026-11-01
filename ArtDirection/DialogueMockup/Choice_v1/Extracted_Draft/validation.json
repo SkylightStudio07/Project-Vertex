@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "assets": 10,
+  "checks": [
+    {
+      "asset": "Choice_Panel_Normal",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_Panel_Hover",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_Panel_Selected",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_Shadow",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_Ghost",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_NumberLine",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_Divider",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_Arrow",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Choice_SelectBand",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    },
+    {
+      "asset": "Header_Rule",
+      "size_ok": true,
+      "text_free": true,
+      "no_blur": true,
+      "corners_and_slice_ok": true
+    }
+  ],
+  "contact_width": 1200,
+  "long_label_22_chars_verified": true,
+  "nine_slice_corners_pixel_equal_at960px": true,
+  "all_assets_zero_rotation": true
+}
