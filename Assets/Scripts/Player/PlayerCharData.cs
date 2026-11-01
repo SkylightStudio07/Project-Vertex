@@ -25,6 +25,19 @@ public class WeaponVisualSet
 
     [Tooltip("해당 무기 사용 시 재생될 공격 연출 시퀀스 (비워둘 시 기본 attackSequence 사용)")]
     public AttackKeyframe[] attackSequence;
+
+    [Tooltip("채우면 attackFrames 대신 이 중 하나를 무작위로 재생한다 (같은 모션이 연달아 나오지 않게)")]
+    public AttackClip[] attackClips;
+}
+
+// 공격 모션 한 벌. 시트 틀이 대기 시트보다 넓으면 scale로 재생 중에만 키워 캐릭터 크기를 맞춘다
+[Serializable]
+public class AttackClip
+{
+    public Sprite[] frames;
+    public float frameRate = 24f;
+    [Tooltip("재생 중 그림에 곱하는 배율 (그림 가운데 기준). 대기 시트와 같은 틀이면 1")]
+    public float scale = 1f;
 }
 
 [CreateAssetMenu(fileName = "newPlayerCharData", menuName = "Game Asset/Player Character")]
@@ -96,13 +109,26 @@ public class PlayerCharData : CharData
     /// 전용 무기에 attackFrames가 등록되어 있다면 이를 반환하고,
     /// 없으면 기본 attackFrames를 반환합니다.
     /// </summary>
-    public Sprite[] GetAttackFrames(WeaponData weapon, out float frameRate)
+    public Sprite[] GetAttackFrames(WeaponData weapon, out float frameRate) => GetAttackFrames(weapon, out frameRate, out _);
+
+    [NonSerialized] private int _lastClip = -1;
+
+    // scale: 재생 중 그림에 곱할 배율 (attackClips의 틀 보정, 그 외 1)
+    public Sprite[] GetAttackFrames(WeaponData weapon, out float frameRate, out float scale)
     {
         frameRate = attackFrameRate > 0f ? attackFrameRate : 24f;
+        scale = 1f;
 
         if (weapon != null && weaponVisuals != null)
         {
             var match = weaponVisuals.Find(v => v != null && v.weapon == weapon);
+            var clip = match != null ? PickClip(match.attackClips) : null;
+            if (clip != null)
+            {
+                frameRate = clip.frameRate > 0f ? clip.frameRate : 24f;
+                scale = clip.scale > 0f ? clip.scale : 1f;
+                return clip.frames;
+            }
             if (match != null && match.attackFrames != null && match.attackFrames.Length > 0)
             {
                 frameRate = match.attackFrameRate > 0f ? match.attackFrameRate : 24f;
@@ -125,5 +151,18 @@ public class PlayerCharData : CharData
                 return match.attackSequence;
         }
         return attackSequence;
+    }
+
+    // 프레임이 있는 모션 중 무작위 하나. 둘 이상이면 바로 전 모션은 빼고 고른다
+    private AttackClip PickClip(AttackClip[] clips)
+    {
+        if (clips == null) return null;
+        var valid = new List<int>();
+        for (int i = 0; i < clips.Length; i++)
+            if (clips[i] != null && clips[i].frames != null && clips[i].frames.Length > 0) valid.Add(i);
+        if (valid.Count == 0) return null;
+        if (valid.Count > 1) valid.Remove(_lastClip);
+        _lastClip = valid[UnityEngine.Random.Range(0, valid.Count)];
+        return clips[_lastClip];
     }
 }

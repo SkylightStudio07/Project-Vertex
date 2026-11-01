@@ -167,7 +167,9 @@ public class PoseSequencePlayer : MonoBehaviour
                 // 대기 포즈 기준 높이는 고정하고, 폭만 이 포즈의 실제 픽셀 비율대로 다시 잡는다.
                 // (세로 높이가 흔들리면 "캐릭터가 갑자기 작아진 것"처럼 보이기 쉬워서 높이를 기준으로 삼음)
                 Rect r = frame.pose.rect;
-                if (r.height > 0f)
+                // 대기 그림과 같은 틀(같은 크기)로 자른 포즈면 상자를 그대로 둔다 — 상자를 비율대로 다시 잡으면 그려지는 크기가 튈 수 있다
+                bool sameFrame = restingSprite != null && restingSprite.rect.size == r.size;
+                if (r.height > 0f && !sameFrame)
                 {
                     float aspect = r.width / r.height;
                     rt.sizeDelta = new Vector2(restingSizeDelta.y * aspect, restingSizeDelta.y);

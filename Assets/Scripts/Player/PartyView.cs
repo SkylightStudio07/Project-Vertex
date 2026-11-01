@@ -171,10 +171,10 @@ public class PartyView : MonoBehaviour
         WeaponData currentWeapon = BattleManager.Instance?.State?.CurrentWeapon;
 
         // 1. 스프라이트 시트 기반 공격 애니메이션 우선 재생
-        var attackFrames = playerCharData.GetAttackFrames(currentWeapon, out float attackFps);
+        var attackFrames = playerCharData.GetAttackFrames(currentWeapon, out float attackFps, out float attackScale);
         if (attackFrames != null && attackFrames.Length > 0)
         {
-            playerPoseSequencer.Play(attackFrames, attackFps);
+            playerPoseSequencer.Play(attackFrames, attackFps, attackScale);
             return;
         }
 
