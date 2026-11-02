@@ -121,6 +121,20 @@ public sealed class StatusContainer
         RemoveExpired();
     }
 
+    // 주인이 상태를 새로 얻었다 (ApplyStatusEffect). 얻은 상태 자신에게도 알린다 — 그 상태가 반응하는지는 behavior가 정한다
+    public void NotifyStatusGained(CardContext context, ICombatant owner, StatusDefinition gained, int amount)
+    {
+        if (gained == null || amount <= 0) return;
+        var snapshot = new List<IPassiveLogic>(_entries);
+        foreach (var passive in snapshot)
+        {
+            if (passive is not StatusInstance status || !_entries.Contains(passive)) continue;
+            var passiveContext = CardContext.CreatePassiveContext(context?.State, owner, context?.PrimaryTarget, passive, parent: context);
+            status.OnStatusGained(passiveContext, owner, gained, amount);
+        }
+        RemoveExpired();
+    }
+
     public void NotifyTurnStart(BattleState state, ICombatant owner)
     {
         RemoveExpired();

@@ -18,27 +18,27 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 8
   isWeaponShootingCard: 0
-  cardDescription: "방어도를 {0.amount} 얻습니다."
-  useMode: 0
+  cardDescription: "\uC801\uC5D0\uAC8C \uC57D\uD654\uB97C {0.amount} \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  useMode: 1
   playCondition:
     rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "응급 조제"
-    energyCost: 2
+    cardName: "\uADFC\uC721 \uACBD\uB828"
+    energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 8755282979299786930
+    - rid: 8428484555819974842
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "응급 조제+"
-    energyCost: 2
+    cardName: "\uADFC\uC721 \uACBD\uB828+"
+    energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 8755282979299786931
+    - rid: 8428484555819974843
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -50,27 +50,39 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8755282979299786930
-      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+    - rid: 8428484555819974842
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 9
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 0
+        amount: 2
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
+        potency: 0
+        secondaryPotency: 0
         targets:
-          mode: 0
-    - rid: 8755282979299786931
-      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+          mode: 1
+        negative: 0
+    - rid: 8428484555819974843
+      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 12
+        status: {fileID: 11400000, guid: 10000000000000000000000000000001, type: 2}
+        operation: 0
+        amount: 3
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
+        potency: 0
+        secondaryPotency: 0
         targets:
-          mode: 0
+          mode: 1
+        negative: 0

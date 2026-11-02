@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: VisionBlock
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: ch03.vision-block
+  displayName: "\uC2DC\uC57C \uCC28\uB2E8"
+  description: "\uBC1B\uB294 \uD53C\uD574\uAC00 1\uB85C \uC81C\uD55C\uB429\uB2C8\uB2E4.
+    \uD134 \uC2DC\uC791\uC5D0 \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
+  icon: {fileID: -5586745604939269991, guid: 46a3eaae3147b3140ab1ee688c8b5319, type: 3}
+  disposition: 1
+  stackPolicy: 0
+  durationPolicy: 0
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 8428484555819974767
+  references:
+    version: 2
+    RefIds:
+    - rid: 8428484555819974767
+      type: {class: DamageModifierStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        side: 1
+        operation: 3
+        magnitudeSource: 0
+        constantAmount: 1
+        multiplier: 1
+        ammoAttacksOnly: 0
+        oncePerTurn: 0
+        consumeStacksOnApply: 0

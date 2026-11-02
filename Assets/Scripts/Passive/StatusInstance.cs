@@ -110,6 +110,12 @@ public sealed class StatusInstance : IPassiveLogic
         foreach (var behavior in Definition.Behaviors) behavior?.OnCardPlayed(this, context, owner);
     }
 
+    public void OnStatusGained(CardContext context, ICombatant owner, StatusDefinition gained, int amount)
+    {
+        if (Definition == null) return;
+        foreach (var behavior in Definition.Behaviors) behavior?.OnStatusGained(this, context, owner, gained, amount);
+    }
+
     public DamageInfo ModifyOutgoingDamage(DamageInfo info, BattleState state)
         => ModifyOutgoing(info, state, false);
 

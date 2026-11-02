@@ -14,31 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
-  cardType: 0
+  cardType: 1
   cardRarity: 0
   cardOwner: 8
   isWeaponShootingCard: 0
-  cardDescription: "적에게 {0.amount}의 피해를 줍니다."
-  useMode: 1
+  cardDescription: "\uBC29\uC5B4\uB3C4\uB97C {0.amount} \uC5BB\uC2B5\uB2C8\uB2E4."
+  useMode: 0
   playCondition:
     rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "산성 플라스크"
+    cardName: "\uB3C5\uC131 \uBCF4\uD638\uB9C9"
     energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 8755282979299786901
+    - rid: 8428484555819974836
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "산성 플라스크+"
+    cardName: "\uB3C5\uC131 \uBCF4\uD638\uB9C9+"
     energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 8755282979299786902
+    - rid: 8428484555819974837
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -50,41 +50,29 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8755282979299786901
-      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+    - rid: 8428484555819974836
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 8
+        amount: 4
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        conditionalBonuses: []
-        hitCount: 1
+          percent: 0
         targets:
-          mode: 1
-        piercing: 0
-        environmentalDamage: 0
-        hitInterval: 0.08
-        onKillEffects: []
-        effectiveAgainst: 0
-    - rid: 8755282979299786902
-      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+          mode: 0
+    - rid: 8428484555819974837
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 11
+        amount: 6
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        conditionalBonuses: []
-        hitCount: 1
+          percent: 0
         targets:
-          mode: 1
-        piercing: 0
-        environmentalDamage: 0
-        hitInterval: 0.08
-        onKillEffects: []
-        effectiveAgainst: 0
+          mode: 0

@@ -202,16 +202,31 @@ MonoBehaviour:
   campActivity: 
   campLines: []
   restArrivalLines: []
-  joinRewardCard: {fileID: 11400000, guid: 99f2465124b04b859b7cf12ec2edee57, type: 2}
+  joinRewardCard: {fileID: 11400000, guid: 42c8c1df792e41f9a75a4e8c3964522c, type: 2}
   skill: {fileID: 0}
   joinDialogueJson: {fileID: 0}
   rewardPoolCommon:
   - {fileID: 11400000, guid: 99f2465124b04b859b7cf12ec2edee57, type: 2}
   - {fileID: 11400000, guid: 83204c7e009a433284887fe6fc9f63ac, type: 2}
-  - {fileID: 11400000, guid: 42c8c1df792e41f9a75a4e8c3964522c, type: 2}
   - {fileID: 11400000, guid: be8496148d2a41368fb9fe4730c4ab5f, type: 2}
   - {fileID: 11400000, guid: f0d7b27122d6440cbc8b857d89d89ba2, type: 2}
-  rewardPoolRare: []
+  - {fileID: 11400000, guid: b4bd077d18d527d4381fa4c1cfdcfd8f, type: 2}
+  - {fileID: 11400000, guid: 6820581dae94b2f4abbf1ab52eb8e497, type: 2}
+  - {fileID: 11400000, guid: fa2ddb0f7eaa7a64381bac5c01e7e90b, type: 2}
+  - {fileID: 11400000, guid: 0f71c426f4277af478fc317638cc5bbb, type: 2}
+  - {fileID: 11400000, guid: 5dd1f0d8fdeb77e4cb000e02f9d574e5, type: 2}
+  - {fileID: 11400000, guid: 194adccf8dd545348b4c5bc62ae1e57a, type: 2}
+  - {fileID: 11400000, guid: 2f26e916aa2680943b741535785d79c8, type: 2}
+  - {fileID: 11400000, guid: efb130d3bd2ee7544aef25996ef42d33, type: 2}
+  - {fileID: 11400000, guid: 7b5bbcfdbe990874286ad7041e668675, type: 2}
+  - {fileID: 11400000, guid: fad14ee0716d7654b9649a1b281bc313, type: 2}
+  rewardPoolRare:
+  - {fileID: 11400000, guid: 8c5e6e9f0f276b840905a342ae235164, type: 2}
+  - {fileID: 11400000, guid: 9987918c6c4c95248877b23428b18c3f, type: 2}
+  - {fileID: 11400000, guid: a36226fdfb7230c499ee798195ef87f9, type: 2}
+  - {fileID: 11400000, guid: 9140ba1f9447fc348996e577fd24a04a, type: 2}
+  - {fileID: 11400000, guid: e0400a30a9117c643b7582d5b5080798, type: 2}
+  - {fileID: 11400000, guid: fe1d4d235feb1984c9cff8f1e339e96d, type: 2}
   rewardPoolUnique: []
   maxCoopLevel: 0
   rankEventDatas: []

@@ -464,14 +464,15 @@ public class BattleManager : MonoBehaviour
     {
         if (card == null || _state == null || !_state.Hand.Contains(card)) return false;
         if (card.IsUnplayable) return false;   // 저주 등 사용 불가 카드 — 손패에는 남지만 플레이 불가
-        if (!card.IsPlayConditionMet(_state)) return false;
+        // 적 지정 카드의 조건은 살아 있는 적 중 하나라도 만족하면 손에서 쓸 수 있게 보이고, 실제 사용은 고른 적 기준으로 다시 본다
+        if (card.UseMode != CardData.CardUseMode.SelectEnemy && !card.IsPlayConditionMet(_state)) return false;
         if (_state.Player != null && !_state.Player.Statuses.AllowsCardPlay(CreateCardPlayContext(card, null))) return false;
         if (!CanPayCardPlayCost(GetCardPlayCost(card))) return false;
 
         if (card.UseMode == CardData.CardUseMode.SelectEnemy)
         {
             foreach (var e in _state.Enemies)
-                if (!e.IsDead) return true;
+                if (!e.IsDead && (!card.HasPlayCondition || card.IsPlayConditionMet(_state, e))) return true;
             return false;
         }
 
@@ -484,6 +485,7 @@ public class BattleManager : MonoBehaviour
         if (card.UseMode == CardData.CardUseMode.SelectEnemy &&
             (target == null || target.IsDead || !_state.Enemies.Contains(target)))
             return false;
+        if (card.UseMode == CardData.CardUseMode.SelectEnemy && !card.IsPlayConditionMet(_state, target)) return false;
 
         var cost = GetCardPlayCost(card, target);
         if (!CanPayCardPlayCost(cost)) return false;

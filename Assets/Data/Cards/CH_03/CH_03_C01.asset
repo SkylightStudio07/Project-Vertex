@@ -18,27 +18,27 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 8
   isWeaponShootingCard: 0
-  cardDescription: "적에게 {0.amount}의 피해를 줍니다."
+  cardDescription: "\uC801\uC5D0\uAC8C {0.amount}\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   useMode: 1
   playCondition:
     rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "촉매 투척"
+    cardName: "\uB3C5\uC131 \uD50C\uB77C\uC2A4\uD06C"
     energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 8755282979299786901
+    - rid: 8428484555819974840
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "촉매 투척+"
+    cardName: "\uB3C5\uC131 \uD50C\uB77C\uC2A4\uD06C+"
     energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 8755282979299786902
+    - rid: 8428484555819974841
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -50,7 +50,34 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8755282979299786901
+    - rid: 8428484555819974840
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 4
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        conditionalBonuses: []
+        hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        targets:
+          mode: 1
+        piercing: 0
+        environmentalDamage: 0
+        hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0
+    - rid: 8428484555819974841
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 6
@@ -60,27 +87,16 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
-        targets:
-          mode: 1
-        piercing: 0
-        environmentalDamage: 0
-        hitInterval: 0.08
-        onKillEffects: []
-        effectiveAgainst: 0
-    - rid: 8755282979299786902
-      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 9
-        scaling:
+        hitCountScaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        conditionalBonuses: []
-        hitCount: 1
+          percent: 0
         targets:
           mode: 1
         piercing: 0

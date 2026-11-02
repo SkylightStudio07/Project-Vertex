@@ -20,10 +20,13 @@ public abstract class StatusBehavior
     public virtual bool AllowsCardPlay(StatusInstance status, CardContext context) => true;
     public virtual void OnAfterDamageTaken(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnAfterDamageDealt(StatusInstance status, CardContext context, ICombatant owner) { }
+    // 이 상태의 주인이 다른 상태를 새로 얻었을 때 (ApplyStatusEffect로 부여된 경우)
+    public virtual void OnStatusGained(StatusInstance status, CardContext context, ICombatant owner, StatusDefinition gained, int amount) { }
 }
 
 public enum DamageModifierSide { Outgoing, Incoming }
-public enum DamageModifierOperation { Add, Multiply, Nullify }
+// Cap: 피해를 constantAmount 이하로 제한 (알케미스트 '시야 차단' — 받는 피해 1). 에셋에 정수로 저장되므로 새 항목은 끝에
+public enum DamageModifierOperation { Add, Multiply, Nullify, Cap }
 public enum StatusMagnitudeSource { Constant, Stacks, Potency, SecondaryPotency }
 
 [Serializable]
@@ -102,6 +105,9 @@ public sealed class DamageModifierStatusBehavior : StatusBehavior
             case DamageModifierOperation.Nullify:
                 info.Amount = 0;
                 break;
+            case DamageModifierOperation.Cap:
+                info.Amount = Mathf.Min(info.Amount, Mathf.Max(0, ResolveMagnitude(status)));
+                break;
         }
 
         if (!preview)
@@ -166,6 +172,44 @@ public sealed class OnBattleStartEffectsStatusBehavior : TriggeredEffectsStatusB
 {
     public override void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner)
         => Execute(context);
+}
+
+// 주인이 지정한 상태를 얻을 때마다 효과 발동 (알케미스트 '동귀어진' — 자신이 중독될 때마다 적에게 중독 1)
+[Serializable]
+public sealed class OnStatusGainedEffectsStatusBehavior : TriggeredEffectsStatusBehavior
+{
+    public StatusDefinition watchedStatus;
+
+    public override void OnStatusGained(StatusInstance status, CardContext context, ICombatant owner, StatusDefinition gained, int amount)
+    {
+        if (gained != null && gained == watchedStatus && amount > 0) Execute(context);
+    }
+}
+
+// 다음에 쓰는 '지정 상태를 부여하는 카드' 1장의 에너지 코스트를 0으로 (알케미스트 '촉매 반응' — 다음 중독 카드)
+[Serializable]
+public sealed class NextStatusCardFreeStatusBehavior : StatusBehavior
+{
+    public StatusDefinition cardAppliesStatus;
+
+    public override CardPlayCost ModifyCardPlayCost(StatusInstance status, CardPlayCost cost, CardContext context)
+    {
+        if (Matches(context?.Card)) cost.Energy = 0;
+        return cost;
+    }
+
+    public override void OnCardPlayed(StatusInstance status, CardContext context, ICombatant owner)
+    {
+        if (Matches(context?.Card)) status.RemoveAll();
+    }
+
+    private bool Matches(CardData card)
+    {
+        if (card == null || cardAppliesStatus == null || card.ActiveEffects == null) return false;
+        foreach (var effect in card.ActiveEffects)
+            if (effect is ApplyStatusEffect apply && apply.status == cardAppliesStatus && apply.operation == StatusStackOperation.Add) return true;
+        return false;
+    }
 }
 
 [Serializable]
