@@ -80,6 +80,25 @@ public class EnemyData : ScriptableObject
         }
     }
 
+    [Header("공격 연출 — 몸놀림 (공격 시트 위에 덧입히는 이동)")]
+    [Tooltip("공격 시트를 재생하는 동안 그림을 이 단계대로 순서대로 움직인다 (도약 · 반동 · 공중제비 등). 마지막 단계는 제자리(0,0)로. 채우면 돌진 · 움찔 대신 쓴다")]
+    public List<AttackMotionStep> attackMotion = new();
+
+    [System.Serializable]
+    public class AttackMotionStep
+    {
+        [Tooltip("대기 자리 기준 위치 (캔버스 px, 왼쪽이 −)")]
+        public Vector2 offset;
+        [Tooltip("이 단계 끝의 회전 (도, 시계 반대가 +). 360 단위로 돌리면 공중제비")]
+        public float rotation;
+        [Tooltip("0보다 크면 포물선으로 뛰어서 간다 (최고점 높이 px)")]
+        public float jumpHeight;
+        public float duration = 0.2f;
+        [Tooltip("도착한 뒤 멈춰 있는 시간")]
+        public float hold;
+        public DG.Tweening.Ease ease = DG.Tweening.Ease.OutQuad;
+    }
+
     [Header("공격 연출 — 땅 파임")]
     [Tooltip("총구마다 탄착점에서 땅이 파이는 충격. 공격 프레임 번호와 터지는 자리를 한 쌍씩 적는다. 비우면 없음")]
     public List<GroundFxShot> groundFxShots = new();

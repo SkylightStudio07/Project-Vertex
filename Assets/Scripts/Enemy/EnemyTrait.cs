@@ -42,6 +42,21 @@ public static class EnemyTraits
     public static bool HasAny(ICombatant combatant, EnemyTrait traits) =>
         traits != EnemyTrait.None && (Of(combatant) & traits) != 0;
 
+    // 전투 · 아카이브 표시. 기록이 모자라면 미상
+    public static string RevealedLabel(EnemyData enemy)
+    {
+        if (enemy == null || !MaterialArchive.TraitsRevealed(enemy)) return "속성 미상";
+        return enemy.traits == EnemyTrait.None ? "속성 없음" : Label(enemy.traits);
+    }
+
+    // 적에게 마우스를 올렸을 때 이름 밑 한 줄
+    public static string HoverLine(EnemyData enemy)
+    {
+        if (enemy == null) return string.Empty;
+        if (!MaterialArchive.TraitsRevealed(enemy)) return "속성 미상 — 추가 탐색 필요";
+        return enemy.traits == EnemyTrait.None ? "속성 없음" : "속성 · " + Label(enemy.traits);
+    }
+
     // "인간·신비"
     public static string Label(EnemyTrait traits)
     {

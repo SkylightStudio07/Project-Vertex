@@ -61,6 +61,12 @@ public static class MaterialArchive
     // 첫 기록이 열리면 훈련장 상대로도 열린다
     public static bool IsTrainingUnlocked(EnemyData enemy) => UnlockedCount(enemy) >= 1;
 
+    // 적 속성(인간 · 기계 · 중장갑 …)은 기록 2편부터 공개된다. 그 전엔 전투 · 아카이브에 '?' (속성 미상)
+    public const int TraitRevealEntries = 2;
+    public static bool TraitsRevealed(EnemyData enemy) => UnlockedCount(enemy) >= TraitRevealEntries;
+    public static int DefeatsToRevealTraits(EnemyData enemy)
+        => enemy == null ? 0 : Mathf.Max(0, RequiredDefeats(enemy, TraitRevealEntries - 1) - PlayerRecord.GetDefeatCount(enemy));
+
     // ── 동료 ──
     public static int UnlockedCount(int coopLevel) => Mathf.Clamp(coopLevel, 0, EntryCount);
 }

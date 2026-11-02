@@ -18,7 +18,7 @@ MonoBehaviour:
   traits: 1
   rank: 1
   materialJson: {fileID: 4900000, guid: ded842b253363d748ba9a33bf5e40edf, type: 3}
-  spriteScale: 1.95
+  spriteScale: 1.53
   intentOffsetY: 0
   useScreenRect: 0
   screenRect:
@@ -87,6 +87,25 @@ MonoBehaviour:
   defeatedTalk: {fileID: 11400000, guid: 9bca62b5b681be641ac2f75341adac98, type: 2}
   attackKeyframes: []
   attackHitDelay: 0.3
+  attackMotion:
+  - offset: {x: -70, y: 0}
+    rotation: 0
+    jumpHeight: 0
+    duration: 0.4
+    hold: 0.1
+    ease: 6
+  - offset: {x: -50, y: 0}
+    rotation: -3
+    jumpHeight: 0
+    duration: 0.08
+    hold: 0.2
+    ease: 6
+  - offset: {x: 0, y: 0}
+    rotation: 0
+    jumpHeight: 0
+    duration: 0.4
+    hold: 0
+    ease: 7
   groundFxShots: []
   groundFxScale: 1
   idleSheetPadding: 0.25

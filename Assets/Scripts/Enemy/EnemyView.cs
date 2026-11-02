@@ -223,6 +223,7 @@ public class EnemyView : MonoBehaviour
             enemyImage.rectTransform.localScale = new Vector3(_enemyImageBaseScale.x * scale, _enemyImageBaseScale.y * scale, 1f);
             BattleUnitLook.Apply(enemyImage, BattleUnitLook.Side.Enemy); // 외곽선 · 림라이트 · 색 보정 · 발밑 그림자 (아군과 같은 처리)
             AlignHpBarToBody(instance);
+            RefreshTraitTag(instance);
 
             if (instance.EnemySprite == null && (instance.IdleFrames == null || instance.IdleFrames.Length == 0))
             {
@@ -285,6 +286,73 @@ public class EnemyView : MonoBehaviour
         Vector2 move = new Vector2(dx, 0f) + instance.Data.hpBarOffset;
         hpBar.anchoredPosition += move;
         if (status != null) status.anchoredPosition += move;
+    }
+
+    // HP 바 오른쪽 위 속성 태그 (왼쪽 위는 상태 줄). 기록 2편 전이면 '?' (속성 미상), 공개되면 "기계" 등. 속성이 없는 적은 공개 후 숨긴다.
+    // 아이콘이 나오기 전까지 글자 태그로 둔다. HP 바 자식이라 바를 옮기면 같이 따라간다
+    private RectTransform _traitTag;
+    private TextMeshProUGUI _traitText;
+    private Image _traitAccent;
+    private static readonly Color TraitKnown = new(0.05f, 0.72f, 0.95f, 1f);
+    private static readonly Color TraitUnknown = new(0.55f, 0.58f, 0.61f, 1f);
+
+    private void RefreshTraitTag(EnemyInstance instance)
+    {
+        var hpBar = hpFill != null ? hpFill.transform.parent as RectTransform : null;
+        var data = instance?.Data;
+        if (hpBar == null || data == null) return;
+
+        bool revealed = MaterialArchive.TraitsRevealed(data);
+        if (revealed && data.traits == EnemyTrait.None)
+        {
+            if (_traitTag != null) _traitTag.gameObject.SetActive(false);
+            return;
+        }
+        if (_traitTag == null) BuildTraitTag(hpBar);
+        _traitTag.gameObject.SetActive(true);
+
+        _traitText.text = revealed ? EnemyTraits.Label(data.traits) : "?";
+        _traitText.color = revealed ? Color.white : TraitUnknown;
+        _traitAccent.color = revealed ? TraitKnown : TraitUnknown;
+        float w = Mathf.Ceil(_traitText.GetPreferredValues(_traitText.text).x) + 18f;
+        _traitTag.sizeDelta = new Vector2(Mathf.Max(26f, w), 24f);
+    }
+
+    private void BuildTraitTag(RectTransform hpBar)
+    {
+        var go = new GameObject("TraitTag", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        go.layer = hpBar.gameObject.layer;
+        _traitTag = (RectTransform)go.transform;
+        _traitTag.SetParent(hpBar, false);
+        _traitTag.anchorMin = _traitTag.anchorMax = new Vector2(1f, 1f);
+        _traitTag.pivot = new Vector2(1f, 0f);
+        _traitTag.anchoredPosition = new Vector2(0f, 4f);
+        var bg = go.GetComponent<Image>();
+        bg.color = new Color(0.07f, 0.08f, 0.09f, 0.85f);
+        bg.raycastTarget = false;
+
+        var accent = new GameObject("Accent", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        accent.layer = go.layer;
+        var ar = (RectTransform)accent.transform;
+        ar.SetParent(_traitTag, false);
+        ar.anchorMin = new Vector2(0f, 0f); ar.anchorMax = new Vector2(0f, 1f); ar.pivot = new Vector2(0f, 0.5f);
+        ar.sizeDelta = new Vector2(3f, 0f); ar.anchoredPosition = Vector2.zero;
+        _traitAccent = accent.GetComponent<Image>();
+        _traitAccent.raycastTarget = false;
+
+        var label = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer));
+        label.layer = go.layer;
+        var lr = (RectTransform)label.transform;
+        lr.SetParent(_traitTag, false);
+        lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one;
+        lr.offsetMin = new Vector2(10f, 0f); lr.offsetMax = new Vector2(-6f, 0f);
+        _traitText = label.AddComponent<TextMeshProUGUI>();
+        if (hpText != null) _traitText.font = hpText.font;
+        _traitText.fontSize = 15f;
+        _traitText.fontStyle = FontStyles.Bold;
+        _traitText.alignment = TextAlignmentOptions.MidlineLeft;
+        _traitText.textWrappingMode = TextWrappingModes.NoWrap;
+        _traitText.raycastTarget = false;
     }
 
     // 화면 고정 배치(EnemyData.useScreenRect) — 화면 끝에 붙는 거대 보스용.
@@ -582,6 +650,13 @@ public class EnemyView : MonoBehaviour
             ScheduleGroundFx();
         }
 
+        // 몸놀림(도약 · 반동 · 공중제비)이 있으면 그림만 그 단계대로 움직인다 — HP 바는 제자리
+        if (Instance?.Data != null && Instance.Data.attackMotion != null && Instance.Data.attackMotion.Count > 0 && enemyImage != null)
+        {
+            PlayAttackMotion(Instance.Data.attackMotion);
+            return;
+        }
+
         // 화면 끝에 붙은 보스는 앞으로 나오지 않고 제자리에서 움찔한다
         if (Instance?.Data != null && Instance.Data.noLunge)
         {
@@ -598,6 +673,48 @@ public class EnemyView : MonoBehaviour
         Vector2 forward = originalPos + new Vector2(-lungeDistance, 0f);
         _rect.DOAnchorPos(forward, lungeOutDuration)
             .OnComplete(() => _rect.DOAnchorPos(originalPos, lungeBackDuration));
+    }
+
+    // 공격 몸놀림 (EnemyData.attackMotion). 그림 rect만 단계별로 옮기고 돌린다.
+    // 피벗이 발밑이어도 그림 가운데를 축으로 돌도록 위치를 보정한다 (공중제비가 발을 축으로 넘어가지 않게)
+    private Sequence _motion;
+    private Vector2 _motionBase;
+    private void PlayAttackMotion(List<EnemyData.AttackMotionStep> steps)
+    {
+        var img = enemyImage.rectTransform;
+        if (_motion != null && _motion.IsActive()) { _motion.Kill(); ApplyMotion(img, Vector2.zero, 0f); }
+        _motionBase = img.anchoredPosition;
+
+        _motion = DOTween.Sequence().SetLink(gameObject);
+        Vector2 prevOff = Vector2.zero;
+        float prevRot = 0f;
+        foreach (var s in steps)
+        {
+            if (s == null) continue;
+            Vector2 from = prevOff, to = s.offset;
+            float r0 = prevRot, r1 = s.rotation, jump = s.jumpHeight;
+            var ease = s.ease;
+            _motion.Append(DOVirtual.Float(0f, 1f, Mathf.Max(0.01f, s.duration), t =>
+            {
+                float e = DOVirtual.EasedValue(0f, 1f, t, ease);
+                Vector2 off = Vector2.LerpUnclamped(from, to, e);
+                if (jump > 0f) off.y += jump * 4f * t * (1f - t); // 포물선은 시간에 고르게
+                ApplyMotion(img, off, Mathf.LerpUnclamped(r0, r1, e));
+            }).SetEase(Ease.Linear));
+            if (s.hold > 0f) _motion.AppendInterval(s.hold);
+            prevOff = to;
+            prevRot = r1;
+        }
+        _motion.OnComplete(() => ApplyMotion(img, Vector2.zero, 0f));
+    }
+
+    private void ApplyMotion(RectTransform img, Vector2 offset, float angle)
+    {
+        Vector2 c = img.rect.center;
+        c = new Vector2(c.x * img.localScale.x, c.y * img.localScale.y);
+        Vector2 rotated = (Vector2)(Quaternion.Euler(0f, 0f, angle) * c);
+        img.anchoredPosition = _motionBase + offset + (c - rotated);
+        img.localEulerAngles = new Vector3(0f, 0f, angle % 360f);
     }
 
     // 공격 프레임 번호마다 땅이 파이는 충격을 터뜨린다 (EnemyData.groundFxShots)

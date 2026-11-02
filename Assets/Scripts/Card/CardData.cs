@@ -125,7 +125,9 @@ public class CardData : ScriptableObject
     public CardUseMode UseMode    => useMode;
     // 저주 등 사용 불가 카드. 손패에는 남지만 플레이가 막힌다(드래그해서 놓아도 사용되지 않음).
     public bool IsUnplayable      => useMode == CardUseMode.Unplayable;
-    public bool IsPlayConditionMet(BattleState state) => playCondition == null || playCondition.IsMet(state, this);
+    // target: 적 지정 카드면 그 적 기준으로 조건을 본다 (예: 대상에게 취약·약화·중독이 모두 있을 때만)
+    public bool IsPlayConditionMet(BattleState state, EnemyInstance target = null) => playCondition == null || playCondition.IsMet(state, this, target);
+    public bool HasPlayCondition => playCondition != null;
     public CardType   Type        => cardType;
     public CardRarity Rarity      => cardRarity;
     public CardOwner  Owner       => cardOwner;
@@ -188,7 +190,8 @@ public class CardData : ScriptableObject
         if (traits == EnemyTrait.None) return text;
         string keyword = EnemyTraits.Label(traits) + " 특효";
         if (text.Contains(keyword)) return text;
-        if (target != null && EnemyTraits.HasAny(target, traits)) keyword = $"<color={EffectiveKeywordColor}>{keyword}</color>";
+        // 속성이 아직 공개되지 않은 적(기록 2편 전)에게는 강조하지 않는다 — 강조로 속성이 드러나므로
+        if (target != null && EnemyTraits.HasAny(target, traits) && MaterialArchive.TraitsRevealed(target.Data)) keyword = $"<color={EffectiveKeywordColor}>{keyword}</color>";
         return string.IsNullOrEmpty(text) ? keyword + "." : keyword + ". " + text;
     }
 

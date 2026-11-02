@@ -27,13 +27,40 @@ public class EnemyHoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (enemy == null || enemy.IsDead) return;
         _hovering = true;
 
-        if (nameText != null) nameText.text = enemy.Data != null ? enemy.Data.enemyName : string.Empty;
+        // 이름 밑에 속성 한 줄 (기록 2편 전엔 '속성 미상 — 추가 탐색 필요')
+        if (nameText != null) nameText.text = enemy.Data != null
+            ? $"{enemy.Data.enemyName}\n<size=72%><color=#9AA3AA>{EnemyTraits.HoverLine(enemy.Data)}</color></size>"
+            : string.Empty;
         if (nameLabel != null) nameLabel.SetActive(true);
+        FitNameLabel();
         // 카드로 겨냥 중엔 툴팁이 조준선·예상 피해를 가리므로 이름만 보여준다
         if (intentTooltip != null && !CardHandler.IsAnyDragging) intentTooltip.Show();
     }
 
     public void OnPointerExit(PointerEventData eventData) => Hide();
+
+    // 속성 줄이 붙어 두 줄이 되면 이름표를 아래로 늘린다 (위 끝은 HP 바 밑 그대로)
+    private bool _labelHomeSet;
+    private Vector2 _labelHomeSize, _labelHomePos;
+    private void FitNameLabel()
+    {
+        if (nameLabel == null || nameText == null) return;
+        var r = (RectTransform)nameLabel.transform;
+        if (!_labelHomeSet) { _labelHomeSize = r.sizeDelta; _labelHomePos = r.anchoredPosition; _labelHomeSet = true; }
+        nameText.ForceMeshUpdate();
+        float pad = Mathf.Max(0f, _labelHomeSize.y - nameText.GetPreferredValues(nameText.text.Split('\n')[0]).y);
+        float h = Mathf.Max(_labelHomeSize.y, nameText.preferredHeight + pad);
+        r.sizeDelta = new Vector2(_labelHomeSize.x, h);
+        r.anchoredPosition = _labelHomePos + new Vector2(0f, (1f - r.pivot.y) * (_labelHomeSize.y - h));
+        // 이름 뒤 어두운 판(Shadow)은 고정 크기라 같이 늘린다
+        var shadow = r.Find("Shadow") as RectTransform;
+        if (shadow != null)
+        {
+            if (_shadowHomeH < 0f) _shadowHomeH = shadow.sizeDelta.y;
+            shadow.sizeDelta = new Vector2(shadow.sizeDelta.x, _shadowHomeH + (h - _labelHomeSize.y));
+        }
+    }
+    private float _shadowHomeH = -1f;
 
     // 사망 연출 시작·비활성화 때도 정리
     public void Hide()

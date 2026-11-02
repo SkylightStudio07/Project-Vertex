@@ -271,7 +271,7 @@ public class MaterialView : MonoBehaviour
             rankBadge.sprite = enemy.rank switch { EnemyEncounterType.Elite => badgeElite, EnemyEncounterType.Boss => badgeBoss, _ => badgeNormal };
             rankLabel.text = enemy.rank switch { EnemyEncounterType.Elite => "엘리트", EnemyEncounterType.Boss => "보스", _ => "일반" };
             rankLabel.color = enemy.rank == EnemyEncounterType.Normal ? inkColor : Color.white;
-            progressText.text = $"격퇴 {PlayerRecord.GetDefeatCount(enemy)}회  ·  기록 {unlocked} / {MaterialArchive.EntryCount}";
+            progressText.text = $"격퇴 {PlayerRecord.GetDefeatCount(enemy)}회  ·  기록 {unlocked} / {MaterialArchive.EntryCount}  ·  {EnemyTraits.RevealedLabel(enemy)}";
         }
         else
         {
