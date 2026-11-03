@@ -53,11 +53,12 @@ public class LobbyShopView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [Tooltip("담당 캐릭터 말 (있으면 입장·클릭·혼잣말을 맡고, 아래 상황 대사도 이쪽으로 찍힌다)")]
     [SerializeField] private LobbyKeeperTalk talk;
-    [SerializeField] private string lineEntry = "필요한 물건 있어? 천천히 둘러봐.";
-    [SerializeField] private string linePurchased = "준비해 뒀어. 잘 써.";
-    [SerializeField] private string lineInsufficient = "탈린이 조금 모자라.";
-    [SerializeField] private string lineSoldOut = "다음 보급까지 기다려.";
-    [SerializeField] private string lineOwned = "그건 이미 네 거야.";
+    [SerializeField] private string lineEntry = "기다리고 있었어요! 출발 전에 필요한 건 다 챙기셨나요?";
+    [SerializeField] private string linePurchased = "좋은 선택이세요! 사실 토냐가 골라둔 특상품이거든요!";
+    [SerializeField] private string linePurchasedAlt = "저도 그거 좋다고 생각해요! 토냐를 만나면 언니가 많이 사랑한다고 전해 주세요!";
+    [SerializeField] private string lineInsufficient = "탈린이 조금 모자라네요.";
+    [SerializeField] private string lineSoldOut = "다음 보급 때 다시 찾아와 주세요!";
+    [SerializeField] private string lineOwned = "그건 이미 가지고 계세요!";
 
     [Header("색")]
     [SerializeField] private Color inkColor = new(0.086f, 0.094f, 0.106f, 1f);
@@ -158,7 +159,7 @@ public class LobbyShopView : MonoBehaviour
         var result = LobbyShop.Buy(item, _quantity);
         Line(result switch
         {
-            LobbyShop.Result.Ok => linePurchased,
+            LobbyShop.Result.Ok => Random.value < 0.5f ? linePurchased : linePurchasedAlt,
             LobbyShop.Result.NotEnoughTalin => lineInsufficient,
             LobbyShop.Result.SoldOut => lineSoldOut,
             LobbyShop.Result.AlreadyOwned => lineOwned,
