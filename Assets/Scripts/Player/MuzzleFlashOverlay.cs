@@ -66,6 +66,13 @@ public class MuzzleFlashOverlay : MonoBehaviour
     [SerializeField] private Coffee.UIExtensions.UIParticle particlesPrefab;
     private Coffee.UIExtensions.UIParticle _particles;
 
+    [Header("총성")]
+    [Tooltip("사격마다 무작위로 재생. 두 발 모션은 두 번 울린다")]
+    [SerializeField] private AudioClip[] gunshotClips;
+    [SerializeField, Range(0f, 1f)] private float gunshotVolume = 0.75f;
+    private AudioSource _audio;
+    private System.Action _nextShot;
+
     private PoseSequencePlayer _player;
     private RectTransform _rect;
     private Image _image;
@@ -132,8 +139,36 @@ public class MuzzleFlashOverlay : MonoBehaviour
         return underscore >= 0 && int.TryParse(name.Substring(underscore + 1), out int n) ? n : -1;
     }
 
+    // 이 프레임 배열이 사격 프레임이 등록된 시트인지
+    public bool HasShotFrames(Sprite[] frames)
+    {
+        if (frames == null || frames.Length == 0 || frames[0] == null) return false;
+        foreach (var entry in clipSheets)
+            if (entry != null && entry.sheet == frames[0].texture && entry.shots != null && entry.shots.Length > 0) return true;
+        return false;
+    }
+
+    // 다음 사격 때 한 번만 호출한다 (피해 타이밍용)
+    public void NotifyNextShot(System.Action callback) => _nextShot = callback;
+
+    private void PlayGunshot()
+    {
+        if (gunshotClips == null || gunshotClips.Length == 0) return;
+        if (_audio == null)
+        {
+            _audio = gameObject.AddComponent<AudioSource>();
+            _audio.playOnAwake = false;
+        }
+        _audio.pitch = Random.Range(0.96f, 1.04f);
+        _audio.PlayOneShot(gunshotClips[Random.Range(0, gunshotClips.Length)], gunshotVolume);
+    }
+
     private void PlayFlash(Vector2 muzzle, Vector2 frameSize, float angle)
     {
+        PlayGunshot();
+        var shot = _nextShot;
+        _nextShot = null;
+        shot?.Invoke();
         PlayParticles(muzzle, frameSize, angle);
         if (burstSprites == null || burstSprites.Length == 0) return;
         EnsureFlashImage();

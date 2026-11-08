@@ -59,6 +59,8 @@ public class BattleImpactFx : MonoBehaviour
 
     [Header("효과음 (비우면 재생 안 함)")]
     [SerializeField] private AudioClip hitClip;
+    [SerializeField] private AudioClip hitMetalClip;
+    [SerializeField] private AudioClip enemyBlockClip;
     [SerializeField] private AudioClip heavyHitClip;
     [SerializeField] private AudioClip killClip;
     [SerializeField] private AudioClip playerHitClip;
@@ -66,6 +68,18 @@ public class BattleImpactFx : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float volume = 0.8f;
 
     private BattleManager _battle;
+    [Header("탄착 이펙트 (Resources/BattleFx/HitImpact/<종류>)")]
+    [Tooltip("불꽃 · 에너지 계열에 쓰는 가산 재질. 피 · 먼지(Flesh)는 일반 합성")]
+    [SerializeField] private Material impactAdditiveMaterial;
+    [SerializeField] private float impactSize = 240f;
+    [SerializeField] private float heavyImpactSize = 300f;
+    [SerializeField] private float fleshImpactSize = 430f;
+    [SerializeField] private float blockImpactSize = 260f;
+    [SerializeField] private float impactDuration = 0.18f;
+    private readonly Dictionary<string, Sprite[]> _impactSprites = new();
+    // 탄착 그림이 있으면 예전 범용 피격 파티클 대신 이쪽이 그린다 (EnemyView가 확인)
+    public static bool DrawsImpacts { get; private set; }
+
     private RectTransform _root;
     private Image _vignette, _shade;
     private bool _pendingLethal;
@@ -84,6 +98,7 @@ public class BattleImpactFx : MonoBehaviour
     private void Awake()
     {
         _root = (RectTransform)transform;
+        DrawsImpacts = ImpactSprites("Flesh").Length > 0;
         var canvas = GetComponent<Canvas>();
         if (canvas == null) canvas = gameObject.AddComponent<Canvas>();
         canvas.overrideSorting = true;
@@ -144,6 +159,7 @@ public class BattleImpactFx : MonoBehaviour
             if (enemy == null || !_watched.Add(enemy)) continue;
             var e = enemy;
             e.OnDamaged += amount => HandleEnemyDamaged(e, amount);
+            e.OnBlocked += amount => HandleEnemyBlocked(e, amount);
         }
     }
 
@@ -164,6 +180,7 @@ public class BattleImpactFx : MonoBehaviour
         bool lastKill = killed && AllEnemiesDead();
         bool big = amount >= bigDamage;
 
+        if (view != null) SpawnImpact(view, ImpactKind(enemy));
         if (view != null)
             SpawnNumber(PointAbove(view.SpriteRect), amount.ToString(), big ? bigNumberSize : numberSize, big ? bigNumberColor : numberColor);
 
@@ -175,13 +192,82 @@ public class BattleImpactFx : MonoBehaviour
             else HitStop(amount, killed);
         }
         if (amount >= shakeThreshold || killed) Shake(amount, killed);
-        Play(killed ? (killClip != null ? killClip : heavyHitClip) : big && heavyHitClip != null ? heavyHitClip : hitClip);
+        Play(killed ? (killClip != null ? killClip : heavyHitClip) : big && heavyHitClip != null ? heavyHitClip : HitClipFor(enemy));
+    }
+
+    // 기계 · 중장갑은 금속성 탄착음, 나머지는 둔탁한 탄착음
+    private AudioClip HitClipFor(EnemyInstance enemy)
+        => hitMetalClip != null && EnemyTraits.HasAny(enemy, EnemyTrait.Machine | EnemyTrait.HeavyArmor) ? hitMetalClip : hitClip;
+
+    // 적 방어도에 막힘: 작은 숫자와 막힘 소리
+    private void HandleEnemyBlocked(EnemyInstance enemy, int absorbed)
+    {
+        if (absorbed <= 0 || !isActiveAndEnabled) return;
+        var view = FindView(enemy);
+        if (view != null) SpawnImpact(view, "Block");
+        if (view != null) SpawnNumber(PointAbove(view.SpriteRect) + new Vector2(-90f, -30f), $"막음 {absorbed}", numberSize * 0.62f, blockNumberColor);
+        Play(enemyBlockClip);
     }
 
     private bool AllEnemiesDead()
     {
         foreach (var e in _battle.Enemies) if (e != null && !e.IsDead) return false;
         return true;
+    }
+
+    // 속성이 여러 개면 눈에 띄는 쪽을 쓴다. 지정이 없으면 피 · 먼지
+    private static string ImpactKind(EnemyInstance enemy)
+    {
+        if (EnemyTraits.HasAny(enemy, EnemyTrait.Dimension)) return "Dimension";
+        if (EnemyTraits.HasAny(enemy, EnemyTrait.Mystic)) return "Mystic";
+        if (EnemyTraits.HasAny(enemy, EnemyTrait.HeavyArmor)) return "Heavy";
+        if (EnemyTraits.HasAny(enemy, EnemyTrait.Machine)) return "Machine";
+        return "Flesh";
+    }
+
+    private Sprite[] ImpactSprites(string kind)
+    {
+        if (!_impactSprites.TryGetValue(kind, out var sprites))
+        {
+            sprites = Resources.LoadAll<Sprite>("BattleFx/HitImpact/" + kind);
+            _impactSprites[kind] = sprites;
+        }
+        return sprites;
+    }
+
+    // 맞은 지점에 낱장 하나를 놓고, 조금 돌리거나 뒤집어 커지면서 사라지게 한다. 히트스톱 중에도 움직인다
+    private void SpawnImpact(EnemyView view, string kind)
+    {
+        var sprites = ImpactSprites(kind);
+        if (sprites.Length == 0) return;
+
+        var corners = new Vector3[4];
+        view.SpriteRect.GetWorldCorners(corners);
+        Vector2 min = _root.InverseTransformPoint(corners[0]), max = _root.InverseTransformPoint(corners[2]);
+        Vector2 size = max - min;
+        Vector2 at = (min + max) * 0.5f + new Vector2(Random.Range(-0.12f, 0.12f) * size.x, (0.06f + Random.Range(-0.12f, 0.12f)) * size.y);
+
+        var go = new GameObject("HitImpact", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        go.layer = gameObject.layer;
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(_root, false);
+        rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
+        float side = kind == "Flesh" ? fleshImpactSize : kind == "Heavy" ? heavyImpactSize : kind == "Block" ? blockImpactSize : impactSize;
+        rt.sizeDelta = Vector2.one * side;
+        rt.anchoredPosition = at;
+        rt.localRotation = Quaternion.Euler(0f, 0f, Random.Range(-14f, 14f)); // 총알이 왼쪽에서 오므로 크게 돌리지 않는다
+        float flipY = Random.value < 0.5f ? -1f : 1f;
+        rt.localScale = new Vector3(0.72f, 0.72f * flipY, 1f);
+
+        var image = go.GetComponent<Image>();
+        image.sprite = sprites[Random.Range(0, sprites.Length)];
+        image.raycastTarget = false;
+        if (kind != "Flesh" && impactAdditiveMaterial != null) image.material = impactAdditiveMaterial;
+
+        DOTween.Sequence().SetUpdate(true).SetLink(go)
+            .Append(rt.DOScale(new Vector3(1.12f, 1.12f * flipY, 1f), impactDuration).SetEase(Ease.OutCubic))
+            .Join(image.DOFade(0f, impactDuration * 0.6f).SetDelay(impactDuration * 0.4f))
+            .OnComplete(() => Destroy(go));
     }
 
     private static EnemyView FindView(EnemyInstance enemy)

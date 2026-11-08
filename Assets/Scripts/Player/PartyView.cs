@@ -77,7 +77,7 @@ public class PartyView : MonoBehaviour
         if (BattleManager.Instance != null)
         {
             BattleManager.Instance.OnBattleStarted += Refresh;
-            BattleManager.Instance.OnCardPlayed += OnCardPlayed;
+            BattleManager.Instance.OnCardMotionRequested += HandleCardMotion;
             BattleManager.Instance.OnWeaponChanged += OnWeaponChanged;
             BattleManager.Instance.OnCompanionSkillUsed += OnCompanionSkillUsed;
         }
@@ -92,7 +92,7 @@ public class PartyView : MonoBehaviour
         if (BattleManager.Instance != null)
         {
             BattleManager.Instance.OnBattleStarted -= Refresh;
-            BattleManager.Instance.OnCardPlayed -= OnCardPlayed;
+            BattleManager.Instance.OnCardMotionRequested -= HandleCardMotion;
             BattleManager.Instance.OnWeaponChanged -= OnWeaponChanged;
             BattleManager.Instance.OnCompanionSkillUsed -= OnCompanionSkillUsed;
         }
@@ -139,8 +139,10 @@ public class PartyView : MonoBehaviour
 
     // 공격 카드를 냈을 때 플레이어/협력자 스탠딩에 연출을 재생한다. 데미지 적용을 기다리지 않는
     // "구경용" 재생 — 결과와 무관하게 그냥 재생만 하고 끝난다.
-    private void OnCardPlayed(CardData card)
+    // 시트에 사격 프레임이 등록된 모션이면 request에 맞는 순간을 알려 줘서, 피해가 총구 프레임에 들어가게 한다.
+    private void HandleCardMotion(CardMotionRequest request)
     {
+        var card = request?.Card;
         if (card == null || card.Type != CardData.CardType.Attack) return;
 
         // 동료 소속 카드면 그 동료가 공격 모션 (소속은 CoopCharData.cardOwner)
@@ -174,6 +176,12 @@ public class PartyView : MonoBehaviour
         var attackFrames = playerCharData.GetAttackFrames(currentWeapon, out float attackFps, out float attackScale, out AttackClip attackClip);
         if (attackFrames != null && attackFrames.Length > 0)
         {
+            var muzzle = playerPoseSequencer.GetComponent<MuzzleFlashOverlay>();
+            if (attackClip != null && muzzle != null && muzzle.HasShotFrames(attackFrames))
+            {
+                request.HasImpactTiming = true;
+                muzzle.NotifyNextShot(request.MarkImpact); // 두 발 모션도 피해는 첫 발에
+            }
             playerPoseSequencer.Play(attackFrames, attackFps, attackScale, attackClip?.holds, attackClip?.blendInto);
             return;
         }

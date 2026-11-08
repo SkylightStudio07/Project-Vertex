@@ -55,6 +55,7 @@ public class EnemyInstance : ICombatant
     public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
 
     public event Action<int> OnDamaged;       // 실제 HP 감소량
+    public event Action<int> OnBlocked;       // 방어도가 흡수한 양
     public event Action<int> OnBlockChanged;  // 현재 블록 수치(흡수/리셋 포함 — 모든 변화에 발화)
     public event Action<int> OnBlockGained;   // 실제로 늘어난 방어도량. AddBlock에서만, 0 이하면 발화 안 함
                                                // (OnBlockChanged는 흡수/리셋에도 같이 울려서 "획득 연출" 트리거로 못 씀)
@@ -98,6 +99,7 @@ public class EnemyInstance : ICombatant
                 _block -= absorbed;
                 amount -= absorbed;
                 OnBlockChanged?.Invoke(_block);
+                OnBlocked?.Invoke(absorbed);
             }
         }
 

@@ -31,6 +31,7 @@ Shader "UI/BattleUnit"
         _Brightness ("Brightness", Range(0.5, 1.5)) = 1
         _Grade ("Grade Multiply", Color) = (1,1,1,1)
         _KeepGlow ("Keep Bright Saturated (flash, sparks)", Range(0, 1)) = 1
+        _HitFlash ("Hit Flash (white)", Range(0, 1)) = 0
 
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -108,6 +109,7 @@ Shader "UI/BattleUnit"
             float _Saturation;
             float _Brightness;
             fixed4 _Grade;
+            half _HitFlash;
             float _KeepGlow;
 
             v2f vert(appdata_t v)
@@ -165,6 +167,7 @@ Shader "UI/BattleUnit"
                 c = lerp(c, _OutlineColor.rgb, outline * _OutlineColor.a);
 
                 fixed4 color = fixed4(c, a) * IN.color;
+                color.rgb = lerp(color.rgb, half3(1, 1, 1), _HitFlash); // 틴트(붉은 점멸)를 곱한 뒤에 입혀야 희게 보인다
 
                 #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);

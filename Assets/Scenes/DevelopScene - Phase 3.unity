@@ -4303,6 +4303,7 @@ MonoBehaviour:
   _defaultDrawCount: 5
   _defaultWeapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
   _passiveDebugView: []
+  _attackImpactTimeout: 0.8
   _lethalWindupDuration: 0.55
   _turnBanner: {fileID: 1901336938}
   _lungeOutWaitDuration: 0.2
@@ -11341,6 +11342,9 @@ MonoBehaviour:
       muzzle: {x: 645, y: 511}
       angle: 9
   particlesPrefab: {fileID: 183044306472308884, guid: 15f4bd84006240c4cb0cf2b7e8b34b98, type: 3}
+  gunshotClips:
+  - {fileID: 8300000, guid: 9062d8640bcabd04cbcb49350e9b6c08, type: 3}
+  gunshotVolume: 0.75
 --- !u!1 &336700220
 GameObject:
   m_ObjectHideFlags: 0
@@ -49028,12 +49032,20 @@ MonoBehaviour:
   windupTremble: 4
   windupShadeColor: {r: 0.086, g: 0.094, b: 0.106, a: 0.55}
   vignetteColor: {r: 0.78, g: 0.12, b: 0.14, a: 0.55}
-  hitClip: {fileID: 0}
-  heavyHitClip: {fileID: 0}
-  killClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 6d4a7c8b83f8b85439780006831e4c66, type: 3}
+  hitMetalClip: {fileID: 8300000, guid: 3918f560e81d81a459705fe0640875c0, type: 3}
+  enemyBlockClip: {fileID: 8300000, guid: 0f71c916a082abd419e40f042524c2aa, type: 3}
+  heavyHitClip: {fileID: 8300000, guid: 117630e14f6dac34b87b613c09cc7755, type: 3}
+  killClip: {fileID: 8300000, guid: 6b2a0fa431ac7fe4cbac546782c41f51, type: 3}
   playerHitClip: {fileID: 0}
   playerBlockClip: {fileID: 0}
   volume: 0.8
+  impactAdditiveMaterial: {fileID: 2100000, guid: 87d181b2630595f47bb5814595f0a733, type: 2}
+  impactSize: 240
+  heavyImpactSize: 300
+  fleshImpactSize: 430
+  blockImpactSize: 260
+  impactDuration: 0.18
 --- !u!1 &1501450038
 GameObject:
   m_ObjectHideFlags: 0

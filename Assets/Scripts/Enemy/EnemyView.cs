@@ -538,8 +538,54 @@ public class EnemyView : MonoBehaviour
     private void HandleDamaged(int amount)
     {
         RefreshHP();
-        SpawnHitEffect();
-        if (amount > 0) HitFlash.Play(enemyImage); // 피격 시 붉게 물들었다 돌아옴
+        if (!BattleImpactFx.DrawsImpacts) SpawnHitEffect(); // 탄착 그림이 있으면 BattleImpactFx가 속성별로 그린다
+        if (amount > 0)
+        {
+            HitFlash.Play(enemyImage, hitWhitePeak); // 맞은 순간 희게 번쩍이고, 붉게 물들었다 돌아옴
+            PlayRecoil(amount);
+        }
+    }
+
+    [Header("맞은 순간 경직")]
+    [Tooltip("피해 1일 때 밀리는 거리 (px)")]
+    [SerializeField] private float recoilMin = 8f;
+    [Tooltip("피해가 recoilFullDamage 이상일 때 밀리는 거리 (px)")]
+    [SerializeField] private float recoilMax = 24f;
+    [SerializeField] private float recoilFullDamage = 20f;
+    [SerializeField] private float recoilOut = 0.05f;
+    [SerializeField] private float recoilBack = 0.22f;
+    [Tooltip("맞은 순간 흰 번쩍임 세기 (0이면 끔)")]
+    [SerializeField, Range(0f, 1f)] private float hitWhitePeak = 0.75f;
+    private float _recoilOffset;
+    private Tween _recoilTween;
+
+    // 뒤로 밀렸다 돌아온다. 돌진 · 등장 연출과 겹쳐도 되도록 위치에 차이만 더한다. 히트스톱 중에도 움직인다
+    private void PlayRecoil(int amount)
+    {
+        if (enemyImage == null) return;
+        _recoilTween?.Kill();
+        SetRecoil(0f);
+        float weight = RecoilWeight();
+        if (weight <= 0f) return;
+        float distance = Mathf.Lerp(recoilMin, recoilMax, Mathf.InverseLerp(1f, recoilFullDamage, amount)) * weight;
+        _recoilTween = DOTween.Sequence().SetUpdate(true).SetLink(gameObject)
+            .Append(DOTween.To(() => _recoilOffset, SetRecoil, distance, recoilOut).SetEase(Ease.OutQuad))
+            .Append(DOTween.To(() => _recoilOffset, SetRecoil, 0f, recoilBack).SetEase(Ease.OutCubic));
+    }
+
+    private void SetRecoil(float value)
+    {
+        enemyImage.rectTransform.anchoredPosition += new Vector2(value - _recoilOffset, 0f);
+        _recoilOffset = value;
+    }
+
+    // 큰 적일수록 덜 밀린다. 화면 고정 거대 보스는 거의 안 움직인다
+    private float RecoilWeight()
+    {
+        var data = Instance?.Data;
+        if (data == null) return 1f;
+        if (data.useScreenRect) return 0.2f;
+        return data.rank == EnemyEncounterType.Boss ? 0.6f : data.rank == EnemyEncounterType.Elite ? 0.85f : 1f;
     }
 
     private void HandleDied()
