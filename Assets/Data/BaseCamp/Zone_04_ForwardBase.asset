@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20701a9f079aecb42b57f07f8a7d1ea5, type: 3}
+  m_Name: Zone_04_ForwardBase
+  m_EditorClassIdentifier: Assembly-CSharp::BaseZoneData
+  id: forward
+  displayName: "\uC804\uC9C4\uAE30\uC9C0"
+  englishName: FORWARD BASE
+  background: {fileID: 21300000, guid: 4b0be464ed9fa3349a1eb3ac0ca21f69, type: 3}
+  unlockDevLevel: 0
+  unlockQuestId: 
+  unlockLabel: 
+  unlockDescription: 
+  spots:
+  - id: gate
+    feet: {x: 290, y: 905}
+    height: 280
+    mirror: 0
+  - id: map
+    feet: {x: 760, y: 830}
+    height: 245
+    mirror: 0
+  - id: radio
+    feet: {x: 1200, y: 830}
+    height: 245
+    mirror: 1
+  - id: supply
+    feet: {x: 1660, y: 905}
+    height: 280
+    mirror: 1
+  facilities:
+  - link: 0
+    label: "\uD0D0\uC0C9 \uAC1C\uC2DC"
+    english: DEPLOY
+    rect:
+      serializedVersion: 2
+      x: 210
+      y: 410
+      width: 201
+      height: 70
+  - link: 1
+    label: "\uC758\uB8B0"
+    english: QUEST
+    rect:
+      serializedVersion: 2
+      x: 1032
+      y: 424
+      width: 203
+      height: 71
+  - link: 2
+    label: "\uC0C1\uC810"
+    english: SUPPLY
+    rect:
+      serializedVersion: 2
+      x: 1596
+      y: 431
+      width: 202
+      height: 70
+  expansions: []

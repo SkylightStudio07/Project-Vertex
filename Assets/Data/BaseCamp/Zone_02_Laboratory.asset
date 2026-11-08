@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20701a9f079aecb42b57f07f8a7d1ea5, type: 3}
+  m_Name: Zone_02_Laboratory
+  m_EditorClassIdentifier: Assembly-CSharp::BaseZoneData
+  id: laboratory
+  displayName: "\uC5F0\uAD6C\uC18C"
+  englishName: LABORATORY
+  background: {fileID: 21300000, guid: 61434c2860589d74497bed691d6a9385, type: 3}
+  unlockDevLevel: 0
+  unlockQuestId: 
+  unlockLabel: 
+  unlockDescription: 
+  spots:
+  - id: shelf
+    feet: {x: 330, y: 860}
+    height: 250
+    mirror: 0
+  - id: bench
+    feet: {x: 600, y: 905}
+    height: 280
+    mirror: 0
+  - id: desk
+    feet: {x: 930, y: 840}
+    height: 250
+    mirror: 0
+  - id: terminal
+    feet: {x: 1230, y: 890}
+    height: 270
+    mirror: 1
+  - id: booth
+    feet: {x: 1500, y: 840}
+    height: 245
+    mirror: 1
+  facilities:
+  - link: 3
+    label: "\uC544\uCE74\uC774\uBE0C"
+    english: ARCHIVE
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 276
+      width: 198
+      height: 68
+  - link: 4
+    label: "\uD6C8\uB828\uC7A5"
+    english: TRAINING
+    rect:
+      serializedVersion: 2
+      x: 1636
+      y: 321
+      width: 209
+      height: 70
+  expansions: []

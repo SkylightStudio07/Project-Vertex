@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20701a9f079aecb42b57f07f8a7d1ea5, type: 3}
+  m_Name: Zone_01_Quarters
+  m_EditorClassIdentifier: Assembly-CSharp::BaseZoneData
+  id: quarters
+  displayName: "\uAC70\uC8FC\uAD6C"
+  englishName: QUARTERS
+  background: {fileID: 21300000, guid: 60fcc898a2f31ec43a20b1428acd3beb, type: 3}
+  unlockDevLevel: 0
+  unlockQuestId: 
+  unlockLabel: 
+  unlockDescription: 
+  spots:
+  - id: bunk
+    feet: {x: 330, y: 905}
+    height: 280
+    mirror: 0
+  - id: wall
+    feet: {x: 610, y: 860}
+    height: 260
+    mirror: 0
+  - id: table
+    feet: {x: 900, y: 820}
+    height: 240
+    mirror: 0
+  - id: window
+    feet: {x: 1190, y: 850}
+    height: 255
+    mirror: 0
+  - id: stove
+    feet: {x: 1470, y: 905}
+    height: 280
+    mirror: 1
+  - id: corner
+    feet: {x: 1720, y: 845}
+    height: 250
+    mirror: 1
+  facilities: []
+  expansions:
+  - devLevel: 6
+    rect:
+      serializedVersion: 2
+      x: 824
+      y: 393
+      width: 253
+      height: 48

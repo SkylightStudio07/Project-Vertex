@@ -76,6 +76,10 @@ public class CoopCharData : CharData
     [Tooltip("휴식 노드에 들어설 때 하는 한 마디. 현재 호감도 레벨 이하인 묶음 중 minCoopLevel이 가장 높은 묶음에서 무작위")]
     public List<LeveledLines> restArrivalLines = new();
 
+    [Header("거점 (로비 거점 화면에서 서는 자리 · 기획: Docs/기획/거점.md)")]
+    [Tooltip("갈 수 있는 자리. 런이 끝날 때마다 열린 구역의 자리 중 하나를 뽑는다. 비우면 빈 자리 아무 데나 (포즈는 campSprite)")]
+    public List<BaseSpotPose> baseSpots = new();
+
     [Header("합류 시 획득 카드")]
     public CardData joinRewardCard;
 
@@ -126,6 +130,18 @@ public class LeveledLines
     public int minCoopLevel;
     [TextArea(1, 3)]
     public List<string> lines = new();
+}
+
+// 거점 자리 하나에서의 모습 (BaseZoneData의 자리 id)
+[System.Serializable]
+public class BaseSpotPose
+{
+    public string zoneId;
+    public string spotId;
+    [Tooltip("이 자리에서의 거점 전용 스탠딩. 비우면 campSprite → standingSprite → charImage")]
+    public Sprite pose;
+    [Tooltip("이름표 아래 '하는 일' (예: 창을 닦는 중). 비우면 campActivity")]
+    public string activity;
 }
 
 // 호감도 랭크업 시 재생할 이벤트 데이터.

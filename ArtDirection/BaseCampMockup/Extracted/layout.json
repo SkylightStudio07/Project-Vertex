@@ -1,0 +1,1721 @@
+{
+  "version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "pixel_scale": 2,
+  "nine_slice_order": [
+    "left",
+    "bottom",
+    "right",
+    "top"
+  ],
+  "assets": [
+    {
+      "file": "TopBar.png",
+      "png_size_px": [
+        3840,
+        220
+      ],
+      "screen_rect": [
+        0,
+        0,
+        1920,
+        110
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        650,
+        8,
+        64,
+        20
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Quarters_UI; back-button region patched with adjacent generated material",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 40,
+        "right": 30
+      }
+    },
+    {
+      "file": "TabBar.png",
+      "png_size_px": [
+        3828,
+        216
+      ],
+      "screen_rect": [
+        5,
+        962,
+        1914,
+        108
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        56,
+        10,
+        56,
+        10
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Quarters_UI",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 30,
+        "right": 30
+      }
+    },
+    {
+      "file": "Button_Back.png",
+      "png_size_px": [
+        336,
+        126
+      ],
+      "screen_rect": [
+        1729,
+        19,
+        168,
+        63
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Quarters_UI",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 28,
+        "right": 22
+      }
+    },
+    {
+      "file": "Button_Back_Hover.png",
+      "png_size_px": [
+        336,
+        126
+      ],
+      "screen_rect": [
+        1729,
+        19,
+        168,
+        63
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Hover_UI / verified Hover_States",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 28,
+        "right": 22
+      }
+    },
+    {
+      "file": "Sign.png",
+      "png_size_px": [
+        402,
+        140
+      ],
+      "screen_rect": [
+        210,
+        410,
+        201,
+        70
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        30,
+        8,
+        30,
+        8
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Hover_UI normal sign",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 20,
+        "right": 20
+      }
+    },
+    {
+      "file": "Sign_Hover.png",
+      "png_size_px": [
+        402,
+        140
+      ],
+      "screen_rect": [
+        210,
+        410,
+        201,
+        70
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        30,
+        8,
+        30,
+        8
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Hover_UI hover sign",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 20,
+        "right": 20
+      }
+    },
+    {
+      "file": "Sign_Hover_Accent.png",
+      "png_size_px": [
+        68,
+        6
+      ],
+      "screen_rect": [
+        220,
+        473,
+        34,
+        3
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0,
+      "animation": "separate from Sign_Hover"
+    },
+    {
+      "file": "Sign_Locked.png",
+      "png_size_px": [
+        506,
+        96
+      ],
+      "screen_rect": [
+        824,
+        393,
+        253,
+        48
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        16,
+        6,
+        16,
+        6
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Quarters_UI",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 20,
+        "right": 20
+      }
+    },
+    {
+      "file": "NameTag.png",
+      "png_size_px": [
+        436,
+        140
+      ],
+      "screen_rect": [
+        1466,
+        366,
+        218,
+        70
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        28,
+        6,
+        28,
+        6
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Quarters_UI",
+      "shadow_opacity": 0,
+      "canonical_screen_rect": [
+        1466,
+        334,
+        273,
+        88
+      ],
+      "text_padding_screen_px": {
+        "left": 20,
+        "right": 20
+      },
+      "delivery_scale": 0.8
+    },
+    {
+      "file": "NameTag_Divider.png",
+      "png_size_px": [
+        348,
+        2
+      ],
+      "screen_rect": [
+        1487,
+        401,
+        174,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0,
+      "canonical_screen_rect": [
+        1493,
+        377,
+        218,
+        1
+      ]
+    },
+    {
+      "file": "NameTag_Leader.png",
+      "png_size_px": [
+        80,
+        128
+      ],
+      "screen_rect": [
+        1462,
+        436,
+        40,
+        64
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        2,
+        4,
+        2,
+        6
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0,
+      "canonical_screen_rect": [
+        1461,
+        422,
+        51,
+        80
+      ]
+    },
+    {
+      "file": "LockedPanel.png",
+      "png_size_px": [
+        1248,
+        864
+      ],
+      "screen_rect": [
+        648,
+        306,
+        624,
+        432
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_LockedPanel; central divider retained",
+      "shadow_opacity": 0,
+      "text_padding_screen_px": {
+        "left": 56,
+        "right": 56
+      }
+    },
+    {
+      "file": "TopBar_Slash.png",
+      "png_size_px": [
+        122,
+        164
+      ],
+      "screen_rect": [
+        249,
+        11,
+        61,
+        82
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "TopBar_Divider.png",
+      "png_size_px": [
+        2,
+        124
+      ],
+      "screen_rect": [
+        1186,
+        18,
+        1,
+        62
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "TopBar_ResourceRule.png",
+      "png_size_px": [
+        948,
+        2
+      ],
+      "screen_rect": [
+        1217,
+        46,
+        474,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Tab_Divider.png",
+      "png_size_px": [
+        64,
+        156
+      ],
+      "screen_rect": [
+        403,
+        977,
+        32,
+        78
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Tab_NumberLine.png",
+      "png_size_px": [
+        44,
+        2
+      ],
+      "screen_rect": [
+        123,
+        1014,
+        22,
+        1
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Tab_Selected.png",
+      "png_size_px": [
+        578,
+        10
+      ],
+      "screen_rect": [
+        88,
+        1059,
+        289,
+        5
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "DevBar_Track.png",
+      "png_size_px": [
+        440,
+        16
+      ],
+      "screen_rect": [
+        1386,
+        27,
+        220,
+        8
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        4,
+        0,
+        4,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "DevBar_Fill.png",
+      "png_size_px": [
+        88,
+        16
+      ],
+      "screen_rect": [
+        1386,
+        27,
+        44,
+        8
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "permitted simple line / bar",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Tab_Hover.png",
+      "png_size_px": [
+        802,
+        216
+      ],
+      "screen_rect": [
+        403,
+        962,
+        401,
+        108
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "Clean_Hover_UI face, perimeter eroded, opacity 30/255",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Emblem_Star.png",
+      "png_size_px": [
+        146,
+        152
+      ],
+      "screen_rect": [
+        39,
+        12,
+        73,
+        76
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "original mockup luminance matte (39, 12, 112, 88)",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Glyph_ArrowLeft.png",
+      "png_size_px": [
+        54,
+        52
+      ],
+      "screen_rect": [
+        1768,
+        36,
+        27,
+        26
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "original mockup luminance matte (1768, 36, 1795, 62)",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Glyph_Lock_Small.png",
+      "png_size_px": [
+        44,
+        60
+      ],
+      "screen_rect": [
+        1704,
+        980,
+        22,
+        30
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "original mockup luminance matte (1704, 980, 1726, 1010)",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Glyph_Lock_Large.png",
+      "png_size_px": [
+        86,
+        106
+      ],
+      "screen_rect": [
+        939,
+        336,
+        43,
+        53
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "original mockup luminance matte (939, 336, 982, 389)",
+      "shadow_opacity": 0
+    },
+    {
+      "file": "Marker_Event.png",
+      "png_size_px": [
+        78,
+        78
+      ],
+      "screen_rect": [
+        951,
+        210,
+        39,
+        39
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "generated NameTag interior raster + permitted small diamond outline; no scene pixels",
+      "shadow_opacity": 0,
+      "canonical_screen_rect": [
+        946,
+        205,
+        49,
+        49
+      ],
+      "delivery_scale": 0.8
+    },
+    {
+      "file": "Glyph_Event.png",
+      "png_size_px": [
+        14,
+        36
+      ],
+      "screen_rect": [
+        968,
+        220,
+        7,
+        18
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "original mockup luminance matte (967, 218, 976, 241)",
+      "shadow_opacity": 0,
+      "canonical_screen_rect": [
+        967,
+        218,
+        9,
+        23
+      ],
+      "delivery_scale": 0.8
+    },
+    {
+      "file": "LockedDim.png",
+      "png_size_px": [
+        3840,
+        2160
+      ],
+      "screen_rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "soft black dim + edge vignette",
+      "shadow_opacity": 0,
+      "apply_before_ui": true,
+      "skip_on_already_dimmed_reference": true
+    },
+    {
+      "file": "LockedPanel_Status.png",
+      "png_size_px": [
+        700,
+        96
+      ],
+      "screen_rect": [
+        785,
+        658,
+        350,
+        48
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": 0,
+      "source": "soft status overlay, matched to original status band",
+      "shadow_opacity": 0
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "title",
+      "sample_text": "거점",
+      "screen_rect": [
+        134,
+        13,
+        110,
+        49
+      ],
+      "align": "left",
+      "font_size_px": 42,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "title_en",
+      "sample_text": "BASE",
+      "screen_rect": [
+        136,
+        69,
+        100,
+        20
+      ],
+      "align": "left",
+      "font_size_px": 17,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 7,
+      "group": "common"
+    },
+    {
+      "id": "zone_number",
+      "sample_text": "01",
+      "screen_rect": [
+        340,
+        20,
+        48,
+        42
+      ],
+      "align": "left",
+      "font_size_px": 29,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "zone_name",
+      "sample_text": "거주구",
+      "screen_rect": [
+        396,
+        13,
+        360,
+        48
+      ],
+      "align": "left",
+      "font_size_px": 38,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "zone_en",
+      "sample_text": "QUARTERS",
+      "screen_rect": [
+        341,
+        66,
+        470,
+        24
+      ],
+      "align": "left",
+      "font_size_px": 17,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 6,
+      "group": "common"
+    },
+    {
+      "id": "dev",
+      "sample_text": "BASE DEV Lv.4",
+      "screen_rect": [
+        1217,
+        17,
+        180,
+        26
+      ],
+      "align": "left",
+      "font_size_px": 21,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "dev_progress",
+      "sample_text": "8 / 40",
+      "screen_rect": [
+        1617,
+        17,
+        78,
+        25
+      ],
+      "align": "left",
+      "font_size_px": 18,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "back",
+      "sample_text": "로비",
+      "screen_rect": [
+        1802,
+        31,
+        78,
+        38
+      ],
+      "align": "left",
+      "font_size_px": 28,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "currency_0",
+      "sample_text": "0",
+      "screen_rect": [
+        1382,
+        54,
+        38,
+        32
+      ],
+      "align": "left",
+      "font_size_px": 26,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "currency_1",
+      "sample_text": "0",
+      "screen_rect": [
+        1517,
+        54,
+        38,
+        32
+      ],
+      "align": "left",
+      "font_size_px": 26,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "currency_2",
+      "sample_text": "1",
+      "screen_rect": [
+        1609,
+        54,
+        38,
+        32
+      ],
+      "align": "left",
+      "font_size_px": 26,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab1_number",
+      "sample_text": "01",
+      "screen_rect": [
+        123,
+        983,
+        34,
+        27
+      ],
+      "align": "left",
+      "font_size_px": 18,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab1_name",
+      "sample_text": "거주구",
+      "screen_rect": [
+        185,
+        978,
+        235,
+        41
+      ],
+      "align": "left",
+      "font_size_px": 34,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab1_en",
+      "sample_text": "QUARTERS",
+      "screen_rect": [
+        185,
+        1027,
+        260,
+        23
+      ],
+      "align": "left",
+      "font_size_px": 16,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "common"
+    },
+    {
+      "id": "tab2_number",
+      "sample_text": "02",
+      "screen_rect": [
+        489,
+        983,
+        34,
+        27
+      ],
+      "align": "left",
+      "font_size_px": 18,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab2_name",
+      "sample_text": "연구소",
+      "screen_rect": [
+        551,
+        978,
+        235,
+        41
+      ],
+      "align": "left",
+      "font_size_px": 34,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab2_en",
+      "sample_text": "LABORATORY",
+      "screen_rect": [
+        551,
+        1027,
+        260,
+        23
+      ],
+      "align": "left",
+      "font_size_px": 16,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "common"
+    },
+    {
+      "id": "tab3_number",
+      "sample_text": "03",
+      "screen_rect": [
+        855,
+        983,
+        34,
+        27
+      ],
+      "align": "left",
+      "font_size_px": 18,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab3_name",
+      "sample_text": "격납고",
+      "screen_rect": [
+        917,
+        978,
+        235,
+        41
+      ],
+      "align": "left",
+      "font_size_px": 34,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab3_en",
+      "sample_text": "HANGAR",
+      "screen_rect": [
+        917,
+        1027,
+        260,
+        23
+      ],
+      "align": "left",
+      "font_size_px": 16,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "common"
+    },
+    {
+      "id": "tab4_number",
+      "sample_text": "04",
+      "screen_rect": [
+        1221,
+        983,
+        34,
+        27
+      ],
+      "align": "left",
+      "font_size_px": 18,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab4_name",
+      "sample_text": "전진기지",
+      "screen_rect": [
+        1283,
+        978,
+        235,
+        41
+      ],
+      "align": "left",
+      "font_size_px": 34,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab4_en",
+      "sample_text": "FORWARD BASE",
+      "screen_rect": [
+        1283,
+        1027,
+        260,
+        23
+      ],
+      "align": "left",
+      "font_size_px": 16,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "common"
+    },
+    {
+      "id": "tab5_number",
+      "sample_text": "05",
+      "screen_rect": [
+        1587,
+        983,
+        34,
+        27
+      ],
+      "align": "left",
+      "font_size_px": 18,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab5_name",
+      "sample_text": "옥상",
+      "screen_rect": [
+        1628,
+        978,
+        72,
+        41
+      ],
+      "align": "left",
+      "font_size_px": 32,
+      "weight": 700,
+      "color": "#A8AAAA",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab5_condition",
+      "sample_text": "의뢰 「용접공 구출」 완료 시 개방",
+      "screen_rect": [
+        1628,
+        1027,
+        267,
+        25
+      ],
+      "align": "left",
+      "font_size_px": 17,
+      "weight": 400,
+      "color": "#A8AAAA",
+      "letter_spacing_px": 0,
+      "group": "common"
+    },
+    {
+      "id": "tab5_en",
+      "sample_text": "ROOFTOP",
+      "screen_rect": [
+        1649,
+        1027,
+        230,
+        23
+      ],
+      "align": "left",
+      "font_size_px": 16,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "common",
+      "visible": false,
+      "note": "locked state hides English in favor of condition"
+    },
+    {
+      "id": "deploy_name",
+      "sample_text": "탐색 개시",
+      "screen_rect": [
+        225,
+        416,
+        171,
+        30
+      ],
+      "align": "center",
+      "font_size_px": 24,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "deploy"
+    },
+    {
+      "id": "deploy_en",
+      "sample_text": "DEPLOY",
+      "screen_rect": [
+        225,
+        453,
+        171,
+        20
+      ],
+      "align": "center",
+      "font_size_px": 13,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "deploy"
+    },
+    {
+      "id": "quest_name",
+      "sample_text": "의뢰",
+      "screen_rect": [
+        1047,
+        430,
+        173,
+        30
+      ],
+      "align": "center",
+      "font_size_px": 24,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "quest"
+    },
+    {
+      "id": "quest_en",
+      "sample_text": "QUEST",
+      "screen_rect": [
+        1047,
+        467,
+        173,
+        20
+      ],
+      "align": "center",
+      "font_size_px": 13,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "quest"
+    },
+    {
+      "id": "shop_name",
+      "sample_text": "상점",
+      "screen_rect": [
+        1611,
+        437,
+        172,
+        30
+      ],
+      "align": "center",
+      "font_size_px": 24,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "shop"
+    },
+    {
+      "id": "shop_en",
+      "sample_text": "SUPPLY",
+      "screen_rect": [
+        1611,
+        474,
+        172,
+        20
+      ],
+      "align": "center",
+      "font_size_px": 13,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "shop"
+    },
+    {
+      "id": "archive_name",
+      "sample_text": "아카이브",
+      "screen_rect": [
+        144,
+        282,
+        168,
+        30
+      ],
+      "align": "center",
+      "font_size_px": 24,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "archive"
+    },
+    {
+      "id": "archive_en",
+      "sample_text": "ARCHIVE",
+      "screen_rect": [
+        144,
+        319,
+        168,
+        20
+      ],
+      "align": "center",
+      "font_size_px": 13,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "archive"
+    },
+    {
+      "id": "training_name",
+      "sample_text": "훈련장",
+      "screen_rect": [
+        1651,
+        327,
+        179,
+        30
+      ],
+      "align": "center",
+      "font_size_px": 24,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "training"
+    },
+    {
+      "id": "training_en",
+      "sample_text": "TRAINING",
+      "screen_rect": [
+        1651,
+        364,
+        179,
+        20
+      ],
+      "align": "center",
+      "font_size_px": 13,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "training"
+    },
+    {
+      "id": "armory_name",
+      "sample_text": "무기고",
+      "screen_rect": [
+        75,
+        294,
+        222,
+        30
+      ],
+      "align": "center",
+      "font_size_px": 24,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "armory"
+    },
+    {
+      "id": "armory_en",
+      "sample_text": "ARMORY",
+      "screen_rect": [
+        75,
+        331,
+        222,
+        20
+      ],
+      "align": "center",
+      "font_size_px": 13,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 4,
+      "group": "armory"
+    },
+    {
+      "id": "expansion",
+      "sample_text": "BASE DEV Lv.6에서 개방",
+      "screen_rect": [
+        844,
+        403,
+        213,
+        27
+      ],
+      "align": "center",
+      "font_size_px": 18,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "quarters"
+    },
+    {
+      "id": "companion_name",
+      "sample_text": "카리나 빈터발트",
+      "screen_rect": [
+        1487,
+        374,
+        178,
+        23
+      ],
+      "align": "left",
+      "font_size_px": 20,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "quarters",
+      "canonical_screen_rect": [
+        1493,
+        345,
+        221,
+        29
+      ],
+      "canonical_font_size_px": 25
+    },
+    {
+      "id": "companion_activity",
+      "sample_text": "커피를 마시며 산탄총 손질 중",
+      "screen_rect": [
+        1487,
+        410,
+        178,
+        19
+      ],
+      "align": "left",
+      "font_size_px": 14,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "quarters",
+      "canonical_screen_rect": [
+        1493,
+        388,
+        221,
+        24
+      ],
+      "canonical_font_size_px": 17
+    },
+    {
+      "id": "locked_title",
+      "sample_text": "구역 잠김",
+      "screen_rect": [
+        704,
+        403,
+        512,
+        62
+      ],
+      "align": "center",
+      "font_size_px": 48,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "rooftop"
+    },
+    {
+      "id": "locked_zone",
+      "sample_text": "05 옥상 / ROOFTOP",
+      "screen_rect": [
+        704,
+        472,
+        512,
+        32
+      ],
+      "align": "center",
+      "font_size_px": 23,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "rooftop"
+    },
+    {
+      "id": "locked_condition",
+      "sample_text": "의뢰 「용접공 구출」 완료 시 개방",
+      "screen_rect": [
+        698,
+        548,
+        524,
+        43
+      ],
+      "align": "center",
+      "font_size_px": 29,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "rooftop"
+    },
+    {
+      "id": "locked_description",
+      "sample_text": "용접공을 구출하면 옥상으로 향하는 길이 열립니다.",
+      "screen_rect": [
+        704,
+        602,
+        512,
+        33
+      ],
+      "align": "center",
+      "font_size_px": 21,
+      "weight": 400,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "rooftop"
+    },
+    {
+      "id": "locked_status",
+      "sample_text": "미완료",
+      "screen_rect": [
+        785,
+        665,
+        350,
+        33
+      ],
+      "align": "center",
+      "font_size_px": 25,
+      "weight": 700,
+      "color": "#E7E6DE",
+      "letter_spacing_px": 0,
+      "group": "rooftop"
+    }
+  ],
+  "instances": {
+    "Quarters": [
+      {
+        "asset": "Sign_Locked",
+        "screen_rect": [
+          824,
+          393,
+          253,
+          48
+        ]
+      },
+      {
+        "asset": "NameTag",
+        "screen_rect": [
+          1466,
+          366,
+          218,
+          70
+        ],
+        "canonical_screen_rect": [
+          1466,
+          334,
+          273,
+          88
+        ]
+      }
+    ],
+    "ForwardBase": [
+      {
+        "asset": "Sign",
+        "screen_rect": [
+          210,
+          410,
+          201,
+          70
+        ]
+      },
+      {
+        "asset": "Sign",
+        "screen_rect": [
+          1032,
+          424,
+          203,
+          71
+        ]
+      },
+      {
+        "asset": "Sign",
+        "screen_rect": [
+          1596,
+          431,
+          202,
+          70
+        ]
+      }
+    ],
+    "Laboratory": [
+      {
+        "asset": "Sign",
+        "screen_rect": [
+          129,
+          276,
+          198,
+          68
+        ]
+      },
+      {
+        "asset": "Sign",
+        "screen_rect": [
+          1636,
+          321,
+          209,
+          70
+        ]
+      }
+    ],
+    "Hangar": [
+      {
+        "asset": "Sign",
+        "screen_rect": [
+          60,
+          288,
+          252,
+          104
+        ]
+      }
+    ],
+    "Rooftop_Locked": [
+      {
+        "asset": "LockedPanel",
+        "screen_rect": [
+          648,
+          306,
+          624,
+          432
+        ]
+      }
+    ]
+  },
+  "tabs": {
+    "count": 5,
+    "first_cell_x": 69,
+    "cell_width": 366,
+    "cell_gap": 0,
+    "y": 962,
+    "height": 108,
+    "divider_offset_from_cell_right": [
+      -32,
+      15,
+      32,
+      78
+    ],
+    "selected_rect_relative_to_cell": [
+      19,
+      97,
+      289,
+      5
+    ],
+    "hover_rect_relative_to_cell": [
+      -32,
+      0,
+      401,
+      108
+    ],
+    "six_cell_example": {
+      "first_cell_x": 69,
+      "cell_width": 305,
+      "cell_gap": 0,
+      "selected_rect_relative_to_cell": [
+        19,
+        97,
+        228,
+        5
+      ]
+    }
+  },
+  "background_visible_region": {
+    "top_bar_bottom_y": 110,
+    "tab_bar_top_y": 962,
+    "screen_rect": [
+      0,
+      110,
+      1920,
+      852
+    ]
+  },
+  "name_tag_anchor": {
+    "leader_character_endpoint": [
+      1464,
+      498
+    ],
+    "plate_offset_from_endpoint": [
+      2,
+      -132
+    ],
+    "canonical_endpoint": [
+      1463,
+      500
+    ],
+    "canonical_plate_offset_from_endpoint": [
+      3,
+      -166
+    ],
+    "scale": 0.8
+  },
+  "event_marker": {
+    "scale": 0.8,
+    "canonical_size": [
+      49,
+      49
+    ],
+    "delivery_size": [
+      39,
+      39
+    ],
+    "glyph_asset": "Glyph_Event.png"
+  },
+  "currency_icons": "reuse existing lobby currency assets; intentionally not supplied",
+  "render_order": [
+    "background",
+    "LockedDim if locked",
+    "TopBar",
+    "TabBar",
+    "panels",
+    "hover overlays",
+    "rules / accent bars",
+    "glyphs",
+    "runtime text"
+  ],
+  "notes": [
+    "Panel pixels are regenerated raster surfaces from Sources; text is runtime only.",
+    "Reference-coordinate reassembly uses canonical nameplate size to avoid retaining old reference UI; small-size demo uses delivered 80% size.",
+    "LockedPanel contains requested center separator; NameTag divider, event exclamation and hover accent are separate.",
+    "No Unity assets or scenes modified."
+  ]
+}
