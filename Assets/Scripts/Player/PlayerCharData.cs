@@ -38,6 +38,10 @@ public class AttackClip
     public float frameRate = 24f;
     [Tooltip("재생 중 그림에 곱하는 배율 (그림 가운데 기준). 대기 시트와 같은 틀이면 1")]
     public float scale = 1f;
+    [Tooltip("프레임별 표시 길이 배수 (1 = 1/frameRate초). 0이면 그 프레임은 건너뛴다. 비어 있거나 모자라면 나머지는 1")]
+    public float[] holds;
+    [Tooltip("이 번호의 프레임으로 넘어갈 때 앞 프레임 위에 서서히 겹쳐 나타난다. 포즈가 한 장 만에 크게 바뀌는 곳에 쓴다")]
+    public int[] blendInto;
 }
 
 [CreateAssetMenu(fileName = "newPlayerCharData", menuName = "Game Asset/Player Character")]
@@ -114,15 +118,19 @@ public class PlayerCharData : CharData
     [NonSerialized] private int _lastClip = -1;
 
     // scale: 재생 중 그림에 곱할 배율 (attackClips의 틀 보정, 그 외 1)
-    public Sprite[] GetAttackFrames(WeaponData weapon, out float frameRate, out float scale)
+    public Sprite[] GetAttackFrames(WeaponData weapon, out float frameRate, out float scale) => GetAttackFrames(weapon, out frameRate, out scale, out _);
+
+    // clip: attackClips에서 고른 모션 (프레임별 길이 · 겹침 정보), 그 외 경로면 null
+    public Sprite[] GetAttackFrames(WeaponData weapon, out float frameRate, out float scale, out AttackClip clip)
     {
         frameRate = attackFrameRate > 0f ? attackFrameRate : 24f;
         scale = 1f;
+        clip = null;
 
         if (weapon != null && weaponVisuals != null)
         {
             var match = weaponVisuals.Find(v => v != null && v.weapon == weapon);
-            var clip = match != null ? PickClip(match.attackClips) : null;
+            clip = match != null ? PickClip(match.attackClips) : null;
             if (clip != null)
             {
                 frameRate = clip.frameRate > 0f ? clip.frameRate : 24f;

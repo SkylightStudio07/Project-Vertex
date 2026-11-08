@@ -1,0 +1,159 @@
+{
+  "all_passed": true,
+  "source_pixel_preservation": "all pixels above extraction threshold retained; no geometric transformation",
+  "checks": [
+    {
+      "file": "Flash_A.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 250,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Flash_B.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 250,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Flash_C.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 250,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Flash_D.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 250,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Flash_Fade_A.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 250,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Flash_Fade_B.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 245,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Smoke_A.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 86,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Smoke_B.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 64,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    },
+    {
+      "file": "Smoke_C.png",
+      "rgba_8bit": true,
+      "size": [
+        512,
+        512
+      ],
+      "border_4px_max_alpha": 0,
+      "alpha_levels": 54,
+      "reconstruction_max_error_per_channel": [
+        0,
+        0,
+        0
+      ],
+      "reconstruction_mean_absolute_error": 0.0,
+      "passed": true
+    }
+  ]
+}

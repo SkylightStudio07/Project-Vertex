@@ -1,0 +1,83 @@
+{
+  "Flash_Variants": {
+    "size": [
+      1920,
+      1080
+    ],
+    "outer_edge_min": [
+      0,
+      0,
+      0
+    ],
+    "outer_edge_max": [
+      0,
+      0,
+      0
+    ],
+    "cells": [
+      {
+        "cell": 1,
+        "gutter_max": 0
+      },
+      {
+        "cell": 2,
+        "gutter_max": 0
+      },
+      {
+        "cell": 3,
+        "gutter_max": 0
+      },
+      {
+        "cell": 4,
+        "gutter_max": 0
+      },
+      {
+        "cell": 5,
+        "gutter_max": 0
+      },
+      {
+        "cell": 6,
+        "gutter_max": 0
+      }
+    ]
+  },
+  "Smoke_Variants": {
+    "size": [
+      1920,
+      1080
+    ],
+    "outer_edge_min": [
+      128,
+      128,
+      128
+    ],
+    "outer_edge_max": [
+      128,
+      128,
+      128
+    ],
+    "achromatic": true
+  },
+  "Battle_Flash": {
+    "size": [
+      1920,
+      1080
+    ],
+    "outer_edge_min": [
+      0,
+      3,
+      7
+    ],
+    "outer_edge_max": [
+      133,
+      154,
+      166
+    ],
+    "bright_flash_bbox": [
+      867,
+      523,
+      206,
+      91
+    ]
+  }
+}
