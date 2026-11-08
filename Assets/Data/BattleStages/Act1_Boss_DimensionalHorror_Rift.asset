@@ -61,3 +61,39 @@ MonoBehaviour:
   screenBottomShade: 0.5
   vignette: 0.55
   hudDecorTint: {r: 0.08, g: 0.04, b: 0.14, a: 0.92}
+  foreground:
+  - sprite: {fileID: 21300000, guid: e6aa6c71d6d44652ad22e8759516e753, type: 3}
+    position: {x: 0, y: 0}
+    pivot: {x: 0.2, y: 0}
+    height: 0.32
+    flip: 0
+    tint: {r: 0.78, g: 0.72, b: 0.88, a: 1}
+    sway: 0
+  - sprite: {fileID: 21300000, guid: 5d16c4238cb24d75ba832c689372462b, type: 3}
+    position: {x: 1, y: 0}
+    pivot: {x: 0.8, y: 0}
+    height: 0.3
+    flip: 1
+    tint: {r: 0.78, g: 0.72, b: 0.88, a: 1}
+    sway: 0
+  - sprite: {fileID: 21300000, guid: acc1af707cf045d39dac30223c74e270, type: 3}
+    position: {x: 0.04, y: 0.52}
+    pivot: {x: 0.5, y: 0.5}
+    height: 0.17
+    flip: 0
+    tint: {r: 0.78, g: 0.72, b: 0.88, a: 1}
+    sway: 1.5
+  - sprite: {fileID: 21300000, guid: 3dff6019aa414ac6a9950a85ba24dad8, type: 3}
+    position: {x: 0.965, y: 0.6}
+    pivot: {x: 0.5, y: 0.5}
+    height: 0.2
+    flip: 1
+    tint: {r: 0.78, g: 0.72, b: 0.88, a: 1}
+    sway: 1.2
+  - sprite: {fileID: 21300000, guid: 5d16c4238cb24d75ba832c689372462b, type: 3}
+    position: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0}
+    height: 0.12
+    flip: 0
+    tint: {r: 0.55, g: 0.5, b: 0.66, a: 1}
+    sway: 0

@@ -29,6 +29,8 @@ public class HandView : MonoBehaviour
     [SerializeField] private float _drawInDuration = 0.25f; // 카드 한 장이 손패 위치까지 이동하는 시간.
     [FormerlySerializedAs("drawInStaggerDelay")]
     [SerializeField] private float _drawInStaggerDelay = 0.04f; // 다음 카드 이동을 시작하기 전 대기 시간.
+    [Tooltip("손패에 놓인 카드의 정렬 순서 시작값. 0이면 전투 배경 앞쪽 레이어(기본 캔버스 0번)와 겹쳐 맨 왼쪽 카드가 소품 밑에 깔린다")]
+    [SerializeField] private int _restingSortingOrderBase = 6;
     [FormerlySerializedAs("drawInSortingOrderBase")]
     [SerializeField] private int _drawInSortingOrderBase = 200; // 드로우 중 카드가 손패 카드보다 앞에 보이도록 하는 기준 순서.
 
@@ -174,7 +176,7 @@ public class HandView : MonoBehaviour
             ApplySelectionAlpha(view, card);
 
             if (!_interactionViewByCard.TryGetValue(card, out CardInteractionView interactionView)) continue;
-            interactionView.SetRestingSortingOrder(i);
+            interactionView.SetRestingSortingOrder(_restingSortingOrderBase + i);
             interactionView.SetTargetingAnchor(_cardContainer);
             _layoutInteractionViews.Add(interactionView);
         }

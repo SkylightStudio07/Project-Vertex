@@ -63,3 +63,32 @@ MonoBehaviour:
   screenBottomShade: 0.5
   vignette: 0.55
   hudDecorTint: {r: 0.05, g: 0.07, b: 0.1, a: 0.9}
+  foreground:
+  - sprite: {fileID: 21300000, guid: e472ed12d51542bdba137bfea9bdf6e4, type: 3}
+    position: {x: 0, y: 0}
+    pivot: {x: 0.3, y: 0}
+    height: 0.36
+    flip: 0
+    tint: {r: 0.5, g: 0.55, b: 0.64, a: 1}
+    sway: 0
+  - sprite: {fileID: 21300000, guid: bd33a299c86b47a7b382b24b3f2d5789, type: 3}
+    position: {x: 1, y: 0}
+    pivot: {x: 0.85, y: 0}
+    height: 0.26
+    flip: 0
+    tint: {r: 0.5, g: 0.55, b: 0.64, a: 1}
+    sway: 0
+  - sprite: {fileID: 21300000, guid: 3261e58b02ee28f4caac10494f14186c, type: 3}
+    position: {x: 0.4, y: 0}
+    pivot: {x: 0.5, y: 0}
+    height: 0.13
+    flip: 0
+    tint: {r: 0.42, g: 0.46, b: 0.54, a: 1}
+    sway: 0
+  - sprite: {fileID: 21300000, guid: 174bcf6188ad41b789655fec5dbc3842, type: 3}
+    position: {x: 0.62, y: 0}
+    pivot: {x: 0.5, y: 0}
+    height: 0.12
+    flip: 1
+    tint: {r: 0.42, g: 0.46, b: 0.54, a: 1}
+    sway: 0
