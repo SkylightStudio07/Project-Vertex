@@ -11,7 +11,7 @@ using UnityEngine;
 public enum EnemyTrait
 {
     None = 0,
-    [InspectorName("인간")] Human = 1 << 0,
+    [InspectorName("생체")] Human = 1 << 0, // 표시 이름은 생체 (예전 "인간" — 에셋 비트 호환을 위해 이름은 그대로)
     [InspectorName("기계")] Machine = 1 << 1,
     [InspectorName("경장갑")] LightArmor = 1 << 2,
     [InspectorName("중장갑")] HeavyArmor = 1 << 3,
@@ -29,7 +29,7 @@ public static class EnemyTraits
 {
     private static readonly (EnemyTrait trait, string name)[] Names =
     {
-        (EnemyTrait.Human, "인간"), (EnemyTrait.Machine, "기계"), (EnemyTrait.LightArmor, "경장갑"),
+        (EnemyTrait.Human, "생체"), (EnemyTrait.Machine, "기계"), (EnemyTrait.LightArmor, "경장갑"),
         (EnemyTrait.HeavyArmor, "중장갑"), (EnemyTrait.Mystic, "신비"), (EnemyTrait.Dimension, "차원"),
         (EnemyTrait.Wave, "파도"), (EnemyTrait.Psychic, "사이킥"), (EnemyTrait.Homunculus, "호문클루스"),
         (EnemyTrait.Star, "별"), (EnemyTrait.Origin, "근원"), (EnemyTrait.GoldenAge, "황금시대"),
@@ -42,13 +42,6 @@ public static class EnemyTraits
     public static bool HasAny(ICombatant combatant, EnemyTrait traits) =>
         traits != EnemyTrait.None && (Of(combatant) & traits) != 0;
 
-    // 전투 · 아카이브 표시. 기록이 모자라면 미상
-    public static string RevealedLabel(EnemyData enemy)
-    {
-        if (enemy == null || !MaterialArchive.TraitsRevealed(enemy)) return "속성 미상";
-        return enemy.traits == EnemyTrait.None ? "속성 없음" : Label(enemy.traits);
-    }
-
     // 적에게 마우스를 올렸을 때 이름 밑 한 줄
     public static string HoverLine(EnemyData enemy)
     {
@@ -57,7 +50,21 @@ public static class EnemyTraits
         return enemy.traits == EnemyTrait.None ? "속성 없음" : "속성 · " + Label(enemy.traits);
     }
 
-    // "인간·신비"
+    // 플래그를 하나씩 (선언 순서)
+    public static IEnumerable<EnemyTrait> Each(EnemyTrait traits)
+    {
+        foreach (var (trait, _) in Names)
+            if ((traits & trait) != 0) yield return trait;
+    }
+
+    public static string NameOf(EnemyTrait trait)
+    {
+        foreach (var (t, name) in Names)
+            if (t == trait) return name;
+        return string.Empty;
+    }
+
+    // "생체·신비"
     public static string Label(EnemyTrait traits)
     {
         var parts = new List<string>();

@@ -181,7 +181,7 @@ public class CardData : ScriptableObject
     private const string BuffedValueColor = "#6FE38A";   // 보정으로 오른 수치
     private const string DebuffedValueColor = "#FF6B5E"; // 보정으로 내린 수치
 
-    // 특효 키워드("인간·신비 특효")는 설명문 템플릿에 적혀 있지 않으면 앞에 자동으로 붙인다.
+    // 특효 키워드("생체·신비 특효")는 설명문 템플릿에 적혀 있지 않으면 앞에 자동으로 붙인다.
     // 겨냥 중인 적에게 특효가 걸리면 강조색(청록)으로 칠한다.
     public string GetDescription(bool upgraded, BattleState state = null, EnemyInstance target = null)
     {

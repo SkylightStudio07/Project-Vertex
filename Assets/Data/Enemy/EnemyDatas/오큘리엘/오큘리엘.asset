@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: "\uC624\uD058\uB9AC\uC5D8"
   health: 60
   enemyImage: {fileID: -3082038378310899728, guid: 9e7e1ff80979f324ca8ed16425c0ac4a, type: 3}
+  traits: 16
   rank: 1
   materialJson: {fileID: 0}
   spriteScale: 1.35
@@ -28,11 +29,19 @@ MonoBehaviour:
     height: 0
   intentAnchor: {x: 0.5, y: 1}
   hpBarAnchor: {x: 0.5, y: 0}
+  slotOffset: {x: 0, y: 0}
+  hpBarOffset: {x: 0, y: 0}
   noLunge: 0
   idleFrames: []
   idleFrameRate: 12
   attackFrames: []
   attackFrameRate: 16
+  defeatedTalk: {fileID: 0}
+  attackKeyframes: []
+  attackHitDelay: -1
+  attackMotion: []
+  groundFxShots: []
+  groundFxScale: 1
   idleSheetPadding: 0.1
   attackSheetPadding: 0.3
   startingStatuses: []

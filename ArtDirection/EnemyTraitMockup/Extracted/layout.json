@@ -1,0 +1,576 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "origin": "top-left; y down",
+  "scale": 2,
+  "assets": [
+    {
+      "file": "Chip_Base.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Chip_Active.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Chip_Shadow.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Unknown.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Human.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Machine.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_LightArmor.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_HeavyArmor.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Mystic.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Dimension.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Wave.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Psychic.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Homunculus.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Star.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_Origin.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Trait_GoldenAge.png",
+      "png_size_px": [
+        92,
+        76
+      ],
+      "screen_size_px": [
+        46.0,
+        38.0
+      ],
+      "alpha": "soft",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ]
+    },
+    {
+      "file": "Archive_TraitTag.png",
+      "png_size_px": [
+        288,
+        92
+      ],
+      "screen_size_px": [
+        144.0,
+        46.0
+      ],
+      "alpha": "binary",
+      "rotation_degrees": 0,
+      "origin": [
+        0,
+        0
+      ],
+      "nine_slice_px": [
+        108,
+        12,
+        20,
+        12
+      ]
+    }
+  ],
+  "chip_measured_screen_size": [
+    46,
+    38
+  ],
+  "measurement_note": "right enemy active shield approx[1600,643,46,38]; source UI raster edges have ~1px uncertainty",
+  "common_canvas_files": "Chip_* and Trait_* all92x76; no baked shadow shift",
+  "shadow": {
+    "offset_screen_px": [
+      2,
+      2
+    ],
+    "opacity": 0.5
+  },
+  "battle": {
+    "hp_bar_rect": [
+      1366,
+      689,
+      270,
+      26
+    ],
+    "anchor": "HP top-right",
+    "rightmost_chip_offset": [
+      -36,
+      -46
+    ],
+    "chip_gap_px": 3,
+    "placement": "index0 rightmost; x=HP.right-36-index*(46+3), y=HP.top-46",
+    "right_enemy_order_right_to_left": [
+      "HeavyArmor",
+      "Human"
+    ],
+    "unknown_count": 1,
+    "zero_traits": "no chips after reveal; unknown still one ?"
+  },
+  "colors": {
+    "revealed": "#FFFFFF",
+    "unknown": "#E2E5E6",
+    "active_glyph": "#101A20"
+  },
+  "archive": {
+    "first_tag_screen_rect": [
+      1371,
+      251,
+      144,
+      46
+    ],
+    "chip_offset_inside_tag": [
+      4,
+      4
+    ],
+    "tag_group_gap_px": 13,
+    "minimum_tag_width": 104,
+    "examples_width_px": {
+      "별": 104,
+      "호문클루스": 184
+    }
+  },
+  "text_slots": [
+    {
+      "id": "trait_name",
+      "parent": "Archive_TraitTag.png",
+      "rect": [
+        64,
+        11,
+        68,
+        25
+      ],
+      "align": "left",
+      "font_size": 19,
+      "weight": 500,
+      "color": "#F3F3F0",
+      "letter_spacing": 0,
+      "opacity": 1,
+      "width_rule": "tag_width-76"
+    }
+  ],
+  "nine_slice_order": "left,bottom,right,top; PNG pixels",
+  "glyph_sources": {
+    "Unknown": {
+      "source_crop": [
+        1147,
+        697,
+        1203,
+        743
+      ],
+      "glyph_bounds_png": [
+        35,
+        21,
+        21,
+        33
+      ]
+    },
+    "Human": {
+      "source_crop": [
+        1149,
+        815,
+        1205,
+        861
+      ],
+      "glyph_bounds_png": [
+        32,
+        23,
+        27,
+        29
+      ]
+    },
+    "Machine": {
+      "source_crop": [
+        1380,
+        815,
+        1436,
+        861
+      ],
+      "glyph_bounds_png": [
+        31,
+        23,
+        30,
+        29
+      ]
+    },
+    "LightArmor": {
+      "source_crop": [
+        1615,
+        815,
+        1671,
+        861
+      ],
+      "glyph_bounds_png": [
+        33,
+        22,
+        26,
+        31
+      ]
+    },
+    "HeavyArmor": {
+      "source_crop": [
+        1149,
+        871,
+        1205,
+        917
+      ],
+      "glyph_bounds_png": [
+        30,
+        20,
+        32,
+        36
+      ]
+    },
+    "Mystic": {
+      "source_crop": [
+        1380,
+        871,
+        1436,
+        917
+      ],
+      "glyph_bounds_png": [
+        26,
+        25,
+        40,
+        25
+      ]
+    },
+    "Dimension": {
+      "source_crop": [
+        1615,
+        871,
+        1671,
+        917
+      ],
+      "glyph_bounds_png": [
+        27,
+        19,
+        38,
+        37
+      ]
+    },
+    "Wave": {
+      "source_crop": [
+        1149,
+        929,
+        1205,
+        975
+      ],
+      "glyph_bounds_png": [
+        27,
+        27,
+        38,
+        22
+      ]
+    },
+    "Psychic": {
+      "source_crop": [
+        1380,
+        929,
+        1436,
+        975
+      ],
+      "glyph_bounds_png": [
+        26,
+        22,
+        40,
+        32
+      ]
+    },
+    "Homunculus": {
+      "source_crop": [
+        1615,
+        929,
+        1671,
+        975
+      ],
+      "glyph_bounds_png": [
+        31,
+        20,
+        30,
+        35
+      ]
+    },
+    "Star": {
+      "source_crop": [
+        1149,
+        990,
+        1205,
+        1036
+      ],
+      "glyph_bounds_png": [
+        28,
+        19,
+        36,
+        38
+      ]
+    },
+    "Origin": {
+      "source_crop": [
+        1380,
+        990,
+        1436,
+        1036
+      ],
+      "glyph_bounds_png": [
+        26,
+        18,
+        39,
+        39
+      ]
+    },
+    "GoldenAge": {
+      "source_crop": [
+        1615,
+        990,
+        1671,
+        1036
+      ],
+      "glyph_bounds_png": [
+        26,
+        22,
+        40,
+        32
+      ]
+    }
+  },
+  "layer_order": [
+    "Chip_Shadow offset/opacity",
+    "Chip_Base or Chip_Active",
+    "Trait glyph tinted"
+  ],
+  "archive_layer_order": [
+    "Archive_TraitTag",
+    "chip stack",
+    "runtime name"
+  ]
+}

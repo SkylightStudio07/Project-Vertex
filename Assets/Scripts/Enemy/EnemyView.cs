@@ -288,13 +288,12 @@ public class EnemyView : MonoBehaviour
         if (status != null) status.anchoredPosition += move;
     }
 
-    // HP 바 오른쪽 위 속성 태그 (왼쪽 위는 상태 줄). 기록 2편 전이면 '?' (속성 미상), 공개되면 "기계" 등. 속성이 없는 적은 공개 후 숨긴다.
-    // 아이콘이 나오기 전까지 글자 태그로 둔다. HP 바 자식이라 바를 옮기면 같이 따라간다
-    private RectTransform _traitTag;
-    private TextMeshProUGUI _traitText;
-    private Image _traitAccent;
-    private static readonly Color TraitKnown = new(0.05f, 0.72f, 0.95f, 1f);
-    private static readonly Color TraitUnknown = new(0.55f, 0.58f, 0.61f, 1f);
+    // HP 바 오른쪽 위 속성 칩 (왼쪽 위는 상태 줄). 기록 2편 전이면 '?' 칩 하나, 공개되면 속성마다 아이콘 칩. 속성이 없는 적은 공개 후 숨긴다.
+    // HP 바 자식이라 바를 옮기면 같이 따라간다. 배치: ArtDirection/EnemyTraitMockup/Extracted/layout.json (battle)
+    private RectTransform _traitRow;
+    private readonly List<TraitChip> _traitChips = new();
+    private static readonly Vector2 TraitRightChipOffset = new(-36f, 46f); // HP 바 오른쪽 위 → 맨 오른쪽 칩 왼쪽 위
+    private const float TraitChipStep = 49f; // 칩 46 + 간격 3
 
     private void RefreshTraitTag(EnemyInstance instance)
     {
@@ -302,57 +301,41 @@ public class EnemyView : MonoBehaviour
         var data = instance?.Data;
         if (hpBar == null || data == null) return;
 
-        bool revealed = MaterialArchive.TraitsRevealed(data);
-        if (revealed && data.traits == EnemyTrait.None)
+        if (_traitRow == null)
         {
-            if (_traitTag != null) _traitTag.gameObject.SetActive(false);
-            return;
+            var go = new GameObject("TraitChips", typeof(RectTransform));
+            go.layer = hpBar.gameObject.layer;
+            _traitRow = (RectTransform)go.transform;
+            _traitRow.SetParent(hpBar, false);
+            _traitRow.anchorMin = _traitRow.anchorMax = new Vector2(1f, 1f);
+            _traitRow.pivot = new Vector2(1f, 0f);
+            _traitRow.sizeDelta = Vector2.zero;
+            _traitRow.anchoredPosition = Vector2.zero;
         }
-        if (_traitTag == null) BuildTraitTag(hpBar);
-        _traitTag.gameObject.SetActive(true);
+        foreach (var chip in _traitChips) if (chip != null) Destroy(chip.gameObject);
+        _traitChips.Clear();
 
-        _traitText.text = revealed ? EnemyTraits.Label(data.traits) : "?";
-        _traitText.color = revealed ? Color.white : TraitUnknown;
-        _traitAccent.color = revealed ? TraitKnown : TraitUnknown;
-        float w = Mathf.Ceil(_traitText.GetPreferredValues(_traitText.text).x) + 18f;
-        _traitTag.sizeDelta = new Vector2(Mathf.Max(26f, w), 24f);
+        var traits = new List<EnemyTrait>();
+        if (!MaterialArchive.TraitsRevealed(data)) traits.Add(EnemyTrait.None); // 미상 '?'
+        else traits.AddRange(EnemyTraits.Each(data.traits));
+
+        // 선언 순서대로 왼쪽부터, 마지막 칩이 맨 오른쪽
+        for (int i = 0; i < traits.Count; i++)
+        {
+            var chip = TraitChip.Create(_traitRow, traits[i]);
+            var rt = (RectTransform)chip.transform;
+            rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
+            rt.pivot = new Vector2(0f, 1f);
+            rt.anchoredPosition = TraitRightChipOffset - new Vector2((traits.Count - 1 - i) * TraitChipStep, 0f);
+            _traitChips.Add(chip);
+        }
     }
 
-    private void BuildTraitTag(RectTransform hpBar)
+    // 특효 카드로 이 적을 겨냥하는 동안 맞는 칩만 켠다 (DamagePreview가 부름). None이면 모두 끈다
+    public void HighlightTraits(EnemyTrait traits)
     {
-        var go = new GameObject("TraitTag", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-        go.layer = hpBar.gameObject.layer;
-        _traitTag = (RectTransform)go.transform;
-        _traitTag.SetParent(hpBar, false);
-        _traitTag.anchorMin = _traitTag.anchorMax = new Vector2(1f, 1f);
-        _traitTag.pivot = new Vector2(1f, 0f);
-        _traitTag.anchoredPosition = new Vector2(0f, 4f);
-        var bg = go.GetComponent<Image>();
-        bg.color = new Color(0.07f, 0.08f, 0.09f, 0.85f);
-        bg.raycastTarget = false;
-
-        var accent = new GameObject("Accent", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-        accent.layer = go.layer;
-        var ar = (RectTransform)accent.transform;
-        ar.SetParent(_traitTag, false);
-        ar.anchorMin = new Vector2(0f, 0f); ar.anchorMax = new Vector2(0f, 1f); ar.pivot = new Vector2(0f, 0.5f);
-        ar.sizeDelta = new Vector2(3f, 0f); ar.anchoredPosition = Vector2.zero;
-        _traitAccent = accent.GetComponent<Image>();
-        _traitAccent.raycastTarget = false;
-
-        var label = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer));
-        label.layer = go.layer;
-        var lr = (RectTransform)label.transform;
-        lr.SetParent(_traitTag, false);
-        lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one;
-        lr.offsetMin = new Vector2(10f, 0f); lr.offsetMax = new Vector2(-6f, 0f);
-        _traitText = label.AddComponent<TextMeshProUGUI>();
-        if (hpText != null) _traitText.font = hpText.font;
-        _traitText.fontSize = 15f;
-        _traitText.fontStyle = FontStyles.Bold;
-        _traitText.alignment = TextAlignmentOptions.MidlineLeft;
-        _traitText.textWrappingMode = TextWrappingModes.NoWrap;
-        _traitText.raycastTarget = false;
+        foreach (var chip in _traitChips)
+            if (chip != null) chip.SetActive((chip.Trait & traits) != 0);
     }
 
     // 화면 고정 배치(EnemyData.useScreenRect) — 화면 끝에 붙는 거대 보스용.
