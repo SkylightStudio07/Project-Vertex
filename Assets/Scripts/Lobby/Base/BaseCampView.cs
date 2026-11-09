@@ -46,7 +46,8 @@ public class BaseCampView : MonoBehaviour
 
     [Header("동료")]
     [Tooltip("평소 동료 색 (밤 조명에 맞춰 살짝 어둡게). 마우스를 올리면 흰색")]
-    [SerializeField] private Color companionIdleTint = new(0.84f, 0.84f, 0.86f, 1f);
+    [SerializeField, Range(0f, 1f)] private float contactShadowAlpha = 0.85f;
+    [SerializeField, Range(0f, 1f)] private float castShadowAlpha = 0.5f;
     [SerializeField, Min(0.5f)] private float lineHoldSeconds = 3.5f;
 
     private static readonly Color Ink = new(0.906f, 0.902f, 0.871f, 1f);   // #E7E6DE
@@ -61,6 +62,8 @@ public class BaseCampView : MonoBehaviour
     private RectTransform _topPlate, _tabPlate;
     private Image _background;
     private RectTransform _zoneLayer;
+    private RectTransform _fxBackLayer; // 동료 뒤의 움직이는 효과
+    private BaseAmbiencePlayer _ambience;
     private CanvasGroup _zoneGroup;
     private GameObject _lockedRoot;
     private TextMeshProUGUI _zoneNumber, _zoneName, _zoneEnglish, _devText, _devValue;
@@ -71,6 +74,8 @@ public class BaseCampView : MonoBehaviour
     private readonly List<TabRefs> _tabs = new();
     private int _zone;
     private bool _playingEvent;
+    private BaseZoneData _ambienceZone;
+    private bool _ambienceCovered;
 
     // 이번 로비 방문(런 횟수)에 뽑은 자리
     private int _assignedSeed = int.MinValue;
@@ -89,6 +94,8 @@ public class BaseCampView : MonoBehaviour
         public CoopCharData character;
         public BaseZoneData.Spot spot;
         public Sprite pose;
+        public float heightScale = 1f;
+        public float hover;
         public string activity;
     }
 
@@ -110,7 +117,34 @@ public class BaseCampView : MonoBehaviour
     private void OnDisable()
     {
         MetaProgress.OnChanged -= RefreshTop;
+        if (_ambience != null) _ambience.Play(null, 0f, 22000f);
         if (mainView != null) mainView.SetActive(true);
+    }
+
+    // 시설 화면이 위를 덮으면 환경음을 줄인다
+    private void Update()
+    {
+        bool covered = IsOn(archiveView) || IsOn(trainingView) || IsOn(armoryView) || IsOn(questView) || IsOn(shopView);
+        if (covered != _ambienceCovered)
+        {
+            _ambienceCovered = covered;
+            RefreshAmbience();
+        }
+    }
+
+    private static bool IsOn(GameObject view) => view != null && view.activeInHierarchy;
+
+    private void RefreshAmbience()
+    {
+        if (_ambience == null)
+        {
+            var go = new GameObject("BaseAmbience", typeof(AudioSource), typeof(AudioLowPassFilter), typeof(BaseAmbiencePlayer));
+            go.transform.SetParent(transform.parent, false); // 화면이 꺼져도 페이드가 끝나게 화면 밖에
+            _ambience = go.GetComponent<BaseAmbiencePlayer>();
+        }
+        var z = _ambienceZone;
+        if (z == null || z.ambience == null || _ambienceCovered) _ambience.Play(null, 0f, 22000f);
+        else _ambience.Play(z.ambience, z.ambienceVolume, z.ambienceCutoff);
     }
 
     // ── 조립 ──
@@ -128,6 +162,11 @@ public class BaseCampView : MonoBehaviour
 
         // 그리는 순서: 배경 → 구역(동료 · 표지) → 잠김 덮개 → 위 · 아래 바 판 → 바 위 글자 · 탭
         _zoneFrame = NewFrame(root, "ZoneFrame");
+        var fxGo = new GameObject("FxBack", typeof(RectTransform));
+        fxGo.layer = gameObject.layer;
+        _fxBackLayer = (RectTransform)fxGo.transform;
+        _fxBackLayer.SetParent(_zoneFrame, false);
+        Stretch(_fxBackLayer);
         var layerGo = new GameObject("Zone", typeof(RectTransform), typeof(CanvasGroup));
         layerGo.layer = gameObject.layer;
         _zoneLayer = (RectTransform)layerGo.transform;
@@ -355,12 +394,21 @@ public class BaseCampView : MonoBehaviour
     private void BuildZoneContent(BaseZoneData z, bool open)
     {
         for (int i = _zoneLayer.childCount - 1; i >= 0; i--) Destroy(_zoneLayer.GetChild(i).gameObject);
+        for (int i = _fxBackLayer.childCount - 1; i >= 0; i--) Destroy(_fxBackLayer.GetChild(i).gameObject);
+        _ambienceZone = open ? z : null;
+        RefreshAmbience();
         if (!open) return;
 
-        // 동료는 뒷줄(위쪽 발밑)부터 그려 앞줄이 앞에 오게
+        BaseZoneFx.BuildBack(_fxBackLayer, z);
+
+        // 동료 · 소품을 뒷줄(위쪽 발밑)부터 그려 앞줄이 앞에 오게
+        var drawOrder = new List<(float y, System.Action build)>();
         if (_placements.TryGetValue(z.id, out var list))
-            foreach (var p in list.OrderBy(p => p.spot.feet.y))
-                BuildCompanion(p);
+            foreach (var p in list) drawOrder.Add((p.spot.feet.y, () => BuildCompanion(p, z)));
+        foreach (var prop in z.props)
+            if (prop.sprite != null) drawOrder.Add((prop.feet.y, () => BuildProp(prop, z)));
+        foreach (var item in drawOrder.OrderBy(d => d.y)) item.build();
+        BaseZoneFx.BuildFront(_zoneLayer, z);
 
         foreach (var e in z.expansions)
         {
@@ -466,15 +514,62 @@ public class BaseCampView : MonoBehaviour
             list.Add(new Placement
             {
                 character = c, spot = spot, pose = sprite,
+                heightScale = pose != null && pose.heightScale > 0f ? pose.heightScale : 1f,
+                hover = pose != null ? pose.hover : 0f,
                 activity = pose != null && !string.IsNullOrEmpty(pose.activity) ? pose.activity : c.campActivity,
             });
         }
     }
 
-    private void BuildCompanion(Placement p)
+    // 바닥 그림자: 닿는 곳의 진한 타원 + 광원 반대쪽으로 늘어진 옅은 타원. 숨쉬기에 흔들리지 않게 몸 밖에 둔다
+    private void BuildShadow(RectTransform holder, BaseZoneData z, float feetX, float width, float strength)
+    {
+        var sprite = Sprite("Shadow_Soft");
+        if (sprite == null) return;
+        float dx = feetX - z.lightX;
+        float far = Mathf.Clamp01(Mathf.Abs(dx) / 700f);
+        float side = dx >= 0f ? 1f : -1f;
+
+        void Add(string name, Vector2 pos, Vector2 size, float alpha)
+        {
+            var image = NewImage(holder, name, sprite);
+            var rt = image.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = pos;
+            rt.sizeDelta = size;
+            image.color = new Color(0f, 0f, 0f, alpha * strength);
+        }
+
+        Add("ShadowCast", new Vector2(side * width * (0.16f + 0.34f * far), -2f),
+            new Vector2(width * (1.15f + 0.6f * far), width * 0.3f), castShadowAlpha);
+        Add("ShadowContact", new Vector2(0f, 0f), new Vector2(width * 1.0f, width * 0.26f), contactShadowAlpha);
+    }
+
+    private void BuildProp(BaseZoneData.Prop prop, BaseZoneData z)
+    {
+        float h = prop.height;
+        float w = h * prop.sprite.rect.width / Mathf.Max(1f, prop.sprite.rect.height);
+        var holder = new GameObject("Prop_" + prop.sprite.name, typeof(RectTransform));
+        holder.layer = gameObject.layer;
+        var hr = (RectTransform)holder.transform;
+        hr.SetParent(_zoneLayer, false);
+        hr.anchorMin = hr.anchorMax = new Vector2(0f, 1f);
+        hr.pivot = new Vector2(0.5f, 0f);
+        hr.anchoredPosition = new Vector2(prop.feet.x, -prop.feet.y);
+        hr.sizeDelta = new Vector2(w, h);
+        BuildShadow(hr, z, prop.feet.x, w, 1f);
+        var body = NewImage(hr, "Body", prop.sprite);
+        Stretch(body.rectTransform);
+        body.preserveAspect = true;
+        body.color = z.propTint;
+        if (prop.mirror) body.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+
+    private void BuildCompanion(Placement p, BaseZoneData z)
     {
         var c = p.character;
-        float h = p.spot.height;
+        float h = p.spot.height * p.heightScale;
         float aspect = p.pose.rect.width / Mathf.Max(1f, p.pose.rect.height);
         float w = h * aspect;
 
@@ -487,12 +582,15 @@ public class BaseCampView : MonoBehaviour
         hr.anchoredPosition = new Vector2(p.spot.feet.x, -p.spot.feet.y);
         hr.sizeDelta = new Vector2(w, h);
 
+        BuildShadow(hr, z, p.spot.feet.x, Mathf.Min(w, h * 0.6f), p.hover > 0f ? 0.55f : 1f);
+
         var body = NewImage(hr, "Body", p.pose);
         Stretch(body.rectTransform);
         body.rectTransform.pivot = new Vector2(0.5f, 0f);
+        body.rectTransform.anchoredPosition += new Vector2(0f, p.hover);
         body.preserveAspect = true;
         body.raycastTarget = true;
-        body.color = companionIdleTint;
+        body.color = z.characterTint;
         if (p.spot.mirror) body.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
         // 가만히 숨쉬기 (위로만 아주 살짝)
         float phase = UnityEngine.Random.value * 2f;
@@ -518,7 +616,7 @@ public class BaseCampView : MonoBehaviour
             enter: () => { body.color = Color.white; tag.root.SetActive(true); },
             exit: () =>
             {
-                body.color = companionIdleTint;
+                body.color = z.characterTint;
                 if (Time.unscaledTime >= lineUntil) { tag.root.SetActive(false); tag.SetLine(p.activity); }
             },
             click: () =>

@@ -15,28 +15,78 @@ MonoBehaviour:
   id: forward
   displayName: "\uC804\uC9C4\uAE30\uC9C0"
   englishName: FORWARD BASE
-  background: {fileID: 21300000, guid: 4b0be464ed9fa3349a1eb3ac0ca21f69, type: 3}
+  background: {fileID: 21300000, guid: 6d59aaafa7b462349a10ba494a2788f4, type: 3}
+  lightX: 480
+  characterTint: {r: 0.62, g: 0.66, b: 0.78, a: 1}
+  propTint: {r: 0.78, g: 0.76, b: 0.8, a: 1}
+  snow:
+  - front: 1
+    mask: {fileID: 0}
+    maskArea:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spawn:
+      serializedVersion: 2
+      x: 715
+      y: 680
+      width: 680
+      height: 26
+    count: 55
+    velocity: {x: 70, y: 7}
+    jitter: {x: 35, y: 5}
+    size: {x: 1.4, y: 3}
+    stretch: 6
+    life: {x: 1.2, y: 2.4}
+    grow: 0.6
+    alpha: 0.24
+    wobble: 2
+  lights:
+  - mode: 0
+    center: {x: 1047, y: 222}
+    size: {x: 170, y: 170}
+    color: {r: 1, g: 0.55, b: 0.18, a: 0.28}
+    min: 0.08
+    speed: 0.4
+    darken: 0.4
+  - mode: 1
+    center: {x: 520, y: 395}
+    size: {x: 430, y: 400}
+    color: {r: 0.55, g: 1, b: 0.7, a: 0.05}
+    min: 0.5
+    speed: 0.5
+    darken: 0
+  - mode: 0
+    center: {x: 172, y: 572}
+    size: {x: 30, y: 30}
+    color: {r: 1, g: 0.25, b: 0.15, a: 0.5}
+    min: 0
+    speed: 0.9
+    darken: 0
+  faultyRoomDim: 0
+  ambience: {fileID: 8300000, guid: b96534267db880e4dbc8ef19ca75a49f, type: 3}
+  ambienceVolume: 0.3
+  ambienceCutoff: 650
   unlockDevLevel: 0
   unlockQuestId: 
   unlockLabel: 
   unlockDescription: 
   spots:
   - id: gate
-    feet: {x: 290, y: 905}
-    height: 280
-    mirror: 0
-  - id: map
-    feet: {x: 760, y: 830}
-    height: 245
-    mirror: 0
-  - id: radio
-    feet: {x: 1200, y: 830}
-    height: 245
+    feet: {x: 1130, y: 835}
+    height: 405
     mirror: 1
-  - id: supply
-    feet: {x: 1660, y: 905}
-    height: 280
-    mirror: 1
+  - id: air
+    feet: {x: 790, y: 790}
+    height: 185
+    mirror: 0
+  props:
+  - sprite: {fileID: 21300000, guid: 2700e28b1db222141b2c4d499b9cfef1, type: 3}
+    feet: {x: 135, y: 975}
+    height: 240
+    mirror: 0
   facilities:
   - link: 0
     label: "\uD0D0\uC0C9 \uAC1C\uC2DC"

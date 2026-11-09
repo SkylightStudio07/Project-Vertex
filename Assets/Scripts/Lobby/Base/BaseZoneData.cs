@@ -20,6 +20,64 @@ public class BaseZoneData : ScriptableObject
         public bool mirror;
     }
 
+    // 배경 위에 놓는 소품. 발밑 y로 동료와 함께 앞뒤를 정렬하고 그림자를 깐다
+    [Serializable]
+    public class Prop
+    {
+        public Sprite sprite;
+        [Tooltip("바닥선 가운데 (1920×1080, 왼쪽 위 원점)")]
+        public Vector2 feet;
+        [Tooltip("화면에서의 높이(px)")]
+        public float height = 160f;
+        public bool mirror;
+    }
+
+    // 눈 한 겹. 좌표 · 속도는 1920×1080 왼쪽 위 원점, 속도의 y는 아래쪽이 +
+    [Serializable]
+    public class SnowFx
+    {
+        [Tooltip("켜면 동료 앞, 끄면 동료 뒤에 그린다")]
+        public bool front;
+        [Tooltip("불투명한 곳에서만 눈이 보인다. 비우면 가리지 않는다")]
+        public Sprite mask;
+        public Rect maskArea;
+        [Tooltip("눈송이가 태어나는 영역")]
+        public Rect spawn;
+        [Min(0)] public int count = 40;
+        public Vector2 velocity = new(0f, 200f);
+        public Vector2 jitter = new(20f, 30f);
+        [Tooltip("반지름 범위(px)")]
+        public Vector2 size = new(2f, 5f);
+        [Tooltip("이동 방향으로 늘이는 배율")]
+        public float stretch = 1f;
+        [Tooltip("수명 범위(초)")]
+        public Vector2 life = new(2f, 4f);
+        [Tooltip("수명 끝에 커지는 비율. 카메라 쪽으로 오는 눈은 크게")]
+        public float grow;
+        [Range(0f, 1f)] public float alpha = 0.7f;
+        [Tooltip("좌우로 흔들리는 폭(px)")]
+        public float wobble;
+    }
+
+    public enum LightFxMode { Breathe, Flame, Faulty }
+
+    // 배경에 그려진 불빛 위에 얹는 깜빡임
+    [Serializable]
+    public class LightFx
+    {
+        public LightFxMode mode = LightFxMode.Flame;
+        [Tooltip("불빛 가운데 (1920×1080, 왼쪽 위 원점)")]
+        public Vector2 center;
+        public Vector2 size = new(300f, 300f);
+        [Tooltip("빛 번짐 색. 알파가 가장 밝을 때의 세기")]
+        public Color color = new(1f, 0.6f, 0.25f, 0.35f);
+        [Range(0f, 1f), Tooltip("가장 약할 때의 밝기")]
+        public float min = 0.4f;
+        [Min(0.01f)] public float speed = 1f;
+        [Range(0f, 1f), Tooltip("불이 꺼졌을 때 배경의 불빛을 눌러 주는 어둠의 세기")]
+        public float darken;
+    }
+
     [Serializable]
     public class FacilityPoint
     {
@@ -46,6 +104,26 @@ public class BaseZoneData : ScriptableObject
     [Header("배경 (1920×1080)")]
     public Sprite background;
 
+    [Header("조명 — 동료 · 소품을 방에 맞춘다")]
+    [Tooltip("주 광원의 화면 x. 그림자가 이 반대쪽으로 늘어진다")]
+    public float lightX = 960f;
+    [Tooltip("평소 동료 색. 마우스를 올리면 흰색")]
+    public Color characterTint = new(0.84f, 0.84f, 0.86f, 1f);
+    [Tooltip("소품 색")]
+    public Color propTint = Color.white;
+
+    [Header("움직이는 효과")]
+    public List<SnowFx> snow = new();
+    public List<LightFx> lights = new();
+    [Range(0f, 1f), Tooltip("Faulty 불이 꺼질 때 방 전체가 어두워지는 세기")]
+    public float faultyRoomDim;
+
+    [Header("환경음 — 비우면 조용하다")]
+    public AudioClip ambience;
+    [Range(0f, 1f)] public float ambienceVolume = 0.5f;
+    [Tooltip("벽 너머처럼 먹먹하게 하려면 낮춘다 (Hz)")]
+    public float ambienceCutoff = 22000f;
+
     [Header("해금 — 둘 다 비면 처음부터 열림")]
     [Min(0)] public int unlockDevLevel;
     public string unlockQuestId;
@@ -55,6 +133,7 @@ public class BaseZoneData : ScriptableObject
 
     [Header("동료 자리 · 시설 · 확장")]
     public List<Spot> spots = new();
+    public List<Prop> props = new();
     public List<FacilityPoint> facilities = new();
     public List<Expansion> expansions = new();
 

@@ -140,6 +140,10 @@ public class BaseSpotPose
     public string spotId;
     [Tooltip("이 자리에서의 거점 전용 스탠딩. 비우면 campSprite → standingSprite → charImage")]
     public Sprite pose;
+    [Tooltip("자리 키에 곱하는 배율. 앉은 포즈는 그림 키가 작으니 줄인다")]
+    public float heightScale = 1f;
+    [Tooltip("바닥에서 띄우는 높이(px). 떠 있는 드론 등")]
+    public float hover;
     [Tooltip("이름표 아래 '하는 일' (예: 창을 닦는 중). 비우면 campActivity")]
     public string activity;
 }

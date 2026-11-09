@@ -15,32 +15,84 @@ MonoBehaviour:
   id: hangar
   displayName: "\uACA9\uB0A9\uACE0"
   englishName: HANGAR
-  background: {fileID: 21300000, guid: efc40fe5b68c9ee45bce1d855ca3745a, type: 3}
+  background: {fileID: 21300000, guid: 1f0cf513796906b478a6958bd8d96ef1, type: 3}
+  lightX: 1000
+  characterTint: {r: 0.66, g: 0.66, b: 0.76, a: 1}
+  propTint: {r: 0.84, g: 0.78, b: 0.72, a: 1}
+  snow:
+  - front: 0
+    mask: {fileID: 21300000, guid: d0afd023f9da78e45bec2382bcb0bd00, type: 3}
+    maskArea:
+      serializedVersion: 2
+      x: 548
+      y: 565
+      width: 600
+      height: 112
+    spawn:
+      serializedVersion: 2
+      x: 600
+      y: 470
+      width: 640
+      height: 110
+    count: 60
+    velocity: {x: -170, y: 300}
+    jitter: {x: 50, y: 60}
+    size: {x: 1.6, y: 3.4}
+    stretch: 3
+    life: {x: 0.6, y: 0.9}
+    grow: 0
+    alpha: 0.8
+    wobble: 1
+  - front: 1
+    mask: {fileID: 0}
+    maskArea:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spawn:
+      serializedVersion: 2
+      x: 560
+      y: 620
+      width: 520
+      height: 80
+    count: 120
+    velocity: {x: -30, y: 110}
+    jitter: {x: 240, y: 45}
+    size: {x: 0.9, y: 2}
+    stretch: 3
+    life: {x: 1.2, y: 2.6}
+    grow: 1
+    alpha: 0.5
+    wobble: 4
+  lights: []
+  faultyRoomDim: 0
+  ambience: {fileID: 8300000, guid: b96534267db880e4dbc8ef19ca75a49f, type: 3}
+  ambienceVolume: 0.55
+  ambienceCutoff: 22000
   unlockDevLevel: 0
   unlockQuestId: 
   unlockLabel: 
   unlockDescription: 
   spots:
   - id: rack
-    feet: {x: 420, y: 900}
-    height: 280
+    feet: {x: 1300, y: 870}
+    height: 430
     mirror: 0
-  - id: lift
-    feet: {x: 760, y: 850}
-    height: 255
+  - id: air
+    feet: {x: 860, y: 830}
+    height: 195
     mirror: 0
-  - id: shutter
-    feet: {x: 1060, y: 830}
-    height: 245
+  props:
+  - sprite: {fileID: 21300000, guid: 07a68dde60290624e84172d84de6b1a7, type: 3}
+    feet: {x: 1700, y: 905}
+    height: 250
     mirror: 0
-  - id: bench
-    feet: {x: 1380, y: 905}
-    height: 285
-    mirror: 1
-  - id: crate
-    feet: {x: 1690, y: 870}
-    height: 265
-    mirror: 1
+  - sprite: {fileID: 21300000, guid: e368fc4b54e3d0246abed4b314651248, type: 3}
+    feet: {x: 590, y: 870}
+    height: 235
+    mirror: 0
   facilities:
   - link: 5
     label: "\uBB34\uAE30\uACE0"

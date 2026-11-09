@@ -58,6 +58,19 @@ MonoBehaviour:
   campActivity: 
   campLines: []
   restArrivalLines: []
+  baseSpots:
+  - zoneId: quarters
+    spotId: stove
+    pose: {fileID: 21300000, guid: cb847137f970b764cb30c74474d80c21, type: 3}
+    heightScale: 0.74
+    hover: 0
+    activity: "\uB09C\uB85C \uC606\uC5D0\uC11C \uC0B0\uD0C4\uCD1D \uC190\uC9C8 \uC911"
+  - zoneId: forward
+    spotId: gate
+    pose: {fileID: 21300000, guid: 9b130e5ffb17c4540a7f41bd9eb75da3, type: 3}
+    heightScale: 1
+    hover: 0
+    activity: "\uCEE4\uD53C \uB9C8\uC2DC\uB294 \uC911"
   joinRewardCard: {fileID: 0}
   skill: {fileID: 0}
   joinDialogueJson: {fileID: 0}
