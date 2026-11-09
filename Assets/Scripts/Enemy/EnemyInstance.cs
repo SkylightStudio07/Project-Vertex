@@ -196,10 +196,33 @@ public class EnemyInstance : ICombatant
 
     public EnemyAction GetCurrentAction()
     {
+        if (GetStun(out var stun) != null) return stun.skippedAction;
         if (CurrentPatterns == null || CurrentPatterns.Count == 0)
             return null;
 
         return _action;
+    }
+
+    public bool IsStunned => GetStun(out _) != null;
+
+    private StatusInstance GetStun(out StunStatusBehavior behavior)
+    {
+        foreach (var passive in _statuses.Entries)
+            if (passive is StatusInstance status && !status.IsExpired && status.Definition != null)
+                foreach (var rule in status.Definition.Behaviors)
+                    if (rule is StunStatusBehavior stun) { behavior = stun; return status; }
+        behavior = null;
+        return null;
+    }
+
+    public bool TrySkipStunnedAction()
+    {
+        var status = GetStun(out _);
+        if (status == null) return false;
+        status.ReduceMagnitude(1);
+        _statuses.RemoveExpired();
+        OnIntentChanged?.Invoke();
+        return true;
     }
 
     public void AdvancePattern()
@@ -254,6 +277,13 @@ public class EnemyInstance : ICombatant
         var result = new List<EnemyAction>();
         if (count <= 0 || Data == null) return result;
 
+        var stunStatus = GetStun(out var stun);
+        if (stunStatus != null)
+        {
+            for (int i = 1; i < stunStatus.Stacks && result.Count < count; i++) result.Add(stun.skippedAction);
+            if (_action != null && result.Count < count) result.Add(_action);
+        }
+
         var openings = CurrentOpenings;
         var patterns = CurrentPatterns;
         int openingIndex = _openingIndex;
@@ -262,7 +292,7 @@ public class EnemyInstance : ICombatant
         int randomQueueIndex = 0;
         EnemyAction previous = _action;
 
-        for (int i = 0; i < count; i++)
+        for (int i = result.Count; i < count; i++)
         {
             EnemyAction next = null;
             if (inOpening)
@@ -373,6 +403,7 @@ public class EnemyInstance : ICombatant
     // battle은 CardContext.Battle을 채우기 위해서만 필요 (DrawEffect 등 일부 효과가 참조).
     public void ExecuteCurrentAction(BattleState state, BattleManager battle)
     {
+        if (TrySkipStunnedAction()) return;
         var action = GetCurrentAction();
         if (action != null && action.effects != null)
         {
@@ -386,12 +417,14 @@ public class EnemyInstance : ICombatant
             EffectRunner.ExecuteImmediate(action.effects, ctx);
         }
 
+        _statuses.NotifyEnemyActionEnd(state, this, action);
         AdvancePattern();
         OnIntentChanged?.Invoke(); // 다음 턴에 보여줄 인텐트가 바뀌었으니 뷰 갱신 알림
     }
 
     public IEnumerator ExecuteCurrentActionCoroutine(BattleState state, BattleManager battle)
     {
+        if (TrySkipStunnedAction()) yield break;
         var action = GetCurrentAction();
         if (action != null && action.effects != null)
         {
@@ -407,6 +440,7 @@ public class EnemyInstance : ICombatant
             yield return EffectRunner.ExecuteSequence(action.effects, context);
         }
 
+        _statuses.NotifyEnemyActionEnd(state, this, action);
         AdvancePattern();
         OnIntentChanged?.Invoke();
     }
@@ -421,6 +455,12 @@ public class EnemyInstance : ICombatant
 
         StartTurnPassives(state);
         if (IsDead) return false; // 패시브로 죽었으면 행동하지 않음
+
+        if (TrySkipStunnedAction())
+        {
+            if (!state.Player.IsDead) EndTurnPassives(state);
+            return false;
+        }
 
         NotifyActionStarted();
         ExecuteCurrentAction(state, battle);

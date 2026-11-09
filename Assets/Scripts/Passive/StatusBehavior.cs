@@ -12,6 +12,8 @@ public abstract class StatusBehavior
     public virtual void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner) { }
+    public virtual void OnEnemyActionEnd(StatusInstance status, CardContext context, EnemyAction action) { }
+    public virtual void OnDeath(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnCardPlayed(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual DamageInfo ModifyOutgoingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;
     public virtual DamageInfo ModifyIncomingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;
@@ -241,6 +243,23 @@ public sealed class CountdownEffectsStatusBehavior : TriggeredEffectsStatusBehav
 public sealed class OnTurnEndEffectsStatusBehavior : TriggeredEffectsStatusBehavior
 {
     public override void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner)
+        => Execute(context);
+}
+
+// 실제 적 행동을 완료했을 때만 발동한다. 기절로 건너뛴 턴에는 발동하지 않는다.
+[Serializable]
+public sealed class OnEnemyActionEndEffectsStatusBehavior : TriggeredEffectsStatusBehavior
+{
+    public override void OnEnemyActionEnd(StatusInstance status, CardContext context, EnemyAction action)
+    {
+        if (action != null) Execute(context);
+    }
+}
+
+[Serializable]
+public sealed class OnDeathEffectsStatusBehavior : TriggeredEffectsStatusBehavior
+{
+    public override void OnDeath(StatusInstance status, CardContext context, ICombatant owner)
         => Execute(context);
 }
 

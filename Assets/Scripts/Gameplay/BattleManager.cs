@@ -166,6 +166,7 @@ public class BattleManager : MonoBehaviour
     private void SetupEnemies(List<EnemyData> enemyDataList)
     {
         _state.Enemies.Clear();
+        _processedEnemyDeaths.Clear();
         if (enemyDataList == null) return;
 
         foreach (var data in enemyDataList)
@@ -175,13 +176,19 @@ public class BattleManager : MonoBehaviour
                 Debug.LogWarning("[BattleManager] enemyDataList에 null 항목이 있어 건너뜀. Inspector 확인 필요.");
                 continue;
             }
-            var enemy = new EnemyInstance(data, _rnd);
-            enemy.OnDied += CheckVictory;
-            enemy.OnDied += () => EnemyDefeated?.Invoke(enemy); // 의뢰(처치 조건) 등 전투 밖 시스템용
-            enemy.OnDied += RunStats.AddDefeat; // 결과 화면 '격퇴'
-            if (!TrainingSession.IsActive) enemy.OnDied += () => PlayerRecord.AddDefeat(enemy.Data); // 실전 격퇴 기록 (훈련장 해금)
-            _state.Enemies.Add(enemy);
+            RegisterEnemy(data);
         }
+    }
+
+    private EnemyInstance RegisterEnemy(EnemyData data)
+    {
+        var enemy = new EnemyInstance(data, _rnd);
+        enemy.OnDied += CheckVictory;
+        enemy.OnDied += () => EnemyDefeated?.Invoke(enemy);
+        enemy.OnDied += RunStats.AddDefeat;
+        if (!TrainingSession.IsActive) enemy.OnDied += () => PlayerRecord.AddDefeat(enemy.Data);
+        _state.Enemies.Add(enemy);
+        return enemy;
     }
 
     private void SetupBattleDeck(List<CardData> masterDeck)
@@ -382,6 +389,13 @@ public class BattleManager : MonoBehaviour
             enemy.StartTurnPassives(_state);
             if (!_isInBattle || _state.Player.IsDead) yield break;
             if (enemy.IsDead) continue; // 패시브(독 등)로 죽었으면 행동하지 않음
+
+            if (enemy.TrySkipStunnedAction())
+            {
+                enemy.EndTurnPassives(_state);
+                if (!_isInBattle || _state.Player.IsDead) yield break;
+                continue;
+            }
 
             var action = enemy.GetCurrentAction();
             string actionName = action != null ? action.name : "없음";
@@ -905,8 +919,27 @@ public class BattleManager : MonoBehaviour
     // 승리 판정
     // ─────────────────────────────────────────────
 
+    private readonly HashSet<EnemyInstance> _processedEnemyDeaths = new();
+
+    public void SpawnEnemies(IEnumerable<EnemyData> enemies)
+    {
+        if (_state == null || enemies == null || !_isInBattle) return;
+        var spawned = new List<EnemyInstance>();
+        foreach (var data in enemies)
+            if (data != null) spawned.Add(RegisterEnemy(data));
+        foreach (var enemy in spawned) enemy.Statuses.NotifyBattleStart(_state, enemy);
+        if (spawned.Count > 0) OnEnemiesChanged?.Invoke();
+    }
+
     private void CheckVictory()
     {
+        // 사망한 적은 기록/동료 사망 판정을 위해 유지한다. 패시브의 사망 효과를 먼저 처리한다.
+        foreach (var enemy in new List<EnemyInstance>(_state.Enemies))
+        {
+            if (!enemy.IsDead || !_processedEnemyDeaths.Add(enemy)) continue;
+            enemy.Statuses.NotifyDeath(_state, enemy);
+        }
+
         // 살아남은 적에게 쓰러진 동료 수를 알린다 (3인 보스의 동료 사망 페이즈 등)
         int dead = 0;
         foreach (var e in _state.Enemies)

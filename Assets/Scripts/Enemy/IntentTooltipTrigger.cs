@@ -31,6 +31,11 @@ public class IntentTooltipTrigger : MonoBehaviour
         if (action == null || _icon == null || !_icon.enabled) { Hide(); return; }
         _shown = true;
         Describe(action.intentType, _enemy.GetIntentDamageAmount(), out string title, out string desc);
+        if (_enemy.IsStunned)
+        {
+            title = "기절";
+            desc = "기절하여 다음 행동을 건너뜁니다. 이후 원래 행동 패턴을 이어갑니다.";
+        }
         StatusTooltipView.Instance?.ShowNear((RectTransform)transform, _icon.sprite, title, desc);
     }
 

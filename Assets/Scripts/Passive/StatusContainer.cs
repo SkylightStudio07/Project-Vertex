@@ -105,6 +105,31 @@ public sealed class StatusContainer
         RemoveExpired();
     }
 
+    public void NotifyEnemyActionEnd(BattleState state, EnemyInstance owner, EnemyAction action)
+    {
+        foreach (var passive in new List<IPassiveLogic>(_entries))
+            if (passive is StatusInstance status && status.Definition != null)
+            {
+                var context = CardContext.CreatePassiveContext(state, owner, null, status);
+                foreach (var behavior in status.Definition.Behaviors)
+                    behavior?.OnEnemyActionEnd(status, context, action);
+            }
+        RemoveExpired();
+    }
+
+    // 사망 효과는 BattleManager가 승리 판정 전에 개체당 한 번 호출한다.
+    public void NotifyDeath(BattleState state, ICombatant owner)
+    {
+        foreach (var passive in new List<IPassiveLogic>(_entries))
+            if (passive is StatusInstance status && !status.IsExpired && status.Definition != null)
+            {
+                var context = CardContext.CreatePassiveContext(state, owner, null, status);
+                foreach (var behavior in status.Definition.Behaviors)
+                    behavior?.OnDeath(status, context, owner);
+            }
+        RemoveExpired();
+    }
+
     public void NotifyCardPlayed(CardContext context, ICombatant owner)
     {
         var snapshot = new List<IPassiveLogic>(_entries);

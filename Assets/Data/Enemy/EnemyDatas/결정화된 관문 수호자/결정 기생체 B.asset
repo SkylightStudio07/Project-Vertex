@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
+  m_Name: "\uACB0\uC815 \uAE30\uC0DD\uCCB4 B"
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "\uACB0\uC815 \uAE30\uC0DD\uCCB4"
+  health: 20
+  enemyImage: {fileID: -1891767681, guid: a5e558d8164bbec40865ef0208918be5, type: 3}
+  traits: 32
+  rank: 0
+  materialJson: {fileID: 0}
+  spriteScale: 0.8
+  intentOffsetY: 0
+  useScreenRect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  intentAnchor: {x: 0.5, y: 1}
+  hpBarAnchor: {x: 0.5, y: 0}
+  slotOffset: {x: 0, y: 0}
+  hpBarOffset: {x: 0, y: 0}
+  noLunge: 0
+  idleFrames: []
+  idleFrameRate: 12
+  attackFrames: []
+  attackFrameRate: 16
+  defeatedTalk: {fileID: 0}
+  attackKeyframes: []
+  attackHitDelay: -1
+  attackMotion: []
+  groundFxShots: []
+  groundFxScale: 1
+  idleSheetPadding: 0.1
+  attackSheetPadding: 0.3
+  startingStatuses:
+  - status: {fileID: 11400000, guid: a34723210f6a28f43afa90ceee595795, type: 2}
+    stacks: 1
+  - status: {fileID: 11400000, guid: d6e151022c819784490d53d0c2b2b807, type: 2}
+    stacks: 1
+  activityPatternType: 0
+  openingActions: []
+  activityPatterns:
+  - {fileID: 11400000, guid: 22629a088740d9a4d943f02b655705c1, type: 2}
+  - {fileID: 11400000, guid: 3ec4ecff67bba294e943310e37ac3d83, type: 2}
+  phases: []

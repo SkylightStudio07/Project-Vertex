@@ -96,7 +96,9 @@ public class EnemyZoneView : MonoBehaviour
         if (BattleManager.Instance == null || BattleManager.Instance.Enemies == null)
             return;
 
-        var enemies = BattleManager.Instance.Enemies;
+        var enemies = new List<EnemyInstance>();
+        foreach (var enemy in BattleManager.Instance.Enemies)
+            if (enemy != null && !enemy.IsDead) enemies.Add(enemy);
         int count = enemies.Count;
         if (count == 0) return;
 

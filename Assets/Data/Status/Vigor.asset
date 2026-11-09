@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: Vigor
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: Vigor
+  displayName: "\uD65C\uB825"
+  description: "\uB2E4\uC74C \uACF5\uACA9 \uD589\uB3D9\uC758 \uBAA8\uB4E0 \uD0C0\uACA9
+    \uD53C\uD574\uAC00 \uC218\uCE58\uB9CC\uD07C \uC99D\uAC00\uD569\uB2C8\uB2E4. \uACF5\uACA9
+    \uD589\uB3D9 \uC885\uB8CC \uD6C4 \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
+  icon: {fileID: -8307069055350043731, guid: e8c9834bdb39550438872b224deaa05a, type: 3}
+  disposition: 1
+  stackPolicy: 1
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 8172647996368355421
+  references:
+    version: 2
+    RefIds:
+    - rid: 8172647996368355421
+      type: {class: NextAttackDamageStatusBehavior, ns: , asm: Assembly-CSharp}
+      data: 
