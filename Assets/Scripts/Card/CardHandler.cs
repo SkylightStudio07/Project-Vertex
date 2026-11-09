@@ -27,6 +27,16 @@ public class CardHandler : MonoBehaviour,
     [FormerlySerializedAs("targetCancelYThreshold")]
     [SerializeField] private float _targetCancelYThreshold = 330f; // 타겟팅을 취소하고 드래그로 되돌아갈 화면 높이 기준값.
 
+    // 기준값은 캔버스 단위라 화면 픽셀인 포인터 위치와 비교하려면 캔버스 배율을 곱한다.
+    private float UiScale
+    {
+        get
+        {
+            Canvas canvas = GetComponentInParent<Canvas>();
+            return canvas != null ? canvas.rootCanvas.scaleFactor : 1f;
+        }
+    }
+
     private static bool _isAnyDragging; // 현재 어떤 카드든 드래그 중인지 공유하는 상태값.
     public static bool IsAnyDragging => _isAnyDragging; // 드래그·겨냥 중 (적 호버 툴팁 억제 등)
 
@@ -114,7 +124,7 @@ public class CardHandler : MonoBehaviour,
                 DamagePreview.Show(_cardView.Data, hovered); // 겨냥한 적 HP바에 예상 피해 표시
             }
 
-            if (eventData.position.y <= _targetCancelYThreshold)
+            if (eventData.position.y <= _targetCancelYThreshold * UiScale)
             {
                 SetState(CardState.Dragging);
                 _interactionView.MoveVisualCenterToPointer(eventData);
@@ -125,7 +135,7 @@ public class CardHandler : MonoBehaviour,
         if (_state != CardState.Dragging) return;
         if (_cardView.Data != null &&
             _cardView.Data.UseMode == CardData.CardUseMode.SelectEnemy &&
-            eventData.position.y >= _dropYThreshold)
+            eventData.position.y >= _dropYThreshold * UiScale)
         {
             _targetingPointerPosition = eventData.position;
             SetState(CardState.Targeting);
@@ -157,7 +167,7 @@ public class CardHandler : MonoBehaviour,
         switch (_cardView.Data.UseMode)
         {
             case CardData.CardUseMode.DropToPlayArea:
-                return eventData.position.y >= _dropYThreshold;
+                return eventData.position.y >= _dropYThreshold * UiScale;
 
             case CardData.CardUseMode.SelectEnemy:
                 return _state == CardState.Targeting &&
