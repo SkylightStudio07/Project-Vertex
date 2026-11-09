@@ -19,7 +19,7 @@ public class BlessingResponsiveUI : MonoBehaviour
     [Tooltip("캐릭터 가로 위치 (화면 너비 대비, 가운데 기준)")]
     [SerializeField] private float characterX = -0.245f;
     [Tooltip("오른쪽 묶음이 침범하면 안 되는 캐릭터 오른쪽 폭 (1080 기준 px)")]
-    [SerializeField] private float characterHalfWidth = 180f;
+    [SerializeField] private float characterHalfWidth = 340f;
     [SerializeField, Range(0.5f, 1f)] private float minColumnScale = 0.7f;
 
     [Header("입력 반응")]
@@ -46,7 +46,7 @@ public class BlessingResponsiveUI : MonoBehaviour
     private Vector2 _lastSize;
     private Vector2 _mouse;
     private float _weight;
-    private float _characterY;
+    private float _characterY, _characterScale = 1f;
     private BlessingIntroCinematic _intro;
     private BlessingAmbienceFx _ambience;
 
@@ -57,7 +57,11 @@ public class BlessingResponsiveUI : MonoBehaviour
         _ambience = GetComponent<BlessingAmbienceFx>();
         _overlay = transform.Find("ChoiceOverlay") as RectTransform;
         _character = transform.Find("BlessingCharacter") as RectTransform;
-        if (_character != null) _characterY = _character.anchoredPosition.y;
+        if (_character != null)
+        {
+            _characterY = _character.anchoredPosition.y;
+            _characterScale = _character.localScale.x;
+        }
 
         // 배경은 비율을 지켜 화면을 덮는다 (늘리면 달이 찌그러진다)
         var bg = transform.Find("Background");
@@ -134,7 +138,7 @@ public class BlessingResponsiveUI : MonoBehaviour
         if (_character != null)
         {
             _character.anchoredPosition = new Vector2(characterX * size.x, _characterY * s);
-            _character.localScale = new Vector3(s, s, 1f);
+            _character.localScale = new Vector3(s * _characterScale, s * _characterScale, 1f);
             _ambience?.SetCharacterBase(_character.localPosition, _character.localScale);
             _intro?.SetCharacterBase(_character.localPosition, _character.localScale);
         }
