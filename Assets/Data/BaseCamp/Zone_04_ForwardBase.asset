@@ -19,30 +19,7 @@ MonoBehaviour:
   lightX: 480
   characterTint: {r: 0.62, g: 0.66, b: 0.78, a: 1}
   propTint: {r: 0.78, g: 0.76, b: 0.8, a: 1}
-  snow:
-  - front: 1
-    mask: {fileID: 0}
-    maskArea:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    spawn:
-      serializedVersion: 2
-      x: 715
-      y: 680
-      width: 680
-      height: 26
-    count: 55
-    velocity: {x: 70, y: 7}
-    jitter: {x: 35, y: 5}
-    size: {x: 1.4, y: 3}
-    stretch: 6
-    life: {x: 1.2, y: 2.4}
-    grow: 0.6
-    alpha: 0.24
-    wobble: 2
+  snow: []
   lights:
   - mode: 0
     center: {x: 1047, y: 222}
@@ -103,7 +80,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 1032
-      y: 424
+      y: 340
       width: 203
       height: 71
   - link: 2

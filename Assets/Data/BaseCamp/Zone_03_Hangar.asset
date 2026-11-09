@@ -43,29 +43,6 @@ MonoBehaviour:
     grow: 0
     alpha: 0.8
     wobble: 1
-  - front: 1
-    mask: {fileID: 0}
-    maskArea:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    spawn:
-      serializedVersion: 2
-      x: 560
-      y: 620
-      width: 520
-      height: 80
-    count: 120
-    velocity: {x: -30, y: 110}
-    jitter: {x: 240, y: 45}
-    size: {x: 0.9, y: 2}
-    stretch: 3
-    life: {x: 1.2, y: 2.6}
-    grow: 1
-    alpha: 0.5
-    wobble: 4
   lights: []
   faultyRoomDim: 0
   ambience: {fileID: 8300000, guid: b96534267db880e4dbc8ef19ca75a49f, type: 3}
