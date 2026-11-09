@@ -172,7 +172,7 @@ public class CardData : ScriptableObject
         if (st.isInnate)   list.Add("선천성");
         if (st.isRetain)   list.Add("보존");
         if (st.isEthereal) list.Add("휘발성");
-        if (st.isExhaust)  list.Add("소멸");
+        if (st.isExhaust && Type != CardType.Power) list.Add("소멸"); // 파워는 플래그와 무관하게 항상 소멸하므로 표시하지 않는다
         var traits = EffectiveTraitsOf(upgraded);
         if (traits != EnemyTrait.None) list.Add(EnemyTraits.Label(traits) + " 특효");
         return list;
