@@ -87,6 +87,8 @@ public class BlessingView : MonoBehaviour
             if (introCinematic == null) introCinematic = gameObject.AddComponent<BlessingIntroCinematic>();
         }
 
+        if (GetComponent<BlessingResponsiveUI>() == null) gameObject.AddComponent<BlessingResponsiveUI>();
+
         if (backgroundImage == null)
         {
             Transform bg = transform.Find("Background");

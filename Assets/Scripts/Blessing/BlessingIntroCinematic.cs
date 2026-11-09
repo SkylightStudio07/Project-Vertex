@@ -163,6 +163,13 @@ public class BlessingIntroCinematic : MonoBehaviour
         };
     }
 
+    // 화면 비율 대응(BlessingResponsiveUI)이 캐릭터 자리를 옮기면 원래 구도도 함께 옮긴다
+    public void SetCharacterBase(Vector3 position, Vector3 scale)
+    {
+        if (!_hasBase) return;
+        _chPos = position; _chScale = scale;
+    }
+
     private void CaptureBase()
     {
         if (_hasBase) return; // 연출 도중 다시 불려도 처음 구도를 기준으로 삼는다
