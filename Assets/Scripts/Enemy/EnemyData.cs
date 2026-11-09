@@ -42,6 +42,8 @@ public class EnemyData : ScriptableObject
     public Vector2 slotOffset;
     [Tooltip("HP 바 · 상태 줄을 기본 자리에서 옮긴다 (캔버스 px, y 아래가 −). 화면 고정 배치가 아닐 때만. 공격 연출이 바와 겹칠 때 쓴다")]
     public Vector2 hpBarOffset;
+    [Tooltip("상태 줄만 추가로 옮긴다 (캔버스 px). 앞에 선 적의 그림에 상태 아이콘이 가릴 때 쓴다")]
+    public Vector2 statusRowOffset;
     [Tooltip("공격할 때 앞으로 튀어나오지 않고 제자리에서 크기만 살짝 튄다")]
     public bool noLunge;
 
@@ -55,6 +57,9 @@ public class EnemyData : ScriptableObject
     [Header("공격(Attack) 애니메이션")]
     [Tooltip("공격 스프라이트 시트 프레임 (비어있으면 돌진 모션 단독 재생)")]
     public Sprite[] attackFrames;
+
+    [Tooltip("켜면 공격 인텐트일 때만 공격 모션을 재생한다. 대기 · 강화 턴에는 제자리에서 행동 이름만 뜬다")]
+    public bool attackMotionOnAttackOnly;
 
     [Tooltip("공격 애니메이션 초당 프레임 수 (기본 16 FPS)")]
     public float attackFrameRate = 16f;
@@ -113,6 +118,12 @@ public class EnemyData : ScriptableObject
         [Tooltip("탄착점 (그림 안 0~1, 좌하단 원점)")]
         public Vector2 point;
     }
+
+    [Header("공격 연출 — 플레이어 위치 착탄 폭발")]
+    [Tooltip("피해가 들어가는 순간 플레이어 발밑에서 터지는 폭발 프레임 (곡사 포격 등). 비우면 없음")]
+    public Sprite[] targetBlastFrames;
+    [Tooltip("폭발 그림 한 변의 크기 (1920×1080 기준 px)")]
+    public float targetBlastSize = 640f;
 
     [Header("시트 여백 (대기/공격 크기 맞추기)")]
     [Tooltip("대기 시트의 여백 비율 — 캐릭터 크기 대비 한쪽 여백. 1할 = 0.1 (프레임 = 캐릭터 × (1 + 2×여백))")]

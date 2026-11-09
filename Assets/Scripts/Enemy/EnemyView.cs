@@ -285,7 +285,7 @@ public class EnemyView : MonoBehaviour
         // 몸 가운데로 맞춘 뒤 hpBarOffset(수동 보정)을 더한다
         Vector2 move = new Vector2(dx, 0f) + instance.Data.hpBarOffset;
         hpBar.anchoredPosition += move;
-        if (status != null) status.anchoredPosition += move;
+        if (status != null) status.anchoredPosition += move + instance.Data.statusRowOffset;
     }
 
     // HP 바 오른쪽 위 속성 칩 (왼쪽 위는 상태 줄). 기록 2편 전이면 '?' 칩 하나, 공개되면 속성마다 아이콘 칩. 속성이 없는 적은 공개 후 숨긴다.
@@ -657,6 +657,7 @@ public class EnemyView : MonoBehaviour
     {
         ShowActionName();
         if (_rect == null) return;
+        if (Instance != null && !Instance.PlaysAttackMotionNow) return;
 
         // 키프레임 공격(포즈 몇 장 + 반동 · 돌진): 제자리 돌진 · 움찔 없이 키프레임이 움직임을 다 맡는다
         if (Instance?.Data != null && Instance.Data.HasAttackKeyframes && enemyImage != null)
@@ -774,11 +775,7 @@ public class EnemyView : MonoBehaviour
             drawn = sprite.rect.size * k;
         }
         Vector3 world = enemyImage.rectTransform.TransformPoint(new Vector3(r.center.x + (point.x - 0.5f) * drawn.x, r.center.y + (point.y - 0.5f) * drawn.y, 0f));
-        // 먼지 색은 배경의 안개 색에 바닥 흙색을 섞는다
-        Color fog = BattleStageView.Active != null ? BattleStageView.Active.fogColor : new Color(0.55f, 0.58f, 0.62f);
-        Color dust = Color.Lerp(new Color(fog.r, fog.g, fog.b), new Color(0.62f, 0.58f, 0.52f), 0.5f);
-        dust.a = 0.55f;
-        GroundImpactFx.Play(transform as RectTransform, world, d.groundFxScale, dust);
+        GroundImpactFx.Play(transform as RectTransform, world, d.groundFxScale, GroundImpactFx.StageDustColor());
     }
 
     private void SpawnHitEffect()

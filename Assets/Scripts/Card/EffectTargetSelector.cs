@@ -69,7 +69,8 @@ public struct EffectTargetSelector
         }
 
         if (context.State.Enemies == null) return;
-        foreach (var enemy in context.State.Enemies) AddAlive(result, enemy);
+        foreach (var enemy in context.State.Enemies)
+            if (!EnemyTargeting.IsProtected(enemy, context.State)) AddAlive(result, enemy);
     }
 
     private static void AddAlive(List<ICombatant> result, ICombatant combatant)

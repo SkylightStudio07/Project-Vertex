@@ -118,6 +118,7 @@ public class BattleImpactFx : MonoBehaviour
         _battle.OnBattleStarted += Rewire;
         _battle.OnEnemiesChanged += Rewire;
         _battle.OnEnemyLethalWindup += HandleLethalWindup;
+        _battle.OnEnemyAttackLanding += SpawnTargetBlast;
         Rewire();
     }
 
@@ -128,6 +129,7 @@ public class BattleImpactFx : MonoBehaviour
             _battle.OnBattleStarted -= Rewire;
             _battle.OnEnemiesChanged -= Rewire;
             _battle.OnEnemyLethalWindup -= HandleLethalWindup;
+            _battle.OnEnemyAttackLanding -= SpawnTargetBlast;
         }
         Unwatch();
         RestoreTime();
@@ -393,6 +395,52 @@ public class BattleImpactFx : MonoBehaviour
         if (_playerAnchor == null)
             _playerAnchor = GetComponentInParent<Canvas>().rootCanvas.transform.Find(playerAnchorName) as RectTransform;
         return _playerAnchor != null ? PointAbove(_playerAnchor) : new Vector2(-560f, 0f);
+    }
+
+    // ───────── 착탄 폭발 ─────────
+
+    // 플레이어 발밑에 구덩이 · 먼지 · 파편을 남기고 그 위로 폭발 프레임을 터뜨린다 (EnemyData.targetBlastFrames). 히트스톱 중에도 움직인다
+    private void SpawnTargetBlast(EnemyInstance enemy)
+    {
+        var frames = enemy?.Data != null ? enemy.Data.targetBlastFrames : null;
+        if (frames == null || frames.Length == 0 || !isActiveAndEnabled) return;
+        PlayerPoint(); // _playerAnchor를 찾아 둔다
+        if (_playerAnchor == null) return;
+
+        var corners = new Vector3[4];
+        _playerAnchor.GetWorldCorners(corners);
+        Vector3 feet = (corners[0] + corners[3]) * 0.5f;
+        var body = _playerAnchor.GetComponentInChildren<Image>();
+        if (body != null && BattleUnitLook.TryVisibleFeetWorld(body, out Vector3 visibleFeet)) feet = visibleFeet;
+
+        GroundImpactFx.Play(_root, feet, 1.5f, GroundImpactFx.StageDustColor());
+
+        float side = enemy.Data.targetBlastSize;
+        var go = new GameObject("TargetBlast", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        go.layer = gameObject.layer;
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(_root, false);
+        rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = Vector2.one * side;
+        rt.anchoredPosition = (Vector2)_root.InverseTransformPoint(feet) + new Vector2(0f, side * 0.27f);
+        rt.localScale = Vector3.one * 0.55f;
+
+        var image = go.GetComponent<Image>();
+        image.sprite = frames[0];
+        image.raycastTarget = false;
+
+        const float frameTime = 0.075f, fade = 0.32f;
+        var seq = DOTween.Sequence().SetUpdate(true).SetLink(go);
+        seq.Join(rt.DOScale(1f, 0.1f).SetEase(Ease.OutCubic));
+        for (int i = 1; i < frames.Length; i++)
+        {
+            var sprite = frames[i];
+            seq.InsertCallback(i * frameTime, () => image.sprite = sprite);
+        }
+        float end = frames.Length * frameTime;
+        seq.Insert(0.1f, rt.DOScale(1.22f, end + fade - 0.1f).SetEase(Ease.OutQuad));
+        seq.Insert(end, image.DOFade(0f, fade).SetEase(Ease.InQuad));
+        seq.OnComplete(() => Destroy(go));
     }
 
     // ───────── 히트스톱 ─────────

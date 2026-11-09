@@ -50,7 +50,7 @@ public class TrainingTargetRow : MonoBehaviour, IPointerClickHandler
     }
 
     public void Bind(EnemyEncounter encounter, string displayName, int defeats, int required, bool unlocked, bool selected, Action onClick)
-        => BindCore(Thumbnail(encounter.enemies), encounter.encounterType, displayName, defeats, required, unlocked, selected, onClick, null);
+        => BindCore(Thumbnail(new[] { encounter.Headliner }), encounter.encounterType, displayName, defeats, required, unlocked, selected, onClick, null);
 
     public void BindEnemy(EnemyData enemy, string displayName, int defeats, int required, bool unlocked, bool selected, Action onClick, Action onRightClick)
         => BindCore(Thumbnail(new[] { enemy }), EnemyEncounterType.Normal, displayName, defeats, required, unlocked, selected, onClick, onRightClick);

@@ -104,6 +104,7 @@ public class BattleManager : MonoBehaviour
     private WaitForSeconds _lungeOutWait; // 적 전진 타이밍 대기에 재사용할 객체.
     [SerializeField] private float _lethalWindupDuration = 0.55f; // 치명 공격(HeavyAttack.Lethal) 직전 예비 동작 시간
     public event Action<EnemyInstance> OnEnemyLethalWindup; // 치명 공격 예비 동작 시작 (BattleImpactFx: 떨림·화면 어둡게)
+    public event Action<EnemyInstance> OnEnemyAttackLanding; // 공격 모션의 피해가 들어가기 직전 (BattleImpactFx: 착탄 폭발)
     private WaitForSeconds _lungeBackAndPostActionWait; // 적 후퇴와 후처리 대기에 재사용할 객체.
     // 카드 이펙트(DamageEffect 등)가 RandomEnemy 타겟을 결정할 때 이 인스턴스를 사용해야
     // 전투 시드 기반의 결정론적 동작이 보장된다. UnityEngine.Random.Range는 시드와 무관하다.
@@ -419,7 +420,7 @@ public class BattleManager : MonoBehaviour
             enemy.NotifyActionStarted();
             float motionStart = Time.time;
             bool keyframed = enemy.Data != null && enemy.Data.HasAttackKeyframes;
-            bool animated = keyframed || enemy.AttackFrames != null && enemy.AttackFrames.Length > 0;
+            bool animated = enemy.PlaysAttackMotionNow && (keyframed || enemy.AttackFrames != null && enemy.AttackFrames.Length > 0);
             yield return _lungeOutWait;
             float hitDelay = enemy.Data != null && enemy.Data.attackHitDelay >= 0f ? enemy.Data.attackHitDelay : _animatedAttackHitDelay;
             if (animated && hitDelay > 0f)
@@ -428,6 +429,7 @@ public class BattleManager : MonoBehaviour
                 if (!_isInBattle || _state.Player.IsDead || enemy.IsDead) continue;
             }
 
+            if (animated) OnEnemyAttackLanding?.Invoke(enemy);
             yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
 
             if (!_isInBattle || _state.Player.IsDead) yield break;
@@ -976,7 +978,11 @@ public class BattleManager : MonoBehaviour
         foreach (var e in _state.Enemies)
             if (e.IsDead) dead++;
         foreach (var e in _state.Enemies)
-            if (!e.IsDead) e.NotifyAlliesDefeated(dead);
+            if (!e.IsDead)
+            {
+                e.NotifyAlliesDefeated(dead);
+                EnemyTargeting.ReleaseProtectionIfAlone(e, _state);
+            }
 
         foreach (var e in _state.Enemies)
             if (!e.IsDead) return;

@@ -365,7 +365,7 @@ public class TrainingView : MonoBehaviour
         previewArt.enabled = has;
         if (!has) return;
 
-        var first = _encounter.enemies.FirstOrDefault(e => e != null);
+        var first = _encounter.Headliner;
         previewArt.sprite = first == null ? null
             : first.enemyImage != null ? first.enemyImage
             : first.idleFrames != null && first.idleFrames.Length > 0 ? first.idleFrames[0] : null;
@@ -555,6 +555,7 @@ public class TrainingView : MonoBehaviour
             int paren = enc.bossTitle.IndexOf(" (", System.StringComparison.Ordinal);
             return paren > 0 ? enc.bossTitle.Substring(0, paren) : enc.bossTitle;
         }
+        if (enc.headliner != null) return enc.headliner.enemyName;
         var names = enc.enemies?.Where(e => e != null).Select(e => e.enemyName).Distinct().ToList();
         return names != null && names.Count > 0 ? string.Join(" · ", names) : enc.name;
     }

@@ -265,6 +265,24 @@ public sealed class AfterDamageDealtEffectsStatusBehavior : TriggeredEffectsStat
         => Execute(context);
 }
 
+// 같은 전투에 다른 적이 살아 있는 동안 지정 · 광역 · 무작위 대상에서 빠지고 피해도 받지 않는다 (포이어발체 '포격 엄호').
+// 지정 제외는 EnemyTargeting / EffectTargetSelector가 맡고, 여기서는 그 밖의 경로로 들어오는 피해를 막는다.
+// EnemyData.startingStatuses로 붙일 것 (Source가 주인이어야 한다). 혼자 남으면 BattleManager가 상태를 지운다.
+[Serializable]
+public sealed class ProtectedByAlliesStatusBehavior : StatusBehavior
+{
+    public override void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner)
+    {
+        if (owner is EnemyInstance enemy && !EnemyTargeting.HasLivingAlly(enemy, context?.State)) status.RemoveAll();
+    }
+
+    public override DamageInfo ModifyIncomingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview)
+    {
+        if (status.Source is EnemyInstance owner && EnemyTargeting.HasLivingAlly(owner, state)) info.Amount = 0;
+        return info;
+    }
+}
+
 // 한 턴에 손으로 낼 수 있는 카드 수 제한. 스택이 최대 장수다 (예: 전술 대형 전환 — 3장, 강화 4장).
 // 상태 정의의 durationPolicy는 Permanent로 둘 것.
 [Serializable]

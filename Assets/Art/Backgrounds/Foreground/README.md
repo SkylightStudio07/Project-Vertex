@@ -20,5 +20,7 @@ NAI V5, 프롬프트 `아트 프롬프트/아트/[Props][Battle] 10_Battle_Foreg
 | FG_RiftShard_A / B | 10:5-B (차원 균열, 공중) | 1522673028 / 1785571383 |
 | FG_Sandbag_A / B | 10:6-A (용병 야영지) | 4212859006 / 1548723158 |
 | FG_GlowLily_A / B | 10:6-B (용병 야영지) | 584302320 / 837641051 |
+| FG_FieldDrone_A | 10:7-A | 2877776887 |
+| FG_FieldSandbag_A | 10:7-B | 184605902 |
 
 배치는 `Assets/Data/BattleStages/*.asset`의 `foreground` 목록. 그림 한쪽이 잘린 소품(풀숲)은 잘린 쪽을 화면 끝에 붙인다.
