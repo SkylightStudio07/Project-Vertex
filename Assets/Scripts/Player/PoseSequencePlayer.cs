@@ -24,6 +24,7 @@ public class PoseSequencePlayer : MonoBehaviour
     private bool hasResting; // restingXxx가 실제 대기 포즈를 담고 있는지(트랜지션 중간값이 아닌지)
 
     private Coroutine playing;
+    public bool IsPlaying => playing != null;
     private Animator animator;
     private bool wasAnimatorEnabled;
     private UISpriteSheetAnimator sheetAnimator;

@@ -135,7 +135,7 @@ public class BattleImpactFx : MonoBehaviour
         RestoreTime();
         foreach (var kv in _offsets) { kv.Value.tween?.Kill(); if (kv.Key != null) kv.Key.anchoredPosition -= kv.Value.applied; }
         _offsets.Clear();
-        foreach (var kv in _zooms) { kv.Value.tween?.Kill(); if (kv.Key != null) { kv.Key.localPosition -= kv.Value.applied; kv.Key.localScale = kv.Value.baseScale; } }
+        foreach (var kv in _zooms) { kv.Value.tween?.Kill(); if (kv.Key != null) { kv.Key.localPosition -= kv.Value.applied; if (kv.Value.baseScale != Vector3.zero) kv.Key.localScale = kv.Value.baseScale; } }
         _zooms.Clear();
     }
 
@@ -522,16 +522,22 @@ public class BattleImpactFx : MonoBehaviour
         foreach (var rt in _shakeTargets)
         {
             if (rt == null) continue;
+            // 공격 모션은 그림 크기를 스스로 정한다(재생 중 1.75배 등). 그 값을 기준 크기로 잡으면 모션이 끝나도 커진 채 남으므로 위치만 움직인다
+            var pose = rt.GetComponent<PoseSequencePlayer>();
+            bool scales = pose == null || !pose.IsPlaying;
             Vector3 baseScale = rt.localScale;
             if (_zooms.TryGetValue(rt, out var prev))
             {
                 prev.tween?.Kill();
                 rt.localPosition -= prev.applied;
-                baseScale = prev.baseScale;
-                rt.localScale = baseScale;
+                if (scales && prev.baseScale != Vector3.zero)
+                {
+                    baseScale = prev.baseScale;
+                    rt.localScale = baseScale;
+                }
             }
             var target = rt;
-            var bs = baseScale;
+            var bs = scales ? baseScale : Vector3.zero; // zero = 크기는 건드리지 않는 줌
             _zooms[rt] = (null, Vector3.zero, bs);
             var tween = DOVirtual.Float(0f, 1f, zoomDuration, t =>
             {
@@ -543,9 +549,10 @@ public class BattleImpactFx : MonoBehaviour
                 Vector3 basePos = target.localPosition - cur.applied;
                 Vector3 next = (Vector3)(((Vector2)basePos - point) * (k - 1f));
                 target.localPosition = basePos + next;
-                target.localScale = bs * k;
+                if (scales && (pose == null || !pose.IsPlaying)) target.localScale = bs * k;
                 _zooms[target] = (cur.tween, next, bs);
-            }).SetUpdate(true).SetEase(Ease.Linear).SetLink(rt.gameObject);
+            }).SetUpdate(true).SetEase(Ease.Linear).SetLink(rt.gameObject)
+              .OnComplete(() => _zooms.Remove(target)); // 끝난 줌의 기준 크기를 다음 줌이 다시 쓰지 않게
             _zooms[rt] = (tween, _zooms[rt].applied, bs);
         }
     }
