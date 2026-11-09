@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: A-UGV
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: A-UGV
-  health: 34
+  health: 16
   enemyImage: {fileID: 2913747789172483728, guid: 10e112a7522fdfe469b6fa2c5959dddc, type: 3}
   traits: 6
   rank: 0
   materialJson: {fileID: 0}
-  spriteScale: 1.6
+  spriteScale: 0.9
   intentOffsetY: 0
   useScreenRect: 0
   screenRect:
