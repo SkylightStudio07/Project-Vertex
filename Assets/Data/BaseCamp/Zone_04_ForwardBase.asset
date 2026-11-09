@@ -42,6 +42,7 @@ MonoBehaviour:
     min: 0
     speed: 0.9
     darken: 0
+  lightSprite: {fileID: 0}
   faultyRoomDim: 0
   ambience: {fileID: 8300000, guid: b96534267db880e4dbc8ef19ca75a49f, type: 3}
   ambienceVolume: 0.3
@@ -55,10 +56,14 @@ MonoBehaviour:
     feet: {x: 1130, y: 835}
     height: 405
     mirror: 1
+    tagLeft: 1
+    tagShiftX: -90
   - id: air
     feet: {x: 790, y: 790}
     height: 185
     mirror: 0
+    tagLeft: 0
+    tagShiftX: 0
   props:
   - sprite: {fileID: 21300000, guid: 2700e28b1db222141b2c4d499b9cfef1, type: 3}
     feet: {x: 135, y: 975}

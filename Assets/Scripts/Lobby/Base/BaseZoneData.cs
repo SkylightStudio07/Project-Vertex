@@ -18,6 +18,10 @@ public class BaseZoneData : ScriptableObject
         [Tooltip("이 자리에 선 동료 전신 키(px). 뒷줄은 작게")]
         public float height = 260f;
         public bool mirror;
+        [Tooltip("켜면 이름표를 머리 왼쪽으로 뒤집는다 (오른쪽에 시설 표지가 있는 자리)")]
+        public bool tagLeft;
+        [Tooltip("이름표를 x로 더 미는 양(px). 왼쪽이 -")]
+        public float tagShiftX;
     }
 
     // 배경 위에 놓는 소품. 발밑 y로 동료와 함께 앞뒤를 정렬하고 그림자를 깐다

@@ -608,7 +608,7 @@ public class BaseCampView : MonoBehaviour
             mr.DOAnchorPosY(22f, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(holder);
         }
 
-        var tag = BuildNameTag(hr, c.charName, p.activity, w, h, p.spot.feet.x > 1920f * 0.62f);
+        var tag = BuildNameTag(hr, c.charName, p.activity, w, h, p.spot.tagLeft || p.spot.feet.x > 1920f * 0.62f, p.spot.tagShiftX);
         tag.root.SetActive(false);
 
         float lineUntil = 0f;
@@ -654,7 +654,7 @@ public class BaseCampView : MonoBehaviour
     }
 
     // 이름표: 지시선 끝점을 머리 옆에 두고, 판은 그 위 오른쪽(화면 오른쪽 끝이면 왼쪽)에. layout.json name_tag_anchor (80%)
-    private NameTag BuildNameTag(RectTransform holder, string charName, string activity, float w, float h, bool flip)
+    private NameTag BuildNameTag(RectTransform holder, string charName, string activity, float w, float h, bool flip, float shiftX)
     {
         var tag = new NameTag { minWidth = 218f, flip = flip };
         var go = new GameObject("NameTag", typeof(RectTransform));
@@ -664,7 +664,7 @@ public class BaseCampView : MonoBehaviour
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
         rt.pivot = new Vector2(0f, 0f);
         rt.sizeDelta = Vector2.zero;
-        rt.anchoredPosition = new Vector2((flip ? -1f : 1f) * w * 0.18f, h * 0.86f); // 끝점 = 머리 옆
+        rt.anchoredPosition = new Vector2((flip ? -1f : 1f) * w * 0.18f + shiftX, h * 0.86f); // 끝점 = 머리 옆
         tag.root = go;
 
         var leader = Pic(rt, "Leader", "NameTag_Leader", new Rect(0f, 0f, 40f, 64f), sliced: true).rectTransform;
