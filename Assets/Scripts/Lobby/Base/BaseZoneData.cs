@@ -38,6 +38,8 @@ public class BaseZoneData : ScriptableObject
     {
         [Tooltip("켜면 동료 앞, 끄면 동료 뒤에 그린다")]
         public bool front;
+        [Tooltip("눈송이 그림. 비우면 기본 그림")]
+        public Sprite sprite;
         [Tooltip("불투명한 곳에서만 눈이 보인다. 비우면 가리지 않는다")]
         public Sprite mask;
         public Rect maskArea;
@@ -115,6 +117,8 @@ public class BaseZoneData : ScriptableObject
     [Header("움직이는 효과")]
     public List<SnowFx> snow = new();
     public List<LightFx> lights = new();
+    [Tooltip("불빛 번짐 그림. 비우면 기본 그림")]
+    public Sprite lightSprite;
     [Range(0f, 1f), Tooltip("Faulty 불이 꺼질 때 방 전체가 어두워지는 세기")]
     public float faultyRoomDim;
 

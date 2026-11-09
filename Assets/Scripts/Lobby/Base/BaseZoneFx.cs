@@ -27,7 +27,7 @@ public static class BaseZoneFx
         go.GetComponent<BaseLightFx>().Setup(rt, z);
     }
 
-    private static void BuildSnow(RectTransform layer, BaseZoneData.SnowFx fx)
+    public static BaseSnowGraphic BuildSnow(RectTransform layer, BaseZoneData.SnowFx fx)
     {
         var parent = layer;
         var offset = Vector2.zero;
@@ -55,7 +55,8 @@ public static class BaseZoneFx
         Frame(rt, offset);
         var graphic = go.AddComponent<BaseSnowGraphic>();
         graphic.raycastTarget = false;
-        graphic.Setup(fx, Resources.Load<Sprite>("BaseCamp/Shadow_Soft"));
+        graphic.Setup(fx, fx.sprite != null ? fx.sprite : Resources.Load<Sprite>("BaseCamp/Shadow_Soft"));
+        return graphic;
     }
 
     private static void Frame(RectTransform rt, Vector2 position)
@@ -144,7 +145,8 @@ public class BaseSnowGraphic : MaskableGraphic
             along *= size * Mathf.Max(1f, _fx.stretch);
             across *= size;
 
-            var c = new Color(1f, 1f, 1f, alpha);
+            var c = color;
+            c.a = alpha;
             int start = vh.currentVertCount;
             vh.AddVert(Local(center - along - across), c, new Vector2(uv.x, uv.y));
             vh.AddVert(Local(center + along - across), c, new Vector2(uv.x, uv.w));
@@ -178,7 +180,7 @@ public class BaseLightFx : MonoBehaviour
 
     public void Setup(RectTransform root, BaseZoneData z)
     {
-        var soft = Resources.Load<Sprite>("BaseCamp/Shadow_Soft");
+        var soft = z.lightSprite != null ? z.lightSprite : Resources.Load<Sprite>("BaseCamp/Shadow_Soft");
         var additive = Resources.Load<Material>("BaseCamp/Fx_Additive");
         _roomDim = z.faultyRoomDim;
         if (_roomDim > 0f)

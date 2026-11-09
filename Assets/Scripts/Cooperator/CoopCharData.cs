@@ -68,6 +68,8 @@ public class CoopCharData : CharData
     [Header("휴식 캠프 (휴식 노드에서 각자 자리에서 하는 일)")]
     [Tooltip("캠프에서 보일 포즈 스프라이트. 비우면 standingSprite → charImage 순으로 대체")]
     public Sprite campSprite;
+    [Tooltip("캠프에서의 키 배율. 드론처럼 작은 동료는 줄인다")]
+    [Min(0.1f)] public float campHeightScale = 1f;
     [Tooltip("캠프에서 하고 있는 일 (예: 장비 정비 중)")]
     public string campActivity;
     [Tooltip("캐릭터를 눌렀을 때 무작위로 나오는 잡담 한 줄")]
