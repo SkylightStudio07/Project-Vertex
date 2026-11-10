@@ -27762,7 +27762,8 @@ MonoBehaviour:
   artifactIcon: {fileID: 21300000, guid: 041e85d69d5971d42ba6ced8b2c5b511, type: 3}
   fontBold: {fileID: 11400000, guid: 41d41edc777433f46bd79202e7b819e1, type: 2}
   fontRegular: {fileID: 11400000, guid: 820c854920fff734c8291d0b01e2aafb, type: 2}
-  companionIdleTint: {r: 0.84, g: 0.84, b: 0.86, a: 1}
+  contactShadowAlpha: 0.85
+  castShadowAlpha: 0.5
   lineHoldSeconds: 3.5
 --- !u!224 &358646052
 RectTransform:
@@ -58440,11 +58441,17 @@ MonoBehaviour:
   buyDisabled: {fileID: 21300000, guid: 84d90163bd3111149a5937a06b7fe204, type: 3}
   dialogueText: {fileID: 1002279631}
   talk: {fileID: 757799572}
-  lineEntry: "\uD544\uC694\uD55C \uBB3C\uAC74 \uC788\uC5B4? \uCC9C\uCC9C\uD788 \uB458\uB7EC\uBD10."
-  linePurchased: "\uC900\uBE44\uD574 \uB480\uC5B4. \uC798 \uC368."
-  lineInsufficient: "\uD0C8\uB9B0\uC774 \uC870\uAE08 \uBAA8\uC790\uB77C."
-  lineSoldOut: "\uB2E4\uC74C \uBCF4\uAE09\uAE4C\uC9C0 \uAE30\uB2E4\uB824."
-  lineOwned: "\uADF8\uAC74 \uC774\uBBF8 \uB124 \uAC70\uC57C."
+  lineEntry: "\uAE30\uB2E4\uB9AC\uACE0 \uC788\uC5C8\uC5B4\uC694! \uCD9C\uBC1C \uC804\uC5D0
+    \uD544\uC694\uD55C \uAC74 \uB2E4 \uCC59\uAE30\uC168\uB098\uC694?"
+  linePurchased: "\uC88B\uC740 \uC120\uD0DD\uC774\uC138\uC694! \uC0AC\uC2E4 \uD1A0\uB0D0\uAC00
+    \uACE8\uB77C\uB454 \uD2B9\uC0C1\uD488\uC774\uAC70\uB4E0\uC694!"
+  linePurchasedAlt: "\uC800\uB3C4 \uADF8\uAC70 \uC88B\uB2E4\uACE0 \uC0DD\uAC01\uD574\uC694!
+    \uD1A0\uB0D0\uB97C \uB9CC\uB098\uBA74 \uC5B8\uB2C8\uAC00 \uB9CE\uC774 \uC0AC\uB791\uD55C\uB2E4\uACE0
+    \uC804\uD574 \uC8FC\uC138\uC694!"
+  lineInsufficient: "\uD0C8\uB9B0\uC774 \uC870\uAE08 \uBAA8\uC790\uB77C\uB124\uC694."
+  lineSoldOut: "\uB2E4\uC74C \uBCF4\uAE09 \uB54C \uB2E4\uC2DC \uCC3E\uC544\uC640
+    \uC8FC\uC138\uC694!"
+  lineOwned: "\uADF8\uAC74 \uC774\uBBF8 \uAC00\uC9C0\uACE0 \uACC4\uC138\uC694!"
   inkColor: {r: 0.086, g: 0.094, b: 0.106, a: 1}
   cyanColor: {r: 0.051, g: 0.722, b: 0.949, a: 1}
   grayColor: {r: 0.58, g: 0.6, b: 0.616, a: 1}
@@ -148448,6 +148455,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5fcab9c7f30759fd8f08783dca01176a, type: 2}
   - {fileID: 11400000, guid: edd1226cc9ba5fdfba53b7e0148deb96, type: 2}
   - {fileID: 11400000, guid: ba082de310bba1c4185f86ec35d98738, type: 2}
+  - {fileID: 11400000, guid: d4a5e1390c4a95c429288416807710e7, type: 2}
   - {fileID: 11400000, guid: b2bb8e682cb2db04ebca5a9242bed878, type: 2}
   - {fileID: 11400000, guid: 9bd31a0134c8f5a44942afb1ddc365a0, type: 2}
   - {fileID: 11400000, guid: 58b6528c5d29ef34481f1a513b07c14d, type: 2}
