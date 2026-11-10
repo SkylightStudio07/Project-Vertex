@@ -202,7 +202,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
   - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
   - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
-  campSprite: {fileID: 0}
+  campSprite: {fileID: 21300000, guid: f345c43233f514c47ace3e7c59c9e965, type: 3}
+  campHeightScale: 1
   campActivity: "\uB2E8\uAC80 \uC190\uC9C8 \uC911"
   campLines:
   - "\u2026\u2026"
@@ -231,6 +232,19 @@ MonoBehaviour:
       \uC5C6\uC796\uC544."
     - "\uC606\uC5D0 \uC549\uC544. \u2026\uADF8\uB0E5, \uADF8\uB7EC\uACE0 \uC2F6\uC5B4\uC11C."
     - "\uC26C\uB294 \uAC83\uB3C4 \uB098\uC058\uC9C0 \uC54A\uB124. \uB108\uB791\uC774\uBA74."
+  baseSpots:
+  - zoneId: quarters
+    spotId: post
+    pose: {fileID: 21300000, guid: 04eea10957874134881d3fcafdd37e19, type: 3}
+    heightScale: 1
+    hover: 0
+    activity: "\uBCBD\uC5D0 \uAE30\uB300 \uC26C\uB294 \uC911"
+  - zoneId: quarters
+    spotId: rug
+    pose: {fileID: 21300000, guid: 9b7aeb9a500a8d74caa1ca769c7838f6, type: 3}
+    heightScale: 0.74
+    hover: 0
+    activity: "\uB2E8\uAC80 \uC190\uC9C8 \uC911"
   joinRewardCard: {fileID: 11400000, guid: 322f32e975740604c84dfbc6becd9845, type: 2}
   skill: {fileID: 11400000, guid: 7e242856db63cc4489d7be5938fc6ded, type: 2}
   joinDialogueJson: {fileID: 4900000, guid: f40cfa2b9a87d7b43a02d1241cc149fb, type: 3}

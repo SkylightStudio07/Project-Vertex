@@ -9,6 +9,7 @@ using K = CompanionSkillUIKit;
 //   1. 탄약 칸 옆 칩 "초탄" "막탄": 아직 쓸 수 있으면 먹색, 손패에 그걸 발동시킬 카드가 있으면 청록으로 맥동, 이미 썼으면 회색.
 //      초탄·막탄 판정을 쓰는 무기(WeaponData.UsesAmmoBoundary)가 아니면 칩을 숨긴다.
 //   2. 손패 카드 위 태그: 지금 내면 초탄·막탄이 되는 카드에 "초탄" / "막탄" / "초탄 · 막탄".
+//      그중 초탄·막탄 보너스가 실제로 터지는 카드(카드 자체 조건 또는 탄창 숙련)는 윤곽선이 빛난다.
 //   3. 발동: 대상 적 위(대상이 없으면 탄약 칸 옆)에 "초탄!" "막탄!"이 튀어 올랐다 사라진다.
 // UI는 Awake에서 코드로 만든다. 칩 좌표는 1920×1080 좌상단 기준.
 public class AmmoBoundaryView : MonoBehaviour
@@ -59,8 +60,10 @@ public class AmmoBoundaryView : MonoBehaviour
         // 손패 카드마다 예측 (값이 바뀐 프레임에만)
         bool anyFirst = false, anyLast = false;
         int hash = boundary ? 17 : 0;
+        bool mastery = boundary && HasBoundaryMastery(state);
         if (boundary)
         {
+            hash = hash * 31 + (mastery ? 1 : 0);
             hash = hash * 31 + state.Ammo;
             hash = hash * 31 + state.Energy;
             hash = hash * 31 + (state.FirstAmmoUseAvailable ? 1 : 0) + (state.LastAmmoUseAvailable ? 2 : 0);
@@ -81,10 +84,36 @@ public class AmmoBoundaryView : MonoBehaviour
                     var (f, l) = boundary ? _battle.PredictAmmoBoundary(view.Data) : (false, false);
                     anyFirst |= f; anyLast |= l;
                     TagOf(view).Set(f, l);
+                    if (view.TryGetComponent(out CardInteractionView interaction))
+                        interaction.SetBoundaryGlow((f || l) && (mastery || view.Data != null && PaysOff(view.Data.ActiveEffects, f, l)));
                 }
             _first.Set(boundary, state != null && state.FirstAmmoUseAvailable && state.Ammo > 0, anyFirst);
             _last.Set(boundary, state != null && state.LastAmmoUseAvailable && state.Ammo > 0, anyLast);
         }
+    }
+
+    // 카드 효과에 지금 성립하는 초탄·막탄 조건이 걸려 있는지 (조건부 효과 · 조건부 추가 피해)
+    private static bool PaysOff(IReadOnlyList<CardEffect> effects, bool first, bool last)
+    {
+        if (effects == null) return false;
+        bool Match(CardCondition c) => c is FirstAmmoUseCondition && first || c is LastAmmoUseCondition && last;
+        foreach (var effect in effects)
+        {
+            if (effect is ConditionalEffect conditional && (Match(conditional.condition) || PaysOff(conditional.effectsWhenMet, first, last))) return true;
+            if (effect is DamageEffect damage && damage.conditionalBonuses != null)
+                foreach (var bonus in damage.conditionalBonuses)
+                    if (Match(bonus.condition)) return true;
+        }
+        return false;
+    }
+
+    private static bool HasBoundaryMastery(BattleState state)
+    {
+        foreach (var entry in state.Player.Statuses.Entries)
+            if (entry is StatusInstance status && status.Definition != null)
+                foreach (var behavior in status.Definition.Behaviors)
+                    if (behavior is AmmoBoundaryDamageStatusBehavior) return true;
+        return false;
     }
 
     // ───────── 칩 ─────────

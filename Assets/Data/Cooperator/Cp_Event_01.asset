@@ -37,7 +37,12 @@ MonoBehaviour:
   sanctuarySelectionFocus: {x: 0.5, y: 0.5}
   sanctuaryHoverFocus: {x: 0.5, y: 0.5}
   sanctuaryFullArt: {fileID: 0}
+  sanctuaryArtScale: 1
+  sanctuaryArtOffset: {x: 0, y: 0}
   rosterFullArt: {fileID: 21300000, guid: 9c7df2af807120248a0045514a5f5f5f, type: 3}
+  cardUseFullArt: 0
+  cardFocus: {x: 0.5, y: 1}
+  cardZoom: 1.9
   isEventCompanion: 1
   faceFocus: {x: 0.45, y: 0.72}
   faceZoom: 1.6
@@ -48,11 +53,26 @@ MonoBehaviour:
   battleOffset: {x: 220, y: 1000}
   floatAmplitude: 40
   floatPeriod: 2.6
+  cardOwner: 7
   unlockCardCoopLevel: []
   campSprite: {fileID: 0}
-  campActivity: 
+  campHeightScale: 0.5
+  campActivity: "\uC8FC\uBCC0 \uACBD\uACC4 \uC911"
   campLines: []
   restArrivalLines: []
+  baseSpots:
+  - zoneId: hangar
+    spotId: air
+    pose: {fileID: 21300000, guid: 9c7df2af807120248a0045514a5f5f5f, type: 3}
+    heightScale: 1
+    hover: 70
+    activity: "\uB5A0\uB2E4\uB2C8\uBA70 \uC815\uCC30 \uC911"
+  - zoneId: forward
+    spotId: air
+    pose: {fileID: 21300000, guid: 9c7df2af807120248a0045514a5f5f5f, type: 3}
+    heightScale: 1
+    hover: 70
+    activity: "\uB5A0\uB2E4\uB2C8\uBA70 \uC815\uCC30 \uC911"
   joinRewardCard: {fileID: 11400000, guid: 0234eac721c9ae941830e1a83a6d769f, type: 2}
   skill: {fileID: 0}
   joinDialogueJson: {fileID: 0}

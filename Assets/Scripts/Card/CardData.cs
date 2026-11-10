@@ -172,7 +172,7 @@ public class CardData : ScriptableObject
         if (st.isInnate)   list.Add("선천성");
         if (st.isRetain)   list.Add("보존");
         if (st.isEthereal) list.Add("휘발성");
-        if (st.isExhaust)  list.Add("소멸");
+        if (st.isExhaust && Type != CardType.Power) list.Add("소멸"); // 파워는 플래그와 무관하게 항상 소멸하므로 표시하지 않는다
         var traits = EffectiveTraitsOf(upgraded);
         if (traits != EnemyTrait.None) list.Add(EnemyTraits.Label(traits) + " 특효");
         return list;
@@ -181,7 +181,7 @@ public class CardData : ScriptableObject
     private const string BuffedValueColor = "#6FE38A";   // 보정으로 오른 수치
     private const string DebuffedValueColor = "#FF6B5E"; // 보정으로 내린 수치
 
-    // 특효 키워드("인간·신비 특효")는 설명문 템플릿에 적혀 있지 않으면 앞에 자동으로 붙인다.
+    // 특효 키워드("생체·신비 특효")는 설명문 템플릿에 적혀 있지 않으면 앞에 자동으로 붙인다.
     // 겨냥 중인 적에게 특효가 걸리면 강조색(청록)으로 칠한다.
     public string GetDescription(bool upgraded, BattleState state = null, EnemyInstance target = null)
     {

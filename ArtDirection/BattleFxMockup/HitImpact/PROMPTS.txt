@@ -1,0 +1,81 @@
+Tool: built-in image_gen.imagegen. Actual prompts, including discarded first pass.
+Final sizing/background cleanup and raster compositing are documented in README.md.
+
+01 INITIAL ADDITIVE SHEET
+========================================================================
+Use case: stylized-concept
+Asset type: painted anime game bullet-hit impact direction mockup, Impact_Additive.png.
+Create one landscape PNG, exactly 1920x1080. The two attached reference images are STYLE references only: match their hand-painted animation brushwork, soft color bleeding and bloom, NOT their muzzle-flash silhouettes.
+Background: perfectly uniform pure black RGB #000000, opaque. Ten separate hit-impact paintings in an invisible exact 5-column x 2-row grid. Each cell is 384x540 pixels. No grid lines, captions, labels or borders.
+Impact origins must be exactly at centers (192,270), (576,270), (960,270), (1344,270), (1728,270), and (192,810), (576,810), (960,810), (1344,810), (1728,810). Each origin is the actual HIT POINT inside the middle of the effect, not a left-hand muzzle tip. All effects burst around their centers, with a slight bias extending farther right because the bullet comes from the left.
+Each painting including every bloom and flying particle must fit within about 290px width x 310px height around its center, and fade completely to pure black WELL BEFORE all four cell edges. Leave at least 40px of absolute black on left/right cell borders and broad black above/below. Sparse intentional clear silhouettes that will read at 130-200px in game for 0.15 seconds. This is a selection of random independent variants, NOT sequential animation frames.
+Columns left to right, same TYPE in both rows but distinctly different organic silhouettes:
+1 MACHINE: hot white-yellow small impact core, sharp orange flying sparks and flame-brush wisps, a tiny amount of pale electrical sparks. Irregular fragmentation with several unequal short and long streaks, NOT a regular star.
+2 HEAVY ARMOR RICOCHET: tiny hard compact white impact flash, only a few very fine long glancing sideways warm-white streaks to the right, sparse orange embers, very little fire. Strongly distinguish this sparse thin silhouette from machine's orange burst.
+3 DIMENSIONAL: splintering purple and deep-indigo LIGHT with scattered irregular painted crystalline shards and luminous violet fracture wisps. Deep indigo remains luminous enough for additive blending. No regular polygons, no geometric construction, no portal ring.
+4 MYSTIC: pale light-green and white mist dispersing like unequal soft petals, softly painted torn wisps, quiet and ominous, not explosive flames. No literal flower, no leaf outlines.
+5 BLOCKED BY ARMOR: thin teal ripple spreading along a shallow surface at impact center, tiny short white central flash, conveys impact stopped at surface. Organic broken off-axis uneven ripple brush arcs, NOT perfect rings, symmetric targets, shields, hexagons or geometric icons.
+Style: PAINTED ANIMATION artwork, irregular asymmetrical brush masses and soft bloom like supplied muzzle flash and smoke references. Restrained luminous colored detail, absolute black outside artwork.
+Prohibited: outlines, ink lines, comic speech-balloon star shapes, symmetrical starbursts, geometric assembly, vector/SVG look, text, numbers, labels, guns, hands, characters, enemy bodies, wounds, objects. Only the ten isolated impact effects.
+Save the generated result for delivery inside ArtDirection/BattleFxMockup/HitImpact/ only.
+
+02 CENTERED HIT-POINT REVISION (used for final columns 1-4)
+========================================================================
+Edit the attached impact artwork sheet. Preserve its 5 columns x 2 rows, the type order (orange machine, sparse white ricochet, violet dimensional, pale green mystic, teal blocked) and hand-painted animation brushwork.
+CRITICAL CORRECTION: these are BULLET HITS on a surface, NOT muzzle flashes. Currently all bright origins are at the left side of their effects. Redraw EVERY effect so the bright point of impact is in the EXACT CENTER of its invisible cell, and painted fragments spray around that point to the LEFT, UP, DOWN, and RIGHT. Left extent must be substantial, at least two thirds of right extent. Only slightly stronger to right. Do not leave a cone with a pinched root on the left. Each needs an irregular multidirectional asymmetric compact surface burst. Avoid symmetric stars.
+Canvas exactly 1920x1080. Invisible 5x2 grid of 384x540 cells, origins (192,270),(576,270),(960,270),(1344,270),(1728,270),(192,810),(576,810),(960,810),(1344,810),(1728,810).
+Machine: small white-yellow core, organic orange sparks radiating all around with a few subtle electric sparks.
+Armor ricochet: tiny compact white hit point, a few fine long glancing streaks predominantly sideways, some small streaks to left, little orange fire.
+Dimensional: fractured purple/deep-indigo light and irregular painted crystal splinters surrounding the center, no regular polygon construction.
+Mystic: pale green-white quiet ominous torn mist-petals scattered around the center, not a directional flame.
+Blocked: ONE irregular thin broken teal ripple spreading around the white impact center across a shallow surface, small and restrained. Ripple should read as absorbed hit, NOT teal fire or a jet; noncircular broken brush arcs, no concentric geometric ring icon.
+Different silhouettes in upper and lower rows, not animation frames.
+Pure #000000 opaque background, completely flat, no texture or shading. All ten paintings including every glow and particle fade all the way to exact black inside their cells, leaving at least 40px black margin horizontally, 60px vertically. Keep every effect isolated. No glow crossing boundaries.
+No text, labels, grid lines, outlines, ink, comic stars, guns, hands, characters, bodies, objects, vector art or SVG. Change the silhouettes and centered hit-point placement as directed; keep painted brushwork quality.
+Save output only inside ArtDirection/BattleFxMockup/HitImpact/.
+
+03 FLESH SHEET
+========================================================================
+Use case: stylized-concept
+Asset type: painted anime game bullet-hit flesh-and-dust direction mockup, Impact_Flesh.png.
+Generate one opaque landscape PNG exactly 1920x1080. The attached images are STYLE references only: match the painted animation brushwork, soft bleeding edges and smoke/dust handling. Do NOT reproduce flame shapes.
+Background must be perfectly flat solid medium gray RGB #808080, with no texture, vignette, gradient, ground plane or shadows. Gray background must remain intact around and between effects for later alpha extraction. Do not create transparency or checkerboard.
+Paint exactly THREE independent flesh-hit variations spaced horizontally, centered at (320,540), (960,540), (1600,540). Each entire painting fits within roughly 400px wide and 350px high with generous untouched medium-gray separation. No text or labels.
+Subject: restrained dark crimson-red blood droplets flicking predominantly RIGHT from a central point of impact, mixed with a small amount of pale warm-gray powdery dust. Ordinary alpha blend, not additive; preserve clearly visible dark deep wine-red color, no emissive glow. A few soft irregular painted red specks on left/up/down around each center, rightward droplets and short tapering streaks extending a little farther right. Sparse deliberate large-enough dark droplets readable at 130-200px game size. Non-graphic and modest quantity, no pool.
+Three DISTINCT organic silhouettes: left a compact uneven fan of varied dark-red droplets plus small pale dust puff; middle a more lateral scattered streak with several separated unequal drops plus thin trailing dust wisps; right a taller broken spray with fewer larger drops and a loose powder curl, still right-biased. These are different random variants, NOT animation frames. The hit point is near the middle of each effect's area, not a left-rooted muzzle jet.
+Style: hand-painted anime effects with visible brush shaping and soft dusty transitions matching references, no hard ink contours. Irregular asymmetrical organic forms. Keep medium-gray visible through thin dust.
+Prohibited: wounds, flesh chunks, anatomy, bodies, characters, guns, hands, gore, pools of blood, glowing red magic, flames, outlines, comic starbursts, geometric assembly, vector/SVG style, text, labels, borders or grid.
+Save output for delivery only inside ArtDirection/BattleFxMockup/HitImpact/.
+
+04 BLOCKED RIPPLE REFINEMENT (used for final column 5)
+========================================================================
+Use case: stylized-concept.
+Create a painted anime game VFX direction mockup with exactly TWO alternate blocked bullet-hit effects, one above the other, isolated on perfectly pure opaque black #000000. Canvas portrait 384x1080; hit-point centers (192,270) and (192,810). Each whole effect including glow inside 290px width and 300px height around that center, fading fully to black before edges. Two different independent random variants, not animation frames.
+Subject: a bullet STOPPED by armor. At center a tiny very short hard white flash. Around it a THIN TEAL SURFACE RIPPLE spreading outward across the surface. The ripple is a shallow, tilted, irregular elliptical wave-front, interrupted and uneven, composed of soft PAINTED BRUSHSTROKES, an incomplete oblique oval with variable thickness, several broken sections and unequal rippling wisps. It communicates a flat surface absorbing impact. One variant leans diagonally upward right, the other leans a little downward right, not identical copies. A few very short restrained white-teal glancing flecks. No long flame branches, no radial fire, no whirling smoke, no tornado, no spiral, no tentacles. No intact shield object. No perfect circle, no geometric target, no regular concentric rings. Ripple itself is the main silhouette, flash extremely small. Slight rightward bias, hit point near middle of ripple.
+Style: hand-painted animation effects with painterly broken edges and subtle teal light bleed on black. No outlines, no ink lines, no vector appearance, no SVG. The attached impact sheet is a STYLE reference only, match its brush rendering. Do NOT copy its last-column flame-like shapes; replace those with the described shallow ripple.
+No labels, text, numbers, grid, objects, characters, bodies, weapons, hands, comic stars or borders.
+Save only for delivery inside ArtDirection/BattleFxMockup/HitImpact/.
+
+
+
+05 MYSTIC + BLOCKED ADDITIVE BRIGHTNESS REVISION (2026-11-09; current columns 4-5)
+========================================================================
+Tool: built-in image_gen.imagegen; opaque background; one generated replacement panel.
+Inputs: Impact_Additive.png (edit target), ../MuzzleFlash/Flash_Variants.png (painted style reference).
+Actual prompt:
+Use case: precise-object-edit / painted game VFX.
+Edit target: image 1, the existing Impact_Additive.png sheet. Style reference: image 2, Flash_Variants.png, hand-painted animation brushwork and luminous color bleeding only, NOT muzzle silhouettes.
+OUTPUT ONLY A REPLACEMENT PANEL FOR THE TWO RIGHTMOST COLUMNS: exactly 768 x 1080 pixels, opaque RGB pure black #000000 background, an invisible 2-column x 2-row layout of 384 x 540 cells. Do NOT include the orange, white ricochet or purple effects from the first three columns of the target. This panel will be composited onto x1152..1919 of the existing sheet. No text or grid.
+Cell centers in this panel: Mystic (192,270) and (192,810); Blocked (576,270) and (576,810).
+LEFT COLUMN MYSTIC, two distinctly different random silhouette variants: replace the murky grey-green old effects with BRIGHT LUMINOUS SATURATED PALE JADE GREEN TO NEAR-WHITE magical light. A near-full-white softly blazing core at the exact cell center. Bright green-white unequal petal-like wisps scatter outward in all directions. Quiet, calm, eerie supernatural dispersal, luminous painted torn mist-petals with soft bloom and expressive brush edges. No literal flower, no leaves, no grey smoke, no muddy olive or desaturated gray-green. Color-rich jade highlights should be clearly readable under additive blending at 130-200 px. The glow and petals themselves must be luminous, not only a white dot surrounded by dark silhouettes. Match the painterly fiery reference's radiant bright value range with jade colors, but NOT its left-rooted cone or fiery aggressiveness.
+RIGHT COLUMN BLOCKED, two distinctly different variants: a clearly visible BRIGHT CYAN/TEAL ripple SHIELD-IMPACT conveying the shot stopped at a surface. HOT NEAR-FULL-WHITE compact central flash precisely at cell center; surrounding BRIGHT TEAL-CYAN luminous thin spreading ring, obliquely viewed, irregular, broken and incomplete, painted uneven brush arcs that fade outward. Strong readable bright cyan ring segments, NOT dark transparent wisps. One leans slightly up-right, the other down-right. The ring spreads thin outward across the absorbing surface. Broken unequal organically painted wave-front, variable width and gaps, sparse short cyan-white flecks. No shield object, no perfect geometric ellipse, no regular concentric target, no rigid symmetry, no flame spiral or vortex. Broad brightness comparable to the muzzle flash reference, while the ripple remains a thin surface wave.
+All four effects are centered hits, not left-origin muzzle jets. Different upper/lower shapes, NOT sequential animation frames.
+Each effect including ALL glow, stray flecks and bloom must fit within 294px wide by 340px high, centered around its designated point, and fade entirely to exact #000000 with at least 45px of pure black before EVERY cell edge. Large pure black space between the two rows. Exact pure-black flat background, no texture, gradients or vignette.
+PAINTED ANIMATION artwork with soft color bleed and asymmetrical brushwork. No outlines, no ink lines, no comic star shapes, no text, no labels, no SVG, no vector appearance, no geometric/shape assembly, no guns, bodies, hands, objects or scene.
+The final composite must preserve every pixel of source columns 1,2,3. Only the two revised columns are requested here.
+Deliver the generated raster for use inside ArtDirection/BattleFxMockup/HitImpact/.
+
+
+Result: 1221x1288 generated raster, retained in _revision_20261109/Mystic_Blocked.generated.png. Raster-resampled each of its four cells around the measured white-core centroid to exact target centers. Set background residuals with max(R,G,B)<=5 to pure black before and after resampling. Composited only x1152..1919 onto the preserved original; no shapes drawn by code. Final canvas 1920x1080 opaque RGB.
+Validation: protected x0..1151 has 1,244,160 identical pixels; 0 changed RGB channels. Revised cells have 46px minimum pure-black margins, exact center RGB channels >=251, and peak RGB (255,255,255). Final copied PNG SHA256: 81ACC949EC93E0F2235278268AC7358CDB26E730EA532B8D4C92B01C9DE7FDBA
+Detailed verification: _revision_20261109/verification.txt.

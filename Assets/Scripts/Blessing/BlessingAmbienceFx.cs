@@ -24,6 +24,7 @@ public class BlessingAmbienceFx : MonoBehaviour
     [SerializeField] private bool foregroundPetals = true;
     [SerializeField] private bool characterRim = true;
     [SerializeField] private bool depthMotion = true;
+    [SerializeField] private bool environment = true; // 기계 첨탑 · 떠 있는 파편 · 앞쪽 피안화 (Resources/BlessingEnv)
 
     [Header("재료")]
     [SerializeField] private Material additiveMaterial;   // UI/Additive
@@ -69,6 +70,28 @@ public class BlessingAmbienceFx : MonoBehaviour
     private Vector2 _mouse;
     private float _boost;       // 교감 순간 밝기 배율 (0 → 1)
     private float _attract;     // 빛 입자가 캐릭터로 모이는 정도
+
+    private readonly List<EnvItem> _env = new();
+    private class EnvItem { public RectTransform rt, frame; public float height, aspect, phase, bob, spin, sway; }
+
+    public Sprite BandSprite => band;
+    public Material AdditiveMaterial => additiveMaterial;
+
+    // 빛 · 입자 크기는 1920×1080 기준이라 배경이 화면을 덮는 크기만큼 함께 키운다
+    private float FxScale
+    {
+        get
+        {
+            var r = ((RectTransform)transform).rect;
+            return r.height > 0f ? Mathf.Max(r.height / 1080f, r.width / 1920f) : 1f;
+        }
+    }
+
+    // 화면 비율 대응(BlessingResponsiveUI)이 캐릭터 자리를 옮기면 시차 기준도 함께 옮긴다
+    public void SetCharacterBase(Vector3 position, Vector3 scale)
+    {
+        _chPos = position; _chScale = scale;
+    }
 
     private class Mote { public RectTransform rt; public Image img; public Vector2 pos; public float speed, phase, size, sway; }
     private class FrontPetal { public RectTransform rt; public Image img; public float t = -1f, dur, y, size, spin; }
@@ -166,6 +189,8 @@ public class BlessingAmbienceFx : MonoBehaviour
             }
         }
 
+        if (environment) BuildEnvironment();
+
         if (characterRim && _character != null)
         {
             _rimSource = _character.GetComponentInChildren<RawImage>(true);
@@ -176,6 +201,48 @@ public class BlessingAmbienceFx : MonoBehaviour
                 _rim.material = silhouetteMaterial;
                 _rim.transform.SetSiblingIndex(_rimSource.transform.GetSiblingIndex()); // 캐릭터 바로 뒤
             }
+        }
+    }
+
+    // 달빛 호수에 얹는 소품. 첨탑 · 파편은 배경과 함께 움직이고, 앞쪽 피안화는 캐릭터 앞에서 시차로 움직인다
+    private void BuildEnvironment()
+    {
+        // 이름, 앞쪽 여부, 위치(0~1), 높이(배경 대비), 피벗, 색, 위아래 흔들림(px), 회전 흔들림(도), 바람(도), 좌우 반전
+        Env("Env_Spire_A", false, new Vector2(0.035f, 0.33f), 0.5f, new Vector2(0.5f, 0f), new Color(0.84f, 0.89f, 1f, 1f), 0f, 0f, 0f, false);
+        Env("Env_Spire_A", false, new Vector2(0.97f, 0.37f), 0.32f, new Vector2(0.5f, 0f), new Color(0.62f, 0.7f, 0.86f, 1f), 0f, 0f, 0f, true);
+        Env("Env_Fragments_A", false, new Vector2(0.2f, 0.78f), 0.22f, new Vector2(0.5f, 0.5f), new Color(0.88f, 0.93f, 1f, 1f), 12f, 3f, 0f, false);
+        Env("Env_Fragments_B", false, new Vector2(0.8f, 0.88f), 0.17f, new Vector2(0.5f, 0.5f), new Color(0.8f, 0.87f, 1f, 1f), 9f, 2.5f, 0f, false);
+        if (_front != null)
+        {
+            Env("Env_Lily_A", true, new Vector2(0.03f, 0f), 0.3f, new Vector2(0.5f, 0f), new Color(0.74f, 0.82f, 0.96f, 1f), 0f, 0f, 1.1f, false);
+            Env("Env_Lily_B", true, new Vector2(0.97f, 0f), 0.26f, new Vector2(0.5f, 0f), new Color(0.74f, 0.82f, 0.96f, 1f), 0f, 0f, 1.4f, true);
+        }
+    }
+
+    private void Env(string file, bool front, Vector2 anchor, float height, Vector2 pivot, Color tint, float bob, float spin, float sway, bool flip)
+    {
+        var sprite = Resources.Load<Sprite>("BlessingEnv/" + file);
+        if (sprite == null) return;
+        var frame = front ? _front : _root;
+        var img = NewImage(file, frame, sprite, null);
+        img.color = tint;
+        img.rectTransform.anchorMin = img.rectTransform.anchorMax = anchor;
+        img.rectTransform.pivot = pivot;
+        img.rectTransform.anchoredPosition = Vector2.zero;
+        img.rectTransform.SetAsFirstSibling(); // 달빛 · 입자 · 꽃잎 뒤
+        if (flip) img.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
+        _env.Add(new EnvItem { rt = img.rectTransform, frame = frame, height = height, aspect = sprite.rect.width / sprite.rect.height, phase = Random.Range(0f, 10f), bob = bob, spin = spin, sway = sway });
+    }
+
+    private void UpdateEnvironment(float t)
+    {
+        foreach (var e in _env)
+        {
+            float h = e.frame.rect.height * e.height;
+            e.rt.sizeDelta = new Vector2(h * e.aspect, h);
+            e.rt.anchoredPosition = new Vector2(0f, Mathf.Sin(t * 0.5f + e.phase) * e.bob * FxScale);
+            if (e.spin != 0f || e.sway != 0f)
+                e.rt.localEulerAngles = new Vector3(0f, 0f, Mathf.Sin(t * 0.3f + e.phase) * e.spin + Mathf.Sin(t * 0.9f + e.phase) * e.sway);
         }
     }
 
@@ -203,6 +270,7 @@ public class BlessingAmbienceFx : MonoBehaviour
             img.color = WithAlpha(Color.white, 0.95f * s * s * boost);
         }
 
+        UpdateEnvironment(t);
         UpdateWave(dt);
         UpdateMotes(t, dt);
         UpdateFrontPetals(dt);
@@ -255,7 +323,7 @@ public class BlessingAmbienceFx : MonoBehaviour
         m.phase = Random.Range(0f, 10f);
         m.sway = Random.Range(0.004f, 0.012f);
         m.size = Random.Range(16f, 40f);
-        m.rt.sizeDelta = Vector2.one * m.size;
+        m.rt.sizeDelta = Vector2.one * (m.size * FxScale);
     }
 
     private void UpdateFrontPetals(float dt)
@@ -271,7 +339,7 @@ public class BlessingAmbienceFx : MonoBehaviour
                 // 화면 앞을 크게 흐린 꽃잎이 가끔 빠르게 스쳐 간다 (초점 밖 느낌)
                 p.dur = Random.Range(2.2f, 3.4f);
                 p.y = Random.Range(0.15f, 0.85f);
-                p.size = Random.Range(160f, 280f);
+                p.size = Random.Range(160f, 280f) * FxScale;
                 p.spin = Random.Range(-90f, 90f);
                 p.rt.sizeDelta = Vector2.one * p.size;
             }
@@ -388,12 +456,12 @@ public class BlessingAmbienceFx : MonoBehaviour
         rt.offsetMin = rt.offsetMax = Vector2.zero;
     }
 
-    private static void Place(RectTransform rt, Vector2 anchor, Vector2 size, Vector2 pivot)
+    private void Place(RectTransform rt, Vector2 anchor, Vector2 size, Vector2 pivot)
     {
         rt.anchorMin = rt.anchorMax = anchor;
         rt.pivot = pivot;
         rt.anchoredPosition = Vector2.zero;
-        rt.sizeDelta = size;
+        rt.sizeDelta = size * FxScale;
     }
 
     private static Color WithAlpha(Color c, float a) => new(c.r, c.g, c.b, Mathf.Clamp01(a));

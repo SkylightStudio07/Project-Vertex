@@ -29,6 +29,7 @@ MonoBehaviour:
     height: 0
   intentAnchor: {x: 0.5, y: 1}
   hpBarAnchor: {x: 0.5, y: 0}
+  slotOffset: {x: 0, y: 0}
   hpBarOffset: {x: 0, y: -12}
   noLunge: 0
   idleFrames:
@@ -180,6 +181,10 @@ MonoBehaviour:
   - {fileID: 237859036, guid: 70fae7596b33ca6499cd79837e44ffd2, type: 3}
   - {fileID: -170741476, guid: 70fae7596b33ca6499cd79837e44ffd2, type: 3}
   attackFrameRate: 36
+  defeatedTalk: {fileID: 0}
+  attackKeyframes: []
+  attackHitDelay: -1
+  attackMotion: []
   groundFxShots:
   - frame: 21
     point: {x: 0.76, y: 0.1}

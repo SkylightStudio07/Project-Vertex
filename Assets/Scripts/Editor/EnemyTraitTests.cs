@@ -43,7 +43,7 @@ public class EnemyTraitTests
         var effect = new DamageEffect { amount = 10, effectiveAgainst = EnemyTrait.Human | EnemyTrait.Mystic };
 
         Assert.AreEqual(10, Hit(effect, Enemy(100, EnemyTrait.Machine)), "특효 없음");
-        Assert.AreEqual(12, Hit(effect, Enemy(100, EnemyTrait.Human)), "인간 특효 ×1.2");
+        Assert.AreEqual(12, Hit(effect, Enemy(100, EnemyTrait.Human)), "생체 특효 ×1.2");
         Assert.AreEqual(12, Hit(effect, Enemy(100, EnemyTrait.Human | EnemyTrait.Mystic)), "둘 다 가져도 1회");
     }
 
@@ -58,7 +58,7 @@ public class EnemyTraitTests
     [Test]
     public void Label_JoinsInDeclaredOrder()
     {
-        Assert.AreEqual("인간·신비", EnemyTraits.Label(EnemyTrait.Mystic | EnemyTrait.Human));
+        Assert.AreEqual("생체·신비", EnemyTraits.Label(EnemyTrait.Mystic | EnemyTrait.Human));
         Assert.AreEqual("", EnemyTraits.Label(EnemyTrait.None));
     }
 }

@@ -247,6 +247,79 @@ public class MaterialView : MonoBehaviour
         => e.enemyImage != null ? e.enemyImage
            : e.idleFrames != null && e.idleFrames.Length > 0 ? e.idleFrames[0] : null;
 
+    // ── 속성 ──
+    // 등급 배지 오른쪽에 [칩 | 이름] 묶음. 기록 2편 전이면 '?' 칩 + "속성 미상 — 기록 2편에서 공개".
+    // 아트: Resources/EnemyTrait/Archive_TraitTag (가로 9-slice) — 배치는 ArtDirection/EnemyTraitMockup/Extracted/layout.json (archive)를 배지 높이에 맞춰 줄인 것
+    private const float TraitTagScale = 0.8f;   // 묶음 46 → 배지 36 높이
+    private const float TraitTagGap = 10f;
+    private const float TraitTagMinWidth = 104f;
+    private RectTransform _traitTags;
+
+    private void RefreshTraitTags(EnemyData enemy)
+    {
+        if (_traitTags == null)
+        {
+            var go = new GameObject("TraitTags", typeof(RectTransform));
+            go.layer = rankBadge.gameObject.layer;
+            _traitTags = (RectTransform)go.transform;
+            _traitTags.SetParent(rankBadge.transform.parent, false);
+            var badge = (RectTransform)rankBadge.transform;
+            _traitTags.anchorMin = _traitTags.anchorMax = _traitTags.pivot = new Vector2(0f, 1f);
+            _traitTags.anchoredPosition = badge.anchoredPosition + new Vector2(badge.sizeDelta.x + 12f, 0f);
+            _traitTags.localScale = Vector3.one * TraitTagScale;
+        }
+        for (int i = _traitTags.childCount - 1; i >= 0; i--) Destroy(_traitTags.GetChild(i).gameObject);
+        // 모르는 적(격퇴 0) · 동료 · 속성 없는 적은 비운다
+        if (enemy == null) return;
+
+        bool revealed = MaterialArchive.TraitsRevealed(enemy);
+        if (revealed && enemy.traits == EnemyTrait.None) return;
+        float x = 0f;
+        if (!revealed) x += AddTraitTag(x, EnemyTrait.None, $"속성 미상 — 기록 {MaterialArchive.TraitRevealEntries}편에서 공개");
+        else foreach (var trait in EnemyTraits.Each(enemy.traits)) x += AddTraitTag(x, trait, EnemyTraits.NameOf(trait)) + TraitTagGap;
+    }
+
+    // 묶음 하나를 x에 놓고 너비를 돌려준다
+    private float AddTraitTag(float x, EnemyTrait trait, string name)
+    {
+        var go = new GameObject("TraitTag", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        go.layer = _traitTags.gameObject.layer;
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(_traitTags, false);
+        rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0f, 1f);
+        var plate = go.GetComponent<Image>();
+        plate.sprite = Resources.Load<Sprite>("EnemyTrait/Archive_TraitTag");
+        plate.type = Image.Type.Sliced;
+        plate.raycastTarget = false;
+
+        var chip = (RectTransform)TraitChip.Create(rt, trait).transform;
+        chip.anchorMin = chip.anchorMax = chip.pivot = new Vector2(0f, 1f);
+        chip.anchoredPosition = new Vector2(4f, -4f);
+
+        var label = new GameObject("Name", typeof(RectTransform), typeof(CanvasRenderer));
+        label.layer = go.layer;
+        var lr = (RectTransform)label.transform;
+        lr.SetParent(rt, false);
+        lr.anchorMin = lr.anchorMax = lr.pivot = new Vector2(0f, 1f);
+        lr.anchoredPosition = new Vector2(64f, -11f);
+        var text = label.AddComponent<TextMeshProUGUI>();
+        text.font = progressText.font;
+        text.fontSize = 19f;
+        text.fontStyle = FontStyles.Normal;
+        text.color = new Color(0.953f, 0.953f, 0.941f, 1f); // #F3F3F0
+        text.alignment = TextAlignmentOptions.MidlineLeft;
+        text.textWrappingMode = TextWrappingModes.NoWrap;
+        text.raycastTarget = false;
+        text.text = name;
+        float textWidth = Mathf.Ceil(text.GetPreferredValues(name).x);
+        lr.sizeDelta = new Vector2(textWidth, 25f);
+
+        float width = Mathf.Max(TraitTagMinWidth, 76f + textWidth);
+        rt.sizeDelta = new Vector2(width, 46f);
+        rt.anchoredPosition = new Vector2(x, 0f);
+        return width;
+    }
+
     // ── 기록 ──
     private void RefreshDetail()
     {
@@ -271,13 +344,14 @@ public class MaterialView : MonoBehaviour
             rankBadge.sprite = enemy.rank switch { EnemyEncounterType.Elite => badgeElite, EnemyEncounterType.Boss => badgeBoss, _ => badgeNormal };
             rankLabel.text = enemy.rank switch { EnemyEncounterType.Elite => "엘리트", EnemyEncounterType.Boss => "보스", _ => "일반" };
             rankLabel.color = enemy.rank == EnemyEncounterType.Normal ? inkColor : Color.white;
-            progressText.text = $"격퇴 {PlayerRecord.GetDefeatCount(enemy)}회  ·  기록 {unlocked} / {MaterialArchive.EntryCount}  ·  {EnemyTraits.RevealedLabel(enemy)}";
+            progressText.text = $"격퇴 {PlayerRecord.GetDefeatCount(enemy)}회  ·  기록 {unlocked} / {MaterialArchive.EntryCount}";
         }
         else
         {
             affiliationLabel.text = coop.affiliation;
             progressText.text = $"호감도 Lv.{CoopLevel(coop)}  ·  기록 {unlocked} / {MaterialArchive.EntryCount}";
         }
+        RefreshTraitTags(known ? enemy : null);
         for (int i = 0; i < progressCells.Count; i++) progressCells[i].sprite = i < unlocked ? progressFilled : progressEmpty;
 
         // 색인 탭

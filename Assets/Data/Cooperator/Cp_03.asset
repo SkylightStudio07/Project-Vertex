@@ -198,10 +198,24 @@ MonoBehaviour:
   floatPeriod: 2.4
   cardOwner: 8
   unlockCardCoopLevel: []
-  campSprite: {fileID: 0}
-  campActivity: 
+  campSprite: {fileID: 21300000, guid: be878143a719cc54894d70526c64bfbd, type: 3}
+  campHeightScale: 1
+  campActivity: "\uC2DC\uC57D \uAC00\uC5F4 \uC911"
   campLines: []
   restArrivalLines: []
+  baseSpots:
+  - zoneId: laboratory
+    spotId: floor
+    pose: {fileID: 21300000, guid: 2cc71c01011a7c34bbecf84e4ba6c3ec, type: 3}
+    heightScale: 0.62
+    hover: 0
+    activity: "\uC2E4\uD5D8 \uB3C4\uAD6C\uB97C \uB298\uC5B4\uB193\uB294 \uC911"
+  - zoneId: laboratory
+    spotId: flask
+    pose: {fileID: 21300000, guid: 4f60a733451fa0f42af3561585ae6b16, type: 3}
+    heightScale: 1
+    hover: 0
+    activity: "\uC2DC\uC57D \uAD00\uCC30 \uC911"
   joinRewardCard: {fileID: 11400000, guid: 42c8c1df792e41f9a75a4e8c3964522c, type: 2}
   skill: {fileID: 0}
   joinDialogueJson: {fileID: 0}

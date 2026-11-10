@@ -136,8 +136,34 @@ MonoBehaviour:
       - {fileID: 4716673506023971998, guid: 0b16b9855d91d0b47a82aff0d75a6972, type: 3}
       - {fileID: -5850491070381915136, guid: 0b16b9855d91d0b47a82aff0d75a6972, type: 3}
       - {fileID: -4958663757678672925, guid: 0b16b9855d91d0b47a82aff0d75a6972, type: 3}
-      frameRate: 36
+      frameRate: 30
       scale: 1.751
+      holds:
+      - 1
+      - 0
+      - 0
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 0
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 0
+      - 1
+      blendInto: 050000000600000014000000
     - frames:
       - {fileID: -1107988013274917726, guid: 2973518a7e6c4a04eb503f1878501a14, type: 3}
       - {fileID: -2639455810742381472, guid: 2973518a7e6c4a04eb503f1878501a14, type: 3}
@@ -163,8 +189,34 @@ MonoBehaviour:
       - {fileID: 8135070599692046576, guid: 2973518a7e6c4a04eb503f1878501a14, type: 3}
       - {fileID: 7909408443115861594, guid: 2973518a7e6c4a04eb503f1878501a14, type: 3}
       - {fileID: 72996416631171982, guid: 2973518a7e6c4a04eb503f1878501a14, type: 3}
-      frameRate: 36
+      frameRate: 30
       scale: 1.751
+      holds:
+      - 1
+      - 0
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      blendInto: 03000000040000000500000012000000130000001400000015000000
     - frames:
       - {fileID: -4734871105260868929, guid: 09053bcf928172c479d878c535e70944, type: 3}
       - {fileID: -8717712225552768631, guid: 09053bcf928172c479d878c535e70944, type: 3}
@@ -190,8 +242,34 @@ MonoBehaviour:
       - {fileID: -8509822450759375048, guid: 09053bcf928172c479d878c535e70944, type: 3}
       - {fileID: 6901848747630259564, guid: 09053bcf928172c479d878c535e70944, type: 3}
       - {fileID: 2201680526425099388, guid: 09053bcf928172c479d878c535e70944, type: 3}
-      frameRate: 36
+      frameRate: 30
       scale: 1.751
+      holds:
+      - 1
+      - 0
+      - 0
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 0
+      - 0
+      - 1
+      blendInto: 04000000050000001000000011000000
   - weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}
     standingSprite: {fileID: 21300000, guid: 608c01635da0ca248a924ce72ce90e18, type: 3}
     idleFrames: []

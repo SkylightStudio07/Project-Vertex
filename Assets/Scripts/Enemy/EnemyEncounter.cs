@@ -22,6 +22,18 @@ public class EnemyEncounter : ScriptableObject
     public EnemyEncounterType encounterType;
     public List<EnemyData> enemies = new();
     [Min(0f)] public float weight = 1f;
+    [Tooltip("훈련장 등에서 이 조우를 대표하는 적 (그림 · 이름). 비우면 첫 번째 적. 호위가 앞줄에 서는 조우에 쓴다")]
+    public EnemyData headliner;
+
+    public EnemyData Headliner
+    {
+        get
+        {
+            if (headliner != null) return headliner;
+            if (enemies != null) foreach (var e in enemies) if (e != null) return e;
+            return null;
+        }
+    }
 
     [Header("보스 연출 (encounterType이 Boss일 때)")]
     [Tooltip("등장 배너 윗줄 (예: 1막 보스). 비우면 'N막 보스'")]

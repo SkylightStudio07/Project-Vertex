@@ -80,6 +80,27 @@ public class BattleStageData : ScriptableObject
     [Tooltip("밝은 배경용 HUD 장식판(흰 그라데이션 · 가장자리 판)에 곱할 색. 어두운 배경이면 어둡게 — 흰 판이 떠 보이지 않게")]
     public Color hudDecorTint = Color.white;
 
+    [Header("앞쪽 레이어 (2.5D 전경 소품: 피안화 · 수풀 · 잔해)")]
+    [Tooltip("유닛 앞 · 손패와 HUD 뒤에 깔리는 투명 소품. 그림 아래 끝을 화면 아래에 붙인다")]
+    public List<ForegroundProp> foreground = new();
+
+    [System.Serializable]
+    public class ForegroundProp
+    {
+        public Sprite sprite;
+        [Tooltip("소품 기준점의 화면 위치 (비율, 좌하단 원점). 보통 y = 0")]
+        public Vector2 position = new(0f, 0f);
+        [Tooltip("소품 그림 안의 기준점 (0~1). 왼쪽 모서리에 붙이면 (0,0), 오른쪽이면 (1,0). 그림 한쪽이 잘려 있으면 그 쪽을 화면 끝에")]
+        public Vector2 pivot = new(0f, 0f);
+        [Tooltip("높이 (화면 높이 비율)")]
+        [Range(0.05f, 0.8f)] public float height = 0.3f;
+        public bool flip;
+        [Tooltip("배경 색에 맞춰 곱할 색 (어둡게 · 색온도)")]
+        public Color tint = Color.white;
+        [Tooltip("바람에 살짝 흔들림 (풀 · 꽃). 0이면 고정")]
+        [Range(0f, 3f)] public float sway;
+    }
+
     [System.Serializable]
     public class BlinkLight
     {

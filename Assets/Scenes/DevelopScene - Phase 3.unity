@@ -4303,6 +4303,7 @@ MonoBehaviour:
   _defaultDrawCount: 5
   _defaultWeapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
   _passiveDebugView: []
+  _attackImpactTimeout: 0.8
   _lethalWindupDuration: 0.55
   _turnBanner: {fileID: 1901336938}
   _lungeOutWaitDuration: 0.2
@@ -5488,11 +5489,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -5534,7 +5535,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 938346461}
   - {fileID: 1486399160}
   - {fileID: 797081297}
   - {fileID: 1975396849}
@@ -5565,6 +5565,7 @@ RectTransform:
   - {fileID: 1736007618}
   - {fileID: 1091963215}
   - {fileID: 1409273073}
+  - {fileID: 938346461}
   - {fileID: 1397604640}
   - {fileID: 1024717747}
   - {fileID: 1971405688}
@@ -11185,6 +11186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beefab473d2d4c37a0d23eacee4db3a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoseSequencePlayer
+  blendPortion: 0.6
+  blendMaxAlpha: 0.7
 --- !u!114 &336480577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11259,15 +11262,89 @@ MonoBehaviour:
   replacementFrame: 48
   muzzlePixel: {x: 744, y: 290}
   sourceFrameSize: {x: 832, y: 1216}
-  flashFrames:
-  - {fileID: 612060504, guid: 0a32035ef6d9a8f48a78bdf138ae90c5, type: 3}
-  - {fileID: 2147183915, guid: 0a32035ef6d9a8f48a78bdf138ae90c5, type: 3}
-  - {fileID: -1737264681, guid: 0a32035ef6d9a8f48a78bdf138ae90c5, type: 3}
-  - {fileID: -2026650883, guid: 0a32035ef6d9a8f48a78bdf138ae90c5, type: 3}
-  - {fileID: -390939838, guid: 0a32035ef6d9a8f48a78bdf138ae90c5, type: 3}
-  - {fileID: -441421643, guid: 0a32035ef6d9a8f48a78bdf138ae90c5, type: 3}
-  flashFps: 24
-  flashScale: 1
+  muzzleAngle: 0
+  burstSprites:
+  - {fileID: 21300000, guid: b72f8423ebdcf134ba16faef2255b428, type: 3}
+  - {fileID: 21300000, guid: db4894c2def6ac048b0fcce6b1c7afee, type: 3}
+  - {fileID: 21300000, guid: c84abd914fa342c4b9f6f0712b98b64f, type: 3}
+  - {fileID: 21300000, guid: dfb74e7d3c0055642b7c6510d51e2325, type: 3}
+  fadeSprites:
+  - {fileID: 21300000, guid: a2effb15c2454444b9baa7536e34ecc7, type: 3}
+  - {fileID: 21300000, guid: ea733d4ffb7ac3549a1cfeabfe96b61b, type: 3}
+  flashMaterial: {fileID: 2100000, guid: 87d181b2630595f47bb5814595f0a733, type: 2}
+  flashScreenSize: 170
+  flashStep: 0.033
+  clipSheets:
+  - sheet: {fileID: 2800000, guid: 0b16b9855d91d0b47a82aff0d75a6972, type: 3}
+    frameSize: {x: 794, y: 1160}
+    shots:
+    - frame: 12
+      muzzle: {x: 601, y: 361}
+      angle: 18.9
+    track:
+    - frame: 13
+      muzzle: {x: 597, y: 357}
+      angle: 28.5
+    - frame: 14
+      muzzle: {x: 633, y: 403}
+      angle: 10.1
+    - frame: 15
+      muzzle: {x: 639, y: 406}
+      angle: 1.2
+    - frame: 16
+      muzzle: {x: 641, y: 406}
+      angle: 4.5
+  - sheet: {fileID: 2800000, guid: 2973518a7e6c4a04eb503f1878501a14, type: 3}
+    frameSize: {x: 794, y: 1160}
+    shots:
+    - frame: 9
+      muzzle: {x: 633, y: 379}
+      angle: 20
+    - frame: 12
+      muzzle: {x: 639, y: 389}
+      angle: 15.1
+    track:
+    - frame: 10
+      muzzle: {x: 651, y: 393}
+      angle: 15.4
+    - frame: 11
+      muzzle: {x: 670, y: 415}
+      angle: 4.2
+    - frame: 13
+      muzzle: {x: 639, y: 379}
+      angle: 24.5
+    - frame: 14
+      muzzle: {x: 668, y: 416}
+      angle: 6.5
+    - frame: 15
+      muzzle: {x: 669, y: 417}
+      angle: 1.5
+    - frame: 16
+      muzzle: {x: 669, y: 416}
+      angle: 3
+  - sheet: {fileID: 2800000, guid: 09053bcf928172c479d878c535e70944, type: 3}
+    frameSize: {x: 794, y: 1160}
+    shots:
+    - frame: 8
+      muzzle: {x: 649, y: 513}
+      angle: 7.6
+    track:
+    - frame: 9
+      muzzle: {x: 619, y: 481}
+      angle: 25.9
+    - frame: 10
+      muzzle: {x: 625, y: 487}
+      angle: 17
+    - frame: 11
+      muzzle: {x: 634, y: 500}
+      angle: 13.2
+    - frame: 12
+      muzzle: {x: 645, y: 511}
+      angle: 9
+  particlesPrefab: {fileID: 183044306472308884, guid: 15f4bd84006240c4cb0cf2b7e8b34b98, type: 3}
+  gunshotClips:
+  - {fileID: 8300000, guid: 9062d8640bcabd04cbcb49350e9b6c08, type: 3}
+  gunshotVolume: 0.75
 --- !u!1 &336700220
 GameObject:
   m_ObjectHideFlags: 0
@@ -12313,7 +12390,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &376222454
 GameObject:
@@ -26587,10 +26664,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fc3d76bd4285ad447b8499863b18192e, type: 2}
   - {fileID: 11400000, guid: 71da86d4f2884d44da1eafe7344808d8, type: 2}
   - {fileID: 11400000, guid: b262241b9a3ab414598180e6a93c6922, type: 2}
+  - {fileID: 11400000, guid: 454fe7a35ec0ff747abd51fc7c73b83c, type: 2}
   ambience: {fileID: 1336420981}
   hudDecor:
   - {fileID: 65647712}
   - {fileID: 186928376}
+  foregroundBefore: EndTurnButton
 --- !u!1 &875548738
 GameObject:
   m_ObjectHideFlags: 0
@@ -48279,6 +48358,7 @@ MonoBehaviour:
   _drawStartPoint: {fileID: 523753937}
   _drawInDuration: 0.2
   _drawInStaggerDelay: 0.06
+  _restingSortingOrderBase: 6
   _drawInSortingOrderBase: 200
   _playDiscardOutAnimation: 1
   _discardEndPoint: {fileID: 1524281369}
@@ -48953,12 +49033,20 @@ MonoBehaviour:
   windupTremble: 4
   windupShadeColor: {r: 0.086, g: 0.094, b: 0.106, a: 0.55}
   vignetteColor: {r: 0.78, g: 0.12, b: 0.14, a: 0.55}
-  hitClip: {fileID: 0}
-  heavyHitClip: {fileID: 0}
-  killClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 6d4a7c8b83f8b85439780006831e4c66, type: 3}
+  hitMetalClip: {fileID: 8300000, guid: 3918f560e81d81a459705fe0640875c0, type: 3}
+  enemyBlockClip: {fileID: 8300000, guid: 0f71c916a082abd419e40f042524c2aa, type: 3}
+  heavyHitClip: {fileID: 8300000, guid: 117630e14f6dac34b87b613c09cc7755, type: 3}
+  killClip: {fileID: 8300000, guid: 6b2a0fa431ac7fe4cbac546782c41f51, type: 3}
   playerHitClip: {fileID: 0}
   playerBlockClip: {fileID: 0}
   volume: 0.8
+  impactAdditiveMaterial: {fileID: 2100000, guid: 87d181b2630595f47bb5814595f0a733, type: 2}
+  impactSize: 240
+  heavyImpactSize: 300
+  fleshImpactSize: 430
+  blockImpactSize: 260
+  impactDuration: 0.18
 --- !u!1 &1501450038
 GameObject:
   m_ObjectHideFlags: 0
@@ -49134,7 +49222,7 @@ MonoBehaviour:
   - coop_rescued_Cp_03
   - coop_rescued_Cp_02
   - coop_rescued_Cp_01
-  - shop_first_wave
+  - karina_recruited
 --- !u!4 &1502612121
 Transform:
   m_ObjectHideFlags: 0

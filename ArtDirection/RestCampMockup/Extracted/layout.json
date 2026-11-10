@@ -1,0 +1,989 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "coordinate_origin": "top-left",
+  "screen_units": "screen pixels",
+  "asset_scale": 2,
+  "png_color_space": "sRGB",
+  "nine_slice_order": [
+    "left",
+    "bottom",
+    "right",
+    "top"
+  ],
+  "nine_slice_units": "PNG pixels",
+  "source_mockups": [
+    "Rest_Menu_Default.png",
+    "Rest_Menu_States.png",
+    "Rest_Camp_Labels.png"
+  ],
+  "pieces": [
+    {
+      "id": "Menu_Panel",
+      "file": "Menu_Panel.png",
+      "png_size_px": [
+        1280,
+        1510
+      ],
+      "screen_rect": [
+        1208,
+        150,
+        640,
+        755
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Menu_Star",
+      "file": "Menu_Star.png",
+      "png_size_px": [
+        126,
+        134
+      ],
+      "screen_rect": [
+        1257,
+        190,
+        63,
+        67
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Menu_TitleDivider",
+      "file": "Menu_TitleDivider.png",
+      "png_size_px": [
+        4,
+        130
+      ],
+      "screen_rect": [
+        1342,
+        192,
+        2,
+        65
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Row_Normal",
+      "file": "Row_Normal.png",
+      "png_size_px": [
+        1236,
+        348
+      ],
+      "screen_rect": [
+        1218,
+        294,
+        618,
+        174
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Row_Hover",
+      "file": "Row_Hover.png",
+      "png_size_px": [
+        1236,
+        348
+      ],
+      "screen_rect": [
+        1218,
+        294,
+        618,
+        174
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Row_Locked",
+      "file": "Row_Locked.png",
+      "png_size_px": [
+        1236,
+        348
+      ],
+      "screen_rect": [
+        1218,
+        658,
+        618,
+        174
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Art_Rest",
+      "file": "Art_Rest.png",
+      "png_size_px": [
+        400,
+        260
+      ],
+      "screen_rect": [
+        1253,
+        326,
+        200,
+        130
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Art_Upgrade",
+      "file": "Art_Upgrade.png",
+      "png_size_px": [
+        320,
+        276
+      ],
+      "screen_rect": [
+        1266,
+        499,
+        160,
+        138
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Art_Return",
+      "file": "Art_Return.png",
+      "png_size_px": [
+        392,
+        290
+      ],
+      "screen_rect": [
+        1258,
+        683,
+        196,
+        145
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Glyph_Arrow",
+      "file": "Glyph_Arrow.png",
+      "png_size_px": [
+        60,
+        50
+      ],
+      "screen_rect": [
+        1780,
+        370,
+        30,
+        25
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Glyph_Lock",
+      "file": "Glyph_Lock.png",
+      "png_size_px": [
+        62,
+        78
+      ],
+      "screen_rect": [
+        1776,
+        725,
+        31,
+        39
+      ],
+      "alpha": "soft",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Tag_Fire",
+      "file": "Tag_Fire.png",
+      "png_size_px": [
+        400,
+        136
+      ],
+      "screen_rect": [
+        858,
+        332,
+        200,
+        68
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nine_slice_mode": "none",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Tag_Name",
+      "file": "Tag_Name.png",
+      "png_size_px": [
+        388,
+        80
+      ],
+      "screen_rect": [
+        143,
+        350,
+        194,
+        40
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        96,
+        0,
+        70,
+        0
+      ],
+      "nine_slice_mode": "horizontal",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    },
+    {
+      "id": "Tag_Activity",
+      "file": "Tag_Activity.png",
+      "png_size_px": [
+        336,
+        56
+      ],
+      "screen_rect": [
+        157,
+        390,
+        168,
+        28
+      ],
+      "alpha": "binary",
+      "nine_slice_px": [
+        32,
+        0,
+        32,
+        0
+      ],
+      "nine_slice_mode": "horizontal",
+      "rotation_degrees": 0,
+      "shadow_opacity": 0
+    }
+  ],
+  "menu": {
+    "panel_rect": [
+      1208,
+      150,
+      640,
+      755
+    ],
+    "rows": [
+      {
+        "id": "rest",
+        "screen_rect": [
+          1218,
+          294,
+          618,
+          174
+        ],
+        "panel_offset_rect": [
+          10,
+          144,
+          618,
+          174
+        ],
+        "menu_offset_rect": [
+          10,
+          144,
+          618,
+          174
+        ],
+        "row_offsets": {
+          "art": [
+            35,
+            32,
+            200,
+            130
+          ],
+          "arrow": [
+            562,
+            76,
+            30,
+            25
+          ],
+          "lock": [
+            558,
+            67,
+            31,
+            39
+          ]
+        },
+        "art_file": "Art_Rest.png"
+      },
+      {
+        "id": "upgrade",
+        "screen_rect": [
+          1218,
+          476,
+          618,
+          174
+        ],
+        "panel_offset_rect": [
+          10,
+          326,
+          618,
+          174
+        ],
+        "menu_offset_rect": [
+          10,
+          326,
+          618,
+          174
+        ],
+        "row_offsets": {
+          "art": [
+            48,
+            23,
+            160,
+            138
+          ],
+          "arrow": [
+            562,
+            76,
+            30,
+            25
+          ],
+          "lock": [
+            558,
+            67,
+            31,
+            39
+          ]
+        },
+        "art_file": "Art_Upgrade.png"
+      },
+      {
+        "id": "return",
+        "screen_rect": [
+          1218,
+          658,
+          618,
+          174
+        ],
+        "panel_offset_rect": [
+          10,
+          508,
+          618,
+          174
+        ],
+        "menu_offset_rect": [
+          10,
+          508,
+          618,
+          174
+        ],
+        "row_offsets": {
+          "art": [
+            40,
+            25,
+            196,
+            145
+          ],
+          "arrow": [
+            562,
+            76,
+            30,
+            25
+          ],
+          "lock": [
+            558,
+            67,
+            31,
+            39
+          ]
+        },
+        "art_file": "Art_Return.png"
+      }
+    ],
+    "row_state_files": {
+      "normal": "Row_Normal.png",
+      "hover": "Row_Hover.png",
+      "locked": "Row_Locked.png"
+    },
+    "glyph_tints": {
+      "arrow": {
+        "normal": "#1D2020",
+        "hover": "#438F83",
+        "locked": "#858581"
+      },
+      "lock": {
+        "normal": "#FFFFFF",
+        "hover": "#FFFFFF",
+        "locked": "#858581"
+      }
+    },
+    "illustration_tints": {
+      "normal": {
+        "multiply_hex": "#FFFFFF",
+        "opacity": 1
+      },
+      "hover": {
+        "multiply_hex": "#FFFFFF",
+        "opacity": 1
+      },
+      "locked": {
+        "multiply_hex": "#B8B8B8",
+        "opacity": 0.43,
+        "blend": "source-over",
+        "note": "Same illustration file in all states; tint then source-over the opaque locked row. Visual approximation of approved graphite artwork."
+      }
+    },
+    "scene_dimming": {
+      "rgb_multiply": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "alpha": 1,
+      "equivalent_black_overlay_opacity": 0.3,
+      "exclude_rects": [
+        [
+          0,
+          0,
+          1920,
+          110
+        ]
+      ],
+      "note": "Measured across unchanged scene pixels; original PROMPTS.txt also records 0.70. Top HUD restored from original scene; dim only scene below y110. UI panel is composited after dimming."
+    }
+  },
+  "text_slots": [
+    {
+      "id": "menu_title",
+      "text_example": "REST / MAINTENANCE",
+      "screen_rect": [
+        1368,
+        196,
+        390,
+        46
+      ],
+      "alignment": "left",
+      "font_size_px": 34,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#A7A6A2",
+        "hover": "#A7A6A2",
+        "locked": "#A7A6A2"
+      },
+      "letter_spacing_px": 0.5
+    },
+    {
+      "id": "row_1_number",
+      "text_example": "01",
+      "screen_rect": [
+        1504,
+        318,
+        42,
+        32
+      ],
+      "alignment": "left",
+      "font_size_px": 27,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 0,
+      "row_offset_rect": [
+        286,
+        24,
+        42,
+        32
+      ]
+    },
+    {
+      "id": "row_1_english",
+      "text_example": "REST",
+      "screen_rect": [
+        1560,
+        322,
+        180,
+        24
+      ],
+      "alignment": "left",
+      "font_size_px": 15,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 7,
+      "row_offset_rect": [
+        342,
+        28,
+        180,
+        24
+      ]
+    },
+    {
+      "id": "row_1_title",
+      "text_example": "휴식",
+      "screen_rect": [
+        1504,
+        351,
+        255,
+        55
+      ],
+      "alignment": "left",
+      "font_size_px": 44,
+      "font_weight": 800,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": -1,
+      "row_offset_rect": [
+        286,
+        57,
+        255,
+        55
+      ]
+    },
+    {
+      "id": "row_1_description",
+      "text_example": "HP 20 회복",
+      "screen_rect": [
+        1506,
+        409,
+        258,
+        35
+      ],
+      "alignment": "left",
+      "font_size_px": 24,
+      "font_weight": 400,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 0,
+      "row_offset_rect": [
+        288,
+        115,
+        258,
+        35
+      ]
+    },
+    {
+      "id": "row_2_number",
+      "text_example": "02",
+      "screen_rect": [
+        1504,
+        500,
+        42,
+        32
+      ],
+      "alignment": "left",
+      "font_size_px": 27,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 0,
+      "row_offset_rect": [
+        286,
+        24,
+        42,
+        32
+      ]
+    },
+    {
+      "id": "row_2_english",
+      "text_example": "UPGRADE",
+      "screen_rect": [
+        1560,
+        504,
+        180,
+        24
+      ],
+      "alignment": "left",
+      "font_size_px": 15,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 7,
+      "row_offset_rect": [
+        342,
+        28,
+        180,
+        24
+      ]
+    },
+    {
+      "id": "row_2_title",
+      "text_example": "강화",
+      "screen_rect": [
+        1504,
+        533,
+        255,
+        55
+      ],
+      "alignment": "left",
+      "font_size_px": 44,
+      "font_weight": 800,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": -1,
+      "row_offset_rect": [
+        286,
+        57,
+        255,
+        55
+      ]
+    },
+    {
+      "id": "row_2_description",
+      "text_example": "카드 1장 정비",
+      "screen_rect": [
+        1506,
+        591,
+        258,
+        35
+      ],
+      "alignment": "left",
+      "font_size_px": 24,
+      "font_weight": 400,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 0,
+      "row_offset_rect": [
+        288,
+        115,
+        258,
+        35
+      ]
+    },
+    {
+      "id": "row_3_number",
+      "text_example": "03",
+      "screen_rect": [
+        1504,
+        682,
+        42,
+        32
+      ],
+      "alignment": "left",
+      "font_size_px": 27,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 0,
+      "row_offset_rect": [
+        286,
+        24,
+        42,
+        32
+      ]
+    },
+    {
+      "id": "row_3_english",
+      "text_example": "RETURN",
+      "screen_rect": [
+        1560,
+        686,
+        180,
+        24
+      ],
+      "alignment": "left",
+      "font_size_px": 15,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 7,
+      "row_offset_rect": [
+        342,
+        28,
+        180,
+        24
+      ]
+    },
+    {
+      "id": "row_3_title",
+      "text_example": "동료 귀환",
+      "screen_rect": [
+        1504,
+        715,
+        255,
+        55
+      ],
+      "alignment": "left",
+      "font_size_px": 44,
+      "font_weight": 800,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": -1,
+      "row_offset_rect": [
+        286,
+        57,
+        255,
+        55
+      ]
+    },
+    {
+      "id": "row_3_description",
+      "text_example": "거점으로 돌려보내기",
+      "screen_rect": [
+        1506,
+        773,
+        258,
+        35
+      ],
+      "alignment": "left",
+      "font_size_px": 24,
+      "font_weight": 400,
+      "colors": {
+        "normal": "#171818",
+        "hover": "#141A1B",
+        "locked": "#858581"
+      },
+      "letter_spacing_px": 0,
+      "row_offset_rect": [
+        288,
+        115,
+        258,
+        35
+      ]
+    },
+    {
+      "id": "fire_title",
+      "text_example": "모닥불",
+      "screen_rect": [
+        875,
+        336,
+        166,
+        29
+      ],
+      "alignment": "center",
+      "font_size_px": 25,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#D1D0CC",
+        "hover": "#D1D0CC",
+        "locked": "#8A8B87"
+      },
+      "letter_spacing_px": 0
+    },
+    {
+      "id": "fire_subtitle",
+      "text_example": "휴식 · 정비",
+      "screen_rect": [
+        876,
+        373,
+        165,
+        22
+      ],
+      "alignment": "center",
+      "font_size_px": 15,
+      "font_weight": 600,
+      "colors": {
+        "normal": "#D1D0CC",
+        "hover": "#D1D0CC",
+        "locked": "#8A8B87"
+      },
+      "letter_spacing_px": 4
+    },
+    {
+      "id": "companion_name",
+      "text_example": "알케미스트",
+      "screen_rect": [
+        157,
+        355,
+        166,
+        29
+      ],
+      "alignment": "center",
+      "font_size_px": 22,
+      "font_weight": 700,
+      "colors": {
+        "normal": "#D1D0CC",
+        "hover": "#D1D0CC",
+        "locked": "#8A8B87"
+      },
+      "letter_spacing_px": 0
+    },
+    {
+      "id": "companion_activity",
+      "text_example": "시약 가열 중",
+      "screen_rect": [
+        168,
+        394,
+        146,
+        21
+      ],
+      "alignment": "center",
+      "font_size_px": 14,
+      "font_weight": 500,
+      "colors": {
+        "normal": "#D1D0CC",
+        "hover": "#D1D0CC",
+        "locked": "#8A8B87"
+      },
+      "letter_spacing_px": 2
+    }
+  ],
+  "tag_stretch": {
+    "Tag_Name": {
+      "keep_height_screen_px": 40,
+      "example_widths_screen_px": [
+        194,
+        320,
+        420
+      ],
+      "text_horizontal_inset_screen_px": 14
+    },
+    "Tag_Activity": {
+      "keep_height_screen_px": 28,
+      "example_widths_screen_px": [
+        168,
+        320,
+        420
+      ],
+      "text_horizontal_inset_screen_px": 11
+    }
+  },
+  "assembly": {
+    "draw_order": [
+      "scene",
+      "scene_dimming",
+      "Tag_Fire",
+      "Menu_Panel",
+      "Menu_Star",
+      "Menu_TitleDivider",
+      "rows",
+      "illustrations",
+      "glyphs",
+      "runtime_text"
+    ],
+    "labels_view_draw_order": [
+      "scene",
+      "Tag_Fire",
+      "Tag_Activity",
+      "Tag_Name",
+      "runtime_text"
+    ],
+    "connector_line": false,
+    "text_rasterized_in_assets": false
+  },
+  "measurement_note": "Rects and typography measured visually from approved 1920x1080 mockups; glyph/font metrics and locked tint are approximate. No original font metadata exists. Nine-slice values apply only to the two horizontal companion tags."
+}

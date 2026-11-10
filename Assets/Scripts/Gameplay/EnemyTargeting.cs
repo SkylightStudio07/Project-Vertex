@@ -27,11 +27,46 @@ public static class EnemyTargeting
             EnemyView enemyView = hit.gameObject.GetComponentInParent<EnemyView>();
             if (enemyView == null || enemyView.Instance == null || enemyView.Instance.IsDead)
                 continue;
+            if (IsProtected(enemyView.Instance, BattleManager.Instance != null ? BattleManager.Instance.State : null))
+                continue;
 
             target = enemyView.Instance;
             return true;
         }
 
         return false;
+    }
+
+    // 다른 적이 살아 있어서 지금은 노릴 수 없는 적인가 ('포격 엄호' 상태)
+    public static bool IsProtected(EnemyInstance enemy, BattleState state)
+        => FindProtection(enemy) != null && HasLivingAlly(enemy, state);
+
+    public static bool HasLivingAlly(EnemyInstance enemy, BattleState state)
+    {
+        if (enemy == null || state?.Enemies == null) return false;
+        foreach (var other in state.Enemies)
+            if (other != null && other != enemy && !other.IsDead) return true;
+        return false;
+    }
+
+    // 혼자 남았으면 엄호 상태를 지운다 (아이콘도 함께 사라진다). 적이 쓰러질 때마다 BattleManager가 부른다.
+    public static void ReleaseProtectionIfAlone(EnemyInstance enemy, BattleState state)
+    {
+        var status = FindProtection(enemy);
+        if (status == null || HasLivingAlly(enemy, state)) return;
+        status.RemoveAll();
+        enemy.Statuses.RemoveExpired();
+    }
+
+    private static StatusInstance FindProtection(EnemyInstance enemy)
+    {
+        if (enemy == null) return null;
+        foreach (var entry in enemy.Statuses.Entries)
+        {
+            if (entry is not StatusInstance status || status.Definition == null) continue;
+            foreach (var behavior in status.Definition.Behaviors)
+                if (behavior is ProtectedByAlliesStatusBehavior) return status;
+        }
+        return null;
     }
 }

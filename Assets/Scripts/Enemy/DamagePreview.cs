@@ -8,12 +8,14 @@ using UnityEngine;
 public static class DamagePreview
 {
     private static readonly List<EnemyView> _shown = new();
+    private static EnemyView _highlighted; // 특효 속성 칩을 켠 적
 
     public static void Show(CardData card, EnemyInstance target)
     {
         Clear();
         var battle = BattleManager.Instance;
         if (card == null || target == null || battle == null || battle.State == null) return;
+        HighlightTraits(card, target);
 
         var context = new CardContext
         {
@@ -37,8 +39,23 @@ public static class DamagePreview
         }
     }
 
+    // 겨냥한 적의 속성 중 카드 특효에 걸리는 칩만 청록으로 (속성이 공개된 적만 — 칩이 '?'면 아무것도 켜지지 않는다)
+    private static void HighlightTraits(CardData card, EnemyInstance target)
+    {
+        var traits = card.EffectiveTraitsOf(card.isUpgraded);
+        if (traits == EnemyTrait.None || !MaterialArchive.TraitsRevealed(target.Data)) return;
+        foreach (var view in Object.FindObjectsByType<EnemyView>(FindObjectsSortMode.None))
+        {
+            if (view.Instance != target) continue;
+            view.HighlightTraits(traits);
+            _highlighted = view;
+        }
+    }
+
     public static void Clear()
     {
+        if (_highlighted != null) _highlighted.HighlightTraits(EnemyTrait.None);
+        _highlighted = null;
         foreach (var view in _shown)
             if (view != null) view.ClearDamagePreview();
         _shown.Clear();

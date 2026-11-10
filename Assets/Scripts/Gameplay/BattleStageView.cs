@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,13 @@ public class BattleStageView : MonoBehaviour
     [SerializeField] private BattleAmbienceFx ambience;
     [Tooltip("배경 밝기에 맞춰 색을 바꿀 HUD 장식판 (밝은 배경용 흰 그라데이션 등)")]
     [SerializeField] private List<Graphic> hudDecor = new();
+    [Tooltip("앞쪽 레이어(전경 소품)는 따로 캔버스를 두지 않고 유닛과 같은 캔버스에서 이 형제 바로 앞에 끼운다 (유닛 뒤 · END TURN 앞)")]
+    [SerializeField] private string foregroundBefore = "EndTurnButton";
 
     private Image _image;
     private BattleStageData _current;
     private Material _ally, _enemy;
+    private RectTransform _foreground;
 
     public BattleStageData Current => _current;
     // 지금 깔린 배경 (아군 진형 오프셋 등 다른 화면이 읽는다)
@@ -85,6 +89,55 @@ public class BattleStageView : MonoBehaviour
 
         foreach (var g in hudDecor) if (g != null) g.color = stage.hudDecorTint;
         if (ambience != null) ambience.Apply(stage);
+        BuildForeground(stage);
+    }
+
+    // 앞쪽 레이어: 배경과 같은 캔버스 아래에 따로 정렬 순서를 가진 층을 만들고, 소품을 화면 아래에 붙인다
+    private void BuildForeground(BattleStageData stage)
+    {
+        if (_foreground == null)
+        {
+            var go = new GameObject("StageForeground", typeof(RectTransform));
+            go.layer = gameObject.layer;
+            _foreground = (RectTransform)go.transform;
+            var root = transform.parent;
+            _foreground.SetParent(root, false);
+            // 유닛과 같은 캔버스 안에서 계층 순서로 그린다: 유닛(PartyViewer · 동료) 뒤, END TURN 앞
+            var hud = root.Find(foregroundBefore);
+            _foreground.SetSiblingIndex(hud != null ? hud.GetSiblingIndex() : transform.GetSiblingIndex() + 1);
+            _foreground.anchorMin = Vector2.zero; _foreground.anchorMax = Vector2.one;
+            _foreground.offsetMin = _foreground.offsetMax = Vector2.zero;
+        }
+        for (int i = _foreground.childCount - 1; i >= 0; i--) Destroy(_foreground.GetChild(i).gameObject);
+        if (stage.foreground == null) return;
+
+        float screenH = _foreground.rect.height > 0f ? _foreground.rect.height : 1080f;
+        foreach (var prop in stage.foreground)
+        {
+            if (prop == null || prop.sprite == null) continue;
+            var go = new GameObject("FG_" + prop.sprite.name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            go.layer = gameObject.layer;
+            var rt = (RectTransform)go.transform;
+            rt.SetParent(_foreground, false);
+            rt.anchorMin = rt.anchorMax = prop.position;
+            rt.pivot = prop.pivot;
+            float h = screenH * prop.height;
+            rt.sizeDelta = new Vector2(h * prop.sprite.rect.width / prop.sprite.rect.height, h);
+            rt.anchoredPosition = Vector2.zero;
+            if (prop.flip) rt.localScale = new Vector3(-1f, 1f, 1f);
+            var image = go.GetComponent<Image>();
+            image.sprite = prop.sprite;
+            image.color = prop.tint;
+            image.raycastTarget = false;
+            if (prop.sway > 0f)
+            {
+                // 바람: 아래 끝을 축으로 아주 조금 기울었다 돌아온다
+                float period = Random.Range(3.2f, 4.6f);
+                rt.localRotation = Quaternion.Euler(0f, 0f, -prop.sway * 0.5f);
+                rt.DOLocalRotate(new Vector3(0f, 0f, prop.sway * 0.5f), period).SetEase(Ease.InOutSine)
+                    .SetLoops(-1, LoopType.Yoyo).SetDelay(Random.value * period).SetLink(go);
+            }
+        }
     }
 
     private static Material Tune(Material current, string resource, Color grade, float brightness, float saturation, BattleStageData stage)

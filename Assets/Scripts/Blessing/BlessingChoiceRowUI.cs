@@ -12,7 +12,7 @@ using UnityEngine.UI;
 //              판 스프라이트(기본/호버/비활성)는 Button SpriteSwap이, 호버 시 내용 밀림·아이콘 칸 반전은 여기서 처리한다.
 // ============================================================
 
-public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Button button;
     [SerializeField] private Image iconImage;
@@ -45,6 +45,14 @@ public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointer
     private Color[] _baseColors;
     private Sprite _icon, _iconHover;
     private bool _available = true;
+
+    [Header("입력 반응")]
+    [SerializeField, Range(1f, 1.08f)] private float hoverScale = 1.022f;
+    [SerializeField, Range(0.9f, 1f)] private float pressScale = 0.98f;
+    [SerializeField, Min(0f)] private float enterStagger = 0.06f;
+    private Image _sweep;
+    private CanvasGroup _group;
+    private bool _hovering;
 
     public Button Button => button;
 
@@ -147,11 +155,83 @@ public class BlessingChoiceRowUI : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData) => SetHover(true);
     public void OnPointerExit(PointerEventData eventData) => SetHover(false);
-    private void OnDisable() => SetHover(false, instant: true);
+    public void OnPointerDown(PointerEventData eventData) { if (_available) ScaleTo(pressScale, 0.06f); }
+    public void OnPointerUp(PointerEventData eventData) { if (_available) ScaleTo(_hovering ? hoverScale : 1f, 0.12f); }
+
+    private void OnDisable()
+    {
+        SetHover(false, instant: true);
+        transform.DOKill();
+        transform.localScale = Vector3.one;
+        if (_group != null) { _group.DOKill(); _group.alpha = 1f; }
+    }
+
+    // 선택지가 나타날 때 위에서부터 차례로 밀려 들어온다
+    private void OnEnable()
+    {
+        if (_group == null && !TryGetComponent(out _group)) _group = gameObject.AddComponent<CanvasGroup>();
+        float delay = transform.GetSiblingIndex() * enterStagger;
+        _group.DOKill();
+        _group.alpha = 0f;
+        _group.DOFade(1f, 0.22f).SetDelay(delay).SetUpdate(true).SetLink(gameObject);
+        if (content == null) return;
+        content.DOKill();
+        content.anchoredPosition = new Vector2(56f, content.anchoredPosition.y);
+        content.DOAnchorPosX(0f, 0.3f).SetDelay(delay).SetEase(Ease.OutCubic).SetUpdate(true).SetLink(gameObject);
+    }
+
+    private void ScaleTo(float scale, float duration)
+    {
+        transform.DOKill();
+        transform.DOScale(scale, duration).SetEase(Ease.OutCubic).SetUpdate(true).SetLink(gameObject);
+    }
+
+    // 호버 순간 판 위로 빛줄기가 한 번 지나가고 아이콘이 튄다
+    private void PlayHoverAccent()
+    {
+        if (iconCell != null)
+        {
+            iconCell.rectTransform.DOComplete();
+            iconCell.rectTransform.DOPunchScale(Vector3.one * 0.12f, 0.25f, 5, 0.5f).SetUpdate(true).SetLink(gameObject);
+        }
+        if (panelImage == null) return;
+        if (_sweep == null)
+        {
+            var fx = GetComponentInParent<BlessingAmbienceFx>(true);
+            if (fx == null || fx.BandSprite == null) return;
+            var go = new GameObject("HoverSweep", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            go.transform.SetParent(panelImage.transform.parent, false);
+            go.transform.SetSiblingIndex(panelImage.transform.GetSiblingIndex() + 1);
+            _sweep = go.GetComponent<Image>();
+            _sweep.sprite = fx.BandSprite;
+            _sweep.material = fx.AdditiveMaterial;
+            _sweep.raycastTarget = false;
+            var rt = _sweep.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0f, 1f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = new Vector2(240f, panelImage.rectTransform.rect.height * 1.25f);
+            rt.localEulerAngles = new Vector3(0f, 0f, -14f);
+        }
+        var sweep = _sweep.rectTransform;
+        float h = panelImage.rectTransform.rect.height, w = panelImage.rectTransform.rect.width;
+        sweep.DOKill(); _sweep.DOKill();
+        sweep.anchoredPosition = new Vector2(40f, -h * 0.5f);
+        _sweep.color = new Color(0.8f, 0.93f, 1f, 0f);
+        DOTween.Sequence().SetUpdate(true).SetLink(gameObject).SetTarget(sweep)
+            .Append(sweep.DOAnchorPosX(w - 40f, 0.42f).SetEase(Ease.OutQuad))
+            .Join(_sweep.DOFade(0.5f, 0.1f))
+            .Insert(0.18f, _sweep.DOFade(0f, 0.24f));
+    }
 
     private void SetHover(bool on, bool instant = false)
     {
         bool hover = on && _available;
+        if (!instant && hover != _hovering)
+        {
+            ScaleTo(hover ? hoverScale : 1f, 0.14f);
+            if (hover) PlayHoverAccent();
+        }
+        _hovering = hover;
         if (iconCell != null && cellNormal != null && _available)
             iconCell.sprite = hover && cellHover != null ? cellHover : cellNormal;
         if (panelImage != null && panelNormal != null && _available)

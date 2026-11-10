@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 휴식 노드 UI 컨트롤러
 public class RestView : MonoBehaviour
@@ -20,6 +21,7 @@ public class RestView : MonoBehaviour
 
     private readonly HashSet<string> _talkedThisVisit = new();
     private bool _eventPlaying;
+    private RestCampDiorama _diorama;
 
     [Header("합류 캐릭터 (초상화 — stations가 비어 있을 때만 사용)")]
     [SerializeField] private Transform portraitSlotParent;
@@ -56,6 +58,24 @@ public class RestView : MonoBehaviour
         if (dismissCancelButton != null) dismissCancelButton.onClick.AddListener(EndDismiss);
         if (dismissYesButton != null) dismissYesButton.onClick.AddListener(ConfirmDismiss);
         if (dismissNoButton != null) dismissNoButton.onClick.AddListener(() => dismissConfirm.SetActive(false));
+
+        BuildDiorama();
+    }
+
+    private void BuildDiorama()
+    {
+        if (stations.Count == 0 || stations[0] == null) return;
+
+        Image background = null;
+        foreach (Transform child in transform)
+        {
+            if (child.name.Trim() != "Background") continue;
+            background = child.GetComponent<Image>();
+            break;
+        }
+        RestCampMenu.Apply(actionPanel, restHealAmount);
+        _diorama = gameObject.AddComponent<RestCampDiorama>();
+        _diorama.Build(stations[0].transform.parent, background, stations, baseCampButton, actionPanel);
     }
 
     public void Open()
@@ -66,6 +86,7 @@ public class RestView : MonoBehaviour
 
         if (stations.Count > 0) BindStations();
         else DisplayCoopPortraits();
+        if (_diorama != null) _diorama.ArrangeStations();
 
         RefreshUpgradeButton();
         EndDismiss();

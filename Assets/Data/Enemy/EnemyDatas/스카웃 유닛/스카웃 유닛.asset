@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: "\uC2A4\uCE74\uC6C3 \uC720\uB2DB"
   health: 34
   enemyImage: {fileID: 1954592265, guid: 6eb244f9bd5d2fb4d8afa287d917d58f, type: 3}
-  traits: 0
+  traits: 6
   rank: 0
   materialJson: {fileID: 0}
   spriteScale: 1.6
@@ -181,6 +181,10 @@ MonoBehaviour:
   - {fileID: -1824380343, guid: abdea1af51f35f04285170cdc463d483, type: 3}
   - {fileID: 1641864511, guid: abdea1af51f35f04285170cdc463d483, type: 3}
   attackFrameRate: 36
+  defeatedTalk: {fileID: 0}
+  attackKeyframes: []
+  attackHitDelay: -1
+  attackMotion: []
   groundFxShots:
   - frame: 21
     point: {x: 0.1, y: 0.1}

@@ -58,6 +58,14 @@ public class BattleManager : MonoBehaviour
     private bool _hasPendingHandChange;
     private bool _isEndingPlayerTurn; // 플레이어 턴 종료 처리가 진행 중인지 나타낸다.
 
+    // 낸 카드의 처리 줄. 비용 · 패 제거는 낼 때 바로 끝나고, 효과만 순서대로 실행한다.
+    // 공격 모션은 그 카드 차례에 시작하고, 총구 프레임에 맞춰 피해가 들어간다 (Docs/타격연출.md 8절)
+    private sealed class PendingCard { public CardData Card; public CardContext Context; }
+    private readonly Queue<PendingCard> _cardQueue = new();
+    private bool _cardQueueRunning;
+    [Tooltip("공격 모션의 맞는 순간을 기다리는 최대 시간. 모션이 끊겨도 카드가 멈추지 않게 하는 안전장치 (게임 시간, 모션과 같은 시계)")]
+    [SerializeField] private float _attackImpactTimeout = 0.8f;
+
     public IReadOnlyList<CardData>      Hand    => _state != null ? _state.Hand : Array.Empty<CardData>();
     public IReadOnlyList<EnemyInstance> Enemies => _state != null ? _state.Enemies : Array.Empty<EnemyInstance>();
     public bool IsPlayerTurnEnding => _isEndingPlayerTurn; // 턴 종료 연출/정리 중 카드 입력을 막기 위한 읽기 전용 상태.
@@ -71,6 +79,8 @@ public class BattleManager : MonoBehaviour
     // 데미지 적용을 기다리지 않는 "구경용" 연출(PoseSequencePlayer 등)을 병행 재생하는 용도 —
     // 구독 쪽에서 결과를 기다리지 않고 그냥 재생만 하면 된다.
     public event Action<CardData> OnCardPlayed;
+    // 카드가 처리될 차례가 됐을 때. 모션을 시작하는 쪽이 받아서, 맞는 순간을 알려 줄 수 있으면 request에 표시한다
+    public event Action<CardMotionRequest> OnCardMotionRequested;
     public event Action<BattleReward> OnBattleVictory;
     public event Action OnCompanionSkillsChanged;              // 동료 스킬 충전·사용 (지시 버튼 갱신)
     public event Action<CompanionSkillSlot> OnCompanionSkillUsed; // 동료 스킬 사용 직후, 효과보다 먼저 (컷인)
@@ -94,6 +104,7 @@ public class BattleManager : MonoBehaviour
     private WaitForSeconds _lungeOutWait; // 적 전진 타이밍 대기에 재사용할 객체.
     [SerializeField] private float _lethalWindupDuration = 0.55f; // 치명 공격(HeavyAttack.Lethal) 직전 예비 동작 시간
     public event Action<EnemyInstance> OnEnemyLethalWindup; // 치명 공격 예비 동작 시작 (BattleImpactFx: 떨림·화면 어둡게)
+    public event Action<EnemyInstance> OnEnemyAttackLanding; // 공격 모션의 피해가 들어가기 직전 (BattleImpactFx: 착탄 폭발)
     private WaitForSeconds _lungeBackAndPostActionWait; // 적 후퇴와 후처리 대기에 재사용할 객체.
     // 카드 이펙트(DamageEffect 등)가 RandomEnemy 타겟을 결정할 때 이 인스턴스를 사용해야
     // 전투 시드 기반의 결정론적 동작이 보장된다. UnityEngine.Random.Range는 시드와 무관하다.
@@ -126,6 +137,8 @@ public class BattleManager : MonoBehaviour
     public void StartBattle(List<EnemyData> enemyDataList, List<CardData> masterDeck, int seed, BattleType battleType = BattleType.Normal)
     {
         StopAllCoroutines();
+        _cardQueue.Clear();
+        _cardQueueRunning = false;
         _state?.ReleaseRuntimeCards();
         _currentBattleType = battleType;
         _rnd = new System.Random(seed);
@@ -267,6 +280,15 @@ public class BattleManager : MonoBehaviour
     private IEnumerator PlayerTurnEndSequence()
     {
         _isEndingPlayerTurn = true;
+
+        // 줄에 남은 카드를 끝까지 처리한 뒤 턴을 넘긴다
+        while (_cardQueueRunning && _isInBattle) yield return null;
+        if (!_isInBattle)
+        {
+            _isEndingPlayerTurn = false;
+            yield break;
+        }
+
         bool shouldStartEnemyTurn = false; // 턴 종료 정리가 정상 완료되면 적 턴을 시작하기 위한 플래그.
 
         try
@@ -412,7 +434,7 @@ public class BattleManager : MonoBehaviour
             enemy.NotifyActionStarted();
             float motionStart = Time.time;
             bool keyframed = enemy.Data != null && enemy.Data.HasAttackKeyframes;
-            bool animated = keyframed || enemy.AttackFrames != null && enemy.AttackFrames.Length > 0;
+            bool animated = enemy.PlaysAttackMotionNow && (keyframed || enemy.AttackFrames != null && enemy.AttackFrames.Length > 0);
             yield return _lungeOutWait;
             float hitDelay = enemy.Data != null && enemy.Data.attackHitDelay >= 0f ? enemy.Data.attackHitDelay : _animatedAttackHitDelay;
             if (animated && hitDelay > 0f)
@@ -421,6 +443,7 @@ public class BattleManager : MonoBehaviour
                 if (!_isInBattle || _state.Player.IsDead || enemy.IsDead) continue;
             }
 
+            if (animated) OnEnemyAttackLanding?.Invoke(enemy);
             yield return enemy.ExecuteCurrentActionCoroutine(_state, this); // 전진 피크 시점에 효과 적용
 
             if (!_isInBattle || _state.Player.IsDead) yield break;
@@ -531,8 +554,50 @@ public class BattleManager : MonoBehaviour
 
         OnCardPlayed?.Invoke(card);
         _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
-        StartCoroutine(ExecuteEffectsSequence(card.ActiveEffects, ctx));
+        EnqueueCardResolution(card, ctx);
 
+        return true;
+    }
+
+    private void EnqueueCardResolution(CardData card, CardContext ctx)
+    {
+        _cardQueue.Enqueue(new PendingCard { Card = card, Context = ctx });
+        if (_cardQueueRunning) return;
+        _cardQueueRunning = true; // StartCoroutine이 첫 yield까지 바로 돌므로 먼저 세운다
+        StartCoroutine(RunCardQueue());
+    }
+
+    private IEnumerator RunCardQueue()
+    {
+        while (_cardQueue.Count > 0)
+        {
+            var pending = _cardQueue.Dequeue();
+            if (!_isInBattle) continue;
+            if (!RetargetIfDead(pending)) continue;
+
+            var motion = new CardMotionRequest(pending.Card);
+            OnCardMotionRequested?.Invoke(motion);
+            if (motion.HasImpactTiming)
+            {
+                float start = Time.time;
+                while (!motion.ImpactReached && _isInBattle && Time.time - start < _attackImpactTimeout)
+                    yield return null;
+                if (!_isInBattle) continue;
+            }
+
+            yield return ExecuteEffectsSequence(pending.Card.ActiveEffects, pending.Context);
+        }
+        _cardQueueRunning = false;
+    }
+
+    // 줄 서 있는 동안 대상이 쓰러졌으면 살아 있는 적으로 옮긴다. 살아 있는 적이 없으면 false
+    private bool RetargetIfDead(PendingCard pending)
+    {
+        if (pending.Card.UseMode != CardData.CardUseMode.SelectEnemy) return true;
+        if (pending.Context.Target != null && !pending.Context.Target.IsDead) return true;
+        var living = _state.Enemies.FirstOrDefault(e => e != null && !e.IsDead);
+        if (living == null) return false;
+        pending.Context.Target = living;
         return true;
     }
 
@@ -686,6 +751,7 @@ public class BattleManager : MonoBehaviour
 
             var ctx = CreateCardPlayContext(card, target);
             OnCardPlayed?.Invoke(card);
+            OnCardMotionRequested?.Invoke(new CardMotionRequest(card));
             _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
             yield return EffectRunner.ExecuteSequence(card.ActiveEffects, ctx);
 
@@ -945,7 +1011,11 @@ public class BattleManager : MonoBehaviour
         foreach (var e in _state.Enemies)
             if (e.IsDead) dead++;
         foreach (var e in _state.Enemies)
-            if (!e.IsDead) e.NotifyAlliesDefeated(dead);
+            if (!e.IsDead)
+            {
+                e.NotifyAlliesDefeated(dead);
+                EnemyTargeting.ReleaseProtectionIfAlone(e, _state);
+            }
 
         foreach (var e in _state.Enemies)
             if (!e.IsDead) return;
@@ -1070,4 +1140,14 @@ public class BattleManager : MonoBehaviour
             _passiveDebugView = _state.Player.DebugPassiveInfo;
 #endif
     }
+}
+
+// 카드 모션 요청. 맞는 순간을 알려 줄 수 있는 모션이면 HasImpactTiming을 켜고, 그 순간 MarkImpact를 부른다
+public sealed class CardMotionRequest
+{
+    public readonly CardData Card;
+    public bool HasImpactTiming;
+    public bool ImpactReached { get; private set; }
+    public CardMotionRequest(CardData card) => Card = card;
+    public void MarkImpact() => ImpactReached = true;
 }

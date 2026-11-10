@@ -159,10 +159,23 @@ public class CardInteractionView : MonoBehaviour
         glow.localRotation = _visual.localRotation;
     }
 
-    private void SetGlow(bool on)
+    private bool _boundaryGlow; // 지금 내면 초탄·막탄 보너스가 터지는 카드
+    private bool _glowShown;
+
+    // AmmoBoundaryView가 부른다. 손패에 있는 동안 잡지 않아도 윤곽이 빛난다
+    public void SetBoundaryGlow(bool on)
+    {
+        _boundaryGlow = on;
+        SetGlow(false);
+    }
+
+    // held: 카드를 잡고 있는지. 잡지 않아도 초탄·막탄 카드면 켜 둔다
+    private void SetGlow(bool held)
     {
         if (_hoverGlow == null) return;
-        if (!on && !_hoverGlow.gameObject.activeSelf) return;
+        bool on = held || _boundaryGlow;
+        if (on == _glowShown) return;
+        _glowShown = on;
         _glowTween?.Kill();
 
         if (on)
@@ -251,7 +264,7 @@ public class CardInteractionView : MonoBehaviour
     {
         StopMovement();
         SetHovered(this);
-        SetGlow(false); // 발광은 카드를 잡았을 때(드래그·겨냥)만
+        SetGlow(false); // 발광은 카드를 잡았을 때(드래그·겨냥)와 초탄·막탄 카드만
         if (_visual != null) _visual.localScale = _hoverScale;
         BringCardToFront();
         // 부채꼴 각도를 펴서 카드 내용을 똑바로 보여준다 (STS 호버 연출).
@@ -343,6 +356,7 @@ public class CardInteractionView : MonoBehaviour
         ClearHovered();
         KillHoverShift();
         StopMovement();
+        _boundaryGlow = false; // 낸 카드는 손패 목록에서 빠져 다시 꺼 줄 곳이 없다
         SetGlow(false);
         HideDebugTargetArrow();
     }

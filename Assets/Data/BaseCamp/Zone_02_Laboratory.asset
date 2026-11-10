@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20701a9f079aecb42b57f07f8a7d1ea5, type: 3}
+  m_Name: Zone_02_Laboratory
+  m_EditorClassIdentifier: Assembly-CSharp::BaseZoneData
+  id: laboratory
+  displayName: "\uC5F0\uAD6C\uC18C"
+  englishName: LABORATORY
+  background: {fileID: 21300000, guid: c5d45615d4470684f975f8035f04ed26, type: 3}
+  lightX: 800
+  characterTint: {r: 0.68, g: 0.7, b: 0.74, a: 1}
+  propTint: {r: 0.82, g: 0.72, b: 0.64, a: 1}
+  snow: []
+  lights:
+  - mode: 2
+    center: {x: 1505, y: 395}
+    size: {x: 560, y: 660}
+    color: {r: 0.35, g: 0.9, b: 0.85, a: 0.09}
+    min: 0
+    speed: 1
+    darken: 0.55
+  - mode: 1
+    center: {x: 578, y: 445}
+    size: {x: 200, y: 200}
+    color: {r: 1, g: 0.58, b: 0.22, a: 0.2}
+    min: 0.3
+    speed: 1
+    darken: 0
+  - mode: 1
+    center: {x: 1240, y: 455}
+    size: {x: 170, y: 170}
+    color: {r: 1, g: 0.58, b: 0.22, a: 0.2}
+    min: 0.3
+    speed: 1.2
+    darken: 0
+  faultyRoomDim: 0.32
+  ambience: {fileID: 8300000, guid: ee47b71df5d0fb644a7ec6a47eca3800, type: 3}
+  ambienceVolume: 0.35
+  ambienceCutoff: 22000
+  unlockDevLevel: 0
+  unlockQuestId: 
+  unlockLabel: 
+  unlockDescription: 
+  spots:
+  - id: floor
+    feet: {x: 830, y: 925}
+    height: 440
+    mirror: 0
+  - id: flask
+    feet: {x: 1000, y: 905}
+    height: 400
+    mirror: 0
+  props:
+  - sprite: {fileID: 21300000, guid: 2aee879e4af51774b958c247d0830eb4, type: 3}
+    feet: {x: 1190, y: 825}
+    height: 250
+    mirror: 0
+  - sprite: {fileID: 21300000, guid: 964134125091a4c4d8768a61703647d9, type: 3}
+    feet: {x: 235, y: 940}
+    height: 200
+    mirror: 0
+  facilities:
+  - link: 3
+    label: "\uC544\uCE74\uC774\uBE0C"
+    english: ARCHIVE
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 276
+      width: 198
+      height: 68
+  - link: 4
+    label: "\uD6C8\uB828\uC7A5"
+    english: TRAINING
+    rect:
+      serializedVersion: 2
+      x: 1636
+      y: 321
+      width: 209
+      height: 70
+  expansions: []

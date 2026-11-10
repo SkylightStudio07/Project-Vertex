@@ -199,7 +199,8 @@ MonoBehaviour:
   floatPeriod: 2.4
   cardOwner: 5
   unlockCardCoopLevel: []
-  campSprite: {fileID: 0}
+  campSprite: {fileID: 21300000, guid: 49d422d06b145c2478bf32fc8e3009e2, type: 3}
+  campHeightScale: 1
   campActivity: "\uCC3D \uB05D \uD68C\uC218 \uC7A5\uCE58 \uC810\uAC80 \uC911"
   campLines:
   - "\uC6A9\uAC74\uC740 \uC9E7\uAC8C. \uC138 \uBB38\uC7A5 \uB118\uC5B4\uAC00\uBA74
@@ -229,6 +230,13 @@ MonoBehaviour:
     - "\uC624\uB298\uC740\u2026 \uCC9C\uCC9C\uD788 \uC26C\uC5B4\uB3C4 \uB3FC. \uC774\uC0C1\uD558\uAC8C
       \uADF8\uB7EC\uACE0 \uC2F6\uB124."
     - "\uC606\uC5D0 \uC788\uC744\uAC8C. \uBE68\uB9AC \uB05D\uB0BC \uC0DD\uAC01 \uC5C6\uC774."
+  baseSpots:
+  - zoneId: hangar
+    spotId: rack
+    pose: {fileID: 21300000, guid: 137116eedaf672344a7f94122445fd0d, type: 3}
+    heightScale: 0.74
+    hover: 0
+    activity: "\uCC3D\uC744 \uB2E6\uB294 \uC911"
   joinRewardCard: {fileID: 11400000, guid: 9446a370d101e9541b9b848c54edec17, type: 2}
   skill: {fileID: 11400000, guid: 640385c6dd5204a479b039924770c65e, type: 2}
   joinDialogueJson: {fileID: 4900000, guid: 51cf66b602942fa469b1909b845c6521, type: 3}

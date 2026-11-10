@@ -124,4 +124,7 @@ Assets/Resources/<UI>/    게임이 읽는 조각 (Extracted에서 PNG만 복사
 | 대화 선택지 v2 | `DialogueMockup/Choice_v2/` | `Choice_v1/Extracted_v2/` + `Choice_v2/Extracted/` | `Resources/DialogueChoice/` |
 | 대화 선택지 v3 | `DialogueMockup/Redesign_v3/Choice_v3.png` | 요청 중 (`SPLIT_REQUEST.md`) | — |
 | 작전 개시 v7 | `BattleFxMockup/StartEnd_Redesign_v2/Operation_Start_Mockup_v7.png` | 요청 중 (`SPLIT_REQUEST_Start.md`) | — |
+| 적 속성 칩 · 기록 속성 줄 | `EnemyTraitMockup/` | `EnemyTraitMockup/Extracted/` | `Resources/EnemyTrait/` (`TraitChip`) |
+| 거점 (구역 탭 · 표지 · 이름표 · 잠김) | `BaseCampMockup/v2/` | `BaseCampMockup/Extracted/` | `Resources/BaseCamp/` (`BaseCampView`) |
+| 휴식 야영지 (행동 메뉴 · 이름표 · 모닥불 표지) | `RestCampMockup/` | `RestCampMockup/Extracted/` | `Resources/RestCamp/UI/` (`RestCampMenu`) |
 | (실패 사례) 질감만 다시 입히기 | — | `BattleFxMockup/Extracted_v2/` | 쓰지 않음 |

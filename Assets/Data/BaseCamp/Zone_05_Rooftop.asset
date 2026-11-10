@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20701a9f079aecb42b57f07f8a7d1ea5, type: 3}
+  m_Name: Zone_05_Rooftop
+  m_EditorClassIdentifier: Assembly-CSharp::BaseZoneData
+  id: rooftop
+  displayName: "\uC625\uC0C1"
+  englishName: ROOFTOP
+  background: {fileID: 21300000, guid: 3b8642dea7c106a4a908c4d7cb838456, type: 3}
+  lightX: 300
+  characterTint: {r: 0.66, g: 0.66, b: 0.76, a: 1}
+  propTint: {r: 0.74, g: 0.72, b: 0.74, a: 1}
+  unlockDevLevel: 0
+  unlockQuestId: rescue_welder
+  unlockLabel: "\uC758\uB8B0 \u300C\uC6A9\uC811\uACF5 \uAD6C\uCD9C\u300D \uC644\uB8CC
+    \uC2DC \uAC1C\uBC29"
+  unlockDescription: "\uC6A9\uC811\uACF5\uC744 \uAD6C\uCD9C\uD558\uBA74 \uC625\uC0C1\uC73C\uB85C
+    \uD5A5\uD558\uB294 \uAE38\uC774 \uC5F4\uB9BD\uB2C8\uB2E4."
+  spots:
+  - id: rail
+    feet: {x: 720, y: 880}
+    height: 260
+    mirror: 0
+  - id: antenna
+    feet: {x: 1220, y: 880}
+    height: 260
+    mirror: 1
+  props:
+  - sprite: {fileID: 21300000, guid: b4992356286ef494e9cc37d4b03f4f03, type: 3}
+    feet: {x: 1000, y: 905}
+    height: 190
+    mirror: 0
+  - sprite: {fileID: 21300000, guid: a7693e4cde2966045a334a2aa9eb4456, type: 3}
+    feet: {x: 700, y: 880}
+    height: 200
+    mirror: 0
+  facilities: []
+  expansions: []

@@ -105,6 +105,15 @@ public static class GroundImpactFx
         return img;
     }
 
+    // 먼지 색은 배경의 안개 색에 바닥 흙색을 섞는다
+    public static Color StageDustColor()
+    {
+        Color fog = BattleStageView.Active != null ? BattleStageView.Active.fogColor : new Color(0.55f, 0.58f, 0.62f);
+        Color dust = Color.Lerp(new Color(fog.r, fog.g, fog.b), new Color(0.62f, 0.58f, 0.52f), 0.5f);
+        dust.a = 0.55f;
+        return dust;
+    }
+
     // worldPos: 땅이 파이는 자리(월드). parent: 이펙트를 담을 RectTransform(보통 적 뷰). scale: 크기 배율. dust: 먼지 색
     public static void Play(RectTransform parent, Vector3 worldPos, float scale, Color dust)
     {

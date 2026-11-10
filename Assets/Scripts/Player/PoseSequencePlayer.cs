@@ -24,6 +24,7 @@ public class PoseSequencePlayer : MonoBehaviour
     private bool hasResting; // restingXxx가 실제 대기 포즈를 담고 있는지(트랜지션 중간값이 아닌지)
 
     private Coroutine playing;
+    public bool IsPlaying => playing != null;
     private Animator animator;
     private bool wasAnimatorEnabled;
     private UISpriteSheetAnimator sheetAnimator;
@@ -81,7 +82,8 @@ public class PoseSequencePlayer : MonoBehaviour
     /// </summary>
     // scaleMultiplier: 이 시트의 여백이 대기 시트와 달라 캐릭터가 작게/크게 보일 때 재생 중에만 곱하는 배율
     // (EnemyData.AttackScaleMultiplier). 그림 가운데를 기준으로 키운다.
-    public void Play(Sprite[] frames, float fps, float scaleMultiplier = 1f)
+    // holds: 프레임별 표시 길이 배수 (0이면 건너뜀, null이면 전부 1). blendInto: 넘어갈 때 겹쳐 나타나게 할 프레임 번호
+    public void Play(Sprite[] frames, float fps, float scaleMultiplier = 1f, float[] holds = null, int[] blendInto = null)
     {
         if (frames == null || frames.Length == 0) return;
 
@@ -103,11 +105,40 @@ public class PoseSequencePlayer : MonoBehaviour
             animator.enabled = false;
         }
 
-        playing = StartCoroutine(PlaySpriteFrames(frames, fps, scaleMultiplier));
+        playing = StartCoroutine(PlaySpriteFrames(frames, fps, scaleMultiplier, holds, blendInto));
+    }
+
+    [Tooltip("blendInto 프레임으로 넘어가기 전, 앞 프레임 표시 시간의 몇 할 동안 다음 프레임을 겹쳐 보일지")]
+    [SerializeField, Range(0.1f, 1f)] private float blendPortion = 0.5f;
+    [Tooltip("겹쳐 보이는 다음 프레임의 최대 불투명도 (넘어가는 순간 1이 된다)")]
+    [SerializeField, Range(0.1f, 1f)] private float blendMaxAlpha = 0.45f;
+    private Image blendImage;
+
+    // 다음 프레임을 앞 프레임 위에 겹쳐 그리는 자식 Image. 같은 틀로 자른 프레임이라 부모를 꽉 채우면 위치가 맞는다
+    private Image EnsureBlendImage()
+    {
+        if (blendImage != null) return blendImage;
+        var go = new GameObject("__FrameBlend", typeof(RectTransform), typeof(Image));
+        var brt = (RectTransform)go.transform;
+        brt.SetParent(rt, false);
+        brt.SetAsFirstSibling(); // 총구 섬광 등 다른 덧그림보다 아래
+        brt.anchorMin = Vector2.zero; brt.anchorMax = Vector2.one;
+        brt.offsetMin = brt.offsetMax = Vector2.zero;
+        blendImage = go.GetComponent<Image>();
+        blendImage.raycastTarget = false;
+        blendImage.preserveAspect = true;
+        blendImage.enabled = false;
+        return blendImage;
+    }
+
+    private void HideBlend()
+    {
+        if (blendImage != null) blendImage.enabled = false;
     }
 
     private void RestoreResting()
     {
+        HideBlend();
         if (sheetAnimator != null && wasSheetAnimatorPlaying)
         {
             sheetAnimator.Resume();
@@ -204,7 +235,7 @@ public class PoseSequencePlayer : MonoBehaviour
         playing = null;
     }
 
-    private IEnumerator PlaySpriteFrames(Sprite[] frames, float fps, float scaleMultiplier)
+    private IEnumerator PlaySpriteFrames(Sprite[] frames, float fps, float scaleMultiplier, float[] holds, int[] blendInto)
     {
         if (rt.anchorMin != rt.anchorMax)
         {
@@ -235,7 +266,7 @@ public class PoseSequencePlayer : MonoBehaviour
                                   + new Vector2(c.x * restingScale.x, c.y * restingScale.y) * (1f - scaleMultiplier);
         }
 
-        float delay = 1f / Mathf.Max(1f, fps);
+        float step = 1f / Mathf.Max(1f, fps);
 
         // 공격 프레임 높이 = 대기 그림이 영역 안에 실제로 그려진 높이. 시트마다 해상도가 달라도(주인공) 같은 틀로 잘랐으면 크기가 맞는다.
         // 예전엔 영역 높이를 그대로 써서, 가로로 넓은 시트(제파러)는 대기 때 폭에 맞춰 작게 그려지다가 공격 때 커졌다
@@ -247,17 +278,66 @@ public class PoseSequencePlayer : MonoBehaviour
             drawnHeight = Mathf.Min(box.y, box.x / aspect);
         }
 
+        // 프레임마다 시작 시각을 미리 정해 두고, 흐른 시간으로 보여줄 프레임을 고른다.
+        // (WaitForSeconds를 프레임마다 기다리면 화면 갱신 주기에 맞춰 반올림돼 간격이 들쭉날쭉하고, 오차가 쌓여 느려진다)
+        var keep = new System.Collections.Generic.List<int>(frames.Length);
+        var start = new System.Collections.Generic.List<float>(frames.Length + 1);
+        float acc = 0f;
         for (int i = 0; i < frames.Length; i++)
         {
-            Sprite f = frames[i];
-            if (f != null)
+            float hold = holds != null && i < holds.Length ? holds[i] : 1f;
+            if (hold <= 0f) continue;
+            keep.Add(i);
+            start.Add(acc);
+            acc += step * hold;
+        }
+        start.Add(acc);
+
+        float t0 = Time.time;
+        int shown = -1;
+        while (keep.Count > 0)
+        {
+            float t = Time.time - t0;
+            if (t >= acc) break;
+
+            int target = Mathf.Max(shown, 0);
+            while (target + 1 < keep.Count && t >= start[target + 1]) target++;
+            // 화면 한 번 갱신하는 사이에 여러 장을 지나쳐도 이벤트(총구 섬광 등)는 빠짐없이 순서대로 보낸다
+            while (shown < target)
             {
-                image.sprite = f;
-                Rect r = f.rect;
-                if (r.height > 0f) rt.sizeDelta = new Vector2(drawnHeight * r.width / r.height, drawnHeight);
+                shown++;
+                int idx = keep[shown];
+                Sprite f = frames[idx];
+                if (f != null)
+                {
+                    image.sprite = f;
+                    Rect r = f.rect;
+                    if (r.height > 0f) rt.sizeDelta = new Vector2(drawnHeight * r.width / r.height, drawnHeight);
+                }
+                OnSpriteFrameShown?.Invoke(frames, idx);
             }
-            OnSpriteFrameShown?.Invoke(frames, i);
-            yield return new WaitForSeconds(delay);
+
+            // 다음 프레임이 겹침 대상이면, 지금 프레임 끝 무렵에 서서히 겹쳐 보인다
+            int next = shown + 1 < keep.Count ? keep[shown + 1] : -1;
+            if (next >= 0 && blendInto != null && System.Array.IndexOf(blendInto, next) >= 0 && frames[next] != null)
+            {
+                float dur = start[shown + 1] - start[shown];
+                float p = dur > 0f ? (t - start[shown]) / dur : 1f;
+                float a = Mathf.InverseLerp(1f - blendPortion, 1f, p);
+                var b = EnsureBlendImage();
+                if (a > 0f)
+                {
+                    b.sprite = frames[next];
+                    b.material = image.material;
+                    Color c = image.color; c.a *= a * a * (3f - 2f * a) * blendMaxAlpha;
+                    b.color = c;
+                    b.enabled = true;
+                }
+                else b.enabled = false;
+            }
+            else HideBlend();
+
+            yield return null;
         }
 
         RestoreResting();

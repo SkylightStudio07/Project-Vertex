@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20701a9f079aecb42b57f07f8a7d1ea5, type: 3}
+  m_Name: Zone_01_Quarters
+  m_EditorClassIdentifier: Assembly-CSharp::BaseZoneData
+  id: quarters
+  displayName: "\uAC70\uC8FC\uAD6C"
+  englishName: QUARTERS
+  background: {fileID: 21300000, guid: 6ff00a415f2614e4f8575dd8740cd332, type: 3}
+  lightX: 1380
+  characterTint: {r: 0.7, g: 0.66, b: 0.72, a: 1}
+  propTint: {r: 0.86, g: 0.8, b: 0.76, a: 1}
+  snow:
+  - front: 0
+    mask: {fileID: 21300000, guid: a112fcb4a36662e4fbfc43f861a23a7d, type: 3}
+    maskArea:
+      serializedVersion: 2
+      x: 519
+      y: 335
+      width: 620
+      height: 213
+    spawn:
+      serializedVersion: 2
+      x: 330
+      y: 170
+      width: 800
+      height: 300
+    count: 70
+    velocity: {x: 210, y: 300}
+    jitter: {x: 45, y: 60}
+    size: {x: 1.6, y: 3.2}
+    stretch: 2.6
+    life: {x: 1, y: 1.6}
+    grow: 0
+    alpha: 0.55
+    wobble: 2
+  - front: 0
+    mask: {fileID: 21300000, guid: a112fcb4a36662e4fbfc43f861a23a7d, type: 3}
+    maskArea:
+      serializedVersion: 2
+      x: 519
+      y: 335
+      width: 620
+      height: 213
+    spawn:
+      serializedVersion: 2
+      x: 280
+      y: 120
+      width: 800
+      height: 320
+    count: 26
+    velocity: {x: 420, y: 560}
+    jitter: {x: 70, y: 80}
+    size: {x: 2.4, y: 4.2}
+    stretch: 3.6
+    life: {x: 0.6, y: 0.9}
+    grow: 0
+    alpha: 0.7
+    wobble: 0
+  lights: []
+  faultyRoomDim: 0
+  ambience: {fileID: 8300000, guid: 3260a92ba3283664dab1e55a6ebf2b8c, type: 3}
+  ambienceVolume: 0.45
+  ambienceCutoff: 22000
+  unlockDevLevel: 0
+  unlockQuestId: 
+  unlockLabel: 
+  unlockDescription: 
+  spots:
+  - id: post
+    feet: {x: 525, y: 790}
+    height: 375
+    mirror: 1
+  - id: stove
+    feet: {x: 1110, y: 835}
+    height: 405
+    mirror: 1
+  - id: rug
+    feet: {x: 790, y: 900}
+    height: 430
+    mirror: 0
+  props:
+  - sprite: {fileID: 21300000, guid: 2700e28b1db222141b2c4d499b9cfef1, type: 3}
+    feet: {x: 140, y: 985}
+    height: 250
+    mirror: 0
+  facilities: []
+  expansions:
+  - devLevel: 6
+    rect:
+      serializedVersion: 2
+      x: 1640
+      y: 450
+      width: 253
+      height: 48

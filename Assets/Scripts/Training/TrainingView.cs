@@ -5,15 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // 로비 훈련장 화면. 무기고·의뢰 게시판처럼 로비 버튼이 SetActive(true)로 연다. 기획: Docs/기획/훈련장.md
-//   메인: 상대(3회 이상 격퇴한 조우) · 선택한 상대 그림 · 동료(호감도 조건, 최대 3명) · 덱 요약 → 출격
+//   메인: 상대(일반은 적 단위로 최대 3기 편성, 엘리트 · 보스는 조우 단위) · 선택한 상대 그림 · 동료(호감도 조건, 최대 3명) · 덱 요약 → 출격
 //   덱 편집: 해금 카드(시작 덱 + 런에서 얻은 적 있는 카드) 격자 + 필터, 현재 덱 −/+  (장수 제한 없음, 최소 1장)
 // 아트: Assets/Art/Lobby/Training (원본 ArtDirection/TrainingMockup/Extracted, 좌표는 그 layout.json — 1672×941 좌상단)
 public class TrainingView : MonoBehaviour
 {
     public const int RequiredDefeats = 3;
+    public const int MaxLineup = 3; // 일반 적 직접 편성 상한
 
     [Header("목록 데이터")]
-    [Tooltip("훈련 상대 후보 조우 (일반·엘리트·보스)")]
+    [Tooltip("훈련 상대 후보 조우 (일반·엘리트·보스). 일반 조우는 안의 적이 한 마리씩 목록에 오른다")]
     [SerializeField] private List<EnemyEncounter> encounters = new();
     [Tooltip("덱 구성 후보 카드. 이 중 시작 덱 카드와 런에서 얻은 적 있는 카드만 덱에 넣을 수 있다")]
     [SerializeField] private List<CardData> cardLibrary = new();
@@ -105,12 +106,18 @@ public class TrainingView : MonoBehaviour
     private readonly HashSet<string> _startingKeys = new();
     private readonly Dictionary<string, string> _ownerOfCard = new(); // 카드 키 → "player" / "neutral" / charID
     private EnemyEncounter _encounter;
+    private readonly List<EnemyData> _lineup = new(); // 일반 적 직접 편성 (고른 순서 = 전투 배치 순서)
+    private EnemyEncounter _lineupEncounter;          // 편성을 전투에 넘기는 런타임 조우
     private string _ownerFilter = "all";
 
     private void Awake()
     {
         // 비율 유지 그림은 칸보다 좁으면 피벗 쪽으로 붙는다. 적 그림이 원판 가운데 서도록 피벗만 가운데로 옮긴다(칸 위치는 그대로)
         CenterPivot(previewArt.rectTransform);
+        // 이름이 긴 적도 미리보기 칸 안에 들어오게 줄인다
+        previewName.fontSizeMax = previewName.fontSize;
+        previewName.fontSizeMin = 28f;
+        previewName.enableAutoSizing = true;
         targetRowTemplate.gameObject.SetActive(false);
         companionTemplate.gameObject.SetActive(false);
         deckRowTemplate.gameObject.SetActive(false);
@@ -151,7 +158,7 @@ public class TrainingView : MonoBehaviour
             foreach (var card in DeckManager.Instance.PlayerDeck) _startingKeys.Add(PlayerRecord.KeyOf(card));
         if (_deck.Count == 0) ResetDeck();
         _companions.RemoveAll(id => !IsCompanionAvailable(companions.Find(c => c != null && c.charID == id)));
-        if (_encounter != null && !IsEncounterUnlocked(_encounter)) _encounter = null;
+        if (_encounter != null && !IsEncounterUnlocked(_encounter)) { _encounter = null; _lineup.Clear(); }
         BuildOwnerMap();
         ShowScreen(Screen.Main);
     }
@@ -173,6 +180,8 @@ public class TrainingView : MonoBehaviour
 #else
     private const bool DebugUnlockAll = false;
 #endif
+
+    private static bool IsEnemyUnlocked(EnemyData enemy) => DebugUnlockAll || MaterialArchive.IsTrainingUnlocked(enemy);
 
     private static int RequiredDefeatsOf(EnemyEncounter encounter)
         => encounter.enemies == null ? RequiredDefeats
@@ -257,17 +266,30 @@ public class TrainingView : MonoBehaviour
     {
         Clear(_spawned);
 
-        int unlocked = 0;
-        // 열린 조우를 먼저, 같은 조건이면 일반 → 엘리트 → 보스
-        foreach (var enc in encounters.Where(e => e != null).OrderByDescending(IsEncounterUnlocked).ThenBy(e => (int)e.encounterType))
+        var normals = encounters.Where(e => e != null && e.encounterType == EnemyEncounterType.Normal && e.enemies != null)
+                                .SelectMany(e => e.enemies).Where(e => e != null).Distinct().ToList();
+        var specials = encounters.Where(e => e != null && e.encounterType != EnemyEncounterType.Normal)
+                                 .OrderBy(e => (int)e.encounterType).ToList();
+
+        // 열린 상대를 먼저, 같은 조건이면 일반 → 엘리트 → 보스
+        foreach (bool open in new[] { true, false })
         {
-            bool open = IsEncounterUnlocked(enc);
-            if (open) unlocked++;
-            var target = enc;
-            Spawn(targetRowTemplate, targetList, _spawned).Bind(enc, EncounterName(enc), LowestDefeatCount(enc), RequiredDefeatsOf(enc),
-                open, enc == _encounter, () => { _encounter = _encounter == target ? null : target; RefreshMain(); });
+            foreach (var enemy in normals.Where(e => IsEnemyUnlocked(e) == open))
+            {
+                var target = enemy;
+                int picked = _lineup.Count(e => e == target);
+                Spawn(targetRowTemplate, targetList, _spawned).BindEnemy(enemy, picked > 1 ? $"×{picked} {enemy.enemyName}" : enemy.enemyName,
+                    PlayerRecord.GetDefeatCount(enemy), MaterialArchive.RequiredDefeats(enemy, 0), open, picked > 0,
+                    () => AddToLineup(target), () => RemoveFromLineup(target));
+            }
+            foreach (var enc in specials.Where(e => IsEncounterUnlocked(e) == open))
+            {
+                var target = enc;
+                Spawn(targetRowTemplate, targetList, _spawned).Bind(enc, EncounterName(enc), LowestDefeatCount(enc), RequiredDefeatsOf(enc),
+                    open, enc == _encounter, () => { _lineup.Clear(); _encounter = _encounter == target ? null : target; RefreshMain(); });
+            }
         }
-        targetCountText.text = $"{unlocked} / {encounters.Count(e => e != null)}";
+        targetCountText.text = $"{normals.Count(IsEnemyUnlocked) + specials.Count(IsEncounterUnlocked)} / {normals.Count + specials.Count}";
         RefreshPreview();
 
         // 메인은 동행 칸 3개만: 편성된 동료 + 빈 칸. 어느 칸이든 누르면 동료 편성 페이지
@@ -287,6 +309,47 @@ public class TrainingView : MonoBehaviour
         sortieButton.interactable = _encounter != null && _deck.Count > 0;
     }
 
+    private void AddToLineup(EnemyData enemy)
+    {
+        if (_lineup.Count >= MaxLineup) return;
+        _lineup.Add(enemy);
+        SyncLineup();
+    }
+
+    private void RemoveFromLineup(EnemyData enemy)
+    {
+        if (_lineup.Remove(enemy)) SyncLineup();
+    }
+
+    // 전투 · 결과 화면은 조우를 읽으므로 편성을 런타임 조우에 담아 넘긴다
+    private void SyncLineup()
+    {
+        if (_lineup.Count == 0)
+        {
+            _encounter = null;
+        }
+        else
+        {
+            if (_lineupEncounter == null)
+            {
+                _lineupEncounter = ScriptableObject.CreateInstance<EnemyEncounter>();
+                _lineupEncounter.name = "훈련 편성";
+                _lineupEncounter.encounterType = EnemyEncounterType.Normal;
+            }
+            _lineupEncounter.enemies = new List<EnemyData>(_lineup);
+            _encounter = _lineupEncounter;
+        }
+        RefreshMain();
+    }
+
+    // 미리보기 그림은 첫 적이므로 이름도 첫 적 기준. 구성은 목록의 선택 표시로 본다
+    private string LineupName()
+    {
+        string first = _lineup[0].enemyName;
+        if (_lineup.Count == 1) return first;
+        return _lineup.Distinct().Count() == 1 ? $"{first} ×{_lineup.Count}" : $"{first} 외 {_lineup.Count - 1}기";
+    }
+
     private static void CenterPivot(RectTransform rt)
     {
         Vector2 delta = new Vector2(0.5f, 0.5f) - rt.pivot;
@@ -302,12 +365,13 @@ public class TrainingView : MonoBehaviour
         previewArt.enabled = has;
         if (!has) return;
 
-        var first = _encounter.enemies.FirstOrDefault(e => e != null);
+        var first = _encounter.Headliner;
         previewArt.sprite = first == null ? null
             : first.enemyImage != null ? first.enemyImage
             : first.idleFrames != null && first.idleFrames.Length > 0 ? first.idleFrames[0] : null;
         previewArt.enabled = previewArt.sprite != null;
-        previewName.text = EncounterName(_encounter);
+        bool lineup = _encounter == _lineupEncounter;
+        previewName.text = lineup ? LineupName() : EncounterName(_encounter);
         previewBadge.sprite = _encounter.encounterType switch
         {
             EnemyEncounterType.Elite => badgeElite,
@@ -316,7 +380,9 @@ public class TrainingView : MonoBehaviour
         };
         previewBadgeLabel.text = TypeLabel(_encounter.encounterType);
         previewBadgeLabel.color = _encounter.encounterType == EnemyEncounterType.Normal ? new Color(0.086f, 0.094f, 0.106f) : Color.white;
-        previewAnalysis.text = $"분석 완료  ·  격퇴 {LowestDefeatCount(_encounter)}회";
+        previewAnalysis.text = lineup
+            ? $"편성 {_lineup.Count} / {MaxLineup}  ·  왼쪽 클릭 추가, 오른쪽 클릭 빼기"
+            : $"분석 완료  ·  격퇴 {LowestDefeatCount(_encounter)}회";
     }
 
     private IEnumerable<(CardData card, int count)> GroupedDeck()
@@ -489,6 +555,7 @@ public class TrainingView : MonoBehaviour
             int paren = enc.bossTitle.IndexOf(" (", System.StringComparison.Ordinal);
             return paren > 0 ? enc.bossTitle.Substring(0, paren) : enc.bossTitle;
         }
+        if (enc.headliner != null) return enc.headliner.enemyName;
         var names = enc.enemies?.Where(e => e != null).Select(e => e.enemyName).Distinct().ToList();
         return names != null && names.Count > 0 ? string.Join(" · ", names) : enc.name;
     }
