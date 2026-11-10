@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: "\uC2EC\uD310"
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
   intentType: 0
+  displayName: 
   effects:
   - rid: 7338471699195101324
   references:
@@ -21,15 +22,27 @@ MonoBehaviour:
     - rid: 7338471699195101324
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 4
+        amount: 5
         scaling:
-          source: 1
-          target: 2
-          status: {fileID: 11400000, guid: 10000000000000000000000000000008, type: 2}
+          source: 0
+          target: 0
+          status: {fileID: 0}
           multiplier: 0
-          flatBonus: 1
+          flatBonus: 0
+          percent: 0
+        conditionalBonuses: []
         hitCount: 3
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
+        environmentalDamage: 0
         hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0

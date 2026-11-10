@@ -13,6 +13,7 @@ public abstract class StatusBehavior
     public virtual void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnEnemyActionEnd(StatusInstance status, CardContext context, EnemyAction action) { }
+    public virtual void OnIncomingEnemyActionEnd(StatusInstance status, CardContext context, EnemyAction action) { }
     public virtual void OnDeath(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnCardPlayed(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual DamageInfo ModifyOutgoingDamage(StatusInstance status, DamageInfo info, BattleState state, bool preview) => info;

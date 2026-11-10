@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: Pressured
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: status.pressured
-  displayName: "\uC751\uC2DC"
-  description: "\uC2EC\uD310\uC774 \uC18C\uBE44\uD558\uB294 \uC9C0\uC18D \uB514\uBC84\uD504\uC785\uB2C8\uB2E4."
+  displayName: "\uC555\uBC15\uAC10"
+  description: "\uB2E4\uC74C\uC5D0 \uBC1B\uB294 \uACF5\uACA9\uC758 \uBAA8\uB4E0 \uD0C0\uACA9
+    \uD53C\uD574\uAC00 \uC2A4\uD0DD\uB9CC\uD07C \uC99D\uAC00\uD569\uB2C8\uB2E4. \uACF5\uACA9
+    \uD589\uB3D9\uC774 \uB05D\uB098\uBA74 \uBAA8\uB450 \uC81C\uAC70\uB429\uB2C8\uB2E4."
   icon: {fileID: 802980995551194373, guid: 2f8c4c6e350ae5f49855933ec3444b2e, type: 3}
   disposition: 2
   stackPolicy: 0
-  durationPolicy: 1
+  durationPolicy: 2
   maxStacks: 0
   dispellable: 1
-  behaviors: []
+  behaviors:
+  - rid: 8172648052692090976
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8172648052692090976
+      type: {class: NextIncomingAttackDamageStatusBehavior, ns: , asm: Assembly-CSharp}
+      data: 

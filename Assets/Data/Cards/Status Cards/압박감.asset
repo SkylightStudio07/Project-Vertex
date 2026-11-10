@@ -18,8 +18,11 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 7
   isWeaponShootingCard: 0
-  cardDescription: "\uD134 \uC885\uB8CC \uC2DC \uC8FC\uC2DC 1\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
+  cardDescription: "\uD134 \uC885\uB8CC \uC2DC \uC190\uD328\uC5D0 \uB0A8\uC544 \uC788\uC73C\uBA74
+    \uC555\uBC15\uAC10 1\uC2A4\uD0DD\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uC555\uBC15\uAC10"
@@ -46,6 +49,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7201000000000000006
       type: {class: ApplyStatusAtEndTurnInHandEffect, ns: , asm: Assembly-CSharp}
       data:

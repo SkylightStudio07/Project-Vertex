@@ -417,6 +417,7 @@ public class EnemyInstance : ICombatant
             EffectRunner.ExecuteImmediate(action.effects, ctx);
         }
 
+        state.Player?.Statuses.NotifyIncomingEnemyActionEnd(state, state.Player, this, action);
         _statuses.NotifyEnemyActionEnd(state, this, action);
         AdvancePattern();
         OnIntentChanged?.Invoke(); // 다음 턴에 보여줄 인텐트가 바뀌었으니 뷰 갱신 알림
@@ -440,6 +441,7 @@ public class EnemyInstance : ICombatant
             yield return EffectRunner.ExecuteSequence(action.effects, context);
         }
 
+        state.Player?.Statuses.NotifyIncomingEnemyActionEnd(state, state.Player, this, action);
         _statuses.NotifyEnemyActionEnd(state, this, action);
         AdvancePattern();
         OnIntentChanged?.Invoke();
