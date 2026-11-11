@@ -148441,24 +148441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee721e658f975844fbbb91b98870ce04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingView
-  encounters:
-  - {fileID: 11400000, guid: 222cd4447b2ee4245bbb411707336c12, type: 2}
-  - {fileID: 11400000, guid: d214807138b272d449b52338fcec29da, type: 2}
-  - {fileID: 11400000, guid: e29a8d59fe084503b2b1c6894e35f67a, type: 2}
-  - {fileID: 11400000, guid: 7f6d6ab52f05e79459370dc7a92d28a3, type: 2}
-  - {fileID: 11400000, guid: 0105cc21e3e74f6591ca0b750db35001, type: 2}
-  - {fileID: 11400000, guid: 11bb3c5c2755529ab547dafeee2e3ffa, type: 2}
-  - {fileID: 11400000, guid: 0e8e699bb4c05a1b840b91ce16be549d, type: 2}
-  - {fileID: 11400000, guid: 55b9db48196c516ea1d4545e26407553, type: 2}
-  - {fileID: 11400000, guid: a46c476622c953968d16d85334612307, type: 2}
-  - {fileID: 11400000, guid: 5b1c572c02b251c0ad3205fe6de008a3, type: 2}
-  - {fileID: 11400000, guid: 5fcab9c7f30759fd8f08783dca01176a, type: 2}
-  - {fileID: 11400000, guid: edd1226cc9ba5fdfba53b7e0148deb96, type: 2}
-  - {fileID: 11400000, guid: ba082de310bba1c4185f86ec35d98738, type: 2}
-  - {fileID: 11400000, guid: d4a5e1390c4a95c429288416807710e7, type: 2}
-  - {fileID: 11400000, guid: b2bb8e682cb2db04ebca5a9242bed878, type: 2}
-  - {fileID: 11400000, guid: 9bd31a0134c8f5a44942afb1ddc365a0, type: 2}
-  - {fileID: 11400000, guid: 58b6528c5d29ef34481f1a513b07c14d, type: 2}
+  roster: {fileID: 11400000, guid: d0ef07acf2da2634a8b9079af91c39e5, type: 2}
   cardLibrary:
   - {fileID: 11400000, guid: 4d1346802760f0e4d998a1a4f54705cf, type: 2}
   - {fileID: 11400000, guid: d5f8a3dee4ce5424d830ea99897bf6f6, type: 2}

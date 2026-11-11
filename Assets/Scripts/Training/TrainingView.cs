@@ -14,8 +14,8 @@ public class TrainingView : MonoBehaviour
     public const int MaxLineup = 3; // 일반 적 직접 편성 상한
 
     [Header("목록 데이터")]
-    [Tooltip("훈련 상대 후보 조우 (일반·엘리트·보스). 일반 조우는 안의 적이 한 마리씩 목록에 오른다")]
-    [SerializeField] private List<EnemyEncounter> encounters = new();
+    [Tooltip("훈련 상대 후보 조우 목록 (Data/Training/TrainingRoster). 새 적은 씬이 아니라 이 에셋에 추가한다")]
+    [SerializeField] private TrainingRosterSO roster;
     [Tooltip("덱 구성 후보 카드. 이 중 시작 덱 카드와 런에서 얻은 적 있는 카드만 덱에 넣을 수 있다")]
     [SerializeField] private List<CardData> cardLibrary = new();
     [SerializeField] private List<CoopCharData> companions = new();
@@ -266,6 +266,7 @@ public class TrainingView : MonoBehaviour
     {
         Clear(_spawned);
 
+        var encounters = roster != null ? roster.encounters : new List<EnemyEncounter>();
         var normals = encounters.Where(e => e != null && e.encounterType == EnemyEncounterType.Normal && e.enemies != null)
                                 .SelectMany(e => e.enemies).Where(e => e != null).Distinct().ToList();
         var specials = encounters.Where(e => e != null && e.encounterType != EnemyEncounterType.Normal)
