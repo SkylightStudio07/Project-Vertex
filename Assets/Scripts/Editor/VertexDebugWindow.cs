@@ -192,6 +192,18 @@ public class VertexDebugWindow : EditorWindow
             EditorPrefs.SetBool(TrainingView.DebugUnlockPref, next);
             TrainingView.DebugUnlockAll = next;
         }
+        bool debugCards = EditorPrefs.GetBool(DeckManager.DebugCardsPref, false);
+        bool nextCards = EditorGUILayout.ToggleLeft("시작 덱에 디버그 카드 (디버그_공격 · 디버그_방어) — 다음 로비 진입부터", debugCards);
+        if (nextCards != debugCards)
+        {
+            EditorPrefs.SetBool(DeckManager.DebugCardsPref, nextCards);
+            DeckManager.DebugCardsInStartingDeck = nextCards;
+        }
+        using (new EditorGUI.DisabledScope(!Application.isPlaying || DeckManager.Instance == null))
+        {
+            if (GUILayout.Button("디버그 카드 지금 덱에 넣기 (1회성 · 전투 중이면 뽑을 더미에도)", GUILayout.Width(360)))
+                Debug.Log($"[디버그] 디버그 카드 {DeckManager.Instance.AddDebugCardsNow()}장을 덱에 넣음");
+        }
         EditorGUILayout.Space(4);
 
         if (_encounters == null)
