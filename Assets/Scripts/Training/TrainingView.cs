@@ -16,9 +16,12 @@ public class TrainingView : MonoBehaviour
     [Header("목록 데이터")]
     [Tooltip("훈련 상대 후보 조우 목록 (Data/Training/TrainingRoster). 새 적은 씬이 아니라 이 에셋에 추가한다")]
     [SerializeField] private TrainingRosterSO roster;
-    [Tooltip("덱 구성 후보 카드. 이 중 시작 덱 카드와 런에서 얻은 적 있는 카드만 덱에 넣을 수 있다")]
-    [SerializeField] private List<CardData> cardLibrary = new();
-    [SerializeField] private List<CoopCharData> companions = new();
+    [Tooltip("덱 구성 후보 카드의 출처. 시작 덱 + 이 보상 풀 + 동료 카드에서 모은다 (무기고 카드 도감과 같은 방식). 시작 덱 카드와 런에서 얻은 적 있는 카드만 덱에 넣을 수 있다")]
+    [SerializeField] private PlayerRewardPoolSO playerRewardPool;
+    [Tooltip("동료 · 기록 대상 적 목록 (Data/Lobby/LobbyRoster). 인물을 추가할 때 씬이 아니라 이 에셋을 고친다")]
+    [SerializeField] private LobbyRosterSO lobbyRoster;
+    private List<CoopCharData> companions => lobbyRoster != null ? lobbyRoster.companions : NoCompanions;
+    private static readonly List<CoopCharData> NoCompanions = new();
     [Tooltip("출격하면 넘어갈 전투 씬 (Build Settings에 있어야 한다)")]
     [SerializeField] private string runSceneName = "DevelopScene - Phase 3";
 
@@ -104,6 +107,7 @@ public class TrainingView : MonoBehaviour
     private readonly List<CardData> _deck = new();
     private readonly List<string> _companions = new();
     private readonly HashSet<string> _startingKeys = new();
+    private readonly List<CardData> _library = new(); // 덱 구성 후보 (시작 덱 · 보상 풀 · 동료 카드, 중복 제거)
     private readonly Dictionary<string, string> _ownerOfCard = new(); // 카드 키 → "player" / "neutral" / charID
     private EnemyEncounter _encounter;
     private readonly List<EnemyData> _lineup = new(); // 일반 적 직접 편성 (고른 순서 = 전투 배치 순서)
@@ -156,6 +160,7 @@ public class TrainingView : MonoBehaviour
         _startingKeys.Clear();
         if (DeckManager.Instance != null)
             foreach (var card in DeckManager.Instance.PlayerDeck) _startingKeys.Add(PlayerRecord.KeyOf(card));
+        BuildLibrary();
         if (_deck.Count == 0) ResetDeck();
         _companions.RemoveAll(id => !IsCompanionAvailable(companions.Find(c => c != null && c.charID == id)));
         if (_encounter != null && !IsEncounterUnlocked(_encounter)) { _encounter = null; _lineup.Clear(); }
@@ -203,7 +208,28 @@ public class TrainingView : MonoBehaviour
     private bool IsCardUnlocked(CardData card) => card != null &&
         (_startingKeys.Contains(PlayerRecord.KeyOf(card)) || PlayerRecord.HasObtained(card));
 
-    private IEnumerable<CardData> LibraryCards => cardLibrary.Where(c => c != null && !string.IsNullOrWhiteSpace(c.CardName));
+    private IEnumerable<CardData> LibraryCards => _library;
+
+    // 덱 구성 후보를 모은다. 씬에 카드 목록을 따로 들고 있지 않아서 카드가 늘어도 손볼 것이 없다
+    private void BuildLibrary()
+    {
+        _library.Clear();
+        var seen = new HashSet<string>();
+        void Add(CardData c)
+        {
+            if (c == null || string.IsNullOrWhiteSpace(c.CardName)) return;
+            if (seen.Add(PlayerRecord.KeyOf(c))) _library.Add(c);
+        }
+        if (DeckManager.Instance != null) foreach (var c in DeckManager.Instance.PlayerDeck) Add(c);
+        if (playerRewardPool != null)
+        {
+            foreach (var c in playerRewardPool.commonCards) Add(c);
+            foreach (var c in playerRewardPool.rareCards) Add(c);
+            foreach (var c in playerRewardPool.uniqueCards) Add(c);
+        }
+        foreach (var ch in companions.Where(c => c != null))
+            foreach (var c in ch.OwnedCards()) Add(c);
+    }
 
     // 기본 덱 = 지금 로비의 시작 덱 (LobbyManager가 로비 진입 때 만들어 둔다)
     private void ResetDeck()
@@ -213,7 +239,7 @@ public class TrainingView : MonoBehaviour
         foreach (var card in DeckManager.Instance.PlayerDeck)
         {
             string key = PlayerRecord.KeyOf(card);
-            _deck.Add(cardLibrary.Find(c => PlayerRecord.KeyOf(c) == key) ?? card);
+            _deck.Add(_library.Find(c => PlayerRecord.KeyOf(c) == key) ?? card);
         }
     }
 

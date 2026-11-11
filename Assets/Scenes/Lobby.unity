@@ -27744,12 +27744,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 734d5a08500e3fd4889a1c778d422f29, type: 2}
   - {fileID: 11400000, guid: 9452d458ea2d3244c88ebbc5d2134be0, type: 2}
   - {fileID: 11400000, guid: 28036b87dab5fad439df2861f63f4552, type: 2}
-  companions:
-  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
-  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
-  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
-  - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
-  - {fileID: 11400000, guid: a644725714c87d74cab7c15855ae4157, type: 2}
+  roster: {fileID: 11400000, guid: 545566a0f6ea6e24fb8dd62b6e2a75f9, type: 2}
   archiveView: {fileID: 1046408007}
   trainingView: {fileID: 1976633455}
   armoryView: {fileID: 133523887}
@@ -43782,10 +43777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardCatalogView
   startingDeckSource: {fileID: 699179263}
   playerRewardPool: {fileID: 11400000, guid: 1abc2608217e25c4d88a264bc9af934c, type: 2}
-  coopCharacters:
-  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
-  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
-  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
+  roster: {fileID: 11400000, guid: 545566a0f6ea6e24fb8dd62b6e2a75f9, type: 2}
   entryPrefab: {fileID: 4845537230710256102, guid: aa79a021c9e1ea745ad70a3721f8ca00, type: 3}
   gridContent: {fileID: 49285301}
   countText: {fileID: 733485707}
@@ -48039,10 +48031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardCatalogView
   startingDeckSource: {fileID: 699179263}
   playerRewardPool: {fileID: 11400000, guid: 1abc2608217e25c4d88a264bc9af934c, type: 2}
-  coopCharacters:
-  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
-  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
-  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
+  roster: {fileID: 11400000, guid: 545566a0f6ea6e24fb8dd62b6e2a75f9, type: 2}
   entryPrefab: {fileID: 2132563626}
   gridContent: {fileID: 1350780525}
   countText: {fileID: 1026635055}
@@ -83028,27 +83017,7 @@ MonoBehaviour:
   - {fileID: 1260768758}
   - {fileID: 1213995463}
   - {fileID: 1861315253}
-  enemies:
-  - {fileID: 11400000, guid: 0c1bb41d3a098624ea18ea7e0ebdd72b, type: 2}
-  - {fileID: 11400000, guid: d5989274ba2deed4e95cfe17798b8500, type: 2}
-  - {fileID: 11400000, guid: 2f5cf33ad5231844d8cda24aa220695f, type: 2}
-  - {fileID: 11400000, guid: 5e03a6f95e9f83544a2b09ce7c042b33, type: 2}
-  - {fileID: 11400000, guid: 7d7a098104e947b4dbef3a4e67808ad1, type: 2}
-  - {fileID: 11400000, guid: 88e370b3d7695897965b2e22204a21ab, type: 2}
-  - {fileID: 11400000, guid: 054259ca7238557ebe2b510bff7611a7, type: 2}
-  - {fileID: 11400000, guid: 7ca3e7adf9df539cbebeb4381e730172, type: 2}
-  - {fileID: 11400000, guid: ede1f1378d035706a4ec9c5d83063e32, type: 2}
-  - {fileID: 11400000, guid: 555372da00d45c7eb3a6fbd7a8a0feb4, type: 2}
-  - {fileID: 11400000, guid: 5c98e28439b05699886a56fd41aeab26, type: 2}
-  - {fileID: 11400000, guid: cd6c9cb52723573b8b27e67e0bf414f9, type: 2}
-  - {fileID: 11400000, guid: b5cf33283ca45ba3894f1a50360734fd, type: 2}
-  - {fileID: 11400000, guid: 2f046b88afbe5483bbc04db342ed29eb, type: 2}
-  companions:
-  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
-  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
-  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
-  - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
-  - {fileID: 11400000, guid: a644725714c87d74cab7c15855ae4157, type: 2}
+  roster: {fileID: 11400000, guid: 545566a0f6ea6e24fb8dd62b6e2a75f9, type: 2}
   items: {fileID: 11400000, guid: e6bd302f6b1fbc74782807033f84fd91, type: 2}
   dialogueText: {fileID: 1384226142}
   talk: {fileID: 1046408013}
@@ -99096,12 +99065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b84df2be044f1c459a3eb70fdf4e2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionView
-  companions:
-  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
-  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
-  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
-  - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
-  - {fileID: 11400000, guid: a644725714c87d74cab7c15855ae4157, type: 2}
+  roster: {fileID: 11400000, guid: 545566a0f6ea6e24fb8dd62b6e2a75f9, type: 2}
   closeButton: {fileID: 308949795}
   listPage: {fileID: 2094099860}
   cardTemplate: {fileID: 788055623}
@@ -109020,29 +108984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be27ea4ffc2fad440abef9f87176afaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaterialView
-  enemies:
-  - {fileID: 11400000, guid: 0c1bb41d3a098624ea18ea7e0ebdd72b, type: 2}
-  - {fileID: 11400000, guid: d5989274ba2deed4e95cfe17798b8500, type: 2}
-  - {fileID: 11400000, guid: 2f5cf33ad5231844d8cda24aa220695f, type: 2}
-  - {fileID: 11400000, guid: 5e03a6f95e9f83544a2b09ce7c042b33, type: 2}
-  - {fileID: 11400000, guid: 7d7a098104e947b4dbef3a4e67808ad1, type: 2}
-  - {fileID: 11400000, guid: 88e370b3d7695897965b2e22204a21ab, type: 2}
-  - {fileID: 11400000, guid: 054259ca7238557ebe2b510bff7611a7, type: 2}
-  - {fileID: 11400000, guid: 7ca3e7adf9df539cbebeb4381e730172, type: 2}
-  - {fileID: 11400000, guid: ede1f1378d035706a4ec9c5d83063e32, type: 2}
-  - {fileID: 11400000, guid: 555372da00d45c7eb3a6fbd7a8a0feb4, type: 2}
-  - {fileID: 11400000, guid: 5c98e28439b05699886a56fd41aeab26, type: 2}
-  - {fileID: 11400000, guid: cd6c9cb52723573b8b27e67e0bf414f9, type: 2}
-  - {fileID: 11400000, guid: b5cf33283ca45ba3894f1a50360734fd, type: 2}
-  - {fileID: 11400000, guid: 2f046b88afbe5483bbc04db342ed29eb, type: 2}
-  - {fileID: 11400000, guid: 72a3401b4f2e5dd41bf9e6832ecd7488, type: 2}
-  - {fileID: 11400000, guid: d042d40b8c4993447a18db3337e3694e, type: 2}
-  companions:
-  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
-  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
-  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
-  - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
-  - {fileID: 11400000, guid: a644725714c87d74cab7c15855ae4157, type: 2}
+  roster: {fileID: 11400000, guid: 545566a0f6ea6e24fb8dd62b6e2a75f9, type: 2}
   titleText: {fileID: 733594735}
   titleEnglish: {fileID: 1525270644}
   closeButton: {fileID: 640798254}
@@ -148442,64 +148384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingView
   roster: {fileID: 11400000, guid: d0ef07acf2da2634a8b9079af91c39e5, type: 2}
-  cardLibrary:
-  - {fileID: 11400000, guid: 4d1346802760f0e4d998a1a4f54705cf, type: 2}
-  - {fileID: 11400000, guid: d5f8a3dee4ce5424d830ea99897bf6f6, type: 2}
-  - {fileID: 11400000, guid: 8ce9e65ac01cb0e4e82eaa20e9ce0b21, type: 2}
-  - {fileID: 11400000, guid: cbf4c9cd32b3de84ea69448d7c161a83, type: 2}
-  - {fileID: 11400000, guid: 89d44c70c6f993849a065ca918d4c3fc, type: 2}
-  - {fileID: 11400000, guid: c198a0055f061e64fa97504c46233bdf, type: 2}
-  - {fileID: 11400000, guid: fc2d76e21a971c34da40a03782da3952, type: 2}
-  - {fileID: 11400000, guid: 8b52cca6d78e38448ae6a1c264ed3eb6, type: 2}
-  - {fileID: 11400000, guid: 488d598f309578d4c811d5aaa5622577, type: 2}
-  - {fileID: 11400000, guid: d2267a4bf8fe586459895e69b3edb29c, type: 2}
-  - {fileID: 11400000, guid: 4a8e821dcb797e94392470c851411a79, type: 2}
-  - {fileID: 11400000, guid: 0234eac721c9ae941830e1a83a6d769f, type: 2}
-  - {fileID: 11400000, guid: 15f1e36653fbecf48bfad141be462b89, type: 2}
-  - {fileID: 11400000, guid: bd1279b4d575aab4486b14c77aea4bf3, type: 2}
-  - {fileID: 11400000, guid: cf3897f00bf703a40a6e233dae2dcfa7, type: 2}
-  - {fileID: 11400000, guid: 29651ea8435a386489b1ec118f568521, type: 2}
-  - {fileID: 11400000, guid: 6e99534b633f55e49888225af7d4d7f9, type: 2}
-  - {fileID: 11400000, guid: 1aa6850b62fe8f94db2c7130e4957573, type: 2}
-  - {fileID: 11400000, guid: 09e9d880f70846a408fc0d3a1f3f2d75, type: 2}
-  - {fileID: 11400000, guid: 203e9b3bfc4b59f42be7aa8b6796c283, type: 2}
-  - {fileID: 11400000, guid: f4f693c78fe39744b82e37ae8e47efe2, type: 2}
-  - {fileID: 11400000, guid: 7faa3a2ac27edd34e8543e8f53b499a5, type: 2}
-  - {fileID: 11400000, guid: 23b4880dece7f574ba26d3d13a02f760, type: 2}
-  - {fileID: 11400000, guid: b422ecccb7f352041969aac9850a795a, type: 2}
-  - {fileID: 11400000, guid: 19f172773da15a04ba78370892c9f0f7, type: 2}
-  - {fileID: 11400000, guid: 6ed203e18c7c57246b1aebd5e3c6ab18, type: 2}
-  - {fileID: 11400000, guid: f0221d85e5bb8564ea4223fa21917bb1, type: 2}
-  - {fileID: 11400000, guid: 7f61065579b5965468c193e2d9ab8fbb, type: 2}
-  - {fileID: 11400000, guid: 77f11f60a078a5c489ab28f726443fb1, type: 2}
-  - {fileID: 11400000, guid: 1696ef4ac17e3d24a9881bc05871fa11, type: 2}
-  - {fileID: 11400000, guid: 33c0a079b33b1994a861156026ce2d70, type: 2}
-  - {fileID: 11400000, guid: 80e337cc9eceff541951365cee3b63f4, type: 2}
-  - {fileID: 11400000, guid: 7a2bd73be234dfd40a7d845ee6e8603f, type: 2}
-  - {fileID: 11400000, guid: 18ca42ef3c97cf04c91ad186223fe32a, type: 2}
-  - {fileID: 11400000, guid: e82e147255c09bd4090cba59d7a01ed8, type: 2}
-  - {fileID: 11400000, guid: 0fcb3af31c3d3384b931587b4cdab73e, type: 2}
-  - {fileID: 11400000, guid: c3de849dabdcc8349b2a171b49a27f5d, type: 2}
-  - {fileID: 11400000, guid: 4b2d9ec4e7b8d534bb796417e166a410, type: 2}
-  - {fileID: 11400000, guid: 256e186ab40df234aa377bed2a170940, type: 2}
-  - {fileID: 11400000, guid: f437ad6ec3b55b24986133183ede631b, type: 2}
-  - {fileID: 11400000, guid: e87deb6d09a7352409660aa32d3a8191, type: 2}
-  - {fileID: 11400000, guid: 50993d0cd51907340a733447c73d0b7a, type: 2}
-  - {fileID: 11400000, guid: 2cbe875e23832b84f90b02234a30c67d, type: 2}
-  - {fileID: 11400000, guid: 17475c531e7bb5f48a0878e9098a3ec7, type: 2}
-  - {fileID: 11400000, guid: bc621e20ed2618f4fae4cef5b08a20b9, type: 2}
-  - {fileID: 11400000, guid: f51719ffd54abc84bb5641b6811699b5, type: 2}
-  - {fileID: 11400000, guid: 4e29098355b2e8c4bbf9421b8787aea3, type: 2}
-  - {fileID: 11400000, guid: ff432f091b0b04849ab669f078642281, type: 2}
-  - {fileID: 11400000, guid: 72379a96d1438da418b4a2b83d5bf547, type: 2}
-  - {fileID: 11400000, guid: 1a0a4296d24c94246ab72bca07341bb2, type: 2}
-  - {fileID: 11400000, guid: a590b4daecd557843b997f6486b594d3, type: 2}
-  companions:
-  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
-  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
-  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
-  - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
-  - {fileID: 11400000, guid: a644725714c87d74cab7c15855ae4157, type: 2}
+  playerRewardPool: {fileID: 11400000, guid: 1abc2608217e25c4d88a264bc9af934c, type: 2}
+  lobbyRoster: {fileID: 11400000, guid: 545566a0f6ea6e24fb8dd62b6e2a75f9, type: 2}
   runSceneName: DevelopScene - Phase 3
   mainScreen: {fileID: 194439681}
   closeButton: {fileID: 264280742}

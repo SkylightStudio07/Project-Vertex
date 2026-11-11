@@ -21,7 +21,10 @@ public class BaseCampView : MonoBehaviour
     [SerializeField] private List<BaseZoneData> zones = new();
 
     [Header("동료 (합류한 적 있는 동료만 나온다)")]
-    [SerializeField] private List<CoopCharData> companions = new();
+    [Tooltip("동료 · 기록 대상 적 목록 (Data/Lobby/LobbyRoster). 인물을 추가할 때 씬이 아니라 이 에셋을 고친다")]
+    [SerializeField] private LobbyRosterSO roster;
+    private List<CoopCharData> companions => roster != null ? roster.companions : NoCompanions;
+    private static readonly List<CoopCharData> NoCompanions = new();
 
     [Header("시설 화면 (표지를 누르면 켠다)")]
     [SerializeField] private GameObject archiveView;
