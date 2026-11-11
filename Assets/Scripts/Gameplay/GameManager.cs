@@ -64,7 +64,8 @@ public class GameManager : MonoBehaviour
     public int Chapter => chapter;
     [Tooltip("막별 데이터(이름·맵 도입 연출). actNumber로 현재 막을 찾는다")]
     [SerializeField] private List<ActData> acts = new();
-    public ActData CurrentAct => acts.Find(a => a != null && a.actNumber == chapter);
+    public ActData CurrentAct => GetAct(chapter);
+    public ActData GetAct(int number) => acts.Find(a => a != null && a.actNumber == number);
 
 
     void Start()
@@ -130,7 +131,10 @@ public class GameManager : MonoBehaviour
         if (blessingView == null) blessingView = FindFirstObjectByType<BlessingView>(FindObjectsInactive.Include);
         if (blessingView != null)
         {
-            blessingView.Open();
+            // 1막 개시 연출(막 스택)을 먼저 보여 준 뒤 마키나 축복을 연다. 연출이 없으면 바로 연다
+            var act = CurrentAct;
+            if (act == null || !act.useStackIntro || !ActIntroCinematic.Play(act, () => blessingView.Open()))
+                blessingView.Open();
         }
         else
         {

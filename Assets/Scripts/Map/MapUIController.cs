@@ -83,9 +83,22 @@ public class MapUIController : MonoBehaviour
     private void PlayActIntro()
     {
         var act = GameManager.Instance != null ? GameManager.Instance.CurrentAct : null;
-        if (actTitleBanner != null) actTitleBanner.Play(act);
-
         _panTween?.Kill();
+
+        // 막 스택 연출: 1막은 런 시작 때 축복 전에 이미 재생했고(GameManager), 2막부터는 여기서 재생한다.
+        // 걷히면 시작점에 맞춰 둔 맵이 드러난다(배너 · 패닝 없음)
+        if (act != null && act.useStackIntro &&
+            (ActIntroCinematic.LastPlayedAct == act.actNumber || ActIntroCinematic.Play(act)))
+        {
+            if (scrollRect != null)
+            {
+                scrollRect.velocity = Vector2.zero;
+                scrollRect.horizontalNormalizedPosition = 0f;
+            }
+            return;
+        }
+
+        if (actTitleBanner != null) actTitleBanner.Play(act);
         float duration = act != null ? act.mapPanDuration : 0f;
         if (duration <= 0f || scrollRect == null) return;
 

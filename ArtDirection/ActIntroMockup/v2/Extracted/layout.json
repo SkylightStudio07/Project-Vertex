@@ -1,0 +1,503 @@
+{
+  "schema_version": 1,
+  "coordinate_system": {
+    "origin": "top_left",
+    "x": "right",
+    "y": "down",
+    "units": "final PNG pixels",
+    "reference_screen_px": [
+      1920,
+      1080
+    ]
+  },
+  "measurement": {
+    "source": "Delivered PNGs after resampling, chroma removal, and edge decontamination",
+    "vertices": "Outer upper rim of slab top face, before the downward bevel; side-bottom vertices at the visible lower contour. Flower and pillar silhouettes do not redefine the slab corners.",
+    "edge_reading_tolerance_px": 2,
+    "geometry_note": "Measured artwork, not requested target coordinates. Independent generated plates differ in size, top angle and thickness. No geometry warping, polygon masking or code-drawn surfaces were used.",
+    "bounds": "[x,y,width,height]; inclusive pixel extrema converted to extent",
+    "center_definition": "Marker center is midpoint of visible top and bottom tips.",
+    "screen_rect_note": "null: this delivery contains independent sprite canvases, not a final gameplay screen layout."
+  },
+  "requested_plate_geometry_px": {
+    "top_vertices": {
+      "back": [
+        600,
+        140
+      ],
+      "left": [
+        60,
+        420
+      ],
+      "right": [
+        1140,
+        420
+      ],
+      "front": [
+        600,
+        700
+      ]
+    },
+    "side_bottom_vertices": {
+      "left": [
+        60,
+        640
+      ],
+      "front": [
+        600,
+        920
+      ],
+      "right": [
+        1140,
+        640
+      ]
+    },
+    "thickness": 220
+  },
+  "assets": [
+    {
+      "pixels_per_screen_pixel": 2,
+      "rotation_deg": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "screen_rect": null,
+      "format": "RGBA8",
+      "file": "Plate_Off.png",
+      "png_size_px": [
+        1200,
+        1000
+      ],
+      "alpha": "binary",
+      "artwork_bounds_px": [
+        67,
+        124,
+        1067,
+        778
+      ],
+      "top_vertices_px": {
+        "back": [
+          600,
+          124
+        ],
+        "left": [
+          68,
+          411
+        ],
+        "right": [
+          1132,
+          411
+        ],
+        "front": [
+          600,
+          695
+        ]
+      },
+      "side_bottom_vertices_px": {
+        "left": [
+          68,
+          615
+        ],
+        "front": [
+          600,
+          901
+        ],
+        "right": [
+          1132,
+          615
+        ]
+      }
+    },
+    {
+      "pixels_per_screen_pixel": 2,
+      "rotation_deg": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "screen_rect": null,
+      "format": "RGBA8",
+      "file": "Plate_Floor01.png",
+      "png_size_px": [
+        1200,
+        1000
+      ],
+      "alpha": "binary_except_flower_edges",
+      "partial_alpha_pixels": 1867,
+      "artwork_bounds_px": [
+        48,
+        118,
+        1106,
+        793
+      ],
+      "top_vertices_px": {
+        "back": [
+          600,
+          120
+        ],
+        "left": [
+          49,
+          417
+        ],
+        "right": [
+          1152,
+          417
+        ],
+        "front": [
+          600,
+          718
+        ]
+      },
+      "side_bottom_vertices_px": {
+        "left": [
+          49,
+          610
+        ],
+        "front": [
+          600,
+          909
+        ],
+        "right": [
+          1152,
+          611
+        ]
+      }
+    },
+    {
+      "pixels_per_screen_pixel": 2,
+      "rotation_deg": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "screen_rect": null,
+      "format": "RGBA8",
+      "file": "Marker_Vertex.png",
+      "png_size_px": [
+        256,
+        384
+      ],
+      "alpha": "binary",
+      "tip_top_px": [
+        128,
+        35
+      ],
+      "tip_bottom_px": [
+        128,
+        343
+      ],
+      "center_px": [
+        128,
+        189
+      ],
+      "artwork_bounds_px": [
+        38,
+        35,
+        179,
+        309
+      ]
+    },
+    {
+      "pixels_per_screen_pixel": 2,
+      "rotation_deg": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "screen_rect": null,
+      "format": "RGBA8",
+      "file": "Fragment_A.png",
+      "png_size_px": [
+        320,
+        240
+      ],
+      "alpha": "binary",
+      "artwork_bounds_px": [
+        45,
+        42,
+        230,
+        157
+      ],
+      "top_vertices_px": {
+        "back": [
+          160,
+          42
+        ],
+        "left": [
+          45,
+          93
+        ],
+        "right": [
+          274,
+          93
+        ],
+        "front": [
+          160,
+          147
+        ]
+      }
+    },
+    {
+      "pixels_per_screen_pixel": 2,
+      "rotation_deg": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "screen_rect": null,
+      "format": "RGBA8",
+      "file": "Fragment_B.png",
+      "png_size_px": [
+        320,
+        240
+      ],
+      "alpha": "binary",
+      "artwork_bounds_px": [
+        67,
+        58,
+        186,
+        123
+      ],
+      "top_vertices_px": {
+        "back": [
+          160,
+          58
+        ],
+        "left": [
+          67,
+          102
+        ],
+        "right": [
+          252,
+          102
+        ],
+        "front": [
+          160,
+          145
+        ]
+      }
+    },
+    {
+      "pixels_per_screen_pixel": 2,
+      "rotation_deg": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "screen_rect": null,
+      "format": "RGBA8",
+      "file": "Fragment_C.png",
+      "png_size_px": [
+        320,
+        240
+      ],
+      "alpha": "binary",
+      "artwork_bounds_px": [
+        80,
+        66,
+        160,
+        110
+      ],
+      "top_vertices_px": {
+        "back": [
+          160,
+          66
+        ],
+        "left": [
+          80,
+          105
+        ],
+        "right": [
+          239,
+          105
+        ],
+        "front": [
+          160,
+          144
+        ]
+      }
+    },
+    {
+      "pixels_per_screen_pixel": 1,
+      "rotation_deg": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "screen_rect": null,
+      "format": "RGBA8",
+      "file": "Backdrop.png",
+      "png_size_px": [
+        1920,
+        1080
+      ],
+      "alpha": "opaque",
+      "artwork_bounds_px": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    }
+  ],
+  "contact_sheet": {
+    "file": "Contact_Sheet.jpg",
+    "canvas_px": [
+      3000,
+      2400
+    ],
+    "background": "#0F1826",
+    "draw_order": "back_to_front",
+    "assembly_slab_canvas_pitch_px": 490,
+    "placements": [
+      {
+        "file": "Plate_Off.png",
+        "rect_px": [
+          1550,
+          1280,
+          1200,
+          1000
+        ],
+        "role": "bottom"
+      },
+      {
+        "file": "Plate_Off.png",
+        "rect_px": [
+          1550,
+          790,
+          1200,
+          1000
+        ],
+        "role": "middle"
+      },
+      {
+        "file": "Plate_Floor01.png",
+        "rect_px": [
+          1550,
+          300,
+          1200,
+          1000
+        ],
+        "role": "top replaces third Plate_Off"
+      },
+      {
+        "file": "Marker_Vertex.png",
+        "rect_px": [
+          2022,
+          10,
+          256,
+          384
+        ]
+      },
+      {
+        "file": "Fragment_A.png",
+        "rect_px": [
+          1390,
+          360,
+          320,
+          240
+        ]
+      },
+      {
+        "file": "Fragment_B.png",
+        "rect_px": [
+          2650,
+          950,
+          320,
+          240
+        ]
+      },
+      {
+        "file": "Fragment_C.png",
+        "rect_px": [
+          1410,
+          1910,
+          320,
+          240
+        ]
+      }
+    ],
+    "standalone_placements": [
+      {
+        "file": "Plate_Off.png",
+        "rect_px": [
+          50,
+          50,
+          600,
+          500
+        ]
+      },
+      {
+        "file": "Plate_Floor01.png",
+        "rect_px": [
+          720,
+          50,
+          600,
+          500
+        ]
+      },
+      {
+        "file": "Marker_Vertex.png",
+        "rect_px": [
+          100,
+          650,
+          256,
+          384
+        ]
+      },
+      {
+        "file": "Fragment_A.png",
+        "rect_px": [
+          430,
+          700,
+          320,
+          240
+        ]
+      },
+      {
+        "file": "Fragment_B.png",
+        "rect_px": [
+          780,
+          700,
+          320,
+          240
+        ]
+      },
+      {
+        "file": "Fragment_C.png",
+        "rect_px": [
+          1100,
+          700,
+          320,
+          240
+        ]
+      },
+      {
+        "file": "Backdrop.png",
+        "rect_px": [
+          50,
+          1150,
+          1280,
+          720
+        ]
+      }
+    ],
+    "note": "Only the supplied raster pieces are alpha-composited. Game-drawn shadows, cyan selection, brackets, labels, scanlines, rulers and axes are intentionally absent."
+  },
+  "text_slots": []
+}
