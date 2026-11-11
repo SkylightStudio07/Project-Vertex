@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "CH_01_C03_\uC0C1\uCC98 \uBC8C\uB9AC\uAE30"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  cardImage: {fileID: -2597091049360475957, guid: dc4a87734295bb54ca6d70b9ca3dd3c5, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
   cardType: 0
   cardRarity: 0
@@ -66,10 +66,12 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
     - rid: 2470581257654239303
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -82,10 +84,12 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
     - rid: 5573463116610797674
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -96,6 +100,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
         hitCountScaling:
@@ -104,6 +109,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
@@ -121,6 +127,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
         hitCountScaling:
@@ -129,6 +136,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
