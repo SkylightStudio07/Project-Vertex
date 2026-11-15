@@ -249,17 +249,17 @@ MonoBehaviour:
   skill: {fileID: 11400000, guid: 7e242856db63cc4489d7be5938fc6ded, type: 2}
   joinDialogueJson: {fileID: 4900000, guid: f40cfa2b9a87d7b43a02d1241cc149fb, type: 3}
   rewardPoolCommon:
-  - {fileID: 11400000, guid: fc2d76e21a971c34da40a03782da3952, type: 2}
-  - {fileID: 11400000, guid: c198a0055f061e64fa97504c46233bdf, type: 2}
   - {fileID: 11400000, guid: d5f8a3dee4ce5424d830ea99897bf6f6, type: 2}
   - {fileID: 11400000, guid: 8ce9e65ac01cb0e4e82eaa20e9ce0b21, type: 2}
+  - {fileID: 11400000, guid: c198a0055f061e64fa97504c46233bdf, type: 2}
+  - {fileID: 11400000, guid: fc2d76e21a971c34da40a03782da3952, type: 2}
   - {fileID: 11400000, guid: a6a1c9660408cc24abcc396cd7f69643, type: 2}
   rewardPoolRare:
+  - {fileID: 11400000, guid: cbf4c9cd32b3de84ea69448d7c161a83, type: 2}
   - {fileID: 11400000, guid: 8b52cca6d78e38448ae6a1c264ed3eb6, type: 2}
   - {fileID: 11400000, guid: 488d598f309578d4c811d5aaa5622577, type: 2}
   - {fileID: 11400000, guid: fb7a79c1749a79c44a97ab5352c02d23, type: 2}
   - {fileID: 11400000, guid: 2513efdf6dc43d84b8a08624d9f1b048, type: 2}
-  - {fileID: 11400000, guid: cbf4c9cd32b3de84ea69448d7c161a83, type: 2}
   rewardPoolUnique: []
   maxCoopLevel: 5
   rankEventDatas:

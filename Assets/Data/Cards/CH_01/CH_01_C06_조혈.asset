@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
   m_Name: "CH_01_C06_\uC870\uD608"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  cardImage: {fileID: 3021177438917646421, guid: 6934ca87f0f2e3c4a887393ff42c4f3b, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
   cardType: 1
   cardRarity: 0
@@ -57,6 +57,13 @@ MonoBehaviour:
       type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 3
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 5573463116610797685
@@ -69,10 +76,18 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
     - rid: 5573463116610797686
       type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 3
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 5573463116610797687
@@ -85,3 +100,4 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0

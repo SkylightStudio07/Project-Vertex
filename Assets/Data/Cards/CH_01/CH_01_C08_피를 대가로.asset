@@ -65,14 +65,23 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 2
+        negative: 0
     - rid: 5573463116610797691
       type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 5
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 5573463116610797692
@@ -87,13 +96,22 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 2
+        negative: 0
     - rid: 5573463116610797693
       type: {class: LoseHPEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 3
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 0
