@@ -5,7 +5,7 @@ using UnityEngine;
 // ============================================================
 // filename   : ScreenshotTool.cs
 // description: 플레이 중 게임뷰 화면만(UI 포함, 에디터 창 제외) PNG로 저장한다.
-//              - 단축키 F12 (Tools ▸ Vertex ▸ 스크린샷), 녹화 F10 (MP4, Recordings/)
+//              - 단축키 F12 (Tools ▸ Vertex ▸ 스크린샷), 녹화 F10 (MP4 또는 GIF, 디버그 패널에서 고름, Recordings/)
 //              - 디버그 패널 맨 위의 버튼 · 지연 촬영
 //              저장 위치: 프로젝트 루트/Screenshots/yyyyMMdd_HHmmss.png (git에는 올라가지 않는다)
 // ============================================================

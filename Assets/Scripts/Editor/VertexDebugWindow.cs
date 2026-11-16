@@ -54,16 +54,48 @@ public class VertexDebugWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
+        using (new EditorGUI.DisabledScope(GameViewRecorder.IsRecording))
+        {
+            // 녹화 형식: 녹화 중에는 못 바꾼다
+            var format = (GameViewRecorder.Format)GUILayout.Toolbar((int)GameViewRecorder.ActiveFormat, new[] { "MP4", "GIF" },
+                GUILayout.Height(24), GUILayout.Width(90));
+            if (!GameViewRecorder.IsRecording) GameViewRecorder.NextFormat = format;
+        }
         using (new EditorGUI.DisabledScope(!Application.isPlaying))
         {
             var prev = GUI.backgroundColor;
             if (GameViewRecorder.IsRecording) GUI.backgroundColor = new Color(1f, 0.45f, 0.45f);
-            string label = GameViewRecorder.IsRecording ? $"■ 녹화 정지 (F10)   {GameViewRecorder.Elapsed:0.0}초" : "● 녹화 시작 (F10)";
+            bool gif = GameViewRecorder.ActiveFormat == GameViewRecorder.Format.Gif;
+            string limit = gif ? $" / {GameViewRecorder.GifMaxSeconds:0}초" : "초";
+            string label = GameViewRecorder.IsRecording
+                ? $"■ 녹화 정지 (F10)   {GameViewRecorder.Elapsed:0.0}{limit}"
+                : gif ? $"● GIF 녹화 (F10, 최대 {GameViewRecorder.GifMaxSeconds:0}초)" : "● 녹화 시작 (F10)";
             if (GUILayout.Button(label, GUILayout.Height(24))) ScreenshotTool.ToggleRecording();
             GUI.backgroundColor = prev;
         }
         if (GUILayout.Button("폴더 열기", GUILayout.Height(24), GUILayout.Width(70))) ScreenshotTool.RevealRecordings();
         EditorGUILayout.EndHorizontal();
+
+        // GIF 설정: 가로 크기 · 최대 길이 (녹화 중에는 못 바꾼다)
+        if (GameViewRecorder.ActiveFormat == GameViewRecorder.Format.Gif)
+        {
+            EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
+            using (new EditorGUI.DisabledScope(GameViewRecorder.IsRecording))
+            {
+                GUILayout.Label("GIF 가로", GUILayout.Width(52));
+                var widths = GameViewRecorder.GifWidths;
+                int wi = System.Math.Max(0, System.Array.IndexOf(widths, GameViewRecorder.GifMaxWidth));
+                int nwi = GUILayout.Toolbar(wi, System.Array.ConvertAll(widths, w => w + "px"), GUILayout.Width(130));
+                if (!GameViewRecorder.IsRecording) GameViewRecorder.NextGifWidth = widths[nwi];
+                GUILayout.Space(10);
+                GUILayout.Label("최대", GUILayout.Width(28));
+                var lengths = GameViewRecorder.GifLengths;
+                int li = System.Math.Max(0, System.Array.IndexOf(lengths, (int)GameViewRecorder.GifMaxSeconds));
+                int nli = GUILayout.Toolbar(li, System.Array.ConvertAll(lengths, s => s + "초"), GUILayout.Width(150));
+                if (!GameViewRecorder.IsRecording) GameViewRecorder.NextGifSeconds = lengths[nli];
+            }
+            EditorGUILayout.EndHorizontal();
+        }
     }
 
     // ── 동료 ──
