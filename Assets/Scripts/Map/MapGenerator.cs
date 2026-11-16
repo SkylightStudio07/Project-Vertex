@@ -161,6 +161,19 @@ public static class MapGenerator
 
         AssignNodeTypes(mapData, config, guaranteeMap, rng);
 
+        //=========== Phase 6: 경로 보장 보정 =============== //
+
+        // Phase 5는 노드마다 따로 주사위를 굴리니까, 운이 나쁘면 휴식/엘리트가 없는 경로가 생긴다.
+        // (5000판 측정: 휴식 0개 경로가 있는 맵 94%, 엘리트를 완전히 피할 수 있는 맵 94%)
+        // 그래서 추첨 결과는 그대로 두고, 모자란 경로에서만 전투 노드를 골라 바꿔 끼운다.
+        // 휴식을 먼저 하는 이유 : 엘리트 보정이 휴식 노드를 건드리지 않게 하려고. (둘 다 전투/이벤트만 바꾼다)
+        // 자세한 건 EnsurePathMinimum 참고.
+
+        //========================================== //
+
+        EnsurePathMinimum(mapData, config, guaranteeMap, NodeType.Rest, config.minRestsPerPath, rng);
+        EnsurePathMinimum(mapData, config, guaranteeMap, NodeType.Elite, config.minElitesPerPath, rng);
+
         return mapData;
     }
 
@@ -175,7 +188,150 @@ public static class MapGenerator
     // 3. AssignNodeTypes / PickNodeType / IsTypeAllowed:
     // 간선까지 다 만들어진 맵에 노드 타입을 배정. 배치 규칙은 전부 여기 모여 있다.
 
+    // 4. EnsurePathMinimum / CanConvert:
+    // 타입 배정이 끝난 맵에서 모든 경로가 휴식/엘리트를 최소 개수 이상 지나도록 보정.
+
     //========================================== //
+
+
+    // 시작 → 보스까지의 "모든 경로"가 type을 minPerPath개 이상 지나게 만든다.
+    // 1) DP로 type을 가장 적게 지나는 경로 하나를 찾는다.
+    // 2) 그 경로도 minPerPath 이상이면 다른 경로는 당연히 OK → 끝.
+    // 3) 아니면 그 경로 위 노드 중 바꿔도 규칙이 안 깨지는 전투 노드(없으면 이벤트) 하나를 type으로 바꾸고 1)로.
+    // 보장 층은 세지 않는다. 14층 휴식은 모든 경로에 있으니까 세면 보장이 의미가 없다.
+    private static void EnsurePathMinimum(
+        MapData mapData, MapConfig config, Dictionary<int, NodeType> guaranteeMap,
+        NodeType type, int minPerPath, System.Random rng)
+    {
+        if (minPerPath <= 0) return;
+
+        int floorCount = mapData.floors.Count;
+
+        // 한 번 돌 때마다 노드 하나를 바꾸니까, 노드 수만큼 돌면 무조건 끝난다. (무한루프 방지)
+        int guard = 0;
+        foreach (var fl in mapData.floors) guard += fl.Count;
+
+        for (int iter = 0; iter < guard; iter++)
+        {
+            // best[f][i] : 시작에서 (f, i)까지 오는 경로 중 type을 가장 적게 지나는 개수
+            // from[f][i] : 그 경로에서 바로 아래 층 노드 인덱스 (경로 복원용)
+            var best = new List<int[]>(floorCount);
+            var from = new List<int[]>(floorCount);
+            for (int f = 0; f < floorCount; f++)
+            {
+                var b = new int[mapData.floors[f].Count];
+                var p = new int[mapData.floors[f].Count];
+                for (int i = 0; i < b.Length; i++) { b[i] = int.MaxValue; p[i] = -1; }
+                best.Add(b);
+                from.Add(p);
+            }
+
+            for (int i = 0; i < best[0].Length; i++)
+                best[0][i] = CountsAs(mapData.floors[0][i], type, guaranteeMap);
+
+            for (int f = 0; f < floorCount - 1; f++)
+            {
+                for (int i = 0; i < mapData.floors[f].Count; i++)
+                {
+                    if (best[f][i] == int.MaxValue) continue; // 도달 불가 노드
+                    foreach (int c in mapData.floors[f][i].nextNodeIndices)
+                    {
+                        int v = best[f][i] + CountsAs(mapData.floors[f + 1][c], type, guaranteeMap);
+                        // 동점이면 반반으로 바꿔서, 매번 왼쪽 경로만 고쳐지는 쏠림을 막는다.
+                        if (v < best[f + 1][c] || (v == best[f + 1][c] && rng.Next(2) == 0))
+                        {
+                            best[f + 1][c] = v;
+                            from[f + 1][c] = i;
+                        }
+                    }
+                }
+            }
+
+            // 마지막 층(보스)에서 가장 적은 노드를 고른다. 보스는 1개라 사실상 그냥 0번.
+            int last = floorCount - 1;
+            int end = 0;
+            for (int i = 1; i < best[last].Length; i++)
+                if (best[last][i] < best[last][end]) end = i;
+
+            if (best[last][end] >= minPerPath) return; // 제일 나쁜 경로도 통과 → 모든 경로 통과
+
+            // 경로 복원 후, 바꿀 수 있는 노드를 전투 / 이벤트로 나눠 모은다.
+            var combats = new List<MapNode>();
+            var events  = new List<MapNode>();
+            var path = new List<MapNode>();
+            for (int f = last, i = end; f >= 0 && i >= 0; i = from[f][i], f--)
+                path.Add(mapData.floors[f][i]);
+
+            foreach (var node in path)
+            {
+                if (!CanConvert(mapData, config, guaranteeMap, node, type)) continue;
+                if (node.nodeType == NodeType.Combat) combats.Add(node);
+                else events.Add(node);
+            }
+
+            // 전투가 우선. 이벤트는 전투가 하나도 없을 때만 바꾼다. (이벤트는 원래 수가 적어서 아껴 둔다)
+            var pool = combats.Count > 0 ? combats : events;
+
+            if (pool.Count == 0)
+            {
+                // 연속 금지를 깨야만 채울 수 있는 경로. 규칙을 깨느니 보장을 포기한다.
+                Debug.LogWarning($"[MapGenerator] {type} 경로 보장 실패 (seed {mapData.seed}). 바꿀 수 있는 노드가 없음.");
+                return;
+            }
+
+            pool[rng.Next(0, pool.Count)].nodeType = type;
+        }
+    }
+
+    // 보정에서 셀 노드인지. 보장 층 노드는 세지 않는다.
+    private static int CountsAs(MapNode node, NodeType type, Dictionary<int, NodeType> guaranteeMap)
+        => node.nodeType == type && !guaranteeMap.ContainsKey(node.floorIndex) ? 1 : 0;
+
+    // 이 노드를 type으로 바꿔도 배치 규칙이 안 깨지는지.
+    // IsTypeAllowed와 같은 규칙인데, 이미 위층까지 타입이 다 정해진 상태라 "자식"도 같이 봐야 한다.
+    private static bool CanConvert(
+        MapData mapData, MapConfig config, Dictionary<int, NodeType> guaranteeMap, MapNode node, NodeType type)
+    {
+        int f = node.floorIndex;
+        int lastFloor = mapData.floors.Count - 1;
+
+        // 전투 / 이벤트만 바꾼다. 상점·휴식·엘리트·성소는 Phase 5 결과를 존중.
+        if (node.nodeType != NodeType.Combat && node.nodeType != NodeType.Event) return false;
+
+        // 0층, 보스층, 보장 층은 손대지 않는다.
+        if (f <= 0 || f >= lastFloor || guaranteeMap.ContainsKey(f)) return false;
+
+        // 규칙 1 : 최소 등장 층
+        if (f < config.GetMinFloorIndex(type)) return false;
+
+        if (!config.noConsecutiveTypes.Contains(type)) return true;
+
+        // 규칙 2-b : 다음 층이 같은 타입 보장 층이면 금지 (13층 휴식 → 14층 휴식 방지)
+        if (guaranteeMap.TryGetValue(f + 1, out var nextGuaranteed) && nextGuaranteed == type) return false;
+
+        // 규칙 2 : 부모와 같은 타입 금지. 부모를 모으는 김에 형제 판정용으로 기억해 둔다.
+        var parents = new List<MapNode>();
+        foreach (var prev in mapData.floors[f - 1])
+        {
+            if (!prev.nextNodeIndices.Contains(node.nodeIndex)) continue;
+            if (prev.nodeType == type) return false;
+            parents.Add(prev);
+        }
+
+        // 규칙 2 (반대 방향) : 자식과 같은 타입 금지. Phase 5에서는 자식이 아직 없어서 안 보던 부분.
+        foreach (int c in node.nextNodeIndices)
+            if (mapData.floors[f + 1][c].nodeType == type) return false;
+
+        // 규칙 3 : 부모를 공유하는 형제와 같은 타입 금지 (forbidSiblingDuplicates를 켰을 때만)
+        if (config.forbidSiblingDuplicates)
+        {
+            foreach (var parent in parents)
+                foreach (int s in parent.nextNodeIndices)
+                    if (s != node.nodeIndex && mapData.floors[f][s].nodeType == type) return false;
+        }
+
+        return true;
+    }
 
 
     // 층을 아래에서 위로 훑으면서 타입을 정한다.
@@ -355,9 +511,36 @@ public static class MapGenerator
         // 셔플.
         Shuffle(slots, rng);
 
-        // 셔플된 리스트에서 앞의 count개만 가져옴.
-        // 앞에서 셔플을 했으니 단순히 자르기만 해도 랜덤화해서 자르는 거랑 같은 효과... 라고 한다. 이 생각은 못했네.
-        var picked = slots.GetRange(0, count);
+        // 덮기 먼저.
+        // 예전엔 셔플 후 앞에서 count개를 그냥 잘랐다. 그러면 이전 층 노드 중 ±1 안에 다음 노드가 하나도 없는 애가 생긴다.
+        // 예시: 이전 층 {0, 2, 4} → 허용 {0~4} → {2, 3, 4}를 뽑으면 0번 칼럼 노드는 갈 곳이 없음.
+        // 그러면 ConnectFloors가 FindClosest로 두 칸 떨어진 노드에 억지로 잇는다. (5000판 중 층마다 약 5%)
+        // 그래서 이전 층 칼럼마다 ±1 안에 하나씩은 먼저 뽑아 두고, 남은 수만 셔플 순서대로 채운다.
+        // 덮느라 count를 넘을 수도 있는데, 넘어 봐야 columnCount 이하라 괜찮다.
+        var picked = new List<int>();
+        if (prevCols != null && prevCols.Count > 0)
+        {
+            var prevOrder = new List<int>(prevCols);
+            Shuffle(prevOrder, rng);
+            foreach (int c in prevOrder)
+            {
+                bool covered = false;
+                foreach (int p in picked)
+                    if (Mathf.Abs(p - c) <= 1) { covered = true; break; }
+                if (covered) continue;
+
+                // 셔플된 순서에서 c ±1 안에 있는 첫 칸. c 자신은 항상 허용 집합에 있으니 반드시 찾는다.
+                foreach (int s in slots)
+                    if (Mathf.Abs(s - c) <= 1) { picked.Add(s); break; }
+            }
+        }
+
+        // 남은 수만큼 셔플 순서대로 채운다.
+        foreach (int s in slots)
+        {
+            if (picked.Count >= count) break;
+            if (!picked.Contains(s)) picked.Add(s);
+        }
 
         // 오름차순 정렬.
         // 그냥 시각화용이다. 나중에 에디터에서 노드 인덱스 볼 때 보려고...

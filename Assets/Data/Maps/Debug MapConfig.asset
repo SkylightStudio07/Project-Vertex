@@ -34,7 +34,7 @@ MonoBehaviour:
   - nodeType: 3
     minFloorIndex: 5
   noConsecutiveTypes: 040000000300000002000000
-  forbidSiblingDuplicates: 1
+  forbidSiblingDuplicates: 0
   normalEncounterPool:
   - {fileID: 11400000, guid: a46c476622c953968d16d85334612307, type: 2}
   - {fileID: 11400000, guid: edd1226cc9ba5fdfba53b7e0148deb96, type: 2}
