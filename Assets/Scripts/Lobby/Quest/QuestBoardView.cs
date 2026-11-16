@@ -66,6 +66,14 @@ public class QuestBoardView : MonoBehaviour
     [SerializeField] private Sprite checkOn, checkOff, badgeStory, badgeRescue;
 
     [Header("수주 버튼")]
+    [Header("담당자")]
+    [Tooltip("의뢰 담당 대사 (LobbyKeeperTalk). 비우면 상황 대사를 내지 않는다")]
+    [SerializeField] private LobbyKeeperTalk talk;
+    [SerializeField] private string lineAccepted = "접수 완료. 도장 찍었으니 이제 못 물러요, 후후.";
+    [SerializeField] private string lineCancelled = "취소요? 위약금은… 이번엔 봐 드릴게요. 이번만요.";
+    [SerializeField] private string lineFull = "욕심쟁이. 진행 칸 꽉 찼어요. 하나 끝내고 오세요.";
+    [SerializeField] private string lineCompleted = "완료 도장 쾅. 보수는 넣어 뒀어요. 칭찬은 따로 받으러 오시고요.";
+
     [SerializeField] private Button actionButton;
     [SerializeField] private Image actionImage;
     [SerializeField] private TextMeshProUGUI actionLabel;
@@ -91,6 +99,13 @@ public class QuestBoardView : MonoBehaviour
         _justCompleted = Q.ConsumeJustCompleted();
         _tab = _justCompleted.Count > 0 ? Tab.History : Tab.Posted;
         Refresh();
+        if (_justCompleted.Count > 0 && talk != null) StartCoroutine(SayLater(lineCompleted)); // 담당자의 인사(OnEnable) 뒤에
+    }
+
+    private System.Collections.IEnumerator SayLater(string line)
+    {
+        yield return null;
+        if (talk != null && isActiveAndEnabled) talk.Say(line);
     }
 
     private void SwitchTab(Tab tab)
@@ -133,7 +148,7 @@ public class QuestBoardView : MonoBehaviour
                 _ => "완료 기록",
             };
         }
-        if (listTitle != null) listTitle.text = _tab switch { Tab.Posted => "의뢰 목록", Tab.Active => "진행 중인 의뢰", _ => "완료한 의뢰" };
+        if (listTitle != null) listTitle.text = _tab switch { Tab.Posted => "작전 목록", Tab.Active => "진행 중인 작전", _ => "완료한 작전" };
     }
 
     private List<QuestData> Source() => _tab switch
@@ -238,7 +253,7 @@ public class QuestBoardView : MonoBehaviour
         if (_selected != null) _selected.SetSelected(false);
         _selected = card;
         detailRoot.SetActive(card != null);
-        if (card == null) { SetAction(ActionState.Disabled, "의뢰를 선택하세요"); return; }
+        if (card == null) { SetAction(ActionState.Disabled, "작전을 선택하세요"); return; }
         card.SetSelected(true);
         var q = card.Quest;
 
@@ -275,7 +290,7 @@ public class QuestBoardView : MonoBehaviour
         rewardValue.text = card.Locked ? "???" : $"{q.rewardExp} <size=75%>EXP</size>";
         rewardExtra.text = q.tag == QuestTag.Story ? "+ 스토리 단서" : q.tag == QuestTag.Rescue ? "+ 동료 구출" : "";
 
-        if (done) SetAction(ActionState.Disabled, "완료한 의뢰");
+        if (done) SetAction(ActionState.Disabled, "완료한 작전");
         else if (card.Locked) SetAction(ActionState.Disabled, "게시 조건 미달");
         else if (Q.IsAccepted(q.questId)) SetAction(ActionState.Cancel);
         else if (Q.ActiveCount >= Q.MaxActive) SetAction(ActionState.Disabled, "수주 한도 도달");
@@ -293,7 +308,7 @@ public class QuestBoardView : MonoBehaviour
         bool cancel = state == ActionState.Cancel;
         actionImage.sprite = state == ActionState.Disabled ? acceptDisabled : cancel ? cancelNormal : acceptNormal;
         var ss = actionButton.spriteState; ss.highlightedSprite = cancel ? cancelHover : acceptHover; ss.pressedSprite = ss.highlightedSprite; ss.disabledSprite = acceptDisabled; actionButton.spriteState = ss;
-        actionLabel.text = state == ActionState.Disabled ? disabledText : cancel ? "수주 취소" : "의뢰 수주";
+        actionLabel.text = state == ActionState.Disabled ? disabledText : cancel ? "수주 취소" : "작전 수주";
         actionLabel.color = cancel ? new Color(0.1f, 0.11f, 0.12f, 1f) : state == ActionState.Disabled ? new Color(0.45f, 0.46f, 0.48f, 1f) : Color.white;
     }
 
@@ -301,13 +316,15 @@ public class QuestBoardView : MonoBehaviour
     {
         if (_selected == null) return;
         var q = _selected.Quest;
-        if (_action == ActionState.Accept && Q.Accept(q))
+        if (_action == ActionState.Accept)
         {
-            _selected.PlayStamp(false);
+            if (Q.Accept(q)) { _selected.PlayStamp(false); talk?.Say(lineAccepted); }
+            else talk?.Say(lineFull);
         }
         else if (_action == ActionState.Cancel)
         {
             Q.Abandon(q);
+            talk?.Say(lineCancelled);
             if (_tab == Tab.Active) { RefreshHeader(); RefreshTabs(); RebuildList(); return; }
             _selected.Bind(q, false, false, false);
             _selected.SetSelected(true);
