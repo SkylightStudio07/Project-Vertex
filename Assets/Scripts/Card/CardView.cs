@@ -45,13 +45,15 @@ public class CardView : MonoBehaviour
         }
 
         nameText.text        = card.CardName;
-        energyCostText.text  = card.EnergyCost.ToString();
-        ammoCostText.text    = card.AmmoCost.ToString();
+        energyCostText.text  = card.EnergyCostLabel;
+        ammoCostText.text    = card.AmmoCostLabel;
 
         bool up = card.isUpgraded;
+        bool energyChanged = card.GetEnergyCost(true) != card.GetEnergyCost(false) || card.IsEnergyCostX(true) != card.IsEnergyCostX(false);
+        bool ammoChanged   = card.GetAmmoCost(true) != card.GetAmmoCost(false) || card.IsAmmoCostX(true) != card.IsAmmoCostX(false);
         nameText.color       = up ? UpgradeNameColor : _nameColor;
-        energyCostText.color = up && card.GetEnergyCost(true) != card.GetEnergyCost(false) ? UpgradeCostColor : _energyColor;
-        ammoCostText.color   = up && card.GetAmmoCost(true) != card.GetAmmoCost(false) ? UpgradeCostColor : _ammoColor;
+        energyCostText.color = up && energyChanged ? UpgradeCostColor : _energyColor;
+        ammoCostText.color   = up && ammoChanged ? UpgradeCostColor : _ammoColor;
         if (typeText != null) typeText.text = GetTypeLabel(card.Type);
         RefreshDescription();
 

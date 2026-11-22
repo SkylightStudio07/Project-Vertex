@@ -488,7 +488,7 @@ public class TrainingView : MonoBehaviour
         {
             detailCardArt.SetSprite(card.CardImage);
             detailCardName.text = card.CardName;
-            detailCardEnergy.text = $"에너지 {card.EnergyCost}";
+            detailCardEnergy.text = $"에너지 {card.EnergyCostLabel}";
         }
     }
 

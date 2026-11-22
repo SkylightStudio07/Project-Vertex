@@ -7,5 +7,11 @@ using UnityEngine;
 public class EffectTokenHintAttribute : PropertyAttribute
 {
     public readonly string EffectsPath;
-    public EffectTokenHintAttribute(string effectsPath) => EffectsPath = effectsPath;
+    // 비어 있지 않으면 "이 필드로 복사" 버튼을 띄운다 (강화 설명 ← 기본 설명)
+    public readonly string CopyFromPath;
+    public EffectTokenHintAttribute(string effectsPath, string copyFromPath = null)
+    {
+        EffectsPath = effectsPath;
+        CopyFromPath = copyFromPath;
+    }
 }

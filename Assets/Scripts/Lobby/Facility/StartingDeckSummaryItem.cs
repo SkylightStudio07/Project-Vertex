@@ -26,7 +26,7 @@ public class StartingDeckSummaryItem : MonoBehaviour
             countText.text = $"x{Mathf.Max(0, count)}";
 
         if (costText != null)
-            costText.text = card != null ? card.EnergyCost.ToString() : "-";
+            costText.text = card != null ? card.EnergyCostLabel : "-";
 
         if (artworkImage == null)
             return;

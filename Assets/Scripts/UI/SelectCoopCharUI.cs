@@ -183,7 +183,7 @@ public class SelectCoopCharUI : MonoBehaviour
         joinCardArt.enabled = joinCardArt.sprite != null;
         joinCardName.text = card != null ? card.CardName : "합류 카드 없음";
         joinCardDescription.text = card != null ? card.CardDescription : "";
-        joinCardCost.text = card != null ? $"에너지 {card.EnergyCost}  ·  탄약 {card.AmmoCost}" : "";
+        joinCardCost.text = card != null ? $"에너지 {card.EnergyCostLabel}  ·  탄약 {card.AmmoCostLabel}" : "";
 
         rewardSummary.text = BuildRewardSummary(data);
         ApplyFullArt(data);

@@ -221,8 +221,8 @@ public sealed partial class CardAuthoringWindow : EditorWindow
     {
         Title("이름·비용·키워드");
         EditorGUILayout.PropertyField(state.FindPropertyRelative("cardName"), new GUIContent("이름"));
-        EditorGUILayout.PropertyField(state.FindPropertyRelative("energyCost"), new GUIContent("에너지 비용"));
-        EditorGUILayout.PropertyField(state.FindPropertyRelative("ammoCost"), new GUIContent("탄약 비용"));
+        CostField(state, "energyCost", "energyCostIsX", "에너지 비용");
+        CostField(state, "ammoCost", "ammoCostIsX", "탄약 비용");
         using (new EditorGUILayout.HorizontalScope())
         {
             Toggle(state, "isExhaust", "소멸"); Toggle(state, "isEthereal", "휘발성");
@@ -413,6 +413,16 @@ public sealed partial class CardAuthoringWindow : EditorWindow
         var description = serializedCard.FindProperty("cardDescription");
         description.stringValue = EditorGUILayout.TextArea(description.stringValue, GUILayout.MinHeight(90));
         EditorGUILayout.HelpBox("예: 피해 {0.amount}을 {0.hitCount}회 줍니다.\n숫자는 각 상태의 효과 값으로 치환됩니다. 효과가 바뀌어도 설명은 자동 작성되지 않습니다.", MessageType.None);
+
+        Title("강화 설명 — 강화로 문구가 바뀔 때만 작성 (비우면 위 설명 사용)");
+        var upgradedDescription = serializedCard.FindProperty("upgradedDescription");
+        upgradedDescription.stringValue = EditorGUILayout.TextArea(upgradedDescription.stringValue, GUILayout.MinHeight(60));
+        using (new EditorGUILayout.HorizontalScope())
+        {
+            if (GUILayout.Button("기본 설명 그대로 가져오기")) { upgradedDescription.stringValue = description.stringValue; GUI.FocusControl(null); }
+            using (new EditorGUI.DisabledScope(string.IsNullOrEmpty(upgradedDescription.stringValue)))
+                if (GUILayout.Button("비우기 (기본 설명 사용)", GUILayout.Width(160))) { upgradedDescription.stringValue = string.Empty; GUI.FocusControl(null); }
+        }
         if (serializedCard.ApplyModifiedProperties()) previewDirty = true;
         if (previewDirty)
         {
@@ -452,8 +462,19 @@ public sealed partial class CardAuthoringWindow : EditorWindow
         if (depth > 16) return;
         foreach (var child in CardAuthoringUtility.Children(parent))
         {
-            if (child.isArray && child.propertyType != SerializedPropertyType.String) continue;
-            string path = prefix + "." + child.name;
+            string path = prefix + "." + CardData.FieldToTokenAlias(child.name);
+            if (child.isArray && child.propertyType != SerializedPropertyType.String)
+            {
+                // 조건부·처치 시 효과 등 안쪽 리스트: {i.OnMet.j.amount}처럼 원소 인덱스로 내려간다
+                for (int j = 0; j < child.arraySize; j++)
+                {
+                    var element = child.GetArrayElementAtIndex(j);
+                    if (element.propertyType == SerializedPropertyType.ManagedReference && element.managedReferenceValue == null) continue;
+                    if (element.propertyType == SerializedPropertyType.Generic || element.propertyType == SerializedPropertyType.ManagedReference)
+                        AppendLeafTokens(element, $"{path}.{j}", sb, depth + 1);
+                }
+                continue;
+            }
             if (child.propertyType == SerializedPropertyType.Generic || child.propertyType == SerializedPropertyType.ManagedReference)
                 AppendLeafTokens(child, path, sb, depth + 1);
             else if (child.propertyType == SerializedPropertyType.Integer || child.propertyType == SerializedPropertyType.Float)
@@ -464,6 +485,17 @@ public sealed partial class CardAuthoringWindow : EditorWindow
     private void CommitAndExit() { serializedCard.ApplyModifiedProperties(); previewDirty = true; GUIUtility.ExitGUI(); }
     private void Field(string path, string label) => EditorGUILayout.PropertyField(serializedCard.FindProperty(path), new GUIContent(label), true);
     private static void Title(string label) { EditorGUILayout.Space(8); EditorGUILayout.LabelField(label, EditorStyles.boldLabel); }
+    // 비용 숫자 + X 표시 토글 (X는 표시 전용 — 비용 차감은 숫자 값을 그대로 쓴다)
+    private static void CostField(SerializedProperty state, string costPath, string xPath, string label)
+    {
+        using (new EditorGUILayout.HorizontalScope())
+        {
+            EditorGUILayout.PropertyField(state.FindPropertyRelative(costPath), new GUIContent(label));
+            var x = state.FindPropertyRelative(xPath);
+            x.boolValue = GUILayout.Toggle(x.boolValue, new GUIContent("X 표시", "비용 칸에 숫자 대신 X로 표시 (표시 전용)"), "Button", GUILayout.Width(60));
+        }
+    }
+
     private static void Toggle(SerializedProperty state, string path, string label)
     {
         var property = state.FindPropertyRelative(path);

@@ -83,6 +83,11 @@ public class CardData : ScriptableObject
     // {인덱스.필드명} 토큰 지원 — GetFullDescription() 참고. 기본/강화 공용 템플릿 하나만 작성.
     // EffectTokenHint가 인스펙터에 사용 가능 토큰 목록과 치환 미리보기를 띄워준다.
     [SerializeField, EffectTokenHint("normalState.effects")] public string cardDescription;
+    // 강화로 문구 자체가 바뀌는 카드용 (예: "다음 카드" → "다음 두 카드", "무작위로" → "선택해서").
+    // 비워 두면 강화 상태도 cardDescription을 쓴다. 토큰은 강화 상태의 이펙트 기준으로 치환된다.
+    [Tooltip("비우면 기본 설명을 강화에도 사용합니다. 강화로 문구가 바뀌는 카드만 작성하세요.")]
+    [SerializeField, EffectTokenHint("upgradedState.effects", nameof(cardDescription))] public string upgradedDescription;
+    public bool HasUpgradedDescription => !string.IsNullOrEmpty(upgradedDescription);
     [SerializeField] private CardUseMode useMode = CardUseMode.DropToPlayArea;
     [Tooltip("사용 조건. 비우면 언제나 쓸 수 있다 (예: 회수 — 특정 카드가 소멸 더미에 있을 때만)")]
     [SerializeReference, SubclassPicker] private CardCondition playCondition;
@@ -143,7 +148,7 @@ public class CardData : ScriptableObject
 
     // cardDescription의 {인덱스.필드명} 토큰을 ActiveEffects[인덱스]의 public 필드값으로 치환한다.
     // 예) "적에게 {0.amount}의 피해를 {0.hitCount}회 줍니다." → "적에게 5의 피해를 3회 줍니다."
-    // 안쪽 리스트는 숫자 조각으로 연다: "초탄이면 방어도를 {1.effectsWhenMet.0.amount} 얻습니다."
+    // 안쪽 리스트는 숫자 조각으로 연다: "초탄이면 방어도를 {1.OnMet.0.amount} 얻습니다." (OnMet = effectsWhenMet 별칭)
     // ActiveEffects가 강화 여부에 따라 다른 리스트를 반환하므로 강화 수치는 자동 반영됨.
     // 템플릿은 기본/강화 공용 하나만 작성하면 된다. 잘못된 토큰(인덱스 초과, 없는 필드)은 원문 그대로 노출.
     //
@@ -164,6 +169,11 @@ public class CardData : ScriptableObject
     }
     public int GetEnergyCost(bool upgraded) => StateOf(upgraded).energyCost;
     public int GetAmmoCost(bool upgraded)   => StateOf(upgraded).ammoCost;
+    public bool IsEnergyCostX(bool upgraded) => StateOf(upgraded).energyCostIsX;
+    public bool IsAmmoCostX(bool upgraded)   => StateOf(upgraded).ammoCostIsX;
+    // 비용 칸 표시용 문자열 (X 비용이면 "X")
+    public string EnergyCostLabel => ActiveState.energyCostIsX ? "X" : EnergyCost.ToString();
+    public string AmmoCostLabel   => ActiveState.ammoCostIsX ? "X" : AmmoCost.ToString();
 
     // 상태 플래그로 정해지는 키워드 (표시 이름). 설명문 템플릿에 직접 적는 대신 강화로 생기는 키워드를 자동 표기할 때 쓴다.
     public List<string> GetKeywords(bool upgraded)
@@ -206,11 +216,25 @@ public class CardData : ScriptableObject
         return traits;
     }
 
+    // 설명문 토큰에서 긴 필드명 대신 쓸 수 있는 짧은 이름. 필드명은 에셋에 저장되므로 바꾸지 않고 토큰에서만 바꿔 읽는다.
+    // 예) {1.OnMet.0.amount} == {1.effectsWhenMet.0.amount}
+    private static readonly Dictionary<string, string> TokenAliases = new()
+    {
+        { "OnMet", nameof(ConditionalEffect.effectsWhenMet) },
+    };
+    public static string TokenAliasToField(string name) => TokenAliases.TryGetValue(name, out var field) ? field : name;
+    public static string FieldToTokenAlias(string field)
+    {
+        foreach (var pair in TokenAliases) if (pair.Value == field) return pair.Key;
+        return field;
+    }
+
     private string ResolveDescription(bool upgraded, BattleState state, EnemyInstance target)
     {
-        if (string.IsNullOrEmpty(cardDescription)) return string.Empty;
+        string template = upgraded && HasUpgradedDescription ? upgradedDescription : cardDescription;
+        if (string.IsNullOrEmpty(template)) return string.Empty;
         var effects = EffectsOf(upgraded);
-        return Regex.Replace(cardDescription, @"\{(\d+)\.([\w.]+)\}", match =>
+        return Regex.Replace(template, @"\{(\d+)\.([\w.]+)\}", match =>
         {
             if (!int.TryParse(match.Groups[1].Value, out int idx)) return match.Value;
             if (idx >= effects.Count) return match.Value;
@@ -239,7 +263,7 @@ public class CardData : ScriptableObject
                 }
 
                 var valueType = value.GetType();
-                var field = valueType.GetField(memberName);
+                var field = valueType.GetField(TokenAliasToField(memberName));
                 var property = field == null ? valueType.GetProperty(memberName) : null;
                 if (field == null && property == null) return match.Value;
                 fieldOwner = value as CardEffect;
