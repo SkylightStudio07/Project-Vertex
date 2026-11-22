@@ -20,7 +20,8 @@ MonoBehaviour:
   isWeaponShootingCard: 0
   cardDescription: "\uC774\uBC88 \uD134\uC5D0 \uD798 {0.amount}\uACFC \uBBFC\uCCA9
     {1.amount}\uC744 \uC5BB\uC2B5\uB2C8\uB2E4. \uC774\uBC88 \uD134\uC5D0\uB294 \uCE74\uB4DC\uB97C
-    {3.amount}\uC7A5\uAE4C\uC9C0\uB9CC \uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uC18C\uBA78."
+    {3.amount}\uC7A5\uAE4C\uC9C0\uB9CC \uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
   playCondition:
     rid: -2
@@ -29,6 +30,8 @@ MonoBehaviour:
     cardName: "\uC804\uC220 \uB300\uD615 \uC804\uD658"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299786932
     - rid: 8755282979299786933
@@ -42,6 +45,8 @@ MonoBehaviour:
     cardName: "\uC804\uC220 \uB300\uD615 \uC804\uD658+"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299786936
     - rid: 8755282979299786937
@@ -70,10 +75,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786933
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -86,10 +94,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786934
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -102,10 +113,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786935
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -118,10 +132,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786936
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -134,10 +151,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786937
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -150,10 +170,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786938
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -166,10 +189,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786939
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -182,7 +208,10 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0

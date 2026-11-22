@@ -19,8 +19,8 @@ MonoBehaviour:
   cardOwner: 1
   isWeaponShootingCard: 0
   cardDescription: "{0.targets}\uC5D0\uAC8C {0.amount}\uC758 \uD53C\uD574\uB97C \uC8FC\uACE0
-    \uB300\uC0C1\uC758 \uCDE8\uC57D\uC744 {1.amount}\uBC30\uB85C \uB9CC\uB4E0\uB2E4.
-    \uC18C\uBA78"
+    \uB300\uC0C1\uC758 \uCDE8\uC57D\uC744 {1.amount}\uBC30\uB85C \uB9CC\uB4E0\uB2E4."
+  upgradedDescription: 
   useMode: 1
   playCondition:
     rid: -2
@@ -29,6 +29,8 @@ MonoBehaviour:
     cardName: "\uC0C1\uCC98 \uBC8C\uB9AC\uAE30"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 5573463116610797674
     - rid: 2470581257654239302
@@ -40,6 +42,8 @@ MonoBehaviour:
     cardName: "\uC0C1\uCC98 \uBC8C\uB9AC\uAE30+"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 5573463116610797675
     - rid: 2470581257654239303
@@ -66,10 +70,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 2470581257654239303
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -82,10 +89,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 5573463116610797674
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -96,6 +106,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
         hitCountScaling:
@@ -104,6 +115,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
@@ -121,6 +133,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
         hitCountScaling:
@@ -129,6 +142,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0

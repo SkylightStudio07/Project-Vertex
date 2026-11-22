@@ -18,8 +18,7 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uC801\uC744 \uD0C0\uACA9\uD560 \uB54C \uB9C8\uB2E4 {0.status}\uB97C
-    {0.potency} \uBD80\uC5EC\uD55C\uB2E4."
+  cardDescription: "\uC801\uC744 \uD0C0\uACA9\uD560 \uB54C \uB9C8\uB2E4 {0.status}\uB97C {0.amount} \uBD80\uC5EC\uD55C\uB2E4."
   useMode: 0
   isUpgraded: 0
   normalState:
@@ -59,7 +58,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        potency: 1
+        potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
@@ -75,7 +74,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        potency: 1
+        potency: 0
         secondaryPotency: 0
         targets:
           mode: 0

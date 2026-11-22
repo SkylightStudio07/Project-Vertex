@@ -20,7 +20,8 @@ MonoBehaviour:
   isWeaponShootingCard: 0
   cardDescription: "\uCCB4\uB825\uC744 {0.amount} \uD68C\uBCF5\uD55C\uB2E4. \uC774\uBC88
     \uD134\uC5D0 \uCCB4\uB825\uC744 \uC783\uC5C8\uB2E4\uBA74 {1.effectsWhenMet.0.amount}
-    \uB354 \uD68C\uBCF5\uD55C\uB2E4. \uC18C\uBA78"
+    \uB354 \uD68C\uBCF5\uD55C\uB2E4."
+  upgradedDescription: 
   useMode: 0
   playCondition:
     rid: -2
@@ -29,6 +30,8 @@ MonoBehaviour:
     cardName: "\uD608\uC561\uC7AC\uC0DD"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299787285
     - rid: 8755282979299787286
@@ -40,6 +43,8 @@ MonoBehaviour:
     cardName: "\uD608\uC561\uC7AC\uC0DD+"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299787289
     - rid: 8755282979299787290
@@ -64,6 +69,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 8755282979299787286
@@ -87,6 +93,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 8755282979299787289
@@ -99,6 +106,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 8755282979299787290
@@ -122,5 +130,6 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0

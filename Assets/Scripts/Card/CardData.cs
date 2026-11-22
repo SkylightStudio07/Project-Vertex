@@ -175,7 +175,7 @@ public class CardData : ScriptableObject
     public string EnergyCostLabel => ActiveState.energyCostIsX ? "X" : EnergyCost.ToString();
     public string AmmoCostLabel   => ActiveState.ammoCostIsX ? "X" : AmmoCost.ToString();
 
-    // 상태 플래그로 정해지는 키워드 (표시 이름). 설명문 템플릿에 직접 적는 대신 강화로 생기는 키워드를 자동 표기할 때 쓴다.
+    // 상태 플래그로 정해지는 키워드 (표시 이름). 설명문 조립은 GetDescription이 하고, 이 목록은 조회용.
     public List<string> GetKeywords(bool upgraded)
     {
         var st = StateOf(upgraded);
@@ -192,11 +192,30 @@ public class CardData : ScriptableObject
     private const string BuffedValueColor = "#6FE38A";   // 보정으로 오른 수치
     private const string DebuffedValueColor = "#FF6B5E"; // 보정으로 내린 수치
 
-    // 특효 키워드("생체·신비 특효")는 설명문 템플릿에 적혀 있지 않으면 앞에 자동으로 붙인다.
-    // 겨냥 중인 적에게 특효가 걸리면 강조색(청록)으로 칠한다.
+    // 설명문 최종 조립: [선천성, 휘발성.] [○○ 특효.] 본문 [소멸, 보존.]
+    // 특수 키워드(선천성·휘발성·소멸·보존)는 카드 자체의 상태 플래그로 자동 표기한다 — 설명문에 직접 적지 않는다.
+    // (효과 문장 속의 "카드 1장을 소멸" 같은 표현은 키워드가 아니므로 설명문에 그대로 쓴다)
     public string GetDescription(bool upgraded, BattleState state = null, EnemyInstance target = null)
     {
         string text = ResolveDescription(upgraded, state, target);
+        text = PrependTraitKeyword(text, upgraded, target);
+
+        var st = StateOf(upgraded);
+        string front = JoinKeywords(st.isInnate ? "선천성" : null, st.isEthereal ? "휘발성" : null);
+        // 파워는 플래그와 무관하게 항상 소멸하므로 소멸을 표시하지 않는다
+        string back = JoinKeywords(st.isExhaust && Type != CardType.Power ? "소멸" : null, st.isRetain ? "보존" : null);
+
+        var sb = new System.Text.StringBuilder();
+        if (front != null) sb.Append(front);
+        if (!string.IsNullOrEmpty(text)) { if (sb.Length > 0) sb.Append(' '); sb.Append(text); }
+        if (back != null) { if (sb.Length > 0) sb.Append(' '); sb.Append(back); }
+        return sb.ToString();
+    }
+
+    // 특효 키워드("생체·신비 특효")는 설명문 템플릿에 적혀 있지 않으면 앞에 자동으로 붙인다.
+    // 겨냥 중인 적에게 특효가 걸리면 강조색(청록)으로 칠한다.
+    private string PrependTraitKeyword(string text, bool upgraded, EnemyInstance target)
+    {
         var traits = EffectiveTraitsOf(upgraded);
         if (traits == EnemyTrait.None) return text;
         string keyword = EnemyTraits.Label(traits) + " 특효";
@@ -204,6 +223,14 @@ public class CardData : ScriptableObject
         // 속성이 아직 공개되지 않은 적(기록 2편 전)에게는 강조하지 않는다 — 강조로 속성이 드러나므로
         if (target != null && EnemyTraits.HasAny(target, traits) && MaterialArchive.TraitsRevealed(target.Data)) keyword = $"<color={EffectiveKeywordColor}>{keyword}</color>";
         return string.IsNullOrEmpty(text) ? keyword + "." : keyword + ". " + text;
+    }
+
+    // "소멸." / "소멸, 보존." — 키워드가 없으면 null
+    private static string JoinKeywords(string first, string second)
+    {
+        if (first == null && second == null) return null;
+        if (first == null || second == null) return (first ?? second) + ".";
+        return first + ", " + second + ".";
     }
 
     private const string EffectiveKeywordColor = "#0DB8F2";

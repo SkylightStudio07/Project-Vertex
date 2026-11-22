@@ -21,7 +21,8 @@ MonoBehaviour:
   cardDescription: "<b>\uC804\uC220 \uAC1C\uB7C9\uD615 \uD22C\uCC99 \uCC3D\uC220</b>\uC774
     \uC18C\uBA78\uB418\uC5B4 \uC788\uC744 \uB54C\uB9CC \uC0AC\uC6A9\uD560 \uC218
     \uC788\uC2B5\uB2C8\uB2E4. \uADF8 \uCE74\uB4DC\uB97C \uC190\uC73C\uB85C \uAC00\uC838\uC624\uACE0
-    {0.amount}\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4. \uC18C\uBA78."
+    {0.amount}\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 1
   playCondition:
     rid: 8755282979299786925
@@ -30,6 +31,8 @@ MonoBehaviour:
     cardName: "\uD68C\uC218"
     energyCost: 0
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299786926
     - rid: 8755282979299786927
@@ -41,6 +44,8 @@ MonoBehaviour:
     cardName: 
     energyCost: 0
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects: []
     isExhaust: 0
     isEthereal: 0
@@ -65,8 +70,16 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0

@@ -21,8 +21,8 @@ MonoBehaviour:
   cardDescription: "\uAC1C\uB7C9\uD615 \uC2A4\uD53C\uC5B4\uB97C \uB358\uC838 {0.amount}\uC758
     \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4. \uBC84\uB9B0 \uCE74\uB4DC \uB354\uBBF8\uC5D0
     <b>\uD68C\uC218</b>\uB97C \uB123\uC2B5\uB2C8\uB2E4. \uCC3D \uC18D\uC131\uC774
-    \uC788\uC73C\uBA74 \uC801\uC911\uD55C \uC801\uC5D0\uAC8C \uBD80\uC5EC\uD569\uB2C8\uB2E4.
-    \uC18C\uBA78."
+    \uC788\uC73C\uBA74 \uC801\uC911\uD55C \uC801\uC5D0\uAC8C \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 1
   playCondition:
     rid: -2
@@ -31,6 +31,8 @@ MonoBehaviour:
     cardName: "\uC804\uC220 \uAC1C\uB7C9\uD615 \uD22C\uCC99 \uCC3D\uC220"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299786903
     - rid: 8755282979299786904
@@ -47,6 +49,8 @@ MonoBehaviour:
     cardName: 
     energyCost: 0
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects: []
     isExhaust: 0
     isEthereal: 0
@@ -69,8 +73,16 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
@@ -112,10 +124,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786908
       type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -142,10 +157,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786911
       type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -172,10 +190,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786914
       type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -202,10 +223,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786917
       type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -231,10 +255,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 8755282979299786920
       type: {class: HasStatusCondition, ns: , asm: Assembly-CSharp}
       data:

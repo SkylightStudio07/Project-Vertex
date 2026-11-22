@@ -20,13 +20,17 @@ MonoBehaviour:
   isWeaponShootingCard: 0
   cardDescription: "\uAD8C\uCD1D\uC73C\uB85C \uC804\uD658\uD569\uB2C8\uB2E4. \uC774\uBC88
     \uD134 \uB2E4\uC74C \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uB294 \uCE74\uB4DC\uC758
-    \uC5D0\uB108\uC9C0 \uBE44\uC6A9\uC774 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+    \uC5D0\uB108\uC9C0 \uBE44\uC6A9\uC774 {1.amount} \uAC10\uC18C\uD569\uB2C8\uB2E4."
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uAD8C\uCD1D \uC900\uBE44"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486431
     - rid: 7338472044098486432
@@ -36,8 +40,10 @@ MonoBehaviour:
     isRetain: 0
   upgradedState:
     cardName: "\uAD8C\uCD1D \uC900\uBE44+"
-    energyCost: 1
+    energyCost: 0
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486433
     - rid: 7338472044098486434
@@ -50,6 +56,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486431
       type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -66,10 +74,12 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        potency: 1
+          percent: 0
+        potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
     - rid: 7338472044098486433
       type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -86,7 +96,9 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        potency: 1
+          percent: 0
+        potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0

@@ -18,14 +18,18 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uC774\uBC88 \uD134 \uB3D9\uC548 \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uBA74
-    \uC0AC\uC6A9\uD55C \uD0C4\uC57D 1\uAC1C\uB2F9 \uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uC2B5\uB2C8\uB2E4."
+  cardDescription: "\uC774\uBC88 \uD134 \uB3D9\uC548 \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uBA74 \uC0AC\uC6A9\uD55C \uD0C4\uC57D 1\uAC1C\uB2F9 \uBC29\uC5B4\uB3C4\uB97C {0.amount} \uC5BB\uC2B5\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uC0AC\uC120 \uC774\uD0C8"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486407
     isExhaust: 0
@@ -36,6 +40,8 @@ MonoBehaviour:
     cardName: "\uC0AC\uC120 \uC774\uD0C8+"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486408
     isExhaust: 0
@@ -47,35 +53,43 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486407
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         status: {fileID: 11400000, guid: 1d66e632e1e539d40a74dc9c41ccd65d, type: 2}
         operation: 0
-        amount: 1
+        amount: 5
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        potency: 5
+          percent: 0
+        potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 7338472044098486408
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         status: {fileID: 11400000, guid: 1d66e632e1e539d40a74dc9c41ccd65d, type: 2}
         operation: 0
-        amount: 1
+        amount: 7
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
-        potency: 5
+          percent: 0
+        potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0

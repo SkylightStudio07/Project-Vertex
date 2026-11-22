@@ -35,7 +35,10 @@ public static class PistolCardBatch
         AssetDatabase.CreateAsset(status, path);
         return status;
     }
-    private static ApplyStatusEffect Buff(StatusDefinition status, int value) => new() { status = status, amount = 1, potency = value, targets = EffectTargetSelector.Source };
+    // 영구 버프는 스택 = 효과 수치 (AddStack으로 다시 쓰면 합산)
+    private static ApplyStatusEffect Buff(StatusDefinition status, int value) => new() { status = status, amount = value, targets = EffectTargetSelector.Source };
+    // 발포 준비처럼 스택이 남은 횟수인 버프는 수치를 potency에 둔다
+    private static ApplyStatusEffect CountBuff(StatusDefinition status, int count, int value) => new() { status = status, amount = count, potency = value, targets = EffectTargetSelector.Source };
     private static DamageEffect Damage(int amount) => new() { amount = amount };
     private static BlockEffect Block(int amount) => new() { amount = amount };
     private static ConditionalEffect If(CardCondition condition, params CardEffect[] effects) => new() { condition = condition, effectsWhenMet = new List<CardEffect>(effects) };
@@ -72,7 +75,7 @@ public static class PistolCardBatch
         var firstBlock = Status("FirstAmmoBlock", "사격 후 이동", "재장전 후 처음 탄약을 사용하는 카드 사용 시 방어도를 얻습니다.", new AmmoSpentBlockStatusBehavior { firstOnly = true });
         var nextDamage = Status("NextAmmoDamage", "발포 준비", "다음 탄약을 사용하는 카드의 피해가 증가합니다.", new NextAmmoDamageStatusBehavior());
         var discount = Status("NextAmmoDiscount", "권총 속사 준비", "이번 턴 다음 탄약을 사용하는 카드의 에너지 비용이 감소합니다.", new NextAmmoDiscountStatusBehavior());
-        var reloadBlock = Status("ReloadBlock", "장전의 여유", "재장전할 때마다 방어도를 얻습니다.", new OnReloadEffectsStatusBehavior { effects = new List<CardEffect> { new BlockEffect { scaling = new EffectValue { source = EffectValueSource.TriggerStatusPotency, multiplier = 1 } } } });
+        var reloadBlock = Status("ReloadBlock", "장전의 여유", "재장전할 때마다 방어도를 얻습니다.", new OnReloadEffectsStatusBehavior { effects = new List<CardEffect> { new BlockEffect { scaling = new EffectValue { source = EffectValueSource.TriggerStatusStacks, multiplier = 1 } } } });
         var cards = new List<CardData> {
             Card(0,1,"피해를 7 줍니다. 초탄이면 피해가 4 증가합니다.", Bonus(7,new FirstAmmoUseCondition(),4)),
             Card(1,1,"피해를 6 줍니다. 초탄이면 방어도를 7 얻습니다.",Damage(6),If(new FirstAmmoUseCondition(),Block(7))),
@@ -88,7 +91,7 @@ public static class PistolCardBatch
             Card(11,0,"이번 전투 동안 재장전 후 처음 탄약을 사용하는 카드를 사용할 때마다 방어도를 5 얻습니다.",Buff(firstBlock,5)),
             Card(12,0,"재장전하고 카드를 1장 뽑습니다.",new ReloadAmmoEffect(),new DrawEffect { count=1 }),
             Card(13,0,"재장전합니다. 재장전 직전 탄약이 0이었다면 카드를 2장 뽑습니다.",new ReloadAmmoEffect { effectsWhenEmpty=new List<CardEffect> { new DrawEffect { count=2 } } }),
-            Card(14,0,"재장전합니다. 다음 탄약을 사용하는 카드의 피해가 6 증가합니다.",new ReloadAmmoEffect(),Buff(nextDamage,6)),
+            Card(14,0,"재장전합니다. 다음 탄약을 사용하는 카드의 피해가 6 증가합니다.",new ReloadAmmoEffect(),CountBuff(nextDamage,1,6)),
             Card(15,0,"권총으로 전환합니다. 이번 턴 다음 탄약을 사용하는 카드의 에너지 비용이 1 감소합니다.",new ChangeWeaponEffect { weapon=pistol },Buff(discount,1)),
             Card(16,0,"권총으로 전환합니다. 방어도를 5 얻고 카드를 1장 뽑습니다.",new ChangeWeaponEffect { weapon=pistol },Block(5),new DrawEffect { count=1 }),
             Card(17,0,"이번 전투 동안 재장전할 때마다 방어도를 4 얻습니다.",Buff(reloadBlock,4)),

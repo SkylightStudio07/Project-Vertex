@@ -6,9 +6,8 @@ using System.Text.RegularExpressions;
 // 설명문 템플릿은 기본/강화 공용이고 수치 토큰만 상태별로 바뀌므로, 강화 전·후 설명문을 조각 단위로 비교해
 // 강화 후에만 있는 조각을 칠한다. 숫자는 조사와 따로 떼어 비교해서 "9만큼"이면 "9"만 칠해진다.
 //
-// 키워드(소멸·휘발성·선천성·보존)는 상태 플래그라 템플릿만으로는 강화 차이를 표현할 수 없다.
-//   - 강화로 새로 생긴 키워드: 설명문 앞에 강조색으로 붙인다 ("소멸. …")
-//   - 강화로 없어진 키워드: 템플릿에 적혀 있으면 설명문에서 지운다
+// 키워드(선천성·휘발성·소멸·보존·특효)는 CardData.GetDescription이 상태 플래그로 양쪽 설명에 자동으로 붙이므로
+// 강화로 새로 생긴 키워드도 같은 비교로 칠해지고, 없어진 키워드는 강화 설명에 아예 나오지 않는다.
 public static class CardUpgradeHighlight
 {
     public const string Color = "#FF5247";
@@ -20,35 +19,14 @@ public static class CardUpgradeHighlight
 
         string before = card.GetDescription(false, state, target);
         string after = card.GetDescription(true, state, target);
-
-        var baseKeywords = card.GetKeywords(false);
-        var upKeywords = card.GetKeywords(true);
-
-        // 없어진 키워드는 양쪽에서 지운다 (비교에서 차이로 잡히지 않게)
-        foreach (var kw in baseKeywords)
-        {
-            if (upKeywords.Contains(kw)) continue;
-            before = RemoveKeyword(before, kw);
-            after = RemoveKeyword(after, kw);
-        }
-
-        var sb = new StringBuilder();
-        // 새로 생긴 키워드 (템플릿에 이미 적혀 있으면 비교로 처리되므로 붙이지 않는다)
-        foreach (var kw in upKeywords)
-            if (!baseKeywords.Contains(kw) && !after.Contains(kw))
-                sb.Append(Wrap(kw)).Append(". ");
-
-        sb.Append(Diff(before, after));
-        return sb.ToString();
+        return Diff(before, after);
     }
 
     public static string Wrap(string text) => $"<color={Color}>{text}</color>";
 
-    private static string RemoveKeyword(string text, string keyword)
-        => Regex.Replace(text, Regex.Escape(keyword) + @"\.?\s*", string.Empty);
-
-    // 조각: 숫자 덩어리 / 공백 / 그 밖의 글자 덩어리
-    private static readonly Regex TokenRegex = new(@"\d+|\s+|[^\d\s]+", RegexOptions.Compiled);
+    // 조각: 숫자 덩어리 / 공백 / 쉼표·마침표 / 그 밖의 글자 덩어리
+    // 구두점을 따로 떼어야 "선천성." → "선천성, 휘발성."에서 원래 있던 "선천성"이 칠해지지 않는다
+    private static readonly Regex TokenRegex = new(@"\d+|\s+|[.,]|[^\d\s.,]+", RegexOptions.Compiled);
 
     private static List<string> Tokenize(string s)
     {

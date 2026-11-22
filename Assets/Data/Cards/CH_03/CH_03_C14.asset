@@ -18,8 +18,7 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 8
   isWeaponShootingCard: 0
-  cardDescription: "\uC801\uC5D0\uAC8C {0.amount}\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uB300\uC0C1\uC774 \uC911\uB3C5 \uC0C1\uD0DC\uBA74 \uD53C\uD574\uAC00 2 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  cardDescription: "\uC801\uC5D0\uAC8C {0.amount}\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4. \uB300\uC0C1\uC774 \uC911\uB3C5 \uC0C1\uD0DC\uBA74 \uD53C\uD574\uAC00 {0.conditionalBonuses.0.amount} \uC99D\uAC00\uD569\uB2C8\uB2E4."
   useMode: 1
   playCondition:
     rid: -2

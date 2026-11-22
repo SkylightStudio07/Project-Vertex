@@ -18,8 +18,8 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 5
   isWeaponShootingCard: 0
-  cardDescription: "\uC5D0\uB108\uC9C0\uB97C {0.amount} \uC5BB\uC2B5\uB2C8\uB2E4.
-    \uC18C\uBA78."
+  cardDescription: "\uC5D0\uB108\uC9C0\uB97C {0.amount} \uC5BB\uC2B5\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
   playCondition:
     rid: -2
@@ -28,6 +28,8 @@ MonoBehaviour:
     cardName: "\uC9D1\uC911"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299786940
     isExhaust: 1
@@ -38,6 +40,8 @@ MonoBehaviour:
     cardName: "\uC9D1\uC911+"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 8755282979299786941
     isExhaust: 1
@@ -55,7 +59,21 @@ MonoBehaviour:
       type: {class: GainEnergyEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 2
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
     - rid: 8755282979299786941
       type: {class: GainEnergyEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 3
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0

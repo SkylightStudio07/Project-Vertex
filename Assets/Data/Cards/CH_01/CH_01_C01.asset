@@ -19,13 +19,18 @@ MonoBehaviour:
   cardOwner: 1
   isWeaponShootingCard: 0
   cardDescription: "{0.amount}\uD134\uB3D9\uC548 \uCE74\uB4DC \uCF54\uC2A4\uD2B8\uAC00
-    \uCCB4\uB825 \uAC10\uC18C\uB85C \uC9C4\uD589\uB41C\uB2E4. \uC18C\uBA78"
+    \uCCB4\uB825 \uAC10\uC18C\uB85C \uC9C4\uD589\uB41C\uB2E4."
+  upgradedDescription: 
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uD608\uC561 \uCE58\uD658"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 5573463091696369758
     isExhaust: 1
@@ -36,6 +41,8 @@ MonoBehaviour:
     cardName: "\uD608\uC561 \uCE58\uD658+"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 5573463091696369759
     isExhaust: 0
@@ -47,6 +54,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 5573463091696369758
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -59,10 +68,13 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
     - rid: 5573463091696369759
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -75,7 +87,10 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 0
+        negative: 0
+        snapshotPotencyAsBlock: 0
