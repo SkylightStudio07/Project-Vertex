@@ -143,6 +143,7 @@ public class CardData : ScriptableObject
 
     // cardDescription의 {인덱스.필드명} 토큰을 ActiveEffects[인덱스]의 public 필드값으로 치환한다.
     // 예) "적에게 {0.amount}의 피해를 {0.hitCount}회 줍니다." → "적에게 5의 피해를 3회 줍니다."
+    // 안쪽 리스트는 숫자 조각으로 연다: "초탄이면 방어도를 {1.effectsWhenMet.0.amount} 얻습니다."
     // ActiveEffects가 강화 여부에 따라 다른 리스트를 반환하므로 강화 수치는 자동 반영됨.
     // 템플릿은 기본/강화 공용 하나만 작성하면 된다. 잘못된 토큰(인덱스 초과, 없는 필드)은 원문 그대로 노출.
     //
@@ -217,30 +218,40 @@ public class CardData : ScriptableObject
             var effect = effects[idx];
             if (effect == null) return match.Value; // 슬롯은 늘렸지만 아직 타입을 안 고른 빈 이펙트
 
+            // 경로 조각이 숫자면 리스트 인덱스로 본다 — 조건부·처치 시 효과처럼 안쪽 리스트에 든 수치용.
+            // 예) {1.effectsWhenMet.0.amount}, {0.conditionalBonuses.0.amount}
+            // 보정 표시는 그 수치를 직접 가진 이펙트에 맡긴다 (조건부 안의 방어도면 그 BlockEffect의 민첩 보정).
+            // 이펙트가 아닌 하위 객체의 수치(scaling.multiplier, conditionalBonuses.0.amount 등)는 원시값 그대로.
             object value = effect;
+            CardEffect fieldOwner = null; // 마지막 필드를 직접 가진 이펙트
             string finalFieldName = null;
             foreach (string memberName in match.Groups[2].Value.Split('.'))
             {
                 if (value == null) return match.Value;
-                var valueType = value.GetType();
-                var field = valueType.GetField(memberName);
-                if (field != null)
+                if (int.TryParse(memberName, out int listIndex))
                 {
-                    value = field.GetValue(value);
-                    finalFieldName = field.Name;
+                    if (value is not System.Collections.IList list || listIndex < 0 || listIndex >= list.Count)
+                        return match.Value;
+                    value = list[listIndex];
+                    fieldOwner = null;
+                    finalFieldName = null;
                     continue;
                 }
-                var property = valueType.GetProperty(memberName);
-                if (property == null) return match.Value;
-                value = property.GetValue(value);
-                finalFieldName = property.Name;
+
+                var valueType = value.GetType();
+                var field = valueType.GetField(memberName);
+                var property = field == null ? valueType.GetProperty(memberName) : null;
+                if (field == null && property == null) return match.Value;
+                fieldOwner = value as CardEffect;
+                finalFieldName = memberName;
+                value = field != null ? field.GetValue(value) : property.GetValue(value);
             }
             if (value == null) return match.Value;
 
-            if (state != null && value is int intValue)
+            if (state != null && value is int intValue && fieldOwner != null)
             {
                 // 힘·죄와 벌·민첩·약화 등 보정이 반영된 최종 수치. 보정으로 바뀐 값은 색으로 알려 준다(슬더스 방식)
-                int shown = effect.GetDisplayValue(finalFieldName, intValue, state, this, target);
+                int shown = fieldOwner.GetDisplayValue(finalFieldName, intValue, state, this, target);
                 if (shown > intValue) return $"<color={BuffedValueColor}>{shown}</color>";
                 if (shown < intValue) return $"<color={DebuffedValueColor}>{shown}</color>";
                 return shown.ToString();
