@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC804\uC9C4\uC0AC\uACA9"
+  m_Name: 퀵 드로우
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: 2952756227899047894, guid: ceac3a9ee9b3e464296849357001298b, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
@@ -19,11 +19,13 @@ MonoBehaviour:
   cardOwner: 0
   isWeaponShootingCard: 0
   cardDescription: "{0.amount}\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4. \uAD8C\uCD1D\uC774\uB77C\uBA74
-    \uCE74\uB4DC\uB97C 1\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+    \uCE74\uB4DC\uB97C {1.effectsWhenMet.0.count}\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uC804\uC9C4\uC0AC\uACA9"
+    cardName: 퀵 드로우
     energyCost: 1
     ammoCost: 0
     effects:
@@ -34,11 +36,12 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: 
-    energyCost: 0
+    cardName: 퀵 드로우+
+    energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 4680130923130519635
+    - rid: 8172648442776256743
+    - rid: 8172648442776256744
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -48,13 +51,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4680130923130519635
-      type: {class: AmmoConsumeAllDamageEffect, ns: , asm: Assembly-CSharp}
-      data:
-        damagePerAmmo: 10
-        separateHits: 0
-        targets:
-          mode: 1
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338471726968995996
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -65,12 +63,23 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
+        conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0
     - rid: 7338471726968995997
       type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -85,4 +94,46 @@ MonoBehaviour:
     - rid: 7338471726968995999
       type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
       data:
-        count: 1
+        count: 2
+    - rid: 8172648442776256743
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 9
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        conditionalBonuses: []
+        hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        targets:
+          mode: 1
+        piercing: 0
+        environmentalDamage: 0
+        hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0
+    - rid: 8172648442776256744
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8172648442776256745
+        effectsWhenMet:
+        - rid: 8172648442776256746
+    - rid: 8172648442776256745
+      type: {class: PlayerWeaponCondition, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 8172648442776256746
+      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 2

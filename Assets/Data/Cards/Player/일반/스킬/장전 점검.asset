@@ -18,13 +18,19 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uC7AC\uC7A5\uC804\uD558\uACE0 \uCE74\uB4DC\uB97C 1\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+  cardDescription: "\uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4.\n\uCE74\uB4DC\uB97C {1.count}\uC7A5
+    \uBF51\uC2B5\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uC7A5\uC804 \uC810\uAC80"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486419
     - rid: 7338472044098486420
@@ -36,6 +42,8 @@ MonoBehaviour:
     cardName: "\uC7A5\uC804 \uC810\uAC80+"
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486421
     - rid: 7338472044098486422
@@ -48,6 +56,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486419
       type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -63,4 +73,4 @@ MonoBehaviour:
     - rid: 7338472044098486422
       type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
       data:
-        count: 1
+        count: 2

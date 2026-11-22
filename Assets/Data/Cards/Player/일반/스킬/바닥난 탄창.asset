@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uBE48 \uD0C4\uCC3D \uAD50\uCCB4"
+  m_Name: 바닥난 탄창
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: 1325019825854483632, guid: 60c15d26d666400bab0820cf626a0bed, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
@@ -19,13 +19,19 @@ MonoBehaviour:
   cardOwner: 0
   isWeaponShootingCard: 0
   cardDescription: "\uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4. \uC7AC\uC7A5\uC804 \uC9C1\uC804
-    \uD0C4\uC57D\uC774 0\uC774\uC5C8\uB2E4\uBA74 \uCE74\uB4DC\uB97C 2\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+    \uD0C4\uC57D\uC774 0\uC774\uC5C8\uB2E4\uBA74 \uCE74\uB4DC\uB97C {0.effectsWhenEmpty.0.count}\uC7A5
+    \uBF51\uC2B5\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uBE48 \uD0C4\uCC3D \uAD50\uCCB4"
+    cardName: 바닥난 탄창
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486423
     isExhaust: 0
@@ -33,9 +39,11 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uBE48 \uD0C4\uCC3D \uAD50\uCCB4+"
+    cardName: 바닥난 탄창+
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486425
     isExhaust: 0
@@ -47,6 +55,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486423
       type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -64,4 +74,4 @@ MonoBehaviour:
     - rid: 7338472044098486426
       type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
       data:
-        count: 2
+        count: 3

@@ -22,11 +22,15 @@ MonoBehaviour:
     x \uC794\uC5EC \uD0C4\uC57D\uC218\uB9CC\uD07C\uC758 \uB370\uBBF8\uC9C0\uB97C
     \uB2E8\uC77C \uC801\uC5D0\uAC8C \uC785\uD799\uB2C8\uB2E4."
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uC5E0\uD2F0 \uB9E4\uAC70\uC9C4"
-    energyCost: 0
+    energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 1
     effects:
     - rid: 4680130923130519634
     isExhaust: 0
@@ -34,11 +38,13 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: 
-    energyCost: 0
+    cardName: "\uC5E0\uD2F0 \uB9E4\uAC70\uC9C4+"
+    energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 1
     effects:
-    - rid: 4680130923130519635
+    - rid: 8172648442776256742
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -48,6 +54,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4680130923130519634
       type: {class: AmmoConsumeAllDamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -55,10 +63,10 @@ MonoBehaviour:
         separateHits: 0
         targets:
           mode: 1
-    - rid: 4680130923130519635
+    - rid: 8172648442776256742
       type: {class: AmmoConsumeAllDamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        damagePerAmmo: 10
+        damagePerAmmo: 11
         separateHits: 0
         targets:
           mode: 1

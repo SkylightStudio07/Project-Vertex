@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC774\uB3D9 \uC0AC\uACA9"
+  m_Name: 반격
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: 7746803211273253272, guid: 2d97bb1bc4d2446d9fd30ef9d3d0d1bd, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
@@ -18,12 +18,15 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4. \uC774\uBC88 \uD134\uC5D0
-    \uBC29\uC5B4\uB3C4\uB97C \uC5BB\uC5C8\uB2E4\uBA74 \uD53C\uD574\uAC00 5 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  cardDescription: "\uD53C\uD574\uB97C {0.amount} \uC90D\uB2C8\uB2E4. \uC774\uBC88
+    \uD134\uC5D0 \uBC29\uC5B4\uB3C4\uB97C \uC5BB\uC5C8\uB2E4\uBA74 \uD53C\uD574\uAC00
+    {0.conditionalBonuses.0.amount} \uC99D\uAC00\uD569\uB2C8\uB2E4."
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uC774\uB3D9 \uC0AC\uACA9"
+    cardName: 반격
     energyCost: 1
     ammoCost: 1
     effects:
@@ -33,7 +36,7 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uC774\uB3D9 \uC0AC\uACA9+"
+    cardName: 반격+
     energyCost: 1
     ammoCost: 1
     effects:
@@ -47,51 +50,71 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486399
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 8
+        amount: 5
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses:
         - condition:
             rid: 7338472044098486400
-          amount: 5
+          amount: 7
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
         onKillEffects: []
+        effectiveAgainst: 0
     - rid: 7338472044098486400
       type: {class: PlayerGainedBlockCondition, ns: , asm: Assembly-CSharp}
       data: 
     - rid: 7338472044098486401
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 8
+        amount: 6
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses:
         - condition:
             rid: 7338472044098486402
-          amount: 5
+          amount: 9
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
         onKillEffects: []
+        effectiveAgainst: 0
     - rid: 7338472044098486402
       type: {class: PlayerGainedBlockCondition, ns: , asm: Assembly-CSharp}
       data: 

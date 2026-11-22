@@ -18,14 +18,18 @@ MonoBehaviour:
   cardRarity: 1
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uC18C\uBA78. \uBC29\uC5B4\uB3C4\uAC00 {0.amount}\uB9CC\uD07C
-    \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  cardDescription: "\uBC29\uC5B4\uB3C4\uAC00 {0.amount}\uB9CC\uD07C \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uBB34\uC801"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 4680130923130519624
     isExhaust: 1
@@ -36,6 +40,8 @@ MonoBehaviour:
     cardName: "\uBB34\uC801+"
     energyCost: 2
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 4680130923130519625
     isExhaust: 1
@@ -47,6 +53,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4680130923130519624
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -57,8 +65,10 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
+        ignoreBlockModifiers: 0
     - rid: 4680130923130519625
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -69,5 +79,7 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
+        ignoreBlockModifiers: 0

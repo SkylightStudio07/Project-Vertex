@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC5C4\uD3D0 \uC0AC\uACA9"
+  m_Name: 응사
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: 21300000, guid: 430db4cc727e40cfbc2c5c80aa29d1c0, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
@@ -18,13 +18,15 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uACE0 \uD53C\uD574\uB97C 7
-    \uC90D\uB2C8\uB2E4."
+  cardDescription: "\uBC29\uC5B4\uB3C4\uB97C {0.amount} \uC5BB\uACE0 \uD53C\uD574\uB97C
+    {1.amount} \uC90D\uB2C8\uB2E4."
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uC5C4\uD3D0 \uC0AC\uACA9"
-    energyCost: 1
+    cardName: 응사
+    energyCost: 0
     ammoCost: 1
     effects:
     - rid: 7338472044098486403
@@ -34,8 +36,8 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uC5C4\uD3D0 \uC0AC\uACA9+"
-    energyCost: 1
+    cardName: 응사+
+    energyCost: 0
     ammoCost: 1
     effects:
     - rid: 7338472044098486405
@@ -49,36 +51,48 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486403
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 5
+        amount: 4
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 7338472044098486404
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 7
+        amount: 4
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
         onKillEffects: []
+        effectiveAgainst: 0
     - rid: 7338472044098486405
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -89,23 +103,33 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 7338472044098486406
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 7
+        amount: 5
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
         onKillEffects: []
+        effectiveAgainst: 0

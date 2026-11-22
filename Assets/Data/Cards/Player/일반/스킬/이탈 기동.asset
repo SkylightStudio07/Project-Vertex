@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: 이탈 기동
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: 4383838760342230339, guid: baf640f332574927ad262ccf19e8bd34, type: 3}
+  CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
+  cardType: 1
+  cardRarity: 0
+  cardOwner: 0
+  isWeaponShootingCard: 0
+  cardDescription: "\uAD8C\uCD1D\uC73C\uB85C \uC804\uD658\uD569\uB2C8\uB2E4.\n\uC774\uBBF8
+    \uAD8C\uCD1D\uC77C \uACBD\uC6B0 \uCE74\uB4DC\uB97C {0.OnMet.0.count} \uBF51\uC2B5\uB2C8\uB2E4"
+  upgradedDescription: 
+  useMode: 0
+  playCondition:
+    rid: -2
+  isUpgraded: 0
+  normalState:
+    cardName: 이탈 기동
+    energyCost: 1
+    ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
+    effects:
+    - rid: 8172648442776256793
+    - rid: 7338472044098486435
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: 이탈 기동+
+    energyCost: 1
+    ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
+    effects:
+    - rid: 8172648442776256796
+    - rid: 8172648442776256797
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7338472044098486435
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 8172648442776256793
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8172648442776256794
+        effectsWhenMet:
+        - rid: 8172648442776256795
+    - rid: 8172648442776256794
+      type: {class: PlayerWeaponCondition, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 8172648442776256795
+      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 1
+    - rid: 8172648442776256796
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8172648442776256798
+        effectsWhenMet:
+        - rid: 8172648442776256799
+    - rid: 8172648442776256797
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 8172648442776256798
+      type: {class: PlayerWeaponCondition, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 8172648442776256799
+      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 2

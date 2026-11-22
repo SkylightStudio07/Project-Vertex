@@ -18,9 +18,11 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uD53C\uD574\uB97C 6 \uC90D\uB2C8\uB2E4. \uCD08\uD0C4\uC774\uBA74
-    \uBC29\uC5B4\uB3C4\uB97C 7 \uC5BB\uC2B5\uB2C8\uB2E4."
+  cardDescription: "\uD53C\uD574\uB97C {0.amount} \uC90D\uB2C8\uB2E4. \uCD08\uD0C4\uC774\uBA74
+    \uBC29\uC5B4\uB3C4\uB97C {1.effectsWhenMet.0.amount} \uC5BB\uC2B5\uB2C8\uB2E4."
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uACAC\uC81C \uCD08\uD0C4"
@@ -49,6 +51,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486369
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -59,14 +63,23 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
         onKillEffects: []
+        effectiveAgainst: 0
     - rid: 7338472044098486370
       type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -87,26 +100,36 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
     - rid: 7338472044098486373
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 6
+        amount: 7
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
         onKillEffects: []
+        effectiveAgainst: 0
     - rid: 7338472044098486374
       type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -120,12 +143,13 @@ MonoBehaviour:
     - rid: 7338472044098486376
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 7
+        amount: 8
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0

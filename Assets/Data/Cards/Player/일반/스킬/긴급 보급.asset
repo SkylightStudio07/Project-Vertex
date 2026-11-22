@@ -18,13 +18,18 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "소멸. 현재 총기의 최대 탄약으로 재장전합니다."
+  cardDescription: "\uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uAE34\uAE09 \uBCF4\uAE09"
     energyCost: 0
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 4680130923130519622
     isExhaust: 1
@@ -35,6 +40,8 @@ MonoBehaviour:
     cardName: "\uAE34\uAE09 \uBCF4\uAE09+"
     energyCost: 0
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 4680130923130519621
     isExhaust: 1
@@ -46,9 +53,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4680130923130519621
       type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
-      data: {}
+      data:
+        effectsWhenEmpty: []
     - rid: 4680130923130519622
       type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
-      data: {}
+      data:
+        effectsWhenEmpty: []

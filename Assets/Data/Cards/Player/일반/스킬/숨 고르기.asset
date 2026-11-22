@@ -10,38 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uD6C4\uD1F4"
+  m_Name: 숨 고르기
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: 4383838760342230339, guid: baf640f332574927ad262ccf19e8bd34, type: 3}
+  cardImage: {fileID: -1540029978310662596, guid: ff07545da3694477aaf7eb9590495f1e, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
   cardType: 1
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uAD8C\uCD1D\uC73C\uB85C \uC804\uD658\uD569\uB2C8\uB2E4. \uBC29\uC5B4\uB3C4\uB97C
-    5 \uC5BB\uACE0 \uCE74\uB4DC\uB97C 1\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+  cardDescription: "\uBC29\uC5B4\uB3C4\uB97C {0.amount} \uC5BB\uC2B5\uB2C8\uB2E4.\n\uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 0
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uD6C4\uD1F4"
+    cardName: 숨 고르기
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
-    - rid: 7338472044098486435
-    - rid: 7338472044098486436
-    - rid: 7338472044098486437
+    - rid: 7338472044098486409
+    - rid: 7338472044098486410
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uAD8C\uCD1D\uC73C\uB85C \uD6C4\uD1F4+"
+    cardName: 숨 고르기+
     energyCost: 1
     ammoCost: 0
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
-    - rid: 7338472044098486438
-    - rid: 7338472044098486439
-    - rid: 7338472044098486440
+    - rid: 7338472044098486411
+    - rid: 7338472044098486412
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -51,43 +55,41 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7338472044098486435
-      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
-      data:
-        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
-    - rid: 7338472044098486436
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7338472044098486409
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 5
+        amount: 6
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
-    - rid: 7338472044098486437
-      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+        ignoreBlockModifiers: 0
+    - rid: 7338472044098486410
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
-        count: 1
-    - rid: 7338472044098486438
-      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
-      data:
-        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
-    - rid: 7338472044098486439
+        effectsWhenEmpty: []
+    - rid: 7338472044098486411
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 5
+        amount: 8
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         targets:
           mode: 0
-    - rid: 7338472044098486440
-      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+        ignoreBlockModifiers: 0
+    - rid: 7338472044098486412
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
-        count: 1
+        effectsWhenEmpty: []

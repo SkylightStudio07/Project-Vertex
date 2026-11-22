@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC0AC\uC120 \uC900\uBE44"
+  m_Name: 전장 감각
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: 21300000, guid: cdfe8da0e90c4e97b0aef564f8bd63e6, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
@@ -23,7 +23,7 @@ MonoBehaviour:
   useMode: 0
   isUpgraded: 0
   normalState:
-    cardName: "\uC0AC\uC120 \uC900\uBE44"
+    cardName: 전장 감각
     energyCost: 1
     ammoCost: 0
     effects:
@@ -33,7 +33,7 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uC0AC\uC120 \uC900\uBE44+"
+    cardName: 전장 감각+
     energyCost: 1
     ammoCost: 0
     effects:

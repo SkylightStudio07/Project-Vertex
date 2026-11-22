@@ -10,40 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uC0AC\uC120 \uC774\uD0C8"
+  m_Name: 사이드암
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardImage: {fileID: 21300000, guid: 78ff3f4ae7074f12a78f988f3a1ff9ae, type: 3}
+  cardImage: {fileID: 21300000, guid: 49d8f0d56f3b4465969990539b68057b, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
   cardType: 1
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uC774\uBC88 \uD134 \uB3D9\uC548 \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uBA74 \uC0AC\uC6A9\uD55C \uD0C4\uC57D 1\uAC1C\uB2F9 \uBC29\uC5B4\uB3C4\uB97C {0.amount} \uC5BB\uC2B5\uB2C8\uB2E4."
+  cardDescription: "\uBC29\uC5B4\uB3C4\uB97C {0.amount} \uC5BB\uC2B5\uB2C8\uB2E4.\n\uAD8C\uCD1D\uC73C\uB85C
+    \uC804\uD658\uD569\uB2C8\uB2E4."
   upgradedDescription: 
   useMode: 0
   playCondition:
     rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uC0AC\uC120 \uC774\uD0C8"
+    cardName: 사이드암
     energyCost: 1
     ammoCost: 0
     energyCostIsX: 0
     ammoCostIsX: 0
     effects:
-    - rid: 7338472044098486407
+    - rid: 7338472044098486413
+    - rid: 7338472044098486414
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uC0AC\uC120 \uC774\uD0C8+"
+    cardName: 사이드암+
     energyCost: 1
     ammoCost: 0
     energyCostIsX: 0
     ammoCostIsX: 0
     effects:
-    - rid: 7338472044098486408
+    - rid: 7338472044098486415
+    - rid: 7338472044098486416
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -55,30 +58,9 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 7338472044098486407
-      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
+    - rid: 7338472044098486413
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
-        status: {fileID: 11400000, guid: 1d66e632e1e539d40a74dc9c41ccd65d, type: 2}
-        operation: 0
-        amount: 5
-        scaling:
-          source: 0
-          target: 0
-          status: {fileID: 0}
-          multiplier: 0
-          flatBonus: 0
-          percent: 0
-        potency: 0
-        secondaryPotency: 0
-        targets:
-          mode: 0
-        negative: 0
-        snapshotPotencyAsBlock: 0
-    - rid: 7338472044098486408
-      type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
-      data:
-        status: {fileID: 11400000, guid: 1d66e632e1e539d40a74dc9c41ccd65d, type: 2}
-        operation: 0
         amount: 7
         scaling:
           source: 0
@@ -87,9 +69,28 @@ MonoBehaviour:
           multiplier: 0
           flatBonus: 0
           percent: 0
-        potency: 0
-        secondaryPotency: 0
         targets:
           mode: 0
-        negative: 0
-        snapshotPotencyAsBlock: 0
+        ignoreBlockModifiers: 0
+    - rid: 7338472044098486414
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}
+    - rid: 7338472044098486415
+      type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 10
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        targets:
+          mode: 0
+        ignoreBlockModifiers: 0
+    - rid: 7338472044098486416
+      type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: 59d36d0a3a61cc247b3da2a24b699db7, type: 2}

@@ -18,16 +18,22 @@ MonoBehaviour:
   cardRarity: 0
   cardOwner: 0
   isWeaponShootingCard: 0
-  cardDescription: "\uD53C\uD574\uB97C 9 \uC90D\uB2C8\uB2E4. \uC774 \uD53C\uD574\uB85C
-    \uC801\uC744 \uCC98\uCE58\uD558\uBA74 \uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
+  cardDescription: "\uD53C\uD574\uB97C {0.amount} \uC90D\uB2C8\uB2E4.\n\uB9C9\uD0C4\uC77C
+    \uACBD\uC6B0 \uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
+  upgradedDescription: 
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uB9C8\uCE68\uD45C"
     energyCost: 1
     ammoCost: 1
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
     - rid: 7338472044098486445
+    - rid: 8172648442776256734
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -36,8 +42,11 @@ MonoBehaviour:
     cardName: "\uB9C8\uCE68\uD45C+"
     energyCost: 1
     ammoCost: 1
+    energyCostIsX: 0
+    ammoCostIsX: 0
     effects:
-    - rid: 7338472044098486447
+    - rid: 8172648442776256738
+    - rid: 8172648442776256739
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -47,6 +56,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338472044098486445
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -57,39 +68,75 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
-        onKillEffects:
-        - rid: 7338472044098486446
-    - rid: 7338472044098486446
+        onKillEffects: []
+        effectiveAgainst: 0
+    - rid: 8172648442776256734
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8172648442776256736
+        effectsWhenMet:
+        - rid: 8172648442776256737
+    - rid: 8172648442776256736
+      type: {class: LastAmmoUseCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8172648442776256737
       type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
         effectsWhenEmpty: []
-    - rid: 7338472044098486447
+    - rid: 8172648442776256738
       type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        amount: 9
+        amount: 13
         scaling:
           source: 0
           target: 0
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         conditionalBonuses: []
         hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
         targets:
           mode: 1
         piercing: 0
         environmentalDamage: 0
         hitInterval: 0.08
-        onKillEffects:
-        - rid: 7338472044098486448
-    - rid: 7338472044098486448
+        onKillEffects: []
+        effectiveAgainst: 0
+    - rid: 8172648442776256739
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 8172648442776256740
+        effectsWhenMet:
+        - rid: 8172648442776256741
+    - rid: 8172648442776256740
+      type: {class: LastAmmoUseCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8172648442776256741
       type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
       data:
         effectsWhenEmpty: []
