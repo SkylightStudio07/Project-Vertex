@@ -26,6 +26,24 @@ public class LobbyKeeperTalk : MonoBehaviour
 
     public LobbyKeeperData Data => data;
 
+    // 코드로 만든 화면(OperationStatusView 등)이 붙일 때. 켜기 전에 부른다
+    public void Bind(LobbyKeeperData keeper, TextMeshProUGUI line, TextMeshProUGUI name, IEnumerable<Graphic> clicks)
+    {
+        data = keeper;
+        lineText = line;
+        nameText = name;
+        foreach (var g in clicks)
+        {
+            if (g == null) continue;
+            clickTargets.Add(g);
+            g.raycastTarget = true;
+            var b = g.GetComponent<Button>();
+            if (b == null) b = g.gameObject.AddComponent<Button>();
+            b.transition = Selectable.Transition.None;
+            b.onClick.AddListener(OnClicked);
+        }
+    }
+
     private void Awake()
     {
         if (!s_hooked) { SceneManager.sceneLoaded += (_, _) => s_visitedThisLobby.Clear(); s_hooked = true; }

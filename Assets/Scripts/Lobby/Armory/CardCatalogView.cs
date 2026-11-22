@@ -11,7 +11,10 @@ public class CardCatalogView : MonoBehaviour
     [Header("카드 풀")]
     [SerializeField] private TentInteractionHandler startingDeckSource;
     [SerializeField] private PlayerRewardPoolSO playerRewardPool;
-    [SerializeField] private List<CoopCharData> coopCharacters = new();
+    [Tooltip("동료 · 기록 대상 적 목록 (Data/Lobby/LobbyRoster). 인물을 추가할 때 씬이 아니라 이 에셋을 고친다")]
+    [SerializeField] private LobbyRosterSO roster;
+    private List<CoopCharData> coopCharacters => roster != null ? roster.companions : NoCompanions;
+    private static readonly List<CoopCharData> NoCompanions = new();
 
     [Header("그리드")]
     [SerializeField] private CardCatalogEntry entryPrefab;

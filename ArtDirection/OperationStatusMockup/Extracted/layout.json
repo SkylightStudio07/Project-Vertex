@@ -1,0 +1,2235 @@
+{
+  "schema_version": 1,
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "origin": "top-left",
+  "scale": 2,
+  "png_format": "RGBA8",
+  "border_order": [
+    "left",
+    "bottom",
+    "right",
+    "top"
+  ],
+  "coordinate_note": "screen_rect is the full canvas including alpha padding. Outer 4 PNG px are transparent. Operation/deploy opaque surfaces use an 8 PNG px inset to reserve cyan glow room. Text measurements are optical estimates, typically +/-2px. Font is an implementation hint, not identified source font.",
+  "source_mockups": [
+    "../OpStatus_Mockup.png",
+    "../OpStatus_Hover.png"
+  ],
+  "assets": [
+    {
+      "file": "Title_Plate.png",
+      "png_size_px": [
+        1168,
+        216
+      ],
+      "screen_size_px": [
+        584,
+        108
+      ],
+      "screen_rect": [
+        60,
+        37,
+        584,
+        108
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Title_Plate_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Panel_Body.png",
+      "png_size_px": [
+        976,
+        840
+      ],
+      "screen_size_px": [
+        488,
+        420
+      ],
+      "screen_rect": [
+        56,
+        597,
+        488,
+        420
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        60,
+        180,
+        64,
+        180
+      ],
+      "stretch_axis": "vertical",
+      "shadow_opacity": 0,
+      "source": "../Working/Panel_Body_magenta.png",
+      "runtime_opacity": 0.85,
+      "state": "normal"
+    },
+    {
+      "file": "Panel_Header.png",
+      "png_size_px": [
+        976,
+        120
+      ],
+      "screen_size_px": [
+        488,
+        60
+      ],
+      "screen_rect": [
+        56,
+        197,
+        488,
+        60
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        72,
+        12,
+        100,
+        12
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Panel_Header_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Panel_Header_Hover.png",
+      "png_size_px": [
+        976,
+        120
+      ],
+      "screen_size_px": [
+        488,
+        60
+      ],
+      "screen_rect": [
+        56,
+        197,
+        488,
+        60
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        72,
+        12,
+        100,
+        12
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Panel_Header_Hover_magenta.png",
+      "runtime_opacity": 1,
+      "state": "hover"
+    },
+    {
+      "file": "Button_Back.png",
+      "png_size_px": [
+        468,
+        126
+      ],
+      "screen_size_px": [
+        234,
+        63
+      ],
+      "screen_rect": [
+        1620,
+        42,
+        234,
+        63
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Back_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Button_Back_Hover.png",
+      "png_size_px": [
+        468,
+        126
+      ],
+      "screen_size_px": [
+        234,
+        63
+      ],
+      "screen_rect": [
+        1620,
+        42,
+        234,
+        63
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Back_Hover_magenta.png",
+      "runtime_opacity": 1,
+      "state": "hover"
+    },
+    {
+      "file": "Button_Back_Pressed.png",
+      "png_size_px": [
+        468,
+        126
+      ],
+      "screen_size_px": [
+        234,
+        63
+      ],
+      "screen_rect": [
+        1620,
+        42,
+        234,
+        63
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Back_Pressed_magenta.png",
+      "runtime_opacity": 1,
+      "state": "pressed"
+    },
+    {
+      "file": "Row_Card.png",
+      "png_size_px": [
+        858,
+        94
+      ],
+      "screen_size_px": [
+        429,
+        47
+      ],
+      "screen_rect": [
+        93,
+        820,
+        429,
+        47
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Row_Card_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Op_Card.png",
+      "png_size_px": [
+        922,
+        492
+      ],
+      "screen_size_px": [
+        461,
+        246
+      ],
+      "screen_rect": [
+        1399,
+        313,
+        461,
+        246
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 8,
+      "alpha": "binary",
+      "nine_slice_px": [
+        56,
+        56,
+        56,
+        56
+      ],
+      "stretch_axis": "vertical",
+      "shadow_opacity": 0,
+      "source": "../Working/Op_Card_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Op_Card_Hover.png",
+      "png_size_px": [
+        922,
+        492
+      ],
+      "screen_size_px": [
+        461,
+        246
+      ],
+      "screen_rect": [
+        1399,
+        313,
+        461,
+        246
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 8,
+      "alpha": "binary_surface_soft_cyan_glow",
+      "nine_slice_px": [
+        56,
+        56,
+        56,
+        56
+      ],
+      "stretch_axis": "vertical",
+      "shadow_opacity": 0,
+      "source": "../Working/Op_Card_Hover_magenta.png",
+      "runtime_opacity": 1,
+      "state": "hover"
+    },
+    {
+      "file": "Op_Slot_Empty.png",
+      "png_size_px": [
+        918,
+        126
+      ],
+      "screen_size_px": [
+        459,
+        63
+      ],
+      "screen_rect": [
+        1400,
+        576,
+        459,
+        63
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        40,
+        16,
+        40,
+        16
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Op_Slot_Empty_magenta.png",
+      "runtime_opacity": 0.85,
+      "state": "normal"
+    },
+    {
+      "file": "Button_Board.png",
+      "png_size_px": [
+        930,
+        84
+      ],
+      "screen_size_px": [
+        465,
+        42
+      ],
+      "screen_rect": [
+        1394,
+        654,
+        465,
+        42
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        58,
+        16,
+        58,
+        16
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Board_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Button_Board_Hover.png",
+      "png_size_px": [
+        930,
+        84
+      ],
+      "screen_size_px": [
+        465,
+        42
+      ],
+      "screen_rect": [
+        1394,
+        654,
+        465,
+        42
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        58,
+        16,
+        58,
+        16
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Board_Hover_magenta.png",
+      "runtime_opacity": 1,
+      "state": "hover"
+    },
+    {
+      "file": "Button_Board_Pressed.png",
+      "png_size_px": [
+        930,
+        84
+      ],
+      "screen_size_px": [
+        465,
+        42
+      ],
+      "screen_rect": [
+        1394,
+        654,
+        465,
+        42
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        58,
+        16,
+        58,
+        16
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Board_Pressed_magenta.png",
+      "runtime_opacity": 1,
+      "state": "pressed"
+    },
+    {
+      "file": "Button_Deploy.png",
+      "png_size_px": [
+        958,
+        282
+      ],
+      "screen_size_px": [
+        479,
+        141
+      ],
+      "screen_rect": [
+        1382,
+        861,
+        479,
+        141
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 8,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Deploy_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Button_Deploy_Hover.png",
+      "png_size_px": [
+        958,
+        282
+      ],
+      "screen_size_px": [
+        479,
+        141
+      ],
+      "screen_rect": [
+        1382,
+        861,
+        479,
+        141
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 8,
+      "alpha": "binary_surface_soft_cyan_glow",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Deploy_Hover_magenta.png",
+      "runtime_opacity": 1,
+      "state": "hover"
+    },
+    {
+      "file": "Button_Deploy_Pressed.png",
+      "png_size_px": [
+        958,
+        282
+      ],
+      "screen_size_px": [
+        479,
+        141
+      ],
+      "screen_rect": [
+        1382,
+        861,
+        479,
+        141
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 8,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Button_Deploy_Pressed_magenta.png",
+      "runtime_opacity": 1,
+      "state": "pressed"
+    },
+    {
+      "file": "Dialogue_Panel.png",
+      "png_size_px": [
+        1520,
+        202
+      ],
+      "screen_size_px": [
+        760,
+        101
+      ],
+      "screen_rect": [
+        581,
+        931,
+        760,
+        101
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        60,
+        28,
+        100,
+        28
+      ],
+      "stretch_axis": "horizontal",
+      "shadow_opacity": 0,
+      "source": "../Working/Dialogue_Panel_magenta.png",
+      "runtime_opacity": 0.85,
+      "state": "normal"
+    },
+    {
+      "file": "Name_Tag.png",
+      "png_size_px": [
+        416,
+        62
+      ],
+      "screen_size_px": [
+        208,
+        31
+      ],
+      "screen_rect": [
+        586,
+        883,
+        208,
+        31
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Name_Tag_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Check_Off.png",
+      "png_size_px": [
+        44,
+        44
+      ],
+      "screen_size_px": [
+        22,
+        22
+      ],
+      "screen_rect": [
+        1437,
+        434,
+        22,
+        22
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Check_Off_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    },
+    {
+      "file": "Check_On.png",
+      "png_size_px": [
+        44,
+        44
+      ],
+      "screen_size_px": [
+        22,
+        22
+      ],
+      "screen_rect": [
+        1437,
+        434,
+        22,
+        22
+      ],
+      "rotation_degrees": 0,
+      "padding_png_px": 4,
+      "opaque_surface_inset_png_px": 4,
+      "alpha": "binary",
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretch_axis": "none",
+      "shadow_opacity": 0,
+      "source": "../Working/Check_On_magenta.png",
+      "runtime_opacity": 1,
+      "state": "normal"
+    }
+  ],
+  "panel_bounds": {
+    "A": [
+      56,
+      197,
+      488,
+      326
+    ],
+    "B": [
+      56,
+      540,
+      488,
+      477
+    ],
+    "C": [
+      1368,
+      193,
+      505,
+      522
+    ],
+    "D": [
+      1368,
+      733,
+      505,
+      281
+    ]
+  },
+  "placements": [
+    {
+      "id": "title",
+      "file": "Title_Plate.png",
+      "screen_rect": [
+        60,
+        37,
+        584,
+        108
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "back",
+      "file": "Button_Back.png",
+      "screen_rect": [
+        1620,
+        42,
+        234,
+        63
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "A_body",
+      "file": "Panel_Body.png",
+      "screen_rect": [
+        56,
+        253,
+        488,
+        270
+      ],
+      "opacity": 0.85
+    },
+    {
+      "id": "B_body",
+      "file": "Panel_Body.png",
+      "screen_rect": [
+        56,
+        597,
+        488,
+        420
+      ],
+      "opacity": 0.85
+    },
+    {
+      "id": "C_body",
+      "file": "Panel_Body.png",
+      "screen_rect": [
+        1368,
+        251,
+        505,
+        464
+      ],
+      "opacity": 0.85
+    },
+    {
+      "id": "D_body",
+      "file": "Panel_Body.png",
+      "screen_rect": [
+        1368,
+        786,
+        505,
+        228
+      ],
+      "opacity": 0.85
+    },
+    {
+      "id": "A_header",
+      "file": "Panel_Header.png",
+      "screen_rect": [
+        56,
+        197,
+        488,
+        60
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "B_header",
+      "file": "Panel_Header.png",
+      "screen_rect": [
+        56,
+        540,
+        488,
+        60
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "C_header",
+      "file": "Panel_Header.png",
+      "screen_rect": [
+        1368,
+        193,
+        505,
+        63
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "D_header",
+      "file": "Panel_Header.png",
+      "screen_rect": [
+        1368,
+        733,
+        505,
+        57
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "deck_row_0",
+      "file": "Row_Card.png",
+      "screen_rect": [
+        93,
+        820,
+        429,
+        47
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "deck_row_1",
+      "file": "Row_Card.png",
+      "screen_rect": [
+        93,
+        868,
+        429,
+        47
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "deck_row_2",
+      "file": "Row_Card.png",
+      "screen_rect": [
+        93,
+        916,
+        429,
+        47
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "Op_Card",
+      "file": "Op_Card.png",
+      "screen_rect": [
+        1399,
+        313,
+        461,
+        246
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "Op_Slot_Empty",
+      "file": "Op_Slot_Empty.png",
+      "screen_rect": [
+        1400,
+        576,
+        459,
+        63
+      ],
+      "opacity": 0.85
+    },
+    {
+      "id": "Button_Board",
+      "file": "Button_Board.png",
+      "screen_rect": [
+        1394,
+        654,
+        465,
+        42
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "Button_Deploy",
+      "file": "Button_Deploy.png",
+      "screen_rect": [
+        1382,
+        861,
+        479,
+        141
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "Dialogue_Panel",
+      "file": "Dialogue_Panel.png",
+      "screen_rect": [
+        581,
+        931,
+        760,
+        101
+      ],
+      "opacity": 0.85
+    },
+    {
+      "id": "Name_Tag",
+      "file": "Name_Tag.png",
+      "screen_rect": [
+        586,
+        883,
+        208,
+        31
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "objective_0",
+      "file": "Check_Off.png",
+      "screen_rect": [
+        1437,
+        434,
+        22,
+        22
+      ],
+      "opacity": 1
+    },
+    {
+      "id": "objective_1",
+      "file": "Check_Off.png",
+      "screen_rect": [
+        1437,
+        466,
+        22,
+        22
+      ],
+      "opacity": 1
+    }
+  ],
+  "text_slots": [
+    {
+      "id": "title_number",
+      "text": "04",
+      "screen_rect": [
+        105,
+        69,
+        54,
+        41
+      ],
+      "size_px": 32,
+      "weight": 700,
+      "color_hex": "#16191C",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "title",
+      "text": "작전 상황",
+      "screen_rect": [
+        207,
+        45,
+        374,
+        64
+      ],
+      "size_px": 52,
+      "weight": 800,
+      "color_hex": "#101316",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "title_en",
+      "text": "OPERATION STATUS / FORWARD STAGING",
+      "screen_rect": [
+        208,
+        110,
+        365,
+        22
+      ],
+      "size_px": 14,
+      "weight": 500,
+      "color_hex": "#353A40",
+      "letter_spacing_px": 2.4,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "sector_readout",
+      "text": "SECTOR 01 · FLOOR 01 · STANDBY",
+      "screen_rect": [
+        109,
+        153,
+        399,
+        20
+      ],
+      "size_px": 14,
+      "weight": 500,
+      "color_hex": "#E8EAED",
+      "letter_spacing_px": 3,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "top_readout_0",
+      "text": "ALT 0280",
+      "screen_rect": [
+        1478,
+        42,
+        111,
+        20
+      ],
+      "size_px": 16,
+      "weight": 400,
+      "color_hex": "#EFF1F4",
+      "letter_spacing_px": 1.5,
+      "alignment": "left",
+      "font_hint": "Consolas"
+    },
+    {
+      "id": "top_readout_1",
+      "text": "SEC 01-01",
+      "screen_rect": [
+        1478,
+        63,
+        111,
+        20
+      ],
+      "size_px": 16,
+      "weight": 400,
+      "color_hex": "#EFF1F4",
+      "letter_spacing_px": 1.5,
+      "alignment": "left",
+      "font_hint": "Consolas"
+    },
+    {
+      "id": "top_readout_2",
+      "text": "T+ 00:00",
+      "screen_rect": [
+        1478,
+        84,
+        111,
+        20
+      ],
+      "size_px": 16,
+      "weight": 400,
+      "color_hex": "#EFF1F4",
+      "letter_spacing_px": 1.5,
+      "alignment": "left",
+      "font_hint": "Consolas"
+    },
+    {
+      "id": "lobby",
+      "text": "← 로비",
+      "screen_rect": [
+        1662,
+        51,
+        155,
+        43
+      ],
+      "size_px": 32,
+      "weight": 700,
+      "color_hex": "#111519",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "A_number",
+      "text": "A / 01",
+      "screen_rect": [
+        82,
+        214,
+        73,
+        27
+      ],
+      "size_px": 18,
+      "weight": 700,
+      "color_hex": "#1A1D20",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "A_title",
+      "text": "장비 현황",
+      "screen_rect": [
+        175,
+        204,
+        179,
+        46
+      ],
+      "size_px": 34,
+      "weight": 800,
+      "color_hex": "#111519",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "A_en",
+      "text": "EQUIPMENT",
+      "screen_rect": [
+        332,
+        218,
+        174,
+        22
+      ],
+      "size_px": 14,
+      "weight": 500,
+      "color_hex": "#555B63",
+      "letter_spacing_px": 3,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "B_number",
+      "text": "B / 02",
+      "screen_rect": [
+        82,
+        557,
+        73,
+        27
+      ],
+      "size_px": 18,
+      "weight": 700,
+      "color_hex": "#1A1D20",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "B_title",
+      "text": "덱 현황",
+      "screen_rect": [
+        175,
+        547,
+        179,
+        46
+      ],
+      "size_px": 34,
+      "weight": 800,
+      "color_hex": "#111519",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "B_en",
+      "text": "DECK",
+      "screen_rect": [
+        302,
+        561,
+        174,
+        22
+      ],
+      "size_px": 14,
+      "weight": 500,
+      "color_hex": "#555B63",
+      "letter_spacing_px": 3,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "C_number",
+      "text": "C / 03",
+      "screen_rect": [
+        1394,
+        210,
+        73,
+        27
+      ],
+      "size_px": 18,
+      "weight": 700,
+      "color_hex": "#1A1D20",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "C_title",
+      "text": "작전 현황",
+      "screen_rect": [
+        1487,
+        200,
+        179,
+        46
+      ],
+      "size_px": 34,
+      "weight": 800,
+      "color_hex": "#111519",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "C_en",
+      "text": "OPERATIONS",
+      "screen_rect": [
+        1647,
+        214,
+        174,
+        22
+      ],
+      "size_px": 14,
+      "weight": 500,
+      "color_hex": "#555B63",
+      "letter_spacing_px": 3,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "D_number",
+      "text": "D / 04",
+      "screen_rect": [
+        1394,
+        750,
+        73,
+        27
+      ],
+      "size_px": 18,
+      "weight": 700,
+      "color_hex": "#1A1D20",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "D_en",
+      "text": "DEPLOY",
+      "screen_rect": [
+        1498,
+        754,
+        174,
+        22
+      ],
+      "size_px": 14,
+      "weight": 500,
+      "color_hex": "#555B63",
+      "letter_spacing_px": 3,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "weapon_name",
+      "text": "권총",
+      "screen_rect": [
+        91,
+        296,
+        126,
+        48
+      ],
+      "size_px": 36,
+      "weight": 800,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "weapon_description",
+      "text": "기본 시작 무기",
+      "screen_rect": [
+        92,
+        344,
+        162,
+        29
+      ],
+      "size_px": 22,
+      "weight": 400,
+      "color_hex": "#D2D6DC",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "magazine_label",
+      "text": "탄창",
+      "screen_rect": [
+        92,
+        431,
+        70,
+        24
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#D0D3D7",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "magazine_value",
+      "text": "3",
+      "screen_rect": [
+        92,
+        453,
+        70,
+        35
+      ],
+      "size_px": 27,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "damage_label",
+      "text": "사격 추가 피해",
+      "screen_rect": [
+        194,
+        431,
+        122,
+        24
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#D0D3D7",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "damage_value",
+      "text": "+0",
+      "screen_rect": [
+        194,
+        453,
+        122,
+        35
+      ],
+      "size_px": 27,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "upgrade_label",
+      "text": "강화",
+      "screen_rect": [
+        350,
+        431,
+        140,
+        24
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#D0D3D7",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "upgrade_value",
+      "text": "0 / 2",
+      "screen_rect": [
+        350,
+        453,
+        140,
+        35
+      ],
+      "size_px": 27,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "armory_link",
+      "text": "무기고 →",
+      "screen_rect": [
+        419,
+        481,
+        100,
+        29
+      ],
+      "size_px": 21,
+      "weight": 600,
+      "color_hex": "#ECEFF2",
+      "letter_spacing_px": 0,
+      "alignment": "right",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_total",
+      "text": "11장",
+      "screen_rect": [
+        94,
+        622,
+        129,
+        65
+      ],
+      "size_px": 52,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_type_0",
+      "text": "공격",
+      "screen_rect": [
+        261,
+        615,
+        51,
+        26
+      ],
+      "size_px": 19,
+      "weight": 500,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_type_value_0",
+      "text": "5",
+      "screen_rect": [
+        491,
+        615,
+        25,
+        26
+      ],
+      "size_px": 20,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_type_1",
+      "text": "스킬",
+      "screen_rect": [
+        261,
+        640,
+        51,
+        26
+      ],
+      "size_px": 19,
+      "weight": 500,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_type_value_1",
+      "text": "6",
+      "screen_rect": [
+        491,
+        640,
+        25,
+        26
+      ],
+      "size_px": 20,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_type_2",
+      "text": "파워",
+      "screen_rect": [
+        261,
+        665,
+        51,
+        26
+      ],
+      "size_px": 19,
+      "weight": 500,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_type_value_2",
+      "text": "0",
+      "screen_rect": [
+        491,
+        665,
+        25,
+        26
+      ],
+      "size_px": 20,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_heading",
+      "text": "비용 분포",
+      "screen_rect": [
+        94,
+        712,
+        122,
+        26
+      ],
+      "size_px": 19,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_count_0",
+      "text": "0",
+      "screen_rect": [
+        178,
+        757,
+        28,
+        24
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_bin_0",
+      "text": "0",
+      "screen_rect": [
+        174,
+        785,
+        38,
+        27
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_count_1",
+      "text": "5",
+      "screen_rect": [
+        260,
+        720,
+        28,
+        24
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_bin_1",
+      "text": "1",
+      "screen_rect": [
+        256,
+        785,
+        38,
+        27
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_count_2",
+      "text": "5",
+      "screen_rect": [
+        349,
+        720,
+        28,
+        24
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_bin_2",
+      "text": "2",
+      "screen_rect": [
+        345,
+        785,
+        38,
+        27
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_count_3",
+      "text": "1",
+      "screen_rect": [
+        437,
+        750,
+        28,
+        24
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "cost_bin_3",
+      "text": "3+",
+      "screen_rect": [
+        433,
+        785,
+        38,
+        27
+      ],
+      "size_px": 18,
+      "weight": 500,
+      "color_hex": "#F1F2F3",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_row_label_0",
+      "text": "사격",
+      "screen_rect": [
+        178,
+        826,
+        202,
+        36
+      ],
+      "size_px": 27,
+      "weight": 600,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_row_count_0",
+      "text": "×5",
+      "screen_rect": [
+        459,
+        826,
+        52,
+        36
+      ],
+      "size_px": 27,
+      "weight": 600,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "right",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_row_label_1",
+      "text": "방어",
+      "screen_rect": [
+        178,
+        874,
+        202,
+        36
+      ],
+      "size_px": 27,
+      "weight": 600,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_row_count_1",
+      "text": "×5",
+      "screen_rect": [
+        459,
+        874,
+        52,
+        36
+      ],
+      "size_px": 27,
+      "weight": 600,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "right",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_row_label_2",
+      "text": "재장전",
+      "screen_rect": [
+        178,
+        922,
+        202,
+        36
+      ],
+      "size_px": 27,
+      "weight": 600,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_row_count_2",
+      "text": "×1",
+      "screen_rect": [
+        459,
+        922,
+        52,
+        36
+      ],
+      "size_px": 27,
+      "weight": 600,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "right",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deck_link",
+      "text": "덱 전체 보기 →",
+      "screen_rect": [
+        347,
+        971,
+        172,
+        28
+      ],
+      "size_px": 20,
+      "weight": 500,
+      "color_hex": "#ECEFF2",
+      "letter_spacing_px": 0,
+      "alignment": "right",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "operation_progress",
+      "text": "진행 중 1 / 2",
+      "screen_rect": [
+        1404,
+        264,
+        156,
+        34
+      ],
+      "size_px": 24,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "operation_type",
+      "text": "회수",
+      "screen_rect": [
+        1515,
+        332,
+        189,
+        24
+      ],
+      "size_px": 19,
+      "weight": 400,
+      "color_hex": "#DFE3E7",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "operation_title",
+      "text": "블랙박스 회수",
+      "screen_rect": [
+        1512,
+        357,
+        323,
+        42
+      ],
+      "size_px": 34,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "operation_client",
+      "text": "R&C 컴퍼니",
+      "screen_rect": [
+        1517,
+        399,
+        270,
+        28
+      ],
+      "size_px": 19,
+      "weight": 400,
+      "color_hex": "#D7DBE0",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "objective_0",
+      "text": "스카웃 유닛 처치 시 획득",
+      "screen_rect": [
+        1477,
+        431,
+        361,
+        29
+      ],
+      "size_px": 21,
+      "weight": 400,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "objective_1",
+      "text": "런 종료 시 보유",
+      "screen_rect": [
+        1477,
+        463,
+        361,
+        29
+      ],
+      "size_px": 21,
+      "weight": 400,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "reward_label",
+      "text": "보상",
+      "screen_rect": [
+        1435,
+        517,
+        73,
+        27
+      ],
+      "size_px": 20,
+      "weight": 400,
+      "color_hex": "#D1D6DD",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "reward_value",
+      "text": "30 EXP",
+      "screen_rect": [
+        1510,
+        511,
+        226,
+        37
+      ],
+      "size_px": 29,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "empty_slot",
+      "text": "비어 있음 · 작전 게시판에서 수주",
+      "screen_rect": [
+        1421,
+        590,
+        414,
+        32
+      ],
+      "size_px": 20,
+      "weight": 400,
+      "color_hex": "#E3E7EB",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "board_button",
+      "text": "작전 게시판 →",
+      "screen_rect": [
+        1426,
+        657,
+        399,
+        34
+      ],
+      "size_px": 25,
+      "weight": 600,
+      "color_hex": "#F1F3F4",
+      "letter_spacing_px": 0,
+      "alignment": "center",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "next_sector",
+      "text": "NEXT SECTOR",
+      "screen_rect": [
+        1399,
+        798,
+        212,
+        22
+      ],
+      "size_px": 14,
+      "weight": 500,
+      "color_hex": "#E3E8ED",
+      "letter_spacing_px": 2.8,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "sector_name",
+      "text": "1막 · 만발한 백피안화의 정원",
+      "screen_rect": [
+        1397,
+        819,
+        442,
+        33
+      ],
+      "size_px": 25,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deploy",
+      "text": "출격",
+      "screen_rect": [
+        1412,
+        893,
+        146,
+        66
+      ],
+      "size_px": 56,
+      "weight": 800,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "deploy_arrow",
+      "text": "→",
+      "screen_rect": [
+        1545,
+        898,
+        83,
+        66
+      ],
+      "size_px": 56,
+      "weight": 500,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "name_tag",
+      "text": "작전 담당 / OPERATIONS",
+      "screen_rect": [
+        598,
+        884,
+        187,
+        28
+      ],
+      "size_px": 16,
+      "weight": 700,
+      "color_hex": "#15191E",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "speaker",
+      "text": "작전 담당",
+      "screen_rect": [
+        626,
+        939,
+        233,
+        33
+      ],
+      "size_px": 25,
+      "weight": 700,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    },
+    {
+      "id": "dialogue",
+      "text": "출격 전 점검 끝나면 말씀하세요. 나머지는 제가 정리할게요.",
+      "screen_rect": [
+        630,
+        978,
+        681,
+        38
+      ],
+      "size_px": 25,
+      "weight": 400,
+      "color_hex": "#F0F1F2",
+      "letter_spacing_px": 0,
+      "alignment": "left",
+      "font_hint": "Malgun Gothic"
+    }
+  ],
+  "state_overrides": {
+    "hover": {
+      "A_header": "Panel_Header_Hover.png",
+      "Op_Card": "Op_Card_Hover.png",
+      "Button_Deploy": "Button_Deploy_Hover.png",
+      "Button_Board": "Button_Board_Pressed.png"
+    },
+    "additional_proof": {
+      "back": "Button_Back_Hover.png",
+      "Button_Board": "Button_Board_Hover.png",
+      "Button_Deploy": "Button_Deploy_Pressed.png",
+      "objective_0": "Check_On.png"
+    },
+    "pressed_text_offset_px": [
+      0,
+      2
+    ],
+    "deploy_hover_arrow_offset_px": [
+      14,
+      0
+    ]
+  },
+  "runtime_drawn": {
+    "weapon_art": [
+      224,
+      278,
+      288,
+      130
+    ],
+    "operation_icon": [
+      1431,
+      341,
+      49,
+      52
+    ],
+    "deck_icons": [
+      [
+        114,
+        825,
+        43,
+        42
+      ],
+      [
+        114,
+        873,
+        43,
+        42
+      ],
+      [
+        114,
+        921,
+        43,
+        42
+      ]
+    ],
+    "progress_bar": [
+      1563,
+      277,
+      275,
+      11
+    ],
+    "deck_type_bars": [
+      [
+        316,
+        623,
+        160,
+        12
+      ],
+      [
+        316,
+        649,
+        160,
+        12
+      ],
+      [
+        316,
+        675,
+        160,
+        12
+      ]
+    ],
+    "cost_chart": [
+      138,
+      744,
+      364,
+      40
+    ],
+    "dialogue_speaker_bar": [
+      606,
+      943,
+      5,
+      24
+    ],
+    "separator_rules": [
+      [
+        176,
+        58,
+        1,
+        65
+      ],
+      [
+        157,
+        212,
+        1,
+        31
+      ],
+      [
+        157,
+        555,
+        1,
+        31
+      ],
+      [
+        1470,
+        209,
+        1,
+        32
+      ],
+      [
+        1474,
+        744,
+        1,
+        33
+      ],
+      [
+        81,
+        421,
+        442,
+        1
+      ],
+      [
+        167,
+        433,
+        1,
+        46
+      ],
+      [
+        325,
+        433,
+        1,
+        46
+      ],
+      [
+        231,
+        620,
+        1,
+        69
+      ],
+      [
+        94,
+        703,
+        428,
+        1
+      ],
+      [
+        1497,
+        333,
+        1,
+        64
+      ],
+      [
+        1422,
+        503,
+        415,
+        1
+      ]
+    ],
+    "excluded": [
+      "all text and numbers",
+      "background",
+      "character",
+      "weapon image",
+      "card type icons",
+      "operation type icon",
+      "progress/type/cost bars",
+      "separator rules",
+      "weapon brackets",
+      "screen registration crosses",
+      "readouts"
+    ]
+  },
+  "nine_slice_policy": "Borders are PNG pixels. Draw 9-sliced assets with fixed corner dimensions; do not uniformly resize. Distinctive hatches/brackets remain in corner patches. Empty-slot dashed top/bottom edges need tiled edge sampling (see edge_sampling).",
+  "edge_sampling": {
+    "Op_Slot_Empty": "Tile horizontal top and bottom center strips, stretch middle; preserve dash cadence."
+  },
+  "uncertainties": [
+    "Table names upper-right cuts for title/header; approved screenshots show upper-left and lower-right cuts. Approved silhouettes take precedence.",
+    "Separate generated states have resynthesized texture; state silhouette is registered to normal alpha during export.",
+    "This is a raster redraw, not pixel-identical extraction.",
+    "Transparent empty-slot appearance is supplied by runtime opacity; exported ink is opaque as requested."
+  ]
+}

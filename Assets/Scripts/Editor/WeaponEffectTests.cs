@@ -519,7 +519,7 @@ public class WeaponEffectTests
         Assert.That(_state.CurrentWeapon, Is.Null);
         Assert.That(_state.Ammo, Is.EqualTo(ammo));
         card.ActiveEffects[1].Execute(context);
-        Assert.That(_state.CurrentWeapon.WeaponName, Is.EqualTo("스나이퍼"));
+        Assert.That(_state.CurrentWeapon.WeaponName, Is.EqualTo("저격총"));
         Assert.That(_state.Ammo, Is.EqualTo(1));
         Assert.That(_state.Player.Passives, Is.Empty);
     }

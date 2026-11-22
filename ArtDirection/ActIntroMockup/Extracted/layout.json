@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "coordinate_system": {
+    "origin": "top-left",
+    "units": "canvas pixels",
+    "x": "right",
+    "y": "down",
+    "points": "Pixel-center coordinates; bounds inclusive."
+  },
+  "reference_screen_size_px": [
+    1920,
+    1080
+  ],
+  "measurement": {
+    "source": "Final extracted PNG pixels, not prompt target coordinates.",
+    "method": "Rear: top silhouette near center. Left/right: first and last opaque pixels of extremal silhouette column. Front: central top/side luminance transition. Front lower: bottommost silhouette. Crystal tips: extreme silhouette rows.",
+    "raster_uncertainty_px": 1,
+    "warning": "Do not substitute target geometry for these measured coordinates. Extremal side-column endpoints can vary by 1-2 pixels due to the raster corner."
+  },
+  "assets": [
+    {
+      "file": "Plate_Off.png",
+      "png_size_px": [
+        1200,
+        800
+      ],
+      "alpha": "binary",
+      "top_vertices_px": {
+        "rear": [
+          600,
+          139
+        ],
+        "left": [
+          60,
+          410
+        ],
+        "right": [
+          1140,
+          411
+        ],
+        "front": [
+          600,
+          678
+        ]
+      },
+      "lower_side_vertices_px": {
+        "left": [
+          60,
+          441
+        ],
+        "front": [
+          600,
+          711
+        ],
+        "right": [
+          1140,
+          441
+        ]
+      },
+      "visible_bounds_inclusive_px": [
+        60,
+        139,
+        1140,
+        711
+      ],
+      "png_format": "RGBA8",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "external_shadow_opacity": 0,
+      "recommended_screen_scale": 0.5
+    },
+    {
+      "file": "Plate_Boss.png",
+      "png_size_px": [
+        1200,
+        800
+      ],
+      "alpha": "binary",
+      "top_vertices_px": {
+        "rear": [
+          600,
+          139
+        ],
+        "left": [
+          61,
+          410
+        ],
+        "right": [
+          1140,
+          411
+        ],
+        "front": [
+          600,
+          678
+        ]
+      },
+      "lower_side_vertices_px": {
+        "left": [
+          61,
+          442
+        ],
+        "front": [
+          600,
+          711
+        ],
+        "right": [
+          1140,
+          440
+        ]
+      },
+      "visible_bounds_inclusive_px": [
+        61,
+        139,
+        1140,
+        711
+      ],
+      "png_format": "RGBA8",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "external_shadow_opacity": 0,
+      "recommended_screen_scale": 0.5
+    },
+    {
+      "file": "Plate_Floor01.png",
+      "png_size_px": [
+        1200,
+        800
+      ],
+      "alpha": "binary_except_flower_edges",
+      "top_vertices_px": {
+        "rear": [
+          600,
+          139
+        ],
+        "left": [
+          61,
+          408
+        ],
+        "right": [
+          1140,
+          408
+        ],
+        "front": [
+          600,
+          678
+        ]
+      },
+      "lower_side_vertices_px": {
+        "left": [
+          61,
+          440
+        ],
+        "front": [
+          600,
+          709
+        ],
+        "right": [
+          1140,
+          440
+        ]
+      },
+      "visible_bounds_inclusive_px": [
+        61,
+        139,
+        1140,
+        709
+      ],
+      "soft_alpha_region": "Only protruding white lily edges above the rear-left slab edge; slab body, stone, stems and remaining perimeter are binary.",
+      "png_format": "RGBA8",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "external_shadow_opacity": 0,
+      "recommended_screen_scale": 0.5
+    },
+    {
+      "file": "Marker_Vertex.png",
+      "png_size_px": [
+        256,
+        384
+      ],
+      "alpha": "binary",
+      "crystal_top_px": [
+        127,
+        42
+      ],
+      "crystal_bottom_px": [
+        127,
+        341
+      ],
+      "crystal_center_px": [
+        127,
+        191.5
+      ],
+      "equatorial_tips_px": {
+        "left": [
+          37,
+          192
+        ],
+        "right": [
+          217,
+          192
+        ]
+      },
+      "visible_bounds_inclusive_px": [
+        37,
+        42,
+        217,
+        341
+      ],
+      "png_format": "RGBA8",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "external_shadow_opacity": 0,
+      "recommended_screen_scale": 0.5
+    },
+    {
+      "file": "Backdrop.png",
+      "png_size_px": [
+        1920,
+        1080
+      ],
+      "alpha": "opaque",
+      "screen_rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "png_format": "RGBA8",
+      "rotation_degrees": 0,
+      "nine_slice_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "external_shadow_opacity": 0,
+      "recommended_screen_scale": 1
+    }
+  ],
+  "contact_sheet": {
+    "file": "Contact_Sheet.jpg",
+    "size_px": [
+      2800,
+      2040
+    ],
+    "background": "#1A2636",
+    "assembly": {
+      "plate_count": 6,
+      "vertical_pitch_px": 190,
+      "scale": 1,
+      "draw_order": "bottom to top",
+      "plates_top_to_bottom": [
+        {
+          "file": "Plate_Boss.png",
+          "canvas_origin_px": [
+            1530,
+            300
+          ]
+        },
+        {
+          "file": "Plate_Off.png",
+          "canvas_origin_px": [
+            1530,
+            490
+          ]
+        },
+        {
+          "file": "Plate_Off.png",
+          "canvas_origin_px": [
+            1530,
+            680
+          ]
+        },
+        {
+          "file": "Plate_Off.png",
+          "canvas_origin_px": [
+            1530,
+            870
+          ]
+        },
+        {
+          "file": "Plate_Off.png",
+          "canvas_origin_px": [
+            1530,
+            1060
+          ]
+        },
+        {
+          "file": "Plate_Floor01.png",
+          "canvas_origin_px": [
+            1530,
+            1250
+          ]
+        }
+      ],
+      "marker": {
+        "file": "Marker_Vertex.png",
+        "canvas_origin_px": [
+          2002,
+          50
+        ]
+      }
+    }
+  },
+  "text_slots": []
+}

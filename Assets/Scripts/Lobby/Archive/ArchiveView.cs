@@ -22,8 +22,12 @@ public class ArchiveView : MonoBehaviour
     [SerializeField] private List<GameObject> hubObjects = new();   // 쪽을 열 때 숨기는 입구 요소(캐릭터·메뉴·대사·로비 버튼)
 
     [Header("수집 수")]
-    [SerializeField] private List<EnemyData> enemies = new();
-    [SerializeField] private List<CoopCharData> companions = new();
+    [Tooltip("동료 · 기록 대상 적 목록 (Data/Lobby/LobbyRoster). 인물을 추가할 때 씬이 아니라 이 에셋을 고친다")]
+    [SerializeField] private LobbyRosterSO roster;
+    private List<EnemyData> enemies => roster != null ? roster.recordEnemies : NoEnemies;
+    private List<CoopCharData> companions => roster != null ? roster.companions : NoCompanions;
+    private static readonly List<EnemyData> NoEnemies = new();
+    private static readonly List<CoopCharData> NoCompanions = new();
     [SerializeField] private ItemCatalog items;
 
     [Header("대사")]

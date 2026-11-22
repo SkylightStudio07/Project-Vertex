@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e6ea1aa097fd7409ec194dbddcacfc, type: 3}
+  m_Name: LobbyRoster
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyRosterSO
+  companions:
+  - {fileID: 11400000, guid: a4baf54087b614744a23e2ad03f7212e, type: 2}
+  - {fileID: 11400000, guid: 9171daf6a5ec1984bbb147e68f3de099, type: 2}
+  - {fileID: 11400000, guid: 4c9afec20b7a0ca4db8a0aad8be19754, type: 2}
+  - {fileID: 11400000, guid: 367988bcc05c7a8488554361be5c377e, type: 2}
+  - {fileID: 11400000, guid: a644725714c87d74cab7c15855ae4157, type: 2}
+  recordEnemies:
+  - {fileID: 11400000, guid: 0c1bb41d3a098624ea18ea7e0ebdd72b, type: 2}
+  - {fileID: 11400000, guid: d5989274ba2deed4e95cfe17798b8500, type: 2}
+  - {fileID: 11400000, guid: 2f5cf33ad5231844d8cda24aa220695f, type: 2}
+  - {fileID: 11400000, guid: 5e03a6f95e9f83544a2b09ce7c042b33, type: 2}
+  - {fileID: 11400000, guid: 7d7a098104e947b4dbef3a4e67808ad1, type: 2}
+  - {fileID: 11400000, guid: 88e370b3d7695897965b2e22204a21ab, type: 2}
+  - {fileID: 11400000, guid: 054259ca7238557ebe2b510bff7611a7, type: 2}
+  - {fileID: 11400000, guid: 7ca3e7adf9df539cbebeb4381e730172, type: 2}
+  - {fileID: 11400000, guid: ede1f1378d035706a4ec9c5d83063e32, type: 2}
+  - {fileID: 11400000, guid: 555372da00d45c7eb3a6fbd7a8a0feb4, type: 2}
+  - {fileID: 11400000, guid: 5c98e28439b05699886a56fd41aeab26, type: 2}
+  - {fileID: 11400000, guid: cd6c9cb52723573b8b27e67e0bf414f9, type: 2}
+  - {fileID: 11400000, guid: b5cf33283ca45ba3894f1a50360734fd, type: 2}
+  - {fileID: 11400000, guid: 2f046b88afbe5483bbc04db342ed29eb, type: 2}
+  - {fileID: 11400000, guid: 72a3401b4f2e5dd41bf9e6832ecd7488, type: 2}
+  - {fileID: 11400000, guid: d042d40b8c4993447a18db3337e3694e, type: 2}

@@ -1,0 +1,140 @@
+ACT INTRO MOCKUPS — ACTUAL IMAGEGEN PROMPT LOG
+Tool: built-in image_gen.imagegen. transparent_background=false for every call.
+No CLI/API fallback, no SVG, no programmatic drawing or compositing.
+Source images returned at 1672x941, resampled only to 1920x1080 for delivery.
+Working references listed below are temporary local copies retained in Working/: automatic approval review blocked cleanup deletion with "blocked by policy" and supplied no more specific reason.
+All prompts below are the exact strings passed to the tool, including rejected attempts.
+
+===== CALL 1: promptA =====
+Status: Rejected: seven plates, shallow tops.
+Input image paths (relative to ArtDirection/ActIntroMockup): None (new generation).
+Generated source basename: exec-84e8978c-34a5-4a50-94ce-6fc2ef926ac1.png
+Prompt:
+Use case: ui-mockup.
+Create ONE finished full-screen 1920x1080 PNG keyframe, ActIntro_A_Stack, for a 3.5-second act-introduction motion graphic in a Korean game. This is an architectural miniature / carefully lit plaster-and-paper model rendered as raster concept art, NOT a flat diagram, NOT an asset sheet.
+
+Design language: a cold white observation system, matte off-white/light grey plaster slabs, hairline graphite drafting marks, tiny registration crosses and ruler ticks, sparse compass-star motifs. Dark blue-grey night air background in #0D1520 to #1A2636; soft low fog, almost invisible isometric ground grid. One accent only, restrained #1EA0E6 cyan for the dotted axis and emblem halo. No gold, yellow, characters, cubes, metal, glass, holograms, saturated neon, circuitry, grunge or fantasy ornament.
+
+CRITICAL ORTHOGRAPHIC GEOMETRY: Exactly EIGHT identical floating square floor slabs stacked vertically at the center of the canvas. NO PERSPECTIVE, no vanishing point, no scale change. Every slab top is a diamond exactly 520 pixels wide and 260 pixels high (2:1). Left/right diamond edges rise/fall at 26.565 degrees from horizontal. Center x=960 for every slab. Top-surface center y values from top to bottom are exactly 240,335,430,525,620,715,810,905, a repeated 95-pixel vertical translation only. Thus the top-surface diamond vertices of the lowest slab are (700,905),(960,775),(1220,905),(960,1035). All others are identical translated upward. The stack naturally overlaps; rear portions of lower slabs can be occluded. Do not spread the floors farther apart to expose the rear corners. ALL EIGHT left tips and ALL EIGHT right tips are visible so the floor count is readable.
+Each slab is about 14 pixels thick in screen space, with real solid opaque top and two shaded front sidewalls. Distinct top / left side / right side shading, subtle paper-plaster texture and ambient occlusion make a convincing three-dimensional architectural model suspended in air. Thin charcoal perimeter and delicate inset border. Sparse very pale drafting lines and tiny cross marks on each top; identical surface design on all floors. No terrain yet. All eight floors are OFF: no cyan rim on ANY slab. Upper floors fade progressively into blue-grey atmospheric haze while keeping the same geometry.
+
+A fine cyan DOTTED vertical axis at x=960 passes through all floor centers, extending above and below the stack, visible in the air gaps and occluded by solid slabs. Above the highest slab, an elongated upright OCTAHEDRON emblem (not a cube) floats approximately x=960 y=58, about 46px wide and 84px high. Matte pale faceted form with delicate line definition, an internal four-point compass-star symbol, extremely faint localized cyan halo. Do not add a large bloom.
+Top-left at x~110 y~100: small restrained off-white text exactly "VERTEX / ASCENT", generously tracked, with a short vertical scale, fine line and tiny registration cross. Plenty of quiet negative space on either side. No other large title or labels.
+
+This first frame establishes the exact reusable plate design and camera for two subsequent frames; prioritize dimensional repetition, physical depth and quiet art direction. Single landscape 16:9 frame, no border, no panels, no explanatory captions.
+
+===== CALL 2: promptA2 =====
+Status: Rejected: seven plates, shallow tops.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/A_draft.png
+Generated source basename: exec-6aae08fd-c06f-49ac-878d-74e610e6604f.png
+Prompt:
+Edit the supplied image into the corrected first keyframe. Keep its matte plaster miniature rendering, deep blue-grey night air, restrained cyan dotted vertical axis, octahedral compass-star emblem, low haze and tiny top-left label. Correct the GEOMETRY: the draft has seven floors and very shallow diamonds. The final MUST HAVE EXACTLY EIGHT identical slabs, and their top faces MUST be MUCH DEEPER, a 2:1 diamond (width / full height = 2.000). No perspective, no taper. Use the same constant width for all eight plates.
+
+Compose on a 16:9 landscape canvas for 1920x1080 delivery. Slab width is only 27.0833% of screen width (=520 at 1920), not one third of screen. Its complete top-face diamond height is 24.074% of screen height (=260 at 1080). The slope of each perimeter edge is 0.5, i.e. 26.565 degrees. On the TOPMOST unobscured plate, left-to-right diagonal is 520 and rear-to-front diagonal is 260; visibly make the diamond deeper than the supplied draft. All other plates are exact repeated translations, partially occluded by the plate above.
+Eight left/right tip y coordinates, in 1920x1080 reference pixels: 240,335,430,525,620,715,810,905. Left and right tips x=700 and1220. Repeated vertical pitch=95px, all eight widths equal. Lowest plate front corner y=1035. Thickness=14px, opaque matte off-white top, darker grey left side and lighter right side, thin graphite edge and fine inset drafting marks. Do not make any plate wider or shallower than the others. Counting from the top: one, two, three, four, five, six, seven, EIGHT. Eight left tips and eight right tips. Their overlap is intended, do not flatten the view to separate them. Have a clear 3D depth to the layered architectural model.
+
+Uppermost plates are subdued by night haze; lower plates clearer. All slabs off: NO cyan rim. Fine cyan DOTTED axis x=960, hidden by opaque slabs where appropriate. Upright elongated matte octahedron x960 y55 ~46x84px above highest slab rear tip y110, delicate 4-point compass-star motif, subtle halo, no cube. Keep text "VERTEX / ASCENT" SMALL, use clean sans-serif spaced letters, pale grey at x110 y100, with fine ruler ticks and + cross. The draft's serif lettering should become the game's clean sans-serif UI language.
+No other labels. No yellow/gold, glass, chrome, neon, hologram, characters, circuitry, terrain, asset sheet, diagram style or decorative fantasy frame.
+Deliver one finished 16:9 raster keyframe, ideally 1920x1080.
+
+===== CALL 3: promptA3 =====
+Status: Rejected: seven plates.
+Input image paths (relative to ArtDirection/ActIntroMockup): None (new generation).
+Generated source basename: exec-c98ab8a2-badd-44de-9768-5f5a5354e2bd.png
+Prompt:
+Create ONE 1920x1080 landscape raster artwork for a polished Korean game act introduction. Centered floating architectural floor-stack, exactly EIGHT matte off-white plaster slabs on a dark navy background. Orthographic projection with no perspective. Think eight identical square thick paper model floors, repeated vertically without any scale change.
+
+ABSOLUTE REQUIREMENTS:
+- Count exactly 8 slabs. Eight pairs of left and right slab tips. NOT seven.
+- Each slab top is a deep 2:1 diamond. Width 520px and full front-to-back height 260px. Edge slopes 26.565 degrees. The camera looks down enough to show a deep diamond, not a thin horizontal lozenge.
+- ALL eight slabs identical shape and size. Center x960, left tips x700, right tips x1220. Plate center y positions: 240 / 335 / 430 / 525 / 620 / 715 / 810 / 905. No other plates. Consecutive plate centers 95px apart. Top diamond rear corner y110 and front corner y370. Bottom diamond rear corner y775 and front corner y1035. Lower plates are partly hidden by the upper ones, naturally.
+- 14px physical thickness with a lighter top, two differently shaded front sidewalls. Each real solid plate has a very thin graphite outline, delicate inset border, sparse faint drafting marks and registration crosses, faint compass center. Off-white opaque plaster / thick paper texture. Not a wireframe.
+- ALL plates are OFF, no cyan edges. Upper floors fade in cool fog; lower floors clearer. Layered suspended architectural miniature, air between layers, physically convincing depth.
+- Thin cyan dotted vertical axis x960 extends top to bottom, obscured by the solid floors except in air.
+- Above the top plate near x960 y55: small vertically elongated OCTAHEDRON, pale matte faceted form, four-point compass-star motif, very faint local cyan halo. NOT A CUBE.
+- Small clean sans-serif top-left label "VERTEX / ASCENT", widely spaced pale grey letters, tiny ruler ticks and + cross.
+- Deep muted blue-grey night air #0D1520 to #1A2636, low ground mist and barely visible isometric floor grid. Cyan #1EA0E6 is the only accent and only on axis and emblem halo. Quiet spacious composition.
+
+No gold, yellow, characters, monsters, neon, hologram, reflective glass, chrome, perspective taper, flat vector diagram, circuitry, grunge, ornate fantasy border, asset sheet, extra typography. The emphasis is exactly EIGHT deep 2:1 identical architectural slabs, not seven shallow plates.
+
+===== CALL 4: promptA4 =====
+Status: Intermediate: eight plates; corrected next.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/A_geometry_draft.png
+Generated source basename: exec-58ffe400-bca1-4de3-b85d-6f69410483b8.png
+Prompt:
+This image currently contains SEVEN floating slab floors. Add ONE additional identical slab so that there are EIGHT floors. Preserve the material, background, text, emblem and constant orthographic width. Make the stack a little taller to accommodate the extra floor: move the top floor slightly upward and the bottom floor slightly downward. The eight floors must all have the same 95px center pitch on a 1080px high final canvas. Top floor center y=240 and bottom floor center y=905. Keep width about520px on a1920 wide canvas. Make ALL the diamond top faces deeper: each full top diamond should have horizontal diagonal520px and vertical diagonal260px. Its four edges make26.565 degrees to the horizontal. Currently the diamond is too shallow. This is an opaque matte plaster 3D architectural miniature, same square slab repeated eight times. No perspective, no cyan plate rims, no extra design elements. One finished1920x1080 landscape frame.
+
+===== CALL 5: promptA5 =====
+Status: Intermediate: haze approved; corrected next.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/A_eight_draft.png
+Generated source basename: exec-90ddf70f-1549-48ed-9982-6d8a5e0ae05d.png
+Prompt:
+Edit only the slab top-face depth and the upper atmospheric fading in this eight-floor stack. Keep EIGHT plates, same 470px horizontal width in this1672x941 image (about540px at1920x1080), same plate centers, same80px pitch, same matte white plaster material, same typography, background and compass octahedron. EVERY plate top must be a TWO-TO-ONE diamond. The current topmost diamond has left tip(600,220), rear tip(836,132), right tip(1072,220), front tip(836,308), which is too shallow. Change its rear tip to(836,102) and front tip to(836,338), while preserving left tip(600,220) and right tip(1072,220). This is a taller/deeper diamond, 472px wide by236px high. Apply the exact same change identically to all8plates: same size and same angle, no perspective. Let the floors overlap more; do NOT change pitch or count to expose more of them. The front edges descend at26.565degrees from the side tips. Preserve real14px thick sidewalls shaded differently from the top. Keep the eight left tips aligned and eight right tips aligned. Fade upper three plates more into blue-grey haze (top plate particularly subdued), progressively lower opacity and contrast upward. All plates off, no cyan rim. The axis is a thin cyan dotted vertical line, the emblem has a restrained local halo. No additional design changes. Finished landscape keyframe.
+
+===== CALL 6: promptA6 =====
+Status: Selected A.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/A_haze_draft.png
+Generated source basename: exec-8d55fdd5-99d9-457a-a745-31fb408afc0e.png
+Prompt:
+Make one precise adjustment to the supplied eight-floor architectural model. Increase the depth (vertical diagonal) of EVERY slab diamond top by another15percent, keeping each left/right tip and center unchanged, so full diamond top horizontal-to-vertical diagonal ratio becomes2:1. Increase top-face depth only, NOT pitch or width. Front and rear diamond tips must extend farther from each center; all eight slabs must match exactly. Their solid14px sidewalls follow the new shape. Keep EIGHT slabs, identical orthographic width about520px on1920canvas and95px pitch, with upper floors hazy. Preserve every other aspect: navy night air, low fog, faint isometric grid, offwhite matte paper-plaster, pale graphite drafting marks, tiny sans-serif VERTEX / ASCENT label and ruler at top-left, floating elongated octahedral star-compass emblem, thin faint cyan dotted axis. No cyan slab rims yet. Only the eight diamond faces become15percent deeper, maintaining repeatable orthographic geometry. One finished16:9 keyframe.
+
+===== CALL 7: promptB =====
+Status: Selected B.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/A_source.png
+Generated source basename: exec-6e0fe6a6-65e8-403b-99dd-0cd7a0d2d646.png
+Prompt:
+Use case: precise-object-edit / ui-mockup. Image1 is the LOCKED visual and geometric reference for keyframe A of a game act-introduction. Create keyframe B, camera descending. Same16:9 canvas and exactly same orthographic camera, slab material, background, widths, depth, thickness, surface drafting marks, ruler and top-left "VERTEX / ASCENT" label. Do not enlarge the floors or change their angle. Their width must remain the same as Image1: approximately470px in1672px-wide source /540px at1920 delivery; top diamond about2:1; repeated vertical pitch80px in941high source /92px at1080delivery.
+
+Change only motion state:
+Translate the ENTIRE eight-floor tower straight UP by350px in the1672x941 reference (about400px at1920x1080). This is a camera PAN DOWN, absolutely NOT a zoom. The emblem and top two floors leave the frame above. The floor top left/right tip y positions after translation should be approximately -130,-50,30,110,190,270,350,430 at this source size. The lowest slab is now fully visible centered near(836,430). Several upper floors are cropped by the top edge and fade into haze. There are no floors beneath the lowest one, only blue-grey night air and low mist.
+The SECOND slab from the BOTTOM, centered near(836,350), is the passing F04 floor. Give ONLY ITS VERY THIN PERIMETER EDGE a restrained cyan #1EA0E6 illumination, keeping its opaque matte off-white surface and graphite drafting marks. NO cyan flood-fill, NO hologram, NO broad neon bloom. All other slabs are off.
+Beside the right tip of that one floor, a small clean sans-serif cyan text label exactly "F 04" and short hairline locator mark. Make it tiny and quiet.
+A thin, subdued cyan light streak flows downward along the dotted vertical central axis x836, visible below the stack in the air, fading toward bottom fog. No arrows or explanatory text.
+Keep quiet dark navy #0D1520~#1A2636 night air, pale ground fog and barely visible isometric floor grid. Same cold white observation-system design. No gold/yellow, cubes, characters, metal, reflective glass, neon, ornate decoration, circuitry, new props or new plate design. Single finished full-screen raster keyframe for1920x1080 delivery.
+
+===== CALL 8: promptC =====
+Status: Rejected: enlarged plate.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/A_source.png; Reference/Terrain_Act1_MapLineArt.png; Reference/Current_Battle_Act1.png; Reference/Current_Map_Act1.png; Reference/Style_TrainingScreen.png
+Generated source basename: exec-3f592f7e-8562-4b0d-943e-aa83b7821116.png
+Prompt:
+Use case: compositing / ui-mockup. Create keyframe C, floor01 ignition and act-title reveal, as the next frame of the same Korean game introduction. One finished16:9 landscape1920x1080 raster mockup.
+
+INPUT ROLES:
+Image1 (A_source) is the LOCKED plate geometry/material, orthographic camera, background, typography-family reference. Reuse its slab design, don't redesign or zoom.
+Image2 (Terrain_Act1_MapLineArt) is terrain reference ONLY: winding path/channel, modest bridges and small scattered ruined stone fragments, flower clusters. Do NOT paste this flat white map.
+Image3 (Current_Battle_Act1) is mood and flower reference ONLY: cold moonlit BLUE NIGHT, WHITE SPIDER LILIES / WHITE LYCORIS with delicate recurved petals and long filament-like stamens, stone paving and modest ruined masonry. NO characters/enemies/cards/HUD.
+Image4 (Current_Map_Act1) is act title typography reference ONLY.
+Image5 (Style_TrainingScreen) is clean sans-serif UI language reference ONLY: small number, tracked English subtitle, bold Korean, fine rules and small + registration crosses.
+
+Composition:
+The bottom/floor01 slab is fully visible lower-center. SAME WIDTH AS IMAGE1 (about470px in1672px-wide source, about540px at1920 delivery), same2:1 top diamond, same physical14px-thick shaded sidewalls, same sparse thin graphite border and matte plaster / thick-paper texture. Do not enlarge it to fill the screen. At1920x1080 reference coordinates: left/right tips approximately(690,680) and(1230,680), rear tip(960,545), front tip(960,815); slab thickness14px below this. Keep x=960 axis and the same26.565-degree diamond edge angle. The whole plate is visible with air around it, no new slabs below it.
+At the very top edge, just one or two VERY FAINT old upper slab fragments depart/crop offscreen, unchanged width/angle. Remaining higher floors disappear into blue-grey atmospheric haze so they do not cover the floor01 diorama. No floating compass emblem remains in this shot.
+On the actual top face of floor01, place a DELICATE miniature landscape, fully contained within the diamond edges: moonlit white spider-lily flowerbeds, short dark stems, a small winding stone-paved path passing between beds, a tiny low broken stone wall and a couple of modest ruin fragments. Architectural landscape model, NOT a full-size environment, not a forest or huge building. Cold white moonlight and subtle flower luminance. Sidewalls remain plainly visible. All vegetation, path, debris stay strictly inside the slab footprint.
+ONLY this floor01 perimeter has a very thin restrained cyan #1EA0E6 illuminated line, not a neon tube or hologram. Soft small cyan-white light diffusion beneath it toward the faint grid floor. A very small, fading WHITE ignition flash at the center, just a quiet star-like glint, not a large lens flare obscuring the miniature. The thin cyan axis continues below the plate into fog.
+
+Title layout in clear lower-left negative space, x~110 y~790 on1920canvas, entirely left of or below the slab, no overlap:
+small clean sans-serif "ACT 01"
+bold large Korean "1막"
+beside or below it, medium bold Korean exactly "만발한 백피안화의 정원"
+small widely tracked English "FLOOR 01 — OPERATION START"
+Use the same typographic family and hierarchy as Current_Map_Act1: bold Korean and small airy sans-serif English, off-white text against navy, a fine line, tiny + cross, sparse ruler ticks. Do not put the title inside a large panel. Make the Korean text exact, clear and readable; no invented copy.
+
+Preserve the deep navy/blue-grey night air #0D1520~#1A2636, subtle low fog, very faint isometric floor grid, cold white observation-system art direction of Image1. Matte physically shaded miniature rendering, no perspective taper, no zoom. Cyan only on active rim, thin axis and restrained lighting; no gold/yellow, cubes, characters, reflective glass, metal, saturated neon, holograms, circuitry, grunge, fantasy decoration or asset sheets.
+
+===== CALL 9: promptC2 =====
+Status: Intermediate: plate still too large.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/C_draft.png; Working/A_source.png
+Generated source basename: exec-011a83c4-9eb3-4832-8dcf-1ffede17a42d.png
+Prompt:
+Precise edit, preserve the artwork and title. Image1 is keyframe C edit target; Image2 is keyframe A GEOMETRY reference. The floor01 diorama in Image1 is too large. Reduce its screen width from716px to470px (about66percent), and reduce the miniature landscape with it, so it is EXACTLY the same size as the slabs in Image2. This is NOT a zoom or a new camera angle. Same size plate in all three animation frames is a hard production requirement.
+
+On the1672x941 reference canvas, replace the floor01 footprint with a2:1 top diamond having left tip(600,575), right tip(1072,575), rear tip(836,457), front tip(836,693). Thickness14px below the top, identical to Image2. Keep the same center(836,575) but shrink the whole miniature and slab to fit these vertices. Nothing else grows. The top diamond must be472px wide,236px deep, not716px wide. Use the SAME angular geometry / material as Image2. The tiny white spider lily beds, curved stone path, low broken wall and tiny ruined stone posts all shrink together and remain inside this footprint. KEEP the beautiful flower details and physically shaded plaster architectural-model sidewalls. The faint upper slab fragments should also match470px width, same angle.
+Keep the thin cyan perimeter, very small fading central white ignition glint, faint cyan vertical axis and restrained light under the plate, scaled appropriately. Preserve the exact existing Korean/English text and its typography and position: ACT01,1막,만발한 백피안화의 정원,FLOOR01—OPERATION START. Keep the navy air, fog, faint grid and top-left VERTEX / ASCENT label unchanged. No new words, props, colors or design. One finished16:9 raster keyframe.
+
+===== CALL 10: promptC3 =====
+Status: Selected C.
+Input image paths (relative to ArtDirection/ActIntroMockup): Working/C_size_draft.png
+Generated source basename: exec-5cb54d15-dc3f-4aa6-b011-1185483e5782.png
+Prompt:
+Precise local geometry correction only. Preserve this image, background, lighting, flowers, path, ruins, typography and placement. The floor01 miniature slab is currently528px wide, fromx572tox1100, centeredx836. Compress ONLY THE SLAB AND ITS MINIATURE horizontally by11percent aboutx836: newlefttipx600, newrighttipx1072, width472px. Keep its vertical size, center height and14px thickness UNCHANGED. So full top diamond vertices are approximately left(600,549), rear(836,436), right(1072,549), front(836,662). This matches the slab size and26degree orthographic angle of the earlier frames. The miniature flowers/path/ruins compress horizontally together with the slab and remain fully within its edges. Do NOT change the camera, crop, title, upper ghost fragments, navy background or any other element. Cyan rim stays thin and restrained. No new objects, words or colors. Single16:9 final frame.
+

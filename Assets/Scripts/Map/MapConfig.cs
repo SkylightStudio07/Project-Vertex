@@ -68,7 +68,15 @@ public class MapConfig : ScriptableObject
     // 같은 부모를 공유하는 형제 노드끼리 같은 타입이 되지 않게 한다.
     // 선택지가 "휴식 vs 휴식"처럼 무의미해지는 걸 막는 용도.
     // noConsecutiveTypes에 올라간 타입에만 적용된다. 끄고 싶으면 false.
-    public bool forbidSiblingDuplicates = true;
+    // 2026-11-12 기본값 false로 변경. 켜 두면 경로 보장(Phase 6)이 바꿀 자리를 못 찾아 맵의 약 30%가 보장에 실패한다.
+    public bool forbidSiblingDuplicates = false;
+
+    [Header("경로 보장 (MapGenerator Phase 6)")]
+    // 노드별 추첨이 끝난 뒤, 시작 → 보스의 "모든 경로"가 이 개수 이상 지나도록 전투 노드를 바꿔 끼운다.
+    // 보장 층(14층 휴식 등)은 세지 않는다. 0이면 보정하지 않는다(예전 동작).
+    // 엘리트 1 = 어느 길로 가도 엘리트를 한 번은 만난다. 언제 어디서 만날지는 플레이어가 고른다.
+    [Min(0)] public int minRestsPerPath = 1;
+    [Min(0)] public int minElitesPerPath = 1;
 
     // minFloorRules 조회용. 목록에 없으면 0(제한 없음)을 돌려준다.
     public int GetMinFloorIndex(NodeType type)

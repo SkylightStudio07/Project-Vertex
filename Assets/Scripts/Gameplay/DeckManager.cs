@@ -41,8 +41,37 @@ public class DeckManager : MonoBehaviour
     [SerializeField] private CardData reloadCard;
 
     [Header("디버그")]
+    [Tooltip("디버그 패널(Tools ▸ Vertex ▸ 디버그 패널 ▸ 적 · 전투)에서 켜면 시작 덱에 들어가는 카드. 릴리즈 빌드에는 절대 들어가지 않는다")]
     [SerializeField] private CardData strikeCard_Debug;
     [SerializeField] private CardData blockCard_Debug;
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    // 디버그: 시작 덱에 디버그 카드를 넣는다 (디버그 패널 토글, 다음 로비 진입부터 적용). 저장 기록은 건드리지 않는다
+    public static bool DebugCardsInStartingDeck;
+#if UNITY_EDITOR
+    public const string DebugCardsPref = "Vertex.Debug.StartingDebugCards";
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void LoadDebugFlag() => DebugCardsInStartingDeck = UnityEditor.EditorPrefs.GetBool(DebugCardsPref, false);
+#endif
+
+    // 디버그: 지금 런 덱에 디버그 카드를 바로 넣는다 (1회성, 디버그 패널 버튼). 전투 중이면 뽑을 더미에도 섞어 넣는다.
+    // 획득 기록(PlayerRecord)에는 남기지 않는다.
+    public int AddDebugCardsNow()
+    {
+        int added = 0;
+        foreach (var card in new[] { strikeCard_Debug, blockCard_Debug })
+        {
+            if (card == null) continue;
+            var copy = CopyForRun(card);
+            PlayerDeck.Add(copy);
+            if (BattleManager.Instance != null && BattleManager.Instance.IsInBattle) BattleManager.Instance.AddCardToDrawPile(copy);
+            added++;
+        }
+        return added;
+    }
+#else
+    private const bool DebugCardsInStartingDeck = false;
+#endif
 
     public List<CardData> PlayerDeck
     {
@@ -62,9 +91,12 @@ public class DeckManager : MonoBehaviour
         }
         PlayerDeck.Add(CopyForRun(reloadCard));
 
-        // 디버그용 시작 덱. 실제 릴리즈 시에는 이 부분 제거할 것.
-        PlayerDeck.Add(CopyForRun(strikeCard_Debug));
-        PlayerDeck.Add(CopyForRun(blockCard_Debug));
+        // 디버그 카드는 디버그 패널에서 켰을 때만 (에디터 · 개발 빌드 한정)
+        if (DebugCardsInStartingDeck)
+        {
+            if (strikeCard_Debug != null) PlayerDeck.Add(CopyForRun(strikeCard_Debug));
+            if (blockCard_Debug != null) PlayerDeck.Add(CopyForRun(blockCard_Debug));
+        }
     }
 
     // 무기고에서 방금 강화한 카드: 이미 만들어 둔 덱(로비 진입 때 구성)에도 바로 반영

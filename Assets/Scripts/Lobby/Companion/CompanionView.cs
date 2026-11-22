@@ -12,7 +12,10 @@ public class CompanionView : MonoBehaviour
 {
     private enum Sort { Joined, Bond, Act }
 
-    [SerializeField] private List<CoopCharData> companions = new();
+    [Tooltip("동료 · 기록 대상 적 목록 (Data/Lobby/LobbyRoster). 인물을 추가할 때 씬이 아니라 이 에셋을 고친다")]
+    [SerializeField] private LobbyRosterSO roster;
+    private List<CoopCharData> companions => roster != null ? roster.companions : NoCompanions;
+    private static readonly List<CoopCharData> NoCompanions = new();
     [SerializeField] private Button closeButton;
 
     [Header("목록")]
