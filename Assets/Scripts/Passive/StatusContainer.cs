@@ -39,7 +39,15 @@ public sealed class StatusContainer
         return null;
     }
 
-    public int GetMagnitude(StatusDefinition definition) => Find(definition)?.Stacks ?? 0;
+    // Separate 정책이면 같은 정의가 여러 인스턴스로 있을 수 있으므로 스택을 합산한다 (그 외 정책은 항상 하나)
+    public int GetMagnitude(StatusDefinition definition)
+    {
+        if (definition == null) return 0;
+        int total = 0;
+        foreach (var entry in _entries)
+            if (entry is StatusInstance status && status.Definition == definition) total += status.Stacks;
+        return total;
+    }
 
     public int GetTotalMagnitude(StatusDisposition disposition)
     {
@@ -59,16 +67,30 @@ public sealed class StatusContainer
 
     public void Modify(StatusDefinition definition, StatusStackOperation operation, int amount)
     {
-        var status = Find(definition);
-        if (status == null) return;
-
-        switch (operation)
+        if (definition == null) return;
+        bool found = false;
+        int remainingReduce = amount; // Reduce는 먼저 얻은 인스턴스부터 차례로 깎는다
+        foreach (var entry in _entries)
         {
-            case StatusStackOperation.Reduce: status.ReduceMagnitude(amount); break;
-            case StatusStackOperation.Multiply: status.MultiplyMagnitude(amount); break;
-            case StatusStackOperation.Set: status.SetMagnitude(amount); break;
-            case StatusStackOperation.RemoveAll: status.RemoveAll(); break;
+            if (entry is not StatusInstance status || status.Definition != definition) continue;
+            switch (operation)
+            {
+                case StatusStackOperation.Reduce:
+                    if (remainingReduce <= 0) break;
+                    int before = Math.Abs(status.Stacks);
+                    status.ReduceMagnitude(remainingReduce);
+                    remainingReduce -= before - Math.Abs(status.Stacks);
+                    break;
+                case StatusStackOperation.Multiply: status.MultiplyMagnitude(amount); break;
+                case StatusStackOperation.Set:
+                    // 여러 인스턴스면 첫 인스턴스에 값을 두고 나머지는 지운다
+                    if (found) status.RemoveAll(); else status.SetMagnitude(amount);
+                    break;
+                case StatusStackOperation.RemoveAll: status.RemoveAll(); break;
+            }
+            found = true;
         }
+        if (!found) return;
         RemoveExpired();
         OnChanged?.Invoke();
     }

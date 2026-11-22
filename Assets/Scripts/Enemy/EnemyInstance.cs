@@ -155,9 +155,11 @@ public class EnemyInstance : ICombatant
         OnIntentChanged?.Invoke();
     }
 
-    public void AddBlock(int amount)
+    public void AddBlock(int amount) => AddBlockRaw(_statuses.ModifyBlockGain(amount, this));
+
+    // 방어도 보정 없이 그대로 얻는다 (부여 시점에 이미 보정을 반영해 고정한 수치용)
+    public void AddBlockRaw(int amount)
     {
-        amount = _statuses.ModifyBlockGain(amount, this);
         if (amount <= 0) return;
         _block += amount;
         OnBlockChanged?.Invoke(_block);

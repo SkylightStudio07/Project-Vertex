@@ -43,12 +43,15 @@ public sealed class StatusInstance : IPassiveLogic
                 if (Math.Abs(other.SecondaryPotency) > Math.Abs(SecondaryPotency)) SecondaryPotency = other.SecondaryPotency;
                 break;
             case StatusStackPolicy.ExtendDuration:
-                // 동일한 시한부 효과를 다시 얻으면 지속 시간만 늘린다.
-                // 효과의 위력은 유지하고 남은 턴만 합산한다.
+            case StatusStackPolicy.AddStack:
+                // 스택만 합산하고 위력(Potency·SecondaryPotency)은 처음 값을 유지한다.
+                // ExtendDuration은 시한부 효과의 남은 턴, AddStack은 일반 스택 관점일 뿐 계산은 같다.
                 Stacks = Clamp(Stacks + other.Stacks);
                 Source = other.Source ?? Source;
                 break;
-            default:
+            case StatusStackPolicy.Separate:
+                return false; // 합치지 않는다 — StatusContainer가 새 인스턴스로 추가
+            default: // AddStackAndPotency
                 Stacks = Clamp(Stacks + other.Stacks);
                 Potency += other.Potency;
                 SecondaryPotency += other.SecondaryPotency;

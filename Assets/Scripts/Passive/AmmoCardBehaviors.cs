@@ -30,6 +30,9 @@ public sealed class AmmoBoundaryDamageStatusBehavior : StatusBehavior
         => status.Potency * ((context.IsFirstAmmoUse ? 1 : 0) + (context.IsLastAmmoUse ? 1 : 0));
 }
 
+// 발포 준비 — 스택 = 남은 카드 수, Potency = 카드 한 장당 추가 피해.
+// 탄약을 쓰는 카드 한 장마다 Potency만큼 더하고 스택을 1 소모한다 (강화로 amount 2면 "다음 두 카드").
+// 상태 정의는 AddStack으로 둘 것 — 다시 얻으면 카드 수만 늘고 장당 피해는 그대로.
 [Serializable]
 public sealed class NextAmmoDamageStatusBehavior : StatusBehavior
 {
@@ -37,7 +40,7 @@ public sealed class NextAmmoDamageStatusBehavior : StatusBehavior
     {
         if (!firstConsumption) return;
         context.NextAmmoDamageBonus += status.Potency;
-        if (!preview) status.RemoveAll();
+        if (!preview) status.ReduceMagnitude(1);
     }
 }
 

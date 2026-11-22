@@ -11,7 +11,10 @@ public sealed class StatusDefinition : ScriptableObject
     [TextArea, SerializeField] private string description;
     [SerializeField] private Sprite icon;
     [SerializeField] private StatusDisposition disposition = StatusDisposition.Neutral;
-    [SerializeField] private StatusStackPolicy stackPolicy = StatusStackPolicy.Add;
+    // 새 상태의 기본은 AddStack (다시 얻으면 스택만 더하고 위력은 처음 값 유지).
+    // 기존 에셋은 저장된 값(대부분 AddStackAndPotency)을 그대로 쓴다.
+    [Tooltip("같은 상태를 다시 얻을 때 합치는 방식.\nAddStack: 스택만 더함(기본)\nSeparate: 합치지 않고 따로 쌓음(부여 시 수치를 고정하는 효과용)\nAddStackAndPotency: 스택·위력 모두 더함\nReplace: 새 값으로 교체\nKeepHigherMagnitude: 각각 큰 값 유지\nExtendDuration: 지속(스택)만 더함")]
+    [SerializeField] private StatusStackPolicy stackPolicy = StatusStackPolicy.AddStack;
     [SerializeField] private StatusDurationPolicy durationPolicy = StatusDurationPolicy.DecreaseOnTurnStart;
     [Min(0), SerializeField] private int maxStacks;
     [SerializeField] private bool dispellable = true;
@@ -60,12 +63,16 @@ public enum StatusDisposition
     DynamicBySign,
 }
 
+// 주의: 에셋에는 정수 값으로 저장된다. 이름·선언 순서는 바꿔도 되지만 숫자는 절대 바꾸지 말 것.
+// (선언 순서 = 인스펙터 드롭다운 순서. 기본인 AddStack을 맨 위에 둔다)
 public enum StatusStackPolicy
 {
-    Add,
-    Replace,
-    KeepHigherMagnitude,
-    ExtendDuration,
+    AddStack = 4,           // 기본. 스택만 더하고 Potency·SecondaryPotency는 처음 값 유지
+    Separate = 5,           // 합치지 않고 부여할 때마다 별도 인스턴스 (각자 수치·남은 턴을 가짐)
+    AddStackAndPotency = 0, // 스택과 Potency·SecondaryPotency를 모두 더함 (구 Add)
+    Replace = 1,
+    KeepHigherMagnitude = 2,
+    ExtendDuration = 3,
 }
 
 public enum StatusDurationPolicy

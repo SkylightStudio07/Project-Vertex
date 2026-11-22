@@ -55,10 +55,15 @@ public class PlayerCombatant : ICombatant
     // 최종 방어도가 음수가 되지 않도록 패시브 보정 후 Max(0)로 하한 처리.
     // 실제로 증가한 만큼만 OnBlockGained로 알린다 — 패시브가 보정을 음수로 걸어서
     // 순증가가 없거나(0 이하) 오히려 줄어드는 경우엔 "방어도 획득" 연출을 띄우면 안 되기 때문.
-    public void AddBlock(int amount)
+    public void AddBlock(int amount) => ApplyBlockGain(PreviewBlockGain(amount));
+
+    // 민첩 등 방어도 보정 없이 그대로 얻는다 (부여 시점에 이미 보정을 반영해 고정한 수치용)
+    public void AddBlockRaw(int amount) => ApplyBlockGain(amount);
+
+    private void ApplyBlockGain(int finalAmount)
     {
         int before = _block;
-        _block = Math.Max(0, _block + PreviewBlockGain(amount));
+        _block = Math.Max(0, _block + finalAmount);
         int gained = _block - before;
 
         if (gained > 0)
