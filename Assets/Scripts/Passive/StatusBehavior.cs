@@ -22,9 +22,28 @@ public abstract class StatusBehavior
     public virtual CardPlayCost ModifyCardPlayCost(StatusInstance status, CardPlayCost cost, CardContext context) => cost;
     public virtual bool AllowsCardPlay(StatusInstance status, CardContext context) => true;
     public virtual void OnAfterDamageTaken(StatusInstance status, CardContext context, ICombatant owner) { }
+    // 실제 피해로 방어도가 파괴되었을 때 호출한다. 턴 시작의 초기화에는 호출하지 않는다.
+    public virtual void OnBlockBroken(StatusInstance status, ICombatant owner) { }
     public virtual void OnAfterDamageDealt(StatusInstance status, CardContext context, ICombatant owner) { }
     // 이 상태의 주인이 다른 상태를 새로 얻었을 때 (ApplyStatusEffect로 부여된 경우)
     public virtual void OnStatusGained(StatusInstance status, CardContext context, ICombatant owner, StatusDefinition gained, int amount) { }
+}
+
+[Serializable]
+public sealed class BlockBreakInterruptStatusBehavior : StatusBehavior
+{
+    [Tooltip("방어도가 파괴되었을 때 교체할 예정 행동")]
+    public EnemyAction expectedAction;
+    [Tooltip("기존 행동 대신 이번 행동 기회에 실행할 행동")]
+    public EnemyAction replacementAction;
+
+    public override void OnBlockBroken(StatusInstance status, ICombatant owner)
+    {
+        if (status.IsExpired || owner is not EnemyInstance enemy) return;
+
+        if (enemy.TryReplaceCurrentAction(expectedAction, replacementAction))
+            status.RemoveAll(); // 한 번 발동하면 소모한다.
+    }
 }
 
 public enum DamageModifierSide { Outgoing, Incoming }

@@ -7,7 +7,8 @@ public enum IntentType
     Defend,
     Buff,
     Debuff,
-    Wait
+    Wait,
+    Stun // 기절로 이번 행동을 쉬는 의도. 기존 직렬화 값은 유지한다.
 }
 
 [CreateAssetMenu(fileName = "EnemyAction", menuName = "Game Asset/Enemy Action")]

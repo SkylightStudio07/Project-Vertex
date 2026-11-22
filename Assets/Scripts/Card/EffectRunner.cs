@@ -85,6 +85,13 @@ public static class EffectRunner
                         CollectDamagePreview(info, target, damage.hitCount, context, preview);
                     }
                     break;
+                case BlockEffect block:
+                    foreach (var target in block.targets.Resolve(context))
+                    {
+                        int amount = block.amount + block.scaling.Evaluate(context, target);
+                        preview.AddTargetBlock(target, target.Statuses.ModifyBlockGain(amount, target));
+                    }
+                    break;
                 case ApplyStatusEffect status when status.status != null:
                     preview.Statuses.Add(status.status);
                     break;
@@ -125,6 +132,17 @@ public sealed class EffectPreview
 
     // 대상별 피해 (HP바 예상 피해 표시용). 관통 피해는 방어도를 무시하므로 따로 모은다.
     public readonly Dictionary<ICombatant, (int normal, int piercing)> DamageByTarget = new();
+    public readonly Dictionary<ICombatant, int> BlockByTarget = new();
+
+    public void AddTargetBlock(ICombatant target, int amount)
+    {
+        if (target == null || amount <= 0) return;
+        BlockByTarget.TryGetValue(target, out int current);
+        BlockByTarget[target] = current + amount;
+    }
+
+    public int GetBlockGain(ICombatant target)
+        => target != null && BlockByTarget.TryGetValue(target, out int amount) ? amount : 0;
 
     public void AddTargetDamage(ICombatant target, int amount, bool piercing)
     {

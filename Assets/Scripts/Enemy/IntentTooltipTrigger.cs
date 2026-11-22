@@ -30,7 +30,24 @@ public class IntentTooltipTrigger : MonoBehaviour
         var action = _enemy != null && !_enemy.IsDead ? _enemy.GetCurrentAction() : null;
         if (action == null || _icon == null || !_icon.enabled) { Hide(); return; }
         _shown = true;
-        Describe(action.intentType, _enemy.GetIntentDamageAmount(), out string title, out string desc);
+        var preview = _enemy.GetIntentPreview();
+        int? damage = preview.HasDamage ? preview.TotalDamage : null;
+        int block = preview.GetBlockGain(_enemy);
+        Describe(action.intentType, damage, out string title, out string desc);
+        if (damage.HasValue && block > 0)
+        {
+            title = "공격 / 방어";
+            desc = $"플레이어에게 <b>{damage.Value}</b>의 피해를 주고 방어도를 <b>{block}</b> 얻습니다.";
+        }
+        else if (block > 0)
+            desc = $"이 적은 방어도를 <b>{block}</b> 얻으려 하고 있습니다.";
+
+        // 행동 고유 이름을 의도 분류로 쓰지 않고, 실제로 얻을 상태만 덧붙인다.
+        if (action.effects != null)
+            foreach (var effect in action.effects)
+                if (effect is ApplyStatusEffect apply && apply.status != null &&
+                    apply.targets.mode == EffectTargetMode.Source && apply.operation == StatusStackOperation.Add)
+                    desc += $"\n자신에게 {apply.status.DisplayName} {apply.amount} 부여. {apply.status.Description}";
         if (_enemy.IsStunned)
         {
             title = "기절";
@@ -69,6 +86,10 @@ public class IntentTooltipTrigger : MonoBehaviour
             case IntentType.Debuff:
                 title = "약화";
                 desc = "이 적은 플레이어에게 디버프를 걸려 하고 있습니다.";
+                break;
+            case IntentType.Stun:
+                title = "기절";
+                desc = "기절하여 이번 행동을 건너뜁니다. 다음 행동은 이후 패턴으로 진행합니다.";
                 break;
             default:
                 title = "대기";
