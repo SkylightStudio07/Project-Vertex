@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
+  m_Name: "\uCE5C\uC808\uD55C \uAC15\uB3C4"
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "\uCE5C\uC808\uD55C \uAC15\uB3C4"
+  health: 72
+  enemyImage: {fileID: -2065984994567231854, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  traits: 1
+  rank: 1
+  materialJson: {fileID: 0}
+  spriteScale: 1.85
+  intentOffsetY: 0
+  useScreenRect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  intentAnchor: {x: 0.5, y: 1}
+  hpBarAnchor: {x: 0.5, y: 0}
+  slotOffset: {x: 0, y: 0}
+  hpBarOffset: {x: 0, y: 0}
+  statusRowOffset: {x: 0, y: 0}
+  noLunge: 0
+  idleFrames:
+  - {fileID: -2065984994567231854, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 3312045326144459792, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: -2933643513156640466, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: -2205673789348277616, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: -7689952489374290259, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 7379554508678916372, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: -7234152488636537445, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 4016302497208845988, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 8208917161767468944, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 5822367901741835085, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: -2413464860866548739, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: -9020002265637760389, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 2291664619905805212, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 3847584674017825912, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: 443723001412827178, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  - {fileID: -2139305418179203483, guid: 05c7535727c8e1d4fbe6ccc5cb52772c, type: 3}
+  idleFrameRate: 5.33
+  attackFrames:
+  - {fileID: -3619298307286166612, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -4281357348828948513, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -8178564485877072138, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -2503451736785143998, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -5048908788840386707, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -7002924754840194657, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -1716756701363912436, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: 2219378377332266879, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -31984407199923912, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: 8035129566782298515, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: -6418132289355389201, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: 1315364471161896061, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: 7787634310281302364, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  - {fileID: 8188989812994800138, guid: 7352bccce8541784dafde649803581b5, type: 3}
+  attackMotionOnAttackOnly: 0
+  attackFrameRate: 30
+  defeatedTalk: {fileID: 0}
+  attackKeyframes: []
+  attackHitDelay: -1
+  attackMotion: []
+  groundFxShots: []
+  groundFxScale: 1
+  targetBlastFrames: []
+  targetBlastSize: 640
+  idleSheetPadding: 0.36
+  attackSheetPadding: 0.4
+  startingStatuses: []
+  activityPatternType: 0
+  openingActions:
+  - {fileID: 11400000, guid: cd610ae20874c5a4ebbd371ce82aff55, type: 2}
+  activityPatterns:
+  - {fileID: 11400000, guid: 0401fbeba9e6abb45991428b4f37651f, type: 2}
+  - {fileID: 11400000, guid: 5b476a3bef344184f80dcd07fd2c3823, type: 2}
+  - {fileID: 11400000, guid: ad9ea5f6486bd4b48a2088557fa117e3, type: 2}
+  - {fileID: 11400000, guid: 55c41e901137ab34784fc1a3ca411683, type: 2}
+  phases:
+  - trigger: 0
+    hpRatioThreshold: 0.4
+    alliesDefeated: 1
+    transitionLine: "\uC88B\uAC8C \uB9D0\uD560 \uB54C \uB0B4\uB193\uC73C\uC168\uC5B4\uC57C\uC8E0."
+    openingActions:
+    - {fileID: 11400000, guid: f74cae1061bb34c4e80a1af350c2208c, type: 2}
+    activityPatternType: 0
+    activityPatterns:
+    - {fileID: 11400000, guid: 55c41e901137ab34784fc1a3ca411683, type: 2}
+    - {fileID: 11400000, guid: 5b476a3bef344184f80dcd07fd2c3823, type: 2}
+    - {fileID: 11400000, guid: 0401fbeba9e6abb45991428b4f37651f, type: 2}

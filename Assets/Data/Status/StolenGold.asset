@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: StolenGold
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: status.stolen_gold
+  displayName: "\uAC15\uD0C8\uD55C \uD06C\uB808\uB527"
+  description: "\uBE7C\uC557\uC544 \uAC04 \uD06C\uB808\uB527\uC785\uB2C8\uB2E4. \uC774
+    \uC801\uC744 \uCC98\uCE58\uD558\uBA74 \uC218\uCE58\uB9CC\uD07C \uB3CC\uB824\uBC1B\uC2B5\uB2C8\uB2E4."
+  icon: {fileID: -8307069055350043731, guid: e8c9834bdb39550438872b224deaa05a, type: 3}
+  disposition: 0
+  stackPolicy: 0
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 0
+  behaviors:
+  - rid: 352448921736314975
+  references:
+    version: 2
+    RefIds:
+    - rid: 352448921736314975
+      type: {class: ReturnStolenGoldStatusBehavior, ns: , asm: Assembly-CSharp}
+      data: 
