@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5350e892b1cf84cb096a051597e402, type: 3}
+  m_Name: "\uBCF4\uD589\uB85C\uBD07B\uD615"
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "\uBCF4\uD589 \uACBD\uBE44 \uB85C\uBD07 B\uD615"
+  health: 10
+  enemyImage: {fileID: 21300000, guid: 6e2157a444cef7c4894bce181fd49d28, type: 3}
+  traits: 2
+  rank: 0
+  materialJson: {fileID: 0}
+  spriteScale: 1
+  intentOffsetY: 0
+  useScreenRect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  intentAnchor: {x: 0.5, y: 1}
+  hpBarAnchor: {x: 0.5, y: 0}
+  slotOffset: {x: 0, y: 0}
+  hpBarOffset: {x: 0, y: 0}
+  statusRowOffset: {x: 0, y: 0}
+  noLunge: 0
+  idleFrames: []
+  idleFrameRate: 12
+  attackFrames: []
+  attackMotionOnAttackOnly: 1
+  attackFrameRate: 16
+  defeatedTalk: {fileID: 0}
+  attackKeyframes: []
+  attackHitDelay: -1
+  attackMotion: []
+  groundFxShots: []
+  groundFxScale: 1
+  targetBlastFrames: []
+  targetBlastSize: 640
+  idleSheetPadding: 0.1
+  attackSheetPadding: 0.3
+  startingStatuses: []
+  activityPatternType: 0
+  openingActions: []
+  activityPatterns:
+  - {fileID: 11400000, guid: 828fc9c7f9b66854cb1e15a7ae8e606f, type: 2}
+  - {fileID: 11400000, guid: fac6bb9d13e64b24eb45a01f5ce0e4ac, type: 2}
+  - {fileID: 11400000, guid: e246980b0afc0c840b21576006c077e5, type: 2}
+  - {fileID: 11400000, guid: 8d7bca858b7799145bc3765ea2f20183, type: 2}
+  phases: []
