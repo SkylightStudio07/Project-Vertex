@@ -1,4 +1,5 @@
 // 활력: 다음 공격 행동의 모든 타격에 더하고, 행동 전체가 끝나면 소모한다.
+// 적은 공격 행동이 끝날 때, 플레이어는 공격 카드의 효과가 모두 끝날 때 소모된다.
 [System.Serializable]
 public sealed class NextAttackDamageStatusBehavior : StatusBehavior
 {
@@ -11,5 +12,10 @@ public sealed class NextAttackDamageStatusBehavior : StatusBehavior
     public override void OnEnemyActionEnd(StatusInstance status, CardContext context, EnemyAction action)
     {
         if (action != null && action.intentType == IntentType.Attack) status.RemoveAll();
+    }
+
+    public override void OnCardResolved(StatusInstance status, CardContext context)
+    {
+        if (context?.Card != null && context.Card.Type == CardData.CardType.Attack) status.RemoveAll();
     }
 }

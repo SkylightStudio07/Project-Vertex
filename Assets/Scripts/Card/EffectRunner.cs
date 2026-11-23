@@ -104,8 +104,11 @@ public static class EffectRunner
         CardContext context, EffectPreview preview)
     {
         if (info.Source != null)
+        {
             foreach (var passive in info.Source.Passives)
                 info = passive.PreviewOutgoingDamage(info, context.State);
+            info = AmmoStatusEvents.ApplyDamageMultiplier(info, context);
+        }
         foreach (var passive in target.Passives)
             info = passive.PreviewIncomingDamage(info, context.State);
         int dealt = System.Math.Max(0, info.Amount) * hits;

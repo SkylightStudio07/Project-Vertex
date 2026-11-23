@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
   statusId: ReloadDraw
   displayName: "\uB05D\uC5C6\uB294 \uAD74\uB808"
-  description: "\uBB34\uAE30\uB97C \uC7AC\uC7A5\uC804 \uD560 \uB54C \uB9C8\uB2E4
-    \uCE74\uB4DC\uB97C \uBF51\uC2B5\uB2C8\uB2E4."
+  description: "\uBB34\uAE30\uB97C \uC7AC\uC7A5\uC804 \uD560 \uB54C\uB9C8\uB2E4 \uCE74\uB4DC\uB97C
+    \uBF51\uC2B5\uB2C8\uB2E4."
   icon: {fileID: 0}
   disposition: 1
   stackPolicy: 0
@@ -30,7 +30,14 @@ MonoBehaviour:
     - rid: 352448965191925854
       type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
       data:
-        count: 1
+        count: 0
+        scaling:
+          source: 7
+          target: 0
+          status: {fileID: 0}
+          multiplier: 1
+          flatBonus: 0
+          percent: 0
     - rid: 7338472044098486363
       type: {class: OnReloadEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
       data:

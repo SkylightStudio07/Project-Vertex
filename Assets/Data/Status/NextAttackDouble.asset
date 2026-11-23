@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: NextAttackDouble
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: status.next_attack_double
+  displayName: "\uC815\uC2E0 \uC9D1\uC911"
+  description: "\uB2E4\uC74C\uC73C\uB85C \uC0AC\uC6A9\uD558\uB294 \uACF5\uACA9 \uCE74\uB4DC\uC758
+    \uD53C\uD574\uAC00 2\uBC30\uAC00 \uB429\uB2C8\uB2E4."
+  icon: {fileID: -8307069055350043731, guid: e8c9834bdb39550438872b224deaa05a, type: 3}
+  disposition: 1
+  stackPolicy: 1
+  durationPolicy: 2
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 352448974954430571
+  references:
+    version: 2
+    RefIds:
+    - rid: 352448974954430571
+      type: {class: NextAttackCardMultiplierStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        multiplier: 2
