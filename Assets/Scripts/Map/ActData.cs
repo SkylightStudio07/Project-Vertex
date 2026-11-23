@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // 막(챕터) 하나의 표시 정보. GameManager의 acts 목록에 등록하면 해당 막 번호일 때 쓰인다.
@@ -21,6 +22,10 @@ public class ActData : ScriptableObject
     [Header("맵 화면")]
     [Tooltip("작전 지도 스크롤 영역에 깔리는 이 막 전용 지형 선화 (3320×600, 층 간격 200 · 16층 기준). 비우면 맵의 기존 바탕을 쓴다")]
     public Texture2D mapTerrain;
+
+    [Header("전투 배경")]
+    [Tooltip("이 막의 일반 전투 배경 풀. 층 범위(BattleStageData.minFloor~maxFloor)에 맞는 것 중에서 고른다. 엘리트 · 보스 전용 배경은 여기가 아니라 조우(EnemyEncounter.stage)에 지정한다")]
+    public List<BattleStageData> battleStages = new();
 
     [Header("막 클리어")]
     [Tooltip("이 막 보스를 격파하면 런 클리어. 끄면 다음 막으로 넘어간다 (다음 막 ActData가 없어도 막 번호만 올려 진행)")]

@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<ActData> acts = new();
     public ActData CurrentAct => GetAct(chapter);
     public ActData GetAct(int number) => acts.Find(a => a != null && a.actNumber == number);
+    // 지금(또는 마지막으로) 시작한 전투의 조우. 조우 없이 기본 적으로 폴백했으면 null. 전용 배경(BattleStageView) 등이 읽는다
+    public EnemyEncounter CurrentEncounter { get; private set; }
 
 
     void Start()
@@ -168,6 +170,7 @@ public class GameManager : MonoBehaviour
             ? pulled.enemies
             : currentEnemies;
         string encounterName = pulled != null ? pulled.name : "기본 폴백(currentEnemies)";
+        CurrentEncounter = pulled;
 
         // 보스전: 등장 배너 → 스토리 대사가 끝난 뒤 첫 턴을 연다
         if (battleType == BattleType.Boss && BossBattleDirector.Instance != null)
@@ -185,6 +188,7 @@ public class GameManager : MonoBehaviour
     private void StartTrainingBattle()
     {
         EnemyEncounter encounter = TrainingSession.Encounter;
+        CurrentEncounter = encounter;
         DeckManager.Instance.SetPlayerDeck(TrainingSession.Deck);
         if (CooperationManager.Instance != null)
             foreach (string charID in TrainingSession.Companions)
@@ -242,6 +246,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (onVictory != null) RegisterOneShotVictory(onVictory);
+        CurrentEncounter = encounter;
         StartBattleInternal(encounter.enemies, battleType, encounter.name);
     }
 

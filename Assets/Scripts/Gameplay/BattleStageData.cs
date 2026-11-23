@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 전투 배경 한 장과 그 배경에 맞춘 조명 · 분위기 값. 막마다 여러 장(슬더스처럼 3~4장)을 두고 전투마다 고른다.
+// 등록하는 곳: 일반 배경은 ActData.battleStages, 엘리트 · 보스 전용 배경은 EnemyEncounter.stage (씬에는 등록하지 않는다).
 // 좌표는 전부 화면 비율(0~1, 좌하단 원점)이라 해상도와 무관하다.
 // 붙이는 곳: BattleStageView (Canvas/Background), 연출: BattleAmbienceFx, 유닛 조명: BattleUnitLook
 [CreateAssetMenu(fileName = "BattleStage", menuName = "Game Asset/Battle Stage")]
@@ -17,9 +18,7 @@ public class BattleStageData : ScriptableObject
     [Min(0)] public int minFloor;
     [Min(0)] public int maxFloor;
 
-    [Header("전용 배경 · 아군 위치")]
-    [Tooltip("이 적이 나오는 전투에서만 쓰는 배경 (엘리트 · 보스). 비우면 일반 배경 풀에서 무작위로 뽑힌다")]
-    public List<EnemyData> featuredEnemies = new();
+    [Header("아군 위치")]
     [Tooltip("아군 진형 중심을 옮긴다 (1920×1080 기준 px, x 오른쪽 · y 위). 배경마다 바닥 높이 · 서는 자리가 달라서")]
     public Vector2 partyOffset;
 

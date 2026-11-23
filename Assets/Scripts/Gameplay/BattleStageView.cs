@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 // 전투마다 배경(BattleStageData)을 하나 골라 깐다: 배경 그림 · 유닛 조명(림 방향 · 색, 색 보정) · 분위기 층.
 // Canvas/Background에 붙인다. 같은 노드에 다시 들어가면 같은 배경 (층 · 노드로 결정).
-// 막 개념이 들어오면 stages를 actNumber로 거르면 된다.
+// 배경 목록은 씬이 아니라 데이터가 들고 있다: 조우 전용은 EnemyEncounter.stage, 일반 풀은 ActData.battleStages.
 [RequireComponent(typeof(Image))]
 public class BattleStageView : MonoBehaviour
 {
-    [SerializeField] private List<BattleStageData> stages = new();
     [Tooltip("배경 바로 위 · 유닛 아래에 깔리는 분위기 층")]
     [SerializeField] private BattleAmbienceFx ambience;
     [Tooltip("배경 밝기에 맞춰 색을 바꿀 HUD 장식판 (밝은 배경용 흰 그라데이션 등)")]
@@ -53,20 +52,23 @@ public class BattleStageView : MonoBehaviour
 
     private BattleStageData Pick()
     {
+        var gm = GameManager.Instance;
+        if (gm == null) return null;
+
+        // 전용 배경: 이번 전투의 조우에 지정돼 있으면 그 배경 (엘리트 · 보스)
+        var encounter = gm.CurrentEncounter;
+        if (encounter != null && encounter.stage != null) return encounter.stage;
+
+        // 일반 배경 풀: 지금 막의 것. 그 막 데이터가 아직 없으면 가장 가까운 이전 막
+        List<BattleStageData> stages = null;
+        for (int n = gm.Chapter; n >= 1 && (stages == null || stages.Count == 0); n--)
+            stages = gm.GetAct(n)?.battleStages;
         if (stages == null || stages.Count == 0) return null;
 
-        // 전용 배경: 이번 전투의 적이 featuredEnemies에 들어 있으면 그 배경
-        var enemies = BattleManager.Instance != null ? BattleManager.Instance.State?.Enemies : null;
-        if (enemies != null)
-            foreach (var stage in stages)
-                if (stage != null && stage.featuredEnemies.Count > 0 && enemies.Exists(e => e?.Data != null && stage.featuredEnemies.Contains(e.Data)))
-                    return stage;
-
-        // 일반 배경 풀 (전용 배경은 뺀다)
         int shownFloor = (RunData.Instance != null ? RunData.Instance.currentFloor : 0) + 1; // 화면에 보이는 층
-        var pool = stages.FindAll(s => s != null && s.featuredEnemies.Count == 0
+        var pool = stages.FindAll(s => s != null
             && (s.minFloor == 0 && s.maxFloor == 0 || shownFloor >= s.minFloor && shownFloor <= (s.maxFloor > 0 ? s.maxFloor : int.MaxValue)));
-        if (pool.Count == 0) pool = stages.FindAll(s => s != null && s.featuredEnemies.Count == 0); // 층에 맞는 배경이 없으면 아무거나
+        if (pool.Count == 0) pool = stages.FindAll(s => s != null); // 층에 맞는 배경이 없으면 아무거나
         if (pool.Count == 0) return null;
         int floor = RunData.Instance != null ? RunData.Instance.currentFloor : 0;
         int node = RunData.Instance != null ? RunData.Instance.currentNodeIndex : 0;

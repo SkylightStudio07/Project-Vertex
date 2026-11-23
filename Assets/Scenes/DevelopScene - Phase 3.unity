@@ -6964,6 +6964,9 @@ MonoBehaviour:
   chevronNormal: {fileID: 21300000, guid: 3d61e364fa874744b8f4c12727abf4c4, type: 3}
   chevronHover: {fileID: 21300000, guid: 28d74682d0746db4bae69c58f567e6bc, type: 3}
   alwaysWhiteIcon: 1
+  hoverScale: 1.022
+  pressScale: 0.98
+  enterStagger: 0.06
 --- !u!114 &198803573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15403,6 +15406,9 @@ MonoBehaviour:
   chevronNormal: {fileID: 21300000, guid: 3d61e364fa874744b8f4c12727abf4c4, type: 3}
   chevronHover: {fileID: 21300000, guid: 28d74682d0746db4bae69c58f567e6bc, type: 3}
   alwaysWhiteIcon: 1
+  hoverScale: 1.022
+  pressScale: 0.98
+  enterStagger: 0.06
 --- !u!114 &471219576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26656,15 +26662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3944212ddb5d16a4482b3cd1a499e2ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleStageView
-  stages:
-  - {fileID: 11400000, guid: e8c61a0ac0aaec2479ff08759d234b27, type: 2}
-  - {fileID: 11400000, guid: 897c1d6f7d362c848a26d58bf0346868, type: 2}
-  - {fileID: 11400000, guid: bfac4933fbe637d43a5b0b4678d19b7e, type: 2}
-  - {fileID: 11400000, guid: 5b84b0fa42a89a54abc4b8a5daebc21d, type: 2}
-  - {fileID: 11400000, guid: fc3d76bd4285ad447b8499863b18192e, type: 2}
-  - {fileID: 11400000, guid: 71da86d4f2884d44da1eafe7344808d8, type: 2}
-  - {fileID: 11400000, guid: b262241b9a3ab414598180e6a93c6922, type: 2}
-  - {fileID: 11400000, guid: 454fe7a35ec0ff747abd51fc7c73b83c, type: 2}
   ambience: {fileID: 1336420981}
   hudDecor:
   - {fileID: 65647712}
@@ -41831,6 +41828,9 @@ MonoBehaviour:
   chevronNormal: {fileID: 21300000, guid: 3d61e364fa874744b8f4c12727abf4c4, type: 3}
   chevronHover: {fileID: 21300000, guid: 28d74682d0746db4bae69c58f567e6bc, type: 3}
   alwaysWhiteIcon: 1
+  hoverScale: 1.022
+  pressScale: 0.98
+  enterStagger: 0.06
 --- !u!114 &1296879700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48995,6 +48995,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7168348811e00fa4497905bd3efc76a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleImpactFx
+  debuffPopColor: {r: 0.86, g: 0.3, b: 0.46, a: 1}
+  buffPopColor: {r: 0.96, g: 0.72, b: 0.26, a: 1}
+  neutralPopColor: {r: 0.62, g: 0.66, b: 0.72, a: 1}
+  healColor: {r: 0.36, g: 0.86, b: 0.52, a: 1}
+  statusPopSize: 30
+  tracerThickness: 26
+  tracerDuration: 0.09
+  enemyFlashSize: 230
+  shellFallTime: 0.32
+  shellRiseTime: 0.34
+  launchDirection: {x: -0.55, y: 1}
+  fallSlant: 0.28
+  shellLength: 420
+  blastHeight: 560
+  buffGlowColor: {r: 1, g: 0.74, b: 0.32, a: 0.55}
+  buffGhostScale: 1.1
+  curseFlightTime: 0.34
+  curseBurstSize: 360
   font: {fileID: 11400000, guid: 41d41edc777433f46bd79202e7b819e1, type: 2}
   sortingOrder: 95
   numberSize: 46
@@ -53349,6 +53367,9 @@ MonoBehaviour:
   chevronNormal: {fileID: 21300000, guid: 3d61e364fa874744b8f4c12727abf4c4, type: 3}
   chevronHover: {fileID: 21300000, guid: 28d74682d0746db4bae69c58f567e6bc, type: 3}
   alwaysWhiteIcon: 1
+  hoverScale: 1.022
+  pressScale: 0.98
+  enterStagger: 0.06
 --- !u!114 &1676452318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68704,6 +68725,7 @@ MonoBehaviour:
   foregroundPetals: 1
   characterRim: 1
   depthMotion: 1
+  environment: 1
   additiveMaterial: {fileID: 2100000, guid: 4a1e7934d17453847a5b86b747beff22, type: 2}
   silhouetteMaterial: {fileID: 2100000, guid: 4089eb6f11724ce4688ae65f09cb4efd, type: 2}
   softCircle: {fileID: 21300000, guid: e1f19bc3f0054ae48b3e0979a84a6116, type: 3}

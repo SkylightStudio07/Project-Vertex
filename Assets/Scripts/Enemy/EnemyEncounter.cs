@@ -35,6 +35,10 @@ public class EnemyEncounter : ScriptableObject
         }
     }
 
+    [Header("전투 배경")]
+    [Tooltip("이 조우 전용 배경 · 조명 (엘리트 · 보스). 비우면 막의 일반 배경(ActData.battleStages)에서 층에 맞게 고른다")]
+    public BattleStageData stage;
+
     [Header("보스 연출 (encounterType이 Boss일 때)")]
     [Tooltip("등장 배너 윗줄 (예: 1막 보스). 비우면 'N막 보스'")]
     public string bossLabel;
