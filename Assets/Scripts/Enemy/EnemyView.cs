@@ -221,6 +221,10 @@ public class EnemyView : MonoBehaviour
             }
 
             enemyImage.rectTransform.localScale = new Vector3(_enemyImageBaseScale.x * scale, _enemyImageBaseScale.y * scale, 1f);
+            var twitch = enemyImage.GetComponent<EnemyIdleTwitch>();
+            bool wantsTwitch = instance.Data != null && instance.Data.idleTwitch;
+            if (wantsTwitch && twitch == null) twitch = enemyImage.gameObject.AddComponent<EnemyIdleTwitch>();
+            if (twitch != null) twitch.enabled = wantsTwitch;
             BattleUnitLook.Apply(enemyImage, BattleUnitLook.Side.Enemy); // 외곽선 · 림라이트 · 색 보정 · 발밑 그림자 (아군과 같은 처리)
             AlignHpBarToBody(instance);
             RefreshTraitTag(instance);

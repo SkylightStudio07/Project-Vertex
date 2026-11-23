@@ -1,0 +1,68 @@
+Enemy Action FX — actual built-in imagegen prompts
+Final assembly note: the standalone buff revision below replaces the initial third-column buff. The model-generated battle edit was a composition study; the delivered Battle_EnemyAction.png composites the final sheet artwork onto the untouched original screenshot so the original scene and HUD are preserved. Resizing, background normalization and raster compositing did not draw new illustration surfaces.
+All illustration surfaces were drawn with image_gen.imagegen. No SVG.
+Reference roles and generated source filenames are recorded below.
+
+=== STREAKS ===
+Use case: stylized-concept.
+Create Streaks.png, a finished painted anime combat VFX direction sheet, EXACT 1920 x 1080 landscape. Reference images are style references only: match the painterly flame surfaces of Style_Flash_Variants.png and energy of Style_Impact_Additive.png. Draw only effects.
+Background perfectly uniform pure black #000000, opaque. Five separate horizontal rows, each exactly 216 pixels high. No dividers, labels or text. All five effects travel RIGHT: soft fading tail LEFT, brightest compact head RIGHT. All are horizontal, no diagonal flight. All glow completely fades to pure black within its own row; ample pure black around every effect, no cropping.
+ROW 1 centered y108: extremely fine straight bullet tracer A, approximately x260 to1660 (1400px long), white-yellow core, orange soft bloom, actual luminous core thickness 6-14px, tail fades toward left. No bulky fireball.
+ROW 2 centered y324: bullet tracer B approximately x460 to1460 (1000px), shorter thicker pair of closely spaced broken streaks, connected visually as ONE two-line tracer variant, pale yellow and orange; very restrained bloom.
+ROW 3 centered y540: artillery fire tail A approximately x510 to1410, 900px long, 40-70px thick, tiny brilliant ember head at right, painted orange flame trailing left mixed with dark smoky wisps; irregular taper.
+ROW 4 centered y756: artillery fire tail B same size x510 to1410, different curling torn flame tail silhouette; tiny brilliant right-facing ember.
+ROW 5 centered y972: curse projectile x660 to1260, 600px overall, compact 90px-diameter violet/deep-indigo luminous orb head RIGHT, smoky undulating purple tail LEFT, a few sickly yellow-green embers. Dark ominous purple, not cyan.
+Style: hand-painted animation effects, visible nuanced brushwork, soft diffusion, irregular organic silhouettes, same family as supplied muzzle-flash and impact art. High detail. No outlines, ink, comic starbursts, assembled geometric shapes, magic circles, symbols, text, guns, mechanical shell body, characters, ground, background texture or borders. This is a set of independent still illustrations, NOT animation frames.
+
+Generated result:
+Generated images are saved to C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57 as C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57\exec-1485f045-116f-4e8d-af70-afc215585d94.png by default.
+
+=== BLASTS ===
+Use case: stylized-concept.
+Create Blasts.png, finished painted anime combat VFX direction sheet, exact 1920x1080 landscape. Use Style_Flash_Variants.png as flame brushwork and diffusion reference, Style_Impact_Additive.png as organic additive energy reference, especially its purple energy. References only, don't copy their layout.
+Opaque perfectly pure black #000000 background. FOUR separate vertical columns of width480, no lines or labels. Art and its glow must fit completely within each column with pure black gaps. Draw ONLY these four effects, high-detail painted animation still illustrations, organic brush-shaped flame tongues and soft irregular bloom.
+Column1 x0-480: fireball ground eruption A, x50..430, y340..940, width380 height600. Ground origin bottom center (240,940). Narrow white-yellow incandescent base surges upward to a bulbous mushroom-like crown of painterly flame, yellow-white inner core, orange midtones and deep burnt-orange irregular edges. No smoke in this sheet, no ground, debris, crater or shock ring. Only the rising fire mass.
+Column2 x480-960: distinct fireball ground eruption B x530..910, y340..940, base at (720,940), approx380x600. Wider lateral burst silhouette than A, asymmetric lobes and split flame crown, still rising upwards, different shape not another animation frame.
+Column3 x960-1440: enemy buff aura approx400x800 within x1000..1400 y140..940. FOOT ORIGIN (1200,940). Two tall RED-ORANGE and golden flame columns climb the left and right sides and curl upward near the top. Keep central vertical 160px black corridor (x1120..1280) EMPTY from feet to near y320 for an unseen standing character. Top may curl inward above its head. Asymmetric hand-painted side flames; no character, no silhouette. Thin lower roots, more energetic tips, restrained organic glow. Not a ring, arch structure or magic symbol.
+Column4 x1440..1920: curse impact centered (1680,540), approx380px diameter x1490..1870 y350..730. Murky violet and deep indigo fog erupts irregularly outward into thorny wisps and branching tendrils, sparse diseased yellow-green smoky accents, ominous and cloudy. Avoid symmetric starburst or geometric spikes. Center is dark-purple luminous mist, not a brilliant white lens flare.
+No text, labels, borders, line art, ink outlines, comic explosion stars, geometry assembly, circles, runes, mechanical shell bodies, guns, characters, enemies or environment. No elements touch each other or image edges.
+
+Generated result:
+Generated images are saved to C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57 as C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57\exec-fba7546e-d144-4b29-a1c7-fa4489742e4b.png by default.
+
+=== SMOKES ===
+Use case: stylized-concept.
+Create Smokes.png, a painted anime combat VFX direction mockup sheet, exact 1920x1080 landscape.
+Input Style_Smoke_Variants.png is ONLY the brushwork / softly dissolving texture reference. CHANGE its white smoke to DARK BLACK-BROWN EXPLOSIVE GUNPOWDER SMOKE, with no fire colors at all.
+Entire opaque background must be exactly uniform middle gray #808080. Three different independent upright dark smoke plumes, spaced horizontally at centers (320,590), (960,590), (1600,590). Each plume fits entirely within its own 560px-wide by700px-high region, with minimum80px completely untouched gray gutters between. Clear margins on all edges. Soft tips and wisps fade completely back into exact #808080 before the margins. No gray gradient, horizon or drop shadow.
+Subject: dense dark charcoal / soot-black with subtle earthy deep-brown explosive smoke billows rising from a broad low base up into curling irregular rolling lobes, delicately brushed soft vapor edges. Lower part broad and heavy, upward turbulence. Left plume clustered broad base and rolling rising crown; middle plume rising twisting column with ragged upper tendrils; right plume asymmetric leaning feathered plume. Different still silhouettes, not matching animation frames.
+Surface should match hand-painted animation FX: nuanced layered painterly forms, flowing subtle brushwork, no realistic photographic cloud noise, no hard vector shapes. Use muted black-brown tonal modeling, darkest dense interiors, thin translucent gray-brown edges. No bright white smoke. No orange, gold, flame, sparks or purple mixed in. No ground, crater, dust shock ring, debris, shells, guns, characters, text, labels, outlines, frames, symbols or diagrams. Only three distinct smoke forms and uniform #808080 background.
+
+Generated result:
+Generated images are saved to C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57 as C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57\exec-46b77d73-c706-47bb-9a79-1ff38b2f5131.png by default.
+
+=== BATTLE ===
+Use case: compositing.
+Create Battle_EnemyAction.png, exact1920x1080. INPUT1 Current_InGame_Enemy.png is the EDIT TARGET: preserve its exact full frame, camera, warehouse background, both character drawings and poses, all Korean HUD text and icons, cards, bars and UI. No redesign, repaint, retouch, crop, overall grading or illumination changes to existing scene.
+Other inputs: Blasts sheet (input2) supplies EXACT fireball A from first column and hollow enemy buff from third column, Smokes sheet(input3) supplies first dark black-brown smoke, Streaks sheet(input4) supplies third-row artillery fire tail. These are painted FX to composite at game scale, not style suggestions to invent new effects.
+Overlay ONLY:
+1) At left player's feet approximately(382,705), a scaled-down version of fireball A. Actual in-game footprint about190px wide x300px tall, ground anchor(382,705), crown near y405. Warm white-yellow/orange flame in additive brightening blend. The character must stay original and readable, with the fire behind her torso where overlapped, only some little flame around the boots in foreground. No new ground crater, debris, ring or damage marks.
+2) A dark brown-black powder smoke plume rising above/behind that fireball, about220px wide x270px tall centered near(392,425), normal semitransparent smoke blend. It must look smoky with soft painterly edges, no gray rectangular background.
+3) A thin diagonal artillery flame tail falling from upper-right to lower-left toward this impact. Length about350px thickness25px, ember head near(418,475), tail toward(640,205). Rotate the input streak so its brightest ember is its LOWER LEFT endpoint. No mechanical shell or gun. Fits under top HUD, avoids objective panel.
+4) Hollow reddish orange/gold rising buff BEHIND the right enemy. Approx210px wide x420px tall, foot origin(1465,705), tips around y285. Its two flame sides frame the enemy body, central body remains unobscured. Orange-red glow additive. Preserve enemy original pixels/body, gun and stance. Keep all existing intent icon, health bar and HUD visible and unchanged.
+Only these effects; no curse, bullet tracers, captions, arrows or labels. Match the supplied painterly brushwork surfaces precisely. This is a direction mockup demonstrating real scale and warm color against cool night-blue background. Outside these small overlay regions, preserve the original screenshot pixel-for-pixel.
+
+Generated result:
+Generated images are saved to C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57 as C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57\exec-cad57539-6e6f-4328-84e7-6eaf804ba421.png by default.
+
+
+
+=== BUFF REVISION — FINAL ===
+Use case: stylized-concept.
+Draw a single ENEMY BUFF AURA illustration only on perfectly pure black #000000, portrait canvas 480x1080. The attached Blasts.png is a STYLE REFERENCE only: match the third column's red-orange and golden painted flame brushwork, but make the empty body space considerably wider. No characters.
+The aura consists of TWO SEPARATE NARROW UPRIGHT FLAME PLUMES, one at the left side x40..145 and the other at the right side x335..440. BOTH start at foot level y940 and rise to y140. Warm red orange and golden tongues curl UPWARD and OUTWARD. Each side is organic, asymmetrical and visibly hand painted. A few wisps curl inward ONLY in the top region y140..300, above an unseen head.
+CRITICAL: the CENTRAL VERTICAL CHANNEL x145..335 must remain perfectly BLACK and EMPTY for the entire body region y300..940, absolutely no fire, glow, ember or flame tongue inside this corridor. Keep that center empty as pure black negative space. Each plume stays narrow enough that the two sides together occupy a 400px-wide overall footprint, yet leave roughly 190px central clear space. Do not form an oval ring or an arch. Do not connect the two feet. The top inward wisps do NOT meet each other.
+All outer glow fades fully to pure black before edges and at bottom. No cropping. Painted animation illustration, fine soft brushwork, organic torn flame silhouettes, not geometry. No ground, crater, sparks across center, symbols, magic circles, text, outlines, mechanical objects, character or enemy bodies.
+
+Generated result:
+Generated images are saved to C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57 as C:\Users\SKYLIGHT\.codex\generated_images\01a1fcdd-1a69-7ea3-b9de-1bb0352d5b57\exec-264b0ae3-239b-4d9e-ad0d-1f62e6460b8d.png by default.

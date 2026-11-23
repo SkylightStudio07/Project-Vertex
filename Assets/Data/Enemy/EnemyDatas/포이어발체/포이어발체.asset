@@ -185,7 +185,12 @@ MonoBehaviour:
   attackFrameRate: 36
   defeatedTalk: {fileID: 0}
   attackKeyframes: []
-  attackHitDelay: 0.7
+  attackHitDelay: 1.25
+  attackFx: 2
+  muzzleAnchor: {x: 0.25, y: 0.89}
+  muzzleFireFrames:
+  - 16
+  sheetDrawsMuzzleFlash: 1
   attackMotion:
   - offset: {x: 0, y: 0}
     rotation: 0

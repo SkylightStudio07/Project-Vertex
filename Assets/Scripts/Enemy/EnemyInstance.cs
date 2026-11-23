@@ -54,7 +54,16 @@ public class EnemyInstance : ICombatant
     public float SpriteScale => (Data != null && Data.spriteScale > 0.01f) ? Data.spriteScale : 1.0f;
     public float IntentOffsetY => Data != null ? Data.intentOffsetY : 0f;
     // 이번 행동에 공격 모션(시트 · 돌진)을 재생하는가
-    public bool PlaysAttackMotionNow => Data == null || !Data.attackMotionOnAttackOnly || GetCurrentAction()?.intentType == IntentType.Attack;
+    // 강화(버프) 행동은 어떤 적이든 돌진하지 않는다 — 금빛 실루엣 파동(BattleImpactFx)으로만 보여 준다
+    public bool PlaysAttackMotionNow
+    {
+        get
+        {
+            var intent = GetCurrentAction()?.intentType;
+            if (intent == IntentType.Buff) return false;
+            return Data == null || !Data.attackMotionOnAttackOnly || intent == IntentType.Attack;
+        }
+    }
 
     public event Action<int> OnDamaged;       // 실제 HP 감소량
     public event Action<int> OnBlocked;       // 방어도가 흡수한 양

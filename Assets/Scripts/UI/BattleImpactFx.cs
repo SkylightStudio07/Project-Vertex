@@ -15,7 +15,7 @@ using UnityEngine.UI;
 //     적의 치명 공격(30+)은 치기 전 예비 동작(적 떨림 + 화면 가장자리 어둡게) → 맞는 순간 더 큰 줌·히트스톱·흔들림
 // 마지막 적을 쓰러뜨리는 타격은 히트스톱 대신 작전 종료 슬로모션(BattleOperationFx)에 맡긴다.
 // 세기는 전부 인스펙터에서 조절. UI 요소는 Awake에서 코드로 만든다.
-public class BattleImpactFx : MonoBehaviour
+public partial class BattleImpactFx : MonoBehaviour
 {
     [SerializeField] private TMP_FontAsset font;
     [SerializeField] private int sortingOrder = 95; // 손패(5)·카드 컷인(90) 위, 배너(210) 아래
@@ -119,6 +119,7 @@ public class BattleImpactFx : MonoBehaviour
         _battle.OnEnemiesChanged += Rewire;
         _battle.OnEnemyLethalWindup += HandleLethalWindup;
         _battle.OnEnemyAttackLanding += SpawnTargetBlast;
+        _battle.OnEnemyActionStarting += HandleEnemyActionStarting;
         Rewire();
     }
 
@@ -130,6 +131,7 @@ public class BattleImpactFx : MonoBehaviour
             _battle.OnEnemiesChanged -= Rewire;
             _battle.OnEnemyLethalWindup -= HandleLethalWindup;
             _battle.OnEnemyAttackLanding -= SpawnTargetBlast;
+            _battle.OnEnemyActionStarting -= HandleEnemyActionStarting;
         }
         Unwatch();
         RestoreTime();
@@ -150,9 +152,9 @@ public class BattleImpactFx : MonoBehaviour
 
         if (_player != state.Player)
         {
-            if (_player != null) { _player.OnDamaged -= HandlePlayerDamaged; _player.OnBlocked -= HandlePlayerBlocked; }
+            if (_player != null) { _player.OnDamaged -= HandlePlayerDamaged; _player.OnBlocked -= HandlePlayerBlocked; UnwatchPlayerExtras(_player); }
             _player = state.Player;
-            if (_player != null) { _player.OnDamaged += HandlePlayerDamaged; _player.OnBlocked += HandlePlayerBlocked; }
+            if (_player != null) { _player.OnDamaged += HandlePlayerDamaged; _player.OnBlocked += HandlePlayerBlocked; WatchPlayerExtras(_player); }
         }
 
         _watched.RemoveWhere(e => !state.Enemies.Contains(e));
@@ -162,12 +164,13 @@ public class BattleImpactFx : MonoBehaviour
             var e = enemy;
             e.OnDamaged += amount => HandleEnemyDamaged(e, amount);
             e.OnBlocked += amount => HandleEnemyBlocked(e, amount);
+            WatchEnemyExtras(e);
         }
     }
 
     private void Unwatch()
     {
-        if (_player != null) { _player.OnDamaged -= HandlePlayerDamaged; _player.OnBlocked -= HandlePlayerBlocked; }
+        if (_player != null) { _player.OnDamaged -= HandlePlayerDamaged; _player.OnBlocked -= HandlePlayerBlocked; UnwatchPlayerExtras(_player); }
         _player = null;
         _watched.Clear(); // 적 인스턴스는 전투마다 새로 만들어지므로 람다 구독은 같이 버려진다
     }
@@ -402,6 +405,7 @@ public class BattleImpactFx : MonoBehaviour
     // 플레이어 발밑에 구덩이 · 먼지 · 파편을 남기고 그 위로 폭발 프레임을 터뜨린다 (EnemyData.targetBlastFrames). 히트스톱 중에도 움직인다
     private void SpawnTargetBlast(EnemyInstance enemy)
     {
+        if (DrawsArtillery(enemy)) return; // 곡사 포격 그림이 있으면 포탄 낙하 → 폭발을 따로 그린다 (HandleEnemyActionStarting)
         var frames = enemy?.Data != null ? enemy.Data.targetBlastFrames : null;
         if (frames == null || frames.Length == 0 || !isActiveAndEnabled) return;
         PlayerPoint(); // _playerAnchor를 찾아 둔다

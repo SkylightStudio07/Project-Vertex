@@ -7,6 +7,8 @@ public sealed class StatusContainer
     private readonly List<IPassiveLogic> _entries;
 
     public event Action OnChanged;
+    // 상태가 새로 붙거나 겹쳐 쌓였을 때 (상태, 이번에 더해진 수치). 전투 연출(BattleImpactFx)이 "취약 +2"를 띄운다
+    public event Action<StatusInstance, int> OnStatusAdded;
 
     public StatusContainer(List<IPassiveLogic> entries) => _entries = entries;
     public IReadOnlyList<IPassiveLogic> Entries => _entries;
@@ -22,6 +24,7 @@ public sealed class StatusContainer
                 if (entry is StatusInstance existing && existing.TryMerge(incoming))
                 {
                     OnChanged?.Invoke();
+                    OnStatusAdded?.Invoke(existing, incoming.Stacks);
                     return;
                 }
             }
@@ -29,6 +32,7 @@ public sealed class StatusContainer
 
         _entries.Add(passive);
         OnChanged?.Invoke();
+        if (passive is StatusInstance added) OnStatusAdded?.Invoke(added, added.Stacks);
     }
 
     public StatusInstance Find(StatusDefinition definition)

@@ -27,6 +27,7 @@ public class PlayerCombatant : ICombatant
     public event Action<int> OnBlocked; // 블록으로 흡수한 데미지량. ResetBlock()으로 0이 되는 것과는 구분된 신호.
     public event Action<int> OnBlockGained; // 방어도 카드 등으로 실제로 늘어난 방어도량(패시브 보정 후). 0 이하면 발화 안 함.
     public event Action      OnDied;
+    public event Action<int> OnHealed; // 실제로 오른 체력 (최대 체력에 막힌 만큼은 빠진다)
 
     public void TakeDamage(DamageInfo info)
     {
@@ -70,8 +71,11 @@ public class PlayerCombatant : ICombatant
 
     public void Heal(int amount)
     {
-        if (amount > 0 && GameManager.Instance != null)
-            GameManager.Instance.HealPlayer(amount);
+        if (amount <= 0 || GameManager.Instance == null) return;
+        int before = GameManager.Instance.PlayerHP;
+        GameManager.Instance.HealPlayer(amount);
+        int healed = GameManager.Instance.PlayerHP - before;
+        if (healed > 0) OnHealed?.Invoke(healed);
     }
 
     // 패시브 보정이 반영된 "이번에 얻게 될" 방어도 획득량. AddBlock과 같은 계산의 읽기 전용 버전 —

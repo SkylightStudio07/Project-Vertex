@@ -53,6 +53,8 @@ public class EnemyData : ScriptableObject
 
     [Tooltip("대기 애니메이션 초당 프레임 수 (기본 12 FPS)")]
     public float idleFrameRate = 12f;
+    [Tooltip("켜면 대기 중 몇 초마다 그림이 멈칫했다가 툭 꺾이며 경련한다 (잠식된 시체 같은 움직임)")]
+    public bool idleTwitch;
 
     [Header("공격(Attack) 애니메이션")]
     [Tooltip("공격 스프라이트 시트 프레임 (비어있으면 돌진 모션 단독 재생)")]
@@ -73,6 +75,16 @@ public class EnemyData : ScriptableObject
     public List<AttackKeyframe> attackKeyframes = new();
     [Tooltip("공격을 시작하고 몇 초 뒤에 피해가 들어가는지 (전진 0.2초 뒤부터). 음수면 전투 기본값(BattleManager)")]
     public float attackHitDelay = -1f;
+
+    [Header("공격 연출 — 이펙트 (BattleImpactFx)")]
+    [Tooltip("기본: 탄착만 / 사격: 총구 섬광 + 탄도선 / 곡사 포격: 하늘에서 포탄이 떨어져 플레이어 발밑에서 폭발 (targetBlastFrames 대신)")]
+    public EnemyAttackFx attackFx = EnemyAttackFx.Default;
+    [Tooltip("사격 총구 위치 — 적 그림 사각형 안의 비율 (0,0 왼쪽 아래 · 1,1 오른쪽 위). 공격 모션 중 그림이 바뀌어도 이 자리에서 쏜다")]
+    public Vector2 muzzleAnchor = new(0.12f, 0.6f);
+    [Tooltip("총 · 포가 실제로 나가는 공격 시트 프레임 (0부터, 점사면 여러 개). 비우면 피해가 들어가는 순간에 한 발. 곡사 포격은 첫 프레임에 포탄이 위로 솟아 화면 밖으로 나갔다가 착탄 때 떨어진다")]
+    public int[] muzzleFireFrames = new int[0];
+    [Tooltip("공격 시트에 총구 섬광이 이미 그려져 있으면 켠다 (탄도선만 긋는다)")]
+    public bool sheetDrawsMuzzleFlash;
 
     public bool HasAttackKeyframes => attackKeyframes != null && attackKeyframes.Count > 0;
     public float AttackKeyframeDuration
@@ -224,4 +236,11 @@ public class EnemyPhase
     public List<EnemyAction> openingActions = new();
     public EnemyActivityPatternType activityPatternType;
     public List<EnemyAction> activityPatterns = new();
+}
+
+public enum EnemyAttackFx
+{
+    Default,
+    Gunshot,
+    Artillery,
 }

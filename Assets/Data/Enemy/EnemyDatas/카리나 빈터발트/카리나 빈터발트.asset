@@ -87,6 +87,11 @@ MonoBehaviour:
   defeatedTalk: {fileID: 11400000, guid: 9bca62b5b681be641ac2f75341adac98, type: 2}
   attackKeyframes: []
   attackHitDelay: 0.3
+  attackFx: 1
+  muzzleAnchor: {x: 0.23, y: 0.72}
+  muzzleFireFrames:
+  - 8
+  sheetDrawsMuzzleFlash: 1
   attackMotion:
   - offset: {x: -70, y: 0}
     rotation: 0
