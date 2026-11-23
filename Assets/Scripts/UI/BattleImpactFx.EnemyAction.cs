@@ -9,6 +9,7 @@ using UnityEngine.UI;
 //   - 회복: 플레이어 위에 초록 "+N"
 //   - 적 사격 (EnemyData.attackFx = Gunshot): 총구 섬광 + 플레이어 쪽으로 그어지는 탄도선
 //   - 곡사 포격 (Artillery): 하늘에서 포탄 꼬리가 떨어지고, 플레이어 발밑에서 화구 · 폭연이 솟는다 (예전 targetBlastFrames 대신)
+//   - 근접 (Melee): 휘두르는 프레임에 무기가 지나간 자리로 궤적이 그어진다 (색 · 크기 · 각도는 적 데이터)
 //   - 적 버프 행동: 적 몸 뒤로 붉은 기운이 피어오른다
 //   - 적 디버프 행동: 저주 구체가 플레이어에게 날아가 보라 안개로 터진다
 // 그림: Resources/BattleFx/EnemyAction/ (원본 ArtDirection/BattleFxMockup/EnemyActionFx). 그림이 없으면 그 연출만 건너뛴다.
@@ -179,6 +180,8 @@ public partial class BattleImpactFx
         {
             case IntentType.Attack:
                 if (data == null) break;
+                if (!string.IsNullOrEmpty(data.playerHitSheet))
+                    DOVirtual.DelayedCall(Mathf.Max(0f, landingIn), () => { if (this != null) PlayerHitSheet(data); }, false).SetLink(gameObject);
                 if (data.attackFx == EnemyAttackFx.Gunshot)
                 {
                     // 시트의 발사 프레임마다 한 발씩 (점사). 지정이 없으면 피해가 들어가는 순간 한 발
@@ -188,6 +191,16 @@ public partial class BattleImpactFx
                             DOVirtual.DelayedCall(f / data.attackFrameRate, () => { if (this != null && view != null) FireGunshot(view, data); }, false).SetLink(gameObject);
                     else
                         DOVirtual.DelayedCall(Mathf.Max(0f, landingIn - 0.02f), () => { if (this != null && view != null) FireGunshot(view, data); }, false).SetLink(gameObject);
+                }
+                else if (data.attackFx == EnemyAttackFx.Melee)
+                {
+                    // 시트의 휘두르는 프레임마다 한 줄씩. 지정이 없으면 피해가 들어가기 직전에 한 줄
+                    var frames = data.muzzleFireFrames;
+                    if (frames != null && frames.Length > 0 && data.attackFrameRate > 0f)
+                        foreach (int f in frames)
+                            DOVirtual.DelayedCall(f / data.attackFrameRate, () => { if (this != null && view != null) SwingArc(view, data); }, false).SetLink(gameObject);
+                    else
+                        DOVirtual.DelayedCall(Mathf.Max(0f, landingIn - 0.06f), () => { if (this != null && view != null) SwingArc(view, data); }, false).SetLink(gameObject);
                 }
                 else if (data.attackFx == EnemyAttackFx.Artillery && DrawsArtillery(enemy))
                 {
@@ -253,6 +266,88 @@ public partial class BattleImpactFx
                 .Join(rt.DOScaleY(0.4f, tracerDuration))
                 .OnComplete(() => Destroy(tracer.gameObject));
         }
+    }
+
+    // 근접: 무기가 지나간 자리에 궤적이 시작 끝에서 앞머리 쪽으로 빠르게 그어졌다가 사라진다
+    private void SwingArc(EnemyView view, EnemyData data)
+    {
+        if (!string.IsNullOrEmpty(data.meleeSwingSheet) && SwingSheet(view, data)) return;
+        var arcs = ActionSprites("Arc_" + data.meleeArc);
+        if (arcs.Length == 0) return;
+        var arc = MakeImage("EnemyMeleeArc", arcs[Random.Range(0, arcs.Length)], true);
+        var rt = arc.rectTransform;
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = new Vector2(Mathf.Abs(data.meleeArcSize.x), Mathf.Abs(data.meleeArcSize.y));
+        rt.anchoredPosition = PointInRect(view.SpriteRect, data.muzzleAnchor);
+        float sx = Mathf.Sign(data.meleeArcSize.x), sy = Mathf.Sign(data.meleeArcSize.y);
+        rt.localRotation = Quaternion.Euler(0f, 0f, data.meleeArcAngle);
+        rt.localScale = new Vector3(0.82f * sx, 0.82f * sy, 1f);
+        arc.color = data.meleeArcColor;
+        // 위쪽 끝(시작)에서 왼쪽을 돌아 아래쪽 끝(앞머리)까지 드러난다
+        arc.type = Image.Type.Filled;
+        arc.fillMethod = Image.FillMethod.Radial360;
+        arc.fillOrigin = (int)Image.Origin360.Top;
+        arc.fillClockwise = false;
+        arc.fillAmount = 0.12f;
+        DOTween.Sequence().SetLink(arc.gameObject)
+            .Append(arc.DOFillAmount(0.62f, 0.07f).SetEase(Ease.OutQuad))
+            .Join(rt.DOScale(new Vector3(1.04f * sx, 1.04f * sy, 1f), 0.16f).SetEase(Ease.OutCubic))
+            .Insert(0.09f, arc.DOFade(0f, 0.16f).SetEase(Ease.InQuad))
+            .OnComplete(() => Destroy(arc.gameObject));
+    }
+
+    // 연속 프레임 휘두르기: 공격 시트 칸에 겹쳐, 시트와 같은 속도로 한 번 재생한다 (칸 밖으로 나간 무기 자리도 덮는다)
+    private bool SwingSheet(EnemyView view, EnemyData data)
+    {
+        var frames = ActionSprites(data.meleeSwingSheet);
+        if (frames.Length == 0) return false;
+        System.Array.Sort(frames, (a, b) => string.CompareOrdinal(a.name, b.name));
+        var fx = MakeImage("EnemyMeleeSwing", frames[0], true);
+        var rt = fx.rectTransform;
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        fx.color = data.meleeArcColor;
+        var area = data.meleeSwingRect;
+        float fps = data.attackFrameRate > 0f ? data.attackFrameRate : 30f;
+        // 휘두르는 앞부분은 시트와 같은 속도, 남는 먼지 · 잔상은 절반 속도 (한 장을 두 프레임씩)
+        int sync = data.meleeSwingSyncFrames > 0 ? Mathf.Min(data.meleeSwingSyncFrames, frames.Length) : frames.Length;
+        float ticks = sync + (frames.Length - sync) * 2f;
+        DOVirtual.Float(0f, ticks, ticks / fps, t =>
+            {
+                if (view == null) return;
+                // 적이 움찔해도 따라가도록 매 프레임 칸 위치를 다시 잰다
+                Vector2 min = PointInDrawnSprite(view.SpriteRect, area.min), max = PointInDrawnSprite(view.SpriteRect, area.max);
+                rt.anchoredPosition = (min + max) * 0.5f;
+                rt.sizeDelta = new Vector2(Mathf.Abs(max.x - min.x), Mathf.Abs(max.y - min.y));
+                int frame = t < sync ? (int)t : sync + (int)((t - sync) * 0.5f);
+                fx.sprite = frames[Mathf.Min(frames.Length - 1, frame)];
+            })
+            .SetEase(Ease.Linear).SetLink(fx.gameObject)
+            .OnComplete(() => Destroy(fx.gameObject));
+        return true;
+    }
+
+    // 플레이어 피격 시트: 플레이어 가슴 높이에서 한 번 재생. 같은 그림이 반복돼 보이지 않게 위아래로 조금 옮기고 가끔 뒤집는다
+    private void PlayerHitSheet(EnemyData data)
+    {
+        var frames = ActionSprites(data.playerHitSheet);
+        if (frames.Length == 0) return;
+        System.Array.Sort(frames, (a, b) => string.CompareOrdinal(a.name, b.name));
+        var fx = MakeImage("PlayerHitSheet", frames[0], true);
+        var rt = fx.rectTransform;
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = new Vector2(300f, 225f);
+        rt.anchoredPosition = PlayerPoint() + new Vector2(Random.Range(-20f, 20f), Random.Range(-70f, -20f)); // 탄도선이 꽂히는 자리와 같은 범위
+        rt.localScale = new Vector3(1f, Random.value < 0.5f ? 1f : -1f, 1f);
+        fx.color = data.playerHitColor;
+        const int sync = 5; const float fps = 30f;
+        float ticks = sync + (frames.Length - sync) * 2f;
+        DOVirtual.Float(0f, ticks, ticks / fps, t =>
+            {
+                int frame = t < sync ? (int)t : sync + (int)((t - sync) * 0.5f);
+                fx.sprite = frames[Mathf.Min(frames.Length - 1, frame)];
+            })
+            .SetEase(Ease.Linear).SetLink(fx.gameObject)
+            .OnComplete(() => Destroy(fx.gameObject));
     }
 
     // 발사: 포구에서 포신 방향(왼쪽 위)으로 솟아 화면 위 밖으로 사라진다
@@ -467,6 +562,21 @@ public partial class BattleImpactFx
 
     private static float SpriteAspect(Sprite sprite, float fallback)
         => sprite != null && sprite.rect.height > 0f ? sprite.rect.width / sprite.rect.height : fallback;
+
+    // 그림 칸 기준 0~1 좌표 → 이펙트 루트 좌표. Image가 preserveAspect면 상자 전체가 아니라 그 안에 맞춰 그려진 영역이 기준이다
+    private Vector2 PointInDrawnSprite(RectTransform target, Vector2 normalized)
+    {
+        Rect r = target.rect;
+        Vector2 drawn = r.size;
+        var image = target.GetComponent<Image>();
+        if (image != null && image.sprite != null && image.preserveAspect)
+        {
+            Rect sr = image.sprite.rect;
+            drawn = sr.size * Mathf.Min(r.width / sr.width, r.height / sr.height);
+        }
+        Vector3 world = target.TransformPoint(new Vector3(r.center.x + (normalized.x - 0.5f) * drawn.x, r.center.y + (normalized.y - 0.5f) * drawn.y, 0f));
+        return _root.InverseTransformPoint(world);
+    }
 
     private Vector2 PointInRect(RectTransform target, Vector2 normalized)
     {

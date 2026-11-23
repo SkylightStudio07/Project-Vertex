@@ -1,0 +1,57 @@
+Built-in imagegen, generation 1
+transparent_background: false
+References: Reference/Guide_Hund_Bite_12.png; Reference/Style_Swing_Bandit_Approved.png; Reference/Style_Impact_Additive.png
+
+Use case: stylized-concept / painted 2D game VFX flipbook.
+Create the finished Bite_Hund effects-only sprite sheet, 1920x1080, EXACTLY 4 equal columns by 3 equal rows, each invisible cell 480x360, row-major chronological frames 1 through 12. One continuous animation, not twelve different designs. Opaque pure RGB black #000000 background. No visible grid, gutters, borders, captions or numbers.
+
+INPUT REFERENCES:
+Guide_Hund_Bite_12.png is POSITION/POSE ONLY. Its character faces LEFT, lunges LEFT and bites. Never render any dog, body, teeth, muzzle, harness, guide markings or navy backdrop in the output.
+Style_Swing_Bandit_Approved.png is the PRIMARY painted brushwork, restrained white luminance, bloom, irregular tapering texture and long soft dissipation reference. Match this visual family, but replace the club's huge overhead swing with a small forward bite and horizontal lunge.
+Style_Impact_Additive.png is SECONDARY for painterly luminous texture only; do not copy colors, starbursts, fire or radial explosions.
+
+FIXED REGISTRATION:
+Every cell is the same coordinate system with local top-left (0,0); do not center each effect in its cell. The imaginary muzzle tip moves from approximately (260,180) in frame 1 to (180,170) in frames 2-3, to (145,150) in frames 4-5, then rests around (130,145) in frames 6-12. The bite flash is just LEFT of this tip, centered about (118,150), using the leftmost 120px reserved for VFX. Main contact remains around (118,150) through the decay; never drift to cell center. Keep substantial empty black beneath the mouth: this is not a ground impact. All marks, bloom and droplets end at least 16px inside every cell edge and fade completely to black before that boundary. No mark crosses cells.
+
+LOOK:
+Hand-painted animation cels, quick fine dry-brush grain with soft luminous bloom and irregular silhouettes, crisp leading edges and needle-tapered trailing fibers, like the approved Bandit sheet. Nearly achromatic white/light gray on pure black; just a trace of warm white in the brightest contact. Sparse deliberate marks and mostly black negative space. No outlines, ink, actual anatomy, drawn teeth, cartoon impact stars, comic focus lines, geometric constructions, perfect circular arcs, magic glyphs, saturated colors, blood, fire, SVG or text.
+
+EXACT ANIMATION:
+Top row, cells 1-4:
+1. Tiny anticipation. Only two or three short faint horizontal brush speed wisps BEHIND the invisible muzzle, around local x280-365,y150-205. Small and quiet.
+2. Lunge accelerates left. A bundle of thin uneven brushed speed strands skims above and below the invisible head. Sharp fronts near x180, long tapering tails toward x390, y100-220. White/gray, no broad crescent.
+3. Maximum leftward lunge. Same strands now longer and sharper, from near x160 toward x410, y85-220. A faint compressed conical air wake immediately LEFT of the invisible muzzle around x140-180,y150-185; organic and pale, not a geometric triangle.
+4. Bite closing at local (118,150), just in front of muzzle. TWO short substantial opposing curved crescent tooth-MARK flashes, one descending from above, the other rising from below, visibly closing toward each other. These are abstract painted attack strokes, NOT actual teeth. Each curved slash about 90-130px long and 25-35px thick at its broadest, with sharp ragged outer leading edge and painterly thinning interior. Their overall extent about x65-165,y92-208. White with restrained bloom. Remaining speed trails break up toward the RIGHT.
+
+Middle row, cells 5-8:
+5. BRIGHTEST FRAME. Same contact at (118,150); the two opposing crescent bite strokes interlock into a compact ragged X-like contact flash, NOT a cartoon star. Distinct upper and lower jaws of light closing together. Six to ten tiny saliva droplets/chips shoot LEFT into local x25-110, y100-215. A little interrupted trailing texture to the right. No ground splash or overhead swing.
+6. Same bite strokes lose luminosity and break into torn brush fibers, contact around (118,150). Fragments spread farther left and slightly down, but stay safely within cell.
+7. Only several thin remnants of the same bite strokes, dimmer and smaller. A few saliva droplets follow downward curving ballistic paths.
+8. Tooth-mark light almost gone. Faint gray warm-breath vapor begins curling UP just in front of the mouth, around x90-145,y110-175. Subtle, wispy and small. A few descending droplets.
+
+Bottom row, cells 9-12:
+9. Fainter breath wisps and a few droplets at same mouth position. Soft small gray painterly vapor, mostly black.
+10. Same vapor becomes still dimmer and smaller, subtly rising, very few droplets.
+11. Almost gone: two or three extremely dim vapor traces near x95-145,y105-150.
+12. Final nonempty frame: one or two VERY faint gray wisps, still visibly present on close inspection. Do not leave the last four cells blank.
+
+Sequence luminance peaks in 4-5, with 5 brightest, and decreases gradually and monotonically through 6-12. The final seven cells linger at half speed compared with the first five. Maintain consistent evolving silhouettes and absolute mouth registration. Deliver ONLY this finished effects sprite sheet.
+
+Built-in imagegen, refinement 2
+transparent_background: false
+Edit target: generation 1 output
+
+Refine this generated Hund bite sheet into the final production sheet. Preserve its successful hand-painted white/gray brush textures, horizontal leftward lunge, two opposing bite crescents, row-major 4x3 layout and gradual vapor dissipation. Make ONLY these corrections:
+
+1. REGISTRATION: In each invisible 480x360 cell, the main bite contact must be at (118,150), not y180-190. Move the ENTIRE evolving effect in cells 4-12 upward by about 30px, retaining matching relative particle trajectories and fixed origin. Main frame 5 flash at (118,150); upper/lower crescent marks meet there. Breath in frames 8-12 must be directly in front of the imaginary muzzle and a little above it, around x95-145,y105-150; keep it small and delicate. No character is drawn. The bite is midair, not on the ground.
+2. TEMPORAL CONTINUITY: Frame 5 remains brightest. Each frame 6,7,8,9,10,11,12 must contain LESS total light AND lower peak intensity than the preceding frame. In particular frame 9 is currently brighter and denser than frame 8; reduce frame 9 to softer wisps and remove its bright droplet glints. Only a few DIM droplets in frame 8. Frames 9-12 must remain nonempty, with clear but progressively fainter vapor traces.
+3. PURE BLACK: Background EXACT RGB(0,0,0), no grain/noise in empty black, no nearblack texture outside the effect. Every one of all twelve cells needs a completely unmarked 16px black border on all four sides; every stroke, bloom and particle falls to exact black before this border.
+4. NEAR ACHROMATIC: White/light neutral gray only. Remove the cream/gold cast from the frame 5 burst and other strokes; the brightest core may be barely warm white.
+5. Frame 4's opposing strokes should close more decisively toward each other as short thick ragged crescents, each 90-130px long and 25-35px at broadest, then interlock to form frame 5's compact X-like flash. Keep their strong painted tapering texture; no actual teeth, no perfect circles. Keep only 6-10 distinct tiny saliva droplets/chips flying left in frame 5.
+
+Output 1920x1080, four columns by three rows, each cell 480x360, no grid lines, no padding/gutters, no text, numbers, dog, muzzle, actual teeth, characters, ground splash, radial star, geometric shapes, fire, blood, colored light or extra effects. Opaque pure black background. This is a single sequential flipbook. Preserve cells 1-3's small anticipation, leftward acceleration and faint organic conical air pressure wave. Primary style remains the approved Bandit sheet's fine irregular luminous painted brushwork.
+
+Selected source outputs:
+Generation 1: exec-98d4256c-317d-4635-9f4b-beb9fd1944f2.png (1672x941); final cells 1-3.
+Refinement 2: exec-6cc0b5eb-4d23-46d0-8853-a9b05fd6e2bf.png (1672x941); final cells 4-12.
+Production normalization and registration: see README.md. No additional drawn content was added outside imagegen.

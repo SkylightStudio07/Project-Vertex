@@ -1,0 +1,53 @@
+Built-in imagegen; initial generation prompt (reference roles listed below).
+
+Use case: stylized-concept
+Create ONE production-ready painted 12-frame sprite animation sheet, exactly 1920 x 1080 pixels, 4 columns x 3 rows, each cell 480 x 360, ordered left to right then top to bottom. All twelve frames share a FIXED origin; never independently center the artwork.
+
+Reference roles:
+1 Guide_CrystalGuardian_Swing_12.png: spatial pose/motion guide ONLY. Its cell coordinates are authoritative. Do NOT reproduce its character, limbs, background, grid, red lines or numbers.
+2 Style_Swing_Bandit_Approved.png: approved STYLE, brightness, painterly brushwork, soft feathered light, irregular contours, and gradual fading reference. Make this effect belong to exactly the same family, but THREE parallel claw trails instead of one club arc. Do not reproduce its ground impact or smoky cloud.
+3 Style_Impact_Additive.png: ONLY sharp additive-light energy rendering and tiny bright impact core; use near-neutral white rather than the reference colors.
+
+Primary request: a crystallized guardian's three claw tips rise from its chest to beside its head, then slash strongly toward screen LEFT, culminating in a crystal impact on frame 8. Draw ONLY the luminous effect. No character, hand, arm or weapon.
+Background: mathematically solid #000000 everywhere with no ambient illumination. Entire canvas opaque. The game uses additive blending and derives alpha=max(R,G,B).
+Palette: nearly achromatic white through faint gray, a very slight cool white only at the impact center. NO magenta, pink, purple or other saturated colors; runtime multiplies magenta into this grayscale texture.
+
+COMMON LOCAL COORDINATES in every 480x360 cell, origin top-left: character body centered around x300; head near (285,65). The three claw tips start around (255,90), wind upward around (240,55), then travel through (190,80) toward (150,130) and finish around (125,170). The claw tips spread, so three offset slightly different organic curves are required, with roughly 25-40 px between tracks, and 20-30 px thick at their widest on the peak frame. There is effect-only space at x<120. Bright leading ends reach into that space on frame 7; frame 8 impact near (125,170). Do not draw a red line at x120. Trails sweep from upper-right to lower-left, curved open on the RIGHT, with bright leading tips at the LEFT/downward end and tapering tails up toward the head. These are three claw slashes, NOT three complete concentric circles or generic centered crescents. Make their spacing organic, lengths and widths slightly unequal, exterior edge decisive and interior broken into fine fading brushed fibers. Match exact position of the claw motion in the guide.
+
+Frame-specific sequence:
+1 (row1 col1): Almost empty; ONE tiny glint at chest-level claw tip around (255,90). No star symbol.
+2 (row1 col2): small glint near (265,80), with one or two fine short brushed fibers.
+3 (row1 col3): THREE distinct short thin parallel traces begin at the rising claw tips near (260,65).
+4 (row1 col4): three thin curling traces rise beside head, from around (265,95) toward (235,50).
+5 (row2 col1): three traces curl over upper-left of head, around x190-255 y45-115, brightest at their forward claw-tip ends.
+6 (row2 col2): three widening brush trails swing broadly left at head height, bright forward tips around x175-205 y75-125.
+7 (row2 col3): LARGEST AND BRIGHTEST three sweeping arcs from above the head (roughly x250,y45) downward and LEFT to the middle-left; bright leading ends approximately (105,125), (115,155), (130,185). Space the three tracks about 25-40px. They must be clearly readable as three, with unequal organic lengths. Width at peak 20-30px. Do not fill the whole cell.
+8 (row2 col4): IMPACT at roughly (125,170), a small sharp irregular crystalline flash with 8-12 distinct thin angular crystal fragments ejecting left. Three upper trailing arcs begin to break apart from the upper/right tails. Equal overall peak energy to frame7 but energy shifts to the impact. Shards are triangular or irregular polygon slivers with luminous edges and darker interiors, not round sparks, not flames.
+9 (row3 col1): reduced flash at SAME origin (125,170), same shards continue LEFT and slightly DOWN; only broken brushed remnants of the three trails remain. No new full arc. Visibly dimmer than frame8.
+10 (row3 col2): a few fine trail threads, same shards farther left/down and smaller, faint crystalline dust. No cloud.
+11 (row3 col3): a few still-visible fading angular fragments and crystal dust along that left/down trajectory. Do NOT leave empty.
+12 (row3 col4): last very dim tiny crystalline dust flecks, still visible on close inspection. Do NOT leave empty.
+
+Continuity: these are consecutive animation frames, not a collection of different effects. Keep the same origin and coherent shapes and shard trajectories between neighboring frames. Peak 7-8, gradual decline 9-12, with late frames visibly nonempty at close inspection. The first 8 frames correspond 1:1 to guide poses at 24fps, final 4 fade at half speed.
+
+Style: hand-PAINTED anime game VFX, irregular swift single-stroke brush shapes, fine directional striations, feathered soft bloom exactly like the approved Bandit sheet. Sharp thin glass/crystal shards, bright edges. Small restrained impact, no comic star shape, no ink outlines, no constructed geometric glyphs.
+CRITICAL technical constraint: all effects, bloom, fragments and dust must fade COMPLETELY to #000000 at least 12 pixels BEFORE EVERY cell edge. Prefer a 16-20px pure-black safety strip inside every 480x360 cell. No inter-cell leakage. No cell borders, no gutters, no grid, no numbers, no words, no guide marks, no watermark. Do not include flames, smoke clouds, arms, hands, characters, circular magic symbols, perfect arcs or SVG-like vector shapes. Deliver only the finished 1920x1080 sheet.
+
+Built-in imagegen; correction prompt after overlay review:
+
+Edit image 1, the generated 12-frame grayscale claw-effect sheet. Image 2 is the authoritative character pose guide, never to be included in the output. Image 3 is a DIAGNOSTIC overlay showing the existing positioning errors, never to be reproduced. Keep the same painted brushwork, three claw strokes, grayscale rendering, 4x3 frame order, black background, and no characters/text/grid in the output.
+
+Correct the spatial alignment in ALL TWELVE frames using the SAME local-cell coordinate transform rather than centering each frame independently. In a final 480x360 cell, transform the existing effect's local coordinates approximately as:
+new x = 0.85 * old x + 26
+new y = 0.60 * old y + 23
+This reduces the excessively tall downward swing while retaining motion continuity and brings existing left-edge shards inward. Do not transform the 4x3 layout, only the artwork within its cells. Result canvas exactly1920x1080, cells480x360.
+
+The peak frame7 bright tips must land around local (100,125), (115,150), (135,175), rather than near y240. The frame8 crystal impact center must be around (125,170), directly at the leftmost extended claw tips in the guide, rather than at (116,245). Frame9 has the same fading impact position while its shards travel left/down. Reference guide frame7 fingers are higher than frame8. Three distinct staggered trails separated25-40px; widest part20-30px. Upper trail tails stay near the upper-left side of the head, with bright heads going left/down, not below the elbow. Early glints stay at claw tips near the upper chest/face as appropriate in each guide pose.
+
+Other corrections:
+- ALL effects, tiny specks and bloom must become EXACT #000000 at least12px inside EVERY cell edge, preferably20px; no shard or glow may enter those strips. Do not merely hard-clip a shard at that line; keep all of it inside.
+- Background must be absolutely pure black, no sensor noise or nearly-black texture.
+- Frame1 one very small glint. Frame2 glint plus1-2 fine fibers. Frame3 three short threads. Frame4 three thin rising threads. Frame5 curling three tracks with brighter heads. Frame6 thicker faster sweep. Frame7 largest brightest three trails. Frame8 impact at125,170 with8-12 angular thin crystal slivers ejected left. Do not turn the impact into a comic star, flame, or smoke.
+- The last row fades much more softly: frame9 reduced flash and breaking remnants, frame10 a few faint thin trails and scattered small shards, NO bright flash center on10. Frame11 only faint shards and crystal grains, NO flash core. Frame12 only very dim grain flecks, NO bright pinpoint core, still not empty. Keep shard positions moving LEFT and slightly DOWN consistently; avoid a stationary bright point on frames10-12. Approximate frame11 brightest grain30/255; frame12 brightest grain10/255. Total brightness of9>10>11>12. No dust cloud.
+- Preserve the approved painterly additive-light aesthetic. White through gray only; no magenta or saturated color. No outlines, no glyphs, no arms/hands/character, no text/numbers/cell lines/gutters/watermarks. No SVG-like geometry.
+Return ONLY the corrected finished effect sheet.

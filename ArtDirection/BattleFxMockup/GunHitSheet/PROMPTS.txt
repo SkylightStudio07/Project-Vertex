@@ -1,0 +1,37 @@
+Built-in imagegen; new image generation. transparent_background=false.
+Actual generation prompt:
+
+Use case: stylized-concept.
+Create ONE finished hand-painted 2D game VFX animation sprite sheet, Hit_Gunshot, exactly 1920 x 1080 pixels, landscape 16:9. It is a gunshot hitting the player's chest, an isolated light effect on absolutely solid RGB (0,0,0) black. No scene, no player, no gun or bullet object. The output is the actual production sprite atlas, not a demonstration or diagram.
+
+STYLE: painted anime animation FX, expressive short tapered brush streaks with fine irregular striations, soft warm-white light bloom and delicate wispy warm-gray smoke. Match the restrained painterly brightness and natural smoky dissolution of the approved bandit swing effect reference in this conversation. Do not draw a swing arc: this is a small ballistic impact. Almost achromatic white through very slightly warm pale gray, no orange flames, no saturated colors. Small central impact, readable when each tile is reduced to 300 x 225. Keep smoke modest, not an explosion cloud. This is light to be additively composited and tinted by the game.
+
+ATLAS GEOMETRY IS CRITICAL: exactly FOUR equal columns and THREE equal rows. Twelve equal 480 x 360 cells, flush together, absolutely no drawn grid, gutter, frames, labels or text. Playback is row-major left to right, top to bottom. Column centers at x = 240, 720, 1200, 1680; row centers y = 180, 540, 900. Every frame uses the SAME fixed local impact origin (240,180) at the exact cell center. These are technical instructions only; draw NO coordinates. Keep every mark and all bloom at least 24 pixels from all four boundaries of its own tile, fading completely to EXACT black well before the edge. Keep the entire canvas background pure black. No unrelated marks. No borders.
+
+DIRECTION AND CONTINUITY: projectile arrives FROM THE RIGHT, traveling LEFT, so the right-facing side of the compact centered impact catches light, with the torn brush tongues and the majority of sparks ejecting left and upper-left/lower-left. It is ONE continuous event in twelve successive frames, not twelve different effects. Small tipped sparks are 20 to 70 pixels long, narrow tapered brush streaks rather than round dots. Particles flow continuously away and downward with time; later smoke gently drifts upper-left from the fixed impact origin, without changing the atlas anchor. Do not shift the origin per tile to center the bounding box. Don't arrange symmetric radial stars.
+
+ROW 1, CELLS 1-4:
+Frame 1 at (240,180): a short thin incoming trajectory terminal extends from just right of center and ends at the exact center with a TINY pinprick flash. Minimal precursor, lots of black.
+Frame 2 at (720,180): very bright small compact irregular brush dab at the exact center, beginning to rip RIGHT TO LEFT, 45-65 pixels across with a few short torn wisps and initial fine sparks.
+Frame 3 at (1200,180): THE PEAK AND BRIGHTEST FRAME. A dense irregular WHITE PAINTED FLASH MASS around 120 pixels in diameter, with the brightest dense center precisely at (1200,180). Jagged uneven organic brush lobes, not a flat cartoon star, no regular rays, no lens flare cross. Eight to twelve narrow tapered spark streaks eject mainly left, up-left and down-left, with a few up/down. Warm-white hot core, softly glowing irregular perimeter.
+Frame 4 at (1680,180): same flash contracts and dims moderately, same sparks travel further out; a faint incomplete irregular BRUSH-PAINTED shock ripple begins surrounding the impact center. Broken organic near-ring, never a perfect circle. Slight smoky traces.
+
+ROW 2, CELLS 5-8:
+Frame 5 at (240,540): flash decreases further. Faint broken shock ripple expands and separates into brush fragments, sparks continue out mainly leftward and begin falling on gentle arcs. Do not make a solid white disk or geometric ring.
+Frame 6 at (720,540): only a tiny central afterglow at exact impact origin, a small handful of very soft gray smoke starts drifting up and left. Sparse falling tapered sparks.
+Frame 7 at (1200,540): smoke spreads with a few remaining thin fading sparks. No main white flash or ring. Less light energy than frame 6.
+Frame 8 at (1680,540): smoke has its greatest spatial spread but is more translucent and darker than frame 7, compact hand-painted wisps up-left of the impact origin. Almost no sparks. A modest smoky wisp, not a giant cloud.
+
+ROW 3, CELLS 9-12:
+Frame 9 at (240,900): pale thin wisps remain from the same smoke, reduced brightness and mass, no sparks, no flash.
+Frame 10 at (720,900): still fainter and smaller, soft translucent gray smoke wisps. Do NOT leave this tile empty.
+Frame 11 at (1200,900): almost disappeared, two or three very dim little smoky brush traces near the original smoke location. Do NOT leave this tile empty.
+Frame 12 at (1680,900): final one or two EXTREMELY FAINT warm-gray smoky flecks, visible on close inspection of black; not empty. Absolute lowest brightness of the smoke tail. Do not brighten it to make the sheet more decorative.
+
+TIMING: first five frames at 30 fps, last seven at 15 fps, total about 0.63 sec. Smoothly continuous rise 1 to 3 then steadily falling light energy 3 to 12. The four bottom-row frames are deliberately dim, do not compensate their exposure. Pure black MUST surround every individual frame, including between the smoke wisps. Flat black corners, no texture in the black.
+
+FORBIDDEN: text, numerals, letters, captions, watermarks, grid lines, outlines, ink contours, comic starbursts, regular geometric shapes, perfect circles, SVG/vector-looking construction, colored magic, strong hues, blood, big fire, explosion clouds, characters, weapons, bullet drawings, background scenery, panel borders. Render only the twelve painted consecutive gun-impact light/smoke frames on black.
+
+Generation count: one built-in imagegen call. No subsequent drawing/edit prompt.
+Reference files reviewed: Reference/Style_Swing_Bandit_Approved.png (primary style), Reference/Style_Impact_Additive.png (secondary impact vocabulary), Reference/Capture_CurrentHit.jpg (in-game context).
+Mechanical finishing only: 1672x941 source resampled to 1920x1080, same 4x3 grid, each cell uniformly scaled to 90% with fixed-center registration, background pixels with max(R,G,B)<=1 set to exact black. See README.md for checks.

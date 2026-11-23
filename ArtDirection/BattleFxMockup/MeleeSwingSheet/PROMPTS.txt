@@ -1,0 +1,33 @@
+Built-in imagegen; transparent_background=false.
+Reference images supplied in the order listed below.
+
+Use case: stylized-concept
+Asset type: finished raster VFX animation spritesheet for a melee club swing, additive blending, NOT a concept presentation.
+Draw ONE 1920 x 1080 PNG, exactly 4 columns x 3 rows of equal 480 x 360 cells, no gutters, no gridlines, no labels. Twelve successive animation frames read left-to-right across each row. Pure opaque RGB black #000000 backdrop everywhere except the effect. Save the generated image inside C:/Users/SKYLIGHT/Documents/Graduation/Project-Vertex/ArtDirection/BattleFxMockup/MeleeSwingSheet/ if the tool supports choosing an output location.
+
+REFERENCE ROLES:
+Image 1 Guide_Bandit_Swing_12.png is POSITION AND TIMING ONLY, never copy the character, club, background, red lines, numbering, grid, old gray remnants at upper left or old yellow marks at lower left.
+Image 2 Style_Arcs_Previous.png is the main painted streak texture reference: irregular sweeping brushwork, bright crisp outer edge and soft fibrous inner falloff.
+Image 3 Style_Impact_Additive.png, Image 4 Style_Flash_Variants.png, Image 5 Style_Streaks_Delivered.png establish the same painted animation VFX family, NOT their saturated colors or flame shapes.
+
+CRITICAL FIXED COORDINATES, per 480 x 360 cell, origin upper left:
+The invisible character is mostly in x=185..420, feet near y=325. Effect belongs largely LEFT of the invisible character, not centered in the cell.
+Swing tip travels from overhead (x=265,y=20), to upper left (x=125,y=45), to left middle (x=75,y=190), to ground impact (x=125,y=305). The leftmost arc bows to x=35..65. Resulting full arc looks like "(" opening to the RIGHT, with overhead tail near (265,20) and lower end (125,305). It is hand-painted, asymmetric, not a perfect geometric circle. Keep the same origin in all cells; never separately center any frame. In frames 3 and 4, broad bright paint must straddle the invisible x=120 clipping line at the club position to hide a clipped club tip. The thickest leading head is 60..80px wide. Keep all effect including glow, loose flecks and dust at least 12px inside EVERY cell edge. Fade naturally all the way to exact black before the safety margin, never visibly crop art. Nothing crosses a cell boundary. This is a working sprite atlas, not twelve independently composed artworks.
+
+TWELVE FRAMES, precisely timed 30fps for 0.4 seconds:
+1 (row1 col1): very small short thin pale streak ONLY at the overhead tip around (265,20..45). No full crescent yet.
+2 (row1 col2): streak grows from overhead to upper-left endpoint (125,45); newest leading head at upper-left is brightest and thickest, older overhead tail thin. Only upper arc, not full crescent.
+3 (row1 col3): largest brightest swing streak, grows to left middle (75,190); thick 60..80px leading head spans x=40..140 near y=175..210, covering the clipped club area. Old overhead tail is already thinning. Not yet ground impact.
+4 (row1 col4): head sweeps down to ground (125,305), full "(" shaped trace. At this contact point a bright irregular brush-dab impact clump erupts with first small gray-white dust. The flash is painted, NOT a flat star or a spiky geometric starburst.
+5 (row2 col1): impact brush-dab flash at (125,305) reaches maximum size. Low gray-white dusty ground ring spreads left-right around that fixed point, from roughly x=35 to x=245. 6..10 small debris chips thrown upward. The old arc starts breaking apart from its upper end.
+6 (row2 col2): impact flash shrinks; gray dust rises above the same impact point, brushy uneven billows. Only broken fibrous fragments of the old arc remain, upper arc gone.
+7 (row2 col3): only a few fine arc threads. The dust volume is at its widest (roughly x=25..255, y=210..335), not brighter than frame6. Debris chips fall on short parabolic paths.
+8 (row2 col4): arc almost absent; dust visibly fades while drifting upward from previous frame. No new burst or new arc.
+9 (row3 col1): faint thinning dust and a few residual chips around the same left-bottom region, drifting upward, clearly related to frame8.
+10 (row3 col2): smaller and fainter residual dust in the same place, continuing movement.
+11 (row3 col3): nearly vanished; just two or three dim dust patches.
+12 (row3 col4): last very faint one or two dust wisps, NOT empty. A slow soft fade through frames9..12 is essential.
+
+STYLE AND COLOR:
+Hand-painted 2D animation effects, energetic brush grain and irregular silhouettes with gentle local bloom. The arc is dusty warm white, almost neutral. Impact center may be faint warm orange-white; all dust is gray-white. Saturated color forbidden because the game multiplies tint later. Arc has a crisp outer rim and striated inner taper, cohesive with supplied white arc reference. Make a convincing motion sequence, same shapes and dust masses evolving continuously, not twelve variants. Brightness peaks during frames3..5, then gradually decreases all the way through12. Dust is atmospheric brushed particulate, not opaque cartoon smoke or flame. Background exact black so alpha can be extracted as max(R,G,B). 
+DO NOT DRAW: characters, weapons, hands, people, scenery, ground line, text, digits, arrows, frame borders, outlines, ink contours, geometric assemblies, perfect circular arcs, magical circles, flat cartoon stars, strong hue, fire, flames, watermark, SVG. Deliver only the raster image.

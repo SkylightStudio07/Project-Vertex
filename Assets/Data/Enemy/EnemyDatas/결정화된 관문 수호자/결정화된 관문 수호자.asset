@@ -163,10 +163,22 @@ MonoBehaviour:
   defeatedTalk: {fileID: 0}
   attackKeyframes: []
   attackHitDelay: 0.8
-  attackFx: 0
+  attackFx: 3
   muzzleAnchor: {x: 0.12, y: 0.6}
-  muzzleFireFrames: 
+  muzzleFireFrames: 12000000
   sheetDrawsMuzzleFlash: 0
+  meleeArc: 0
+  meleeArcSize: {x: 300, y: 420}
+  meleeArcAngle: 0
+  meleeArcColor: {r: 1, g: 0.55, b: 0.85, a: 1}
+  meleeSwingSheet: Swing_CrystalGuardian
+  meleeSwingRect:
+    serializedVersion: 2
+    x: -0.33333334
+    y: 0
+    width: 1.3333334
+    height: 1
+  meleeSwingSyncFrames: 9
   attackMotion: []
   groundFxShots: []
   groundFxScale: 1

@@ -1,0 +1,34 @@
+Tool: built-in image_gen.imagegen
+Mode: new raster generation; opaque black background
+Style references: Reference/Style_Flash_Variants.png; Reference/Style_Impact_Additive.png; Reference/Style_Streaks_Delivered.png (visually inspected)
+
+GENERATION PROMPT (verbatim)
+Use case: stylized-concept
+Asset type: finished raster game VFX direction mockup, single 1920 x 1080 PNG.
+Create original painted anime melee swing afterimages, matching the fast painterly brush texture, irregular luminous edges and soft localized glow of the supplied muzzle-flash, projectile-streak and impact style references, but NEARLY ACHROMATIC white and pale warm gray. Not orange or purple.
+Canvas/backdrop: landscape 1920x1080, opaque absolute pure black #000000. Invisible 2 rows x 2 columns, each cell 960x540. NO visible grid, dividers, frames, text, labels or other objects. Center one effect in each cell, with ample entirely black separation and margins; all glow must fade completely to black before any cell edge.
+MANDATORY DIRECTION for EVERY arc: open on the RIGHT, bulging toward the LEFT, like a left parenthesis '('. The faint thin trailing START is the UPPER RIGHT endpoint. The curve passes down around the LEFT side. The LOWER RIGHT endpoint is the sharp BRIGHT WHITE LEADING HEAD. Show weapon motion from upper end to lower end toward an opponent on the left. Never brighten the upper tail more than the lower head. Never mirror this direction. These are weapon afterimages, not physical weapons or smoke rings.
+Style/medium: hand-painted animation effects; a single fast broad brushstroke with longitudinal ragged streaks, irregular silhouette, decisive clean outer convex edge, inside edge fading along brush grain. Local soft bloom only, brighter lower quarter leading to needle tip, upper trailing half thinning and disintegrating. Organic asymmetry, not geometrically perfect circles or assembled shapes.
+Top-left cell center (480,270): blunt weapon A, heavy thick crescent about 440px total high. Upper tail near (585,50), leftmost outer curve around (345,265), lower leading tip near (585,490). Thickest middle body about 90px, rough coarse brush grain and a few small dust-like fragments immediately outside convex edge. Lower tip is sharp and brightest, body remains textured and less bright.
+Top-right cell center (1440,270): blunt weapon B, about 460px total high, wider more open semicircular sweep than A, near (1555,40) through (1280,270) to (1555,500). Broad painterly weight, an elongated unraveling dim upper tail. Lower tip sharp and brightest.
+Bottom-left cell center (480,810): cutting slash, about 440px total high from near (585,590) through (370,810) to (585,1030). ONE thin fast flowing curved stroke, body only 20-35px thick, both ends needle-sharp, upper endpoint dimmer and lower endpoint bright white. Very little bloom. No multiple main blades.
+Bottom-right cell center (1440,810): exactly THREE separate slender parallel left-parenthesis arcs, about 45px apart horizontally, lengths slightly different, tallest about 420px. Group centered in cell, from about y600 to y1020, convex left sides, three separate dim upper tails and three bright needle lower heads. Three single continuous thin strokes, never crossing, no fourth arc. Each line has organic brush grain.
+All sizes include natural contained glow; keep at least 25px completely black buffer on every edge of each cell. Use white to pale neutral/warm gray, strong luminance range for additive blending and later runtime color multiplication. Pure black negative space everywhere outside effects.
+Avoid: outlines, ink lines, comic stars, impact starbursts, radial rays, perfect circular arcs, magic circles, runes, decorative geometry, SVG/vector appearance, letters, watermarks, weapons, hands, characters, strong color, scenery, connecting trails between cells. No animation frames and no extraction pieces. Deliver the single finished mockup only.
+
+EDIT PROMPT (verbatim)
+Use case: precise-object-edit
+Edit the provided melee arc mockup. Preserve its four designs, painted stroke texture, near-achromatic palette and left-parenthesis orientation. Preserve the brighter LOWER RIGHT leading tips and dim UPPER RIGHT trailing tips.
+Production correction: make the output a 1920x1080 landscape sheet with invisible 2x2 cells of 960x540. All artwork and all bloom must be fully contained in its own cell, centered with real pure black padding. The outside margins AND both invisible gutters must be flat EXACT #000000, no faint gray background, no noise or residual glow. Do not draw any grid.
+Top-left heavy A: about 440px tall, centered (480,270), maximum body thickness at center about 90px, with only a few local dust chips.
+Top-right heavy B: about 460px tall, centered (1440,270), noticeably wider curvature than A, long dim unravelling upper tail.
+Bottom-left: single thin slash, 440px tall, centered (480,810), 20-35px middle body, both ends needle sharp.
+Bottom-right: exactly three thin separate parallel claw curves, group 420px tall centered (1440,810), about 45px horizontal separation, slightly different lengths.
+The shape of every stroke bulges LEFT and is open on the RIGHT, '('. The brightest part of every stroke is at its LOWER endpoint, never upper. Keep clear black negative space inside the curves.
+Keep at least 35px flat black padding above and below all strokes and glows in every cell. Contain top-row effects fully above y505, bottom-row effects fully below y575. No rays, stars, outlines, text, labels, new effects, physical objects or strong color. This is a single painted raster mockup, not a contact sheet with borders.
+
+INPUT TO EDIT
+The image generated by the first prompt above.
+
+TECHNICAL DELIVERY NORMALIZATION (not an image-generation prompt)
+The edited tool output was 1672x941. Normalize generated RGB to neutral gray using max(R,G,B), map levels <=3 to exact black, and remap remaining levels by round((value-3)*255/252). Resample and center the painted effects into the requested 1920x1080 invisible 2x2 layout. Fit A to a roughly 90px central body, slash to 20-35px, and claw center separation to about 45px. Final measured nonblack bounds are recorded in README.md. No SVG, procedural drawing, additional illustrated objects, extraction assets or Unity changes.

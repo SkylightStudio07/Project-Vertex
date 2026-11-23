@@ -86,6 +86,31 @@ public class EnemyData : ScriptableObject
     [Tooltip("공격 시트에 총구 섬광이 이미 그려져 있으면 켠다 (탄도선만 긋는다)")]
     public bool sheetDrawsMuzzleFlash;
 
+    [Header("근접 궤적 (attackFx = Melee)")]
+    [Tooltip("휘두름 궤적 모양. 그림은 Resources/BattleFx/EnemyAction/Arc_<모양>_*.png")]
+    public EnemyMeleeArc meleeArc = EnemyMeleeArc.Blunt;
+    [Tooltip("궤적 크기 (1920 기준 px, 가로 × 세로). 그림 원본은 위에서 아래로 왼쪽으로 불룩한 '(' 모양. 음수면 그 축으로 뒤집는다. " +
+             "위치는 muzzleAnchor(그림 칸 기준 0~1), 나오는 프레임은 muzzleFireFrames(여러 개면 연타)")]
+    public Vector2 meleeArcSize = new(300f, 420f);
+    [Tooltip("궤적 회전 (도, 반시계). 0 = 위에서 아래로 내려치기, -90 = 오른쪽에서 왼쪽으로 가로 휘두르기")]
+    public float meleeArcAngle;
+    [Tooltip("궤적에 곱할 색 (그림은 흰색). 알파 = 밝기")]
+    public Color meleeArcColor = new(1f, 0.96f, 0.9f, 0.9f);
+    [Tooltip("연속 프레임 휘두르기 이펙트 이름 (Resources/BattleFx/EnemyAction/<이름>_NN). 채우면 낱장 궤적 대신 이 프레임들을 " +
+             "muzzleFireFrames 프레임부터 공격 시트와 같은 속도로 한 번 재생한다. 색은 meleeArcColor")]
+    public string meleeSwingSheet;
+    [Tooltip("이펙트를 놓을 영역 (공격 시트 한 칸 기준 0~1, 칸 밖으로 나가도 된다). 기본값 = 칸을 왼쪽으로 1/3 넓힌 영역")]
+    public Rect meleeSwingRect = new(-1f / 3f, 0f, 4f / 3f, 1f);
+    [Tooltip("앞에서부터 이 장수까지만 공격 시트와 1:1로 맞물리고, 그 뒤(먼지 · 잔상)는 절반 속도로 천천히 사라진다. 0 = 전부 같은 속도")]
+    public int meleeSwingSyncFrames = 5;
+
+    [Header("플레이어 피격 시트 (공격 종류와 무관)")]
+    [Tooltip("공격이 플레이어에게 들어가는 순간 플레이어 위치에서 한 번 재생할 연속 프레임 이펙트 (Resources/BattleFx/EnemyAction/<이름>_NN). " +
+             "사격 적은 공용 Hit_Gunshot. 비우면 없음")]
+    public string playerHitSheet;
+    [Tooltip("플레이어 피격 시트에 곱할 색 (그림은 흰색)")]
+    public Color playerHitColor = new(1f, 0.85f, 0.65f, 1f);
+
     public bool HasAttackKeyframes => attackKeyframes != null && attackKeyframes.Count > 0;
     public float AttackKeyframeDuration
     {
@@ -243,4 +268,12 @@ public enum EnemyAttackFx
     Default,
     Gunshot,
     Artillery,
+    Melee,      // 무기 · 발톱을 휘두르는 순간 궤적을 그린다
+}
+
+public enum EnemyMeleeArc
+{
+    Blunt,  // 둔기: 굵은 초승달
+    Slash,  // 베기: 가늘고 빠른 호
+    Claw,   // 발톱: 나란한 세 줄
 }

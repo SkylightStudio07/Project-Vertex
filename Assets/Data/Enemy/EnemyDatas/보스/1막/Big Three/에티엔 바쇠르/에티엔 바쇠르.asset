@@ -31,6 +31,7 @@ MonoBehaviour:
   hpBarAnchor: {x: 0.5, y: 0}
   slotOffset: {x: -100, y: 0}
   hpBarOffset: {x: 0, y: -17.6}
+  statusRowOffset: {x: 0, y: 0}
   noLunge: 0
   idleFrames:
   - {fileID: 1000829156, guid: 705b671fb053aba4385cbb5951adb4f8, type: 3}
@@ -106,6 +107,7 @@ MonoBehaviour:
   - {fileID: 1555811388, guid: 705b671fb053aba4385cbb5951adb4f8, type: 3}
   - {fileID: -1557676828, guid: 705b671fb053aba4385cbb5951adb4f8, type: 3}
   idleFrameRate: 24
+  idleTwitch: 0
   attackFrames:
   - {fileID: 1252933085, guid: 942473f2f444c3b45b6878804fa2eb85, type: 3}
   - {fileID: -86573683, guid: 942473f2f444c3b45b6878804fa2eb85, type: 3}
@@ -180,13 +182,34 @@ MonoBehaviour:
   - {fileID: -2018234038, guid: 942473f2f444c3b45b6878804fa2eb85, type: 3}
   - {fileID: 31356130, guid: 942473f2f444c3b45b6878804fa2eb85, type: 3}
   - {fileID: -1621420851, guid: 942473f2f444c3b45b6878804fa2eb85, type: 3}
+  attackMotionOnAttackOnly: 0
   attackFrameRate: 36
   defeatedTalk: {fileID: 0}
   attackKeyframes: []
   attackHitDelay: -1
+  attackFx: 0
+  muzzleAnchor: {x: 0.12, y: 0.6}
+  muzzleFireFrames: 
+  sheetDrawsMuzzleFlash: 0
+  meleeArc: 0
+  meleeArcSize: {x: 300, y: 420}
+  meleeArcAngle: 0
+  meleeArcColor: {r: 1, g: 0.96, b: 0.9, a: 0.9}
+  meleeSwingSheet: 
+  meleeSwingRect:
+    serializedVersion: 2
+    x: -0.33333334
+    y: 0
+    width: 1.3333334
+    height: 1
+  meleeSwingSyncFrames: 5
+  playerHitSheet: Hit_Gunshot
+  playerHitColor: {r: 1, g: 0.85, b: 0.65, a: 1}
   attackMotion: []
   groundFxShots: []
   groundFxScale: 1
+  targetBlastFrames: []
+  targetBlastSize: 640
   idleSheetPadding: 0
   attackSheetPadding: 0
   startingStatuses: []
