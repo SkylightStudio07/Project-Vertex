@@ -111,16 +111,6 @@ MonoBehaviour:
   idleTwitch: 0
   attackFrames:
   - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 8638517674797190763, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
   - {fileID: -5135242633105506940, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
   - {fileID: 1023575221994590245, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
   - {fileID: -7393606057533595543, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
@@ -167,27 +157,12 @@ MonoBehaviour:
   - {fileID: -5417226356496968574, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
   - {fileID: 8563796276777380509, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
   - {fileID: 2827352724931784718, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 2827352724931784718, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: 2827352724931784718, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
   - {fileID: -8026277858306408433, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -8026277858306408433, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
-  - {fileID: -2681386925847306476, guid: ccfee5d0e91492e4ab6a81bd3169eb2e, type: 3}
   attackMotionOnAttackOnly: 1
   attackFrameRate: 24
   defeatedTalk: {fileID: 0}
   attackKeyframes: []
-  attackHitDelay: 1.03
+  attackHitDelay: 0.8
   attackFx: 0
   muzzleAnchor: {x: 0.12, y: 0.6}
   muzzleFireFrames: 

@@ -22,13 +22,13 @@ MonoBehaviour:
   allyGrade: {r: 0.9, g: 0.88, b: 1, a: 1}
   allyBrightness: 0.95
   enemyGrade: {r: 0.94, g: 0.96, b: 1, a: 1}
-  enemySaturation: 0.9
-  enemyBrightness: 0.96
+  enemySaturation: 1.1
+  enemyBrightness: 1.04
   topLight: {r: 0.85, g: 0.75, b: 1, a: 0.12}
   topFalloff: 2.2
   bottomShade: 0.25
   spotlightColor: {r: 0.85, g: 0.7, b: 1, a: 0.08}
-  moteCount: 30
+  moteCount: 18
   moteColor: {r: 1, g: 0.6, b: 0.85, a: 0.8}
   moteArea:
     serializedVersion: 2
@@ -43,7 +43,7 @@ MonoBehaviour:
   shaftAngle: 8
   shaftSize: {x: 0.28, y: 0.9}
   shaftColor: {r: 0.7, g: 0.85, b: 1, a: 0.12}
-  fogColor: {r: 0.5, g: 0.48, b: 0.7, a: 0.22}
+  fogColor: {r: 0.4, g: 0.38, b: 0.6, a: 0.1}
   fogBands:
   - 0.42
   - 0.24
@@ -51,7 +51,7 @@ MonoBehaviour:
   standPools:
   - {x: 0.26, y: 0.32}
   - {x: 0.72, y: 0.32}
-  standPoolColor: {r: 0.9, g: 0.6, b: 0.95, a: 0.12}
+  standPoolColor: {r: 0.9, g: 0.6, b: 0.95, a: 0.06}
   screenBottomShade: 0.5
   vignette: 0.5
   hudDecorTint: {r: 0.05, g: 0.07, b: 0.1, a: 0.9}
