@@ -1,0 +1,14 @@
+Imagegen revision: Mystic and Blocked only.
+Canvas: 1920x1080, opaque RGB.
+Mystic row 1: source core (336.07,319.90), scale 0.62375, target core (1344,270).
+Blocked row 1: source core (273.55,316.61), scale 0.60468, target core (1728,270).
+Mystic row 2: source core (335.66,284.93), scale 0.66467, target core (1344,810).
+Blocked row 2: source core (290.99,297.24), scale 0.61346, target core (1728,810).
+Columns 1-3: 1,244,160 pixels compared, 0 changed (all RGB channels identical).
+
+Mystic row 1: nonblack bounds [1199,139,286,263], pure-black margins L/R/T/B 47/51/139/138px; center RGB (254,253,254); peak minimum-channel 255; near-white pixels 1137; changed pixels 44943.
+Blocked row 1: nonblack bounds [1600,169,274,191], pure-black margins L/R/T/B 64/46/169/180px; center RGB (255,255,255); peak minimum-channel 255; near-white pixels 224; changed pixels 30700.
+Mystic row 2: nonblack bounds [1199,675,286,276], pure-black margins L/R/T/B 47/51/135/129px; center RGB (255,254,254); peak minimum-channel 255; near-white pixels 1486; changed pixels 51909.
+Blocked row 2: nonblack bounds [1582,723,285,174], pure-black margins L/R/T/B 46/53/183/183px; center RGB (253,251,253); peak minimum-channel 255; near-white pixels 173; changed pixels 29185.
+PNG reload: all 2,073,600 pixels identical to verified composite.
+Only raster resampling, placement, low-level background cleanup and compositing used; no effects drawn by code.
