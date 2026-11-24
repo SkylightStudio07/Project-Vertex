@@ -1112,7 +1112,6 @@ public class EnemyView : MonoBehaviour
         if (intentSprites == null) return null;
         foreach (var entry in intentSprites)
             if (entry.intentType == type) return entry.sprite;
-        if (type == IntentType.Stun) return GetIntentSprite(IntentType.Wait);
         return null;
     }
 }

@@ -7,8 +7,7 @@ public enum IntentType
     Defend,
     Buff,
     Debuff,
-    Wait, // 공격·강화 없이 차례를 보내는 대기 의도. 포이어발체의 사격 제원 산출에서 사용한다.
-    Stun // 기절로 이번 행동을 쉬는 의도. 기존 직렬화 값은 유지한다.
+    Wait
 }
 
 [CreateAssetMenu(fileName = "EnemyAction", menuName = "Game Asset/Enemy Action")]
