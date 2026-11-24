@@ -82,7 +82,7 @@ public static class EffectRunner
                             damage.environmentalDamage ? null : context.Source,
                             damage.piercing,
                             context.Card != null && context.Card.AmmoCost > 0);
-                        CollectDamagePreview(info, target, damage.HitsFor(context, target), context, preview);
+                        CollectDamagePreview(info, target, damage.hitCount, context, preview);
                     }
                     break;
                 case ApplyStatusEffect status when status.status != null:
@@ -103,7 +103,6 @@ public static class EffectRunner
     private static void CollectDamagePreview(DamageInfo info, ICombatant target, int hits,
         CardContext context, EffectPreview preview)
     {
-        if (hits <= 0) return;
         if (info.Source != null)
             foreach (var passive in info.Source.Passives)
                 info = passive.PreviewOutgoingDamage(info, context.State);
