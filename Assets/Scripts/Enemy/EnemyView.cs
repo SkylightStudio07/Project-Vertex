@@ -860,14 +860,11 @@ public class EnemyView : MonoBehaviour
             return;
         }
 
-        var preview = Instance.GetIntentPreview();
-        int? damage = preview.HasDamage ? preview.TotalDamage : null;
+        int? damage = Instance.GetIntentDamageAmount(out int? damagePerHit, out int hitCount);
         _intentTypes.Clear();
         AddIntent(action.intentType);
         if (action.additionalIntents != null)
             foreach (var type in action.additionalIntents) AddIntent(type);
-        if (preview.HasDamage) AddIntent(IntentType.Attack);
-        if (preview.HasSelfBlock) AddIntent(IntentType.Defend);
 
         int lookahead = BattleManager.Instance?.State?.EnemyIntentLookahead ?? 0;
         var upcoming = Instance.GetUpcomingActions(lookahead);
@@ -881,7 +878,8 @@ public class EnemyView : MonoBehaviour
         {
             var item = _intentItems[i];
             var type = _intentTypes[i];
-            item.Bind(GetIntentSprite(type), type == IntentType.Attack ? damage : null);
+            item.Bind(GetIntentSprite(type), type == IntentType.Attack ? damage : null,
+                hitCount: hitCount, damagePerHit: damagePerHit);
             if (type == IntentType.Attack)
                 item.ApplyAttackTier(damage, heavyIntentScale, lethalIntentScale, lethalIntentColor);
             item.SetAlpha(_intentAlpha);
@@ -895,7 +893,7 @@ public class EnemyView : MonoBehaviour
             item.transform.SetAsLastSibling();
         }
         LayoutRebuilder.ForceRebuildLayoutImmediate(intentRow);
-        intentTooltip?.SetOwner(Instance, damage, _intentTypes, IntentAnchor);
+        intentTooltip?.SetOwner(Instance, damage, _intentTypes, IntentAnchor, hitCount, damagePerHit);
     }
 
     private void AddIntent(IntentType type)

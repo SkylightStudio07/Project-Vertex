@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: "01_\uB370\uB4DC\uB77D"
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAction
   intentType: 0
+  additionalIntents: 01000000
   displayName: "\uB370\uB4DC\uB77D"
   effects:
   - rid: 8123393623525687425
-  - rid: 8123393623525687426
+  - rid: 8123393666740125948
   references:
     version: 2
     RefIds:
@@ -47,7 +48,7 @@ MonoBehaviour:
         hitInterval: 0.08
         onKillEffects: []
         effectiveAgainst: 0
-    - rid: 8123393623525687426
+    - rid: 8123393666740125948
       type: {class: BlockEffect, ns: , asm: Assembly-CSharp}
       data:
         amount: 6

@@ -28,13 +28,16 @@ public class IntentIconView : MonoBehaviour
         _valueColor = valueText.color;
     }
 
-    public void Bind(Sprite sprite, int? damage, bool lookahead = false)
+    public void Bind(Sprite sprite, int? damage, bool lookahead = false, int hitCount = 1, int? damagePerHit = null)
     {
         ResetVisuals();
         iconImage.sprite = sprite;
         iconImage.enabled = sprite != null;
         valueText.gameObject.SetActive(damage.HasValue);
-        valueText.text = damage.HasValue ? damage.Value.ToString() : string.Empty;
+        valueText.text = !damage.HasValue ? string.Empty
+            : hitCount > 1 && damagePerHit.HasValue ? $"{damagePerHit.Value} × {hitCount}"
+            : hitCount > 1 ? $"{damage.Value} ({hitCount}회)"
+            : damage.Value.ToString();
         transform.localScale = lookahead ? Vector3.one * 0.62f : Vector3.one;
         _opacity = lookahead ? 0.72f : 1f;
         canvasGroup.blocksRaycasts = !lookahead;

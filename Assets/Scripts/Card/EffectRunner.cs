@@ -82,11 +82,8 @@ public static class EffectRunner
                             damage.environmentalDamage ? null : context.Source,
                             damage.piercing,
                             context.Card != null && context.Card.AmmoCost > 0);
-                        CollectDamagePreview(info, target, damage.hitCount, context, preview);
+                        CollectDamagePreview(info, target, damage.HitsFor(context, target), context, preview);
                     }
-                    break;
-                case BlockEffect block when block.targets.mode == EffectTargetMode.Source:
-                    preview.HasSelfBlock = true;
                     break;
                 case ApplyStatusEffect status when status.status != null:
                     preview.Statuses.Add(status.status);
@@ -106,12 +103,17 @@ public static class EffectRunner
     private static void CollectDamagePreview(DamageInfo info, ICombatant target, int hits,
         CardContext context, EffectPreview preview)
     {
+        if (hits <= 0) return;
         if (info.Source != null)
             foreach (var passive in info.Source.Passives)
                 info = passive.PreviewOutgoingDamage(info, context.State);
         foreach (var passive in target.Passives)
             info = passive.PreviewIncomingDamage(info, context.State);
-        int dealt = System.Math.Max(0, info.Amount) * hits;
+        int damagePerHit = System.Math.Max(0, info.Amount);
+        // 서로 다른 피해량을 합친 경우에는 평균값을 타격당 피해로 표시하지 않는다.
+        if (!preview.HasDamage) preview.DamagePerHit = damagePerHit;
+        else if (preview.DamagePerHit != damagePerHit) preview.DamagePerHit = null;
+        int dealt = damagePerHit * hits;
         preview.TotalDamage += dealt;
         preview.AddTargetDamage(target, dealt, info.IsPiercing);
         preview.HitCount += hits;
@@ -123,8 +125,8 @@ public sealed class EffectPreview
 {
     public bool HasDamage;
     public int TotalDamage;
+    public int? DamagePerHit;
     public int HitCount;
-    public bool HasSelfBlock;
     public readonly List<StatusDefinition> Statuses = new();
 
     // 대상별 피해 (HP바 예상 피해 표시용). 관통 피해는 방어도를 무시하므로 따로 모은다.

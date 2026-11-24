@@ -402,12 +402,18 @@ public class EnemyInstance : ICombatant
         return next;
     }
 
-    // 의도는 실행 효과에서 공격 수치와 방어 행동 여부를 읽는다. 전투 상태는 변경하지 않는다.
-    public EffectPreview GetIntentPreview(BattleState state = null)
+    // 표시할 의도 종류는 EnemyAction에 명시하고, 효과에서는 공격 수치만 계산한다.
+    public int? GetIntentDamageAmount()
+        => GetIntentDamageAmount(out _, out _);
+
+    // 총피해량은 강공격 판정에, 타격당 피해와 타수는 의도 UI 표시에 사용한다.
+    public int? GetIntentDamageAmount(out int? damagePerHit, out int hitCount)
     {
+        damagePerHit = null;
+        hitCount = 0;
         var action = GetCurrentAction();
-        state ??= BattleManager.Instance?.State;
-        if (action?.effects == null || state == null) return new EffectPreview();
+        var state = BattleManager.Instance?.State;
+        if (action?.effects == null || state == null) return null;
 
         var context = new CardContext
         {
@@ -418,12 +424,9 @@ public class EnemyInstance : ICombatant
             PrimaryTargetOverride = state.Player,
             AllEnemies = state.Enemies,
         };
-        return EffectRunner.Preview(action.effects, context);
-    }
-
-    public int? GetIntentDamageAmount()
-    {
-        var preview = GetIntentPreview();
+        var preview = EffectRunner.Preview(action.effects, context);
+        damagePerHit = preview.DamagePerHit;
+        hitCount = preview.HitCount;
         return preview.HasDamage ? preview.TotalDamage : null;
     }
 

@@ -12,15 +12,20 @@ public class IntentTooltipTrigger : MonoBehaviour
     private IReadOnlyList<IntentType> _intents = System.Array.Empty<IntentType>();
     private RectTransform _anchor;
     private int? _damage;
+    private int? _damagePerHit;
+    private int _hitCount;
     private bool _shown;
     private RectTransform _group;
     private readonly List<IntentTooltipView> _items = new();
 
     // EnemyView가 실제로 표시한 의도 목록을 전달하여 아이콘과 설명을 일치시킨다.
-    public void SetOwner(EnemyInstance enemy, int? damage, IReadOnlyList<IntentType> intents, RectTransform anchor)
+    public void SetOwner(EnemyInstance enemy, int? damage, IReadOnlyList<IntentType> intents, RectTransform anchor,
+        int hitCount = 1, int? damagePerHit = null)
     {
         _enemy = enemy;
         _damage = damage;
+        _damagePerHit = damagePerHit;
+        _hitCount = hitCount;
         _intents = intents;
         _anchor = anchor;
         if (_shown) Show();
@@ -44,7 +49,8 @@ public class IntentTooltipTrigger : MonoBehaviour
         {
             if (count == _items.Count) _items.Add(Instantiate(tooltipPrefab, _group));
             var item = _items[count++];
-            Describe(type, type == IntentType.Attack ? _damage : null, out string title, out string description);
+            Describe(type, type == IntentType.Attack ? _damage : null, _damagePerHit, _hitCount,
+                out string title, out string description);
             item.Bind(view != null ? view.GetIntentSprite(type) : null, title, description);
             item.gameObject.SetActive(true);
         }
@@ -83,14 +89,23 @@ public class IntentTooltipTrigger : MonoBehaviour
 
     private void OnDisable() => Hide();
 
-    private static void Describe(IntentType type, int? damage, out string title, out string description)
+    private static void Describe(IntentType type, int? damage, int? damagePerHit, int hitCount,
+        out string title, out string description)
     {
         switch (type)
         {
             case IntentType.Attack:
                 title = "공격";
                 description = "이 적은 플레이어를 공격하려 하고 있습니다.";
-                if (damage.HasValue) description += $" <b>{damage.Value}</b>의 피해를 줍니다.";
+                if (damage.HasValue)
+                {
+                    if (hitCount > 1 && damagePerHit.HasValue)
+                        description += $" <b>{damagePerHit.Value}</b>의 피해를 <b>{hitCount}</b>번 입힙니다.";
+                    else if (hitCount > 1)
+                        description += $" 총 <b>{damage.Value}</b>의 피해를 <b>{hitCount}</b>번에 걸쳐 입힙니다.";
+                    else
+                        description += $" <b>{damage.Value}</b>의 피해를 입힙니다.";
+                }
                 break;
             case IntentType.Defend:
                 title = "방어";
@@ -102,7 +117,7 @@ public class IntentTooltipTrigger : MonoBehaviour
                 break;
             case IntentType.Debuff:
                 title = "약화";
-                description = "이 적은 플레이어에게 약화 효과를 부여하려 하고 있습니다.";
+                description = "이 적은 플레이어에게 디버프를 부여하려 하고 있습니다.";
                 break;
             default:
                 title = "대기";
