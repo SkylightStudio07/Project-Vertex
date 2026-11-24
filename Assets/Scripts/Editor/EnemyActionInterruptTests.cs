@@ -6,6 +6,15 @@ using UnityEngine;
 // 방어도 파괴 상태: 피격 즉시 행동 교체, 다음 행동 전 만료, 패턴 진행을 검증한다.
 public class EnemyActionInterruptTests
 {
+    private sealed class BlockGainProbe : StatusBehavior
+    {
+        public int Calls;
+        public override int ModifyBlockGain(StatusInstance status, int amount, ICombatant owner)
+        {
+            Calls++;
+            return amount + 2;
+        }
+    }
     private readonly List<Object> _assets = new();
     private EnemyAction _prepare, _attack, _conflict, _recovery;
     private StatusDefinition _synchronizing;
@@ -270,7 +279,7 @@ public class EnemyActionInterruptTests
     }
 
     [Test]
-    public void AttackAndBlockPreview_ShowsBothValuesWithoutExecutingEffects()
+    public void AttackAndBlockPreview_ShowsAttackValueAndDefenseCategory()
     {
         var target = new EnemyInstance(_data);
         _attack.effects = new List<CardEffect>
@@ -282,28 +291,30 @@ public class EnemyActionInterruptTests
             State = _state, ActingEnemy = _enemy, PrimaryTargetOverride = target
         });
         Assert.AreEqual(6, preview.TotalDamage);
-        Assert.AreEqual(6, preview.GetBlockGain(_enemy));
-        Assert.AreEqual(0, preview.GetBlockGain(target));
+        Assert.IsTrue(preview.HasSelfBlock);
         Assert.AreEqual(0, _enemy.Block, "의도 미리보기는 방어도를 실제로 부여하면 안 됩니다.");
         Assert.AreEqual(100, target.HP);
     }
 
     [Test]
-    public void BlockPreview_UsesTheSameStatusModifierAsExecution()
+    public void BlockIntentPreview_DoesNotCalculateOrGrantBlock()
     {
         var modifier = Asset<StatusDefinition>();
+        var probe = new BlockGainProbe();
         typeof(StatusDefinition).GetField("behaviors", BindingFlags.Instance | BindingFlags.NonPublic)
             .SetValue(modifier, new List<StatusBehavior>
             {
-                new BlockModifierStatusBehavior { magnitudeSource = StatusMagnitudeSource.Constant, constantAmount = 2 }
+                probe
             });
         _enemy.AddPassive(modifier.CreateInstance(1));
         var effect = new BlockEffect { amount = 6 };
         var context = new CardContext { State = _state, ActingEnemy = _enemy };
         var preview = EffectRunner.Preview(new[] { effect }, context);
-        Assert.AreEqual(8, preview.GetBlockGain(_enemy));
+        Assert.IsTrue(preview.HasSelfBlock);
+        Assert.AreEqual(0, probe.Calls, "의도 표시에서는 실제 방어도 보정 계산을 실행하지 않습니다.");
         Assert.AreEqual(0, _enemy.Block);
         effect.Execute(context);
+        Assert.AreEqual(1, probe.Calls);
         Assert.AreEqual(8, _enemy.Block);
     }
 

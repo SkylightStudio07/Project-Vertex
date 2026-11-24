@@ -32,22 +32,12 @@ public class IntentTooltipTrigger : MonoBehaviour
         _shown = true;
         var preview = _enemy.GetIntentPreview();
         int? damage = preview.HasDamage ? preview.TotalDamage : null;
-        int block = preview.GetBlockGain(_enemy);
         Describe(action.intentType, damage, out string title, out string desc);
-        if (damage.HasValue && block > 0)
+        if (damage.HasValue && preview.HasSelfBlock)
         {
             title = "공격 / 방어";
-            desc = $"플레이어에게 <b>{damage.Value}</b>의 피해를 주고 방어도를 <b>{block}</b> 얻습니다.";
+            desc = $"플레이어에게 <b>{damage.Value}</b>의 피해를 주고 방어도를 얻으려 하고 있습니다.";
         }
-        else if (block > 0)
-            desc = $"이 적은 방어도를 <b>{block}</b> 얻으려 하고 있습니다.";
-
-        // 행동 고유 이름을 의도 분류로 쓰지 않고, 실제로 얻을 상태만 덧붙인다.
-        if (action.effects != null)
-            foreach (var effect in action.effects)
-                if (effect is ApplyStatusEffect apply && apply.status != null &&
-                    apply.targets.mode == EffectTargetMode.Source && apply.operation == StatusStackOperation.Add)
-                    desc += $"\n자신에게 {apply.status.DisplayName} {apply.amount} 부여. {apply.status.Description}";
         if (_enemy.IsStunned)
         {
             title = "기절";

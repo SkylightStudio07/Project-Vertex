@@ -402,7 +402,7 @@ public class EnemyInstance : ICombatant
         return next;
     }
 
-    // 의도는 실행 효과와 같은 미리보기에서 공격·방어를 함께 읽는다. 전투 상태는 변경하지 않는다.
+    // 의도는 실행 효과에서 공격 수치와 방어 행동 여부를 읽는다. 전투 상태는 변경하지 않는다.
     public EffectPreview GetIntentPreview(BattleState state = null)
     {
         var action = GetCurrentAction();

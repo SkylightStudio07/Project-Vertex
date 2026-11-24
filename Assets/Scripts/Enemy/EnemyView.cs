@@ -174,7 +174,8 @@ public class EnemyView : MonoBehaviour
         if (_secondaryIntentIcon != null && _secondaryIntentIcon.gameObject.activeSelf)
         {
             _secondaryIntentIcon.rectTransform.anchoredPosition = _secondaryIntentIconBasePos + new Vector2(0f, offsetY);
-            _secondaryIntentValue.rectTransform.anchoredPosition = _secondaryIntentValueBasePos + new Vector2(0f, offsetY);
+            if (_secondaryIntentValue != null && _secondaryIntentValue.gameObject.activeSelf)
+                _secondaryIntentValue.rectTransform.anchoredPosition = _secondaryIntentValueBasePos + new Vector2(0f, offsetY);
         }
         for (int i = 0; i < _lookaheadRects.Count && i < _lookaheadBasePositions.Count; i++)
             if (_lookaheadRects[i] != null)
@@ -896,8 +897,7 @@ public class EnemyView : MonoBehaviour
         EnemyAction action = Instance.GetCurrentAction();
         var preview = Instance.GetIntentPreview();
         int? damage = preview.HasDamage ? preview.TotalDamage : null;
-        int block = preview.GetBlockGain(Instance);
-        int? primaryValue = action?.intentType == IntentType.Defend && block > 0 ? block : damage;
+        int? primaryValue = action?.intentType == IntentType.Defend ? null : damage;
 
         // 인텐트 아이콘 호버 툴팁 — 대상 적/내용 갱신 (프리팹에 IntentTooltipTrigger가 붙어 있을 때만)
         if (intentIcon != null && intentIcon.TryGetComponent<IntentTooltipTrigger>(out var tooltip))
@@ -916,36 +916,34 @@ public class EnemyView : MonoBehaviour
             if (primaryValue.HasValue) intentValueText.text = primaryValue.Value.ToString();
         }
         ApplyIntentTier(damage);
-        if (damage.HasValue && block > 0 &&
+        if (damage.HasValue && preview.HasSelfBlock &&
             (action.intentType == IntentType.Attack || action.intentType == IntentType.Defend))
             ShowSecondaryIntent(action.intentType == IntentType.Defend ? IntentType.Attack : IntentType.Defend,
-                action.intentType == IntentType.Defend ? damage.Value : block);
+                action.intentType == IntentType.Defend ? damage : null);
         else
             HideSecondaryIntent();
 
         RefreshLookaheadIcons();
     }
 
-    private Vector2 PrimaryIntentHorizontalBounds()
+    private Vector2 IntentHorizontalBounds(RectTransform icon, TextMeshProUGUI value)
     {
-        var parent = _intentIconRect.parent;
-        float origin = parent.InverseTransformPoint(_intentIconRect.position).x;
-        float left = parent.InverseTransformPoint(_intentIconRect.TransformPoint(
-            new Vector3(_intentIconRect.rect.xMin, 0f, 0f))).x - origin;
-        float right = parent.InverseTransformPoint(_intentIconRect.TransformPoint(
-            new Vector3(_intentIconRect.rect.xMax, 0f, 0f))).x - origin;
-        if (intentValueText != null && intentValueText.gameObject.activeSelf)
+        var parent = icon.parent;
+        float origin = parent.InverseTransformPoint(icon.position).x;
+        float left = parent.InverseTransformPoint(icon.TransformPoint(new Vector3(icon.rect.xMin, 0f, 0f))).x - origin;
+        float right = parent.InverseTransformPoint(icon.TransformPoint(new Vector3(icon.rect.xMax, 0f, 0f))).x - origin;
+        if (value != null && value.gameObject.activeSelf)
         {
             // 서로 다른 앵커와 자동 글자 크기를 반영해 실제 그려지는 글자 경계로 간격을 잡는다.
-            intentValueText.ForceMeshUpdate();
-            var bounds = intentValueText.textBounds;
-            left = Mathf.Min(left, parent.InverseTransformPoint(_intentValueRect.TransformPoint(bounds.min)).x - origin);
-            right = Mathf.Max(right, parent.InverseTransformPoint(_intentValueRect.TransformPoint(bounds.max)).x - origin);
+            value.ForceMeshUpdate();
+            var bounds = value.textBounds;
+            left = Mathf.Min(left, parent.InverseTransformPoint(value.rectTransform.TransformPoint(bounds.min)).x - origin);
+            right = Mathf.Max(right, parent.InverseTransformPoint(value.rectTransform.TransformPoint(bounds.max)).x - origin);
         }
         return new Vector2(left, right);
     }
 
-    private void ShowSecondaryIntent(IntentType type, int value)
+    private void ShowSecondaryIntent(IntentType type, int? value)
     {
         if (intentIcon == null || intentValueText == null) return;
         if (_secondaryIntentIcon == null)
@@ -964,6 +962,9 @@ public class EnemyView : MonoBehaviour
             _secondaryIntentIcon.preserveAspect = intentIcon.preserveAspect;
             _secondaryIntentIcon.material = intentIcon.material;
             _secondaryIntentIcon.raycastTarget = false;
+        }
+        if (_secondaryIntentValue == null && value.HasValue)
+        {
             _secondaryIntentValue = Instantiate(intentValueText, intentValueText.transform.parent);
             _secondaryIntentValue.name = "SecondaryIntentValue";
             _secondaryIntentValue.rectTransform.localScale = _intentValueScale;
@@ -971,16 +972,24 @@ public class EnemyView : MonoBehaviour
         }
         _secondaryIntentIcon.sprite = GetIntentSprite(type);
         _secondaryIntentIcon.color = _intentIconColor;
-        _secondaryIntentValue.color = _intentValueColor;
-        _secondaryIntentValue.text = value.ToString();
         _secondaryIntentIcon.gameObject.SetActive(_secondaryIntentIcon.sprite != null);
-        _secondaryIntentValue.gameObject.SetActive(_secondaryIntentIcon.sprite != null);
-        var bounds = PrimaryIntentHorizontalBounds();
-        _secondaryIntentOffset = bounds.y - bounds.x + 14f;
+        if (_secondaryIntentValue != null)
+        {
+            _secondaryIntentValue.color = _intentValueColor;
+            _secondaryIntentValue.gameObject.SetActive(value.HasValue && _secondaryIntentIcon.sprite != null);
+            if (value.HasValue) _secondaryIntentValue.text = value.Value.ToString();
+            _secondaryIntentValue.rectTransform.anchoredPosition = _intentValueBasePos;
+        }
+        _secondaryIntentIcon.rectTransform.anchoredPosition = _intentIconBasePos;
+        var primaryBounds = IntentHorizontalBounds(_intentIconRect, intentValueText);
+        var secondaryBounds = IntentHorizontalBounds(_secondaryIntentIcon.rectTransform, _secondaryIntentValue);
+        _secondaryIntentOffset = Mathf.Max(primaryBounds.y - primaryBounds.x + 14f,
+            primaryBounds.y - secondaryBounds.x + 14f);
         _secondaryIntentIconBasePos = _intentIconBasePos + Vector2.right * _secondaryIntentOffset;
         _secondaryIntentValueBasePos = _intentValueBasePos + Vector2.right * _secondaryIntentOffset;
         _secondaryIntentIcon.rectTransform.anchoredPosition = _secondaryIntentIconBasePos;
-        _secondaryIntentValue.rectTransform.anchoredPosition = _secondaryIntentValueBasePos;
+        if (_secondaryIntentValue != null)
+            _secondaryIntentValue.rectTransform.anchoredPosition = _secondaryIntentValueBasePos;
     }
 
     private void HideSecondaryIntent()
@@ -1072,9 +1081,9 @@ public class EnemyView : MonoBehaviour
         _lookaheadBasePositions.Clear();
         float currentWidth = Mathf.Abs(_intentIconRect.rect.width * _intentIconRect.localScale.x);
         float spacing = Mathf.Max(24f, currentWidth * 0.72f);
-        float rightExtent = PrimaryIntentHorizontalBounds().y;
+        float rightExtent = IntentHorizontalBounds(_intentIconRect, intentValueText).y;
         if (_secondaryIntentIcon != null && _secondaryIntentIcon.gameObject.activeSelf)
-            rightExtent += _secondaryIntentOffset;
+            rightExtent = _secondaryIntentOffset + IntentHorizontalBounds(_secondaryIntentIcon.rectTransform, _secondaryIntentValue).y;
         for (int i = 0; i < _lookaheadRects.Count; i++)
         {
             Vector2 basePosition = _intentIconBasePos + new Vector2(rightExtent + spacing * (i + 1), 0f);
