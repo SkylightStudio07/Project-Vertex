@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
-  m_Name: "\uB4A4\uAD6C\uB974\uAE30"
+  m_Name: "\uC815\uCC30"
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
   CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
@@ -20,12 +20,12 @@ MonoBehaviour:
   isWeaponShootingCard: 0
   cardDescription: "\uCE74\uB4DC\uB97C {0.count}\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4.
     \uBB34\uAE30\uB97C \uC800\uACA9\uCD1D\uC73C\uB85C \uAD50\uCCB4\uD569\uB2C8\uB2E4."
-  useMode: 1
+  useMode: 0
   playCondition:
     rid: -2
   isUpgraded: 0
   normalState:
-    cardName: "\uB4A4\uAD6C\uB974\uAE30"
+    cardName: "\uC815\uCC30"
     energyCost: 1
     ammoCost: 0
     effects:
@@ -36,12 +36,12 @@ MonoBehaviour:
     isInnate: 0
     isRetain: 0
   upgradedState:
-    cardName: "\uB4A4\uAD6C\uB974\uAE30+"
+    cardName: "\uC815\uCC30+"
     energyCost: 1
     ammoCost: 0
     effects:
-    - rid: 352448974954430588
-    - rid: 352448974954430589
+    - rid: 352448997217796222
+    - rid: 352448997217796223
     isExhaust: 0
     isEthereal: 0
     isInnate: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
           multiplier: 0
           flatBonus: 0
           percent: 0
-    - rid: 352448974954430588
+    - rid: 352448997217796222
       type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
       data:
         count: 3
@@ -75,7 +75,7 @@ MonoBehaviour:
           multiplier: 0
           flatBonus: 0
           percent: 0
-    - rid: 352448974954430589
+    - rid: 352448997217796223
       type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
       data:
         weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}

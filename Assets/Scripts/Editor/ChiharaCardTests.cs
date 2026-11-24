@@ -19,7 +19,7 @@ public class ChiharaCardTests
 
     private static void Singleton(Type type, object value) => type.GetProperty("Instance").SetValue(null, value);
     private void SetHP(int hp) => typeof(GameManager).GetProperty("PlayerHP").SetValue(_game, hp);
-    private static CardData Card(string id) => AssetDatabase.LoadAssetAtPath<CardData>($"{Cards}CH_01_{id}.asset");
+    private static CardData Card(string id) => TestAssetLookup.CardByPrefix(Cards, $"CH_01_{id}");
     private static StatusDefinition Def(string path) => AssetDatabase.LoadAssetAtPath<StatusDefinition>($"Assets/Data/Status/{path}.asset");
 
     [SetUp]

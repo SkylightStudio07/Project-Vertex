@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed94517fa0815409fca98833d909fb, type: 3}
+  m_Name: "\uCE58\uACE0 \uBE60\uC9C0\uAE30"
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardImage: {fileID: -3665716920279922390, guid: 9561382ed2bc7c8459abb71b5eb568bb, type: 3}
+  CardBackground: {fileID: 21300000, guid: 502d3d549eaa8524f86c10abb442105f, type: 3}
+  cardType: 0
+  cardRarity: 0
+  cardOwner: 0
+  isWeaponShootingCard: 0
+  cardDescription: "\uD53C\uD574\uB97C {0.amount} \uC90D\uB2C8\uB2E4. \uD604\uC7AC
+    \uBB34\uAE30\uAC00 \uC800\uACA9\uCD1D\uC774\uB77C\uBA74, \uC7AC\uC7A5\uC804\uD569\uB2C8\uB2E4."
+  useMode: 1
+  playCondition:
+    rid: -2
+  isUpgraded: 0
+  normalState:
+    cardName: "\uCE58\uACE0 \uBE60\uC9C0\uAE30"
+    energyCost: 1
+    ammoCost: 1
+    effects:
+    - rid: 352448981144174594
+    - rid: 352448983060447317
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  upgradedState:
+    cardName: "\uCE58\uACE0 \uBE60\uC9C0\uAE30+"
+    energyCost: 1
+    ammoCost: 1
+    effects:
+    - rid: 352448983060447328
+    - rid: 352448983060447329
+    isExhaust: 0
+    isEthereal: 0
+    isInnate: 0
+    isRetain: 0
+  useAnimation: {fileID: 0}
+  useSFX: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 352448981144174594
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 8
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        conditionalBonuses: []
+        hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        targets:
+          mode: 1
+        piercing: 0
+        environmentalDamage: 0
+        hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0
+    - rid: 352448983060447317
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 352448983060447318
+        effectsWhenMet:
+        - rid: 352448983060447319
+    - rid: 352448983060447318
+      type: {class: PlayerWeaponCondition, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}
+    - rid: 352448983060447319
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effectsWhenEmpty: []
+    - rid: 352448983060447328
+      type: {class: DamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 12
+        scaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        conditionalBonuses: []
+        hitCount: 1
+        hitCountScaling:
+          source: 0
+          target: 0
+          status: {fileID: 0}
+          multiplier: 0
+          flatBonus: 0
+          percent: 0
+        targets:
+          mode: 1
+        piercing: 0
+        environmentalDamage: 0
+        hitInterval: 0.08
+        onKillEffects: []
+        effectiveAgainst: 0
+    - rid: 352448983060447329
+      type: {class: ConditionalEffect, ns: , asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 352448983060447330
+        effectsWhenMet:
+        - rid: 352448983060447331
+    - rid: 352448983060447330
+      type: {class: PlayerWeaponCondition, ns: , asm: Assembly-CSharp}
+      data:
+        weapon: {fileID: 11400000, guid: ec4e99c9007ceb64fbe64bb30f76d3ad, type: 2}
+    - rid: 352448983060447331
+      type: {class: ReloadAmmoEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effectsWhenEmpty: []

@@ -5,7 +5,7 @@ using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
-// 다음 공격 카드 강화: 활력(덧셈) + 정조준(×2, 저격총일 때 카드가 추가로 건다).
+// 다음 공격 카드 강화 (정신 집중): 활력(덧셈) + 배율 상태(×1.5, 저격총일 때 카드가 추가로 건다).
 // 합 → 곱 순서, 플레이어 공격 카드가 끝나면 둘 다 소모.
 public class NextAttackEmpowerTests
 {
@@ -109,15 +109,15 @@ public class NextAttackEmpowerTests
     }
 
     [Test]
-    public void Double_AppliesAfterAllAdditions_ThenConsumed()
+    public void Multiplier_AppliesAfterAllAdditions_ThenConsumed()
     {
         _state.Player.AddPassive(AssetDatabase.LoadAssetAtPath<StatusDefinition>(StrengthPath).CreateInstance(3));
         _state.Player.AddPassive(_vigor.CreateInstance(4));
         _state.Player.AddPassive(_double.CreateInstance(1));
 
-        Assert.AreEqual((10 + 4 + 3) * 2, Play(Attack(10)), "(기본 10 + 활력 4 + 힘 3) × 2");
+        Assert.AreEqual(24, Play(Attack(9)), "(기본 9 + 활력 4 + 힘 3) × 1.5");
         Assert.IsFalse(_state.Player.Statuses.Has(_double));
-        Assert.AreEqual(10 + 3, Play(Attack(10)), "소모 후엔 힘만");
+        Assert.AreEqual(9 + 3, Play(Attack(9)), "소모 후엔 힘만");
     }
 
     [Test]
@@ -135,7 +135,7 @@ public class NextAttackEmpowerTests
     {
         _state.ChangePlayerWeapon(AssetDatabase.LoadAssetAtPath<WeaponData>(SniperPath));
         Play(EmpowerCard(4));
-        Assert.AreEqual((10 + 4) * 2, Play(Attack(10)));
+        Assert.AreEqual(21, Play(Attack(10)), "(10 + 활력 4) × 1.5");
     }
 
     [Test]
