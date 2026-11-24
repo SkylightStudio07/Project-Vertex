@@ -35,6 +35,8 @@ MonoBehaviour:
     minFloorIndex: 5
   noConsecutiveTypes: 040000000300000002000000
   forbidSiblingDuplicates: 0
+  minRestsPerPath: 1
+  minElitesPerPath: 1
   normalEncounterPool:
   - {fileID: 11400000, guid: a46c476622c953968d16d85334612307, type: 2}
   - {fileID: 11400000, guid: edd1226cc9ba5fdfba53b7e0148deb96, type: 2}
@@ -42,6 +44,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5fcab9c7f30759fd8f08783dca01176a, type: 2}
   - {fileID: 11400000, guid: 55b9db48196c516ea1d4545e26407553, type: 2}
   - {fileID: 11400000, guid: 58b6528c5d29ef34481f1a513b07c14d, type: 2}
+  - {fileID: 11400000, guid: 28bfea9e2fb8b304ab60e6bb77e2499b, type: 2}
+  - {fileID: 11400000, guid: 4b0a8efec5e7b7e4f957b3b0ab14d474, type: 2}
+  - {fileID: 11400000, guid: 4968a5ad8de63fd46863d48a04b88998, type: 2}
   eliteEncounterPool:
   - {fileID: 11400000, guid: 7f6d6ab52f05e79459370dc7a92d28a3, type: 2}
   - {fileID: 11400000, guid: ba082de310bba1c4185f86ec35d98738, type: 2}

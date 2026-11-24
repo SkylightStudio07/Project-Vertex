@@ -93,11 +93,33 @@ public class EnemyInstance : ICombatant
 
     public void NotifyIntentChanged() => OnIntentChanged?.Invoke();
 
+    // 예정 행동을 교체한다. 바로 다음 순서의 행동으로 교체하면 그 위치로 옮겨 중복 실행을 막는다.
+    public bool TryReplaceCurrentAction(EnemyAction expectedAction, EnemyAction replacementAction)
+    {
+        if (IsDead || expectedAction == null || replacementAction == null ||
+            expectedAction == replacementAction || _action != expectedAction) return false;
+
+        bool inOpening = CurrentOpenings != null && _openingIndex < CurrentOpenings.Count;
+        if (!inOpening && CurrentPatternType == EnemyActivityPatternType.Sequential &&
+            CurrentPatterns != null && CurrentPatterns.Count > 0)
+        {
+            int nextIndex = (_patternIndex + 1) % CurrentPatterns.Count;
+            if (CurrentPatterns[nextIndex] == replacementAction)
+                _patternIndex = nextIndex;
+        }
+
+        _action = replacementAction;
+        OnIntentChanged?.Invoke();
+        return true;
+    }
+
     // 블록 흡수 → HP 감소. 패시브 배율은 DamageCalculator가 호출 전에 이미 적용함.
     public void TakeDamage(DamageInfo info)
     {
         if (IsDead || info.Amount <= 0) return;
 
+        bool blockBroken = false;
+        int phaseBefore = _phaseIndex;
         int amount = info.Amount;
 
         if (!info.IsPiercing)
@@ -109,6 +131,7 @@ public class EnemyInstance : ICombatant
             {
                 _block -= absorbed;
                 amount -= absorbed;
+                blockBroken = _block == 0;
                 OnBlockChanged?.Invoke(_block);
                 OnBlocked?.Invoke(absorbed);
             }
@@ -126,6 +149,10 @@ public class EnemyInstance : ICombatant
             Debug.Log($"<color=#F87171>[Battle] 적 처치 완료: '{Data?.enemyName}' 사망!</color>");
             OnDied?.Invoke();
         }
+
+        // 같은 피격 안에서 즉시 알린다. 사망하거나 새 페이즈에 진입하면 그 처리를 우선한다.
+        if (!IsDead && blockBroken && _phaseIndex == phaseBefore)
+            _statuses.NotifyBlockBroken(this);
     }
 
     // 같은 전투의 다른 적이 쓰러졌을 때 BattleManager가 호출 — 동료 사망 조건 페이즈 검사용.
@@ -384,26 +411,31 @@ public class EnemyInstance : ICombatant
         return next;
     }
 
-    // Intent UI에서 공격 수치를 미리 보여주기 위한 헬퍼.
-    // GetCurrentAction()의 effects 중 DamageEffect들을 합산한다 (강화/약화 등 패시브 보정은 반영하지 않음 — TODO).
-    // DamageEffect가 없는 행동(방어/버프 등)이면 null 반환.
+    // 표시할 의도 종류는 EnemyAction에 명시하고, 효과에서는 공격 수치만 계산한다.
     public int? GetIntentDamageAmount()
+        => GetIntentDamageAmount(out _, out _);
+
+    // 총피해량은 강공격 판정에, 타격당 피해와 타수는 의도 UI 표시에 사용한다.
+    public int? GetIntentDamageAmount(out int? damagePerHit, out int hitCount)
     {
+        damagePerHit = null;
+        hitCount = 0;
         var action = GetCurrentAction();
-        if (action == null || action.effects == null) return null;
+        var state = BattleManager.Instance?.State;
+        if (action?.effects == null || state == null) return null;
 
         var context = new CardContext
         {
-            State = BattleManager.Instance?.State,
+            State = state,
             Battle = BattleManager.Instance,
             ActingEnemy = this,
             SourceOverride = this,
-            PrimaryTargetOverride = BattleManager.Instance?.State?.Player,
-            AllEnemies = BattleManager.Instance?.State?.Enemies,
+            PrimaryTargetOverride = state.Player,
+            AllEnemies = state.Enemies,
         };
-        if (context.State == null) return null;
-
         var preview = EffectRunner.Preview(action.effects, context);
+        damagePerHit = preview.DamagePerHit;
+        hitCount = preview.HitCount;
         return preview.HasDamage ? preview.TotalDamage : null;
     }
 

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class EnemyView : MonoBehaviour
@@ -34,9 +35,10 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI blockText;
 
     [Header("인텐트")]
-    [SerializeField] private Image intentIcon;
+    [SerializeField] private RectTransform intentRow;
+    [SerializeField] private IntentIconView intentIconPrefab;
+    [SerializeField] private IntentTooltipTrigger intentTooltip;
     [SerializeField] private GameObject intentField; // 단순 blob 용도
-    [SerializeField] private TextMeshProUGUI intentValueText; // 공격 수치 등. DamageEffect 없는 행동이면 숨김
     [SerializeField] private List<IntentSprite> intentSprites;
     [Header("강한 공격 인텐트 (HeavyAttack 기준: 강함 15+ / 치명 30+)")]
     [SerializeField] private float heavyIntentScale = 1.15f;
@@ -87,55 +89,39 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private float enterSlideDistance = 120f;
     [SerializeField, Min(0f)] private float enterDuration = 0.4f;
 
-    private RectTransform _intentIconRect;
-    private Vector2 _initialIntentIconPos;
-    private Vector2 _intentIconBasePos;
-
-    private RectTransform _intentValueRect;
-    private Vector2 _initialIntentValuePos;
-    private Vector2 _intentValueBasePos;
+    private Vector2 _initialIntentRowPos;
+    private Vector2 _intentRowBasePos;
 
     private RectTransform _intentFieldRect;
     private Vector2 _initialIntentFieldPos;
     private Vector2 _intentFieldBasePos;
 
-    // 자동 매핑 기기 사용 시 현재 인텐트 오른쪽에 표시되는 향후 행동 아이콘.
-    // 프리팹 직렬화 참조를 늘리지 않도록 현재 인텐트 Image의 시각 속성을 복제해 런타임 생성한다.
-    private readonly List<UnityEngine.UI.Image> _lookaheadIcons = new();
-    private readonly List<RectTransform> _lookaheadRects = new();
-    private readonly List<Vector2> _lookaheadBasePositions = new();
+    private ObjectPool<IntentIconView> _intentPool;
+    private readonly List<IntentIconView> _intentItems = new();
+    private readonly List<IntentIconView> _lookaheadItems = new();
+    private readonly List<IntentType> _intentTypes = new();
+    private float _intentAlpha = 1f;
+    private RectTransform IntentAnchor => _intentItems.Count > 0
+        ? (RectTransform)_intentItems[0].transform : intentRow;
 
     private Vector3 _enemyImageBaseScale = Vector3.one;
     private RectTransform _rect;
 
     public EnemyInstance Instance { get; private set; }
 
-    private Tween _intentPulse;
-    private Vector3 _intentIconScale = Vector3.one, _intentValueScale = Vector3.one;
-    private Color _intentIconColor = Color.white, _intentValueColor = Color.white;
-
     private void Awake()
     {
-        if (intentIcon != null) { _intentIconScale = intentIcon.rectTransform.localScale; _intentIconColor = intentIcon.color; }
-        if (intentValueText != null) { _intentValueScale = intentValueText.rectTransform.localScale; _intentValueColor = intentValueText.color; }
+        EnsureIntentPool();
         if (enemyImage != null)
         {
             _enemyImageBaseScale = enemyImage.rectTransform.localScale;
             if (_enemyImageBaseScale == Vector3.zero) _enemyImageBaseScale = Vector3.one;
         }
 
-        if (intentIcon != null)
+        if (intentRow != null)
         {
-            _intentIconRect = intentIcon.rectTransform;
-            _initialIntentIconPos = _intentIconRect.anchoredPosition;
-            _intentIconBasePos = _initialIntentIconPos;
-        }
-
-        if (intentValueText != null)
-        {
-            _intentValueRect = intentValueText.rectTransform;
-            _initialIntentValuePos = _intentValueRect.anchoredPosition;
-            _intentValueBasePos = _initialIntentValuePos;
+            _initialIntentRowPos = intentRow.anchoredPosition;
+            _intentRowBasePos = _initialIntentRowPos;
         }
 
         if (intentField != null)
@@ -153,21 +139,17 @@ public class EnemyView : MonoBehaviour
 
     private void Update()
     {
-        if (_intentIconRect == null || !intentIcon.enabled) return;
+        if (intentRow == null || _intentItems.Count == 0) return;
 
         // Sin(시간 * 속도) → -1~+1을 반복하는 값. 여기에 진폭을 곱하면 -amplitude~+amplitude(px) 범위의 오프셋이 된다.
         // 예) bobAmplitude=6, bobSpeed=2 → 초당 약 0.3회 진동, 최대 ±6px 위아래로 움직임.
         float offsetY = Mathf.Sin(Time.time * bobSpeed) * bobAmplitude;
 
         // 기준 위치에 오프셋을 더한다. 기준점을 고정해야 오프셋이 누적되지 않는다.
-        _intentIconRect.anchoredPosition = _intentIconBasePos + new Vector2(0f, offsetY);
-        if (_intentValueRect != null)
-            _intentValueRect.anchoredPosition = _intentValueBasePos + new Vector2(0f, offsetY);
+        if (intentRow != null)
+            intentRow.anchoredPosition = _intentRowBasePos + new Vector2(0f, offsetY);
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _intentFieldBasePos + new Vector2(0f, offsetY);
-        for (int i = 0; i < _lookaheadRects.Count && i < _lookaheadBasePositions.Count; i++)
-            if (_lookaheadRects[i] != null)
-                _lookaheadRects[i].anchoredPosition = _lookaheadBasePositions[i] + new Vector2(0f, offsetY);
     }
 
     public void Bind(EnemyInstance instance)
@@ -239,13 +221,11 @@ public class EnemyView : MonoBehaviour
         // 스프라이트 박스(Image rect) 위 끝을 기준으로 하면, 시트 프레임 위쪽의 투명 여백만큼 붕 떠서
         // 화면 위쪽(DECK 버튼 근처)에 뜨게 된다. 스프라이트의 Tight 메시에서 불투명 영역 위 끝을 구해 쓴다.
         float deltaY = extraOffsetY;
-        if (_intentIconRect != null && enemyImage != null && TryGetVisibleTopLocal(out float visibleTop))
+        if (intentRow != null && enemyImage != null && TryGetVisibleTopLocal(out float visibleTop))
         {
-            // 아이콘 아래 끝이 그림 위 끝 + intentGap 에 오도록, 초기 배치 기준의 이동량을 구한다
-            // 아이콘에 localScale(현재 0.2)이 걸려 있어 부모 좌표 기준 높이는 rect × scale 이다
-            float iconBottomAtInitial = _initialIntentIconPos.y
-                                        - _intentIconRect.rect.height * _intentIconRect.pivot.y * _intentIconRect.localScale.y;
-            deltaY += visibleTop + intentGap - iconBottomAtInitial;
+            // 항목 간격은 LayoutGroup이 담당하고, 묶음 전체만 적의 실제 머리 위에 맞춘다.
+            float rowBottomAtInitial = _initialIntentRowPos.y - intentRow.rect.height * intentRow.pivot.y;
+            deltaY += visibleTop + intentGap - rowBottomAtInitial;
         }
         else
         {
@@ -255,18 +235,14 @@ public class EnemyView : MonoBehaviour
             deltaY += spriteHeight * pivotTopFactor * (scale - 1.0f);
         }
 
-        _intentIconBasePos = _initialIntentIconPos + new Vector2(0f, deltaY);
-        _intentValueBasePos = _initialIntentValuePos + new Vector2(0f, deltaY);
+        _intentRowBasePos = _initialIntentRowPos + new Vector2(0f, deltaY);
         if (_intentFieldRect != null)
             _intentFieldBasePos = _initialIntentFieldPos + new Vector2(0f, deltaY);
 
-        if (_intentIconRect != null)
-            _intentIconRect.anchoredPosition = _intentIconBasePos;
-        if (_intentValueRect != null)
-            _intentValueRect.anchoredPosition = _intentValueBasePos;
+        if (intentRow != null)
+            intentRow.anchoredPosition = _intentRowBasePos;
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _intentFieldBasePos;
-        LayoutLookaheadIcons();
     }
 
     // 시트 안에서 캐릭터가 한쪽으로 치우쳐 그려져도(노상강도) HP 바 · 상태 줄이 보이는 몸 가운데 아래에 오게 가로만 맞춘다.
@@ -383,23 +359,20 @@ public class EnemyView : MonoBehaviour
             if (status != null) status.anchoredPosition = hpBar.anchoredPosition + statusOffset;
         }
 
-        // INTENT — 아이콘 아래 끝이 기준점 + intentGap에 오도록. 수치·blob은 아이콘과의 처음 간격 유지
-        if (_intentIconRect != null && _intentIconRect.parent is RectTransform parent)
+        // 의도 묶음 아래 끝을 보스 그림의 기준점에 맞춘다. 내부 정렬은 LayoutGroup이 담당한다.
+        if (intentRow != null && intentRow.parent is RectTransform parent)
         {
             Vector2 local = parent.InverseTransformPoint(SpritePoint(data.intentAnchor));
-            Vector2 anchorRef = Vector2.Lerp(_intentIconRect.anchorMin, _intentIconRect.anchorMax, 0.5f);
+            Vector2 anchorRef = Vector2.Lerp(intentRow.anchorMin, intentRow.anchorMax, 0.5f);
             local -= new Vector2(parent.rect.xMin + parent.rect.width * anchorRef.x, parent.rect.yMin + parent.rect.height * anchorRef.y);
-            float halfBelow = _intentIconRect.rect.height * _intentIconRect.pivot.y * _intentIconRect.localScale.y;
-            Vector2 iconPos = local + new Vector2(0f, intentGap + halfBelow);
+            float halfBelow = intentRow.rect.height * intentRow.pivot.y;
+            Vector2 rowPos = local + new Vector2(0f, intentGap + halfBelow);
 
-            Vector2 shift = iconPos - _initialIntentIconPos;
-            _intentIconBasePos = iconPos;
-            _intentValueBasePos = _initialIntentValuePos + shift;
+            Vector2 shift = rowPos - _initialIntentRowPos;
+            _intentRowBasePos = rowPos;
             if (_intentFieldRect != null) _intentFieldBasePos = _initialIntentFieldPos + shift;
-            _intentIconRect.anchoredPosition = _intentIconBasePos;
-            if (_intentValueRect != null) _intentValueRect.anchoredPosition = _intentValueBasePos;
+            intentRow.anchoredPosition = _intentRowBasePos;
             if (_intentFieldRect != null) _intentFieldRect.anchoredPosition = _intentFieldBasePos;
-            LayoutLookaheadIcons();
         }
     }
 
@@ -426,18 +399,23 @@ public class EnemyView : MonoBehaviour
         float localTop = r.center.y - drawnH * 0.5f + normalized * drawnH; // Image 로컬
 
         Vector3 world = enemyImage.rectTransform.TransformPoint(new Vector3(r.center.x, localTop, 0f));
-        var parent = _intentIconRect.parent as RectTransform;
+        var parent = intentRow.parent as RectTransform;
         top = parent != null ? parent.InverseTransformPoint(world).y : world.y;
         // anchoredPosition 기준으로 맞추기 위해 앵커 오프셋을 뺀다 (앵커가 부모 중앙이 아닐 때 대비)
         if (parent != null)
         {
-            Vector2 anchorRef = Vector2.Lerp(_intentIconRect.anchorMin, _intentIconRect.anchorMax, 0.5f);
+            Vector2 anchorRef = Vector2.Lerp(intentRow.anchorMin, intentRow.anchorMax, 0.5f);
             top -= parent.rect.yMin + parent.rect.height * anchorRef.y;
         }
         return true;
     }
 
-    private void OnDestroy() => Unbind();
+    private void OnDestroy()
+    {
+        Unbind();
+        ClearIntentViews();
+        _intentPool?.Dispose();
+    }
 
     // 적 턴에 행동을 시작하면 인텐트를 잠깐 가리고 그 자리에 행동 이름을 띄운다.
     private void ShowActionName()
@@ -446,7 +424,7 @@ public class EnemyView : MonoBehaviour
         if (actionNameText == null || action == null || string.IsNullOrWhiteSpace(action.DisplayName)) return;
 
         actionNameText.text = action.DisplayName;
-        if (_intentIconRect != null) actionNameText.rectTransform.position = _intentIconRect.position;
+        if (IntentAnchor != null) actionNameText.rectTransform.position = IntentAnchor.position;
 
         SetIntentAlpha(0f);
         actionNameText.DOKill();
@@ -465,8 +443,9 @@ public class EnemyView : MonoBehaviour
 
     private void SetIntentAlpha(float alpha)
     {
-        if (intentIcon != null) { var c = intentIcon.color; c.a = alpha; intentIcon.color = c; }
-        if (intentValueText != null) intentValueText.alpha = alpha;
+        _intentAlpha = alpha;
+        foreach (var item in _intentItems) item.SetAlpha(alpha);
+        foreach (var item in _lookaheadItems) item.SetAlpha(alpha);
     }
 
     // 페이즈 전환: 적이 움찔 커졌다 돌아오며 붉게 번쩍이고, 전환 대사가 인텐트 위에 잠깐 떠오른다.
@@ -483,9 +462,9 @@ public class EnemyView : MonoBehaviour
         if (phaseLineText == null || phase == null || string.IsNullOrWhiteSpace(phase.transitionLine)) return;
         phaseLineText.text = phase.transitionLine;
         var lineRect = phaseLineText.rectTransform;
-        if (_intentIconRect != null)
+        if (IntentAnchor != null)
         {
-            lineRect.position = _intentIconRect.position;
+            lineRect.position = IntentAnchor.position;
             lineRect.anchoredPosition += new Vector2(0f, 13f); // 루트가 3배라 화면상 약 40px 위
         }
         phaseLineText.DOKill();
@@ -514,18 +493,15 @@ public class EnemyView : MonoBehaviour
             enemyImage.rectTransform.localScale = _enemyImageBaseScale;
         }
 
-        _intentIconBasePos = _initialIntentIconPos;
-        _intentValueBasePos = _initialIntentValuePos;
+        _intentRowBasePos = _initialIntentRowPos;
         if (_intentFieldRect != null)
             _intentFieldBasePos = _initialIntentFieldPos;
 
-        if (_intentIconRect != null)
-            _intentIconRect.anchoredPosition = _initialIntentIconPos;
-        if (_intentValueRect != null)
-            _intentValueRect.anchoredPosition = _initialIntentValuePos;
+        if (intentRow != null)
+            intentRow.anchoredPosition = _initialIntentRowPos;
         if (_intentFieldRect != null)
             _intentFieldRect.anchoredPosition = _initialIntentFieldPos;
-        HideLookaheadIcons();
+        ClearIntentViews();
     }
 
     private void Unsubscribe()
@@ -594,6 +570,7 @@ public class EnemyView : MonoBehaviour
 
     private void HandleDied()
     {
+        ClearIntentViews();
         // 격퇴 후 대화하는 적: 사라지지 않고 서 있는다 (HP · 인텐트 · 상태만 걷어낸다). 클릭은 DefeatedTalkSession이 맡는다
         if (Instance?.Data != null && Instance.Data.defeatedTalk != null && enemyImage != null)
         {
@@ -604,9 +581,7 @@ public class EnemyView : MonoBehaviour
             if (hpFill != null) hpFill.transform.parent.gameObject.SetActive(false);
             if (statusList != null) statusList.gameObject.SetActive(false);
             if (blockBadge != null) blockBadge.SetActive(false);
-            if (intentIcon != null) intentIcon.gameObject.SetActive(false);
             if (intentField != null) intentField.SetActive(false);
-            if (intentValueText != null) intentValueText.gameObject.SetActive(false);
             if (actionNameText != null) actionNameText.gameObject.SetActive(false);
             enemyImage.raycastTarget = false;
             enemyImage.DOColor(new Color(0.78f, 0.8f, 0.84f, 1f), 0.4f).SetLink(gameObject); // 숨을 고르는 듯 살짝 가라앉힌다
@@ -881,130 +856,102 @@ public class EnemyView : MonoBehaviour
     private void RefreshIntent()
     {
         if (Instance == null) return;
-
-        EnemyAction action = Instance.GetCurrentAction();
-
-        // 인텐트 아이콘 호버 툴팁 — 대상 적/내용 갱신 (프리팹에 IntentTooltipTrigger가 붙어 있을 때만)
-        if (intentIcon != null && intentIcon.TryGetComponent<IntentTooltipTrigger>(out var tooltip))
-            tooltip.SetOwner(Instance);
-
-        if (intentIcon != null)
+        var action = Instance.GetCurrentAction();
+        EnsureIntentPool();
+        if (action == null || _intentPool == null)
         {
-            Sprite sprite = action == null ? null : GetIntentSprite(action.intentType);
-            intentIcon.sprite  = sprite;
-            intentIcon.enabled = sprite != null;
-        }
-
-        if (intentValueText != null)
-        {
-            int? amount = Instance.GetIntentDamageAmount();
-            intentValueText.gameObject.SetActive(amount.HasValue);
-            if (amount.HasValue) intentValueText.text = amount.Value.ToString();
-        }
-        ApplyIntentTier(action != null ? Instance.GetIntentDamageAmount() : null);
-
-        RefreshLookaheadIcons();
-    }
-
-    // 강함: 아이콘 확대 / 치명: 더 크게 + 아이콘·숫자가 붉게 맥동
-    private void ApplyIntentTier(int? damage)
-    {
-        _intentPulse?.Kill();
-        _intentPulse = null;
-        var tier = HeavyAttack.Of(damage);
-        if (intentIcon != null)
-        {
-            float k = tier == HeavyAttack.Tier.Lethal ? lethalIntentScale : tier == HeavyAttack.Tier.Heavy ? heavyIntentScale : 1f;
-            intentIcon.rectTransform.localScale = _intentIconScale * k;
-            intentIcon.color = _intentIconColor;
-        }
-        if (intentValueText != null)
-        {
-            intentValueText.color = tier == HeavyAttack.Tier.Lethal ? lethalIntentColor : _intentValueColor;
-            intentValueText.rectTransform.localScale = _intentValueScale * (tier == HeavyAttack.Tier.Lethal ? 1.2f : 1f);
-        }
-        if (tier == HeavyAttack.Tier.Lethal && intentIcon != null)
-            _intentPulse = intentIcon.DOColor(lethalIntentColor, 0.45f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetLink(gameObject);
-    }
-
-    private void RefreshLookaheadIcons()
-    {
-        int count = BattleManager.Instance?.State?.EnemyIntentLookahead ?? 0;
-        if (Instance == null || intentIcon == null || count <= 0)
-        {
-            HideLookaheadIcons();
+            ClearIntentViews();
             return;
         }
 
-        IReadOnlyList<EnemyAction> upcoming = Instance.GetUpcomingActions(count);
-        EnsureLookaheadIconCount(upcoming.Count);
-        for (int i = 0; i < _lookaheadIcons.Count; i++)
+        int? damage = Instance.GetIntentDamageAmount(out int? damagePerHit, out int hitCount);
+        _intentTypes.Clear();
+        AddIntent(action.intentType);
+        if (action.additionalIntents != null)
+            foreach (var type in action.additionalIntents) AddIntent(type);
+
+        int lookahead = BattleManager.Instance?.State?.EnemyIntentLookahead ?? 0;
+        var upcoming = Instance.GetUpcomingActions(lookahead);
+        // 줄어든 항목부터 반납하여 다른 목록에서 필요한 항목에도 바로 재사용한다.
+        ReturnUnusedItems(_intentItems, _intentTypes.Count);
+        ReturnUnusedItems(_lookaheadItems, upcoming.Count);
+        EnsureItemCount(_intentItems, _intentTypes.Count);
+        EnsureItemCount(_lookaheadItems, upcoming.Count);
+
+        for (int i = 0; i < _intentTypes.Count; i++)
         {
-            bool visible = i < upcoming.Count;
-            var image = _lookaheadIcons[i];
-            if (image == null) continue;
-            image.gameObject.SetActive(visible);
-            if (!visible) continue;
-
-            image.sprite = GetIntentSprite(upcoming[i].intentType);
-            image.enabled = image.sprite != null;
+            var item = _intentItems[i];
+            var type = _intentTypes[i];
+            item.Bind(GetIntentSprite(type), type == IntentType.Attack ? damage : null,
+                hitCount: hitCount, damagePerHit: damagePerHit);
+            if (type == IntentType.Attack)
+                item.ApplyAttackTier(damage, heavyIntentScale, lethalIntentScale, lethalIntentColor);
+            item.SetAlpha(_intentAlpha);
+            item.transform.SetAsLastSibling();
         }
-        LayoutLookaheadIcons();
-    }
-
-    private void EnsureLookaheadIconCount(int count)
-    {
-        while (_lookaheadIcons.Count < count)
+        for (int i = 0; i < upcoming.Count; i++)
         {
-            var go = new GameObject(
-                $"NextIntent{_lookaheadIcons.Count + 1}",
-                typeof(RectTransform),
-                typeof(CanvasRenderer),
-                typeof(UnityEngine.UI.Image));
-            go.layer = intentIcon.gameObject.layer;
-
-            var rect = go.GetComponent<RectTransform>();
-            rect.SetParent(intentIcon.transform.parent, false);
-            rect.anchorMin = _intentIconRect.anchorMin;
-            rect.anchorMax = _intentIconRect.anchorMax;
-            rect.pivot = _intentIconRect.pivot;
-            rect.sizeDelta = _intentIconRect.sizeDelta;
-            rect.localScale = _intentIconRect.localScale * 0.62f;
-            rect.SetSiblingIndex(intentIcon.transform.GetSiblingIndex() + 1 + _lookaheadIcons.Count);
-
-            var image = go.GetComponent<UnityEngine.UI.Image>();
-            image.preserveAspect = intentIcon.preserveAspect;
-            image.material = intentIcon.material;
-            image.color = new Color(intentIcon.color.r, intentIcon.color.g, intentIcon.color.b, intentIcon.color.a * 0.72f);
-            image.raycastTarget = false;
-
-            _lookaheadRects.Add(rect);
-            _lookaheadIcons.Add(image);
+            var item = _lookaheadItems[i];
+            item.Bind(GetIntentSprite(upcoming[i].intentType), null, lookahead: true);
+            item.SetAlpha(_intentAlpha);
+            item.transform.SetAsLastSibling();
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(intentRow);
+        intentTooltip?.SetOwner(Instance, damage, _intentTypes, IntentAnchor, hitCount, damagePerHit);
     }
 
-    private void LayoutLookaheadIcons()
+    private void AddIntent(IntentType type)
     {
-        if (_intentIconRect == null) return;
-        _lookaheadBasePositions.Clear();
-        float currentWidth = Mathf.Abs(_intentIconRect.rect.width * _intentIconRect.localScale.x);
-        float spacing = Mathf.Max(24f, currentWidth * 0.72f);
-        for (int i = 0; i < _lookaheadRects.Count; i++)
+        if (!_intentTypes.Contains(type)) _intentTypes.Add(type);
+    }
+
+    // 적 뷰 하나가 소유하는 작은 풀. 반환한 항목은 비활성화되므로 LayoutGroup에서 제외된다.
+    private void EnsureIntentPool()
+    {
+        if (_intentPool != null || intentIconPrefab == null || intentRow == null) return;
+        _intentPool = new ObjectPool<IntentIconView>(
+            createFunc: () => Instantiate(intentIconPrefab, intentRow),
+            actionOnGet: item => item.gameObject.SetActive(true),
+            actionOnRelease: item => item.ResetForPool(),
+            actionOnDestroy: DestroyIntentItem,
+            collectionCheck: true,
+            defaultCapacity: 4,
+            maxSize: 16);
+    }
+
+    private static void DestroyIntentItem(IntentIconView item)
+    {
+        if (item == null) return;
+        if (Application.isPlaying) Destroy(item.gameObject);
+        else DestroyImmediate(item.gameObject);
+    }
+
+    private void EnsureItemCount(List<IntentIconView> items, int count)
+    {
+        while (items.Count < count) items.Add(_intentPool.Get());
+    }
+
+    private void ReturnUnusedItems(List<IntentIconView> items, int count)
+    {
+        for (int i = items.Count - 1; i >= count; i--)
         {
-            Vector2 basePosition = _intentIconBasePos + new Vector2(spacing * (i + 1), 0f);
-            _lookaheadBasePositions.Add(basePosition);
-            if (_lookaheadRects[i] != null)
-                _lookaheadRects[i].anchoredPosition = basePosition;
+            _intentPool.Release(items[i]);
+            items.RemoveAt(i);
         }
     }
 
-    private void HideLookaheadIcons()
+    private void ClearIntentViews()
     {
-        foreach (var image in _lookaheadIcons)
-            if (image != null) image.gameObject.SetActive(false);
+        if (_intentPool != null)
+        {
+            ReturnUnusedItems(_intentItems, 0);
+            ReturnUnusedItems(_lookaheadItems, 0);
+        }
+        _intentTypes.Clear();
+        _intentAlpha = 1f;
+        intentTooltip?.SetOwner(null, null, _intentTypes, intentRow);
     }
-
-    private Sprite GetIntentSprite(IntentType type)
+    public Sprite GetIntentSprite(IntentType type)
     {
         if (intentSprites == null) return null;
         foreach (var entry in intentSprites)

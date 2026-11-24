@@ -207,13 +207,37 @@ public sealed class StatusContainer
     private void TickDurations(List<IPassiveLogic> snapshot, StatusDurationPolicy timing, ICombatant owner)
     {
         // 이번 이벤트에서 새로 등록된 인스턴스는 즉시 감소시키지 않는다. 기존 인스턴스에 병합된 수치는 감소 대상이다.
-        // 적이 적 턴에 플레이어에게 건 상태(취약 1 등)는 플레이어 턴을 지나며 바로 감소하면 적이 행동하기 전에 풀린다.
-        // 그래서 적이 건 상태는 플레이어 쪽 첫 감소를 한 번 건너뛴다 (슬더스 justApplied와 같은 규칙).
+        // 적이 플레이어에게 건 상태는 기존대로 첫 감소를 건너뛴다.
+        // 적이 자신에게 건 턴 종료 감소 상태도 부여한 행동 직후 사라지지 않도록 첫 감소를 건너뛴다.
+        // 자기 턴 시작에 감소하는 상태(동기화 중·불가침)는 다음 행동 전에 정상 만료한다.
         foreach (var passive in snapshot)
             if (passive is StatusInstance status && _entries.Contains(passive))
-                status.TickDown(timing, skipFirstTick: owner is PlayerCombatant && status.Source is EnemyInstance);
+            {
+                bool skipFirstTick = status.Source is EnemyInstance &&
+                    (owner is PlayerCombatant ||
+                     object.ReferenceEquals(status.Source, owner) && timing == StatusDurationPolicy.DecreaseOnTurnEnd);
+                status.TickDown(timing, skipFirstTick);
+            }
         RemoveExpired();
         OnChanged?.Invoke();
+    }
+
+    // 체력이 줄지 않고 방어도만 정확히 소진된 경우에도 상태에 알린다.
+    public void NotifyBlockBroken(ICombatant owner)
+    {
+        foreach (var entry in new List<IPassiveLogic>(_entries))
+        {
+            if (owner.IsDead) break;
+            if (entry is not StatusInstance status || status.IsExpired ||
+                status.Definition == null || !_entries.Contains(status)) continue;
+
+            foreach (var behavior in status.Definition.Behaviors)
+            {
+                if (owner.IsDead || status.IsExpired || !_entries.Contains(status)) break;
+                behavior?.OnBlockBroken(status, owner);
+            }
+        }
+        RemoveExpired();
     }
 
     public void NotifyAfterDamageTaken(

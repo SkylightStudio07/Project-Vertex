@@ -68,7 +68,7 @@ public sealed class StatusInstance : IPassiveLogic
     public void MultiplyMagnitude(int multiplier) => Stacks = multiplier < 0 ? Stacks : Clamp(Stacks * multiplier);
     public void RemoveAll() => Stacks = 0;
 
-    // skipFirstTick: 이 인스턴스의 첫 감소 한 번만 건너뛴다 (적이 플레이어에게 건 상태 — StatusContainer.TickDurations 참고)
+    // skipFirstTick: 이 인스턴스의 첫 감소 한 번만 건너뛴다 (적 부여 상태 — StatusContainer.TickDurations 참고)
     public void TickDown(StatusDurationPolicy timing, bool skipFirstTick = false)
     {
         if (timing != StatusDurationPolicy.DecreaseOnTurnStart && timing != StatusDurationPolicy.DecreaseOnTurnEnd) return;
