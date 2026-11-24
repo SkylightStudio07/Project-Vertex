@@ -10,6 +10,8 @@ public static class DamageCalculator
             foreach (var p in info.Source.Passives)
                 info = p.ModifyOutgoingDamage(info, state);
             info.Source.RemoveExpiredPassives();
+            // 1-1. 플레이어 카드 피해 배율 — 덧셈 보정(힘 등)을 모두 더한 뒤 곱한다 (다음 공격 카드 강화 등)
+            info = AmmoStatusEvents.ApplyDamageMultiplier(info, originContext);
         }
 
         // 2. 방어자 패시브 (Vulnerable 등)

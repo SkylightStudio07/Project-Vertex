@@ -22,6 +22,8 @@ MonoBehaviour:
     \uC800\uACA9\uCD1D\uC73C\uB85C \uAD50\uCCB4\uD558\uACE0 \uD0C4\uC57D\uC744 1\uB85C
     \uC124\uC815\uD569\uB2C8\uB2E4."
   useMode: 1
+  playCondition:
+    rid: -2
   isUpgraded: 0
   normalState:
     cardName: "\uBE60\uB978 \uD6C4\uD1F4"
@@ -50,6 +52,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7338471726968995946
       type: {class: ApplyStatusEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -62,10 +66,12 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
     - rid: 7338471726968995947
       type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -82,10 +88,12 @@ MonoBehaviour:
           status: {fileID: 0}
           multiplier: 0
           flatBonus: 0
+          percent: 0
         potency: 0
         secondaryPotency: 0
         targets:
           mode: 1
+        negative: 0
     - rid: 7338471726968995949
       type: {class: ChangeWeaponEffect, ns: , asm: Assembly-CSharp}
       data:

@@ -118,7 +118,7 @@ public class WeaponEffectTests
         var shot = Card("Original", true, 1);
         var defaultWeapon = Weapon(Card("Default", false, 2));
         var changedWeapon = Weapon(Card("Changed", false, 3));
-        SetField(battle, "defaultWeapon", defaultWeapon);
+        SetField(battle, "_defaultWeapon", defaultWeapon);
         var deck = new List<CardData> { shot };
         battle.StartBattle(new List<EnemyData>(), deck, 42);
         int handChanges = 0;

@@ -107,7 +107,7 @@ internal static class CardAuthoringUtility
             "FirstAmmoUseCondition" => "초탄", "LastAmmoUseCondition" => "막탄",
             "PlayerGainedBlockCondition" => "이번 턴 방어도 획득", "IncreaseMagazineEffect" => "최대 탄약 증가",
             "ChangeWeaponEffect" => "무기 변경", "AddCardToPileEffect" => "카드 생성",
-            "LoseHPEffect" => "HP 손실", "GainGoldEffect" => "골드 획득",
+            "LoseHPEffect" => "HP 손실", "GainGoldEffect" => "골드 획득", "StealGoldEffect" => "크레딧 강탈",
             "IncreaseCardDrawEffect" => "드로우 수 증가", "AddCoopPointEffect" => "동료 포인트",
             "JoinCompanionEffect" => "동료 합류", _ => null
         };

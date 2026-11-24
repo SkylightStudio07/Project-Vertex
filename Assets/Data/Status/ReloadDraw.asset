@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1b2c3d4e54f67890123456789abcd, type: 3}
+  m_Name: ReloadDraw
+  m_EditorClassIdentifier: Assembly-CSharp::StatusDefinition
+  statusId: ReloadDraw
+  displayName: "\uB05D\uC5C6\uB294 \uAD74\uB808"
+  description: "\uBB34\uAE30\uB97C \uC7AC\uC7A5\uC804 \uD560 \uB54C\uB9C8\uB2E4 \uCE74\uB4DC\uB97C
+    \uBF51\uC2B5\uB2C8\uB2E4."
+  icon: {fileID: 0}
+  disposition: 1
+  stackPolicy: 0
+  durationPolicy: 1
+  maxStacks: 0
+  dispellable: 1
+  behaviors:
+  - rid: 7338472044098486363
+  references:
+    version: 2
+    RefIds:
+    - rid: 352448965191925854
+      type: {class: DrawEffect, ns: , asm: Assembly-CSharp}
+      data:
+        count: 0
+        scaling:
+          source: 7
+          target: 0
+          status: {fileID: 0}
+          multiplier: 1
+          flatBonus: 0
+          percent: 0
+    - rid: 7338472044098486363
+      type: {class: OnReloadEffectsStatusBehavior, ns: , asm: Assembly-CSharp}
+      data:
+        effects:
+        - rid: 352448965191925854

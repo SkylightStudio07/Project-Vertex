@@ -10,9 +10,10 @@ public static class PistolCardBatch
     public static readonly string[] Names = {
         "첫발의 기선", "견제 초탄", "마지막 한 발", "쏘고 숨기", "남김없이", "탄창 숙련",
         "이동 사격", "엄폐 사격", "사선 이탈", "엄폐 재장전", "엄폐 전환", "사격 후 이동",
-        "장전 점검", "빈 탄창 교체", "발포 준비", "권총 속사 준비", "권총으로 후퇴", "장전의 여유", "확장 탄창", "마침표"
+        "장전 점검", "빈 탄창 교체", "발포 준비", "권총 준비", "후퇴", "장전의 여유", "확장 탄창", "마침표"
     };
-    public static readonly string[] Kinds = { "공격","공격","공격","공격","공격","파워","공격","공격","스킬","스킬","스킬","파워","스킬","스킬","스킬","스킬","스킬","파워","스킬","공격" };
+    // 카드 이름·폴더를 에셋에서 바꾸면 여기도 맞춰야 PistolCardTests가 찾는다 (예: 권총 속사 준비 → 권총 준비, 확장 탄창 → 파워)
+    public static readonly string[] Kinds = { "공격","공격","공격","공격","공격","파워","공격","공격","스킬","스킬","스킬","파워","스킬","스킬","스킬","스킬","스킬","파워","파워","공격" };
     public static string PathFor(int index) => $"Assets/Data/Cards/Player/일반/{Kinds[index]}/{Names[index]}.asset";
     private static void Field(object obj, string field, object value) => obj.GetType().GetField(field, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).SetValue(obj, value);
     private static void Folder(string path)

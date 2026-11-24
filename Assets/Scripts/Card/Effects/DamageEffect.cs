@@ -74,6 +74,7 @@ public class DamageEffect : CardEffect
         var info = new DamageInfo(baseValue, state.Player, piercing, isAmmoAttack);
         foreach (var passive in state.Player.Passives)
             info = passive.PreviewOutgoingDamage(info, state);
+        info = AmmoStatusEvents.ApplyDamageMultiplier(info, previewContext);
 
         if (target != null)
             foreach (var passive in target.Passives)

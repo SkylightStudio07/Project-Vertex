@@ -9,6 +9,10 @@ public abstract class StatusBehavior
     public virtual void OnReload(StatusInstance status, CardContext context) { }
     public virtual void OnAmmoSpent(StatusInstance status, CardContext context, int spent, bool first, bool firstConsumption, bool preview) { }
     public virtual int CardDamageBonus(StatusInstance status, CardContext context) => 0;
+    // 플레이어 카드 피해에 곱하는 배율. 공격자 패시브의 덧셈 보정(힘 등)까지 모두 끝난 뒤 적용된다 (합 → 곱)
+    public virtual float CardDamageMultiplier(StatusInstance status, CardContext context) => 1f;
+    // 플레이어 카드의 효과가 전부 실행된 뒤 (OnCardPlayed는 효과 실행 전에 불린다)
+    public virtual void OnCardResolved(StatusInstance status, CardContext context) { }
     public virtual void OnBattleStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnStart(StatusInstance status, CardContext context, ICombatant owner) { }
     public virtual void OnTurnEnd(StatusInstance status, CardContext context, ICombatant owner) { }

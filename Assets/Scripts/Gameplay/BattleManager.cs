@@ -588,6 +588,7 @@ public class BattleManager : MonoBehaviour
             }
 
             yield return ExecuteEffectsSequence(pending.Card.ActiveEffects, pending.Context);
+            AmmoStatusEvents.NotifyCardResolved(_state, pending.Context);
         }
         _cardQueueRunning = false;
     }
@@ -756,6 +757,7 @@ public class BattleManager : MonoBehaviour
             OnCardMotionRequested?.Invoke(new CardMotionRequest(card));
             _state.Player.Statuses.NotifyCardPlayed(ctx, _state.Player);
             yield return EffectRunner.ExecuteSequence(card.ActiveEffects, ctx);
+            AmmoStatusEvents.NotifyCardResolved(_state, ctx);
 
             if (card.IsExhaust || card.Type == CardData.CardType.Power)
                 _state.ExhaustPile.Add(card);
