@@ -86,7 +86,6 @@ public static class EffectRunner
                     }
                     break;
                 case BlockEffect block when block.targets.mode == EffectTargetMode.Source:
-                    // 의도에는 방어 행동 여부만 필요하다. 획득량과 상태 보정은 계산하지 않는다.
                     preview.HasSelfBlock = true;
                     break;
                 case ApplyStatusEffect status when status.status != null:

@@ -9,11 +9,11 @@ public class IntentTooltipView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI descriptionText;
 
-    public void Bind(IntentDefinition definition, int? damage)
+    public void Bind(Sprite icon, string title, string description)
     {
-        iconImage.sprite = definition.icon;
-        iconImage.enabled = definition.icon != null;
-        titleText.text = definition.title;
-        descriptionText.text = definition.GetDescription(damage);
+        iconImage.sprite = icon;
+        iconImage.enabled = icon != null;
+        titleText.text = title;
+        descriptionText.text = description;
     }
 }
