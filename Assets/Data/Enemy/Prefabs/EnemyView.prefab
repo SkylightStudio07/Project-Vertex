@@ -902,6 +902,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45e6d69202f2c148a1b953b930a29b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IntentTooltipTrigger
+  tooltipPrefab: {fileID: 7852188491969044709, guid: 40701b8b07598c340b462038878194ba, type: 3}
+  tooltipGroupPrefab: {fileID: 4958794024894651225, guid: 42155f0c8cdca7446a403f6fcdb196d4, type: 3}
+  definitions:
+  - {fileID: 11400000, guid: 48be5925af84beb4980358b8d4af6ab9, type: 2}
+  - {fileID: 11400000, guid: 1299db5defc506140b87fbc9a15ca458, type: 2}
+  - {fileID: 11400000, guid: 5f8db965364e85c44a38a78ca7abcfe6, type: 2}
+  - {fileID: 11400000, guid: a8ab4c4495b36d44ebca3304f7ce5c50, type: 2}
+  - {fileID: 11400000, guid: 04bf34965f60e5b4c824b5ceb383ed91, type: 2}
+  - {fileID: 11400000, guid: efcc3402ef9ac7946b13cb38dce099da, type: 2}
 --- !u!1 &5223787687078656024
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,3 +25,6 @@
 - Do not reset, discard, overwrite, or clean unrelated modified/untracked files.
 - Prefer targeted changes and verify them after execution.
 
+## Verification
+- Do not add test-only scripts unless the user explicitly requests them. Verify changes through compilation and the existing Unity Editor instead.
+

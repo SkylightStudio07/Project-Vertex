@@ -899,10 +899,6 @@ public class EnemyView : MonoBehaviour
         int? damage = preview.HasDamage ? preview.TotalDamage : null;
         int? primaryValue = action?.intentType == IntentType.Defend ? null : damage;
 
-        // 인텐트 아이콘 호버 툴팁 — 대상 적/내용 갱신 (프리팹에 IntentTooltipTrigger가 붙어 있을 때만)
-        if (intentIcon != null && intentIcon.TryGetComponent<IntentTooltipTrigger>(out var tooltip))
-            tooltip.SetOwner(Instance);
-
         if (intentIcon != null)
         {
             Sprite sprite = action == null ? null : GetIntentSprite(action.intentType);
@@ -922,6 +918,18 @@ public class EnemyView : MonoBehaviour
                 action.intentType == IntentType.Defend ? damage : null);
         else
             HideSecondaryIntent();
+
+        // 화면에 표시한 각각의 의도와 동일한 순서로 툴팁을 구성한다.
+        if (intentIcon != null && intentIcon.TryGetComponent<IntentTooltipTrigger>(out var tooltip))
+        {
+            if (action == null || !intentIcon.enabled)
+                tooltip.SetOwner(Instance, damage);
+            else if (_secondaryIntentIcon != null && _secondaryIntentIcon.gameObject.activeSelf)
+                tooltip.SetOwner(Instance, damage, action.intentType,
+                    action.intentType == IntentType.Defend ? IntentType.Attack : IntentType.Defend);
+            else
+                tooltip.SetOwner(Instance, damage, action.intentType);
+        }
 
         RefreshLookaheadIcons();
     }
